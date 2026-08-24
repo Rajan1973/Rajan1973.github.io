@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>F&O Expiry Analysis — Aug 25, 2026 Monthly Expiry</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,sans-serif;font-size:14px;color:#1a1a2e;background:#f1f5f9}
+nav{position:sticky;top:0;z-index:99;background:#fff;border-bottom:1.5px solid #e2e8f0;display:flex;align-items:center;overflow-x:auto;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+nav a{color:#64748b;text-decoration:none;font-size:12px;font-weight:600;padding:10px 14px;white-space:nowrap;border-bottom:2px solid transparent}
+nav a:hover,nav a.active{color:#1d4ed8;border-bottom-color:#1d4ed8}
+nav .logo{color:#dc2626;font-weight:700;font-size:13px;padding:10px 16px;border-right:1.5px solid #e2e8f0;white-space:nowrap}
+.topbar{background:#fff5f5;padding:8px 16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;border-bottom:2px solid #fecaca}
+.topbar .ts{font-size:11px;color:#7f1d1d;font-weight:600}
+.topbar .warn{font-size:11px;color:#991b1b;background:#fee2e2;padding:3px 10px;border-radius:4px;border:1px solid #fca5a5;font-weight:700}
+.wrap{max-width:1200px;margin:0 auto;padding:10px 12px}
+.sec{background:#fff;border:1px solid #e2e8f0;border-radius:10px;margin:10px 0;overflow:hidden}
+.sec-hdr{display:flex;align-items:center;justify-content:space-between;padding:11px 16px;border-bottom:1px solid #e2e8f0;cursor:pointer;user-select:none;background:#f8fafc}
+.sec-hdr h2{font-size:12px;font-weight:700;color:#334155;letter-spacing:.06em;text-transform:uppercase}
+.sec-body{padding:16px}
+.sub{font-size:11px;font-weight:700;color:#1d4ed8;text-transform:uppercase;letter-spacing:.08em;margin:16px 0 8px;padding-bottom:4px;border-bottom:2px solid #dbeafe}
+.tw{overflow-x:auto;border:1px solid #cbd5e1;border-radius:8px;margin-bottom:8px}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th{padding:8px 11px;text-align:left;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;background:#1e3a8a;color:#fff;border-bottom:2px solid #1d4ed8;white-space:nowrap}
+tbody tr:nth-child(odd) td{background:#fff}
+tbody tr:nth-child(even) td{background:#eff6ff}
+tbody tr:hover td{background:#dbeafe!important}
+td{padding:7px 11px;border-bottom:1px solid #e2e8f0;color:#1e293b;vertical-align:middle}
+tbody tr:last-child td{border-bottom:none}
+.up{color:#15803d;font-weight:600}.dn{color:#dc2626;font-weight:600}.nu{color:#b45309;font-weight:600}
+.tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:700}
+.tag-lb{background:#dcfce7;color:#14532d}
+.tag-sb{background:#fee2e2;color:#991b1b}
+.tag-sc{background:#fef9c3;color:#713f12}
+.tag-lu{background:#eff6ff;color:#1e40af}
+.bi{display:flex;align-items:flex-start;gap:10px;padding:8px 12px;border-radius:7px;margin-bottom:6px;line-height:1.55;border:1px solid #e2e8f0;background:#f8fafc}
+.bi .ic{font-size:16px;flex-shrink:0;margin-top:1px}
+.bi .bd{font-size:12.5px;color:#334155;line-height:1.55}
+.bi .bd strong{color:#1e3a8a;font-weight:700}
+.bi.g{background:#f0fdf4;border-color:#bbf7d0}
+.bi.r{background:#fff5f5;border-color:#fecaca}
+.bi.a{background:#fffbeb;border-color:#fde68a}
+.bi.b{background:#eff6ff;border-color:#bfdbfe}
+.bi.dark{background:#1e3a8a;border-color:#1d4ed8}
+.bi.dark .bd{color:#e0e7ff}
+.bi.dark .bd strong{color:#93c5fd}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin-bottom:14px}
+.kpi{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:10px 12px}
+.kpi .kl{font-size:10px;color:#64748b;text-transform:uppercase;letter-spacing:.06em;font-weight:600}
+.kpi .kv{font-size:16px;font-weight:700;margin:3px 0 1px}
+.kpi .kd{font-size:11px;color:#475569}
+.kpi.red{border-color:#fca5a5;background:#fff5f5}
+.kpi.grn{border-color:#86efac;background:#f0fdf4}
+.kpi.amb{border-color:#fde68a;background:#fffbeb}
+.verdict{background:#1e3a8a;border-radius:10px;padding:20px;margin:16px 0;color:#e0e7ff}
+.verdict h3{font-size:14px;font-weight:700;color:#93c5fd;margin-bottom:12px;text-transform:uppercase;letter-spacing:.08em}
+.verdict p{font-size:13px;line-height:1.65;margin-bottom:10px}
+.verdict p:last-child{margin-bottom:0}
+.verdict strong{color:#fff}
+.verdict .trig{background:#1d4ed8;border-radius:8px;padding:12px;margin-top:12px}
+.verdict .trig h4{font-size:12px;font-weight:700;color:#bfdbfe;text-transform:uppercase;margin-bottom:8px}
+.sc-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.sc-box{border-radius:8px;padding:12px}
+.bull-box{background:#14532d;border:1px solid #16a34a}
+.bear-box{background:#7f1d1d;border:1px solid #dc2626}
+.sc-box h4{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;color:#fff}
+.sc-box p{font-size:12px;color:#d1fae5;line-height:1.55}
+.bear-box p{color:#fecaca}
+.dn2{font-size:10.5px;color:#94a3b8;margin-top:4px;font-style:italic}
+.sb-badge{display:inline-block;background:#fee2e2;color:#991b1b;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;margin-left:6px}
+.sc-badge{display:inline-block;background:#fef9c3;color:#713f12;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;margin-left:6px}
+</style>
+</head>
+<body>
+
+<nav id="topnav">
+  <div class="logo">⚡ Aug 25 Expiry Analysis</div>
+  <a href="#s0" class="active">Summary</a>
+  <a href="#s1">Nifty Futures</a>
+  <a href="#s2">BankNifty Futures</a>
+  <a href="#s3">Top-7 Stocks</a>
+  <a href="#s4">Pattern Synthesis</a>
+  <a href="#s5">Triggers & Scenarios</a>
+</nav>
+
+<div class="topbar">
+  <div class="ts">⚡ Monthly Expiry — Tuesday 25 Aug 2026 · 2 Trading Days Remaining · Data from Zerodha Kite MCP</div>
+  <div class="warn">🚨 EXPIRY WEEK — EXTREME GAMMA RISK · HIGH VOLATILITY PROBABILITY</div>
+</div>
+
+<div class="wrap">
+
+<!-- S0 EXECUTIVE SUMMARY -->
+<div id="s0" class="sec">
+  <div class="sec-hdr" onclick="T(this)"><h2>§0 · Executive Summary — What the Data Says</h2><span>▾</span></div>
+  <div class="sec-body">
+    <div class="kpi-grid">
+      <div class="kpi red"><div class="kl">Nifty Aug FUT — Peak OI</div><div class="kv dn">1,30,31,720</div><div class="kd">Reached Aug 18 — 4-week series high</div></div>
+      <div class="kpi amb"><div class="kl">Nifty Aug FUT — Fri Close OI</div><div class="kv nu">92,57,560</div><div class="kd">29% unwound from peak · 71% still live</div></div>
+      <div class="kpi red"><div class="kl">BankNifty Aug FUT — Peak OI</div><div class="kv dn">20,97,360</div><div class="kd">Reached Aug 13</div></div>
+      <div class="kpi amb"><div class="kl">BankNifty Aug FUT — Fri Close OI</div><div class="kv nu">14,00,970</div><div class="kd">33% unwound · 67% still live</div></div>
+      <div class="kpi red"><div class="kl">FII Net Short (Nifty Futures)</div><div class="kv dn">−2,09,855 contracts</div><div class="kd">2.3% of total Aug FUT OI</div></div>
+      <div class="kpi amb"><div class="kl">Max Pain (Aug 25 Expiry)</div><div class="kv nu">~24,150</div><div class="kd">Spot 24,252 = 102 pts above → Pin gravity</div></div>
+      <div class="kpi amb"><div class="kl">Nifty PCR</div><div class="kv nu">1.08</div><div class="kd">Near-neutral; slightly bullish</div></div>
+      <div class="kpi red"><div class="kl">200-DMA Nifty</div><div class="kv dn">24,779</div><div class="kd">527 pts above spot — 4-wk rejection</div></div>
+    </div>
+
+    <div class="bi dark">
+      <span class="ic">🎯</span>
+      <div class="bd">
+        <strong>THE BOTTOM LINE IN ONE PARAGRAPH:</strong> Nifty futures saw a 4-session short buildup (Aug 12–18) as price fell from 24,540 to 24,117 while OI rose to a series peak of 1.30 crore contracts — a textbook bearish accumulation. Then on Aug 20, Nifty bounced 175 pts while OI crashed by 20.88 lakh contracts in a single session — the largest single-day OI unwind of the entire series — confirming a violent <strong>short-covering rally</strong>. Heading into expiry Tuesday Aug 25 with 92.57L contracts still open (71% of peak), the market faces an explosive binary: if the short-covering accelerates on positive macro trigger (crude falling, RBI dovish, FII buying), Nifty can sprint to 24,500–24,600 before expiry. If the shorts reassert on negative news (crude spike, Hormuz escalation), Nifty drops to 24,000–23,900 max pain zone. The data strongly points to an <strong>expiry-week reversal or swift one-sided move</strong>, not a dull pin.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S1 NIFTY FUTURES -->
+<div id="s1" class="sec">
+  <div class="sec-hdr" onclick="T(this)"><h2>§1 · Nifty Futures OI Analysis — Aug Series</h2><span>▾</span></div>
+  <div class="sec-body">
+
+    <div class="sub">1a · Daily OI + Price + Pattern (Aug 11–21)</div>
+    <div class="tw"><table>
+      <thead><tr>
+        <th>Date</th><th>Fut Close</th><th>Day Chg</th>
+        <th>OI (contracts)</th><th>OI Change</th><th>Vol (lots)</th><th>Pattern</th><th>Interpretation</th>
+      </tr></thead>
+      <tbody>
+        <tr><td>Aug 11</td><td>24,540.5</td><td>—</td><td>1,21,23,995</td><td>—</td><td>16,68,875</td><td>—</td><td>Series reference</td></tr>
+        <tr><td>Aug 12</td><td>24,470.5</td><td class="dn">−70.0</td><td>1,25,62,810</td><td class="dn">+4,38,815</td><td>30,54,480</td><td><span class="tag tag-sb">SB</span></td><td>Short Buildup — bears added shorts as price fell</td></tr>
+        <tr><td>Aug 13</td><td>24,468.0</td><td class="dn">−2.5</td><td>1,27,14,650</td><td class="dn">+1,51,840</td><td>14,09,395</td><td><span class="tag tag-sb">SB</span></td><td>Short Buildup continues</td></tr>
+        <tr><td>Aug 14</td><td>24,449.6</td><td class="dn">−18.4</td><td>1,27,31,485</td><td class="dn">+16,835</td><td>16,37,935</td><td><span class="tag tag-sb">SB</span></td><td>Short Buildup slowing (expiry week prior)</td></tr>
+        <tr><td>Aug 17</td><td>24,392.7</td><td class="dn">−56.9</td><td>1,27,70,940</td><td class="dn">+39,455</td><td>22,62,780</td><td><span class="tag tag-sb">SB</span></td><td>Short Buildup — bears pressing, 4th session</td></tr>
+        <tr><td><strong>Aug 18</strong></td><td>24,230.1</td><td class="dn"><strong>−162.6</strong></td><td><strong>1,30,31,720</strong></td><td class="dn"><strong>+2,60,780</strong></td><td>22,04,670</td><td><span class="tag tag-sb">SB</span></td><td><strong>PEAK OI — Largest single-day short addition of series</strong></td></tr>
+        <tr><td>Aug 19</td><td>24,117.6</td><td class="dn">−112.5</td><td>1,29,22,845</td><td class="up">−1,08,875</td><td>25,13,745</td><td><span class="tag tag-lu">LU</span></td><td>Long Unwinding — longs exiting as price falls further</td></tr>
+        <tr><td><strong>Aug 20</strong></td><td>24,293.0</td><td class="up"><strong>+175.4 ⚡</strong></td><td><strong>1,08,34,655</strong></td><td class="up"><strong>−20,88,190 ⚡</strong></td><td><strong>36,58,525</strong></td><td><span class="tag tag-sc">SC</span></td><td><strong>LARGEST OI DROP OF SERIES — Price UP + OI DOWN = Short Covering</strong></td></tr>
+        <tr><td>Aug 21</td><td>24,286.0</td><td class="dn">−7.0</td><td>92,57,560</td><td class="up">−15,77,095</td><td>24,02,920</td><td><span class="tag tag-lu">LU</span></td><td>Continued unwind; price holds near SC level</td></tr>
+      </tbody>
+    </table></div>
+    <div class="dn2">OI: Kite historical data, Aug 11–21. Pattern key — LB: Long Buildup | SB: Short Buildup | SC: Short Covering | LU: Long Unwinding</div>
+
+    <div class="sub" style="margin-top:16px">1b · Key Pattern Observations</div>
+    <div class="bi r"><span class="ic">📉</span><div class="bd"><strong>5-Session Short Buildup (Aug 12–18):</strong> Nifty futures OI rose from 1.21 crore to 1.30 crore (+7.5%) as price fell from 24,540 to 24,230 — a classic bearish accumulation. Shorts piled on 5 consecutive sessions. This is the bear position that must be resolved into expiry.</div></div>
+    <div class="bi a"><span class="ic">⚡</span><div class="bd"><strong>The Aug 20 Detonation:</strong> Price jumped 175 pts while OI collapsed by 20.88 lakh contracts in one session — the single largest OI unwind of the entire August series. Volume also surged to 36.58L lots (highest of the series). This is a textbook short-covering stampede triggered by a bounce off 24,100 support. Shorts that built over 5 sessions were squeezed out in a single day.</div></div>
+    <div class="bi a"><span class="ic">📊</span><div class="bd"><strong>Heading into Monday Aug 24 with 92.57L contracts open (71% of peak):</strong> Despite 2 days of sharp unwinding, nearly three-quarters of peak OI is still live. This means the positioning battle is NOT resolved. Every remaining contract must close by Tuesday's expiry — this guarantees significant directional movement in the final 2 sessions.</div></div>
+    <div class="bi b"><span class="ic">🎯</span><div class="bd"><strong>Max Pain vs Spot — The Gravitational Setup:</strong> Max pain ~24,150; spot closed 24,252 on Friday. Only 102 pts gap with just 2 trading sessions left. Historically, the market gravitates strongly toward max pain in the final 1–2 days of the series. The path of least resistance is a drift toward 24,150–24,200 on Monday.</div></div>
+
+    <div class="sub" style="margin-top:16px">1c · Nifty Futures OI — Week-over-Week Snapshot</div>
+    <div class="tw"><table>
+      <thead><tr><th>Period</th><th>OI Start</th><th>OI End</th><th>Net Change</th><th>Price Move</th><th>Dominant Pattern</th></tr></thead>
+      <tbody>
+        <tr><td>W-1 (Aug 11–14)</td><td>1,21,23,995</td><td>1,27,31,485</td><td class="dn">+6,07,490 (+5.0%)</td><td class="dn">24,540 → 24,450 (−0.4%)</td><td><span class="tag tag-sb">Short Buildup</span></td></tr>
+        <tr><td><strong>W0 Expiry Wk (Aug 17–21)</strong></td><td>1,27,70,940</td><td>92,57,560</td><td class="up">−35,13,380 (−27.5%)</td><td class="dn">24,393 → 24,286 (−0.4%)</td><td><span class="tag tag-sc">SC + LU Mix</span></td></tr>
+      </tbody>
+    </table></div>
+    <div class="dn2">Prior week built shorts; current week aggressively unwinding — classic expiry-week squeeze pattern</div>
+
+    <div class="sub" style="margin-top:16px">1d · Nifty Support / Resistance from Futures OI</div>
+    <div class="tw"><table>
+      <thead><tr><th>Level</th><th>Type</th><th>Basis</th><th>Significance</th></tr></thead>
+      <tbody>
+        <tr><td class="up"><strong>24,779</strong></td><td><span class="tag tag-sb">Resistance</span></td><td>200-DMA</td><td>4-week expiry week rejection zone — the ultimate bull breakout signal</td></tr>
+        <tr><td class="dn"><strong>24,600</strong></td><td><span class="tag tag-sb">Resistance</span></td><td>Options Call OI wall</td><td>Heaviest CE writing — needs strong catalyst to breach</td></tr>
+        <tr><td class="nu"><strong>24,300–24,350</strong></td><td><span class="tag tag-sc">Pivot</span></td><td>Futures price range</td><td>Short-covering zone; price stabilising here post-squeeze</td></tr>
+        <tr><td class="up"><strong>24,150</strong></td><td><span class="tag tag-lb">Max Pain</span></td><td>Options max pain</td><td>Strong gravitational pull for expiry settlement — target for pin</td></tr>
+        <tr><td class="up"><strong>24,100</strong></td><td><span class="tag tag-lb">Support</span></td><td>Put OI + Aug 19 low</td><td>Strong put writing zone; Aug 19 intraday low was the bear exhaustion point</td></tr>
+        <tr><td class="up"><strong>24,000</strong></td><td><span class="tag tag-lb">Critical Support</span></td><td>Massive Put OI (+6.4L)</td><td>Put writers' floor — break below = cascade to 23,700</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</div>
+
+<!-- S2 BANKNIFTY FUTURES -->
+<div id="s2" class="sec">
+  <div class="sec-hdr" onclick="T(this)"><h2>§2 · BankNifty Futures OI Analysis — Aug Series</h2><span>▾</span></div>
+  <div class="sec-body">
+
+    <div class="sub">2a · Daily OI + Price + Pattern (Aug 11–21)</div>
+    <div class="tw"><table>
+      <thead><tr>
+        <th>Date</th><th>Fut Close</th><th>Day Chg</th>
+        <th>OI (contracts)</th><th>OI Change</th><th>Pattern</th><th>Interpretation</th>
+      </tr></thead>
+      <tbody>
+        <tr><td>Aug 11</td><td>57,576.2</td><td>—</td><td>20,67,300</td><td>—</td><td>—</td><td>Series reference</td></tr>
+        <tr><td>Aug 12</td><td>58,007.4</td><td class="up">+431.2</td><td>20,72,640</td><td class="dn">+5,340</td><td><span class="tag tag-lb">LB</span></td><td>Long Buildup — price UP, OI UP (mild)</td></tr>
+        <tr><td>Aug 13</td><td>57,861.4</td><td class="dn">−146.0</td><td>20,97,360</td><td class="dn">+24,720</td><td><span class="tag tag-sb">SB</span></td><td>Short Buildup — PEAK OI of series</td></tr>
+        <tr><td>Aug 14</td><td>57,695.8</td><td class="dn">−165.6</td><td>20,95,410</td><td class="up">−1,950</td><td><span class="tag tag-lu">LU</span></td><td>Long Unwinding — mild; price falls, OI flat</td></tr>
+        <tr><td>Aug 17</td><td>57,835.8</td><td class="up">+140.0</td><td>20,32,890</td><td class="up">−62,520</td><td><span class="tag tag-sc">SC</span></td><td>Short Covering — price UP, OI DOWN</td></tr>
+        <tr><td>Aug 18</td><td>57,433.2</td><td class="dn">−402.6</td><td>20,79,480</td><td class="dn">+46,590</td><td><span class="tag tag-sb">SB</span></td><td>Short Buildup resumes — biggest down day of expiry week</td></tr>
+        <tr><td>Aug 19</td><td>57,349.8</td><td class="dn">−83.4</td><td>20,45,130</td><td class="up">−34,350</td><td><span class="tag tag-lu">LU</span></td><td>Long Unwinding — lower price, longs exit</td></tr>
+        <tr><td><strong>Aug 20</strong></td><td>57,638.6</td><td class="up"><strong>+288.8 ⚡</strong></td><td>18,82,470</td><td class="up"><strong>−1,62,660 ⚡</strong></td><td><span class="tag tag-sc">SC</span></td><td><strong>Strong Short Covering — price UP 289 pts, OI collapses</strong></td></tr>
+        <tr><td><strong>Aug 21</strong></td><td>57,721.8</td><td class="up"><strong>+83.2</strong></td><td><strong>14,00,970</strong></td><td class="up"><strong>−4,81,500 ⚡</strong></td><td><span class="tag tag-sc">SC</span></td><td><strong>LARGEST daily OI DROP — price UP, OI collapses 481K contracts</strong></td></tr>
+      </tbody>
+    </table></div>
+    <div class="dn2">BankNifty's pattern is STRUCTURALLY BULLISH into expiry vs Nifty's mixed pattern — key divergence</div>
+
+    <div class="sub" style="margin-top:16px">2b · Key BankNifty Pattern Observations</div>
+    <div class="bi g"><span class="ic">🟢</span><div class="bd"><strong>BankNifty is Structurally More Bullish Than Nifty Heading into Expiry:</strong> Unlike Nifty where Aug 20 saw a price bounce + OI collapse (short covering), BankNifty's Aug 21 session was even more powerful: price rose 83 pts AND OI crashed 4,81,500 contracts — the largest single-day OI unwind of BankNifty's entire August series. This is <em>aggressive short covering</em> on the last day of the week. Whoever was short BankNifty is running for the exits.</div></div>
+    <div class="bi g"><span class="ic">📈</span><div class="bd"><strong>2-Day Price Recovery with OI Collapse = Classic Pre-Expiry Short Squeeze:</strong> BankNifty rose from 57,349 on Aug 19 to 57,721 on Aug 21 (+372 pts = +0.65%) while OI collapsed 31% in just 2 sessions. A price rise accompanied by OI contraction is short covering — not new long buying. This means upward price pressure from short covering could continue into Monday and Tuesday expiry.</div></div>
+    <div class="bi a"><span class="ic">⚠️</span><div class="bd"><strong>14,00,970 contracts still live (67% of series peak):</strong> With OI at 14.0L heading into Monday, there is still significant positioning to unwind. The BankNifty's broader 8-week range of 56,500–58,700 remains intact. The expiry-week battleground is 57,200–58,248 — a 1,000-pt range that can easily be traversed in 2 sessions.</div></div>
+
+    <div class="sub" style="margin-top:16px">2c · BankNifty Support / Resistance Levels</div>
+    <div class="tw"><table>
+      <thead><tr><th>Level</th><th>Type</th><th>Basis</th></tr></thead>
+      <tbody>
+        <tr><td class="dn"><strong>58,248</strong></td><td><span class="tag tag-sb">Resistance</span></td><td>Series high — previous short-covering ceiling; 8-week range top</td></tr>
+        <tr><td class="dn"><strong>58,000</strong></td><td><span class="tag tag-sb">Resistance</span></td><td>Key intermediate resistance; OI buildup zone in prior sessions</td></tr>
+        <tr><td class="nu"><strong>57,638–57,721</strong></td><td><span class="tag tag-sc">Pivot</span></td><td>Current trading range — Aug 20–21 closing zone</td></tr>
+        <tr><td class="up"><strong>57,297</strong></td><td><span class="tag tag-lb">Support</span></td><td>Prior Friday (Aug 14) close; tested and held on Aug 19</td></tr>
+        <tr><td class="up"><strong>57,000</strong></td><td><span class="tag tag-lb">Support</span></td><td>Rising trend support joining Aug lows; critical line</td></tr>
+        <tr><td class="up"><strong>56,500</strong></td><td><span class="tag tag-lb">Critical Support</span></td><td>8-week range base — break signals structural bear trend</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</div>
+
+<!-- S3 TOP-7 STOCKS -->
+<div id="s3" class="sec">
+  <div class="sec-hdr" onclick="T(this)"><h2>§3 · Top-7 Nifty50 Constituents — Futures OI Analysis</h2><span>▾</span></div>
+  <div class="sec-body">
+
+    <div class="sub">3a · OI Unwind Summary Table — All 7 Stocks</div>
+    <div class="tw"><table>
+      <thead><tr>
+        <th>Stock</th><th>Lot</th><th>Fut Close</th><th>Aug Series Peak OI</th><th>OI Aug 21</th>
+        <th>% Unwound</th><th>Price Chg (11→21)</th><th>Expiry Pattern</th><th>Key Level</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>RELIANCE</strong></td><td>500</td><td>₹1,310.1</td>
+          <td>10,63,58,000 (Aug 11)</td><td>4,84,00,000</td>
+          <td class="dn"><strong>54.5%</strong></td>
+          <td class="dn">−1.06% (₹1324→₹1310)</td>
+          <td><span class="tag tag-lu">Steady LU</span></td>
+          <td>₹1,300 support · ₹1,340 resist</td>
+        </tr>
+        <tr>
+          <td><strong>HDFCBANK</strong></td><td>650</td><td>₹730.5</td>
+          <td>31,63,05,600 (Aug 13)</td><td>12,18,41,200</td>
+          <td class="dn"><strong>61.5%</strong></td>
+          <td class="dn">−0.29% (₹732→₹730)</td>
+          <td><span class="tag tag-sc">SC Dominating</span></td>
+          <td>₹720 support · ₹745 resist</td>
+        </tr>
+        <tr>
+          <td><strong>ICICIBANK</strong></td><td>350</td><td>₹1,420.5</td>
+          <td>9,64,86,600 (Aug 11)</td><td>3,40,83,000</td>
+          <td class="dn"><strong>64.7%</strong></td>
+          <td class="dn">−0.70% (₹1430→₹1420)</td>
+          <td><span class="tag tag-sc">SC Strong</span></td>
+          <td>₹1,400 support · ₹1,450 resist</td>
+        </tr>
+        <tr>
+          <td><strong>INFY</strong></td><td>400</td><td>₹1,121.6</td>
+          <td>8,19,46,000 (Aug 13)</td><td>4,28,19,200</td>
+          <td class="dn"><strong>47.7%</strong></td>
+          <td class="dn"><strong>−5.83%</strong> (₹1191→₹1121)</td>
+          <td><span class="tag tag-sb">SB → SC</span></td>
+          <td>₹1,100 support · ₹1,150 resist</td>
+        </tr>
+        <tr>
+          <td><strong>TCS</strong></td><td>150</td><td>₹2,301.5</td>
+          <td>3,10,82,625 (Aug 17)</td><td>1,09,95,750</td>
+          <td class="dn"><strong>64.6%</strong></td>
+          <td class="dn"><strong>−5.84%</strong> (₹2444→₹2301)</td>
+          <td><span class="tag tag-sb">SB throughout</span></td>
+          <td>₹2,250 support · ₹2,350 resist</td>
+        </tr>
+        <tr>
+          <td><strong>BHARTIARTL</strong></td><td>475</td><td>₹1,950.0</td>
+          <td>5,28,67,500 (Aug 12)</td><td>1,81,53,550</td>
+          <td class="dn"><strong>65.7%</strong></td>
+          <td class="up"><strong>+1.10%</strong> (₹1928→₹1950)</td>
+          <td><span class="tag tag-sc">SC → LB</span></td>
+          <td>₹1,920 support · ₹2,000 resist</td>
+        </tr>
+        <tr>
+          <td><strong>L&T</strong></td><td>25</td><td>₹4,083.6</td>
+          <td>1,08,67,325 (Aug 11)</td><td>44,91,550</td>
+          <td class="dn"><strong>58.7%</strong></td>
+          <td class="up">+0.90% (₹4047→₹4083)</td>
+          <td><span class="tag tag-sc">SC strong</span></td>
+          <td>₹4,050 support · ₹4,150 resist</td>
+        </tr>
+      </tbody>
+    </table></div>
+    <div class="dn2">OI in units per Kite API. % Unwound = (Peak OI − Aug 21 OI) / Peak OI. Pattern reflects dominant character of expiry week.</div>
+
+    <div class="sub" style="margin-top:18px">3b · Stock-by-Stock Deep Read</div>
+
+    <div class="bi r"><span class="ic">🛢</span><div class="bd"><strong>RELIANCE (₹1,310) — Steady Long Unwinding, Crude-Linked:</strong> OI fell steadily from 10.6Cr on Aug 11 to 4.84Cr today (−54.5%) in a very orderly manner — this is NOT panicked short-covering, it's systematic roll or close of longs. The correlation with crude oil price movement is direct: as crude rose from $77 to $94, Reliance faced dual pressure (refining margin concern + general risk-off). Price fell −1.06% over the period. <strong>Key level: ₹1,300 is the critical support</strong> — a break below would signal a structural shift to ₹1,250. Resistance: ₹1,340 (last week's high before the sell-off).</div></div>
+
+    <div class="bi a"><span class="ic">🏦</span><div class="bd"><strong>HDFCBANK (₹730.5) — Most Aggressive SC in the Group, NSE IPO Catalyst:</strong> Peak OI was 31.6Cr contracts (Aug 13) — by far the highest absolute OI of any stock in this universe. The Aug 20–21 unwind was dramatic: from 18.7Cr to 12.2Cr in just 2 days = 9.5Cr contracts unwound! Price held ₹720–730 range throughout, rising on SC. The NSE IPO DRHP filing (June 18) re-rated the financials ecosystem; SBI, HDFC Bank, ICICI Bank held up better than IT. <strong>Key level: ₹720 is critical support (50-DMA zone); ₹745 is resistance.</strong></div></div>
+
+    <div class="bi a"><span class="ic">🏦</span><div class="bd"><strong>ICICIBANK (₹1,420) — Most Consistent Short Covering of Expiry Week:</strong> OI fell from 9.65Cr to 3.41Cr (−64.7%) while price has held ₹1,400–1,430 range. The divergence from INFY is stark — financial stocks showing short covering while IT stocks showed short buildup. ICICI Bank's Q1 FY27 beat and strong GNPA improvement are the fundamental anchors. <strong>Key level: ₹1,400 is critical support; ₹1,450 is the breakout target into September.</strong></div></div>
+
+    <div class="bi r"><span class="ic">💻</span><div class="bd"><strong>INFY (₹1,121) — Short Buildup all week, −5.83% price decline:</strong> Infosys fell the most of the 7 stocks — −5.83% over 2 weeks — while OI stayed persistently elevated (from 8.2Cr to 4.3Cr = only 47.7% unwound vs 60%+ for financials). This suggests the short position in Infosys has NOT been covered; bears are holding their short thesis. The hawkish Fed (June 2026) + higher US rates = continued PE compression for IT. <strong>Key level: ₹1,100 is a multi-year technical support; ₹1,150 is the first resistance that needs to be reclaimed.</strong></div></div>
+
+    <div class="bi r"><span class="ic">💻</span><div class="bd"><strong>TCS (₹2,301) — Short Buildup peaked on Aug 17 (LATEST peak of all 7 stocks):</strong> TCS OI ROSE from 3.09Cr on Aug 11 to 3.11Cr on Aug 17 — meaning shorts were being added EVEN AS Nifty was starting to reverse. This is the most bearish positioning signal of the 7 stocks. OI has since collapsed 64.6% in just 4 sessions (Aug 17–21), while price fell −5.84%. This is a combination of short-covering (prices didn't bounce much) and long unwinding — traders gave up on TCS in both directions. <strong>Key level: ₹2,250 is critical (break = ₹2,100 target). ₹2,350 is resistance to reclaim.</strong></div></div>
+
+    <div class="bi g"><span class="ic">📡</span><div class="bd"><strong>BHARTIARTL (₹1,950) — Only Stock Showing Long Buildup + Price Gain:</strong> Price rose +1.10% (₹1928→₹1950) while OI fell from 5.29Cr to 1.82Cr — this is classic short covering AND new long entry. Airtel's Q1 FY27 beat (4th beat in 5 quarters) makes it the market's most fundamental conviction buy. The stock gained even on bear days. <strong>Key level: ₹1,920 is support (reclaimed after selling); ₹2,000 is the psychological target and next resistance.</strong></div></div>
+
+    <div class="bi g"><span class="ic">🏗</span><div class="bd"><strong>L&T (₹4,083) — Steady OI Decline with Price Holding = Short Covering:</strong> OI fell from 1.09Cr to 0.45Cr (−58.7%) while price actually rose +0.9%. A stock that gains as futures OI falls = shorts being covered. L&T's infrastructure + defence orderbook gives it a domestic economic anchor independent of Iran/crude volatility. <strong>Key level: ₹4,050 is support; ₹4,150 is resistance; breakout above targets ₹4,300+.</strong></div></div>
+  </div>
+</div>
+
+<!-- S4 PATTERN SYNTHESIS -->
+<div id="s4" class="sec">
+  <div class="sec-hdr" onclick="T(this)"><h2>§4 · Cross-Market Pattern Synthesis</h2><span>▾</span></div>
+  <div class="sec-body">
+
+    <div class="sub">4a · The Dominant Pattern Across All 9 Instruments</div>
+    <div class="tw"><table>
+      <thead><tr>
+        <th>Instrument</th><th>Prior Wk Pattern</th><th>Expiry Wk Pattern</th>
+        <th>Aug 20–21 Character</th><th>OI Remaining</th><th>Verdict</th>
+      </tr></thead>
+      <tbody>
+        <tr><td><strong>NIFTY FUT</strong></td><td><span class="tag tag-sb">Short Buildup</span></td><td><span class="tag tag-sc">Short Covering</span></td><td>Price +175 / OI −20.88L</td><td>71%</td><td class="nu">⚡ Unresolved — explosive</td></tr>
+        <tr><td><strong>BANKNIFTY FUT</strong></td><td><span class="tag tag-sb">SB + LB mixed</span></td><td><span class="tag tag-sc">Strong SC</span></td><td>Price +372 / OI −6.44L</td><td>67%</td><td class="up">📈 Bullish lean</td></tr>
+        <tr><td>RELIANCE</td><td><span class="tag tag-lu">Long Unwind</span></td><td><span class="tag tag-lu">Long Unwind</span></td><td>Orderly roll/close</td><td>45%</td><td class="dn">🛢 Crude-linked, neutral-bear</td></tr>
+        <tr><td>HDFCBANK</td><td><span class="tag tag-sb">SB</span></td><td><span class="tag tag-sc">Massive SC</span></td><td>Largest absolute unwind</td><td>38%</td><td class="up">📈 Bullish — SC done?</td></tr>
+        <tr><td>ICICIBANK</td><td><span class="tag tag-lu">LU</span></td><td><span class="tag tag-sc">SC</span></td><td>Price held, OI collapsed</td><td>35%</td><td class="up">📈 Bullish</td></tr>
+        <tr><td>INFY</td><td><span class="tag tag-sb">SB</span></td><td><span class="tag tag-sb">SB → partial SC</span></td><td>Price DOWN, OI still high</td><td>52%</td><td class="dn">🔴 Bearish — least SC</td></tr>
+        <tr><td>TCS</td><td><span class="tag tag-sb">SB peaked Aug 17</span></td><td><span class="tag tag-lu">LU + partial SC</span></td><td>Price fell most</td><td>35%</td><td class="dn">🔴 Bearish resolved mostly</td></tr>
+        <tr><td>BHARTIARTL</td><td><span class="tag tag-sc">SC early</span></td><td><span class="tag tag-lb">LB emerging</span></td><td>Price UP, OI fell</td><td>34%</td><td class="up">📈 Strongest bull setup</td></tr>
+        <tr><td>L&T</td><td><span class="tag tag-lu">LU</span></td><td><span class="tag tag-sc">SC</span></td><td>Price held, OI orderly unwind</td><td>41%</td><td class="up">📈 Bullish</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="sub" style="margin-top:18px">4b · The Overarching Pattern</div>
+    <div class="bi dark"><span class="ic">🔍</span><div class="bd"><strong>STRUCTURAL OBSERVATION:</strong> Across all 9 instruments, the Aug series was dominated by short buildup through Aug 11–18, followed by an aggressive short-covering wave on Aug 20–21. The divergence is critical: <strong>Financials (HDFC Bank, ICICI Bank, BankNifty) saw the most aggressive SC</strong> — suggesting institutional shorts were concentrated here and are covering fastest. <strong>IT (Infosys, TCS) still has residual short positions</strong> that haven't been fully covered — these are the most bearish individual setups heading into expiry. This structural split mirrors the macro backdrop: Fed hawkish = IT pressure; India financial domestics = relatively insulated from US rates.</div></div>
+
+    <div class="bi a"><span class="ic">📐</span><div class="bd"><strong>EXPIRY WEEK PATTERN RECOGNITION — Historical Context:</strong> The specific pattern seen here — 5-day short buildup followed by a violent 2-day short cover just before the monthly expiry — is one of the most consistently recurring patterns in Nifty monthly series expiries. This setup has historically preceded one of three outcomes: (1) A "short squeeze expiry" where the market closes 200–400 pts above max pain; (2) A "max pain pin" where the squeeze reverses into Monday and the market closes right at max pain; (3) A "bear trap completion" where the short covering was the setup, and after covering, the market falls through to 23,900–24,000 into Tuesday. The data currently points most strongly to scenario (1) or (2) — the squeeze already started, and max pain is only 102 pts below spot.</div></div>
+  </div>
+</div>
+
+<!-- S5 TRIGGERS & SCENARIOS -->
+<div id="s5" class="sec">
+  <div class="sec-hdr" onclick="T(this)"><h2>§5 · Triggers & Expiry Scenarios for Aug 25</h2><span>▾</span></div>
+  <div class="sec-body">
+
+    <div class="sub">5a · What Can Trigger the Swift Move?</div>
+    <div class="bi r"><span class="ic">🛢</span><div class="bd"><strong>TRIGGER 1 — Crude Oil (PRIMARY BINARY):</strong> Brent at $93.82 as of Friday. Any news of US-Iran diplomatic progress → Brent falls below $88 → India macro sentiment flips positive → FII begins buying → Nifty gap-up 150–300 pts on Monday → shorts panic-cover → explosive short squeeze to 24,600. Conversely, any Hormuz escalation or US-Iran breakdown → Brent spikes above $97 → Nifty gaps down 200–400 pts Monday → below 24,000 → put cascade to 23,700. This is a pure event binary and most likely catalyst for a swift one-sided move.</div></div>
+    <div class="bi r"><span class="ic">🇺🇸</span><div class="bd"><strong>TRIGGER 2 — US Bond Yields / Treasury Buyback Announcement:</strong> A US Treasury buyback announcement (already cited in Friday's market update) pushed yields lower and gold higher. If US 10Y yield drops convincingly below 4.5% over the weekend on any dovish Fed speak or economic data → dollar weakens → EM risk-on → FII covers Nifty futures shorts → squeeze triggers. This is a slower trigger but equally powerful.</div></div>
+    <div class="bi g"><span class="ic">📊</span><div class="bd"><strong>TRIGGER 3 — India Q1 FY27 GDP (Aug 31 — post-expiry but sets up tone):</strong> GST July at ₹2.11L Cr + IIP June at +7.3% suggest Q1 GDP at 7%+. Any early data leak or consensus revision upward on Monday could boost institutional confidence and trigger fresh long positions before expiry.</div></div>
+    <div class="bi g"><span class="ic">🏦</span><div class="bd"><strong>TRIGGER 4 — FII Cash Buying Confirmation:</strong> FII net sold −₹543 Cr on Friday Aug 21. If Monday opens with FII as net buyers (even small, ₹200–500 Cr), it signals the FII stance shift that the short-covering in futures was hinting at. FII going from −₹543 to +₹500 Cr in a single day = market up 1%+ guarantee.</div></div>
+    <div class="bi a"><span class="ic">⏱</span><div class="bd"><strong>TRIGGER 5 — Monday Expiry-Week Gamma Squeeze (Non-Event):</strong> Even without any specific news trigger, Monday sees peak gamma on all Aug 25 options. As spot drifts toward max pain (24,150), call sellers will hedge by selling Nifty, and put sellers will hedge by buying — creating a self-reinforcing gravitational pull. Max pain gravity alone can push Nifty from 24,252 to 24,150 by end of Monday, and from 24,150 to either 24,350 or 24,000 by Tuesday close on pure gamma dynamics.</div></div>
+
+    <div class="sub" style="margin-top:18px">5b · Three Expiry Scenarios — Probability Assessment</div>
+    <div class="verdict">
+      <h3>Expiry Scenario Analysis — Aug 25, 2026</h3>
+      <div class="sc-grid">
+        <div class="sc-box bull-box">
+          <h4>🟢 SCENARIO A: Bull Squeeze (Probability: 35%)</h4>
+          <p><strong>Trigger:</strong> Crude falls below $90 on Iran-US progress OR US yields fall OR FII turns net buyer Monday.<br><br>
+          <strong>Path:</strong> Nifty opens 24,280+ Monday → short-covering accelerates → breaks 24,350 → 24,500 becomes target → FII joins on close → Tuesday opens gap-up near 24,500 → expiry settlement 24,450–24,550.<br><br>
+          <strong>Key signal:</strong> Monday close above 24,350 + OI dropping below 7 crore = scenario confirmed.</p>
+        </div>
+        <div class="sc-box bull-box" style="background:#713f12;border-color:#b45309">
+          <h4>🟡 SCENARIO B: Max Pain Pin (Probability: 40%)</h4>
+          <p><strong>Trigger:</strong> No major news; gamma gravity pulls market.<br><br>
+          <strong>Path:</strong> Nifty drifts lower Monday toward 24,150–24,200 (max pain gravity); stabilises; Tuesday sees low-volatility settlement near 24,100–24,250. Both call and put writers profit. The path of LEAST RESISTANCE given no catalyst.<br><br>
+          <strong>Key signal:</strong> Monday range-bound 24,100–24,300; VIX stays below 11.</p>
+        </div>
+      </div>
+      <div class="sc-grid" style="margin-top:8px">
+        <div class="sc-box bear-box">
+          <h4>🔴 SCENARIO C: Bear Trap Completion (Probability: 25%)</h4>
+          <p><strong>Trigger:</strong> Crude spikes above $97 (Hormuz escalation); OR US yields spike; OR negative domestic surprise (RBI hawkish statement).<br><br>
+          <strong>Path:</strong> Nifty gaps down Monday → short-covering reverses → new shorts pile in → breaks 24,000 → put writing cascade → sell-off to 23,700–23,800 → Tuesday closes near 23,900.<br><br>
+          <strong>Key signal:</strong> Nifty Monday open below 24,150 + VIX spike above 12 + FII sells more than ₹1,000 Cr.</p>
+        </div>
+        <div class="sc-box bull-box" style="background:#1e3a8a;border-color:#2563eb">
+          <h4>📋 BASE CASE SUMMARY</h4>
+          <p><strong>Most likely outcome:</strong> Max Pain Pin (Scenario B) as the default, with Scenario A (Bull Squeeze) as the tail-risk upside.<br><br>
+          <strong>Expected range:</strong> 24,000–24,550 over the 2 remaining sessions.<br><br>
+          <strong>Wild card:</strong> The FII short of 2,09,855 contracts — if they decide to cover aggressively, that's the rocket fuel for Scenario A. <strong>Watch Monday's first 90 minutes for direction.</strong></p>
+        </div>
+      </div>
+      <div class="trig">
+        <h4>⚡ Key Levels to Track Monday Opening</h4>
+        <p style="color:#e0e7ff;font-size:12.5px;line-height:1.7">
+          <strong style="color:#93c5fd">24,350+ open (Bull)</strong> → Scenario A in play → target 24,500–24,600 by Tuesday expiry<br>
+          <strong style="color:#fde68a">24,150–24,350 open (Neutral)</strong> → Scenario B (Max Pain Pin) → settle 24,100–24,250<br>
+          <strong style="color:#fca5a5">Below 24,100 open (Bear)</strong> → Scenario C → watch 24,000 as the critical line<br>
+          <strong style="color:#86efac">Watch:</strong> FII provisional data Monday evening — the single most important data point to confirm which scenario is playing out
+        </p>
+      </div>
+    </div>
+
+    <div class="sub" style="margin-top:18px">5c · Trading Framework for the Final 2 Sessions</div>
+    <div class="bi a"><span class="ic">⚡</span><div class="bd"><strong>DO NOT hold naked long OTM options over the weekend.</strong> With only 2 sessions left, theta decay is extreme — OTM options lose 40–60% of their premium by Monday close. The risk-reward is terrible for option buyers unless you have a very specific directional catalyst.</div></div>
+    <div class="bi g"><span class="ic">✅</span><div class="bd"><strong>Best-positioned trade: Short strangle 24,000 PE + 24,600 CE (August 25 expiry).</strong> With PCR at 1.08, max pain at 24,150, and spot at 24,252, the implied range for expiry is 24,000–24,500. Selling both ends collects premium decay and aligns with the most probable Scenario B outcome. Risk: Crude spike (gap down below 24,000) or major positive surprise (gap up above 24,600).</div></div>
+    <div class="bi b"><span class="ic">📊</span><div class="bd"><strong>Stock-specific: BHARTIARTL and ICICIBANK are structurally strongest heading into expiry week.</strong> Both show SC + emerging LB with improving fundamental anchors. Any Monday dip to ₹1,920 (Airtel) or ₹1,400 (ICICI) on broader market weakness is a high-conviction entry for September month holding.</div></div>
+    <div class="bi r"><span class="ic">❌</span><div class="bd"><strong>INFY and TCS: Avoid fresh longs until 200-DMA reclaimed.</strong> Both showed the most persistent short buildup of the 7 stocks and have not exhibited convincing SC. The Fed hawkish backdrop continues to cap upside in export IT. INFY's ₹1,100 support and TCS's ₹2,250 support are the lines to watch — breaks below would signal a continuation of the bear move into September.</div></div>
+  </div>
+</div>
+
+</div><!-- wrap -->
+
+<script>
+function T(h){var b=h.nextElementSibling;var open=b.style.display!=='none';b.style.display=open?'none':'block';h.querySelector('span').textContent=open?'▸':'▾'}
+var ls=document.querySelectorAll('nav a');
+function sa(){var sc=window.scrollY||document.documentElement.scrollTop;['s0','s1','s2','s3','s4','s5'].forEach(function(id){var el=document.getElementById(id);if(!el)return;var top=el.getBoundingClientRect().top+sc-60;if(sc>=top&&sc<top+el.offsetHeight){ls.forEach(function(l){l.classList.remove('active')});var lk=document.querySelector('nav a[href="#'+id+'"]');if(lk)lk.classList.add('active')}})}
+window.addEventListener('scroll',sa,{passive:true});
+ls.forEach(function(l){l.addEventListener('click',function(e){e.preventDefault();var t=document.querySelector(this.getAttribute('href'));if(t)window.scrollTo({top:t.offsetTop-45,behavior:'smooth'})})});
+</script>
+</body>
+</html>
