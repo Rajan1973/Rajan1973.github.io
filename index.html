@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Markets with Rajan — Post-Market Intelligence</title>
+<meta name="description" content="Daily post-market intelligence for Indian equity traders. Nifty, BankNifty, FII/DII flows, F&O OI analysis, sector rotation, macro impact — every trading day.">
+<meta property="og:title" content="Markets with Rajan — Post-Market Intelligence">
+<meta property="og:description" content="Daily institutional-grade post-market analysis for Indian equity traders. Nifty · BankNifty · FII/DII · F&O · Sectors · Macro.">
+<meta property="og:url" content="https://Rajan1973.github.io">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,sans-serif;background:#f1f5f9;color:#1e293b}
+header{background:#1e3a8a;padding:0}
+.hdr-inner{max-width:960px;margin:0 auto;padding:28px 20px 24px}
+.hdr-logo{font-size:11px;font-weight:700;color:#93c5fd;text-transform:uppercase;letter-spacing:.14em;margin-bottom:8px}
+.hdr-title{font-size:28px;font-weight:800;color:#fff;margin-bottom:6px;line-height:1.2}
+.hdr-sub{font-size:14px;color:#bfdbfe;line-height:1.6;max-width:560px}
+.hdr-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px}
+.hdr-tag{background:rgba(255,255,255,.12);color:#dbeafe;font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;border:1px solid rgba(255,255,255,.15)}
+.wrap{max-width:960px;margin:0 auto;padding:24px 20px}
+.section-label{font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.1em;margin-bottom:14px;padding-bottom:8px;border-bottom:2px solid #e2e8f0}
+.latest-card{background:#fff;border:2px solid #1d4ed8;border-radius:12px;overflow:hidden;margin-bottom:24px;box-shadow:0 4px 16px rgba(29,78,216,.12)}
+.latest-card .lc-header{background:#1e3a8a;padding:10px 16px;display:flex;align-items:center;gap:8px}
+.latest-card .lc-badge{background:#3b82f6;color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;text-transform:uppercase;letter-spacing:.06em}
+.latest-card .lc-date{color:#93c5fd;font-size:12px;font-weight:600}
+.latest-card .lc-body{padding:16px 20px}
+.latest-card .lc-title{font-size:16px;font-weight:700;color:#1e3a8a;margin-bottom:6px}
+.latest-card .lc-desc{font-size:13px;color:#475569;line-height:1.6;margin-bottom:14px}
+.latest-card .lc-pills{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.pill{background:#eff6ff;color:#1d4ed8;font-size:11px;font-weight:600;padding:3px 9px;border-radius:10px;border:1px solid #bfdbfe}
+.pill.red{background:#fff5f5;color:#991b1b;border-color:#fecaca}
+.pill.grn{background:#f0fdf4;color:#14532d;border-color:#bbf7d0}
+.pill.amb{background:#fffbeb;color:#92400e;border-color:#fde68a}
+.btn{display:inline-block;background:#1d4ed8;color:#fff;font-size:13px;font-weight:700;padding:9px 20px;border-radius:7px;text-decoration:none;transition:background .15s}
+.btn:hover{background:#1e40af}
+.btn-outline{background:#fff;color:#1d4ed8;border:2px solid #1d4ed8;margin-left:8px}
+.btn-outline:hover{background:#eff6ff}
+.archive{display:grid;gap:10px}
+.arc-item{background:#fff;border:1px solid #e2e8f0;border-radius:9px;padding:13px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;transition:border-color .15s;text-decoration:none;color:inherit}
+.arc-item:hover{border-color:#1d4ed8;background:#eff6ff}
+.arc-left{flex:1}
+.arc-date{font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px}
+.arc-title{font-size:14px;font-weight:600;color:#1e293b}
+.arc-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px}
+.arc-tag{font-size:10px;color:#475569;background:#f1f5f9;padding:2px 7px;border-radius:6px}
+.arc-arrow{color:#94a3b8;font-size:18px;flex-shrink:0}
+.arc-item:hover .arc-arrow{color:#1d4ed8}
+.about{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:20px;margin-bottom:24px}
+.about h3{font-size:14px;font-weight:700;color:#1e3a8a;margin-bottom:10px}
+.about p{font-size:13px;color:#475569;line-height:1.7;margin-bottom:8px}
+.about p:last-child{margin-bottom:0}
+.about ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:8px}
+.about ul li{font-size:12.5px;color:#334155;padding:3px 0 3px 16px;position:relative}
+.about ul li::before{content:"▸";position:absolute;left:2px;color:#1d4ed8;font-size:11px}
+.blogger-box{background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:14px 16px;margin-top:24px;font-size:12.5px;color:#92400e;line-height:1.6}
+.blogger-box strong{color:#78350f}
+.blogger-box code{background:#fef3c7;padding:2px 5px;border-radius:3px;font-size:11px;font-family:monospace;color:#78350f}
+footer{background:#1e293b;padding:20px;text-align:center;margin-top:40px}
+footer p{font-size:12px;color:#64748b;line-height:1.6}
+footer a{color:#93c5fd;text-decoration:none}
+@media(max-width:600px){
+  .hdr-title{font-size:22px}
+  .about ul{grid-template-columns:1fr}
+  .arc-item{flex-direction:column;align-items:flex-start}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hdr-inner">
+    <div class="hdr-logo">📊 Markets with Rajan</div>
+    <div class="hdr-title">Post-Market Intelligence<br>for Indian Equity Traders</div>
+    <div class="hdr-sub">Daily institutional-grade analysis of Nifty, BankNifty, FII/DII flows, F&O OI patterns, sectoral breadth, macro impact and expiry intelligence. Every trading day by 6 PM IST.</div>
+    <div class="hdr-tags">
+      <span class="hdr-tag">Nifty 50</span>
+      <span class="hdr-tag">BankNifty</span>
+      <span class="hdr-tag">FII/DII Flows</span>
+      <span class="hdr-tag">F&O OI Analysis</span>
+      <span class="hdr-tag">Sector Rotation</span>
+      <span class="hdr-tag">Macro & Policy</span>
+      <span class="hdr-tag">Expiry Intelligence</span>
+      <span class="hdr-tag">Kite MCP Data</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- LATEST REPORT -->
+  <div class="section-label">Latest Report</div>
+  <div class="latest-card">
+    <div class="lc-header">
+      <span class="lc-badge">⚡ Latest</span>
+      <span class="lc-date">Monday, 24 August 2026</span>
+    </div>
+    <div class="lc-body">
+      <div class="lc-title">Post-Market Intelligence — 24 August 2026</div>
+      <div class="lc-desc">Nifty settled at 24,219 (−0.14%) as Iran sanctions uncertainty triggered an expiry-eve whipsaw. FII turned net buyer +₹1,182 Cr — the largest FII buy day of the August series — while PSU Banks dragged. Metals surged +1.59%. Full §6 F&O Expiry Intelligence with live Kite MCP data: Nifty Aug FUT at a 31-pt discount to spot, 68% peak OI still live, and the Aug 24 paradox — 5 of 7 heavyweight stocks showing fresh short buildup on expiry eve.</div>
+      <div class="lc-pills">
+        <span class="pill">Nifty −0.14%</span>
+        <span class="pill red">PSU Bank −0.93%</span>
+        <span class="pill grn">Metal +1.59%</span>
+        <span class="pill grn">FII +₹1,182 Cr ✅</span>
+        <span class="pill amb">Expiry Tomorrow ⚡</span>
+        <span class="pill">Brent ~$93</span>
+        <span class="pill grn">Gold ₹1,63,970</span>
+      </div>
+      <a href="reports/2026/08/aug-24-2026.html" class="btn">Open Full Report →</a>
+      <a href="https://nifty-vanakkam.blogspot.com" class="btn btn-outline" target="_blank">Blogger</a>
+    </div>
+  </div>
+
+  <!-- ARCHIVE -->
+  <div class="section-label" style="margin-top:28px">Report Archive</div>
+  <div class="archive">
+    <a href="reports/2026/08/aug-24-2026.html" class="arc-item">
+      <div class="arc-left">
+        <div class="arc-date">Monday, 24 August 2026</div>
+        <div class="arc-title">Post-Market Intelligence — 24 Aug 2026 ⚡ Expiry Eve</div>
+        <div class="arc-tags">
+          <span class="arc-tag">Nifty −0.14%</span>
+          <span class="arc-tag">FII +₹1,182 Cr</span>
+          <span class="arc-tag">Metal +1.59%</span>
+          <span class="arc-tag">§6 F&O Expiry Intel</span>
+          <span class="arc-tag">Kite MCP</span>
+        </div>
+      </div>
+      <div class="arc-arrow">→</div>
+    </a>
+  </div>
+
+  <!-- ABOUT -->
+  <div class="section-label" style="margin-top:28px">About This Site</div>
+  <div class="about">
+    <h3>What is Markets with Rajan?</h3>
+    <p>A daily post-market intelligence report for active Indian equity traders and investors. Each report covers six sections of structured analysis published every trading day after market close:</p>
+    <ul>
+      <li>§0 Executive Scorecard — indices, VIX, FII/DII, commodities</li>
+      <li>§1 Nifty Movement — OHLC, narrative, global cues</li>
+      <li>§2 Macro & Policy — RBI, SEBI, Fed, geopolitical events</li>
+      <li>§3 Breadth — 5-day A/D comparison, SMA%, sector rotation</li>
+      <li>§4 FII/DII Flows — daily, weekly, MTD trend analysis</li>
+      <li>§5 F&O Intelligence — PCR, max pain, OI strikes, expiry outlook</li>
+      <li>§6 F&O Expiry Intel — live Kite MCP futures OI pattern analysis</li>
+    </ul>
+    <p style="margin-top:12px">Data sourced from Zerodha Kite MCP (live F&O OI), NSE, MCX, and real-time web feeds. Not investment advice — for educational and research purposes only.</p>
+  </div>
+
+  <div class="blogger-box">
+    <strong>Reading on Blogger?</strong> Full reports are published daily at <a href="https://nifty-vanakkam.blogspot.com" style="color:#92400e;font-weight:700">nifty-vanakkam.blogspot.com</a>. This GitHub Pages site hosts the interactive HTML versions with full formatting, tables, charts and sticky navigation. Use the archive above to access any report directly.
+  </div>
+
+</div>
+
+<footer>
+  <p>Markets with Rajan · Post-Market Intelligence for Indian Equity Traders<br>
+  Data: Zerodha Kite MCP · NSE · MCX · Web feeds · Not investment advice<br>
+  <a href="https://nifty-vanakkam.blogspot.com">Blogger</a> · 
+  <a href="https://github.com/Rajan1973/Rajan1973.github.io">GitHub</a></p>
+</footer>
+
+</body>
+</html>
