@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Markets with Rajan — Platform Guide</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,sans-serif;background:#f1f5f9;color:#1e293b;font-size:15px;line-height:1.7}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:99;background:#1e3a8a;display:flex;align-items:center;flex-wrap:wrap;gap:0;box-shadow:0 2px 8px rgba(0,0,0,.2);padding:0 16px}
+nav .brand{color:#fff;font-weight:800;font-size:14px;padding:12px 16px 12px 0;border-right:1px solid rgba(255,255,255,.2);margin-right:8px;white-space:nowrap}
+nav a{color:#bfdbfe;text-decoration:none;font-size:12px;font-weight:600;padding:12px 11px;border-bottom:2px solid transparent;white-space:nowrap;transition:color .15s}
+nav a:hover,nav a.active{color:#fff;border-bottom-color:#60a5fa}
+.pdf-btn{margin-left:auto;background:#f59e0b;color:#fff;font-size:12px;font-weight:700;padding:7px 14px;border-radius:6px;text-decoration:none;white-space:nowrap;border:none;cursor:pointer}
+.pdf-btn:hover{background:#d97706}
+
+/* LAYOUT */
+.wrap{max-width:960px;margin:0 auto;padding:28px 20px 60px}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,#1e3a8a 0%,#1d4ed8 100%);border-radius:14px;padding:36px 32px;margin-bottom:32px;color:#fff}
+.hero .tag{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:#93c5fd;margin-bottom:10px}
+.hero h1{font-size:26px;font-weight:800;line-height:1.2;margin-bottom:10px}
+.hero p{font-size:14px;color:#bfdbfe;line-height:1.7;max-width:640px}
+.hero .meta{display:flex;gap:20px;flex-wrap:wrap;margin-top:18px}
+.hero .mi{font-size:12px;color:#dbeafe}
+.hero .mi span{color:#fff;font-weight:700}
+
+/* SECTION HEADERS */
+.sec-wrap{background:#fff;border:1px solid #e2e8f0;border-radius:12px;margin-bottom:24px;overflow:hidden}
+.sec-head{padding:20px 24px;border-bottom:1px solid #e2e8f0;background:#f8fafc;display:flex;align-items:center;gap:14px}
+.sec-num{background:#1e3a8a;color:#fff;font-size:13px;font-weight:800;width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.sec-head h2{font-size:18px;font-weight:700;color:#1e3a8a}
+.sec-body{padding:24px}
+
+/* TEXT */
+h3{font-size:15px;font-weight:700;color:#1e3a8a;margin:20px 0 8px}
+h3:first-child{margin-top:0}
+p{margin-bottom:12px;color:#334155;font-size:14px}
+p:last-child{margin-bottom:0}
+strong{color:#1e293b;font-weight:700}
+
+/* BULLETS */
+ul.guide{list-style:none;margin:0 0 14px}
+ul.guide li{padding:5px 0 5px 20px;position:relative;font-size:14px;color:#334155;line-height:1.6;border-bottom:1px solid #f1f5f9}
+ul.guide li:last-child{border-bottom:none}
+ul.guide li::before{content:"▸";position:absolute;left:2px;color:#1d4ed8;font-size:12px;font-weight:700;top:7px}
+
+/* SECTION CARDS - report sections */
+.section-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin:16px 0}
+.sg{border-radius:9px;padding:14px 16px;border:1px solid}
+.sg .snum{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px}
+.sg .stitle{font-size:14px;font-weight:700;margin-bottom:6px}
+.sg .sdesc{font-size:12.5px;line-height:1.6}
+.s0{background:#f0fdf4;border-color:#86efac}.s0 .snum{color:#14532d}.s0 .stitle{color:#14532d}.s0 .sdesc{color:#166534}
+.s1{background:#eff6ff;border-color:#bfdbfe}.s1 .snum{color:#1e40af}.s1 .stitle{color:#1e3a8a}.s1 .sdesc{color:#1e40af}
+.s2{background:#fffbeb;border-color:#fde68a}.s2 .snum{color:#92400e}.s2 .stitle{color:#78350f}.s2 .sdesc{color:#92400e}
+.s3{background:#f5f3ff;border-color:#ddd6fe}.s3 .snum{color:#5b21b6}.s3 .stitle{color:#4c1d95}.s3 .sdesc{color:#5b21b6}
+.s4{background:#fff5f5;border-color:#fecaca}.s4 .snum{color:#991b1b}.s4 .stitle{color:#7f1d1d}.s4 .sdesc{color:#991b1b}
+.s5{background:#fff7ed;border-color:#fed7aa}.s5 .snum{color:#92400e}.s5 .stitle{color:#7c2d12}.s5 .sdesc{color:#c2410c}
+.s6{background:#1e3a8a;border-color:#1d4ed8}.s6 .snum{color:#93c5fd}.s6 .stitle{color:#fff}.s6 .sdesc{color:#bfdbfe}
+
+/* INFO BOXES */
+.info{border-radius:8px;padding:14px 16px;margin:14px 0;display:flex;gap:10px;align-items:flex-start;font-size:13.5px;line-height:1.6}
+.info .ic{font-size:18px;flex-shrink:0;margin-top:1px}
+.info .tx{color:#334155}
+.info .tx strong{color:#1e293b}
+.info.blue{background:#eff6ff;border:1px solid #bfdbfe}
+.info.green{background:#f0fdf4;border:1px solid #86efac}
+.info.amber{background:#fffbeb;border:1px solid #fde68a}.info.amber .tx{color:#78350f}
+.info.red{background:#fff5f5;border:1px solid #fecaca}.info.red .tx{color:#7f1d1d}
+
+/* CODE BLOCK */
+.code-wrap{background:#1e293b;border-radius:9px;overflow:hidden;margin:14px 0}
+.code-label{background:#334155;color:#94a3b8;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:7px 14px}
+.code-body{padding:14px 16px;overflow-x:auto}
+.code-body code{font-family:'Courier New',monospace;font-size:13px;color:#86efac;line-height:1.7;white-space:pre}
+.copy-row{display:flex;justify-content:flex-end;padding:0 14px 10px}
+.copy-btn{background:#1d4ed8;color:#fff;font-size:11px;font-weight:700;padding:4px 12px;border-radius:5px;border:none;cursor:pointer}
+.copy-btn:hover{background:#1e40af}
+
+/* LINKS TABLE */
+.link-table{width:100%;border-collapse:collapse;font-size:13.5px;margin:14px 0}
+.link-table th{background:#1e3a8a;color:#fff;padding:9px 12px;text-align:left;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+.link-table tbody tr:nth-child(odd) td{background:#fff}
+.link-table tbody tr:nth-child(even) td{background:#f8fafc}
+.link-table td{padding:9px 12px;border-bottom:1px solid #e2e8f0;vertical-align:top}
+.link-table a{color:#1d4ed8;font-weight:600;text-decoration:none}
+.link-table a:hover{text-decoration:underline}
+
+/* WORKFLOW STEPS */
+.steps{margin:14px 0}
+.step{display:flex;gap:14px;margin-bottom:12px;align-items:flex-start}
+.step-num{background:#1e3a8a;color:#fff;font-size:12px;font-weight:800;min-width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.step-body{flex:1}
+.step-title{font-size:14px;font-weight:700;color:#1e293b;margin-bottom:3px}
+.step-desc{font-size:13px;color:#475569;line-height:1.6}
+
+/* REPORT PREVIEW BOX */
+.preview-box{border:2px solid #1d4ed8;border-radius:10px;overflow:hidden;margin:16px 0}
+.preview-head{background:#1e3a8a;padding:10px 16px;display:flex;align-items:center;justify-content:space-between}
+.preview-head span{color:#93c5fd;font-size:12px;font-weight:600}
+.preview-head a{background:#3b82f6;color:#fff;font-size:11px;font-weight:700;padding:4px 12px;border-radius:5px;text-decoration:none}
+.preview-head a:hover{background:#2563eb}
+.preview-frame{background:#f8fafc;padding:16px;min-height:120px}
+.preview-sections{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.ps{background:#fff;border:1px solid #e2e8f0;border-radius:6px;padding:8px 10px;text-align:center}
+.ps .pl{font-size:9px;font-weight:700;text-transform:uppercase;color:#64748b;letter-spacing:.06em}
+.ps .pv{font-size:11px;font-weight:700;color:#1e3a8a;margin-top:2px}
+
+/* WHERE-ARE-WE NOTE */
+.waw-note{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:20px 24px;margin-top:28px}
+.waw-note h3{font-size:16px;font-weight:700;color:#1e293b;margin-bottom:10px}
+.waw-note p{font-size:14px;color:#334155;margin-bottom:8px}
+.waw-note .cmd{font-family:monospace;background:#1e293b;color:#86efac;padding:3px 8px;border-radius:4px;font-size:13px}
+
+/* DIVIDER */
+.divider{height:1px;background:linear-gradient(to right,transparent,#cbd5e1,transparent);margin:28px 0}
+
+/* PRINT */
+@media print{
+  nav,.pdf-btn{display:none}
+  .wrap{padding:0}
+  .sec-wrap{break-inside:avoid}
+}
+@media(max-width:640px){
+  .section-grid{grid-template-columns:1fr}
+  .preview-sections{grid-template-columns:repeat(2,1fr)}
+  nav a{padding:10px 8px;font-size:11px}
+}
+</style>
+</head>
+<body>
+
+<nav id="topnav">
+  <div class="brand">📊 Markets with Rajan</div>
+  <a href="#s1" class="active">The Skill</a>
+  <a href="#s2">GitHub Pages</a>
+  <a href="#s3">Blogger</a>
+  <a href="#s4">Daily Workflow</a>
+  <button class="pdf-btn" onclick="window.print()">⬇ Download PDF</button>
+</nav>
+
+<div class="wrap">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="tag">Platform Guide · Markets with Rajan</div>
+    <h1>Post-Market Intelligence —<br>How Everything Works</h1>
+    <p>This document explains the full system: how the daily report is generated, where it is hosted, how it is published to the blog, and how to run the process every day. Keep this as your reference.</p>
+    <div class="meta">
+      <div class="mi">Report Skill <span>post-market-intelligence</span></div>
+      <div class="mi">GitHub Site <span>rajan1973.github.io</span></div>
+      <div class="mi">Blog <span>nifty-vanakkam.blogspot.com</span></div>
+      <div class="mi">Data Source <span>Zerodha Kite MCP</span></div>
+    </div>
+  </div>
+
+  <!-- SECTION 1 — THE SKILL -->
+  <div id="s1" class="sec-wrap">
+    <div class="sec-head">
+      <div class="sec-num">1</div>
+      <h2>What is the post-market-intelligence Skill?</h2>
+    </div>
+    <div class="sec-body">
+
+      <p>A <strong>skill</strong> is a saved set of instructions that tells Claude exactly how to build the post-market report — what data to fetch, how to structure the analysis, and how to format the output. Think of it as a playbook Claude reads before starting every report.</p>
+
+      <ul class="guide">
+        <li>Trigger it by typing <strong>"post-market report"</strong>, <strong>"EOD report"</strong>, <strong>"weekly review"</strong>, or <strong>"expiry analysis"</strong></li>
+        <li>It fetches data from <strong>14 web searches</strong> (indices, sectors, FII/DII, macro, commodities) and <strong>Zerodha Kite MCP</strong> (live F&O OI for expiry reports)</li>
+        <li>Outputs a <strong>single interactive HTML file</strong> — light theme, sticky nav bar, sortable colour-coded tables, collapsible sections</li>
+        <li>Report types: <strong>Daily</strong> (every trading day) · <strong>Weekly Review</strong> (every Friday, 5-week comparison) · <strong>F&O Expiry Special</strong> (last week of each monthly series)</li>
+        <li>If you provide FII/DII data as a screenshot or text, it overrides the web search for those fields</li>
+      </ul>
+
+      <div class="info blue">
+        <span class="ic">📁</span>
+        <div class="tx">Skill file location: <strong>/mnt/skills/user/post-market-intelligence/SKILL.md</strong> — this is the master instruction file. If it ever needs updating, changes are made here and the skill is repackaged.</div>
+      </div>
+
+      <h3>The 7 Sections of Every Report</h3>
+      <p>Every daily report contains 6 sections (§0–§5). Section §6 is added automatically in the last week of a monthly F&O series, or always in a weekly review.</p>
+
+      <div class="section-grid">
+        <div class="sg s0">
+          <div class="snum">§0</div>
+          <div class="stitle">Executive Scorecard</div>
+          <div class="sdesc">Quick-view dashboard. Index closes, VIX, FII/DII net flows, PCR. Commodity row: Brent Crude, Gold, Silver, Aluminium, Copper MCX prices. 3–4 key theme bullets.</div>
+        </div>
+        <div class="sg s1">
+          <div class="snum">§1</div>
+          <div class="stitle">Nifty Movement & Narrative</div>
+          <div class="sdesc">Full OHLC table, 1D/1W/MTD performance. 4–6 narrative bullet points explaining exactly what moved the market and why. Global cues table (Dow, NASDAQ, Crude, USD/INR, US 10Y).</div>
+        </div>
+        <div class="sg s2">
+          <div class="snum">§2</div>
+          <div class="stitle">Macro & Policy Dashboard</div>
+          <div class="sdesc">Any RBI, SEBI, or data releases in the last 48 hours. CPI, WPI, IIP, PMI, GST, RBI rate decisions — each as a structured card with bullet-point market impact.</div>
+        </div>
+        <div class="sg s3">
+          <div class="snum">§3</div>
+          <div class="stitle">Breadth & Sector Rotation</div>
+          <div class="sdesc">5-day Advance/Decline comparison across all major indices. % of stocks above 200/50/20 SMA. Sector rotation insight (what to buy, what to avoid). Currency & commodity 5-day snapshot.</div>
+        </div>
+        <div class="sg s4">
+          <div class="snum">§4</div>
+          <div class="stitle">FII / DII Flow Dashboard</div>
+          <div class="sdesc">Daily buy/sell/net table. 5-day trend comparison. FII F&O futures position. Interpretation: what the flows mean for tomorrow and the coming week.</div>
+        </div>
+        <div class="sg s5">
+          <div class="snum">§5</div>
+          <div class="stitle">F&O Intelligence</div>
+          <div class="sdesc">PCR, Max Pain, India VIX. Strike-wise Call/Put OI table. Key support and resistance levels from options OI. Next-session outlook with directional bias.</div>
+        </div>
+        <div class="sg s6">
+          <div class="snum">§6</div>
+          <div class="stitle">F&O Expiry Intelligence</div>
+          <div class="sdesc">Live from Zerodha Kite MCP. Daily OI pattern table for Nifty & BankNifty futures (LB / SB / SC / LU classification). Top-7 Nifty50 stocks OI analysis. Three expiry scenarios with probability. Triggers for swift moves. Trading framework for final sessions.</div>
+        </div>
+      </div>
+
+      <div class="info amber">
+        <span class="ic">⚡</span>
+        <div class="tx"><strong>§6 trigger rule:</strong> Added automatically in Weekly Reviews (always) and in Daily reports when the monthly expiry is 5 or fewer trading days away. It uses live Kite MCP data — Kite login is required before running.</div>
+      </div>
+
+      <h3>Sample Report — 24 August 2026 (Daily)</h3>
+      <p>This is a typical daily report. It was generated on an expiry-eve day (Aug 25 expiry was next day), so §6 F&O Expiry Intelligence is included.</p>
+
+      <div class="preview-box">
+        <div class="preview-head">
+          <span>📊 Post-Market Intelligence — 24 August 2026 · Live on GitHub Pages</span>
+          <a href="https://rajan1973.github.io/reports/2026/08/aug-24-2026.html" target="_blank">Open Full Report ↗</a>
+        </div>
+        <div class="preview-frame">
+          <p style="font-size:12px;color:#64748b;margin-bottom:12px;font-style:italic">Live interactive report — click the link above to view in full. Key highlights from this report:</p>
+          <div class="preview-sections">
+            <div class="ps"><div class="pl">§0 Scorecard</div><div class="pv">Nifty −0.14%<br>FII +₹1,182 Cr ✅</div></div>
+            <div class="ps"><div class="pl">§1 Narrative</div><div class="pv">Iran sanctions<br>Metal +1.59%</div></div>
+            <div class="ps"><div class="pl">§2 Macro</div><div class="pv">RBI hawkish<br>US PMI 56.8</div></div>
+            <div class="ps"><div class="pl">§3 Breadth</div><div class="pv">5-day A/D<br>SMA% tables</div></div>
+            <div class="ps"><div class="pl">§4 FII/DII</div><div class="pv">₹3,675 Cr<br>Inst. co-buy</div></div>
+            <div class="ps"><div class="pl">§5 F&O</div><div class="pv">PCR 1.08<br>Max Pain 24,150</div></div>
+            <div class="ps"><div class="pl">§6 Expiry</div><div class="pv">Kite MCP Live<br>3 Scenarios</div></div>
+            <div class="ps"><div class="pl">Report Size</div><div class="pv">67KB · Single<br>HTML file</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info green">
+        <span class="ic">✅</span>
+        <div class="tx"><strong>Key feature:</strong> Every report is a single self-contained HTML file. No external dependencies. Sticky navigation bar, collapsible sections, sortable tables, green/red/amber colour coding. Works on desktop and mobile.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SECTION 2 — GITHUB PAGES -->
+  <div id="s2" class="sec-wrap">
+    <div class="sec-head">
+      <div class="sec-num">2</div>
+      <h2>GitHub Pages — How Reports are Hosted</h2>
+    </div>
+    <div class="sec-body">
+
+      <h3>Why GitHub Pages?</h3>
+      <p>Blogger strips the styling from HTML reports when pasted directly — tables lose colours, the nav bar disappears, and the report becomes unreadable. The fix is to <strong>host the HTML file on GitHub Pages</strong> and embed it in Blogger via a single iframe link. This way, readers see the fully styled report exactly as designed.</p>
+
+      <h3>Account & Repository Details</h3>
+      <table class="link-table">
+        <thead><tr><th>Item</th><th>Detail</th><th>Link</th></tr></thead>
+        <tbody>
+          <tr><td><strong>GitHub Username</strong></td><td>Rajan1973</td><td><a href="https://github.com/Rajan1973" target="_blank">github.com/Rajan1973 ↗</a></td></tr>
+          <tr><td><strong>Repository Name</strong></td><td>Rajan1973.github.io</td><td><a href="https://github.com/Rajan1973/Rajan1973.github.io" target="_blank">github.com/Rajan1973/Rajan1973.github.io ↗</a></td></tr>
+          <tr><td><strong>Live Site (GitHub Pages)</strong></td><td>Landing page with report archive</td><td><a href="https://rajan1973.github.io" target="_blank">rajan1973.github.io ↗</a></td></tr>
+          <tr><td><strong>Reports Folder</strong></td><td>reports/YYYY/MM/filename.html</td><td><a href="https://rajan1973.github.io/reports/2026/08/aug-24-2026.html" target="_blank">Example: aug-24-2026.html ↗</a></td></tr>
+          <tr><td><strong>Token Type</strong></td><td>Classic PAT (ghp_…) · repo scope · 90-day expiry</td><td>Generate at: github.com → Settings → Developer settings → Tokens (classic)</td></tr>
+        </tbody>
+      </table>
+
+      <h3>What the GitHub Pages Site Provides</h3>
+      <div class="info blue">
+        <span class="ic">🌐</span>
+        <div class="tx">
+          The landing page at <a href="https://rajan1973.github.io" target="_blank" style="color:#1d4ed8;font-weight:700">rajan1973.github.io</a> is an always-updated archive of all published reports. It shows the <strong>latest report pinned at the top</strong> and a colour-coded list of all past reports — Daily (blue), Weekly Review (purple), F&O Expiry Analysis (red). Each report is a direct clickable link. The site also shows the Blogger iframe embed code for easy copy-paste. Reports are stored in a date-organised folder structure: <strong>reports/2026/08/filename.html</strong>, making it easy to find any past report by date.
+        </div>
+      </div>
+
+      <h3>File Naming Convention</h3>
+      <ul class="guide">
+        <li><strong>Daily report:</strong> <code style="background:#f1f5f9;padding:2px 6px;border-radius:4px;font-family:monospace;font-size:12px">aug-24-2026.html</code></li>
+        <li><strong>Weekly review:</strong> <code style="background:#f1f5f9;padding:2px 6px;border-radius:4px;font-family:monospace;font-size:12px">aug-21-2026-weekly-review.html</code></li>
+        <li><strong>F&O expiry analysis:</strong> <code style="background:#f1f5f9;padding:2px 6px;border-radius:4px;font-family:monospace;font-size:12px">aug-25-2026-fo-expiry-analysis.html</code></li>
+        <li><strong>Expiry day special:</strong> <code style="background:#f1f5f9;padding:2px 6px;border-radius:4px;font-family:monospace;font-size:12px">aug-25-2026.html</code></li>
+      </ul>
+
+      <h3>Current Reports Live on GitHub Pages</h3>
+      <table class="link-table">
+        <thead><tr><th>Date</th><th>Type</th><th>Live Link</th></tr></thead>
+        <tbody>
+          <tr><td>25 Aug 2026</td><td>✅ Expiry Day Special</td><td><a href="https://rajan1973.github.io/reports/2026/08/aug-25-2026.html" target="_blank">aug-25-2026.html ↗</a></td></tr>
+          <tr><td>25 Aug 2026</td><td>⚡ F&O Expiry Analysis</td><td><a href="https://rajan1973.github.io/reports/2026/08/aug-25-2026-fo-expiry-analysis.html" target="_blank">aug-25-2026-fo-expiry-analysis.html ↗</a></td></tr>
+          <tr><td>24 Aug 2026</td><td>📊 Daily Post-Market</td><td><a href="https://rajan1973.github.io/reports/2026/08/aug-24-2026.html" target="_blank">aug-24-2026.html ↗</a></td></tr>
+          <tr><td>21 Aug 2026</td><td>📅 Weekly Review</td><td><a href="https://rajan1973.github.io/reports/2026/08/aug-21-2026-weekly-review.html" target="_blank">aug-21-2026-weekly-review.html ↗</a></td></tr>
+        </tbody>
+      </table>
+
+      <div class="info amber">
+        <span class="ic">🔑</span>
+        <div class="tx"><strong>Token reminder:</strong> The GitHub classic PAT (ghp_…) is required every time Claude pushes a new report. Store it safely — in a password manager or locked notes app. Never share it publicly. Regenerate it at GitHub every 90 days. Claude never stores the token between sessions.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SECTION 3 — BLOGGER -->
+  <div id="s3" class="sec-wrap">
+    <div class="sec-head">
+      <div class="sec-num">3</div>
+      <h2>Blogger Site — How to Publish Each Report</h2>
+    </div>
+    <div class="sec-body">
+
+      <h3>Blog Details</h3>
+      <table class="link-table">
+        <thead><tr><th>Item</th><th>Detail</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Blog Name</strong></td><td>Nifty Vanakkam</td></tr>
+          <tr><td><strong>Blog URL</strong></td><td><a href="https://nifty-vanakkam.blogspot.com" target="_blank">nifty-vanakkam.blogspot.com ↗</a></td></tr>
+          <tr><td><strong>Brand</strong></td><td>Markets with Rajan</td></tr>
+          <tr><td><strong>Blog Description</strong></td><td>Daily post-market intelligence for Indian equity traders. Nifty, BankNifty, FII/DII flows, F&O OI analysis, sector rotation, macro impact and expiry intelligence — every trading day by 9:30 PM IST. Data sourced from Zerodha Kite.</td></tr>
+          <tr><td><strong>Author</strong></td><td>Rajan (update in Blogger Settings if showing "Babu")</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Why We Use an iframe — Not Direct HTML</h3>
+      <p>When you paste the full HTML report into Blogger, it <strong>strips all the CSS styling</strong> — the colour-coded tables, sticky nav bar, cards, and collapsible sections all disappear. The report becomes unreadable plain text.</p>
+      <p>The solution: <strong>paste a single iframe tag</strong> into Blogger that loads the report from GitHub Pages. Readers see the fully styled, interactive report. Blogger just acts as the frame.</p>
+
+      <h3>How to Create a New Blogger Post — Step by Step</h3>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <div class="step-title">Go to Blogger and create a new post</div>
+            <div class="step-desc">blogger.com → Your Blog → New Post. Give it a proper title like: <strong>Post-Market Intelligence — 26 August 2026</strong></div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <div class="step-title">Switch to HTML mode</div>
+            <div class="step-desc">In the editor toolbar, click <strong>HTML</strong> (not Compose). This is critical — pasting in Compose mode will strip the iframe tag.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <div class="step-title">Delete everything in the editor and paste the iframe code</div>
+            <div class="step-desc">Copy the code below, change the filename in the URL to match today's report, and paste it into the HTML editor.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <div class="step-title">Add labels and publish</div>
+            <div class="step-desc">Add labels: <strong>Nifty, BankNifty, FII/DII, F&O, Post-Market, Markets with Rajan</strong>. Then click Publish.</div>
+          </div>
+        </div>
+      </div>
+
+      <h3>The iframe Embed Code — Generic Template</h3>
+      <p>Use this template for every post. Change only the <strong>filename</strong> in the URL (highlighted in the example below).</p>
+
+      <div class="code-wrap">
+        <div class="code-label">📋 Blogger iframe embed — paste in HTML mode</div>
+        <div class="code-body">
+          <code>&lt;iframe
+  src="https://rajan1973.github.io/reports/YYYY/MM/<span style="color:#fbbf24">filename.html</span>"
+  width="100%"
+  height="4500"
+  frameborder="0"
+  scrolling="yes"
+  style="border:none; min-height:4000px;"&gt;
+&lt;/iframe&gt;</code>
+        </div>
+        <div class="copy-row">
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+      </div>
+
+      <h3>Real Examples — Ready to Use</h3>
+
+      <div class="code-wrap">
+        <div class="code-label">📊 Daily Report — 24 August 2026</div>
+        <div class="code-body"><code>&lt;iframe src="https://rajan1973.github.io/reports/2026/08/aug-24-2026.html"
+  width="100%" height="4500" frameborder="0" scrolling="yes"
+  style="border:none; min-height:4000px;"&gt;&lt;/iframe&gt;</code></div>
+      </div>
+
+      <div class="code-wrap">
+        <div class="code-label">✅ Expiry Day Report — 25 August 2026</div>
+        <div class="code-body"><code>&lt;iframe src="https://rajan1973.github.io/reports/2026/08/aug-25-2026.html"
+  width="100%" height="4500" frameborder="0" scrolling="yes"
+  style="border:none; min-height:4000px;"&gt;&lt;/iframe&gt;</code></div>
+      </div>
+
+      <div class="code-wrap">
+        <div class="code-label">📅 Weekly Review — 21 August 2026</div>
+        <div class="code-body"><code>&lt;iframe src="https://rajan1973.github.io/reports/2026/08/aug-21-2026-weekly-review.html"
+  width="100%" height="4500" frameborder="0" scrolling="yes"
+  style="border:none; min-height:4000px;"&gt;&lt;/iframe&gt;</code></div>
+      </div>
+
+      <div class="info red">
+        <span class="ic">⚠️</span>
+        <div class="tx"><strong>Common mistake:</strong> If you paste in Compose mode instead of HTML mode, Blogger will either strip the iframe or show it as plain text. Always switch to HTML mode first before pasting.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SECTION 4 — DAILY WORKFLOW -->
+  <div id="s4" class="sec-wrap">
+    <div class="sec-head">
+      <div class="sec-num">4</div>
+      <h2>The Daily Workflow — End to End</h2>
+    </div>
+    <div class="sec-body">
+
+      <p>This is the complete daily process, from market close to Blogger post published. The entire workflow typically takes <strong>5–8 minutes</strong> after market close.</p>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <div class="step-title">Provide FII/DII data (optional but recommended)</div>
+            <div class="step-desc">Take a screenshot of the NSE/5paisa cash market summary table and paste it into Claude. This gives accurate FII/DII numbers that web search sometimes misses.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <div class="step-title">Trigger the report</div>
+            <div class="step-desc">Type: <strong>"post-market report for [date]"</strong>. If it is expiry week or a weekly review day, Claude adds §6 automatically. If Kite data is needed, Claude will prompt for login.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <div class="step-title">Authorise Kite (if prompted)</div>
+            <div class="step-desc">Click the Kite login link Claude provides. Authorise in the browser. Tell Claude "login done". Claude then pulls live F&O OI data from your Zerodha account.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <div class="step-title">Claude generates the HTML report</div>
+            <div class="step-desc">Takes 3–5 minutes. Claude runs 14 parallel web searches + Kite API calls. The report appears as a downloadable HTML file in the chat.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">5</div>
+          <div class="step-body">
+            <div class="step-title">Push to GitHub Pages</div>
+            <div class="step-desc">Paste your GitHub classic token (ghp_…) and say <strong>"push today's report"</strong>. Claude uploads the HTML to <code style="font-family:monospace;font-size:12px;background:#f1f5f9;padding:1px 5px;border-radius:3px">reports/2026/MM/</code>, updates the index page, and gives you the Blogger iframe code.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">6</div>
+          <div class="step-body">
+            <div class="step-title">Create Blogger post</div>
+            <div class="step-desc">Go to Blogger → New Post → HTML mode → paste the iframe code Claude provides → add labels → Publish. Done.</div>
+          </div>
+        </div>
+      </div>
+
+      <h3>Automation Built In</h3>
+      <ul class="guide">
+        <li><strong>§6 auto-trigger:</strong> Claude checks if expiry is ≤5 days away and adds the Kite MCP OI analysis without being asked</li>
+        <li><strong>Weekly review auto-trigger:</strong> On Fridays, Claude switches to 5-week comparison framework automatically</li>
+        <li><strong>Index update:</strong> Every GitHub push automatically updates the landing page archive with the new report</li>
+        <li><strong>Scenario tracking:</strong> On expiry day, Claude reviews the prior day's 3 scenarios and tells you which one played out</li>
+        <li><strong>FII/DII override:</strong> If you paste FII/DII data, Claude uses your numbers instead of web search — more accurate</li>
+      </ul>
+
+      <div class="info green">
+        <span class="ic">💡</span>
+        <div class="tx"><strong>Tip:</strong> Keep your GitHub token stored in a password manager or locked notes app. Paste it at Step 5 each day. You only need to regenerate it every 90 days.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- WHERE ARE WE NOTE -->
+  <div class="waw-note" id="waw">
+    <h3>📍 The "Where Are We" Command</h3>
+    <p>At any point in any Claude session — including a brand new conversation — you can type <span class="cmd">where are we</span> and Claude will give you a full status update of everything built so far in the Markets with Rajan project.</p>
+    <p>The command will tell you:</p>
+    <ul class="guide" style="margin:10px 0">
+      <li>What has been completed — reports generated, GitHub files pushed, skills built</li>
+      <li>What is currently in progress — any partial task or open decision</li>
+      <li>What is pending — any task Claude suggested that you have not yet decided on or started</li>
+      <li>Where you can pick up from — so you can continue from exactly where the last session ended</li>
+    </ul>
+    <p>Example: if Claude suggested "We can also add an email subscription widget to Blogger" in a previous session and you haven't acted on it yet, <span class="cmd">where are we</span> will remind you of that open item so it doesn't get lost across sessions.</p>
+    <p style="margin-top:10px;font-size:13px;color:#64748b">This document itself is available at: <a href="https://rajan1973.github.io/reports/2026/08/markets-with-rajan-guide.html" target="_blank" style="color:#1d4ed8">rajan1973.github.io/reports/2026/08/markets-with-rajan-guide.html ↗</a></p>
+  </div>
+
+</div>
+
+<script>
+// Nav active state on scroll
+var ls=document.querySelectorAll('nav a');
+function sa(){
+  var sc=window.scrollY||document.documentElement.scrollTop;
+  ['s1','s2','s3','s4'].forEach(function(id){
+    var el=document.getElementById(id);
+    if(!el)return;
+    var top=el.getBoundingClientRect().top+sc-60;
+    if(sc>=top-10&&sc<top+el.offsetHeight){
+      ls.forEach(function(l){l.classList.remove('active')});
+      var lk=document.querySelector('nav a[href="#'+id+'"]');
+      if(lk)lk.classList.add('active');
+    }
+  });
+}
+window.addEventListener('scroll',sa,{passive:true});
+ls.forEach(function(l){
+  l.addEventListener('click',function(e){
+    e.preventDefault();
+    var t=document.querySelector(this.getAttribute('href'));
+    if(t)window.scrollTo({top:t.offsetTop-50,behavior:'smooth'});
+  });
+});
+
+// Copy button
+function copyCode(btn){
+  var code=btn.closest('.code-wrap').querySelector('code');
+  navigator.clipboard.writeText(code.innerText).then(function(){
+    btn.textContent='Copied!';
+    setTimeout(function(){btn.textContent='Copy';},2000);
+  });
+}
+</script>
+</body>
+</html>
