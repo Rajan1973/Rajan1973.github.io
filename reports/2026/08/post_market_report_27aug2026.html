@@ -1,0 +1,553 @@
+<title>Post-Market Intelligence — 27 Aug 2026</title>
+<style>
+:root{
+  --bg:#f8f9fa; --card:#f1f5f9; --text:#0f172a; --border:#cbd5e1; --border-light:#e2e8f0;
+  --navy:#1e3a8a; --navy-hover:#1d4ed8; --accent:#2563eb;
+  --pos:#15803d; --neg:#dc2626; --amber:#b45309;
+  --row-odd:#ffffff; --row-even:#eff6ff; --row-hover:#dbeafe;
+}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.5;}
+a{color:var(--accent);}
+.pos{color:var(--pos);font-weight:600;}
+.neg{color:var(--neg);font-weight:600;}
+.neu{color:var(--amber);font-weight:600;}
+.topbar{background:#ffffff;border-bottom:1px solid var(--border);padding:8px 20px;font-size:13px;color:#475569;position:sticky;top:0;z-index:30;}
+.topbar .warn{color:#b45309;font-weight:700;margin-left:14px;}
+nav.mainnav{position:sticky;top:32px;z-index:29;background:#ffffff;border-bottom:1px solid var(--border);padding:0 12px;display:flex;flex-wrap:wrap;gap:2px;overflow-x:auto;}
+nav.mainnav a{padding:10px 14px;font-size:13px;font-weight:600;color:#334155;text-decoration:none;border-bottom:3px solid transparent;white-space:nowrap;}
+nav.mainnav a:hover{color:var(--accent);}
+nav.mainnav a.active{color:var(--accent);border-bottom-color:var(--accent);}
+.wrap{max-width:1180px;margin:0 auto;padding:20px 18px 80px;}
+section{margin-bottom:28px;scroll-margin-top:90px;}
+.card{background:var(--card);border:1px solid var(--border-light);border-radius:10px;padding:18px 20px;}
+h1{font-size:22px;margin:6px 0 4px;}
+h2{font-size:18px;margin:0;display:flex;align-items:center;justify-content:space-between;cursor:pointer;}
+h2 .chevron{font-size:13px;color:#64748b;transition:transform .15s;}
+h2.collapsed .chevron{transform:rotate(-90deg);}
+.sec-body{margin-top:14px;}
+.sec-body.collapsed{display:none;}
+h3{font-size:14px;margin:18px 0 8px;color:#1e293b;}
+p{margin:6px 0;}
+.subtitle{color:#64748b;font-size:12.5px;}
+.tablewrap{border:1px solid var(--border);border-radius:8px;overflow:auto;max-width:100%;margin:10px 0;}
+table{border-collapse:collapse;width:100%;font-size:13px;min-width:520px;}
+th,td{padding:7px 10px;text-align:left;white-space:nowrap;}
+td.num, th.num{text-align:right;font-variant-numeric:tabular-nums;}
+thead th{background:var(--navy);color:#fff;font-weight:700;text-transform:uppercase;font-size:11px;letter-spacing:.04em;cursor:pointer;user-select:none;position:sticky;top:0;}
+thead th:hover{background:var(--navy-hover);}
+tbody tr:nth-child(odd){background:var(--row-odd);}
+tbody tr:nth-child(even){background:var(--row-even);}
+tbody tr:hover{background:var(--row-hover) !important;}
+td{border-bottom:1px solid var(--border-light);}
+tr:last-child td{border-bottom:none;}
+tr.group-start td{background:#e2e8f0 !important;font-weight:700;border-top:1px solid var(--border);}
+.sortarrow{font-size:9px;margin-left:4px;opacity:.7;}
+.scorecard-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:10px 0;}
+.stat{background:#fff;border:1px solid var(--border-light);border-radius:8px;padding:12px 14px;}
+.stat .label{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:#64748b;font-weight:700;}
+.stat .value{font-size:20px;font-weight:700;margin-top:4px;}
+.stat .sub{font-size:12px;color:#64748b;margin-top:2px;}
+ul.bullets{margin:8px 0;padding-left:0;list-style:none;}
+ul.bullets li{margin:8px 0;padding-left:0;}
+.macrocard{background:#fff;border:1px solid var(--border-light);border-radius:8px;padding:12px 14px;margin:10px 0;}
+.macrocard h4{margin:0 0 6px;font-size:14px;}
+.macrocard ul{margin:6px 0;padding-left:20px;}
+.datanote{font-style:italic;color:#64748b;font-size:12px;}
+.databadge{display:inline-block;background:#fef3c7;color:#92400e;border:1px solid #fcd34d;border-radius:6px;padding:2px 8px;font-size:11.5px;font-weight:600;margin:6px 0;}
+.footnote{font-size:11.5px;color:#94a3b8;margin-top:30px;text-align:center;}
+.pill{display:inline-block;padding:2px 9px;border-radius:99px;font-size:11px;font-weight:700;}
+.pill.bull{background:#dcfce7;color:#166534;}
+.pill.bear{background:#fee2e2;color:#991b1b;}
+.pill.neutral{background:#fef3c7;color:#92400e;}
+</style>
+<div class="topbar">
+  27 Aug 2026 &middot; 2026-08-27 22:50 IST &middot; Kite MCP + NSE/MoneyControl/Business Standard + Supabase (nifty500data) &middot; FII/DII: user-provided data (in Supabase)
+</div>
+<nav class="mainnav">
+  <a href="#s0">Scorecard</a>
+  <a href="#s1">Nifty &amp; Sentiment</a>
+  <a href="#s2">Macro/Policy</a>
+  <a href="#s3">Breadth</a>
+  <a href="#s4">FII/DII</a>
+  <a href="#s5">Momentum</a>
+  <a href="#s6">F&amp;O</a>
+</nav>
+<div class="wrap">
+<div class="databadge">⚠ Data note: the Supabase historical pipeline had not ingested the 27-Aug session at report time (last sync: 26-Aug-2026 close). All 27-Aug index levels, breadth and momentum-scan inputs below are live EOD figures pulled directly from Kite MCP and merged with Supabase's historical series for trend columns — not a stale re-print.</div>
+
+
+<section id="s0">
+<div class="card">
+<h2 data-toggle>§0 &middot; Executive Scorecard <span class="chevron">▾</span></h2>
+<div class="sec-body">
+<h3>Equity</h3>
+<div class="scorecard-grid">
+  <div class="stat"><div class="label">Nifty 50</div><div class="value">24,090.85</div><div class="sub neg">-116.90 (-0.48%)</div></div>
+  <div class="stat"><div class="label">Bank Nifty</div><div class="value">57,509.95</div><div class="sub neg">-273.80 (-0.47%)</div></div>
+  <div class="stat"><div class="label">India VIX</div><div class="value">11.07</div><div class="sub neu">+0.50 (+4.7%)</div></div>
+  <div class="stat"><div class="label">FII Net (Cash)</div><div class="value neg">-₹298 Cr</div><div class="sub">Sold, ending 2-day buy streak</div></div>
+  <div class="stat"><div class="label">DII Net (Cash)</div><div class="value pos">+₹4,977 Cr</div><div class="sub">Absorbed FII selling</div></div>
+  <div class="stat"><div class="label">Nifty PCR (Weekly)</div><div class="value">0.61</div><div class="sub neu">Call-heavy / bearish-leaning</div></div>
+  <div class="stat"><div class="label">Market Breadth (Nifty50 A:D)</div><div class="value">18:31</div><div class="sub neg">Negative</div></div>
+</div>
+<h3>Commodities</h3>
+<div class="scorecard-grid">
+  <div class="stat"><div class="label">Brent Crude</div><div class="value">$87.20</div><div class="sub neg">-0.7% (4th down day)</div></div>
+  <div class="stat"><div class="label">Gold (MCX, ₹/10g)</div><div class="value">₹1,59,154</div><div class="sub pos">+0.31%</div></div>
+  <div class="stat"><div class="label">Silver (MCX, ₹/kg)</div><div class="value">₹2,41,648</div><div class="sub pos">+0.84%</div></div>
+  <div class="stat"><div class="label">Aluminium (MCX, ₹/kg)</div><div class="value">₹345.90</div><div class="sub neg">-0.86%</div></div>
+  <div class="stat"><div class="label">Copper (MCX, ₹/kg)</div><div class="value">₹1,380.00</div><div class="sub neg">-0.14%</div></div>
+</div>
+<h3>Today in 4 lines</h3>
+<ul class="bullets">
+<li>Nifty fell for a <strong>second straight session</strong> to 24,090.85 (-0.48%) despite a positive overnight setup — Nvidia's blowout Q2 (revenue $96.22bn, guided $108bn for Q3) lifted Asian tech and nudged GIFT Nifty into marginally positive territory pre-open.</li>
+<li>Domestic selling in <strong>Metal (-0.86%), PSU Bank (-0.94%) and Cement (&gt;-1%)</strong> overwhelmed the positive global cues; breadth was negative across large caps (Nifty50 A:D 18:31).</li>
+<li>FIIs turned net sellers (-₹298 Cr) after two buying sessions, but DIIs bought +₹4,977 Cr — DIIs have now net-bought <strong>+₹48,495 Cr MTD</strong> against FII's +₹5,494 Cr, an almost 9:1 ratio this month.</li>
+<li>Nifty futures added <strong>+9.07 lakh in OI (+6.4%) while price fell</strong> — a short buildup — and weekly options show a Call wall at 24,300-24,500 capping the bounce, with 24,000 as the key support floor into Tuesday's (1-Sep) weekly expiry.</li>
+</ul>
+</div>
+</div>
+</section>
+
+
+<section id="s1">
+<div class="card">
+<h2 data-toggle>§1 &middot; Nifty Movement &amp; Market Sentiment <span class="chevron">▾</span></h2>
+<div class="sec-body">
+<h3>1a. Price Summary</h3>
+<div class="tablewrap"><table data-sortable>
+<thead><tr><th>Metric</th><th class="num">Value</th></tr></thead>
+<tbody>
+<tr><td>Open</td><td class="num">24,277.60</td></tr>
+<tr><td>High</td><td class="num">24,297.45</td></tr>
+<tr><td>Low</td><td class="num">24,090.85</td></tr>
+<tr><td>Close</td><td class="num">24,090.85</td></tr>
+<tr><td>Change (pts / %)</td><td class="num neg">-116.90 / -0.48%</td></tr>
+<tr><td>1-Week %</td><td class="num neg">-0.58%</td></tr>
+<tr><td>MTD %</td><td class="num neg">-1.20%</td></tr>
+<tr><td>India VIX (close)</td><td class="num neu">11.07 (+4.7% vs 10.57 D-1)</td></tr>
+</tbody>
+</table></div>
+<p class="subtitle">Note: Nifty's Low = Close today (24,090.85), i.e. the index closed at the day's weakest point — a poor intraday texture.</p>
+
+<h3>1b. Dominant Narrative</h3>
+<ul class="bullets">
+<li>🌍 <strong>Global:</strong> Nvidia's blowout Q2 (revenue $96.22bn, EPS $2.22, Q3 guidance $108bn ±2%, ~70% FY28 growth outlook) sent the stock +4.7-7.6% after-hours and lifted Asian tech; GIFT Nifty firmed to roughly flat/+5.5pts by the Indian open after having indicated a soft open overnight on hot US inflation data.</li>
+<li>📉 <strong>Domestic:</strong> Nifty opened above 24,250 but faded all session to close at the day's low (24,090.85, -0.48%) — the second consecutive down day — dragged by Metal (-0.86%), PSU Bank (-0.94%) and Cement (&gt;-1%, the day's worst sector).</li>
+<li>💰 <strong>Flows:</strong> FIIs net sold ₹298 Cr in cash (ending a 2-day buying streak); DIIs net bought ₹4,977 Cr, extending a dominant MTD run of +₹48,495 Cr against FII's +₹5,494 Cr.</li>
+<li>⚡ <strong>Rates:</strong> US 10-year yield ticked up to 4.66% (+1bp) after a hotter-than-expected PCE print (3.7% vs 3.6% est.), reinforcing Fed hold/hike-before-year-end bets — a mild headwind for EM risk appetite; DXY rose to 99.13, its highest since 19-Aug.</li>
+<li>🏦 <strong>Stock-specific drag:</strong> ICICI Prudential AMC (-4.0%) and HDFC AMC (-3.5%) fell on news that promoter Prudential plc is trimming a 2% stake via block deal; Tata Power (-3.3%) slid after losing a $490mn arbitration case in Singapore; Hindustan Copper (-3.6%) stayed under pressure from the government's ongoing OFS stake sale.</li>
+<li>📊 <strong>Positioning:</strong> Nifty futures OI rose +6.4% even as price fell -0.67% (classic short buildup); weekly options PCR at 0.61 (call-heavy) versus monthly PCR at 1.19 (put-heavy) — near-term caution, medium-term optimism.</li>
+</ul>
+
+<h3>1c. Global Cues at Close (overnight, ahead of 27-Aug session)</h3>
+<div class="tablewrap"><table data-sortable>
+<thead><tr><th>Metric</th><th class="num">Level</th><th class="num">Change</th></tr></thead>
+<tbody>
+<tr><td>GIFT Nifty (Sep fut, pre-open)</td><td class="num">24,461 &ndash; 24,540 (mixed reports)</td><td class="num neu">~flat to +5.5pts</td></tr>
+<tr><td>Dow Jones</td><td class="num">53,463.88</td><td class="num neg">-113.52 (-0.21%)</td></tr>
+<tr><td>S&amp;P 500</td><td class="num">7,675.70</td><td class="num neg">-1.58 (-0.02%)</td></tr>
+<tr><td>Nasdaq Composite</td><td class="num">26,130.20</td><td class="num neg">-21.10 (-0.08%)</td></tr>
+<tr><td>Crude Oil (Brent)</td><td class="num">$87.20</td><td class="num neg">-0.7% (4th down day)</td></tr>
+<tr><td>USD/INR</td><td class="num">&mdash;</td><td class="num"><span class="datanote">not found in sources checked</span></td></tr>
+<tr><td>US 10-Year Yield</td><td class="num">4.66%</td><td class="num neu">+1bp d/d</td></tr>
+<tr><td>DXY (Dollar Index)</td><td class="num">99.13</td><td class="num neu">+0.21% (highest since 19-Aug)</td></tr>
+</tbody>
+</table></div>
+<p class="datanote">Note: two pre-market sources gave conflicting GIFT Nifty prints (-68pts vs +5.5pts) depending on whether they were filed before or after Nvidia's post-close earnings beat flipped Asian sentiment positive — both are shown for transparency. USD/INR spot was not located in the sources checked this run.</p>
+</div>
+</div>
+</section>
+
+
+<section id="s2">
+<div class="card">
+<h2 data-toggle>§2 &middot; Macroeconomic &amp; Policy Dashboard (Last 48 Hours) <span class="chevron">▾</span></h2>
+<div class="sec-body">
+<p><strong>No major India data releases (CPI/WPI/IIP/PMI/auto sales/GST) or fresh RBI/SEBI policy actions were found in the last 48 hours.</strong> The most recent SEBI board action located (June 2026, 214th board meeting — buyback and AIF framework reforms) predates this window and is not repeated here to avoid padding. The dominant macro driver in this window was external: a hotter-than-expected US PCE inflation print (see §1c).</p>
+
+<div class="macrocard">
+<h4>🛢️ Commodities confirmation (cross-check with §0)</h4>
+<ul>
+<li>Brent Crude: $87.20, -0.7%, fourth consecutive daily decline — a tailwind for India's import bill and INR if sustained.</li>
+<li>Gold (MCX): ₹1,59,154/10g, +0.31%; global spot $4,624.14, +0.7% — safe-haven bid persists alongside equity weakness.</li>
+<li>Silver (MCX): ₹2,41,648/kg, +0.84%, outpacing gold's gain.</li>
+</ul>
+</div>
+
+<div class="macrocard">
+<h4>⚡ US inflation / Fed positioning (the session's real macro driver)</h4>
+<ul>
+<li>US PCE inflation printed at 3.7% YoY vs 3.6% estimate, pushing the 10-year Treasury yield to 4.66% (+1bp) and DXY to 99.13 (highest since 19-Aug).</li>
+<li>Trader implication: a firmer-for-longer Fed stance is a mild headwind for EM equity flows and keeps FII cash buying muted (today's -₹298 Cr net sell fits this pattern).</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+
+
+<section id="s3">
+<div class="card">
+<h2 data-toggle>§3 &middot; Index Performance &amp; Market Breadth <span class="chevron">▾</span></h2>
+<div class="sec-body">
+<h3>3a. Index Performance</h3>
+<div class="tablewrap"><table data-sortable>
+<thead><tr><th>Index</th><th class="num">Close</th><th class="num">1D Chg%</th><th class="num">1W Chg%</th><th class="num">MTD%</th></tr></thead>
+<tbody>
+<tr><td>NIFTY 50</td><td class='num'>24,090.85</td><td class='num'><span class="neg">-0.48%</span></td><td class='num'><span class="neg">-0.58%</span></td><td class='num'><span class="neg">-1.20%</span></td></tr>
+<tr><td>NIFTY BANK</td><td class='num'>57,509.95</td><td class='num'><span class="neg">-0.47%</span></td><td class='num'><span class="pos">+0.02%</span></td><td class='num'><span class="pos">+0.43%</span></td></tr>
+<tr><td>NIFTY 100</td><td class='num'>25,281.60</td><td class='num'><span class="neg">-0.43%</span></td><td class='num'><span class="neg">-0.43%</span></td><td class='num'><span class="neg">-0.80%</span></td></tr>
+<tr><td>NIFTY MIDCAP 100</td><td class='num'>64,035.45</td><td class='num'><span class="neg">-0.10%</span></td><td class='num'><span class="pos">+0.57%</span></td><td class='num'><span class="pos">+0.40%</span></td></tr>
+<tr><td>NIFTY SMLCAP 100</td><td class='num'>20,040.65</td><td class='num'><span class="neg">-0.13%</span></td><td class='num'><span class="pos">+1.00%</span></td><td class='num'><span class="pos">+3.62%</span></td></tr>
+<tr><td>NIFTY AUTO</td><td class='num'>28,883.50</td><td class='num'><span class="neg">-0.40%</span></td><td class='num'><span class="neg">-1.43%</span></td><td class='num'><span class="neg">-1.11%</span></td></tr>
+<tr><td>NIFTY IT</td><td class='num'>30,221.15</td><td class='num'><span class="neg">-0.32%</span></td><td class='num'><span class="neg">-1.47%</span></td><td class='num'><span class="neg">-1.59%</span></td></tr>
+<tr><td>NIFTY FMCG</td><td class='num'>47,030.45</td><td class='num'><span class="neg">-0.47%</span></td><td class='num'><span class="neg">-1.74%</span></td><td class='num'><span class="neg">-3.26%</span></td></tr>
+<tr><td>NIFTY METAL</td><td class='num'>13,425.20</td><td class='num'><span class="neg">-0.86%</span></td><td class='num'><span class="pos">+2.79%</span></td><td class='num'><span class="pos">+3.74%</span></td></tr>
+<tr><td>NIFTY REALTY</td><td class='num'>909.60</td><td class='num'><span class="neg">-0.06%</span></td><td class='num'><span class="pos">+0.18%</span></td><td class='num'><span class="pos">+1.56%</span></td></tr>
+<tr><td>NIFTY PHARMA</td><td class='num'>26,848.75</td><td class='num'><span class="pos">+0.84%</span></td><td class='num'><span class="pos">+1.64%</span></td><td class='num'><span class="pos">+1.18%</span></td></tr>
+</tbody>
+</table></div>
+<p class="datanote">MTD base: 31-Jul close for indices with data back that far; Nifty Auto/FMCG/Metal/Midcap100/Realty use their earliest available Supabase date (14-Aug) as base — noted since it understates true MTD for those five.</p>
+
+<h3>3b. Breadth Comparison (Advance:Decline &amp; % Above SMA)</h3>
+<p class="subtitle">Today's row is computed live from Kite EOD quotes for all constituents joined to each index's most recent Supabase SMA snapshot (26-Aug) — see data note at top of report. D-1 through 1-Week-Ago are sourced directly from Supabase <code>index_breadth</code>.</p>
+<div class="tablewrap"><table data-sortable>
+<thead><tr><th>Index</th><th>Snapshot</th><th class="num">Adv:Dec</th><th class="num">%&gt;SMA20</th><th class="num">%&gt;SMA50</th><th class="num">%&gt;SMA100</th><th class="num">%&gt;SMA200</th></tr></thead>
+<tbody>
+<tr class='group-start'><td colspan='7'><strong>NIFTY 50</strong></td></tr>
+<tr><td>NIFTY 50</td><td>Today (27-Aug)</td><td class='num'>18:31</td><td class='num'>26.0%</td><td class='num'>46.0%</td><td class='num'>54.0%</td><td class='num'>50.0%</td></tr>
+<tr><td>NIFTY 50</td><td>D-1 (26-Aug)</td><td class='num'>14:36</td><td class='num'>34.0%</td><td class='num'>44.0%</td><td class='num'>56.0%</td><td class='num'>50.0%</td></tr>
+<tr><td>NIFTY 50</td><td>D-2 (25-Aug)</td><td class='num'>34:16</td><td class='num'>36.0%</td><td class='num'>54.0%</td><td class='num'>62.0%</td><td class='num'>50.0%</td></tr>
+<tr><td>NIFTY 50</td><td>D-3 (24-Aug)</td><td class='num'>23:26</td><td class='num'>30.0%</td><td class='num'>48.0%</td><td class='num'>58.0%</td><td class='num'>50.0%</td></tr>
+<tr><td>NIFTY 50</td><td>1 Week Ago (20-Aug)</td><td class='num'>39:10</td><td class='num'>34.0%</td><td class='num'>56.0%</td><td class='num'>60.0%</td><td class='num'>50.0%</td></tr>
+<tr class='group-start'><td colspan='7'><strong>NIFTY BANK</strong></td></tr>
+<tr><td>NIFTY BANK</td><td>Today (27-Aug)</td><td class='num'>3:11</td><td class='num'>35.7%</td><td class='num'>64.3%</td><td class='num'>64.3%</td><td class='num'>71.4%</td></tr>
+<tr><td>NIFTY BANK</td><td>D-1 (26-Aug)</td><td class='num'>8:6</td><td class='num'>50.0%</td><td class='num'>71.4%</td><td class='num'>71.4%</td><td class='num'>71.4%</td></tr>
+<tr><td>NIFTY BANK</td><td>D-2 (25-Aug)</td><td class='num'>7:7</td><td class='num'>28.6%</td><td class='num'>71.4%</td><td class='num'>71.4%</td><td class='num'>71.4%</td></tr>
+<tr><td>NIFTY BANK</td><td>D-3 (24-Aug)</td><td class='num'>4:10</td><td class='num'>50.0%</td><td class='num'>57.1%</td><td class='num'>71.4%</td><td class='num'>71.4%</td></tr>
+<tr><td>NIFTY BANK</td><td>1 Week Ago (20-Aug)</td><td class='num'>8:5</td><td class='num'>50.0%</td><td class='num'>71.4%</td><td class='num'>78.6%</td><td class='num'>64.3%</td></tr>
+<tr class='group-start'><td colspan='7'><strong>NIFTY 100</strong></td></tr>
+<tr><td>NIFTY 100</td><td>Today (27-Aug)</td><td class='num'>37:61</td><td class='num'>39.0%</td><td class='num'>52.0%</td><td class='num'>57.0%</td><td class='num'>56.0%</td></tr>
+<tr><td>NIFTY 100</td><td>D-1 (26-Aug)</td><td class='num'>37:63</td><td class='num'>43.0%</td><td class='num'>53.0%</td><td class='num'>60.0%</td><td class='num'>57.6%</td></tr>
+<tr><td>NIFTY 100</td><td>D-2 (25-Aug)</td><td class='num'>66:34</td><td class='num'>42.0%</td><td class='num'>60.0%</td><td class='num'>65.0%</td><td class='num'>57.6%</td></tr>
+<tr><td>NIFTY 100</td><td>D-3 (24-Aug)</td><td class='num'>46:53</td><td class='num'>38.0%</td><td class='num'>52.0%</td><td class='num'>61.0%</td><td class='num'>57.6%</td></tr>
+<tr><td>NIFTY 100</td><td>1 Week Ago (20-Aug)</td><td class='num'>70:28</td><td class='num'>47.0%</td><td class='num'>56.0%</td><td class='num'>63.0%</td><td class='num'>56.6%</td></tr>
+<tr class='group-start'><td colspan='7'><strong>NIFTY MIDCAP 100</strong></td></tr>
+<tr><td>NIFTY MIDCAP 100</td><td>Today (27-Aug)</td><td class='num'>43:56</td><td class='num'>50.0%</td><td class='num'>54.0%</td><td class='num'>59.0%</td><td class='num'>62.0%</td></tr>
+<tr><td>NIFTY MIDCAP 100</td><td>D-1 (26-Aug)</td><td class='num'>42:58</td><td class='num'>53.0%</td><td class='num'>56.0%</td><td class='num'>57.0%</td><td class='num'>61.2%</td></tr>
+<tr><td>NIFTY MIDCAP 100</td><td>D-2 (25-Aug)</td><td class='num'>63:37</td><td class='num'>51.0%</td><td class='num'>58.0%</td><td class='num'>62.0%</td><td class='num'>62.2%</td></tr>
+<tr><td>NIFTY MIDCAP 100</td><td>D-3 (24-Aug)</td><td class='num'>43:56</td><td class='num'>50.0%</td><td class='num'>55.0%</td><td class='num'>60.0%</td><td class='num'>61.9%</td></tr>
+<tr><td>NIFTY MIDCAP 100</td><td>1 Week Ago (20-Aug)</td><td class='num'>57:41</td><td class='num'>49.0%</td><td class='num'>53.0%</td><td class='num'>59.0%</td><td class='num'>60.8%</td></tr>
+<tr class='group-start'><td colspan='7'><strong>NIFTY SMLCAP 100</strong></td></tr>
+<tr><td>NIFTY SMLCAP 100</td><td>Today (27-Aug)</td><td class='num'>40:59</td><td class='num'>49.0%</td><td class='num'>54.0%</td><td class='num'>61.0%</td><td class='num'>62.0%</td></tr>
+<tr><td>NIFTY SMLCAP 100</td><td>D-1 (26-Aug)</td><td class='num'>59:39</td><td class='num'>56.0%</td><td class='num'>50.0%</td><td class='num'>59.0%</td><td class='num'>67.7%</td></tr>
+<tr><td>NIFTY SMLCAP 100</td><td>D-2 (25-Aug)</td><td class='num'>47:53</td><td class='num'>49.0%</td><td class='num'>50.0%</td><td class='num'>59.0%</td><td class='num'>66.7%</td></tr>
+<tr><td>NIFTY SMLCAP 100</td><td>D-3 (24-Aug)</td><td class='num'>39:61</td><td class='num'>48.0%</td><td class='num'>49.0%</td><td class='num'>58.0%</td><td class='num'>65.6%</td></tr>
+<tr><td>NIFTY SMLCAP 100</td><td>1 Week Ago (20-Aug)</td><td class='num'>66:33</td><td class='num'>50.0%</td><td class='num'>53.0%</td><td class='num'>59.0%</td><td class='num'>63.2%</td></tr>
+<tr class='group-start'><td colspan='7'><strong>NIFTY AUTO</strong></td></tr>
+<tr><td>NIFTY AUTO</td><td>Today (27-Aug)</td><td class='num'>7:8</td><td class='num'>60.0%</td><td class='num'>73.3%</td><td class='num'>86.7%</td><td class='num'>86.7%</td></tr>
+<tr><td>NIFTY AUTO</td><td>D-1 (26-Aug)</td><td class='num'>4:11</td><td class='num'>53.3%</td><td class='num'>73.3%</td><td class='num'>80.0%</td><td class='num'>86.7%</td></tr>
+<tr><td>NIFTY AUTO</td><td>D-2 (25-Aug)</td><td class='num'>10:5</td><td class='num'>66.7%</td><td class='num'>73.3%</td><td class='num'>86.7%</td><td class='num'>86.7%</td></tr>
+<tr><td>NIFTY AUTO</td><td>D-3 (24-Aug)</td><td class='num'>5:10</td><td class='num'>73.3%</td><td class='num'>73.3%</td><td class='num'>86.7%</td><td class='num'>86.7%</td></tr>
+<tr><td>NIFTY AUTO</td><td>1 Week Ago (20-Aug)</td><td class='num'>9:6</td><td class='num'>80.0%</td><td class='num'>80.0%</td><td class='num'>86.7%</td><td class='num'>86.7%</td></tr>
+<tr class='group-start'><td colspan='7'><strong>NIFTY IT</strong></td></tr>
+<tr><td>NIFTY IT</td><td>Today (27-Aug)</td><td class='num'>6:4</td><td class='num'>30.0%</td><td class='num'>90.0%</td><td class='num'>70.0%</td><td class='num'>50.0%</td></tr>
+<tr><td>NIFTY IT</td><td>D-1 (26-Aug)</td><td class='num'>1:9</td><td class='num'>30.0%</td><td class='num'>90.0%</td><td class='num'>70.0%</td><td class='num'>40.0%</td></tr>
+<tr><td>NIFTY IT</td><td>D-2 (25-Aug)</td><td class='num'>7:3</td><td class='num'>30.0%</td><td class='num'>100.0%</td><td class='num'>90.0%</td><td class='num'>50.0%</td></tr>
+<tr><td>NIFTY IT</td><td>D-3 (24-Aug)</td><td class='num'>5:4</td><td class='num'>20.0%</td><td class='num'>100.0%</td><td class='num'>70.0%</td><td class='num'>50.0%</td></tr>
+<tr><td>NIFTY IT</td><td>1 Week Ago (20-Aug)</td><td class='num'>8:2</td><td class='num'>40.0%</td><td class='num'>100.0%</td><td class='num'>80.0%</td><td class='num'>50.0%</td></tr>
+<tr class='group-start'><td colspan='7'><strong>NIFTY FMCG</strong></td></tr>
+<tr><td>NIFTY FMCG</td><td>Today (27-Aug)</td><td class='num'>3:12</td><td class='num'>6.7%</td><td class='num'>13.3%</td><td class='num'>26.7%</td><td class='num'>26.7%</td></tr>
+<tr><td>NIFTY FMCG</td><td>D-1 (26-Aug)</td><td class='num'>1:14</td><td class='num'>13.3%</td><td class='num'>13.3%</td><td class='num'>26.7%</td><td class='num'>26.7%</td></tr>
+<tr><td>NIFTY FMCG</td><td>D-2 (25-Aug)</td><td class='num'>9:6</td><td class='num'>13.3%</td><td class='num'>33.3%</td><td class='num'>33.3%</td><td class='num'>26.7%</td></tr>
+<tr><td>NIFTY FMCG</td><td>D-3 (24-Aug)</td><td class='num'>5:10</td><td class='num'>20.0%</td><td class='num'>26.7%</td><td class='num'>26.7%</td><td class='num'>26.7%</td></tr>
+<tr><td>NIFTY FMCG</td><td>1 Week Ago (20-Aug)</td><td class='num'>11:3</td><td class='num'>26.7%</td><td class='num'>40.0%</td><td class='num'>33.3%</td><td class='num'>26.7%</td></tr>
+<tr class='group-start'><td colspan='7'><strong>NIFTY METAL</strong></td></tr>
+<tr><td>NIFTY METAL</td><td>Today (27-Aug)</td><td class='num'>3:12</td><td class='num'>66.7%</td><td class='num'>80.0%</td><td class='num'>66.7%</td><td class='num'>80.0%</td></tr>
+<tr><td>NIFTY METAL</td><td>D-1 (26-Aug)</td><td class='num'>14:1</td><td class='num'>86.7%</td><td class='num'>80.0%</td><td class='num'>80.0%</td><td class='num'>80.0%</td></tr>
+<tr><td>NIFTY METAL</td><td>D-2 (25-Aug)</td><td class='num'>6:9</td><td class='num'>73.3%</td><td class='num'>80.0%</td><td class='num'>73.3%</td><td class='num'>80.0%</td></tr>
+<tr><td>NIFTY METAL</td><td>D-3 (24-Aug)</td><td class='num'>13:2</td><td class='num'>73.3%</td><td class='num'>73.3%</td><td class='num'>66.7%</td><td class='num'>80.0%</td></tr>
+<tr><td>NIFTY METAL</td><td>1 Week Ago (20-Aug)</td><td class='num'>10:5</td><td class='num'>60.0%</td><td class='num'>73.3%</td><td class='num'>53.3%</td><td class='num'>73.3%</td></tr>
+<tr class='group-start'><td colspan='7'><strong>NIFTY REALTY</strong></td></tr>
+<tr><td>NIFTY REALTY</td><td>Today (27-Aug)</td><td class='num'>6:4</td><td class='num'>60.0%</td><td class='num'>80.0%</td><td class='num'>90.0%</td><td class='num'>80.0%</td></tr>
+<tr><td>NIFTY REALTY</td><td>D-1 (26-Aug)</td><td class='num'>1:9</td><td class='num'>60.0%</td><td class='num'>70.0%</td><td class='num'>90.0%</td><td class='num'>80.0%</td></tr>
+<tr><td>NIFTY REALTY</td><td>D-2 (25-Aug)</td><td class='num'>4:6</td><td class='num'>70.0%</td><td class='num'>80.0%</td><td class='num'>90.0%</td><td class='num'>80.0%</td></tr>
+<tr><td>NIFTY REALTY</td><td>D-3 (24-Aug)</td><td class='num'>7:3</td><td class='num'>70.0%</td><td class='num'>80.0%</td><td class='num'>90.0%</td><td class='num'>90.0%</td></tr>
+<tr><td>NIFTY REALTY</td><td>1 Week Ago (20-Aug)</td><td class='num'>10:0</td><td class='num'>60.0%</td><td class='num'>70.0%</td><td class='num'>90.0%</td><td class='num'>90.0%</td></tr>
+<tr class='group-start'><td colspan='7'><strong>NIFTY PHARMA</strong></td></tr>
+<tr><td>NIFTY PHARMA</td><td>Today (27-Aug)</td><td class='num'>15:5</td><td class='num'>55.0%</td><td class='num'>60.0%</td><td class='num'>85.0%</td><td class='num'>80.0%</td></tr>
+<tr><td>NIFTY PHARMA</td><td>D-1 (26-Aug)</td><td class='num'>13:7</td><td class='num'>50.0%</td><td class='num'>55.0%</td><td class='num'>80.0%</td><td class='num'>80.0%</td></tr>
+<tr><td>NIFTY PHARMA</td><td>D-2 (25-Aug)</td><td class='num'>13:7</td><td class='num'>45.0%</td><td class='num'>60.0%</td><td class='num'>80.0%</td><td class='num'>80.0%</td></tr>
+<tr><td>NIFTY PHARMA</td><td>D-3 (24-Aug)</td><td class='num'>7:13</td><td class='num'>40.0%</td><td class='num'>55.0%</td><td class='num'>80.0%</td><td class='num'>80.0%</td></tr>
+<tr><td>NIFTY PHARMA</td><td>1 Week Ago (20-Aug)</td><td class='num'>11:9</td><td class='num'>55.0%</td><td class='num'>55.0%</td><td class='num'>75.0%</td><td class='num'>80.0%</td></tr>
+</tbody>
+</table></div>
+
+<h3>3c. Rotation Insight</h3>
+<ul class="bullets">
+<li>❌ <strong>Rotation OUT of Metal:</strong> price -0.86% (worst large sector today) despite still-elevated 66.7% of constituents above 20SMA — a profit-taking pullback inside an intact uptrend, not a trend break; breadth (adv:dec 3:12) turned sharply negative for the first time in a week.</li>
+<li>❌ <strong>Rotation OUT of FMCG:</strong> the sector's %&gt;SMA20 has fallen in a straight line all week — 26.7% (24-Aug) → 13.3% (25-Aug) → 13.3% (26-Aug) → 6.7% (today) — the cleanest deteriorating trend of any tracked sector.</li>
+<li>❌ <strong>Rotation OUT of Bank:</strong> adv:dec 3:11 today and %&gt;SMA20 fell to 35.7% from 50% yesterday; Bank Nifty -0.47% in line with the broader market, no idiosyncratic driver found beyond general risk-off.</li>
+<li>✅ <strong>Holding up: Pharma</strong> — the day's best sector (+0.84%), adv:dec 15:5, and 80% of constituents remain above both the 100- and 200-day SMA, supported by fresh USFDA approvals flowing through names like Zydus Lifesciences.</li>
+<li>⚠️ <strong>Watch: IT</strong> — breadth is thin (only 30% above 20SMA, flat vs yesterday) even though the index (-0.32%) held up better than banks or metals; a level to revisit if global tech strength (post-Nvidia) broadens into Indian IT.</li>
+<li>🔭 <strong>Implication:</strong> broad-market breadth (Nifty50 18:31, Nifty100 37:61) is weaker than the index-level declines suggest — this was a broad-based risk-off day, not a narrow one, which raises the bar for tomorrow's bounce to look convincing.</li>
+</ul>
+<p class="datanote">Data note: index_breadth is not yet populated with a 27-Aug row (see top-of-report note), so "Today" breadth above is a same-day approximation (today's live Kite quotes vs each stock's most recent Supabase SMA, dated 26-Aug) rather than a same-day pull from the Supabase table itself.</p>
+
+<h3>3d. Currency &amp; Commodity Snapshot</h3>
+<div class="tablewrap"><table data-sortable>
+<thead><tr><th>Instrument</th><th class="num">Level</th><th class="num">1D%</th><th>Signal for Indian equities</th></tr></thead>
+<tbody>
+<tr><td>Brent Crude</td><td class="num">$87.20</td><td class="num neg">-0.7%</td><td>4th straight decline; a sustained fall would ease India's import bill / current-account pressure and support OMCs, aviation.</td></tr>
+<tr><td>DXY</td><td class="num">99.13</td><td class="num neu">+0.21%</td><td>Highest since 19-Aug; a stronger dollar is a mild headwind for INR and FII flows.</td></tr>
+<tr><td>US 10Y Yield</td><td class="num">4.66%</td><td class="num neu">+1bp</td><td>Firming yields on hot PCE data reduce the relative attractiveness of EM equities at the margin.</td></tr>
+<tr><td>Gold (MCX)</td><td class="num">₹1,59,154/10g</td><td class="num pos">+0.31%</td><td>Safe-haven bid alongside equity weakness; watch NBFC gold-financiers (Muthoot, Manappuram) for a positive read-through.</td></tr>
+<tr><td>Silver (MCX)</td><td class="num">₹2,41,648/kg</td><td class="num pos">+0.84%</td><td>Outpacing gold; industrial-demand narrative intact.</td></tr>
+<tr><td>Aluminium (MCX)</td><td class="num">₹345.90/kg</td><td class="num neg">-0.86%</td><td>Consistent with today's Nifty Metal weakness; a read-through negative for Hindalco, Nalco.</td></tr>
+<tr><td>Copper (MCX)</td><td class="num">₹1,380.00/kg</td><td class="num neg">-0.14%</td><td>Roughly flat; Hindustan Copper's move today was OFS-driven, not commodity-driven (see §5b).</td></tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</section>
+
+
+<section id="s4">
+<div class="card">
+<h2 data-toggle>§4 &middot; FII / DII Flow Dashboard <span class="chevron">▾</span></h2>
+<div class="sec-body">
+<h3>4a. Daily Flow (Cash Market, ₹ Cr)</h3>
+<div class="tablewrap"><table data-sortable>
+<thead><tr><th>Category</th><th class="num">Buy</th><th class="num">Sell</th><th class="num">Net</th></tr></thead>
+<tbody>
+<tr><td>FII/FPI</td><td class="num">15,277</td><td class="num">15,575</td><td class="num neg">-298</td></tr>
+<tr><td>DII</td><td class="num">19,606</td><td class="num">14,628</td><td class="num pos">+4,977</td></tr>
+</tbody>
+</table></div>
+<p class="datanote">F&amp;O / index-futures net FII position not available from the sources checked this run — cash-market only, as provided by the user.</p>
+
+<h3>4b. Trend Comparison</h3>
+<div class="tablewrap"><table data-sortable>
+<thead><tr><th>Period</th><th class="num">FII Net</th><th class="num">DII Net</th></tr></thead>
+<tbody>
+
+<tr><td>Today (27-Aug)</td><td class="num"><span class=neg>-298</span> Cr</td>
+<td class="num"><span class=pos>+4,977</span> Cr</td></tr>
+<tr><td>This Week (24-27 Aug, 4 sessions)</td><td class="num"><span class=pos>+2,980</span> Cr</td><td class="num"><span class=pos>+14,125</span> Cr</td></tr>
+<tr><td>MTD (19 sessions)</td><td class="num"><span class=pos>+5,494</span> Cr</td><td class="num"><span class=pos>+48,495</span> Cr</td></tr>
+
+</tbody>
+</table></div>
+<h3>Last 4 sessions</h3>
+<div class="tablewrap"><table data-sortable>
+<thead><tr><th>Date</th><th class="num">FII Net</th><th class="num">DII Net</th></tr></thead>
+<tbody>
+<tr><td>27-Aug</td><td class='num'><span class=neg>-298</span> Cr</td><td class='num'><span class=pos>+4,977</span> Cr</td></tr>
+<tr><td>26-Aug</td><td class='num'><span class=pos>+503</span> Cr</td><td class='num'><span class=pos>+6,425</span> Cr</td></tr>
+<tr><td>25-Aug</td><td class='num'><span class=pos>+1,594</span> Cr</td><td class='num'><span class=pos>+230</span> Cr</td></tr>
+<tr><td>24-Aug</td><td class='num'><span class=pos>+1,182</span> Cr</td><td class='num'><span class=pos>+2,493</span> Cr</td></tr>
+
+</tbody>
+</table></div>
+
+<h3>4c. Flow Interpretation</h3>
+<p>The FII/DII tug-of-war is easing in FIIs' favour on a MTD basis but flipped negative today: FIIs turned net sellers (-₹298 Cr) for the first time in three sessions, while DIIs stepped up buying to +₹4,977 Cr, their second-largest single-day net buy of the past week. DIIs have now out-bought FIIs by roughly 9:1 this month (+₹48,495 Cr vs +₹5,494 Cr), and that gap continues to be the primary reason the index has not fallen further despite two straight red sessions.</p>
+</div>
+</div>
+</section>
+
+
+<section id="s5">
+<div class="card">
+<h2 data-toggle>§5 &middot; Momentum Stocks Filter (NIFTY 500) <span class="chevron">▾</span></h2>
+<div class="sec-body">
+<h3>5a. Stage 1 + Stage 2 Ranking</h3>
+<p class="subtitle">Stage 1 filter: |daily % change| ≥ 1.05% AND volume ≥ 1.25&times; the 63-day average (liquidity floor: 63-day avg volume ≥ 50,000 shares). Stage 2 composite: 35% daily price action + 15% weekly price action + 25% daily volume expansion + 15% weekly volume expansion + 10% three-week trend, each percentile-ranked across the 45 stocks that passed Stage 1 out of the full NIFTY 500 universe. Computed live: today's (27-Aug) close/volume via Kite MCP, joined to Supabase's historical closes and 63-day volume average (as of 26-Aug) — a genuine same-day scan, not a re-run of yesterday's numbers.</p>
+<div class="tablewrap"><table data-sortable>
+<thead><tr><th class="num">Rank</th><th>Symbol</th><th class="num">LTP</th><th class="num">Daily %</th><th class="num">Vol Ratio</th><th class="num">5D %</th><th class="num">5D Vol Ratio</th><th class="num">3W Trend</th><th class="num">Score</th></tr></thead>
+<tbody>
+<tr><td class='num'>1</td><td>WHIRLPOOL</td><td class='num'>841.15</td><td class='num'><span class="pos">+9.00%</span></td><td class='num'>18.89x</td><td class='num'><span class="pos">+8.43%</span></td><td class='num'>0.78x</td><td class='num'>✓</td><td class='num'><strong>90.8</strong></td></tr>
+<tr><td class='num'>2</td><td>WELCORP</td><td class='num'>2,405.80</td><td class='num'><span class="pos">+4.30%</span></td><td class='num'>2.82x</td><td class='num'><span class="pos">+19.98%</span></td><td class='num'>4.85x</td><td class='num'>✓</td><td class='num'><strong>87.8</strong></td></tr>
+<tr><td class='num'>3</td><td>NSLNISP</td><td class='num'>44.99</td><td class='num'><span class="pos">+8.57%</span></td><td class='num'>11.86x</td><td class='num'><span class="pos">+13.84%</span></td><td class='num'>0.58x</td><td class='num'>✓</td><td class='num'><strong>87.0</strong></td></tr>
+<tr><td class='num'>4</td><td>JINDALSAW</td><td class='num'>310.25</td><td class='num'><span class="pos">+2.58%</span></td><td class='num'>3.84x</td><td class='num'><span class="pos">+15.01%</span></td><td class='num'>2.91x</td><td class='num'>✓</td><td class='num'><strong>78.8</strong></td></tr>
+<tr><td class='num'>5</td><td>MEDANTA</td><td class='num'>1,508.90</td><td class='num'><span class="pos">+3.43%</span></td><td class='num'>4.61x</td><td class='num'><span class="pos">+7.15%</span></td><td class='num'>0.84x</td><td class='num'>✓</td><td class='num'><strong>77.7</strong></td></tr>
+<tr><td class='num'>6</td><td>ICICIAMC</td><td class='num'>3,093.60</td><td class='num'><span class="neg">-4.01%</span></td><td class='num'>10.36x</td><td class='num'><span class="neg">-4.19%</span></td><td class='num'>0.69x</td><td class='num'>✓</td><td class='num'><strong>75.1</strong></td></tr>
+<tr><td class='num'>7</td><td>SBFC</td><td class='num'>98.61</td><td class='num'><span class="neg">-2.50%</span></td><td class='num'>4.52x</td><td class='num'><span class="pos">+4.92%</span></td><td class='num'>2.63x</td><td class='num'>✓</td><td class='num'><strong>72.3</strong></td></tr>
+<tr><td class='num'>8</td><td>ZYDUSLIFE</td><td class='num'>1,189.20</td><td class='num'><span class="pos">+3.41%</span></td><td class='num'>2.33x</td><td class='num'><span class="pos">+7.36%</span></td><td class='num'>0.79x</td><td class='num'>✓</td><td class='num'><strong>68.4</strong></td></tr>
+<tr><td class='num'>9</td><td>CRISIL</td><td class='num'>4,703.20</td><td class='num'><span class="pos">+4.21%</span></td><td class='num'>2.95x</td><td class='num'><span class="pos">+5.01%</span></td><td class='num'>0.37x</td><td class='num'>✓</td><td class='num'><strong>68.1</strong></td></tr>
+<tr><td class='num'>10</td><td>ADANIPOWER</td><td class='num'>215.00</td><td class='num'><span class="pos">+3.76%</span></td><td class='num'>2.82x</td><td class='num'><span class="pos">+5.39%</span></td><td class='num'>0.55x</td><td class='num'>✓</td><td class='num'><strong>67.5</strong></td></tr>
+<tr><td class='num'>11</td><td>RAMCOCEM</td><td class='num'>892.55</td><td class='num'><span class="neg">-5.11%</span></td><td class='num'>3.13x</td><td class='num'><span class="neg">-1.59%</span></td><td class='num'>1.53x</td><td class='num'>✗</td><td class='num'><strong>67.4</strong></td></tr>
+<tr><td class='num'>12</td><td>HINDCOPPER</td><td class='num'>536.30</td><td class='num'><span class="neg">-3.55%</span></td><td class='num'>3.22x</td><td class='num'><span class="neg">-4.25%</span></td><td class='num'>3.64x</td><td class='num'>✗</td><td class='num'><strong>67.2</strong></td></tr>
+<tr><td class='num'>13</td><td>LICHSGFIN</td><td class='num'>535.50</td><td class='num'><span class="pos">+2.12%</span></td><td class='num'>4.45x</td><td class='num'><span class="pos">+5.40%</span></td><td class='num'>2.48x</td><td class='num'>✓</td><td class='num'><strong>66.7</strong></td></tr>
+<tr><td class='num'>14</td><td>TATAPOWER</td><td class='num'>352.00</td><td class='num'><span class="neg">-3.30%</span></td><td class='num'>3.66x</td><td class='num'><span class="neg">-6.20%</span></td><td class='num'>1.19x</td><td class='num'>✗</td><td class='num'><strong>64.4</strong></td></tr>
+<tr><td class='num'>15</td><td>HDFCAMC</td><td class='num'>2,575.00</td><td class='num'><span class="neg">-3.48%</span></td><td class='num'>2.41x</td><td class='num'><span class="neg">-1.87%</span></td><td class='num'>0.98x</td><td class='num'>✓</td><td class='num'><strong>63.4</strong></td></tr>
+<tr><td class='num'>16</td><td>NCC</td><td class='num'>150.29</td><td class='num'><span class="pos">+2.10%</span></td><td class='num'>1.96x</td><td class='num'><span class="pos">+7.30%</span></td><td class='num'>2.92x</td><td class='num'>✓</td><td class='num'><strong>60.3</strong></td></tr>
+<tr><td class='num'>17</td><td>APARINDS</td><td class='num'>17,900.00</td><td class='num'><span class="pos">+4.91%</span></td><td class='num'>1.28x</td><td class='num'><span class="pos">+6.65%</span></td><td class='num'>0.63x</td><td class='num'>✓</td><td class='num'><strong>59.9</strong></td></tr>
+<tr><td class='num'>18</td><td>MANAPPURAM</td><td class='num'>348.00</td><td class='num'><span class="neg">-4.76%</span></td><td class='num'>2.14x</td><td class='num'><span class="neg">-0.36%</span></td><td class='num'>1.54x</td><td class='num'>✗</td><td class='num'><strong>58.4</strong></td></tr>
+<tr><td class='num'>19</td><td>AMBER</td><td class='num'>7,701.00</td><td class='num'><span class="pos">+3.15%</span></td><td class='num'>1.84x</td><td class='num'><span class="pos">+5.86%</span></td><td class='num'>0.75x</td><td class='num'>✓</td><td class='num'><strong>58.3</strong></td></tr>
+<tr><td class='num'>20</td><td>LAURUSLABS</td><td class='num'>1,929.40</td><td class='num'><span class="pos">+2.25%</span></td><td class='num'>1.93x</td><td class='num'><span class="pos">+5.72%</span></td><td class='num'>1.13x</td><td class='num'>✓</td><td class='num'><strong>57.6</strong></td></tr>
+</tbody>
+</table></div>
+
+<h3>5b. Possible Triggers</h3>
+<ul class="bullets">
+<li><strong>ICICIAMC</strong> (-4.0%): promoter Prudential plc moved to trim a ~2% stake via block deal, triggering a sharp sell-off in the AMC name.</li>
+<li><strong>WELCORP</strong> (+4.3%): continued follow-through on its record $1.8bn (~₹17,200 Cr) pipe supply order won last week — one of the largest single orders in the company's history — plus a fresh block deal today.</li>
+<li><strong>TATAPOWER</strong> (-3.3%): lost a $490mn arbitration challenge in a Singapore tribunal, reviving legal/financial overhang concerns.</li>
+<li><strong>ZYDUSLIFE</strong> (+3.4%): part of a steady drumbeat of USFDA approvals (most recently an Ascorbic Acid injection with 180-day competitive-generic-therapy exclusivity), consistent with Pharma's sector-wide outperformance today.</li>
+<li><strong>HINDCOPPER</strong> (-3.6%): continued overhang from the government's ongoing OFS (offer-for-sale) stake sale, which has produced choppy multi-day price action as non-retail tranches are absorbed.</li>
+</ul>
+<p class="datanote">No specific, dated news trigger was found for the remaining names in the top 20 (WHIRLPOOL, NSLNISP, JINDALSAW, MEDANTA, SBFC, CRISIL, ADANIPOWER, RAMCOCEM, LICHSGFIN, HDFCAMC, NCC, APARINDS, MANAPPURAM, AMBER, LAURUSLABS) — they are omitted here rather than padded with generic commentary.</p>
+</div>
+</div>
+</section>
+
+
+<section id="s6">
+<div class="card">
+<h2 data-toggle>§6 &middot; Futures &amp; Options Intelligence <span class="chevron">▾</span></h2>
+<div class="sec-body">
+<h3>6a. Nifty50 F&amp;O Snapshot</h3>
+<div class="tablewrap"><table data-sortable>
+<thead><tr><th>Metric</th><th class="num">Today</th><th class="num">Yesterday</th><th class="num">Change</th></tr></thead>
+<tbody>
+<tr><td>Nifty Futures Close (Sep, front month)</td><td class="num">24,266.00</td><td class="num">24,429.10</td><td class="num neg">-163.10 (-0.67%)</td></tr>
+<tr><td>Nifty Futures Premium/Discount (vs spot)</td><td class="num">+175.15</td><td class="num">&mdash;</td><td class="num datanote">yesterday's spot close not isolated separately</td></tr>
+<tr><td>Nifty Futures OI</td><td class="num">15,142,465</td><td class="num">14,235,390</td><td class="num pos">+907,075 (+6.4%)</td></tr>
+<tr><td>Total Call OI (Weekly, 1-Sep)</td><td class="num">169,005,980</td><td class="num">&mdash;</td><td class="num datanote">D-1 strike-level snapshot not captured this run</td></tr>
+<tr><td>Total Put OI (Weekly, 1-Sep)</td><td class="num">103,594,920</td><td class="num">&mdash;</td><td class="num"></td></tr>
+<tr><td>Put/Call Ratio (Weekly)</td><td class="num neu">0.613</td><td class="num">&mdash;</td><td class="num"></td></tr>
+<tr><td>Put/Call Ratio (Monthly, 29-Sep)</td><td class="num pos">1.194</td><td class="num">&mdash;</td><td class="num"></td></tr>
+<tr><td>Max Pain (Weekly)</td><td class="num">24,200</td><td class="num">&mdash;</td><td class="num"></td></tr>
+<tr><td>Max Pain (Monthly)</td><td class="num">24,400</td><td class="num">&mdash;</td><td class="num"></td></tr>
+<tr><td>India VIX</td><td class="num">11.07</td><td class="num">10.57</td><td class="num neu">+0.50 (+4.7%)</td></tr>
+</tbody>
+</table></div>
+<p class="datanote">OI-change-by-strike (vs yesterday) requires a prior-day strike-level snapshot that wasn't captured in this run; totals, PCR and max pain above are today's live figures from Kite MCP across a ±₹1,500 strike band (22,500-25,500).</p>
+
+<h3>6b. Key Strike OI — Weekly Expiry (1-Sep-2026, highest priority)</h3>
+<div class="tablewrap"><table data-sortable>
+<thead><tr><th class="num">Strike</th><th class="num">OI</th><th class="num">LTP</th><th>Signal</th></tr></thead>
+<tbody>
+<tr><td class='num'>24,300</td><td class='num'>13,253,305</td><td class='num'>51.45</td><td>Resistance (Call wall)</td></tr>
+<tr><td class='num'>24,500</td><td class='num'>12,545,520</td><td class='num'>14.65</td><td>Resistance (Call wall)</td></tr>
+<tr><td class='num'>24,400</td><td class='num'>12,241,515</td><td class='num'>27.25</td><td>Resistance (Call wall)</td></tr>
+<tr><td class='num'>25,500</td><td class='num'>11,968,320</td><td class='num'>1.10</td><td>Resistance (Call wall)</td></tr>
+<tr><td class='num'>25,000</td><td class='num'>11,406,265</td><td class='num'>2.15</td><td>Resistance (Call wall)</td></tr>
+<tr><td class='num'>24,200</td><td class='num'>10,122,580</td><td class='num'>89.40</td><td>Resistance (Call wall)</td></tr>
+<tr><td class='num'>24,600</td><td class='num'>8,205,080</td><td class='num'>8.15</td><td>Resistance (Call wall)</td></tr>
+<tr><td class='num'>24,000</td><td class='num'>7,042,295</td><td class='num'>40.10</td><td>Support (Put floor)</td></tr>
+<tr><td class='num'>23,500</td><td class='num'>6,949,670</td><td class='num'>3.30</td><td>Support (Put floor)</td></tr>
+<tr><td class='num'>24,200</td><td class='num'>6,730,945</td><td class='num'>114.65</td><td>Support (Put floor)</td></tr>
+<tr><td class='num'>23,800</td><td class='num'>6,364,995</td><td class='num'>12.35</td><td>Support (Put floor)</td></tr>
+<tr><td class='num'>23,000</td><td class='num'>6,211,205</td><td class='num'>1.65</td><td>Support (Put floor)</td></tr>
+<tr><td class='num'>22,500</td><td class='num'>6,034,470</td><td class='num'>1.20</td><td>Support (Put floor)</td></tr>
+<tr><td class='num'>24,100</td><td class='num'>5,523,375</td><td class='num'>69.45</td><td>Support (Put floor)</td></tr>
+</tbody>
+</table></div>
+
+<h3>6c. Key Strike OI — Monthly Expiry (29-Sep-2026)</h3>
+<div class="tablewrap"><table data-sortable>
+<thead><tr><th class="num">Strike</th><th class="num">OI</th><th class="num">LTP</th><th>Signal</th></tr></thead>
+<tbody>
+<tr><td class='num'>25,000</td><td class='num'>5,803,005</td><td class='num'>49.45</td><td>Resistance (Call wall)</td></tr>
+<tr><td class='num'>24,500</td><td class='num'>5,576,675</td><td class='num'>174.10</td><td>Resistance (Call wall)</td></tr>
+<tr><td class='num'>24,300</td><td class='num'>4,086,875</td><td class='num'>263.00</td><td>Resistance (Call wall)</td></tr>
+<tr><td class='num'>25,500</td><td class='num'>3,481,140</td><td class='num'>14.00</td><td>Resistance (Call wall)</td></tr>
+<tr><td class='num'>24,000</td><td class='num'>2,941,900</td><td class='num'>445.00</td><td>Resistance (Call wall)</td></tr>
+<tr><td class='num'>24,400</td><td class='num'>2,808,715</td><td class='num'>217.35</td><td>Resistance (Call wall)</td></tr>
+<tr><td class='num'>24,200</td><td class='num'>2,614,885</td><td class='num'>320.00</td><td>Resistance (Call wall)</td></tr>
+<tr><td class='num'>24,000</td><td class='num'>5,621,230</td><td class='num'>171.00</td><td>Support (Put floor)</td></tr>
+<tr><td class='num'>24,500</td><td class='num'>4,774,835</td><td class='num'>391.70</td><td>Support (Put floor)</td></tr>
+<tr><td class='num'>23,000</td><td class='num'>4,556,825</td><td class='num'>27.95</td><td>Support (Put floor)</td></tr>
+<tr><td class='num'>24,300</td><td class='num'>3,967,145</td><td class='num'>288.15</td><td>Support (Put floor)</td></tr>
+<tr><td class='num'>23,500</td><td class='num'>3,855,475</td><td class='num'>66.40</td><td>Support (Put floor)</td></tr>
+<tr><td class='num'>24,200</td><td class='num'>2,724,800</td><td class='num'>242.00</td><td>Support (Put floor)</td></tr>
+<tr><td class='num'>24,400</td><td class='num'>2,518,165</td><td class='num'>336.70</td><td>Support (Put floor)</td></tr>
+</tbody>
+</table></div>
+<p class="datanote">Note: monthly max pain (24,400) sits above weekly max pain (24,200), and monthly PCR (1.19, put-heavy) is the inverse of weekly PCR (0.61, call-heavy) — a divergence worth watching: near-term positioning is more cautious/call-write-heavy than the medium-term picture.</p>
+
+<h3>6d. Structural Shift Analysis</h3>
+<ul class="bullets">
+<li>Futures OI rose +6.4% while price fell -0.67% today — a textbook <strong>short buildup</strong> in the front-month contract, the most bearish of the four OI/price patterns.</li>
+<li>Weekly Call OI (169.0mn) outweighs Put OI (103.6mn) by ~1.6:1 — heavy fresh call writing at 24,300-24,500 is the immediate resistance overhang capping any bounce this week.</li>
+<li>Weekly max pain (24,200) sits ~110pts above today's close (24,090.85) — a mild pull-to-max-pain dynamic into Tuesday's expiry, but the call wall above 24,300 will need to break first.</li>
+<li>Monthly positioning (PCR 1.19) is more balanced/put-heavy than weekly, suggesting option writers see this week's weakness as more tactical than structural.</li>
+<li>No single strike holds &gt;10% of either side's total OI in the tracked band — positioning is broad-based rather than concentrated at one level, reducing pin-risk at any single strike.</li>
+</ul>
+
+<h3>6e. Next Session Outlook</h3>
+<p><span class="pill bear">Bias: Cautious / Range-bound</span></p>
+<ul class="bullets">
+<li><strong>Support:</strong> 24,000 (round number, heaviest put OI in both weekly and monthly chains) and 23,800 (secondary weekly put wall).</li>
+<li><strong>Resistance:</strong> 24,300 and 24,400-24,500 (heaviest call OI in both expiries) — the level bulls need to reclaim to invalidate today's short buildup.</li>
+<li><strong>Rationale:</strong> a fresh short buildup in futures plus a call-heavy weekly options book argues for continued range-bound-to-cautious trade unless 24,300+ is reclaimed with volume; DII buying remains the key support-side offset to FII selling.</li>
+<li>No caution flag for gamma risk — nearest weekly expiry (1-Sep) is 3 trading sessions away (28-Aug, 31-Aug, then expiry), outside the 2-session window that would trigger an expiry deep-dive.</li>
+</ul>
+</div>
+</div>
+</section>
+
+
+<div class="footnote">
+Post-Market Intelligence Report &middot; 27-Aug-2026 &middot; Generated 2026-08-27 22:50 IST &middot; Sources: Kite MCP (Zerodha), Supabase nifty500data, Business Standard, BusinessToday, India TV News, Upstox, StartupTalky, TradingEconomics &middot; Not investment advice.
+</div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  // collapsible sections
+  document.querySelectorAll('h2[data-toggle]').forEach(function(h){
+    h.addEventListener('click', function(){
+      h.classList.toggle('collapsed');
+      var body = h.nextElementSibling;
+      body.classList.toggle('collapsed');
+    });
+  });
+
+  // sortable tables
+  document.querySelectorAll('table[data-sortable]').forEach(function(tbl){
+    var thead = tbl.querySelector('thead');
+    if(!thead) return;
+    thead.querySelectorAll('th').forEach(function(th, idx){
+      th.addEventListener('click', function(){
+        var tbody = tbl.querySelector('tbody');
+        var rows = Array.from(tbody.querySelectorAll('tr')).filter(r => !r.classList.contains('group-start'));
+        var asc = th.getAttribute('data-asc') !== 'true';
+        thead.querySelectorAll('th').forEach(h => h.removeAttribute('data-asc'));
+        th.setAttribute('data-asc', asc);
+        rows.sort(function(a,b){
+          var ca = a.children[idx], cb = b.children[idx];
+          if(!ca || !cb) return 0;
+          var va = ca.getAttribute('data-sort') !== null ? ca.getAttribute('data-sort') : ca.textContent.trim();
+          var vb = cb.getAttribute('data-sort') !== null ? cb.getAttribute('data-sort') : cb.textContent.trim();
+          var na = parseFloat(va.replace(/[^0-9.\-]/g,''));
+          var nb = parseFloat(vb.replace(/[^0-9.\-]/g,''));
+          var cmp;
+          if(!isNaN(na) && !isNaN(nb)){ cmp = na-nb; } else { cmp = va.localeCompare(vb); }
+          return asc ? cmp : -cmp;
+        });
+        rows.forEach(r => tbody.appendChild(r));
+      });
+    });
+  });
+
+  // scroll spy
+  var sections = Array.from(document.querySelectorAll('section[id]'));
+  var navLinks = Array.from(document.querySelectorAll('nav.mainnav a'));
+  function onScroll(){
+    var pos = window.scrollY + 110;
+    var current = sections[0] ? sections[0].id : null;
+    sections.forEach(function(s){
+      if(s.offsetTop <= pos) current = s.id;
+    });
+    navLinks.forEach(function(a){
+      a.classList.toggle('active', a.getAttribute('href') === '#'+current);
+    });
+  }
+  window.addEventListener('scroll', onScroll);
+  onScroll();
+});
+</script>
