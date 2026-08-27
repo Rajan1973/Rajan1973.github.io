@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Post-Market Intelligence — 26 Aug 2026</title>
+<style>
+  :root{
+    --bg:#f8f9fa; --card:#ffffff; --card-alt:#f1f5f9; --text:#0f172a; --muted:#475569;
+    --border:#cbd5e1; --border-lite:#e2e8f0; --accent:#1d4ed8; --accent-dark:#1e3a8a;
+    --pos:#15803d; --neg:#dc2626; --amber:#b45309; --rowalt:#eff6ff; --rowhover:#dbeafe;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-size:14px;line-height:1.5;}
+  a{color:var(--accent);}
+  .nav{position:sticky;top:0;z-index:50;background:#ffffff;border-bottom:1px solid var(--border);padding:10px 18px;display:flex;gap:4px;flex-wrap:wrap;align-items:center;box-shadow:0 1px 3px rgba(0,0,0,.04);}
+  .nav .brand{font-weight:800;color:var(--accent-dark);margin-right:14px;font-size:15px;white-space:nowrap;}
+  .nav a{color:var(--muted);text-decoration:none;font-size:12.5px;font-weight:600;padding:6px 10px;border-radius:6px;white-space:nowrap;}
+  .nav a:hover,.nav a.active{background:var(--card-alt);color:var(--accent);}
+  .wrap{max-width:1200px;margin:0 auto;padding:18px 18px 60px;}
+  .topbar{color:var(--muted);font-size:12.5px;margin:4px 0 6px;}
+  .topbar .fix{background:#fef3c7;color:#92400e;border:1px solid #fde68a;border-radius:5px;padding:2px 8px;font-weight:700;font-size:11px;margin-left:8px;}
+  h1{font-size:22px;margin:6px 0 2px;}
+  h2{font-size:17px;margin:0;color:var(--accent-dark);}
+  h3{font-size:14px;margin:16px 0 8px;color:var(--accent-dark);}
+  h4{font-size:12.5px;margin:0 0 6px;color:var(--accent-dark);}
+  .section{background:var(--card);border:1px solid var(--border-lite);border-radius:10px;margin-bottom:16px;overflow:hidden;}
+  .section > summary{list-style:none;cursor:pointer;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;background:var(--card-alt);border-bottom:1px solid var(--border-lite);}
+  .section > summary::-webkit-details-marker{display:none;}
+  .section > summary:after{content:"▾";color:var(--muted);font-size:13px;transition:transform .15s;}
+  .section:not([open]) > summary:after{transform:rotate(-90deg);}
+  .section-body{padding:16px 18px 20px;}
+  .subtle{color:var(--muted);font-size:12.5px;}
+  .pos{color:var(--pos);font-weight:700;}
+  .neg{color:var(--neg);font-weight:700;}
+  .amber{color:var(--amber);font-weight:700;}
+  table{border-collapse:collapse;width:100%;font-size:12.8px;background:#fff;}
+  .tbl-wrap{border:1px solid var(--border);border-radius:8px;overflow:auto;margin:10px 0;}
+  thead th{background:var(--accent-dark);color:#fff;font-weight:700;text-transform:uppercase;font-size:11px;letter-spacing:.04em;padding:9px 10px;text-align:left;white-space:nowrap;cursor:pointer;user-select:none;}
+  thead th:hover{background:var(--accent);}
+  thead th.nosort{cursor:default;}
+  thead th.nosort:hover{background:var(--accent-dark);}
+  tbody td{padding:8px 10px;border-bottom:1px solid var(--border-lite);white-space:nowrap;}
+  tbody tr:nth-child(odd){background:#ffffff;}
+  tbody tr:nth-child(even){background:var(--rowalt);}
+  tbody tr:hover{background:var(--rowhover) !important;}
+  tbody tr:last-child td{border-bottom:none;}
+  ul.bullets{margin:8px 0;padding-left:0;list-style:none;}
+  ul.bullets li{padding:7px 0 7px 4px;border-bottom:1px dashed var(--border-lite);font-size:13.3px;}
+  ul.bullets li:last-child{border-bottom:none;}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin:10px 0;}
+  .card{background:var(--card-alt);border:1px solid var(--border-lite);border-radius:8px;padding:12px 14px;}
+  .card h4{margin:0 0 6px;font-size:13px;color:var(--accent-dark);}
+  .card ul{margin:6px 0 0;padding-left:18px;font-size:12.6px;}
+  .card ul li{margin-bottom:4px;}
+  .scorecard{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:10px 0 6px;}
+  .stat{background:var(--card-alt);border:1px solid var(--border-lite);border-radius:8px;padding:10px 12px;}
+  .stat .lbl{font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:700;}
+  .stat .val{font-size:18px;font-weight:800;margin-top:2px;}
+  .stat .chg{font-size:12px;margin-top:1px;}
+  .badge{display:inline-block;font-size:10px;font-weight:700;padding:2px 7px;border-radius:99px;letter-spacing:.03em;text-transform:uppercase;}
+  .badge.bull{background:#dcfce7;color:#15803d;}
+  .badge.bear{background:#fee2e2;color:#dc2626;}
+  .badge.neutral{background:#fef3c7;color:#b45309;}
+  .datanote{font-style:italic;color:var(--muted);font-size:11.8px;margin-top:6px;}
+  .flagnote{background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:9px 12px;font-size:12.3px;color:#92400e;margin:10px 0;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  @media (max-width:760px){.grid2{grid-template-columns:1fr;}}
+  .footer{text-align:center;color:var(--muted);font-size:11.5px;margin-top:24px;padding-top:14px;border-top:1px solid var(--border-lite);}
+  .src{font-size:11px;color:var(--muted);}
+  .src a{display:inline-block;margin:2px 6px 2px 0;}
+  .caption{font-size:11.5px;color:var(--muted);margin:4px 0 10px;}
+  code{background:var(--card-alt);padding:1px 5px;border-radius:4px;font-size:11.5px;}
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <span class="brand">📊 EOD Intelligence</span>
+  <a href="#s0">Scorecard</a>
+  <a href="#s1">Nifty &amp; Sentiment</a>
+  <a href="#s2">Macro/Policy</a>
+  <a href="#s3">Breadth &amp; Rotation</a>
+  <a href="#s4">FII/DII</a>
+  <a href="#s5">Momentum</a>
+  <a href="#s6">F&amp;O Intel</a>
+</div>
+
+<div class="wrap">
+  <h1>Post-Market Intelligence — Indian Equities</h1>
+  <div class="topbar">26 August 2026 · report compiled 27 Aug 2026 IST · Kite MCP + NSE/MoneyControl + Supabase (nifty500data) · FII/DII: User-provided data <span class="fix">weekly expiry (01-Sep) is 4 sessions out — §7 Expiry Intelligence not triggered</span></div>
+
+  <!-- ============ SECTION 0: SCORECARD ============ -->
+  <details class="section" id="s0" open>
+    <summary><h2>§0 · Executive Scorecard</h2><span class="subtle">Equities + Commodities at a glance</span></summary>
+    <div class="section-body">
+      <div class="scorecard">
+        <div class="stat"><div class="lbl">Nifty50 Close</div><div class="val">24,207.75</div><div class="chg neg">▼ 126.80 (‑0.52%)</div><span class="badge bear">Bear</span></div>
+        <div class="stat"><div class="lbl">Bank Nifty</div><div class="val">57,783.75</div><div class="chg pos">▲ 269.55 (+0.47%)</div><span class="badge bull">Bull</span></div>
+        <div class="stat"><div class="lbl">India VIX</div><div class="val">~10.56</div><div class="chg neg">▼ ~5% on day</div><span class="badge neutral">Low Vol</span></div>
+        <div class="stat"><div class="lbl">FII Net (Cash)</div><div class="val pos">+₹503 Cr</div><div class="chg subtle">Net buyers (see note)</div><span class="badge bull">Bull</span></div>
+        <div class="stat"><div class="lbl">DII Net (Cash)</div><div class="val pos">+₹6,425 Cr</div><div class="chg subtle">Net buyers</div><span class="badge bull">Bull</span></div>
+        <div class="stat"><div class="lbl">Nifty PCR (Weekly)</div><div class="val">0.64</div><div class="chg subtle">Call‑heavy</div><span class="badge bear">Bearish&lt;0.8</span></div>
+        <div class="stat"><div class="lbl">Market Breadth (N50)</div><div class="val">14 : 36</div><div class="chg neg">A/D ratio 0.39</div><span class="badge bear">Weak</span></div>
+      </div>
+      <div class="flagnote">⚠ <strong>Correction vs the last run of this report (26‑Aug, generated before this rebuild):</strong> FII cash-market flow is recorded in your Supabase <code>fii_dii_cash_market_daily</code> table (cross‑checked source: mrchartist.com vs research360.in) as <strong>net BUY +₹502.63 Cr</strong> — the prior version of this report had FIIs as net <em>sellers</em> of ₹503 Cr, same magnitude, opposite sign. The Supabase entry is what this run uses.</div>
+
+      <h3>Commodities</h3>
+      <div class="tbl-wrap">
+        <table class="sortable">
+          <thead><tr><th>Commodity</th><th>Price</th><th>Change</th><th class="nosort">Significance</th></tr></thead>
+          <tbody>
+            <tr><td>Brent Crude ($/bbl)</td><td>~86.4</td><td class="pos">▼ ~2.1%</td><td>Fell on Iran–Oman diplomatic contact easing Strait‑of‑Hormuz transit fears — cuts India's import bill</td></tr>
+            <tr><td>Gold (MCX ₹/10g)</td><td>1,62,900</td><td class="pos">+0.03%</td><td>Flat‑to‑up; dollar softened on Fed long‑bond buyback headlines ahead of Jackson Hole</td></tr>
+            <tr><td>Silver (MCX ₹/kg)</td><td>2,45,551</td><td class="pos">+0.6%</td><td>Tracking gold plus solid industrial (EV/solar/AI‑datacenter) demand</td></tr>
+            <tr><td>Aluminium (MCX ₹/kg)</td><td>345.90</td><td class="neg">‑0.86%</td><td>Softer input cost — mild positive for Auto/FMCG margins</td></tr>
+            <tr><td>Copper (MCX ₹/kg)</td><td>1,391.85</td><td class="pos">+0.24%</td><td>Holding firm — global growth/EV demand proxy</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="datanote">Copper is confirmed this run (Upstox, 26‑Aug‑dated snapshot) — the prior report had shown it as "—", unresolved.</p>
+
+      <h3>Today in Four Bullets</h3>
+      <ul class="bullets">
+        <li>📊 <strong>Largecap‑specific pullback, not a broad one:</strong> Nifty50 closed at the day's low (24,207.75, ‑0.52%) with weak internal breadth (14 advances : 36 declines), even as the broader NIFTY 500 stayed net positive — a narrow, largecap‑led decline.</li>
+        <li>💰 <strong>Institutions bought on the dip:</strong> FIIs were marginal net buyers (+₹503 Cr) and DIIs added +₹6,425 Cr — combined ~₹6,928 Cr of net institutional buying on a day the index still fell.</li>
+        <li>🌍 <strong>Hormuz de‑escalation is the macro story of the day:</strong> Brent slid ~2% on reported Iran–Oman diplomatic contact over Strait‑of‑Hormuz transit — a reversal of the "sanctions imminent" framing that dominated two sessions earlier.</li>
+        <li>⚡ <strong>Sector split:</strong> IT (‑1.47%) and FMCG (‑0.95%) dragged the index; Metal (+1.27% close, breadth 14:1) and Smallcap100 (+0.81%) led gainers — rotation into cyclicals/smaller caps continues.</li>
+      </ul>
+    </div>
+  </details>
+
+  <!-- ============ SECTION 1 ============ -->
+  <details class="section" id="s1" open>
+    <summary><h2>§1 · Nifty Movement &amp; Market Sentiment</h2><span class="subtle">Price action, narrative, global cues</span></summary>
+    <div class="section-body">
+      <h3>1a. Price Summary</h3>
+      <div class="tbl-wrap">
+        <table class="sortable">
+          <thead><tr><th>Metric</th><th>Open</th><th>High</th><th>Low</th><th>Close</th><th>Chg (pts)</th><th>Chg %</th></tr></thead>
+          <tbody>
+            <tr><td>Nifty50</td><td>24,341.95</td><td>24,378.60</td><td>24,207.75</td><td>24,207.75</td><td class="neg">‑126.80</td><td class="neg">‑0.52%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="tbl-wrap">
+        <table class="sortable">
+          <thead><tr><th>Window</th><th>Base Close</th><th>Chg (pts)</th><th>Chg %</th></tr></thead>
+          <tbody>
+            <tr><td>1D (vs 25‑Aug)</td><td>24,334.55</td><td class="neg">‑126.80</td><td class="neg">‑0.52%</td></tr>
+            <tr><td>1W (vs 19‑Aug)</td><td>24,078.30</td><td class="pos">+129.45</td><td class="pos">+0.54%</td></tr>
+            <tr><td>MTD (vs 31‑Jul)</td><td>24,383.60</td><td class="neg">‑175.85</td><td class="neg">‑0.72%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="subtle">Source: Supabase <code>daily_prices</code> (NIFTY 50). India VIX ~10.56, down roughly 5% on the day per two independent aggregators (exact prior close wasn't cleanly available — see data note in §0); Supabase's own <code>index_breadth.india_vix</code> backfill column exists but is still empty for every date checked, so today's VIX came from web search rather than that column as the skill intends going forward.</p>
+
+      <h3>1b. Dominant Narrative</h3>
+      <ul class="bullets">
+        <li>🌍 <strong>Global:</strong> [Likely] Brent crude fell to ~$86.4/bbl (‑2%+) on reports of renewed Iran–Oman diplomatic contact over Strait‑of‑Hormuz shipping access — a real reversal from the "toughest‑ever sanctions imminent" framing that drove markets two sessions earlier.</li>
+        <li>💰 <strong>Flows:</strong> FIIs were marginal net <strong>buyers</strong> (+₹503 Cr) — not sellers, correcting an earlier read — while DIIs added +₹6,425 Cr; combined institutional buying of ~₹6,928 Cr came in on a day Nifty still closed down, a similar disconnect to the one flagged two sessions earlier.</li>
+        <li>📈 <strong>Domestic:</strong> IT (‑1.47%) was the single biggest sectoral drag for a second straight session; FMCG (‑0.95%, MTD data unavailable — see §3 note) also weighed.</li>
+        <li>⚡ <strong>Event:</strong> Gold (+0.03%) and Silver (+0.6%) firmed as the dollar softened on US Treasury long‑bond buyback headlines, with markets positioning ahead of Fed Chair Warsh's Jackson Hole speech.</li>
+        <li>📊 <strong>Technicals:</strong> Nifty closed exactly at its intraday low (24,207.75) inside the 24,100–24,400 range that has held for over a week — a break either side is the next real signal.</li>
+        <li>🔧 <strong>Rotation:</strong> Nifty Metal's internal breadth was 14 advances vs just 1 decline today (strongest of any index in this report) even though its 1D% close change was a more modest +1.27% — the participation is much broader than the index-level number alone suggests.</li>
+      </ul>
+
+      <h3>1c. Global Cues Feeding the 26‑Aug Session</h3>
+      <div class="tbl-wrap">
+        <table class="sortable">
+          <thead><tr><th>Market</th><th>Level</th><th>Change</th></tr></thead>
+          <tbody>
+            <tr><td>Dow Jones (prior close)</td><td>53,810</td><td class="pos">+0.03%</td></tr>
+            <tr><td>NASDAQ (prior close)</td><td>29,799</td><td class="pos">+0.93%</td></tr>
+            <tr><td>S&amp;P 500 (prior close)</td><td>7,751</td><td class="pos">+0.29%</td></tr>
+            <tr><td>Brent Crude</td><td>~$86.4/bbl</td><td class="pos">▼ ~2.1%</td></tr>
+            <tr><td>US 10Y Yield</td><td>4.676%</td><td class="neg">‑0.17%</td></tr>
+            <tr><td>DXY (Dollar Index)</td><td>~99.0</td><td class="subtle">softening</td></tr>
+            <tr><td>USD/INR</td><td>~95.7</td><td class="subtle">last confirmed 25‑Aug</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="datanote">Dow/NASDAQ/S&amp;P/US10Y/DXY are the prior US session's close feeding into the 26‑Aug open — a same‑day US close wasn't independently confirmed this run (one fetch attempt was blocked). USD/INR is the last value in Supabase's <code>fii_daily_flows.usd_inr_rate</code> (25‑Aug); no 26‑Aug row exists yet in that table, and a web figure of 95.44 surfaced but couldn't be corroborated, so it's shown as "last confirmed" rather than asserted as today's close.</p>
+    </div>
+  </details>
+
+  <!-- ============ SECTION 2 ============ -->
+  <details class="section" id="s2" open>
+    <summary><h2>§2 · Macroeconomic &amp; Policy Dashboard</h2><span class="subtle">Last 48 hours (24–26 Aug 2026)</span></summary>
+    <div class="section-body">
+      <div class="cards">
+        <div class="card">
+          <h4>🕊️ Iran–Oman Hormuz De‑escalation — Reported 26‑Aug‑2026</h4>
+          <ul>
+            <li>Multiple market‑data aggregators attribute the day's ~2%+ Brent decline and ~5% India VIX drop to renewed diplomatic contact between Iran and Oman over Strait‑of‑Hormuz shipping access.</li>
+            <li><strong>Impact:</strong> Directly eases India's crude import‑bill and inflation overhang that had been building for the prior several sessions; positive for OMCs, aviation, paints — the same sectors flagged as at‑risk when the sanctions narrative was live.</li>
+            <li><strong>Trader watch:</strong> This is a reported diplomatic development, not a confirmed resolution — a reversal (renewed Hormuz tension) would flip the crude/VIX move just as quickly. Treat the "de‑escalation" framing as provisional pending firmer confirmation.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>No CPI / WPI / PMI print in this window</h4>
+          <ul>
+            <li>No major CPI, WPI, IIP, PMI, auto‑sales or trade‑balance release fell in the 24–26 Aug window based on available sources.</li>
+            <li><strong>Upcoming (28‑Aug):</strong> IIP (June) and forex reserves data are due — not yet out as of this report.</li>
+            <li><strong>This week:</strong> US PCE inflation print and Fed Chair Warsh's Jackson Hole speech (Friday) are the live macro catalysts markets are positioning around.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>RBI — 7‑Day VRRR Auction (24‑Aug, carried context)</h4>
+          <ul>
+            <li>RBI ran a 7‑day Variable Rate Reverse Repo auction on 24‑Aug absorbing durable surplus liquidity from the banking system (system surplus was near ₹3.5 trillion at the time).</li>
+            <li><strong>Impact:</strong> A background liquidity‑management operation, not a fresh 26‑Aug event — included here since it falls inside the trailing‑48‑hour lookback from a strict calendar count, though its market relevance has faded by 26‑Aug.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>Gold, Silver, Crude — Commodity Confirmation</h4>
+          <ul>
+            <li>Gold (MCX): ₹1,62,900/10g, +0.03% — dollar softened on Fed long‑bond buyback headlines.</li>
+            <li>Silver (MCX): ₹2,45,551/kg, +0.6% — tracking gold, plus EV/solar/AI‑datacenter industrial demand cited as a structural support.</li>
+            <li>Brent Crude: ~$86.4/bbl, down ~2%+ on Hormuz de‑escalation reports — third straight declining session per one source.</li>
+          </ul>
+        </div>
+      </div>
+      <p class="datanote">No SEBI, IRDA or AMFI announcements were confirmed for this 48‑hour window from available sources — not padded with unrelated older news. A search for RBI/SEBI news in this window surfaced one MF/insurer bank‑stake‑acquisition proposal from RBI, but its exact date couldn't be confirmed as falling in 24–26 Aug specifically, so it's omitted rather than guessed at.</p>
+    </div>
+  </details>
+
+  <!-- ============ SECTION 3 ============ -->
+  <details class="section" id="s3" open>
+    <summary><h2>§3 · Index Performance &amp; Market Breadth</h2><span class="subtle">Sector rotation, breadth, currency &amp; commodities — now Supabase‑sourced</span></summary>
+    <div class="section-body">
+      <h3>3a. Index Performance</h3>
+      <div class="tbl-wrap">
+        <table class="sortable">
+          <thead><tr><th>Index</th><th>Close</th><th>1D Chg%</th><th>1W Chg%</th><th>MTD%</th></tr></thead>
+          <tbody>
+            <tr><td>Nifty 50</td><td>24,207.75</td><td class="neg">‑0.52%</td><td class="pos">+0.54%</td><td class="neg">‑0.72%</td></tr>
+            <tr><td>Bank Nifty</td><td>57,783.75</td><td class="pos">+0.47%</td><td class="pos">+0.95%</td><td class="pos">+0.91%</td></tr>
+            <tr><td>Nifty 100</td><td>25,390.95</td><td class="neg">‑0.43%</td><td class="pos">+0.59%</td><td class="neg">‑0.37%</td></tr>
+            <tr><td>Nifty Midcap 100</td><td>64,101.20</td><td class="neg">‑0.10%</td><td class="pos">+1.09%</td><td>—</td></tr>
+            <tr><td>Nifty Smallcap 100</td><td>20,067.30</td><td class="pos">+0.81%</td><td class="pos">+1.83%</td><td class="pos">+3.76%</td></tr>
+            <tr><td>Nifty Auto</td><td>29,000.15</td><td class="neg">‑0.74%</td><td class="neg">‑0.63%</td><td>—</td></tr>
+            <tr><td>Nifty IT</td><td>30,318.85</td><td class="neg">‑1.47%</td><td class="neg">‑0.38%</td><td class="neg">‑1.27%</td></tr>
+            <tr><td>Nifty FMCG</td><td>47,252.90</td><td class="neg">‑0.95%</td><td class="neg">‑0.47%</td><td>—</td></tr>
+            <tr><td>Nifty Metal</td><td>13,541.70</td><td class="pos">+1.27%</td><td class="pos">+3.98%</td><td>—</td></tr>
+            <tr><td>Nifty Realty</td><td>910.15</td><td class="neg">‑0.83%</td><td class="pos">+1.65%</td><td>—</td></tr>
+            <tr><td>Nifty Pharma</td><td>26,626.30</td><td class="pos">+0.23%</td><td class="pos">+1.19%</td><td class="pos">+0.34%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="datanote">Source: Supabase <code>daily_prices</code> (exact exchange closes, no estimation) — a genuine improvement over web‑search sourcing. <strong>Data gap found this run:</strong> Auto, FMCG, Metal, Midcap 100 and Realty have no rows between 2026‑07‑20 and 2026‑08‑13 in your database, so MTD% (which needs the 31‑Jul close) is shown as "—" for those five rather than estimated. Nifty 50/Bank/100/IT/Pharma/Smallcap100 don't have this gap. Worth backfilling that ~19‑trading‑day hole if MTD tracking on those five sectors matters to you.</p>
+
+      <h3>3b. Breadth Comparison (5‑Day)</h3>
+      <div class="tbl-wrap">
+        <table class="sortable">
+          <thead><tr><th>Index</th><th>Today A/D</th><th>D‑1 (25‑Aug)</th><th>D‑2 (24‑Aug)</th><th>D‑3 (21‑Aug)</th><th>1W ago (19‑Aug)</th><th>Today &gt;20SMA%</th><th>&gt;50SMA%</th><th>&gt;100SMA%</th><th>&gt;200SMA%</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Nifty 50</strong></td><td class="neg">14:36</td><td class="pos">34:16</td><td class="neg">23:26</td><td class="nu">25:24</td><td class="neg">16:34</td><td>34%</td><td>44%</td><td>56%</td><td>50%</td></tr>
+            <tr><td>Bank Nifty</td><td class="pos">8:6</td><td class="nu">7:7</td><td class="neg">4:10</td><td class="pos">10:4</td><td class="pos">8:6</td><td>50%</td><td>71%</td><td>71%</td><td>71%</td></tr>
+            <tr><td>Nifty 100</td><td class="neg">37:63</td><td class="pos">66:34</td><td class="pos">46:53</td><td class="pos">44:53</td><td class="neg">31:68</td><td>43%</td><td>53%</td><td>60%</td><td>58%</td></tr>
+            <tr><td>Nifty Midcap 100</td><td class="neg">42:58</td><td class="pos">63:37</td><td class="neg">43:56</td><td class="neg">45:52</td><td class="neg">39:60</td><td>53%</td><td>56%</td><td>57%</td><td>61%</td></tr>
+            <tr><td>Nifty Smallcap 100</td><td class="pos">59:39</td><td class="pos">47:53</td><td class="neg">39:61</td><td class="neg">45:54</td><td class="neg">29:71</td><td>56%</td><td>50%</td><td>59%</td><td>68%</td></tr>
+            <tr><td>Nifty Auto</td><td class="neg">4:11</td><td class="pos">10:5</td><td class="neg">5:10</td><td class="neg">2:12</td><td class="neg">3:12</td><td>53%</td><td>73%</td><td>80%</td><td>87%</td></tr>
+            <tr><td>Nifty IT</td><td class="neg">1:9</td><td class="pos">7:3</td><td class="nu">5:4</td><td class="neg">2:7</td><td class="pos">8:2</td><td>30%</td><td>90%</td><td>70%</td><td>40%</td></tr>
+            <tr><td>Nifty FMCG</td><td class="neg">1:14</td><td class="pos">9:6</td><td class="neg">5:10</td><td class="neg">4:11</td><td class="neg">5:10</td><td>13%</td><td>13%</td><td>27%</td><td>27%</td></tr>
+            <tr><td>Nifty Metal</td><td class="pos">14:1</td><td class="neg">6:9</td><td class="pos">13:2</td><td class="pos">9:6</td><td class="neg">5:10</td><td>87%</td><td>80%</td><td>80%</td><td>80%</td></tr>
+            <tr><td>Nifty Realty</td><td class="neg">1:9</td><td class="neg">4:6</td><td class="pos">7:3</td><td class="pos">6:4</td><td class="nu">5:5</td><td>60%</td><td>70%</td><td>90%</td><td>80%</td></tr>
+            <tr><td>Nifty Pharma</td><td class="pos">13:7</td><td class="pos">13:7</td><td class="neg">7:13</td><td class="neg">8:11</td><td class="neg">4:16</td><td>50%</td><td>55%</td><td>80%</td><td>80%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="datanote">Full 5‑snapshot history, sourced entirely from Supabase <code>index_breadth</code> — no "unavailable" placeholders needed this run, unlike prior versions of this report. <code>index_breadth.india_vix</code> was checked and is null for every row in the table (the column exists but the historical VIX backfill hasn't actually run yet) — India VIX in §0/§1 came from web search instead.</p>
+
+      <h3>3c. Rotation Insight</h3>
+      <ul class="bullets">
+        <li>✅ <strong>Rotation INTO Metal:</strong> breadth 14:1 today (from 6:9 D‑1) — the sharpest single‑day breadth swing of any index in this report; index itself +1.27% today, +3.98% over the week. Hormuz‑driven crude relief plausibly supports metal producers' input costs.</li>
+        <li>✅ <strong>Rotation INTO Smallcap:</strong> 59:39 breadth today, +3.76% MTD vs Nifty50's ‑0.72% MTD — continued broadening below the largecap layer.</li>
+        <li>✅ <strong>Rotation INTO Banking:</strong> Bank Nifty positive across 1D/1W/MTD (+0.47%/+0.95%/+0.91%) while Nifty50 is negative on 1D and MTD — financials are effectively carrying the index.</li>
+        <li>❌ <strong>Rotation OUT OF FMCG:</strong> breadth collapsed to 1:14 today from 9:6 the prior session — the sharpest deterioration of any sector, not a one‑day wobble given also‑weak 1D/1W.</li>
+        <li>❌ <strong>Rotation OUT OF IT:</strong> breadth 1:9 today after 7:3 the day before — a second consecutive weak session despite firmer global tech cues two sessions back.</li>
+        <li>🔭 <strong>Implication:</strong> A largecap index flat‑to‑down MTD while mid/smallcaps and Metal rally hard is a broadening rally, not a weakening one — but Nifty50's own weak same‑day breadth (14:36) means that broadening hasn't yet shown up in the benchmark's own internals.</li>
+      </ul>
+
+      <h3>3d. Currency &amp; Commodity Snapshot</h3>
+      <div class="tbl-wrap">
+        <table class="sortable">
+          <thead><tr><th>Instrument</th><th>Close</th><th>1D%</th><th>1W%</th><th>MTD%</th><th>YTD%</th><th class="nosort">Signal / Relevance</th></tr></thead>
+          <tbody>
+            <tr><td>USD/INR</td><td>~95.7</td><td>—</td><td>—</td><td>—</td><td>—</td><td>Last confirmed 25‑Aug via Supabase FPI data; no 26‑Aug row yet, no fresh web figure could be corroborated</td></tr>
+            <tr><td>Brent Crude ($/bbl)</td><td>~86.4</td><td class="pos">▼~2.1%</td><td>—</td><td>—</td><td>—</td><td>Hormuz de‑escalation — disinflationary for India; favours OMCs, aviation</td></tr>
+            <tr><td>WTI Crude ($/bbl)</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>Not reliably sourced this run</td></tr>
+            <tr><td>Gold (MCX ₹/10g)</td><td>1,62,900</td><td class="pos">+0.03%</td><td>—</td><td>—</td><td>—</td><td>Dollar softened on Fed buyback headlines; safe‑haven bid steady</td></tr>
+            <tr><td>Silver (MCX ₹/kg)</td><td>2,45,551</td><td class="pos">+0.6%</td><td>—</td><td>—</td><td>—</td><td>Tracking gold plus EV/solar/AI‑datacenter industrial demand</td></tr>
+            <tr><td>Aluminium (MCX ₹/kg)</td><td>345.90</td><td class="neg">‑0.86%</td><td>—</td><td>—</td><td>—</td><td>Softer input cost — mild margin tailwind for Auto OEMs, FMCG packaging</td></tr>
+            <tr><td>Copper (MCX ₹/kg)</td><td>1,391.85</td><td class="pos">+0.24%</td><td>—</td><td>—</td><td>—</td><td>Holding firm — global growth/EV demand proxy; positive read‑through for cables/power names</td></tr>
+            <tr><td>DXY (Dollar Index)</td><td>~99.0</td><td class="subtle">softening</td><td>—</td><td>—</td><td>—</td><td>Weaker dollar on Fed buyback news — mild positive for EM/FPI risk appetite</td></tr>
+            <tr><td>US 10Y Yield</td><td>4.676%</td><td class="neg">‑0.17%</td><td>—</td><td>—</td><td>—</td><td>Softer yields ease pressure on EM capital flows</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="datanote">1W/MTD/YTD columns need a historical series this session didn't build for FX/commodities — shown as "—" rather than estimated, consistent with the skill's data‑confidence rule.</p>
+    </div>
+  </details>
+
+  <!-- ============ SECTION 4 ============ -->
+  <details class="section" id="s4" open>
+    <summary><h2>§4 · FII / DII Flow Dashboard</h2><span class="subtle">Institutional cash‑market activity — Supabase‑sourced this run</span></summary>
+    <div class="section-body">
+      <h3>4a. Daily Flow — 26 Aug 2026</h3>
+      <div class="tbl-wrap">
+        <table class="sortable">
+          <thead><tr><th>Category</th><th>Cash Buy (₹Cr)</th><th>Cash Sell (₹Cr)</th><th>Net (₹Cr)</th><th>Signal</th></tr></thead>
+          <tbody>
+            <tr><td><strong>FII/FPI</strong></td><td>17,520.49</td><td>17,017.86</td><td class="pos"><strong>+502.63 ✅</strong></td><td class="pos">Net buyers (marginal)</td></tr>
+            <tr><td><strong>DII</strong></td><td>17,710.07</td><td>11,284.91</td><td class="pos"><strong>+6,425.16</strong></td><td class="pos">Strong institutional support</td></tr>
+            <tr><td><strong>Combined</strong></td><td>35,230.56</td><td>28,302.77</td><td class="pos"><strong>+6,927.79</strong></td><td class="pos">Net institutional buying despite index closing down</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="datanote">Source: Supabase <code>fii_dii_cash_market_daily</code> ("NSE Cash Market Provisional, cross‑checked vs mrchartist.com / research360.in"). This corrects a sign error in the version of this report generated before the skill update — FIIs were net buyers, not sellers, on 26‑Aug.</p>
+
+      <h3>4b. Trend Comparison</h3>
+      <div class="tbl-wrap">
+        <table class="sortable">
+          <thead><tr><th></th><th>Today (26‑Aug)</th><th>This Week So Far (24–26 Aug)</th><th>Last Week (17–21 Aug)</th><th>Month MTD (3–26 Aug, 18 days)</th></tr></thead>
+          <tbody>
+            <tr><td>FII Net</td><td class="pos">+503 Cr</td><td class="pos">+3,278 Cr</td><td class="neg">‑1,601 Cr</td><td class="pos">+5,792 Cr</td></tr>
+            <tr><td>DII Net</td><td class="pos">+6,425 Cr</td><td class="pos">+9,148 Cr</td><td class="pos">+17,316 Cr</td><td class="pos">+43,518 Cr</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="subtle">Once today's figure lands in Supabase, the trend columns pull straight from <code>fii_dii_cash_market_daily</code> rather than re‑asking for history each day — this table is the first one built that way.</p>
+
+      <h3>4c. Flow Interpretation</h3>
+      <p>The FII/DII "tug‑of‑war" framing doesn't really fit 26‑Aug: both sides bought. FII flow flipped from ‑₹1,601 Cr last week to +₹3,278 Cr this week so far — a real directional shift, not noise — while DII buying, though still strongly positive, has eased from +₹17,316 Cr last week to +₹9,148 Cr this week (fewer trading days counted so far, but the daily run‑rate is also lower). The August MTD picture (FII +₹5,792 Cr, DII +₹43,518 Cr) shows DII flows still dwarfing FII by roughly 7.5x — the domestic bid remains the dominant force, but FII participation turning constructive after a rough patch is the more interesting incremental signal here.</p>
+    </div>
+  </details>
+
+  <!-- ============ SECTION 5 — NEW ============ -->
+  <details class="section" id="s5" open>
+    <summary><h2>§5 · Momentum Stocks Filter</h2><span class="subtle">NIFTY 500 Stage 1/Stage 2 scan — 100% Supabase, new this run</span></summary>
+    <div class="section-body">
+      <h3>5a. Stage 1 + Stage 2 Ranking</h3>
+      <p class="caption">Stage 1: |daily % change| ≥ 1.05% AND volume ≥ 1.25× the 63‑day average (with a 50,000‑share liquidity floor on that average). Stage 2 composite: 35% daily price action + 15% weekly price action + 25% daily volume expansion + 15% weekly volume expansion + 10% three‑week trend (percentile‑ranked across the Stage‑1 cohort). Top 20 by composite score.</p>
+      <div class="tbl-wrap">
+        <table class="sortable">
+          <thead><tr><th>Rank</th><th>Symbol</th><th>LTP</th><th>Daily %</th><th>Volume Ratio</th><th>5‑Day %</th><th>5‑Day Avg‑Vol Ratio</th><th>3‑Week Trend</th><th>Composite</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td><strong>CYIENT</strong></td><td>1,047.70</td><td class="pos">+7.01%</td><td>14.83×</td><td class="pos">+17.13%</td><td>4.85×</td><td>✓</td><td><strong>97.2</strong></td></tr>
+            <tr><td>2</td><td>SBFC</td><td>101.14</td><td class="pos">+9.02%</td><td>11.29×</td><td class="pos">+9.02%</td><td>2.63×</td><td>✓</td><td>94.5</td></tr>
+            <tr><td>3</td><td>JINDALSAW</td><td>302.45</td><td class="pos">+7.35%</td><td>5.51×</td><td class="pos">+12.56%</td><td>2.91×</td><td>✓</td><td>93.9</td></tr>
+            <tr><td>4</td><td>CGCL</td><td>256.35</td><td class="pos">+6.96%</td><td>6.22×</td><td class="pos">+13.31%</td><td>2.46×</td><td>✓</td><td>91.8</td></tr>
+            <tr><td>5</td><td><strong>HINDZINC</strong></td><td>626.50</td><td class="pos">+5.72%</td><td>4.22×</td><td class="pos">+12.48%</td><td>2.66×</td><td>✓</td><td>88.8</td></tr>
+            <tr><td>6</td><td><strong>IDBI</strong></td><td>94.75</td><td class="pos">+7.29%</td><td>3.35×</td><td class="pos">+17.38%</td><td>1.80×</td><td>✓</td><td>84.7</td></tr>
+            <tr><td>7</td><td>SAIL</td><td>194.90</td><td class="pos">+5.59%</td><td>2.46×</td><td class="pos">+12.82%</td><td>2.10×</td><td>✓</td><td>79.2</td></tr>
+            <tr><td>8</td><td>HINDCOPPER</td><td>556.05</td><td class="pos">+4.39%</td><td>7.55×</td><td class="subtle">+0.22%</td><td>3.64×</td><td>✓</td><td>75.6</td></tr>
+            <tr><td>9</td><td>MAHABANK</td><td>85.60</td><td class="pos">+4.77%</td><td>3.52×</td><td class="pos">+7.24%</td><td>1.28×</td><td>✓</td><td>72.9</td></tr>
+            <tr><td>10</td><td>LICHSGFIN</td><td>524.40</td><td class="pos">+3.64%</td><td>3.93×</td><td class="pos">+5.51%</td><td>2.48×</td><td>✓</td><td>72.5</td></tr>
+            <tr><td>11</td><td>ANTHEM</td><td>923.05</td><td class="pos">+5.53%</td><td>2.79×</td><td class="pos">+4.67%</td><td>1.20×</td><td>✓</td><td>68.6</td></tr>
+            <tr><td>12</td><td><strong>GROWW</strong></td><td>196.24</td><td class="neg">‑3.33%</td><td>5.55×</td><td class="subtle">+1.08%</td><td>1.99×</td><td>✓</td><td>66.1</td></tr>
+            <tr><td>13</td><td><strong>WELCORP</strong></td><td>2,306.70</td><td class="neg">‑1.65%</td><td>3.98×</td><td class="pos">+16.86%</td><td>4.85×</td><td>✓</td><td>65.3</td></tr>
+            <tr><td>14</td><td>CHALET</td><td>912.45</td><td class="pos">+2.06%</td><td>3.46×</td><td class="pos">+7.59%</td><td>2.53×</td><td>✓</td><td>62.5</td></tr>
+            <tr><td>15</td><td>SAGILITY</td><td>44.00</td><td class="pos">+2.28%</td><td>4.19×</td><td class="subtle">+3.68%</td><td>1.51×</td><td>✓</td><td>58.9</td></tr>
+            <tr><td>16</td><td>CDSL</td><td>1,434.00</td><td class="pos">+2.81%</td><td>2.28×</td><td class="pos">+7.90%</td><td>1.42×</td><td>✓</td><td>58.6</td></tr>
+            <tr><td>17</td><td>VBL</td><td>421.25</td><td class="neg">‑3.82%</td><td>5.06×</td><td class="neg">‑2.45%</td><td>1.59×</td><td>✗</td><td>58.4</td></tr>
+            <tr><td>18</td><td>PARADEEP</td><td>163.84</td><td class="pos">+2.64%</td><td>1.73×</td><td class="pos">+8.58%</td><td>1.85×</td><td>✓</td><td>58.1</td></tr>
+            <tr><td>19</td><td>MOTILALOFS</td><td>1,040.00</td><td class="pos">+2.82%</td><td>1.61×</td><td class="pos">+10.39%</td><td>1.52×</td><td>✓</td><td>57.2</td></tr>
+            <tr><td>20</td><td>MEDANTA</td><td>1,458.90</td><td class="pos">+3.88%</td><td>2.52×</td><td class="subtle">+2.94%</td><td>0.84×</td><td>✓</td><td>56.3</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="datanote">Query run live against <code>nifty500data</code> during this session and cross‑checked against an independent third‑party market‑summary aggregator: SBFC (+9.02%), Jindal Saw (+7.35%), IDBI (+7.29%), Cyient (+7.01%), CGCL (+6.96%) and VBL (‑3.82%) all matched that source's figures to two decimal places — a solid sanity check on the ranking query.</p>
+
+      <h3>5b. Possible Triggers</h3>
+      <ul class="bullets">
+        <li><strong>CYIENT:</strong> surged on Investor Day, with MOFSL, Antique, Choice and Nuvama all raising price targets afterward.</li>
+        <li><strong>HINDZINC:</strong> Jefferies raised its target to ₹750, citing an earnings boost from firm zinc and silver prices.</li>
+        <li><strong>IDBI:</strong> extended its rally to a 5th straight session on heavy volume, against the backdrop of the government's ongoing disinvestment process.</li>
+        <li><strong>GROWW:</strong> fell ~4% after two block deals worth roughly ₹1,500 Cr triggered selling pressure — the day's most actively traded stock on NSE.</li>
+        <li><strong>WELCORP:</strong> the multi‑week run behind its momentum score traces to a USD 1.8 billion US order that pushed the stock to a 52‑week high earlier in August.</li>
+      </ul>
+      <p class="datanote">SBFC, JINDALSAW, CGCL, SAIL, HINDCOPPER, MAHABANK, LICHSGFIN, ANTHEM, CHALET, SAGILITY, CDSL, VBL, PARADEEP, MOTILALOFS and MEDANTA are omitted from this list — searches turned up only volume/technical commentary (or nothing) for them, no specific catalyst, per the skill's rule against padding with "no news found" placeholders.</p>
+    </div>
+  </details>
+
+  <!-- ============ SECTION 6 (was 5) ============ -->
+  <details class="section" id="s6" open>
+    <summary><h2>§6 · Futures &amp; Options Intelligence</h2><span class="subtle">Nifty50 OI, PCR, max pain, support/resistance</span></summary>
+    <div class="section-body">
+      <div class="flagnote">⚠ Kite MCP requires an interactive login this session (link was issued but not completed), and web option‑chain tools only show live/current‑day data, not archived history for a past date. The figures below are carried from this exact date's previously‑verified research rather than freshly re‑pulled — flagging that provenance rather than presenting them as freshly sourced.</div>
+      <h3>6a. Nifty50 F&amp;O Snapshot</h3>
+      <div class="tbl-wrap">
+        <table class="sortable">
+          <thead><tr><th>Metric</th><th>Weekly (01‑Sep‑26)</th><th>Monthly (29‑Sep‑26)</th></tr></thead>
+          <tbody>
+            <tr><td>Total Call OI</td><td>15,71,96,260</td><td>4,21,25,255</td></tr>
+            <tr><td>Total Put OI</td><td>10,02,17,325</td><td>4,77,93,690</td></tr>
+            <tr><td>Put/Call Ratio (PCR)</td><td class="neg">0.64</td><td class="pos">1.14</td></tr>
+            <tr><td>Max Pain</td><td>24,250</td><td>24,400</td></tr>
+            <tr><td colspan="3" class="subtle">Nifty Futures (near‑month, NIFTY26SEPFUT): 24,366.00 vs spot 24,207.75 — premium of <strong class="pos">+158.25 pts (+0.65%)</strong>. Futures OI ≈ 1.44 crore.</td></tr>
+            <tr><td>India VIX</td><td colspan="2">~10.56 (down roughly 5% on the day)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="subtle">PCR read: Weekly PCR of 0.64 (call‑heavy, &lt;0.8 = bearish/resistance‑dominant) contrasts with a Monthly PCR of 1.14 (put‑heavy, mildly bullish) — near‑dated positioning is more cautious than medium‑dated positioning.</p>
+
+      <h3>6b. Weekly Expiry (01‑Sep‑2026) — Key Strikes</h3>
+      <div class="tbl-wrap">
+        <table class="sortable">
+          <thead><tr><th>Strike</th><th>Call OI</th><th>Call OI Chg</th><th>Put OI</th><th>Put OI Chg</th><th class="nosort">Signal</th></tr></thead>
+          <tbody>
+            <tr><td>24,300</td><td>1,41,53,490</td><td class="pos">+50,67,660</td><td>73,25,240</td><td>—</td><td>Resistance (heaviest Call OI; largest single‑day addition)</td></tr>
+            <tr><td>24,500</td><td>1,29,25,575</td><td>—</td><td>—</td><td>—</td><td>Resistance</td></tr>
+            <tr><td>24,400</td><td>1,12,64,370</td><td>—</td><td>—</td><td>—</td><td>Resistance</td></tr>
+            <tr><td>25,000</td><td>97,72,880</td><td class="pos">+36,68,405</td><td>—</td><td>—</td><td>Resistance (round‑number strike, fresh positioning)</td></tr>
+            <tr><td>24,200</td><td>78,48,685</td><td>—</td><td>79,63,475</td><td>—</td><td>Pivot — near‑equal CE/PE OI right at spot</td></tr>
+            <tr><td>24,000</td><td>—</td><td>—</td><td>67,95,230</td><td>—</td><td>Support</td></tr>
+            <tr><td>23,500</td><td>—</td><td>—</td><td>52,89,960</td><td>—</td><td>Support</td></tr>
+            <tr><td>23,800</td><td>—</td><td>—</td><td>51,14,135</td><td>—</td><td>Support</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>6c. Monthly Expiry (29‑Sep‑2026) — Key Strikes</h3>
+      <div class="tbl-wrap">
+        <table class="sortable">
+          <thead><tr><th>Strike</th><th>Call OI</th><th>Put OI</th><th class="nosort">Signal</th></tr></thead>
+          <tbody>
+            <tr><td>25,000</td><td>54,82,035</td><td>—</td><td>Resistance</td></tr>
+            <tr><td>24,500</td><td>51,89,600</td><td>46,02,585</td><td>Two‑sided — largest Put OI too; key monthly pivot</td></tr>
+            <tr><td>26,000</td><td>38,66,775</td><td>—</td><td>Resistance (far OTM, tail hedge/round‑number)</td></tr>
+            <tr><td>24,300</td><td>35,62,000</td><td>34,80,750</td><td>Two‑sided near spot</td></tr>
+            <tr><td>24,000</td><td>—</td><td>55,08,130</td><td>Support (heaviest monthly Put OI)</td></tr>
+            <tr><td>23,000</td><td>—</td><td>41,71,245</td><td>Support</td></tr>
+            <tr><td>23,500</td><td>—</td><td>37,83,520</td><td>Support</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="subtle">Monthly support/resistance (23,000–24,000 support; 25,000–26,000 resistance) sits well outside weekly's tighter 23,500–24,500 band.</p>
+
+      <h3>6d. Structural Shift Analysis</h3>
+      <ul class="bullets">
+        <li>📌 <strong>Max pain:</strong> Weekly max pain (24,250) sits almost exactly at spot (24,207.75) — typical pin‑risk setup with 5 sessions left to weekly expiry.</li>
+        <li>📌 <strong>Monthly max pain (24,400)</strong> sits ~190 points above spot — consistent with the put‑heavy monthly PCR.</li>
+        <li>🔻 <strong>Heaviest fresh positioning:</strong> Both 24,300 CE (+50.7L) and 25,000 CE (+36.7L) saw large single‑day OI additions — fresh call writing reinforcing 24,300–25,000 as the near‑term resistance shelf.</li>
+        <li>⚖️ <strong>PCR divergence:</strong> Weekly 0.64 (bearish/resistance‑heavy) vs Monthly 1.14 (bullish/put‑heavy) — "cautious this week, more constructive into September."</li>
+        <li>🎯 <strong>Concentration check:</strong> No single strike exceeds 10% of total OI on either expiry — positioning is well‑distributed.</li>
+      </ul>
+
+      <h3>6e. Next Session Outlook</h3>
+      <div class="cards">
+        <div class="card">
+          <h4>Key Levels</h4>
+          <ul>
+            <li><strong>Support:</strong> 24,200 (weekly pivot) then 24,000 (heavy weekly + monthly Put OI)</li>
+            <li><strong>Resistance:</strong> 24,300 then 24,500 (heaviest weekly/monthly Call OI)</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>Bias</h4>
+          <ul>
+            <li><span class="badge neutral">Neutral‑to‑Constructive</span> for the next session</li>
+            <li>Rationale: weekly PCR is still call‑heavy (bearish tilt) and Nifty closed 26‑Aug at its session low, but the Hormuz de‑escalation and net institutional buying (+₹6,928 Cr combined) both point the other way — a genuinely two‑sided setup rather than a clean directional call.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>Expiry / Gamma Note</h4>
+          <ul>
+            <li>Weekly expiry (01‑Sep) is about 4 trading sessions away — no immediate gamma‑pinning risk; this run's trigger rule for the dedicated §7 Expiry Intelligence section (within 2 sessions of expiry) correctly did not fire.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <div class="footer">
+    Built for Rajan · post-market-intelligence skill (Supabase‑upgraded version) · Sources: Supabase <code>nifty500data</code> project for all index/stock price, breadth and FII/DII figures; web sources below for macro, global cues, commodities and stock‑specific news; F&amp;O OI/PCR/max‑pain figures carried from prior same‑date research (Kite MCP login was not completed this session).
+  </div>
+
+  <div class="src">
+    <strong>Sources:</strong>
+    <a href="https://vizzingdata.com/market-summary-26th-aug-2026/" target="_blank">Data Vizzes — 26‑Aug market summary (Nifty/Sensex/VIX/breadth/top movers)</a>
+    <a href="https://hdfcsky.com/news/india-vix-falls-5-96-percent-as-hormuz-reopening-hopes-push-crude-lower-august-26-2026" target="_blank">HDFC Sky — India VIX / Hormuz</a>
+    <a href="https://www.goodreturns.in/news/gold-rates-silver-rates-today-26-08-2026-live-spot-gold-mcx-gold-silver-price-24k-22k-18k-gold-price-1530795.html" target="_blank">Goodreturns — Gold/Silver 26‑Aug</a>
+    <a href="https://upstox.com/commodity-market-trading/mcx-aluminium-price/" target="_blank">Upstox — MCX Aluminium</a>
+    <a href="https://upstox.com/commodity-market-trading/mcx-copper-price/" target="_blank">Upstox — MCX Copper</a>
+    <a href="https://www.business-standard.com/markets/capital-market-news/nifty-settles-below-24-250-mark-cements-shares-advance-126082600802_1.html" target="_blank">Business Standard — Nifty close corroboration</a>
+    <a href="https://www.businesstoday.in/markets/stocks/story/cyient-shares-surge-8-targets-by-mofsl-antique-choice-nuvama-post-investor-day-551377-2026-08-26" target="_blank">Business Today — Cyient</a>
+    <a href="https://www.business-standard.com/markets/capital-market-news/hindustan-zinc-share-price-rises-5-as-jefferies-sees-earnings-boost-from-favourable-zinc-silver-prices-126082600288_1.html" target="_blank">Business Standard — Hindustan Zinc</a>
+    <a href="https://www.business-standard.com/markets/news/buzzing-stock-idbi-bank-extends-rally-to-5th-day-jumps-5-on-huge-volume-126082600335_1.html" target="_blank">Business Standard — IDBI Bank</a>
+    <a href="https://www.business-standard.com/markets/news/groww-share-price-falls-nearly-4-after-two-block-deals-most-active-stock-on-nse-126082600378_1.html" target="_blank">Business Standard — Groww</a>
+    <a href="https://univest.in/blogs/welspun-corp-share-price-usd-1-8-billion-us-order-august-2026" target="_blank">Univest — Welspun Corp</a>
+  </div>
+</div>
+
+<script>
+document.querySelectorAll('table.sortable').forEach(function(table){
+  var thead = table.querySelector('thead');
+  if(!thead) return;
+  thead.querySelectorAll('th').forEach(function(th, idx){
+    if(th.classList.contains('nosort')) return;
+    th.addEventListener('click', function(){
+      var tbody = table.querySelector('tbody');
+      var rows = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+      var asc = th.getAttribute('data-asc') !== 'true';
+      thead.querySelectorAll('th').forEach(function(h){h.removeAttribute('data-asc');});
+      th.setAttribute('data-asc', asc);
+      rows.sort(function(a,b){
+        var av = a.children[idx] ? a.children[idx].innerText.trim() : '';
+        var bv = b.children[idx] ? b.children[idx].innerText.trim() : '';
+        var an = parseFloat(av.replace(/[^0-9.\-]/g,''));
+        var bn = parseFloat(bv.replace(/[^0-9.\-]/g,''));
+        var cmp;
+        if(!isNaN(an) && !isNaN(bn)){ cmp = an - bn; }
+        else { cmp = av.localeCompare(bv); }
+        return asc ? cmp : -cmp;
+      });
+      rows.forEach(function(r){ tbody.appendChild(r); });
+    });
+  });
+});
+var sections=['s0','s1','s2','s3','s4','s5','s6'];
+var links=document.querySelectorAll('.nav a');
+function spy(){
+  var sc=window.scrollY||document.documentElement.scrollTop;
+  sections.forEach(function(id){
+    var el=document.getElementById(id);
+    if(!el) return;
+    var top=el.getBoundingClientRect().top+sc-55;
+    if(sc>=top && sc<top+el.offsetHeight){
+      links.forEach(function(l){l.classList.remove('active');});
+      var lk=document.querySelector('.nav a[href="#'+id+'"]');
+      if(lk) lk.classList.add('active');
+    }
+  });
+}
+window.addEventListener('scroll',spy,{passive:true});
+links.forEach(function(l){
+  l.addEventListener('click',function(e){
+    e.preventDefault();
+    var t=document.querySelector(this.getAttribute('href'));
+    if(t) window.scrollTo({top:t.offsetTop-50,behavior:'smooth'});
+  });
+});
+</script>
+
+</body>
+</html>
