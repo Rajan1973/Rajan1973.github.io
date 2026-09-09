@@ -78,6 +78,21 @@ const displayName = (slug, title) => {
   return nice[slug] || clean(title) || slug.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
 };
 
+/* Company names + tickers covered by a review, for search.
+ * The reviews use a consistent card head:
+ *   <h3>Motherson Sumi</h3><div class="tick">NSE: MOTHERSON • Large Cap</div>
+ * plus analyst-table ticker cells. Pull both, dedupe, drop obvious noise. */
+const coversOf = (html) => {
+  const set = new Set();
+  for (const m of html.matchAll(/<h3>\s*([A-Z][^<]{1,40}?)\s*<\/h3>\s*<div class="tick">\s*(?:NSE|BSE)\s*:\s*([A-Z0-9&.\-]{2,20})/gi)) {
+    set.add(m[1].replace(/\s+/g, ' ').trim());
+    set.add(m[2].trim().toUpperCase());
+  }
+  for (const m of html.matchAll(/(?:NSE|BSE)\s*:\s*([A-Z0-9&.\-]{2,20})\b/g)) set.add(m[1].toUpperCase());
+  const NOISE = new Set(['NSE', 'BSE', 'EBITDA', 'OPM', 'CMP', 'BUY', 'SELL', 'HOLD', 'BEAT', 'MISS', 'FY27', 'FY26', 'ADD', 'PAT', 'YOY', 'QOQ', 'ROE', 'ROCE']);
+  return [...set].filter((x) => x && !NOISE.has(x)).sort();
+};
+
 if (!existsSync(SRC)) { console.error('source dir not found: ' + SRC); process.exit(1); }
 mkdirSync(OUT_DIR, { recursive: true });
 
@@ -100,6 +115,7 @@ for (const f of files) {
     path: 'sectors/' + outName,
     title: titleOf(html) || displayName(slug),
     note: NOTE.get(slug) || '',
+    covers: coversOf(html),
   });
 }
 sectors.sort((a, b) => (ORDER.has(a.id) ? ORDER.get(a.id) : 999) - (ORDER.has(b.id) ? ORDER.get(b.id) : 999) || a.name.localeCompare(b.name));
