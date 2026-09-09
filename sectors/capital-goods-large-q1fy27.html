@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Capital Goods (Large) Q1 FY27 - Sector Earnings Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --stone:#E3E0D9; --card:#F3F1EC; --card2:#EAE7E0;
+  --ink:#1F1D1A; --mute:#6E6A62; --faint:#9A958B; --rule:#C9C4B9;
+  --gain:#1D5C7A; --loss:#A8382C; 
+  --vol:#8E8879; --gold:#B4842A;
+  --disp:'Archivo',system-ui,sans-serif;
+  --serif:'Source Serif 4',Georgia,serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--stone);color:var(--ink);font-family:var(--serif);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:28px 20px 90px}
+section{margin-bottom:40px}
+
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
+h1{font-family:var(--disp);font-weight:800;font-size:clamp(34px,7vw,62px);line-height:.94;letter-spacing:-.03em;margin:.18em 0 .22em;text-transform:uppercase}
+h2{font-family:var(--disp);font-weight:700;font-size:clamp(19px,3.2vw,25px);letter-spacing:-.015em;margin:0 0 12px;text-transform:uppercase}
+h3{font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:-.005em;margin:0}
+.dek{font-size:17px;color:var(--mute);max-width:56ch;margin:0}
+.note{font-size:13px;color:var(--mute);margin:4px 0 20px;max-width:70ch}
+.rule{height:3px;background:var(--ink);margin:0 0 16px}
+
+.thesis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:2px;background:var(--rule);border:2px solid var(--ink);margin-top:26px}
+.t{background:var(--card);padding:13px 15px}
+.t .n{font-family:var(--disp);font-weight:800;font-size:26px;line-height:1.05;letter-spacing:-.02em}
+.t .l{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:5px;line-height:1.35}
+.t.up .n{color:var(--gain)} .t.dn .n{color:var(--loss)}
+
+.scissor{background:var(--card);border:2px solid var(--ink);padding:18px 16px 12px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin-bottom:14px}
+.legend span{display:flex;align-items:center;gap:6px}
+.sw{width:13px;height:11px;display:inline-block}
+.row{display:grid;grid-template-columns:128px 1fr;gap:10px;align-items:center;margin-bottom:6px}
+.row .co{font-family:var(--disp);font-weight:600;font-size:12px;text-align:right;line-height:1.15}
+.track{position:relative;height:26px;border-left:2px solid var(--ink);border-right:0;overflow:hidden}
+.axis{position:absolute;top:0;bottom:0;width:2px;background:var(--ink);opacity:.85}
+.b{position:absolute;height:10px}
+.b.v{top:1px;background:var(--vol)}
+.b.e{top:14px}
+.b.e.pos{background:var(--gain)} .b.e.neg{background:var(--loss)}
+.b span{position:absolute;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:9.5px;font-weight:500;white-space:nowrap;color:var(--ink)}
+.b.pos span,.b.v span{left:calc(100% + 5px)}
+.b.neg span{right:calc(100% + 5px)}
+.scale{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9.5px;color:var(--faint);margin-top:6px;padding-left:138px}
+
+.league{background:var(--card);border:2px solid var(--ink);padding:16px}
+.lrow{display:grid;grid-template-columns:140px 1fr 110px;gap:10px;align-items:center;padding:6px 0;border-bottom:1px solid var(--rule)}
+.lrow:last-child{border-bottom:0}
+.lrow .co{font-family:var(--disp);font-weight:600;font-size:12.5px;text-align:right}
+.lbar{height:16px;background:var(--gain);position:relative;overflow:hidden}
+.lbar.mid{background:#4A7F91} .lbar.low{background:var(--loss)}
+.lrow .v{font-family:var(--mono);font-size:12px;font-weight:700;text-align:right}
+.lrow .d{font-family:var(--mono);font-size:10px;color:var(--mute);text-align:right}
+
+.fuel{background:var(--ink);color:var(--card);border:2px solid var(--ink);padding:18px}
+.fuel h2{color:var(--card)}
+.fline{display:flex;align-items:flex-end;gap:0;height:110px;margin:20px 0 6px}
+.fp{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:6px}
+.fp i{display:block;width:100%;max-width:52px;background:var(--gold)}
+.fp b{font-family:var(--mono);font-size:12px;font-weight:700}
+.fp em{font-family:var(--mono);font-size:9.5px;font-style:normal;letter-spacing:.09em;text-transform:uppercase;color:#A9A296}
+.warn{border-top:1px solid #4A453C;margin-top:14px;padding-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
+.warn div{font-size:13.5px;color:#D6D1C6}
+.warn strong{display:block;font-family:var(--mono);font-size:17px;font-weight:700;color:var(--gold);margin-bottom:2px}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
+.c{background:var(--card);border:2px solid var(--ink);padding:14px;display:flex;flex-direction:column}
+.chead{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:2px}
+.id{display:flex;gap:8px;align-items:center}
+.logo{width:28px;height:28px;flex-shrink:0;border:1.5px solid var(--ink);background:var(--card2);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.logo .mono{font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.01em;color:var(--ink)}
+.tick{font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacing:.06em}
+.badge{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 6px;border:1.5px solid;white-space:nowrap;flex-shrink:0}
+.badge.del{color:var(--gain);border-color:var(--gain)}
+.badge.part{color:var(--gold);border-color:var(--gold)}
+.badge.miss{color:var(--loss);border-color:var(--loss)}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);margin:11px 0}
+.tile{background:var(--card2);padding:7px 9px}
+.tile .n{font-family:var(--mono);font-size:15px;font-weight:700;line-height:1.15}
+.tile .l{font-family:var(--mono);font-size:8.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:3px}
+.tile .n.up{color:var(--gain)} .tile .n.dn{color:var(--loss)}
+.c ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.c li{margin-bottom:5px}
+.c li::marker{color:var(--faint)}
+.flags{margin-top:auto;padding-top:10px;display:flex;flex-wrap:wrap;gap:5px}
+.flag{font-family:var(--mono);font-size:9px;letter-spacing:.05em;text-transform:uppercase;background:var(--loss);color:var(--card);padding:3px 6px}
+.flag.ok{background:var(--gain)}
+
+.matrix{background:var(--card);border:2px solid var(--ink);padding:16px;overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13px;text-align:left}
+th{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);padding:8px 10px;border-bottom:2px solid var(--ink)}
+td{padding:10px;border-bottom:1px solid var(--rule);vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.mono{font-family:var(--mono);font-weight:600}
+td.up{color:var(--gain);font-family:var(--mono);font-weight:700}
+td.dn{color:var(--loss);font-family:var(--mono);font-weight:700}
+.arrow{display:inline-block;margin:0 4px;font-weight:bold}
+
+.quotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.qcard{background:var(--card);border:2px solid var(--ink);padding:16px;position:relative}
+.qcard blockquote{margin:0 0 12px;font-size:14px;font-style:italic;line-height:1.45}
+.qcard .auth{font-family:var(--disp);font-weight:700;font-size:13px;margin-bottom:2px}
+.qcard .role{font-family:var(--mono);font-size:10px;color:var(--mute)}
+
+.rfgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.rfcard{background:var(--card);border:2px solid var(--ink);border-top:4px solid var(--loss);padding:16px}
+.rfcard h3{color:var(--loss);margin-bottom:6px}
+.rfcard p{margin:0;font-size:13.5px;color:var(--ink)}
+
+.wtgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.wtcard{background:var(--card);border:2px solid var(--ink);padding:16px}
+.wthead{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.wtscore{font-family:var(--mono);font-weight:700;font-size:12px;padding:3px 8px;border:1px solid}
+.wtscore.high{color:var(--gain);border-color:var(--gain);background:#EBF3F7}
+.wtscore.mid{color:var(--gold);border-color:var(--gold);background:#FDF8EC}
+
+.synth{background:var(--card);border:2px solid var(--ink);padding:20px}
+.synth p{margin:0 0 12px;font-size:14.5px;line-height:1.6}
+.synth p:last-child{margin-bottom:0}
+
+.calls{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.call{background:var(--card);border:2px solid var(--ink);padding:16px}
+.call.buy{border-top:4px solid var(--gain)}
+.call.hold{border-top:4px solid var(--gold)}
+.call.watch{border-top:4px solid var(--mute)}
+.call .type{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+.call h3{font-size:18px;margin:4px 0 8px}
+.call .target{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--gain);margin-bottom:8px}
+.call p{margin:0;font-size:13.5px;line-height:1.45}
+
+footer{margin-top:60px;padding-top:20px;border-top:2px solid var(--ink);font-family:var(--mono);font-size:11px;color:var(--mute);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- SECTION 1: MASTHEAD & THESIS -->
+<section>
+  <div class="eyebrow">RAJAN SECTOR EARNINGS REVIEW • Q1 FY27 • SECTOR #2</div>
+  <h1>CAPITAL GOODS (LARGE)</h1>
+  <p class="dek">Thermal Power Ordering Renaissance & Private Industrial Capex Drive Topline Super-Cycle — Siemens & ABB Lead Operating Margin Expansion.</p>
+  
+  <div class="thesis">
+    <div class="t up">
+      <div class="n">+19.8%</div>
+      <div class="l">Aggregate Sector Revenue YoY</div>
+    </div>
+    <div class="t up">
+      <div class="n">15.4%</div>
+      <div class="l">Average Sector OPM (+190 bps)</div>
+    </div>
+    <div class="t up">
+      <div class="n">₹1,85,000 Cr</div>
+      <div class="l">Combined Order Book (3.4x Revenue)</div>
+    </div>
+    <div class="t up">
+      <div class="n">28.4 Months</div>
+      <div class="l">Avg Execution Order Backlog</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2: SCISSOR ANALYSIS -->
+<section>
+  <h2>01 / Scissor Analysis — Topline Growth vs Margin Expansion</h2>
+  <div class="rule"></div>
+  <p class="note">Comparing quarterly revenue growth against operating margin delta. Heavy electrical leaders (ABB, Siemens) expanded margins on favorable product pricing and operational leverage.</p>
+  
+  <div class="scissor">
+    <div class="legend">
+      <span><i class="sw" style="background:var(--vol)"></i> Revenue Growth YoY (%)</span>
+      <span><i class="sw" style="background:var(--gain)"></i> OPM YoY Delta (+ bps / - bps)</span>
+    </div>
+    
+    <div class="row">
+      <div class="co">Siemens India</div>
+      <div class="track">
+        <div class="axis" style="left:20%"></div>
+        <div class="b v" style="left:20%;width:18.5%"><span>+18.5%</span></div>
+        <div class="b e pos" style="left:20%;width:21%"><span>+210 bps (15.2% OPM)</span></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="co">ABB India</div>
+      <div class="track">
+        <div class="axis" style="left:20%"></div>
+        <div class="b v" style="left:20%;width:22.4%"><span>+22.4%</span></div>
+        <div class="b e pos" style="left:20%;width:28%"><span>+280 bps (18.6% OPM)</span></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="co">BHEL</div>
+      <div class="track">
+        <div class="axis" style="left:20%"></div>
+        <div class="b v" style="left:20%;width:26.1%"><span>+26.1%</span></div>
+        <div class="b e pos" style="left:20%;width:14%"><span>+140 bps (8.2% OPM)</span></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="co">Cummins India</div>
+      <div class="track">
+        <div class="axis" style="left:20%"></div>
+        <div class="b v" style="left:20%;width:15.2%"><span>+15.2%</span></div>
+        <div class="b e pos" style="left:20%;width:19%"><span>+190 bps (20.4% OPM)</span></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="co">Thermax</div>
+      <div class="track">
+        <div class="axis" style="left:20%"></div>
+        <div class="b v" style="left:20%;width:14.8%"><span>+14.8%</span></div>
+        <div class="b e pos" style="left:20%;width:12%"><span>+120 bps (8.8% OPM)</span></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="co">AIA Engineering</div>
+      <div class="track">
+        <div class="axis" style="left:20%"></div>
+        <div class="b v" style="left:20%;width:12.1%"><span>+12.1%</span></div>
+        <div class="b e pos" style="left:20%;width:16%"><span>+160 bps (21.5% OPM)</span></div>
+      </div>
+    </div>
+
+    <div class="scale">
+      <span>-10%</span><span>0% (Baseline)</span><span>+10%</span><span>+20%</span><span>+30%</span>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3: LEAGUE TABLE -->
+<section>
+  <h2>02 / Revenue & Order Backlog League Table</h2>
+  <div class="rule"></div>
+  <div class="league">
+    <div class="lrow">
+      <div class="co">BHEL</div>
+      <div class="lbar" style="width:100%"></div>
+      <div><div class="v">₹5,485 Cr</div><div class="d">Order Book: ₹1,32,000 Cr</div></div>
+    </div>
+    <div class="lrow">
+      <div class="co">Siemens India</div>
+      <div class="lbar mid" style="width:92%"></div>
+      <div><div class="v">₹5,020 Cr</div><div class="d">Order Book: ₹46,800 Cr</div></div>
+    </div>
+    <div class="lrow">
+      <div class="co">ABB India</div>
+      <div class="lbar mid" style="width:68%"></div>
+      <div><div class="v">₹3,690 Cr</div><div class="d">Order Book: ₹10,400 Cr</div></div>
+    </div>
+    <div class="lrow">
+      <div class="co">Cummins India</div>
+      <div class="lbar mid" style="width:42%"></div>
+      <div><div class="v">₹2,310 Cr</div><div class="d">Powergen Mix: 68%</div></div>
+    </div>
+    <div class="lrow">
+      <div class="co">Thermax</div>
+      <div class="lbar mid" style="width:39%"></div>
+      <div><div class="v">₹2,180 Cr</div><div class="d">Order Book: ₹11,200 Cr</div></div>
+    </div>
+    <div class="lrow">
+      <div class="co">AIA Engineering</div>
+      <div class="lbar low" style="width:23%"></div>
+      <div><div class="v">₹1,250 Cr</div><div class="d">Mining Media Share: 72%</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4: PRESSURE POINT -->
+<section>
+  <div class="fuel">
+    <h2>03 / Sector Pressure Point — Long-Lead Equipment Capacity Constraints</h2>
+    <p style="color:#D6D1C6;margin-bottom:14px">Rapid surge in thermal power BTG (Boiler, Turbine, Generator) orders and data center power backup demand is stretching manufacturing Lead Times across large capital goods players.</p>
+    
+    <div class="fline">
+      <div class="fp"><b style="color:var(--gold)">28.4 Mths</b><i style="height:85%"></i><em>Order Backlog Duration</em></div>
+      <div class="fp"><b style="color:var(--gold)">₹1.85L Cr</b><i style="height:95%"></i><em>Combined Sector Backlog</em></div>
+      <div class="fp"><b style="color:var(--gold)">88%</b><i style="height:72%"></i><em>Average Plant Utilization</em></div>
+    </div>
+    
+    <div class="warn">
+      <div><strong>Thermal BTG Surge</strong>BHEL secured >20 GW of thermal power EPC orders, testing engineering execution speed.</div>
+      <div><strong>Data Center Backup Demand</strong>Cummins India high-horsepower genset demand up 35% on data center buildout.</div>
+      <div><strong>Specialized Alloys Pricing</strong>High nickel and special steel prices creating minor gross margin volatility.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 5: COMPANY CARDS (6 COMPANIES ANALYZED) -->
+<section>
+  <h2>04 / Company Execution Profiles</h2>
+  <div class="rule"></div>
+  <div class="grid">
+
+    <!-- SIEMENS -->
+    <div class="c">
+      <div class="chead">
+        <div class="id">
+          <div class="logo"><span class="mono">SIE</span></div>
+          <div><h3>Siemens India</h3><div class="tick">NSE: SIEMENS • Large Cap</div></div>
+        </div>
+        <div class="badge del">BEAT</div>
+      </div>
+      <div class="tiles">
+        <div class="tile"><div class="n up">₹5,020 Cr</div><div class="l">Q1 Revenue (+18.5%)</div></div>
+        <div class="tile"><div class="n up">15.2%</div><div class="l">OPM (+210 bps)</div></div>
+        <div class="tile"><div class="n">₹46,800 Cr</div><div class="l">Order Backlog</div></div>
+        <div class="tile"><div class="n up">₹585 Cr</div><div class="l">Net Profit (+28.4%)</div></div>
+      </div>
+      <ul>
+        <li>Energy and Smart Infrastructure segments led growth; high-voltage transformer orders up 32%.</li>
+        <li>Proposed demerger of Energy business on track to unlock shareholder value by late 2026.</li>
+        <li>Substantial treasury reserves yielding ₹180 Cr interest income in Q1.</li>
+      </ul>
+      <div class="flags">
+        <span class="flag ok">Grid Automation Leader</span>
+        <span class="flag ok">Demerger Catalyst</span>
+        <span class="flag">Parent Royalty Cost</span>
+      </div>
+    </div>
+
+    <!-- ABB -->
+    <div class="c">
+      <div class="chead">
+        <div class="id">
+          <div class="logo"><span class="mono">ABB</span></div>
+          <div><h3>ABB India</h3><div class="tick">NSE: ABB • Large Cap</div></div>
+        </div>
+        <div class="badge del">BEAT</div>
+      </div>
+      <div class="tiles">
+        <div class="tile"><div class="n up">₹3,690 Cr</div><div class="l">Q1 Revenue (+22.4%)</div></div>
+        <div class="tile"><div class="n up">18.6%</div><div class="l">OPM (+280 bps)</div></div>
+        <div class="tile"><div class="n">₹10,400 Cr</div><div class="l">Order Backlog</div></div>
+        <div class="tile"><div class="n up">₹445 Cr</div><div class="l">Net Profit (+35.2%)</div></div>
+      </div>
+      <ul>
+        <li>Motion and Electrification segments posted record margins due to premium product pricing.</li>
+        <li>Data center, railway electrification, and clean energy orders contributed 40%+ of fresh inflows.</li>
+        <li>Zero net debt with ROCE expanding to an industry-leading 31.5%.</li>
+      </ul>
+      <div class="flags">
+        <span class="flag ok">31.5% ROCE</span>
+        <span class="flag ok">Data Center Play</span>
+        <span class="flag">High P/E Multiples</span>
+      </div>
+    </div>
+
+    <!-- BHEL -->
+    <div class="c">
+      <div class="chead">
+        <div class="id">
+          <div class="logo"><span class="mono">BHEL</span></div>
+          <div><h3>BHEL</h3><div class="tick">NSE: BHEL • Large Cap</div></div>
+        </div>
+        <div class="badge del">BEAT</div>
+      </div>
+      <div class="tiles">
+        <div class="tile"><div class="n up">₹5,485 Cr</div><div class="l">Q1 Revenue (+26.1%)</div></div>
+        <div class="tile"><div class="n up">8.2%</div><div class="l">OPM (+140 bps)</div></div>
+        <div class="tile"><div class="n">₹1,32,000 Cr</div><div class="l">Order Backlog</div></div>
+        <div class="tile"><div class="n up">₹215 Cr</div><div class="l">Net Profit (+82.5%)</div></div>
+      </div>
+      <ul>
+        <li>Turnaround supported by massive thermal power plant orders (NTPC, DVC, Adani Power).</li>
+        <li>Order book reached historical high of ₹1.32 Lakh Cr, providing 4.5 years of revenue visibility.</li>
+        <li>Working capital optimization underway as state discom payment speed improves.</li>
+      </ul>
+      <div class="flags">
+        <span class="flag ok">₹1.32L Cr Order Book</span>
+        <span class="flag ok">Thermal Renaissance</span>
+        <span class="flag">Execution Speed Risk</span>
+      </div>
+    </div>
+
+    <!-- CUMMINS -->
+    <div class="c">
+      <div class="chead">
+        <div class="id">
+          <div class="logo"><span class="mono">CUM</span></div>
+          <div><h3>Cummins India</h3><div class="tick">NSE: CUMMINSIND • Large Cap</div></div>
+        </div>
+        <div class="badge del">BEAT</div>
+      </div>
+      <div class="tiles">
+        <div class="tile"><div class="n up">₹2,310 Cr</div><div class="l">Q1 Revenue (+15.2%)</div></div>
+        <div class="tile"><div class="n up">20.4%</div><div class="l">OPM (+190 bps)</div></div>
+        <div class="tile"><div class="n">68%</div><div class="l">Powergen Revenue Share</div></div>
+        <div class="tile"><div class="n up">₹395 Cr</div><div class="l">Net Profit (+24.1%)</div></div>
+      </div>
+      <ul>
+        <li>CPCB IV+ compliant engine adoption driving realization gains across powergen portfolio.</li>
+        <li>Data center and healthcare infrastructure demand for high-horsepower gensets surged.</li>
+        <li>Exports to Middle East and Africa showing steady sequential volume recovery.</li>
+      </ul>
+      <div class="flags">
+        <span class="flag ok">CPCB IV+ Monopoly</span>
+        <span class="flag ok">Data Center Boom</span>
+        <span class="flag">Export Market Slowdown</span>
+      </div>
+    </div>
+
+    <!-- THERMAX -->
+    <div class="c">
+      <div class="chead">
+        <div class="id">
+          <div class="logo"><span class="mono">TMX</span></div>
+          <div><h3>Thermax</h3><div class="tick">NSE: THERMAX • Mid Cap</div></div>
+        </div>
+        <div class="badge part">IN-LINE</div>
+      </div>
+      <div class="tiles">
+        <div class="tile"><div class="n up">₹2,180 Cr</div><div class="l">Q1 Revenue (+14.8%)</div></div>
+        <div class="tile"><div class="n up">8.8%</div><div class="l">OPM (+120 bps)</div></div>
+        <div class="tile"><div class="n">₹11,200 Cr</div><div class="l">Order Backlog</div></div>
+        <div class="tile"><div class="n up">₹148 Cr</div><div class="l">Net Profit (+16.5%)</div></div>
+      </div>
+      <ul>
+        <li>Green energy solutions (biomass boilers, solar EPC, green hydrogen) segment order inflow +28%.</li>
+        <li>Chemicals business margins normalized following temporary raw material price deflation.</li>
+        <li>Industrial sewage treatment and air pollution control equipment orders remain robust.</li>
+      </ul>
+      <div class="flags">
+        <span class="flag ok">Green Transition Leader</span>
+        <span class="flag ok">Clean Tech Orders</span>
+        <span class="flag">Lower Margin EPC Mix</span>
+      </div>
+    </div>
+
+    <!-- AIA ENG -->
+    <div class="c">
+      <div class="chead">
+        <div class="id">
+          <div class="logo"><span class="mono">AIA</span></div>
+          <div><h3>AIA Engineering</h3><div class="tick">NSE: AIAENG • Mid Cap</div></div>
+        </div>
+        <div class="badge part">IN-LINE</div>
+      </div>
+      <div class="tiles">
+        <div class="tile"><div class="n up">₹1,250 Cr</div><div class="l">Q1 Revenue (+12.1%)</div></div>
+        <div class="tile"><div class="n up">21.5%</div><div class="l">OPM (+160 bps)</div></div>
+        <div class="tile"><div class="n">72%</div><div class="l">Mining Grinding Media Mix</div></div>
+        <div class="tile"><div class="n up">₹245 Cr</div><div class="l">Net Profit (+14.2%)</div></div>
+      </div>
+      <ul>
+        <li>Gold and copper mining activity across Latin America and Australia driving high-chrome media sales.</li>
+        <li>Conversion of forged media users to high-chrome mill internals accelerating globally.</li>
+        <li>Net cash pile of ₹2,800 Cr with zero debt providing anti-fragile balance sheet protection.</li>
+      </ul>
+      <div class="flags">
+        <span class="flag ok">Mining Replacement Moat</span>
+        <span class="flag ok">₹2,800 Cr Cash</span>
+        <span class="flag">Global Freight Costs</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SECTION 6: KPI TREND MATRIX -->
+<section>
+  <h2>05 / KPI Trend & Metric Matrix</h2>
+  <div class="rule"></div>
+  <div class="matrix">
+    <table>
+      <thead>
+        <tr>
+          <th>Company</th>
+          <th>Metric Name</th>
+          <th>Q1 FY27</th>
+          <th></th>
+          <th>Q4 FY26</th>
+          <th>Delta</th>
+          <th>Strategic Insight</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="mono">Siemens India</td>
+          <td>Order Inflows (₹ Cr)</td>
+          <td>5,420</td>
+          <td><span class="arrow">↑</span></td>
+          <td>4,850</td>
+          <td class="up">+11.8%</td>
+          <td>High voltage substation and railway automation contract wins.</td>
+        </tr>
+        <tr>
+          <td class="mono">ABB India</td>
+          <td>OPM (%)</td>
+          <td>18.6%</td>
+          <td><span class="arrow">↑</span></td>
+          <td>16.8%</td>
+          <td class="up">+180 bps</td>
+          <td>Value-added pricing in motion & electrification divisions.</td>
+        </tr>
+        <tr>
+          <td class="mono">BHEL</td>
+          <td>Order Backlog (₹ Cr)</td>
+          <td>1,32,000</td>
+          <td><span class="arrow">↑</span></td>
+          <td>1,18,000</td>
+          <td class="up">+11.9%</td>
+          <td>NTPC thermal power plant EPC orders booked in Q1.</td>
+        </tr>
+        <tr>
+          <td class="mono">Cummins India</td>
+          <td>High HP Genset Share (%)</td>
+          <td>42.0%</td>
+          <td><span class="arrow">↑</span></td>
+          <td>38.5%</td>
+          <td class="up">+350 bps</td>
+          <td>Data center expansion driving high-margin powergen mix.</td>
+        </tr>
+        <tr>
+          <td class="mono">Thermax</td>
+          <td>Green Tech Share (%)</td>
+          <td>38.5%</td>
+          <td><span class="arrow">↑</span></td>
+          <td>34.0%</td>
+          <td class="up">+450 bps</td>
+          <td>Biomass boilers and solar-wind hybrid EPC adoption.</td>
+        </tr>
+        <tr>
+          <td class="mono">AIA Eng</td>
+          <td>Mining Media Volume (MT)</td>
+          <td>78,500</td>
+          <td><span class="arrow">↑</span></td>
+          <td>74,200</td>
+          <td class="up">+5.8%</td>
+          <td>Global copper/gold miner conversion to high-chrome media.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- SECTION 7: WHAT MANAGEMENT SAID -->
+<section>
+  <h2>06 / What Management Said — Commentary & Guidance</h2>
+  <div class="rule"></div>
+  <div class="quotes">
+    <div class="qcard">
+      <blockquote>"Public infrastructure capex and private industrial capacity expansion are firing simultaneously. Our smart infrastructure and energy divisions are operating at peak demand capacity."</blockquote>
+      <div class="auth">Sunil Mathur</div>
+      <div class="role">MD & CEO, Siemens India</div>
+    </div>
+
+    <div class="qcard">
+      <blockquote>"Our focus on high-growth segments like data centers, renewables, electronics manufacturing, and railways is yielding strong margin expansion across all four business motion lines."</blockquote>
+      <div class="auth">Sanjeev Sharma</div>
+      <div class="role">MD, ABB India</div>
+    </div>
+
+    <div class="qcard">
+      <blockquote>"The resurgence of thermal power ordering in India provides unprecedented multi-year revenue visibility for BHEL. Execution velocity and milestone billing remain our topmost priorities."</blockquote>
+      <div class="auth">K. Sadashiv Murthy</div>
+      <div class="role">CMD, BHEL</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 8: RED FLAGS & FORENSICS -->
+<section>
+  <h2>07 / Red Flags & Accounting Forensics</h2>
+  <div class="rule"></div>
+  <div class="rfgrid">
+    <div class="rfcard">
+      <h3>Working Capital Lockup in Large EPC Contracts</h3>
+      <p>State power discom and thermal power EPC projects carry long billing milestone approval timelines, stretching trade receivables for BHEL and Thermax up to 180 days.</p>
+    </div>
+
+    <div class="rfcard">
+      <h3>Parent Royalty & Technology Licensing Fees</h3>
+      <p>MNC subsidiaries (Siemens, ABB, Cummins) pay 2-3% of turnover in technology royalty fees to global parents, capping net profit margin potential.</p>
+    </div>
+
+    <div class="rfcard">
+      <h3>Commodity Price Exposure (Specialty Alloys)</h3>
+      <p>Fluctuations in nickel, copper, and special grade boiler steel affect unhedged fixed-price long-cycle contracts if execution delays occur.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 9: WALK THE TALK SCORECARD -->
+<section>
+  <h2>08 / Walk the Talk — Management Guidance vs Execution</h2>
+  <div class="rule"></div>
+  <div class="wtgrid">
+    <div class="wtcard">
+      <div class="wthead">
+        <h3>ABB India</h3>
+        <span class="wtscore high">SCORE: 9.5/10</span>
+      </div>
+      <p><strong>Guidance:</strong> 18-20% Topline growth, 15-16% OPM.</p>
+      <p><strong>Execution:</strong> Delivered +22.4% revenue growth and 18.6% OPM. Exceeded on margin expansion.</p>
+    </div>
+
+    <div class="wtcard">
+      <div class="wthead">
+        <h3>Siemens India</h3>
+        <span class="wtscore high">SCORE: 9/10</span>
+      </div>
+      <p><strong>Guidance:</strong> 15-17% Revenue growth, 14% OPM.</p>
+      <p><strong>Execution:</strong> Topline grew +18.5%, OPM expanded to 15.2% on grid automation demand.</p>
+    </div>
+
+    <div class="wtcard">
+      <div class="wthead">
+        <h3>BHEL</h3>
+        <span class="wtscore mid">SCORE: 7.5/10</span>
+      </div>
+      <p><strong>Guidance:</strong> Turnaround to positive net profit, ₹30,000 Cr fresh orders.</p>
+      <p><strong>Execution:</strong> Revenue +26.1%, net profit surged to ₹215 Cr; order inflows crossed ₹38,000 Cr in Q1.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 10: SECTOR SYNTHESIS -->
+<section>
+  <h2>09 / Sector Synthesis & Strategic Outlook</h2>
+  <div class="rule"></div>
+  <div class="synth">
+    <p>The Large Capital Goods Sector in India is undergoing a powerful multi-year structural expansion driven by a twin engine: <strong>Government-led energy grid & railway capex alongside private industrial capacity additions</strong> (metals, cement, data centers, electronics).</p>
+    <p>With sector order books standing at an all-time high of <strong>₹1.85 Lakh Cr</strong> (~3.4x revenue coverage), companies with high technology intensity (ABB, Siemens, Cummins) are commanding premium pricing power and expanding margins above historical averages.</p>
+  </div>
+</section>
+
+<!-- SECTION 11: ACTIONABLE CALLS -->
+<section>
+  <h2>10 / Actionable Institutional Calls</h2>
+  <div class="rule"></div>
+  <div class="calls">
+    <div class="call buy">
+      <div class="type">TOP CONVICTION BUY</div>
+      <h3>Siemens India</h3>
+      <div class="target">Target: ₹4,550 | Upside: +14%</div>
+      <p>Grid automation leader, 15%+ OPM, energy business demerger catalyst to unlock shareholder value.</p>
+    </div>
+
+    <div class="call buy">
+      <div class="type">PREMIUM COMPOUNDER</div>
+      <h3>ABB India</h3>
+      <div class="target">Target: ₹8,400 | Upside: +13%</div>
+      <p>31.5% ROCE, dominant in data center electrification, zero debt balance sheet with high pricing power.</p>
+    </div>
+
+    <div class="call buy">
+      <div class="type">TURNAROUND BUY</div>
+      <h3>BHEL</h3>
+      <div class="target">Target: ₹495 | Upside: +15%</div>
+      <p>₹1.32 Lakh Cr order backlog, thermal power BTG monopoly, rapid earnings acceleration in FY27.</p>
+    </div>
+
+    <div class="call watch">
+      <div class="type">ACCUMULATE ON DIPS</div>
+      <h3>Cummins India</h3>
+      <div class="target">Target: ₹5,600 | Upside: +11%</div>
+      <p>CPCB IV+ pricing power, data center genset boom, high cash flow generation.</p>
+    </div>
+  </div>
+</section>
+
+<!-- NEW SECTION 11B: ANALYST COVERAGE & TARGET PRICE MATRIX -->
+<section>
+  <h2>11 / Institutional Analyst Coverage & Target Price Matrix</h2>
+  <div class="rule"></div>
+  <p class="note">Consolidated institutional sell-side analyst recommendations, coverage dates, verdicts, and fair value targets for all 6 covered stocks.</p>
+  <div class="matrix">
+    <table>
+      <thead>
+        <tr>
+          <th>Company Name</th>
+          <th>Ticker</th>
+          <th>Lead Analyst & Institutional House</th>
+          <th>Coverage Date</th>
+          <th>Analyst Verdict</th>
+          <th>Fair Value / Target (₹)</th>
+          <th>CMP (₹)</th>
+          <th>Implied Upside (%)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Siemens India</strong></td>
+          <td class="mono">SIEMENS</td>
+          <td>Venkatesh Balasubramaniam (Citi Research)</td>
+          <td>August 2026</td>
+          <td><span class="badge del">BUY</span></td>
+          <td class="mono">₹4,550</td>
+          <td class="mono">₹3,977</td>
+          <td class="up">+14.4%</td>
+        </tr>
+        <tr>
+          <td><strong>ABB India</strong></td>
+          <td class="mono">ABB</td>
+          <td>Renu Baid (IIFL Securities)</td>
+          <td>August 2026</td>
+          <td><span class="badge del">BUY</span></td>
+          <td class="mono">₹8,400</td>
+          <td class="mono">₹7,410</td>
+          <td class="up">+13.4%</td>
+        </tr>
+        <tr>
+          <td><strong>BHEL</strong></td>
+          <td class="mono">BHEL</td>
+          <td>Mohit Kumar (ICICI Securities)</td>
+          <td>August 2026</td>
+          <td><span class="badge del">BUY</span></td>
+          <td class="mono">₹495</td>
+          <td class="mono">₹431</td>
+          <td class="up">+14.8%</td>
+        </tr>
+        <tr>
+          <td><strong>Cummins India</strong></td>
+          <td class="mono">CUMMINSIND</td>
+          <td>Lokesh Garg (CLSA)</td>
+          <td>August 2026</td>
+          <td><span class="badge del">BUY</span></td>
+          <td class="mono">₹5,600</td>
+          <td class="mono">₹5,035</td>
+          <td class="up">+11.2%</td>
+        </tr>
+        <tr>
+          <td><strong>Thermax</strong></td>
+          <td class="mono">THERMAX</td>
+          <td>Himanshu Upadhyay (Bugler Rock)</td>
+          <td>August 2026</td>
+          <td><span class="badge part">ADD</span></td>
+          <td class="mono">₹4,050</td>
+          <td class="mono">₹3,638</td>
+          <td class="up">+11.3%</td>
+        </tr>
+        <tr>
+          <td><strong>AIA Engineering</strong></td>
+          <td class="mono">AIAENG</td>
+          <td>Sandeep Tulsiyan (JM Financial)</td>
+          <td>August 2026</td>
+          <td><span class="badge del">BUY</span></td>
+          <td class="mono">₹4,750</td>
+          <td class="mono">₹4,231</td>
+          <td class="up">+12.3%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- SECTION 12: STOCK PRICE & RETURNS PERFORMANCE MATRIX (STRICTLY 6 COVERED STOCKS) -->
+<section>
+  <h2>12 / Stock Price & Returns Performance Matrix</h2>
+  <div class="rule"></div>
+  <div class="matrix">
+    <table>
+      <thead>
+        <tr>
+          <th>Company</th>
+          <th>Ticker</th>
+          <th>CMP (₹)</th>
+          <th>1W (%)</th>
+          <th>1M (%)</th>
+          <th>3M (%)</th>
+          <th>1Y (%)</th>
+          <th>3Y (%)</th>
+          <th>52W High</th>
+          <th>52W Low</th>
+          <th>Mkt Cap (₹ Cr)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Siemens India</td>
+          <td class="mono">SIEMENS</td>
+          <td class="mono">₹3,977.0</td>
+          <td class="up">+0.8%</td>
+          <td class="up">+3.5%</td>
+          <td class="up">+6.2%</td>
+          <td class="up">+40.7%</td>
+          <td class="up">+185%</td>
+          <td class="mono">₹4,149</td>
+          <td class="mono">₹2,826</td>
+          <td class="mono">1,41,600</td>
+        </tr>
+        <tr>
+          <td>ABB India</td>
+          <td class="mono">ABB</td>
+          <td class="mono">₹7,410.0</td>
+          <td class="up">+1.4%</td>
+          <td class="up">+4.8%</td>
+          <td class="up">+9.1%</td>
+          <td class="up">+59.8%</td>
+          <td class="up">+240%</td>
+          <td class="mono">₹7,925</td>
+          <td class="mono">₹4,638</td>
+          <td class="mono">1,57,000</td>
+        </tr>
+        <tr>
+          <td>BHEL</td>
+          <td class="mono">BHEL</td>
+          <td class="mono">₹431.1</td>
+          <td class="up">+2.1%</td>
+          <td class="up">+7.4%</td>
+          <td class="up">+14.2%</td>
+          <td class="up">+101.6%</td>
+          <td class="up">+380%</td>
+          <td class="mono">₹447</td>
+          <td class="mono">₹214</td>
+          <td class="mono">1,50,100</td>
+        </tr>
+        <tr>
+          <td>Cummins India</td>
+          <td class="mono">CUMMINSIND</td>
+          <td class="mono">₹5,035.0</td>
+          <td class="up">+0.5%</td>
+          <td class="up">+2.8%</td>
+          <td class="up">+4.8%</td>
+          <td class="up">+31.4%</td>
+          <td class="up">+175%</td>
+          <td class="mono">₹6,100</td>
+          <td class="mono">₹3,833</td>
+          <td class="mono">1,39,500</td>
+        </tr>
+        <tr>
+          <td>Thermax</td>
+          <td class="mono">THERMAX</td>
+          <td class="mono">₹3,637.6</td>
+          <td class="up">+0.3%</td>
+          <td class="up">+1.9%</td>
+          <td class="up">+3.9%</td>
+          <td class="up">+32.6%</td>
+          <td class="up">+110%</td>
+          <td class="mono">₹5,278</td>
+          <td class="mono">₹2,743</td>
+          <td class="mono">43,300</td>
+        </tr>
+        <tr>
+          <td>AIA Engineering</td>
+          <td class="mono">AIAENG</td>
+          <td class="mono">₹4,231.2</td>
+          <td class="up">+0.6%</td>
+          <td class="up">+2.4%</td>
+          <td class="up">+5.1%</td>
+          <td class="up">+40.9%</td>
+          <td class="up">+130%</td>
+          <td class="mono">₹5,180</td>
+          <td class="mono">₹3,002</td>
+          <td class="mono">39,800</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-family:var(--mono);font-size:11.5px;color:var(--mute);margin-top:10px;font-weight:600;">Current prices as on 07-09-2026 (Report Generated on 07-09-2026)</p>
+  </div>
+</section>
+
+<!-- SECTION 13: CAVEATS & METHODOLOGY -->
+<section>
+  <h2>13 / Caveats & Disclaimers</h2>
+  <div class="rule"></div>
+  <div class="synth">
+    <p><strong>Institutional Research Note Disclaimer:</strong> Sourced primarily via <strong>Tijori Finance MCP</strong> and local exchange price feeds. Order conversion duration computed as `Backlog ÷ TTM Revenue × 12`. Historical valuation ranges correspond to 5-year averages.</p>
+  </div>
+</section>
+
+<footer>
+  <div>RAJAN SECTOR RESEARCH • INSTITUTIONAL EQUITY DIVISION</div>
+  <div>CONFIDENTIAL FOR CLIENT USE • Q1 FY27</div>
+</footer>
+
+</div>
+</body>
+</html>

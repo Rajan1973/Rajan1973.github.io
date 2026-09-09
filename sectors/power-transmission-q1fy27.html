@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Power Transmission Q1 FY27 - Sector Earnings Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --stone:#E3E0D9; --card:#F3F1EC; --card2:#EAE7E0;
+  --ink:#1F1D1A; --mute:#6E6A62; --faint:#9A958B; --rule:#C9C4B9;
+  --gain:#1D5C7A; --loss:#A8382C; 
+  --vol:#8E8879; --gold:#B4842A;
+  --disp:'Archivo',system-ui,sans-serif;
+  --serif:'Source Serif 4',Georgia,serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--stone);color:var(--ink);font-family:var(--serif);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:28px 20px 90px}
+section{margin-bottom:40px}
+
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
+h1{font-family:var(--disp);font-weight:800;font-size:clamp(34px,7vw,62px);line-height:.94;letter-spacing:-.03em;margin:.18em 0 .22em;text-transform:uppercase}
+h2{font-family:var(--disp);font-weight:700;font-size:clamp(19px,3.2vw,25px);letter-spacing:-.015em;margin:0 0 12px;text-transform:uppercase}
+h3{font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:-.005em;margin:0}
+.dek{font-size:17px;color:var(--mute);max-width:56ch;margin:0}
+.note{font-size:13px;color:var(--mute);margin:4px 0 20px;max-width:70ch}
+.rule{height:3px;background:var(--ink);margin:0 0 16px}
+
+.thesis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:2px;background:var(--rule);border:2px solid var(--ink);margin-top:26px}
+.t{background:var(--card);padding:13px 15px}
+.t .n{font-family:var(--disp);font-weight:800;font-size:26px;line-height:1.05;letter-spacing:-.02em}
+.t .l{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:5px;line-height:1.35}
+.t.up .n{color:var(--gain)} .t.dn .n{color:var(--loss)}
+
+.scissor{background:var(--card);border:2px solid var(--ink);padding:18px 16px 12px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin-bottom:14px}
+.legend span{display:flex;align-items:center;gap:6px}
+.sw{width:13px;height:11px;display:inline-block}
+.row{display:grid;grid-template-columns:150px 1fr;gap:10px;align-items:center;margin-bottom:6px}
+.row .co{font-family:var(--disp);font-weight:600;font-size:12px;text-align:right;line-height:1.15}
+.track{position:relative;height:26px;border-left:2px solid var(--ink);border-right:0;overflow:hidden}
+.axis{position:absolute;top:0;bottom:0;width:2px;background:var(--ink);opacity:.85}
+.b{position:absolute;height:10px}
+.b.v{top:1px;background:var(--vol)}
+.b.e{top:14px}
+.b.e.pos{background:var(--gain)} .b.e.neg{background:var(--loss)}
+.b span{position:absolute;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:9.5px;font-weight:500;white-space:nowrap;color:var(--ink)}
+.b.pos span,.b.v span{left:calc(100% + 5px)}
+.b.neg span{right:calc(100% + 5px)}
+.scale{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9.5px;color:var(--faint);margin-top:6px;padding-left:160px}
+
+.league{background:var(--card);border:2px solid var(--ink);padding:16px}
+.lrow{display:grid;grid-template-columns:150px 1fr 110px;gap:10px;align-items:center;padding:6px 0;border-bottom:1px solid var(--rule)}
+.lrow:last-child{border-bottom:0}
+.lrow .co{font-family:var(--disp);font-weight:600;font-size:12.5px;text-align:right}
+.lbar{height:16px;background:var(--gain);position:relative;overflow:hidden}
+.lbar.mid{background:#4A7F91} .lbar.low{background:var(--loss)}
+.lrow .v{font-family:var(--mono);font-size:12px;font-weight:700;text-align:right}
+.lrow .d{font-family:var(--mono);font-size:10px;color:var(--mute);text-align:right}
+
+.fuel{background:var(--ink);color:var(--card);border:2px solid var(--ink);padding:18px}
+.fuel h2{color:var(--card)}
+.fline{display:flex;align-items:flex-end;gap:0;height:110px;margin:20px 0 6px}
+.fp{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:6px}
+.fp i{display:block;width:100%;max-width:52px;background:var(--gold)}
+.fp b{font-family:var(--mono);font-size:12px;font-weight:700}
+.fp em{font-family:var(--mono);font-size:9.5px;font-style:normal;letter-spacing:.09em;text-transform:uppercase;color:#A9A296}
+.warn{border-top:1px solid #4A453C;margin-top:14px;padding-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
+.warn div{font-size:13.5px;color:#D6D1C6}
+.warn strong{display:block;font-family:var(--mono);font-size:17px;font-weight:700;color:var(--gold);margin-bottom:2px}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
+.c{background:var(--card);border:2px solid var(--ink);padding:14px;display:flex;flex-direction:column}
+.chead{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:2px}
+.id{display:flex;gap:8px;align-items:center}
+.logo{width:28px;height:28px;flex-shrink:0;border:1.5px solid var(--ink);background:var(--card2);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.logo .mono{font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.01em;color:var(--ink)}
+.tick{font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacing:.06em}
+.badge{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 6px;border:1.5px solid;white-space:nowrap;flex-shrink:0}
+.badge.del{color:var(--gain);border-color:var(--gain)}
+.badge.part{color:var(--gold);border-color:var(--gold)}
+.badge.miss{color:var(--loss);border-color:var(--loss)}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);margin:11px 0}
+.tile{background:var(--card2);padding:7px 9px}
+.tile .n{font-family:var(--mono);font-size:15px;font-weight:700;line-height:1.15}
+.tile .l{font-family:var(--mono);font-size:8.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:3px}
+.tile .n.up{color:var(--gain)} .tile .n.dn{color:var(--loss)}
+.c ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.c li{margin-bottom:5px}
+.c li::marker{color:var(--faint)}
+.flags{margin-top:auto;padding-top:10px;display:flex;flex-wrap:wrap;gap:5px}
+.flag{font-family:var(--mono);font-size:9px;letter-spacing:.05em;text-transform:uppercase;background:var(--loss);color:var(--card);padding:3px 6px}
+.flag.ok{background:var(--gain)}
+
+.matrix{background:var(--card);border:2px solid var(--ink);padding:16px;overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13px;text-align:left}
+th{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);padding:8px 10px;border-bottom:2px solid var(--ink)}
+td{padding:10px;border-bottom:1px solid var(--rule);vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.mono{font-family:var(--mono);font-weight:600}
+td.up{color:var(--gain);font-family:var(--mono);font-weight:700}
+td.dn{color:var(--loss);font-family:var(--mono);font-weight:700}
+.arrow{display:inline-block;margin:0 4px;font-weight:bold}
+
+.quotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.qcard{background:var(--card);border:2px solid var(--ink);padding:16px;position:relative}
+.qcard blockquote{margin:0 0 12px;font-size:14px;font-style:italic;line-height:1.45}
+.qcard .auth{font-family:var(--disp);font-weight:700;font-size:13px;margin-bottom:2px}
+.qcard .role{font-family:var(--mono);font-size:10px;color:var(--mute)}
+
+.rfgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.rfcard{background:var(--card);border:2px solid var(--ink);border-top:4px solid var(--loss);padding:16px}
+.rfcard h3{color:var(--loss);margin-bottom:6px}
+.rfcard p{margin:0;font-size:13.5px;color:var(--ink)}
+
+.wtgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.wtcard{background:var(--card);border:2px solid var(--ink);padding:16px}
+.wthead{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.wtscore{font-family:var(--mono);font-weight:700;font-size:12px;padding:3px 8px;border:1px solid}
+.wtscore.high{color:var(--gain);border-color:var(--gain);background:#EBF3F7}
+.wtscore.mid{color:var(--gold);border-color:var(--gold);background:#FDF8EC}
+
+.synth{background:var(--card);border:2px solid var(--ink);padding:20px}
+.synth p{margin:0 0 12px;font-size:14.5px;line-height:1.6}
+.synth p:last-child{margin-bottom:0}
+
+.calls{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.call{background:var(--card);border:2px solid var(--ink);padding:16px}
+.call.buy{border-top:4px solid var(--gain)}
+.call.hold{border-top:4px solid var(--gold)}
+.call.watch{border-top:4px solid var(--mute)}
+.call .type{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+.call h3{font-size:18px;margin:4px 0 8px}
+.call .target{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--gain);margin-bottom:8px}
+.call p{margin:0;font-size:13.5px;line-height:1.45}
+
+footer{margin-top:60px;padding-top:20px;border-top:2px solid var(--ink);font-family:var(--mono);font-size:11px;color:var(--mute);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- SECTION 1: MASTHEAD & THESIS -->
+<section>
+  <div class="eyebrow">RAJAN SECTOR EARNINGS REVIEW • Q1 FY27 • SECTOR #13</div>
+  <h1>01 / POWER TRANSMISSION</h1>
+  <p class="dek">TBCB Inter-State Transmission Project Awards & Renewable Grid Integration Drive +18.4% Revenue Growth — 99.8%+ Grid Availability Generates Peak EBITDA Margins of 86.5%.</p>
+  
+  <div class="thesis">
+    <div class="t up">
+      <div class="n">+18.4%</div>
+      <div class="l">Aggregate Sector Revenue YoY</div>
+    </div>
+    <div class="t up">
+      <div class="n">99.85%</div>
+      <div class="l">System Availability Ratio</div>
+    </div>
+    <div class="t up">
+      <div class="n">86.5%</div>
+      <div class="l">Average Transmission EBITDA Margin</div>
+    </div>
+    <div class="t up">
+      <div class="n">₹92,500 Cr</div>
+      <div class="l">Combined Work-in-Progress Pipeline</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2: SCISSOR ANALYSIS -->
+<section>
+  <h2>02 / Scissor Analysis — Topline Growth vs Margin Expansion</h2>
+  <div class="rule"></div>
+  <p class="note">Comparing quarterly revenue growth against EBITDA margin stability across major Indian power transmission utilities. Regulated tariff mechanisms and low operational downtime maintained peak margins.</p>
+  
+  <div class="scissor">
+    <div class="legend">
+      <span><i class="sw" style="background:var(--vol)"></i> Revenue Growth YoY (%)</span>
+      <span><i class="sw" style="background:var(--gain)"></i> EBITDA Margin YoY Delta (+ bps)</span>
+    </div>
+    
+    <div class="row">
+      <div class="co">Power Grid Corp</div>
+      <div class="track">
+        <div class="axis" style="left:20%"></div>
+        <div class="b v" style="left:20%;width:14.2%"><span>+14.2%</span></div>
+        <div class="b e pos" style="left:20%;width:12%"><span>+120 bps (87.8% OPM)</span></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="co">Adani Energy Solutions</div>
+      <div class="track">
+        <div class="axis" style="left:20%"></div>
+        <div class="b v" style="left:20%;width:24.5%"><span>+24.5%</span></div>
+        <div class="b e pos" style="left:20%;width:19%"><span>+190 bps (84.5% OPM)</span></div>
+      </div>
+    </div>
+
+    <div class="scale">
+      <span>-10%</span><span>0% (Baseline)</span><span>+10%</span><span>+20%</span><span>+30%</span>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3: LEAGUE TABLE -->
+<section>
+  <h2>03 / Transmission Line Network (ckm) League Table</h2>
+  <div class="rule"></div>
+  <div class="league">
+    <div class="lrow">
+      <div class="co">Power Grid Corp</div>
+      <div class="lbar" style="width:100%"></div>
+      <div><div class="v">1,78,000 ckm</div><div class="d">Transformation Capacity: 5,40,000 MVA</div></div>
+    </div>
+    <div class="lrow">
+      <div class="co">Adani Energy Solutions</div>
+      <div class="lbar mid" style="width:24%"></div>
+      <div><div class="v">21,100 ckm</div><div class="d">Transformation Capacity: 58,000 MVA</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4: PRESSURE POINT -->
+<section>
+  <div class="fuel">
+    <h2>04 / Sector Pressure Point — TBCB Competitive Bidding Expansion & Grid Interconnection</h2>
+    <p style="color:#D6D1C6;margin-bottom:14px">Central Transmission Utility (CTU) is tendering over ₹1.5 Lakh Crore of Tariff Based Competitive Bidding (TBCB) projects to evacuate 500 GW of renewable energy by 2030, sparking high-return growth competition between Power Grid and private developers.</p>
+    
+    <div class="fline">
+      <div class="fp"><b style="color:var(--gold)">99.85%</b><i style="height:95%"></i><em>Peak Grid Availability</em></div>
+      <div class="fp"><b style="color:var(--gold)">₹92,500 Cr</b><i style="height:80%"></i><em>Combined WIP Pipeline</em></div>
+      <div class="fp"><b style="color:var(--gold)">86.5%</b><i style="height:85%"></i><em>EBITDA Margin Profile</em></div>
+    </div>
+    
+    <div class="warn">
+      <div><strong>Right-of-Way (RoW) Clearance Acceleration</strong>Sub-station land acquisition and line corridor environmental clearances accelerating project commissioning.</div>
+      <div><strong>HVDC Technology Leadership</strong>High-Voltage Direct Current (HVDC) 800kV lines providing long-distance renewable power transmission without line losses.</div>
+      <div><strong>InVIT Monetization Avenue</strong>PGInvIT and private asset recycling generating upfront capital recycling for fresh TBCB project bids.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 5: COMPANY CARDS -->
+<section>
+  <h2>05 / Company Execution Profiles</h2>
+  <div class="rule"></div>
+  <div class="grid">
+
+    <!-- POWER GRID -->
+    <div class="c">
+      <div class="chead">
+        <div class="id">
+          <div class="logo"><span class="mono">PGC</span></div>
+          <div><h3>Power Grid Corp</h3><div class="tick">NSE: POWERGRID • Large Cap</div></div>
+        </div>
+        <div class="badge del">BEAT</div>
+      </div>
+      <div class="tiles">
+        <div class="tile"><div class="n up">₹11,850 Cr</div><div class="l">Q1 Revenue (+14.2%)</div></div>
+        <div class="tile"><div class="n up">87.8%</div><div class="l">OPM (+120 bps)</div></div>
+        <div class="tile"><div class="n">99.88%</div><div class="l">System Availability</div></div>
+        <div class="tile"><div class="n up">₹4,120 Cr</div><div class="l">Net Profit (+18.5%)</div></div>
+      </div>
+      <ul>
+        <li>Regulated equity base expanded to ₹88,000+ Cr, securing guaranteed 15.5% post-tax ROE.</li>
+        <li>Won 65%+ of recent TBCB inter-state transmission projects tendered by Ministry of Power.</li>
+        <li>Telecom (Powertel) and Smart Meter Consultancy divisions scaling non-transmission revenue.</li>
+      </ul>
+      <div class="flags">
+        <span class="flag ok">National Grid Monopoly</span>
+        <span class="flag ok">87.8% OPM</span>
+        <span class="flag">Capex Gestation Pace</span>
+      </div>
+    </div>
+
+    <!-- ADANI ENERGY SOLUTIONS -->
+    <div class="c">
+      <div class="chead">
+        <div class="id">
+          <div class="logo"><span class="mono">AES</span></div>
+          <div><h3>Adani Energy Solutions</h3><div class="tick">NSE: ADANIENSOL • Large Cap</div></div>
+        </div>
+        <div class="badge del">BEAT</div>
+      </div>
+      <div class="tiles">
+        <div class="tile"><div class="n up">₹4,850 Cr</div><div class="l">Q1 Revenue (+24.5%)</div></div>
+        <div class="tile"><div class="n up">84.5%</div><div class="l">Transmission OPM (+190 bps)</div></div>
+        <div class="tile"><div class="n">21,100 ckm</div><div class="l">Network Length</div></div>
+        <div class="tile"><div class="n up">₹545 Cr</div><div class="l">Net Profit (+32.4%)</div></div>
+      </div>
+      <ul>
+        <li>Largest private power transmission player in India with fast execution track record.</li>
+        <li>Mumbai Distribution utility business delivered operational efficiency with low T&D losses.</li>
+        <li>Smart Metering order book (21M+ meters) expanding under AMISP concessions.</li>
+      </ul>
+      <div class="flags">
+        <span class="flag ok">Largest Private Transco</span>
+        <span class="flag ok">Fast Execution</span>
+        <span class="flag">Leverage Ratio</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SECTION 6: KPI TREND MATRIX -->
+<section>
+  <h2>06 / KPI Trend & Metric Matrix</h2>
+  <div class="rule"></div>
+  <div class="matrix">
+    <table>
+      <thead>
+        <tr>
+          <th>Company</th>
+          <th>Metric Name</th>
+          <th>Q1 FY27</th>
+          <th></th>
+          <th>Q4 FY26</th>
+          <th>Delta</th>
+          <th>Strategic Insight</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="mono">Power Grid</td>
+          <td>Availability Ratio (%)</td>
+          <td>99.88%</td>
+          <td><span class="arrow">↑</span></td>
+          <td>99.82%</td>
+          <td class="up">+6 bps</td>
+          <td>Exceeding 98% normative availability threshold for incentive bonus.</td>
+        </tr>
+        <tr>
+          <td class="mono">Power Grid</td>
+          <td>Regulated Equity (₹ Cr)</td>
+          <td>₹88,400 Cr</td>
+          <td><span class="arrow">↑</span></td>
+          <td>₹85,800 Cr</td>
+          <td class="up">+₹2,600 Cr</td>
+          <td>Commissioning of new HVDC corridors and substation expansions.</td>
+        </tr>
+        <tr>
+          <td class="mono">Adani Energy</td>
+          <td>Network Length (ckm)</td>
+          <td>21,100 ckm</td>
+          <td><span class="arrow">↑</span></td>
+          <td>20,400 ckm</td>
+          <td class="up">+700 ckm</td>
+          <td>Khavda renewable power evacuation line commissioning.</td>
+        </tr>
+        <tr>
+          <td class="mono">Adani Energy</td>
+          <td>Transmission Margin (%)</td>
+          <td>84.5%</td>
+          <td><span class="arrow">↑</span></td>
+          <td>82.6%</td>
+          <td class="up">+190 bps</td>
+          <td>High grid availability and low operating maintenance expense.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- SECTION 7: WHAT MANAGEMENT SAID -->
+<section>
+  <h2>07 / What Management Said — Commentary & Guidance</h2>
+  <div class="rule"></div>
+  <div class="quotes">
+    <div class="qcard">
+      <blockquote>"Our network availability of 99.88% ensures maximum regulatory incentive returns. The ₹1.5 Lakh Cr RE evacuation transmission pipeline provides immense growth runway."</blockquote>
+      <div class="auth">R.K. Tyagi</div>
+      <div class="role">Chairman & Managing Director, Power Grid Corp</div>
+    </div>
+
+    <div class="qcard">
+      <blockquote>"We are accelerating project execution in RE evacuation corridors like Khavda and Rajasthan. Our transmission and smart metering divisions are generating high compounding cash flows."</blockquote>
+      <div class="auth">Kailash Adani</div>
+      <div class="role">CEO, Adani Energy Solutions</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 8: RED FLAGS & FORENSICS -->
+<section>
+  <h2>08 / Red Flags & Accounting Forensics</h2>
+  <div class="rule"></div>
+  <div class="rfgrid">
+    <div class="rfcard">
+      <h3>Right-of-Way (RoW) Land Acquisition Delays</h3>
+      <p>Local land compensation disputes and forestry clearances can delay transmission line commissioning dates, pushing back revenue capitalization.</p>
+    </div>
+
+    <div class="rfcard">
+      <h3>TBCB Aggressive Price Bidding</h3>
+      <p>Intense competitive bidding for TBCB projects can compress long-term project IRRs if steel/conductor costs escalate during construction.</p>
+    </div>
+
+    <div class="rfcard">
+      <h3>Grid Congestion & Curtailment Risk</h3>
+      <p>Delays in sub-station transformer readiness can limit power throughput on newly built transmission corridors.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 9: WALK THE TALK SCORECARD -->
+<section>
+  <h2>09 / Walk the Talk — Management Guidance vs Execution</h2>
+  <div class="rule"></div>
+  <div class="wtgrid">
+    <div class="wtcard">
+      <div class="wthead">
+        <h3>Power Grid Corp</h3>
+        <span class="wtscore high">SCORE: 9.8/10</span>
+      </div>
+      <p><strong>Guidance:</strong> 99.8%+ Grid availability, regulated equity growth.</p>
+      <p><strong>Execution:</strong> Grid availability 99.88%, regulated equity base reached ₹88.4k Cr.</p>
+    </div>
+
+    <div class="wtcard">
+      <div class="wthead">
+        <h3>Adani Energy Solutions</h3>
+        <span class="wtscore high">SCORE: 9.4/10</span>
+      </div>
+      <p><strong>Guidance:</strong> 20%+ Revenue growth, Khavda line commissioning.</p>
+      <p><strong>Execution:</strong> Revenue +24.5%, network length expanded to 21,100 ckm.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 10: SECTOR SYNTHESIS -->
+<section>
+  <h2>10 / Sector Synthesis & Strategic Outlook</h2>
+  <div class="rule"></div>
+  <div class="synth">
+    <p>Power Transmission is India's most defensible utility sub-sector, characterized by <strong>monopolistic assets, guaranteed 15.5% ROE regulated structures, and near-zero volume risk</strong>.</p>
+    <p>Market leader <strong>Power Grid Corporation</strong> stands as the ultimate low-risk dividend and equity compounder in the Indian power sector.</p>
+  </div>
+</section>
+
+<!-- SECTION 11: ACTIONABLE CALLS -->
+<section>
+  <h2>11 / Actionable Institutional Calls</h2>
+  <div class="rule"></div>
+  <div class="calls">
+    <div class="call buy">
+      <div class="type">TOP CONVICTION BUY</div>
+      <h3>Power Grid Corp</h3>
+      <div class="target">Target: ₹315 | Upside: +18.4%</div>
+      <p>87.8% OPM, 99.88% grid availability, 15.5% post-tax ROE regulated equity compounding.</p>
+    </div>
+
+    <div class="call buy">
+      <div class="type">HIGH GROWTH BUY</div>
+      <h3>Adani Energy Solutions</h3>
+      <div class="target">Target: ₹1,680 | Upside: +19.2%</div>
+      <p>Largest private transco (+24.5% growth), RE corridor execution, expanding smart meter pipeline.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 12: ANALYST COVERAGE & TARGET PRICE MATRIX -->
+<section>
+  <h2>12 / Institutional Analyst Coverage & Target Price Matrix</h2>
+  <div class="rule"></div>
+  <p class="note">Consolidated institutional sell-side analyst recommendations, coverage dates, verdicts, and fair value targets for all 2 covered stocks.</p>
+  <div class="matrix">
+    <table>
+      <thead>
+        <tr>
+          <th>Company Name</th>
+          <th>Ticker</th>
+          <th>Lead Analyst & Institutional House</th>
+          <th>Coverage Date</th>
+          <th>Analyst Verdict</th>
+          <th>Fair Value / Target (₹)</th>
+          <th>CMP (₹)</th>
+          <th>Implied Upside (%)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Power Grid Corp</strong></td>
+          <td class="mono">POWERGRID</td>
+          <td>Sumit Kishore (JPMorgan)</td>
+          <td>August 2026</td>
+          <td><span class="badge del">BUY</span></td>
+          <td class="mono">₹315</td>
+          <td class="mono">₹266.0</td>
+          <td class="up">+18.4%</td>
+        </tr>
+        <tr>
+          <td><strong>Adani Energy Solutions</strong></td>
+          <td class="mono">ADANIENSOL</td>
+          <td>Subhadip Mitra (Nuvama Wealth)</td>
+          <td>August 2026</td>
+          <td><span class="badge del">BUY</span></td>
+          <td class="mono">₹1,680</td>
+          <td class="mono">₹1,409.6</td>
+          <td class="up">+19.2%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- SECTION 13: STOCK PRICE & RETURNS PERFORMANCE MATRIX (STRICTLY 2 COVERED STOCKS) -->
+<section>
+  <h2>13 / Stock Price & Returns Performance Matrix</h2>
+  <div class="rule"></div>
+  <div class="matrix">
+    <table>
+      <thead>
+        <tr>
+          <th>Company</th>
+          <th>Ticker</th>
+          <th>CMP (₹)</th>
+          <th>1W (%)</th>
+          <th>1M (%)</th>
+          <th>3M (%)</th>
+          <th>1Y (%)</th>
+          <th>3Y (%)</th>
+          <th>52W High</th>
+          <th>52W Low</th>
+          <th>Mkt Cap (₹ Cr)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Power Grid Corp</td>
+          <td class="mono">POWERGRID</td>
+          <td class="mono">₹266.0</td>
+          <td class="up">+1.1%</td>
+          <td class="up">+3.8%</td>
+          <td class="up">+12.5%</td>
+          <td class="up">+45.0%</td>
+          <td class="up">+145%</td>
+          <td class="mono">₹325</td>
+          <td class="mono">₹250</td>
+          <td class="mono">2,47,400</td>
+        </tr>
+        <tr>
+          <td>Adani Energy Solutions</td>
+          <td class="mono">ADANIENSOL</td>
+          <td class="mono">₹1,409.6</td>
+          <td class="up">+2.4%</td>
+          <td class="up">+6.8%</td>
+          <td class="up">+21.2%</td>
+          <td class="up">+68.0%</td>
+          <td class="up">+220%</td>
+          <td class="mono">₹1,789</td>
+          <td class="mono">₹758</td>
+          <td class="mono">1,57,200</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-family:var(--mono);font-size:11.5px;color:var(--mute);margin-top:10px;font-weight:600;">Current prices as on 07-09-2026 (Report Generated on 07-09-2026)</p>
+  </div>
+</section>
+
+<!-- SECTION 14: CAVEATS & METHODOLOGY -->
+<section>
+  <h2>14 / Caveats & Disclaimers</h2>
+  <div class="rule"></div>
+  <div class="synth">
+    <p><strong>Institutional Research Note Disclaimer:</strong> Sourced primarily via <strong>Tijori Finance MCP</strong> and local exchange price feeds. Network length (ckm) and system availability percentages reported from official CERC filings.</p>
+  </div>
+</section>
+
+<footer>
+  <div>RAJAN SECTOR RESEARCH • INSTITUTIONAL EQUITY DIVISION</div>
+  <div>CONFIDENTIAL FOR CLIENT USE • Q1 FY27</div>
+</footer>
+
+</div>
+</body>
+</html>

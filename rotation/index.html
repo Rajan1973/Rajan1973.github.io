@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>India RRG — Relative Rotation</title>
+<style>
+:root{--bg:#f7f8fa;--panel:#fff;--line:#dfe3e8;--text:#18212b;--muted:#6b7280;--shadow:0 8px 28px rgba(15,23,42,.06)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:13px Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+header{height:64px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 22px}
+.brand{font-weight:750;letter-spacing:.2px}.brand span{font-weight:450;color:var(--muted);margin-left:8px}
+.status{font-size:11px;color:var(--muted);display:flex;gap:14px;align-items:center}.dot{width:7px;height:7px;border-radius:50%;background:#2e8b57;display:inline-block}
+.manual-link{display:inline-flex;align-items:center;gap:6px;color:inherit;text-decoration:none;border:1px solid rgba(255,255,255,.24);border-radius:8px;padding:7px 10px;font-size:11px;font-weight:650;background:rgba(255,255,255,.08)}.manual-link:hover{background:rgba(255,255,255,.16)}.manual-link:focus-visible{outline:3px solid #9dbcf7;outline-offset:2px}
+.layout{display:grid;grid-template-columns:235px minmax(0,1fr);min-height:calc(100vh - 64px)}
+aside{background:#fff;border-right:1px solid var(--line);padding:18px 15px}
+.section{margin-bottom:22px}.label{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:#8a929c;margin-bottom:8px}
+select,input{width:100%;height:34px;border:1px solid var(--line);border-radius:7px;background:#fff;padding:0 9px;color:var(--text)}
+input[type=range]{padding:0}.range-row{display:flex;justify-content:space-between;color:var(--muted);font-size:11px;margin-top:5px}
+.checks{display:grid;grid-template-columns:1fr 1fr;gap:6px}.check{display:flex;gap:7px;align-items:center;font-size:12px}.check input{width:auto;height:auto}
+main{padding:18px;min-width:0}.toolbar{display:flex;align-items:end;justify-content:space-between;margin-bottom:12px;gap:10px}
+.title h1{font-size:22px;margin:0 0 3px}.title p{margin:0;color:var(--muted)}.datebox{text-align:right;color:var(--muted);font-size:11px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.chart-card{padding:10px}.chart-wrap{position:relative;width:100%;height:min(70vh,700px);min-height:520px}.chart-wrap svg{width:100%;height:100%;display:block}
+.quad{font-size:12px;font-weight:700;fill:#7b8188}.axis{stroke:#87909a;stroke-width:1}.grid{stroke:#e8ebef;stroke-width:1}
+.tail{fill:none;stroke-width:1.7;opacity:.34}.point{stroke:#fff;stroke-width:1.5;cursor:pointer}.point.selected{stroke:#111827;stroke-width:2.5}
+.labelText{font-size:10.5px;font-weight:650;paint-order:stroke;stroke:#fff;stroke-width:3px;stroke-linejoin:round;pointer-events:none}
+.tickText{font-size:10px;fill:#687383}.axisLabel{font-size:11px;font-weight:750;fill:#4b5563;letter-spacing:.02em}
+.summary{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}.qcard{padding:12px;min-height:100px}
+.qtitle{font-weight:750;margin-bottom:7px}.items{color:var(--muted);line-height:1.65}
+.detail{margin-top:12px;padding:14px;display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:12px}
+.metric{border-left:1px solid var(--line);padding-left:12px}.metric:first-child{border-left:0}
+.metric b{display:block;font-size:18px;margin-top:4px}.metric span{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.note{margin-top:10px;color:#7b8188;font-size:10px}.loading{padding:50px;text-align:center;color:var(--muted)}
+.history{padding:12px 15px;margin-bottom:12px}.history-head{display:flex;justify-content:space-between;align-items:center}.history-title{font-weight:750}.history-sub{font-size:11px;color:var(--muted);margin-top:2px}.history-value{font-size:12px;font-weight:750;color:var(--blue)}.history input{margin:10px 0 0;accent-color:var(--blue);cursor:pointer}.ticks{display:flex;justify-content:space-between;color:#8a939e;font-size:10px}.underchart{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:11px;margin:8px 1px}.qcard{overflow:hidden;min-height:155px}.qhead{padding:11px 12px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px}.qicon{width:25px;height:25px;border-radius:50%;display:grid;place-items:center;font-size:15px}.qtitle{font-weight:780}.qcount{margin-left:auto;border-radius:999px;padding:3px 8px;font-size:11px;font-weight:750}.qdesc{font-size:10px;color:var(--muted);margin:3px 12px 7px}.items{padding:0 12px 10px}.item{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:7px;padding:8px 0;border-top:1px solid #eef1f4}.item-name{font-weight:650;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.item-meta{font-size:10px;color:var(--muted);margin-top:3px}.item-return{font-size:10px;font-weight:750;align-self:center;padding:4px 6px;border-radius:6px;white-space:nowrap}.green{color:#159447;background:#e9f7ef}.red{color:#df3030;background:#ffeded}.blue{color:#2d6cdf;background:#edf4ff}.orange{color:#d68000;background:#fff3df}.faq{margin-top:20px;padding:20px 22px}.faq h2{margin:0 0 15px;font-size:19px}.faq h3{font-size:13px;margin:16px 0 5px}.faq p{margin:0;color:#566170;line-height:1.65}
+.index-list{border:1px solid var(--line);border-radius:8px;overflow:auto;max-height:430px}.index-btn{width:100%;border:0;border-bottom:1px solid #eef0f3;background:#fff;text-align:left;padding:10px 9px;cursor:pointer;display:flex;justify-content:space-between;gap:8px}.index-btn:hover{background:#f6f8fb}.index-btn.active{background:#edf4ff;color:#1e5bd7;font-weight:700}.badge{font-size:9px;color:#8b949e;white-space:nowrap}.universe-strip{padding:10px 12px;margin-bottom:12px}.strip-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;gap:8px}.strip-title{font-weight:750}.strip-hint{font-size:10px;color:var(--muted)}.chips{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px}.chip{display:inline-flex;align-items:center;gap:5px;border:1px solid #d8dee6;border-radius:15px;padding:5px 9px;background:#fff;cursor:pointer;font-size:11px;white-space:nowrap}.chip.on{background:#edf4ff;border-color:#9dbcf7;color:#1e5bd7}.chip-dot{width:7px;height:7px;border-radius:50%}.drawer-close{order:-1;margin-left:0}
+.watchlist-section textarea{width:100%;margin-top:7px;border:1px solid var(--line);border-radius:7px;padding:8px 9px;resize:vertical;font:12px inherit;color:var(--text)}.watch-include{margin-top:8px;line-height:1.4}.watch-actions{display:flex;gap:6px;margin-top:8px}.watch-actions button,.file-btn{flex:1;min-height:32px;border:1px solid var(--line);border-radius:7px;background:#fff;color:var(--text);font-size:11px;cursor:pointer;padding:6px}.watch-actions button:hover,.file-btn:hover{background:#f6f8fb}.file-btn{text-align:center}.file-btn input{display:none}.watch-status{font-size:10px;line-height:1.5;color:var(--muted);margin-top:8px;max-height:120px;overflow:auto}.watch-status .ok{color:#159447}.watch-status .bad{color:#df3030}
+.zoom-tools{position:absolute;right:16px;top:16px;z-index:2;display:flex;flex-direction:column;gap:6px}.zoom-btn{width:34px;height:34px;border:1px solid #d8dee6;border-radius:8px;background:#fff;color:#344054;display:grid;place-items:center;cursor:pointer;box-shadow:0 3px 10px rgba(15,23,42,.08)}.zoom-btn:hover{background:#f3f6fa}.zoom-btn:focus-visible,.drawer-close:focus-visible,.item:focus-visible{outline:3px solid #9dbcf7;outline-offset:2px}.zoom-btn svg{width:17px;height:17px}.item{cursor:pointer}.item:hover{background:#f7f9fc}.drawer{position:fixed;z-index:10;top:0;right:0;width:min(440px,92vw);height:100vh;background:#fff;border-left:1px solid var(--line);box-shadow:-14px 0 35px rgba(15,23,42,.16);transform:translateX(105%);transition:transform .24s ease;display:flex;flex-direction:column}.drawer.open{transform:translateX(0)}.drawer-head{display:flex;align-items:flex-start;gap:12px;padding:20px;border-bottom:1px solid var(--line)}.drawer-close{margin-left:auto;width:36px;height:36px;border:1px solid var(--line);border-radius:8px;background:#fff;cursor:pointer;font-size:22px;line-height:1}.drawer-kicker{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}.drawer-title{font-size:20px;font-weight:780;margin-top:4px}.drawer-body{padding:18px;overflow:auto}.tv-frame{width:100%;height:460px;border:1px solid var(--line);border-radius:10px;background:#10151d}.drawer-note{font-size:11px;line-height:1.6;color:var(--muted);margin-top:12px}
+@media(max-width:850px){.layout{grid-template-columns:1fr}aside{border-right:0;border-bottom:1px solid var(--line)}.chart-wrap{min-height:430px}.summary{grid-template-columns:1fr 1fr}.detail{grid-template-columns:1fr 1fr}}
+.chips{display:flex;flex-wrap:wrap;align-content:flex-start;gap:5px;max-height:68px;overflow:auto;padding-bottom:2px}.chip{padding:4px 7px;font-size:10px}
+.index-btn[data-wl]{background:#fbf7ff;border-left:3px solid #8b5cf6;color:#5b21b6}.index-btn[data-wl]:hover{background:#f3e8ff}.index-btn[data-wl].active{background:#ede9fe;color:#4c1d95;border-left-color:#6d28d9}
+:root{--bg:#eef2f6;--panel:#ffffff;--line:#d8e0e8;--text:#132033;--muted:#66768a;--shadow:0 10px 30px rgba(21,37,58,.07)}body{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;letter-spacing:.005em}header{height:68px;background:#142033;color:#f8fafc;border-bottom:0;padding:0 26px;box-shadow:0 4px 18px rgba(15,23,42,.12)}.brand{letter-spacing:.01em}.brand span{color:#aab7c8}.status{color:#b6c2d1}.layout{grid-template-columns:248px minmax(0,1fr)}aside{background:#f8fafc;border-right:1px solid #d5dee8;padding:20px 16px}.section{margin-bottom:22px}.label{color:#8190a2;font-weight:700;letter-spacing:.13em}.card{border-radius:14px;box-shadow:var(--shadow)}main{padding:22px 24px}.toolbar{margin-bottom:16px}.title h1{font-size:24px;letter-spacing:-.025em}.title p{color:#718198}.datebox{font-size:11px}.index-list{border-radius:12px;background:#fff}.index-btn{padding:11px 10px;border-bottom-color:#edf1f5}.index-btn.active{box-shadow:inset 3px 0 #2563eb}.history,.universe-strip{padding:14px 16px;border-color:#d5dee8}.history-title,.strip-title{letter-spacing:.01em}.chart-card{padding:12px}.summary{gap:12px;margin-top:14px}.qcard{box-shadow:0 7px 22px rgba(21,37,58,.055)}.detail{border-color:#d5dee8}.faq{border-color:#d5dee8}.chips{display:flex;flex-wrap:wrap;align-content:flex-start;gap:6px;max-height:68px;overflow:auto}.chip{border-radius:10px;padding:5px 8px;font-size:10px}.watchlist-section{padding:12px 10px;border:1px solid #e5d9ff;border-radius:12px;background:#fcfaff}.watchlist-section>.label{color:#7c3aed}.watch-actions button,.file-btn{border-radius:8px}
+.index-btn[data-wl]{background:#fbf7ff;border-left:3px solid #8b5cf6;color:#5b21b6}.index-btn[data-wl]:hover{background:#f3e8ff}.index-btn[data-wl].active{background:#ede9fe;color:#4c1d95;border-left-color:#6d28d9}
+</style>
+</head>
+<body>
+<header>
+<div class="brand">India RRG <span>Weekly Relative Rotation</span></div>
+<div class="status"><a class="manual-link" href="rrg-user-manual.html" target="_blank" rel="noopener">User manual ↗</a><span><i class="dot"></i> RRG-Data</span><span id="freshness">Loading…</span></div>
+</header>
+<div class="layout">
+<aside>
+<div class="section"><div class="label">Benchmark</div><select id="benchmark"></select></div>
+<div class="section"><div class="label">Tail</div><input id="tail" type="range" min="2" max="12" value="6">
+<div class="range-row"><span>2 weeks</span><strong id="tailValue">6 weeks</strong><span>12</span></div></div>
+<div class="section"><div class="label">Search</div><input id="search" placeholder="Index / sector…"></div>
+<div class="section"><div class="label">Nifty index drill-down</div><div id="indexList" class="index-list"></div></div>
+<div class="section"><div class="label">Show quadrants</div>
+<div class="checks">
+<label class="check"><input type="checkbox" data-q="Leading" checked>Leading</label>
+<label class="check"><input type="checkbox" data-q="Improving" checked>Improving</label>
+<label class="check"><input type="checkbox" data-q="Weakening" checked>Weakening</label>
+<label class="check"><input type="checkbox" data-q="Lagging" checked>Lagging</label>
+</div></div>
+<div class="section watchlist-section"><div class="label">User Watchlist</div><select id="watchlistSelect"><option value="1">Watchlist-1</option><option value="2">Watchlist-2</option><option value="3">Watchlist-3</option></select><input id="watchlistName" placeholder="Watchlist name" style="margin-top:7px"><textarea id="watchlistCodes" rows="4" placeholder="PCBL, JBMA, INOXINDIA, NTPC…" aria-label="NSE stock codes separated by commas"></textarea><label class="check watch-include"><input id="includeWatchlist" type="checkbox">Include watchlist during Index Analysis</label><div class="watch-actions"><button id="validateWatchlist" type="button">Check codes</button><button id="saveWatchlist" type="button">Confirm & save</button></div><div class="watch-actions"><button id="exportWatchlists" type="button">Export CSV</button><label class="file-btn">Import CSV<input id="importWatchlists" type="file" accept=".csv,text/csv"></label></div><div id="watchlistStatus" class="watch-status" aria-live="polite"></div></div>
+<div class="section"><div class="label">Calculation</div>
+<div style="color:#6b7280;line-height:1.6">V2 public RRG formulation, weekly Friday-close snapshots, axes centered at 100.</div></div>
+</aside>
+<main>
+<div class="toolbar">
+<div class="title"><h1 id="chartTitle">Key Indices</h1><p id="subtitle">Weekly relative strength vs selected benchmark</p></div>
+<div class="datebox">Completed trading week<br><strong id="dateLabel">—</strong></div>
+</div>
+<div class="card universe-strip"><div class="strip-head"><div><div class="strip-title" id="stripTitle">Indices shown on chart</div><div class="strip-hint">Select or clear names to control the graph</div></div><div><button id="showAll" class="chip">Show all</button> <button id="hideAll" class="chip">Hide all</button></div></div><div id="chips" class="chips"></div></div>
+<div class="card history"><div class="history-head"><div><div class="history-title">8-week Weekly RRG history</div><div class="history-sub">Drag to move the complete snapshot through Friday closes</div></div><div id="historyValue" class="history-value">—</div></div><input id="history" type="range" min="0" max="7" value="0" step="1" aria-label="Choose one of the past 8 weekly RRG snapshots"><div id="ticks" class="ticks"></div></div>
+<div class="card chart-card"><div id="chart" class="chart-wrap"><div class="loading">Loading RRG data…</div></div></div>
+<div class="underchart"><span>Click a point for details · tails show recent rotation</span><span id="coverage"></span></div>
+<div id="summary" class="summary"></div>
+<div id="detail" class="card detail">
+<div><span>Selection</span><b id="dName">Click a point</b></div>
+<div class="metric"><span>RS-Ratio</span><b id="dRatio">—</b></div>
+<div class="metric"><span>RS-Momentum</span><b id="dMomentum">—</b></div>
+<div class="metric"><span>Quadrant</span><b id="dQuad">—</b></div>
+</div>
+<div class="note">RRG-compatible implementation; not the proprietary JdK implementation. Market data is read-only from the separate RRG-Data Supabase project, derived from the Nifty500 data warehouse.</div>
+<section class="card faq"><h2>Sector rotation (RRG) — FAQ</h2>
+<h3>What is a Relative Rotation Graph (RRG)?</h3><p>A Relative Rotation Graph plots each NSE sector against a benchmark (the Nifty 500) on two axes — RS-Ratio, which measures relative strength, and RS-Momentum, which measures whether that strength is rising or fading. It shows at a glance which sectors are leading, weakening, lagging or improving. It describes market structure for research and education only — not investment advice.</p>
+<h3>What do the four quadrants mean?</h3><p>Leading (top-right) = outperforming the market and still gaining momentum. Weakening (bottom-right) = still strong but momentum fading. Lagging (bottom-left) = underperforming and still falling. Improving (top-left) = still weak but momentum turning up. Sectors typically rotate clockwise: Improving to Leading to Weakening to Lagging.</p>
+<h3>How are RS-Ratio and RS-Momentum calculated?</h3><p>RS-Ratio normalises a sector's price relative to the Nifty 500 around a baseline of 100. RS-Momentum is the normalised rate of change of that relative-strength line, so it leads the ratio. Both use a weekly timeframe and refresh after each daily NSE scan.</p>
+<h3>Which sectors and benchmark does it use?</h3><p>The graph covers the NSE sectoral indices — such as IT, Financials, Auto, Pharma, FMCG, Metal, Energy and Realty — measured against the Nifty 500. You can also switch to the broad-market indices view.</p>
+<h3>Is the sector rotation graph a buy or sell signal?</h3><p>No. It is a descriptive, educational view of how sectors are rotating relative to the market. It is not investment advice and not a recommendation to buy, sell or hold any security.</p></section>
+</main>
+</div>
+<aside id="drawer" class="drawer" aria-label="Trading chart details" aria-hidden="true"><div class="drawer-head"><div><div class="drawer-kicker">TradingView Lite</div><div id="drawerTitle" class="drawer-title">Selected instrument</div></div><button id="drawerClose" class="drawer-close" type="button" aria-label="Close chart panel">×</button></div><div class="drawer-body"><iframe id="tvFrame" class="tv-frame" title="TradingView Lite chart" loading="lazy" src="about:blank"></iframe><div class="drawer-note">This TradingView chart is provided for visual reference. The RRG calculations remain powered by the read-only RRG V2 dataset.</div></div></aside>
+<script>
+const SUPA_URL="https://lwspbnufodlvvnrokaux.supabase.co";
+const SUPA_KEY="sb_publishable_5TQc0xNB3yeeHFr6pKM8-Q__pufSmZp";
+const VERSION="v2-ema10-jdk-public";
+let benchmarks=[], instruments=new Map(), rows=[], grouped={}, weeks=[], selected=null, activeUniverse=null, activeWatchlist=null, selectedIds=new Set(), zoomScale=1, watchlists=loadWatchlists();
+
+const $=id=>document.getElementById(id);
+async function api(path){const out=[];let start=0;while(true){const u=new URL(SUPA_URL+"/rest/v1/"+path);u.searchParams.set("offset",start);u.searchParams.set("limit",1000);const r=await fetch(u,{headers:{apikey:SUPA_KEY,Authorization:"Bearer "+SUPA_KEY}});if(!r.ok)throw Error(await r.text());const batch=await r.json();out.push(...batch);if(batch.length<1000)return out;start+=1000}}
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));}
+function color(q){return q==="Leading"?"#2e8b57":q==="Improving"?"#2563eb":q==="Weakening"?"#b8860b":"#c94b4b";}
+const instrumentPalette=["#2563eb","#0f9d8a","#8b5cf6","#e67e22","#d946ef","#0891b2","#65a30d","#dc2626","#475569","#c026d3","#0284c7","#ca8a04","#059669","#7c3aed","#ea580c","#4f46e5"];
+function instrumentColor(id){return instrumentPalette[Math.abs(Number(id))%instrumentPalette.length]}
+function nameFor(id){return instruments.get(Number(id))?.symbol || instruments.get(Number(id))?.name || ("ID "+id);}
+function loadWatchlists(){try{const saved=JSON.parse(localStorage.getItem("indiaRrgWatchlists")||"null");return Array.isArray(saved)&&saved.length===3?saved:[1,2,3].map(i=>({name:"Watchlist-"+i,codes:[]}))}catch(e){return [1,2,3].map(i=>({name:"Watchlist-"+i,codes:[]}))}}
+function persistWatchlists(){localStorage.setItem("indiaRrgWatchlists",JSON.stringify(watchlists))}
+function currentWatchlist(){return watchlists[Number($("watchlistSelect").value)-1]}
+function normalizedCodes(text){return [...new Set(String(text||"").split(/[,,\s]+/).map(x=>x.trim().toUpperCase()).filter(Boolean))]}
+function validateWatchlistCodes(codes){const known=new Set([...instruments.values()].filter(x=>x.instrument_type!=="INDEX").map(x=>String(x.symbol||"").toUpperCase().trim()));return {valid:codes.filter(x=>known.has(x)),invalid:codes.filter(x=>!known.has(x))}}
+function showWatchlistStatus(result,prefix=""){const good=result.valid.length?`<span class="ok">Found (${result.valid.length}): ${result.valid.join(", ")}</span>`:'<span class="bad">No matching NSE codes found.</span>';const bad=result.invalid.length?`<br><span class="bad">Not found / incorrect (${result.invalid.length}): ${result.invalid.join(", ")}</span>`:"";$("watchlistStatus").innerHTML=prefix+good+bad}
+function editWatchlist(){const w=currentWatchlist();$("watchlistName").value=w.name;$("watchlistCodes").value=w.codes.join(", ");$("includeWatchlist").checked=localStorage.getItem("indiaRrgIncludeWatchlist")==="true"}
+function saveWatchlist(){const result=validateWatchlistCodes(normalizedCodes($("watchlistCodes").value));const slot=Number($("watchlistSelect").value)-1;watchlists[slot]={name:$("watchlistName").value.trim()||`Watchlist-${slot+1}`,codes:result.valid};persistWatchlists();localStorage.setItem("indiaRrgIncludeWatchlist",String($("includeWatchlist").checked));showWatchlistStatus(result,result.invalid.length?"Saved valid codes. Edit or replace the codes marked below.<br>":"Watchlist confirmed and saved.<br>");renderIndexList();if(activeWatchlist===slot+1)load()}
+function validateCurrentWatchlist(){const result=validateWatchlistCodes(normalizedCodes($("watchlistCodes").value));showWatchlistStatus(result)}
+function exportWatchlists(){const csv="watchlist,name,code\n"+watchlists.flatMap((w,i)=>w.codes.map(c=>`${i+1},"${w.name.replace(/"/g,'""')}",${c}`)).join("\n");const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv"}));a.download="india-rrg-watchlists.csv";a.click();URL.revokeObjectURL(a.href)}
+function importWatchlistsFile(file){if(!file)return;const reader=new FileReader();reader.onload=()=>{const parsed={1:[],2:[],3:[]};String(reader.result).split(/\r?\n/).slice(1).forEach(line=>{const m=line.match(/^\s*(1|2|3)\s*,\s*"?([^",]*)"?\s*,\s*([A-Za-z0-9&-]+)\s*$/);if(m)parsed[m[1]].push(m[3].toUpperCase())});[1,2,3].forEach(i=>{watchlists[i-1].codes=[...new Set(parsed[i])];});persistWatchlists();editWatchlist();showWatchlistStatus(validateWatchlistCodes(currentWatchlist().codes),"CSV imported. ");renderIndexList()};reader.readAsText(file)}
+
+async function init(){
+ try{
+  const [bi,bench]=await Promise.all([
+  api("rrg_instruments?select=id,source_instrument_id,symbol,name,instrument_type&is_active=eq.true"),
+   api("rrg_benchmarks?select=id,symbol,name&is_active=eq.true&order=name.asc")
+  ]);
+  bi.forEach(x=>instruments.set(x.id,x));
+  benchmarks=bench;
+  const benchmarkChoices=benchmarks.filter(b=>/NIFTY\s*(50|500)/i.test(b.symbol+" "+b.name));
+  $("benchmark").innerHTML=benchmarkChoices.map(b=>`<option value="${b.id}" ${/NIFTY\s*50/i.test(b.symbol+" "+b.name)?"selected":""}>${esc(b.name)}</option>`).join("");
+  await load();
+  $("benchmark").onchange=()=>{activeUniverse=null;load()};
+  $("history").oninput=render;
+  $("tail").oninput=()=>{$("tailValue").textContent=$("tail").value+" weeks";render();};
+  $("search").oninput=()=>{renderIndexList();render()};
+  document.querySelectorAll(".check input").forEach(x=>x.onchange=render);
+  $("showAll").onclick=()=>{selectedIds=new Set(currentRows().map(r=>Number(r.instrument_id)));render()};
+  $("hideAll").onclick=()=>{selectedIds.clear();render()};
+  $("drawerClose").onclick=closeDrawer;
+  document.addEventListener("keydown",e=>{if(e.key==="Escape")closeDrawer()});
+  $("watchlistSelect").onchange=editWatchlist;$("validateWatchlist").onclick=validateCurrentWatchlist;$("saveWatchlist").onclick=saveWatchlist;$("exportWatchlists").onclick=exportWatchlists;$("importWatchlists").onchange=e=>importWatchlistsFile(e.target.files[0]);$("includeWatchlist").onchange=()=>{localStorage.setItem("indiaRrgIncludeWatchlist",String($("includeWatchlist").checked));if(activeUniverse===null&&!activeWatchlist)load()};editWatchlist();
+  renderIndexList();
+ }catch(e){$("chart").innerHTML='<div class="loading">Unable to load RRG data: '+esc(e.message)+'</div>';}
+}
+async function load(){
+ const bid=activeUniverse||$("benchmark").value; const indexView=activeUniverse===null&&!activeWatchlist;
+ const bm=benchmarks.find(x=>String(x.id)===String(bid));
+ const selectedBenchmark=benchmarks.find(x=>String(x.id)===String($("benchmark").value));
+ $("chartTitle").textContent=indexView?"Key Nifty Indices":(bm?.name || "RRG");
+ $("subtitle").textContent=indexView?`Weekly index RRG vs ${selectedBenchmark?.name||"benchmark"}`:`Weekly constituent RRG within ${bm?.name||"selected index"}`;
+const p=new URLSearchParams({select:"instrument_id,benchmark_id,week_end,rs_ratio,rs_momentum,quadrant,direction",benchmark_id:`eq.${bid}`,universe_type:`eq.${indexView?"INDEX":"STOCK"}`,calculation_version:`eq.${VERSION}`,order:"week_end.asc"});
+ rows=await api("rrg_metrics_v2?"+p.toString());
+ if(activeWatchlist&&!rows.length){const ids=watchlists[activeWatchlist-1].codes.map(c=>[...instruments.values()].find(x=>String(x.symbol||"").toUpperCase()===c)?.id).filter(Boolean);if(ids.length){const wp=new URLSearchParams({select:p.get("select"),instrument_id:`in.(${ids.join(",")})`,universe_type:"eq.STOCK",calculation_version:`eq.${VERSION}`,order:"week_end.asc"});const fallback=await api("rrg_metrics_v2?"+wp.toString());const seen=new Set();rows=fallback.filter(r=>{const k=r.instrument_id+"|"+r.week_end;if(seen.has(k))return false;seen.add(k);return true})}}
+ if(indexView&&$("includeWatchlist").checked){const ids=watchlists.flatMap(w=>w.codes).map(c=>[...instruments.values()].find(x=>String(x.symbol||"").toUpperCase()===c)?.id).filter(Boolean);if(ids.length){const wp=new URLSearchParams({select:p.get("select"),benchmark_id:`eq.${bid}`,universe_type:"eq.INDEX",calculation_version:`eq.${VERSION}`,instrument_id:`in.(${ids.join(",")})`,order:"week_end.asc"});rows=rows.concat(await api("rrg_metrics_v2?"+wp.toString()))}}
+ if(activeWatchlist){const wanted=new Set((watchlists[activeWatchlist-1]?.codes||[]).map(c=>[...instruments.values()].find(x=>String(x.symbol||"").toUpperCase()===c)?.id).filter(Boolean));rows=rows.filter(r=>wanted.has(Number(r.instrument_id)))}
+ grouped={};
+ rows.forEach(r=>(grouped[r.instrument_id]??=[]).push(r));
+weeks=[...new Set(rows.map(r=>r.week_end))].filter(w=>new Date(w).getDay()===5).sort().slice(-8);
+$("history").max=Math.max(0,weeks.length-1);$("history").value=Math.max(0,weeks.length-1);renderTicks();
+ $("freshness").textContent=weeks[0]||"No data";
+ selectedIds=new Set(currentRows().map(r=>Number(r.instrument_id)));
+ renderIndexList();
+ render();
+}
+function renderIndexList(){const q=$("search").value.toLowerCase();const items=benchmarks.filter(b=>!(/NIFTY\s*(50|500)/i.test(b.symbol+" "+b.name))).filter(b=>(b.name+" "+b.symbol).toLowerCase().includes(q));const nav=`<button class="index-btn ${activeUniverse===null&&!activeWatchlist?"active":""}" data-id="all"><span>All Nifty indices</span><span class="badge">INDEX RRG</span></button>`+items.map(b=>`<button class="index-btn ${String(b.id)===String(activeUniverse)&&!activeWatchlist?"active":""}" data-id="${b.id}"><span>${esc(b.name)}</span><span class="badge">STOCKS</span></button>`).join("");const wl=watchlists.map((w,i)=>`<button class="index-btn ${activeWatchlist===i+1?"active":""}" data-wl="${i+1}"><span>${esc(w.name||"Watchlist-"+(i+1))}</span><span class="badge">WATCHLIST</span></button>`).join("");$("indexList").innerHTML=nav+`<div class="label" style="margin:10px 8px 5px">User watchlists</div>`+wl;document.querySelectorAll(".index-btn").forEach(x=>x.onclick=()=>{if(x.dataset.wl){activeWatchlist=Number(x.dataset.wl);activeUniverse=null;$("watchlistSelect").value=activeWatchlist;editWatchlist()}else{activeWatchlist=null;activeUniverse=x.dataset.id==="all"?null:Number(x.dataset.id)}selected=null;load()})}
+function tradingViewSymbol(id){const raw=(instruments.get(Number(id))?.symbol||instruments.get(Number(id))?.name||"").toUpperCase().trim();const aliases={"NIFTY 50":"NIFTY","NIFTY 500":"NIFTY500","NIFTY BANK":"BANKNIFTY","NIFTY AUTO":"CNXAUTO","NIFTY IT":"CNXIT","NIFTY FINANCIAL SERVICES":"CNXFINANCE","NIFTY FMCG":"CNXFMCG","NIFTY METAL":"CNXMETAL","NIFTY PHARMA":"CNXPHARMA","NIFTY PSU BANK":"CNXPSUBANK","NIFTY PRIVATE BANK":"CNXPVTBANK","NIFTY REALTY":"CNXREALTY","NIFTY MEDIA":"CNXMEDIA","NIFTY HEALTHCARE":"NIFTY_HEALTHCARE","NIFTY OIL & GAS":"CNXOILGAS","NIFTY CONSUMER DURABLES":"CNXCONSUMER"};return "NSE:"+(aliases[raw]||raw.replace(/[^A-Z0-9_&-]/g,""))}
+const BSE_CODES={PCBL:"506590",JBMA:"532819",INOXINDIA:"543829",NTPC:"532555",ITCHOTELS:"544005",TATAPOWER:"500400",DRREDDY:"500124",SHAKTIPUMP:"531431",NMDC:"526371",GENUSPOWER:"530343",DDEVPLSTIK:"543547",SUNPHARMA:"524715",CARERATING:"534804",GATEWAY:"543489",RVNL:"542649",SERVOTECH:"535044",E2E:"535675"};
+function bseSymbol(id){const item=instruments.get(Number(id))||{};const raw=String(item.symbol||item.name||"").toUpperCase().trim();const code=item.bse_code||item.bse_symbol||BSE_CODES[raw];return "BSE:"+(code||raw.replace(/[^A-Z0-9_&-]/g,""))}
+function openDrawer(id){const name=nameFor(id);$("drawerTitle").textContent=name;const symbol=bseSymbol(id);$("tvFrame").src="https://www.tradingview.com/widgetembed/?symbol="+encodeURIComponent(symbol)+"&interval=W&hidesidetoolbar=1&symboledit=0&saveimage=0&toolbarbg=f7f8fa&hideideas=1&studies=RSI%40tv-basicstudies,MACD%40tv-basicstudies,Volume%40tv-basicstudies&hide_volume=0&theme=light&style=1&timezone=Asia%2FKolkata";$("drawer").classList.add("open");$("drawer").setAttribute("aria-hidden","false")}
+function applyTradingViewDefaults(id){const symbol=bseSymbol(id);const config={autosize:false,width:"100%",height:460,symbol,interval:"W",timezone:"Asia/Kolkata",theme:"light",style:"1",withdateranges:true,hide_side_toolbar:true,hide_top_toolbar:false,allow_symbol_change:true,save_image:false,hide_volume:false,studies:["RSI@tv-basicstudies","MACD@tv-basicstudies","Volume@tv-basicstudies"],support_host:"https://www.tradingview.com"};const json=JSON.stringify(config).replace(/<\//g,"<\\/");$("tvFrame").srcdoc='<!doctype html><html><head><style>html,body{margin:0;height:460px;overflow:hidden} .tradingview-widget-container,.tradingview-widget-container__widget{height:460px;width:100%}</style></head><body><div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>'+json+'</scr'+'ipt></div></body></html>'}
+const openDrawerWithDefaults=openDrawer;openDrawer=function(id){openDrawerWithDefaults(id);applyTradingViewDefaults(id)};
+function closeDrawer(){$("drawer").classList.remove("open");$("drawer").setAttribute("aria-hidden","true");setTimeout(()=>{$("tvFrame").src="about:blank"},260)}
+function render(){
+ if(!weeks.length)return;renderTicks();const date=weeks[+$('history').value];
+ const tail=+$("tail").value;
+ const enabled=new Set([...document.querySelectorAll(".check input:checked")].map(x=>x.dataset.q));
+ const search=$("search").value.toLowerCase();
+ const latest=Object.values(grouped).map(a=>a.find(r=>r.week_end===date)).filter(Boolean);
+ const points=latest.filter(r=>selectedIds.has(Number(r.instrument_id))&&enabled.has(r.quadrant)&&(!search||nameFor(r.instrument_id).toLowerCase().includes(search)));
+ $("dateLabel").textContent=date;
+ $("coverage").textContent=`${points.length}/${latest.length} displayed`;
+ draw(points,tail,date);
+ renderUniverse(latest);
+ renderBoard(points);
+ if(selected){const s=latest.find(r=>r.instrument_id===selected);if(s)selectPoint(s);}
+}
+function currentRows(){const date=weeks[+$('history').value];return Object.values(grouped).map(a=>a.find(r=>r.week_end===date)).filter(Boolean)}
+function renderUniverse(latest){$("stripTitle").textContent=activeUniverse===null?"Nifty indices shown on chart":"Stocks in "+(benchmarks.find(b=>String(b.id)===String(activeUniverse))?.name||"selected index");$("chips").innerHTML=latest.map(r=>`<button class="chip ${selectedIds.has(Number(r.instrument_id))?"on":""}" data-id="${r.instrument_id}"><i class="chip-dot" style="background:${instrumentColor(r.instrument_id)}"></i>${esc(nameFor(r.instrument_id))}</button>`).join("");document.querySelectorAll("#chips .chip").forEach(x=>x.onclick=()=>{const id=Number(x.dataset.id);selectedIds.has(id)?selectedIds.delete(id):selectedIds.add(id);render()})}
+function renderTicks(){$("ticks").innerHTML=weeks.map(w=>`<span>${w.slice(5)}</span>`).join("");$("historyValue").textContent=weeks[+$('history').value]||"—"}
+const board={Improving:{title:"Money Flowing In",desc:"Weak but gaining momentum",icon:"↗",cls:"blue"},Leading:{title:"Building Strength",desc:"Strong and still rising",icon:"↗",cls:"green"},Weakening:{title:"Losing Momentum",desc:"Strong but rolling over",icon:"↘",cls:"orange"},Lagging:{title:"Underperforming",desc:"Weak and falling further",icon:"↓",cls:"red"}};
+function metricReturn(r){const n=Number(r.relative_return_4w);return Number.isFinite(n)?n:Number(r.rs_momentum)-100}
+function renderBoard(all){const buckets={Leading:[],Improving:[],Weakening:[],Lagging:[]};all.forEach(r=>buckets[r.quadrant]?.push(r));Object.values(buckets).forEach(a=>a.sort((x,y)=>Math.abs(metricReturn(y))-Math.abs(metricReturn(x))));$("summary").innerHTML=Object.entries(board).map(([q,c])=>{const a=buckets[q];return `<div class="card qcard"><div class="qhead"><span class="qicon ${c.cls}">${c.icon}</span><div class="qtitle">${c.title}</div><span class="qcount ${c.cls}">${a.length}</span></div><div class="qdesc">${c.desc}</div><div class="items">${a.map(r=>{const ret=metricReturn(r),txt=(ret>=0?"+":"")+ret.toFixed(1)+"%";return `<div class="item" role="button" tabindex="0" data-chart-id="${r.instrument_id}" aria-label="Open TradingView chart for ${esc(nameFor(r.instrument_id))}"><div><div class="item-name">${esc(nameFor(r.instrument_id))}</div><div class="item-meta">Score ${((Number(r.rs_ratio)-100)*10).toFixed(0)} · Mom ${((Number(r.rs_momentum)-100)*10).toFixed(0)}</div></div><span class="item-return ${ret>=0?"green":"red"}">${txt}</span></div>`}).join("")||'<div class="item-meta">No names in this bucket</div>'}</div></div>`}).join("");document.querySelectorAll("[data-chart-id]").forEach(x=>{x.onclick=()=>openDrawer(Number(x.dataset.chartId));x.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openDrawer(Number(x.dataset.chartId))}}})}
+function draw(points,tail,date){
+ const el=$("chart"),W=el.clientWidth,H=el.clientHeight,pad=52;
+ const vals=points.flatMap(p=>[+p.rs_ratio,+p.rs_momentum]);
+ let min=Math.min(85,...vals)-4,max=Math.max(115,...vals)+4;
+ if(max-min<35){min=82.5;max=117.5;}
+ const span=(max-min)/(zoomScale||1);min=100-span/2;max=100+span/2;
+ const sx=x=>pad+(x-min)/(max-min)*(W-2*pad);
+ const sy=y=>H-pad-(y-min)/(max-min)*(H-2*pad);
+ let svg=`<svg viewBox="0 0 ${W} ${H}" role="img">
+ <rect width="50%" height="50%" x="0" y="0" fill="#eef8f1"/>
+ <rect width="50%" height="50%" x="50%" y="0" fill="#fff8e8"/>
+ <rect width="50%" height="50%" x="0" y="50%" fill="#edf4ff"/>
+ <rect width="50%" height="50%" x="50%" y="50%" fill="#fff0f0"/>`;
+ for(let v=Math.ceil(min/5)*5;v<=max;v+=5)
+  svg+=`<line class="grid" x1="${sx(v)}" x2="${sx(v)}" y1="${pad}" y2="${H-pad}"/><line class="grid" x1="${pad}" x2="${W-pad}" y1="${sy(v)}" y2="${sy(v)}"/><text class="tickText" x="${sx(v)}" y="${H-pad+18}" text-anchor="middle">${v}</text><text class="tickText" x="${pad-8}" y="${sy(v)+3}" text-anchor="end">${v}</text>`;
+ svg+=`<line class="axis" x1="${sx(100)}" x2="${sx(100)}" y1="${pad}" y2="${H-pad}"/>
+ <line class="axis" x1="${pad}" x2="${W-pad}" y1="${sy(100)}" y2="${sy(100)}"/>
+ <text class="quad" x="${pad+10}" y="${pad+18}">IMPROVING</text>
+ <text class="quad" x="${W-pad-78}" y="${pad+18}">LEADING</text>
+ <text class="quad" x="${pad+10}" y="${H-pad-10}">LAGGING</text>
+ <text class="quad" x="${W-pad-86}" y="${H-pad-10}">WEAKENING</text>
+ <text class="axisLabel" x="${W/2}" y="${H-9}" text-anchor="middle">RS-Ratio (Relative Strength)</text>
+ <text class="axisLabel" x="16" y="${H/2}" text-anchor="middle" transform="rotate(-90 16 ${H/2})">RS-Momentum</text>`;
+ points.forEach(p=>{
+  const hist=(grouped[p.instrument_id]||[]).filter(r=>r.week_end<=date).slice(-tail);
+  if(hist.length>1) svg+=`<polyline class="tail" stroke="${instrumentColor(p.instrument_id)}" points="${hist.map(r=>sx(+r.rs_ratio)+","+sy(+r.rs_momentum)).join(" ")}"/>`;
+  const cx=sx(+p.rs_ratio),cy=sy(+p.rs_momentum);
+  svg+=`<circle class="point ${selected===p.instrument_id?"selected":""}" cx="${cx}" cy="${cy}" r="6" fill="${instrumentColor(p.instrument_id)}" data-id="${p.instrument_id}"/>
+  <text class="labelText" x="${cx+8}" y="${cy+4}">${esc(nameFor(p.instrument_id))}</text>`;
+ });
+ svg+="</svg>";el.innerHTML=`<div class="zoom-tools" aria-label="Chart zoom controls"><button id="zoomIn" class="zoom-btn" type="button" aria-label="Zoom in" title="Zoom in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M11 8v6M8 11h6M16.5 16.5 21 21"/></svg></button><button id="zoomOut" class="zoom-btn" type="button" aria-label="Zoom out" title="Zoom out"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M8 11h6M16.5 16.5 21 21"/></svg></button><button id="zoomReset" class="zoom-btn" type="button" aria-label="Reset chart zoom" title="Reset zoom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12a8 8 0 1 0 2.3-5.7L4 8.6M4 4v4.6h4.6"/></svg></button></div>`+svg;
+ $("zoomIn").onclick=()=>{zoomScale=Math.min(4,zoomScale*1.25);render()};$("zoomOut").onclick=()=>{zoomScale=Math.max(.5,zoomScale/1.25);render()};$("zoomReset").onclick=()=>{zoomScale=1;render()};
+ el.querySelectorAll(".point").forEach(n=>n.onclick=()=>{
+  selected=Number(n.dataset.id);
+  const p=points.find(x=>Number(x.instrument_id)===selected);
+  selectPoint(p);render();
+ });
+}
+function selectPoint(p){
+ if(!p)return;
+ $("dName").textContent=nameFor(p.instrument_id);
+ $("dRatio").textContent=(+p.rs_ratio).toFixed(2);
+ $("dMomentum").textContent=(+p.rs_momentum).toFixed(2);
+ $("dQuad").textContent=p.quadrant;
+}
+init();
+</script>
+</body>
+</html>

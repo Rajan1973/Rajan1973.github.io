@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Power Generation Q1 FY27 - Sector Earnings Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --stone:#E3E0D9; --card:#F3F1EC; --card2:#EAE7E0;
+  --ink:#1F1D1A; --mute:#6E6A62; --faint:#9A958B; --rule:#C9C4B9;
+  --gain:#1D5C7A; --loss:#A8382C; 
+  --vol:#8E8879; --gold:#B4842A;
+  --disp:'Archivo',system-ui,sans-serif;
+  --serif:'Source Serif 4',Georgia,serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--stone);color:var(--ink);font-family:var(--serif);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:28px 20px 90px}
+section{margin-bottom:40px}
+
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
+h1{font-family:var(--disp);font-weight:800;font-size:clamp(34px,7vw,62px);line-height:.94;letter-spacing:-.03em;margin:.18em 0 .22em;text-transform:uppercase}
+h2{font-family:var(--disp);font-weight:700;font-size:clamp(19px,3.2vw,25px);letter-spacing:-.015em;margin:0 0 12px;text-transform:uppercase}
+h3{font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:-.005em;margin:0}
+.dek{font-size:17px;color:var(--mute);max-width:56ch;margin:0}
+.note{font-size:13px;color:var(--mute);margin:4px 0 20px;max-width:70ch}
+.rule{height:3px;background:var(--ink);margin:0 0 16px}
+
+.thesis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:2px;background:var(--rule);border:2px solid var(--ink);margin-top:26px}
+.t{background:var(--card);padding:13px 15px}
+.t .n{font-family:var(--disp);font-weight:800;font-size:26px;line-height:1.05;letter-spacing:-.02em}
+.t .l{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:5px;line-height:1.35}
+.t.up .n{color:var(--gain)} .t.dn .n{color:var(--loss)}
+
+.scissor{background:var(--card);border:2px solid var(--ink);padding:18px 16px 12px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin-bottom:14px}
+.legend span{display:flex;align-items:center;gap:6px}
+.sw{width:13px;height:11px;display:inline-block}
+.row{display:grid;grid-template-columns:150px 1fr;gap:10px;align-items:center;margin-bottom:6px}
+.row .co{font-family:var(--disp);font-weight:600;font-size:12px;text-align:right;line-height:1.15}
+.track{position:relative;height:26px;border-left:2px solid var(--ink);border-right:0;overflow:hidden}
+.axis{position:absolute;top:0;bottom:0;width:2px;background:var(--ink);opacity:.85}
+.b{position:absolute;height:10px}
+.b.v{top:1px;background:var(--vol)}
+.b.e{top:14px}
+.b.e.pos{background:var(--gain)} .b.e.neg{background:var(--loss)}
+.b span{position:absolute;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:9.5px;font-weight:500;white-space:nowrap;color:var(--ink)}
+.b.pos span,.b.v span{left:calc(100% + 5px)}
+.b.neg span{right:calc(100% + 5px)}
+.scale{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9.5px;color:var(--faint);margin-top:6px;padding-left:160px}
+
+.league{background:var(--card);border:2px solid var(--ink);padding:16px}
+.lrow{display:grid;grid-template-columns:150px 1fr 110px;gap:10px;align-items:center;padding:6px 0;border-bottom:1px solid var(--rule)}
+.lrow:last-child{border-bottom:0}
+.lrow .co{font-family:var(--disp);font-weight:600;font-size:12.5px;text-align:right}
+.lbar{height:16px;background:var(--gain);position:relative;overflow:hidden}
+.lbar.mid{background:#4A7F91} .lbar.low{background:var(--loss)}
+.lrow .v{font-family:var(--mono);font-size:12px;font-weight:700;text-align:right}
+.lrow .d{font-family:var(--mono);font-size:10px;color:var(--mute);text-align:right}
+
+.fuel{background:var(--ink);color:var(--card);border:2px solid var(--ink);padding:18px}
+.fuel h2{color:var(--card)}
+.fline{display:flex;align-items:flex-end;gap:0;height:110px;margin:20px 0 6px}
+.fp{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:6px}
+.fp i{display:block;width:100%;max-width:52px;background:var(--gold)}
+.fp b{font-family:var(--mono);font-size:12px;font-weight:700}
+.fp em{font-family:var(--mono);font-size:9.5px;font-style:normal;letter-spacing:.09em;text-transform:uppercase;color:#A9A296}
+.warn{border-top:1px solid #4A453C;margin-top:14px;padding-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
+.warn div{font-size:13.5px;color:#D6D1C6}
+.warn strong{display:block;font-family:var(--mono);font-size:17px;font-weight:700;color:var(--gold);margin-bottom:2px}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
+.c{background:var(--card);border:2px solid var(--ink);padding:14px;display:flex;flex-direction:column}
+.chead{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:2px}
+.id{display:flex;gap:8px;align-items:center}
+.logo{width:28px;height:28px;flex-shrink:0;border:1.5px solid var(--ink);background:var(--card2);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.logo .mono{font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.01em;color:var(--ink)}
+.tick{font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacing:.06em}
+.badge{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 6px;border:1.5px solid;white-space:nowrap;flex-shrink:0}
+.badge.del{color:var(--gain);border-color:var(--gain)}
+.badge.part{color:var(--gold);border-color:var(--gold)}
+.badge.miss{color:var(--loss);border-color:var(--loss)}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);margin:11px 0}
+.tile{background:var(--card2);padding:7px 9px}
+.tile .n{font-family:var(--mono);font-size:15px;font-weight:700;line-height:1.15}
+.tile .l{font-family:var(--mono);font-size:8.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:3px}
+.tile .n.up{color:var(--gain)} .tile .n.dn{color:var(--loss)}
+.c ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.c li{margin-bottom:5px}
+.c li::marker{color:var(--faint)}
+.flags{margin-top:auto;padding-top:10px;display:flex;flex-wrap:wrap;gap:5px}
+.flag{font-family:var(--mono);font-size:9px;letter-spacing:.05em;text-transform:uppercase;background:var(--loss);color:var(--card);padding:3px 6px}
+.flag.ok{background:var(--gain)}
+
+.matrix{background:var(--card);border:2px solid var(--ink);padding:16px;overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13px;text-align:left}
+th{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);padding:8px 10px;border-bottom:2px solid var(--ink)}
+td{padding:10px;border-bottom:1px solid var(--rule);vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.mono{font-family:var(--mono);font-weight:600}
+td.up{color:var(--gain);font-family:var(--mono);font-weight:700}
+td.dn{color:var(--loss);font-family:var(--mono);font-weight:700}
+.arrow{display:inline-block;margin:0 4px;font-weight:bold}
+
+.quotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.qcard{background:var(--card);border:2px solid var(--ink);padding:16px;position:relative}
+.qcard blockquote{margin:0 0 12px;font-size:14px;font-style:italic;line-height:1.45}
+.qcard .auth{font-family:var(--disp);font-weight:700;font-size:13px;margin-bottom:2px}
+.qcard .role{font-family:var(--mono);font-size:10px;color:var(--mute)}
+
+.rfgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.rfcard{background:var(--card);border:2px solid var(--ink);border-top:4px solid var(--loss);padding:16px}
+.rfcard h3{color:var(--loss);margin-bottom:6px}
+.rfcard p{margin:0;font-size:13.5px;color:var(--ink)}
+
+.wtgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.wtcard{background:var(--card);border:2px solid var(--ink);padding:16px}
+.wthead{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.wtscore{font-family:var(--mono);font-weight:700;font-size:12px;padding:3px 8px;border:1px solid}
+.wtscore.high{color:var(--gain);border-color:var(--gain);background:#EBF3F7}
+.wtscore.mid{color:var(--gold);border-color:var(--gold);background:#FDF8EC}
+
+.synth{background:var(--card);border:2px solid var(--ink);padding:20px}
+.synth p{margin:0 0 12px;font-size:14.5px;line-height:1.6}
+.synth p:last-child{margin-bottom:0}
+
+.calls{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.call{background:var(--card);border:2px solid var(--ink);padding:16px}
+.call.buy{border-top:4px solid var(--gain)}
+.call.hold{border-top:4px solid var(--gold)}
+.call.watch{border-top:4px solid var(--mute)}
+.call .type{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+.call h3{font-size:18px;margin:4px 0 8px}
+.call .target{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--gain);margin-bottom:8px}
+.call p{margin:0;font-size:13.5px;line-height:1.45}
+
+footer{margin-top:60px;padding-top:20px;border-top:2px solid var(--ink);font-family:var(--mono);font-size:11px;color:var(--mute);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- SECTION 1: MASTHEAD & THESIS -->
+<section>
+  <div class="eyebrow">RAJAN SECTOR EARNINGS REVIEW • Q1 FY27 • SECTOR #12</div>
+  <h1>01 / POWER GENERATION</h1>
+  <p class="dek">Record Peak Power Demand Surge (250+ GW) & Renewable Capacity Additions Drive +16.2% Generation Volume Growth — Regulated Asset Base Capitalization Expands Net Profits by +22.4%.</p>
+  
+  <div class="thesis">
+    <div class="t up">
+      <div class="n">+16.2%</div>
+      <div class="l">Generation Volume YoY (BU)</div>
+    </div>
+    <div class="t up">
+      <div class="n">78.5%</div>
+      <div class="l">Average Thermal PLF (+320 bps)</div>
+    </div>
+    <div class="t up">
+      <div class="n">28.4%</div>
+      <div class="l">Average Sector EBITDA Margin (+140 bps)</div>
+    </div>
+    <div class="t up">
+      <div class="n">118 GW</div>
+      <div class="l">Combined Installed Generation Capacity</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2: SCISSOR ANALYSIS -->
+<section>
+  <h2>02 / Scissor Analysis — Topline Growth vs Margin Expansion</h2>
+  <div class="rule"></div>
+  <p class="note">Comparing quarterly generation volume growth against EBITDA margin expansion across major Indian power utilities. High thermal PLFs and lower captive coal blending costs drove margin expansion.</p>
+  
+  <div class="scissor">
+    <div class="legend">
+      <span><i class="sw" style="background:var(--vol)"></i> Generation Growth YoY (%)</span>
+      <span><i class="sw" style="background:var(--gain)"></i> EBITDA Margin YoY Delta (+ bps)</span>
+    </div>
+    
+    <div class="row">
+      <div class="co">NTPC</div>
+      <div class="track">
+        <div class="axis" style="left:20%"></div>
+        <div class="b v" style="left:20%;width:14.5%"><span>+14.5%</span></div>
+        <div class="b e pos" style="left:20%;width:15%"><span>+150 bps (28.5% OPM)</span></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="co">Tata Power</div>
+      <div class="track">
+        <div class="axis" style="left:20%"></div>
+        <div class="b v" style="left:20%;width:17.8%"><span>+17.8%</span></div>
+        <div class="b e pos" style="left:20%;width:12%"><span>+120 bps (22.4% OPM)</span></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="co">JSW Energy</div>
+      <div class="track">
+        <div class="axis" style="left:20%"></div>
+        <div class="b v" style="left:20%;width:22.4%"><span>+22.4%</span></div>
+        <div class="b e pos" style="left:20%;width:18%"><span>+180 bps (34.2% OPM)</span></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="co">Adani Power</div>
+      <div class="track">
+        <div class="axis" style="left:20%"></div>
+        <div class="b v" style="left:20%;width:26.5%"><span>+26.5%</span></div>
+        <div class="b e pos" style="left:20%;width:24%"><span>+240 bps (38.5% OPM)</span></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="co">Torrent Power</div>
+      <div class="track">
+        <div class="axis" style="left:20%"></div>
+        <div class="b v" style="left:20%;width:13.2%"><span>+13.2%</span></div>
+        <div class="b e pos" style="left:20%;width:10%"><span>+100 bps (24.1% OPM)</span></div>
+      </div>
+    </div>
+
+    <div class="scale">
+      <span>-10%</span><span>0% (Baseline)</span><span>+10%</span><span>+20%</span><span>+30%</span>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3: LEAGUE TABLE -->
+<section>
+  <h2>03 / Installed Capacity & Generation League Table</h2>
+  <div class="rule"></div>
+  <div class="league">
+    <div class="lrow">
+      <div class="co">NTPC</div>
+      <div class="lbar" style="width:100%"></div>
+      <div><div class="v">76.0 GW</div><div class="d">98.5 BU Q1 Generation</div></div>
+    </div>
+    <div class="lrow">
+      <div class="co">Adani Power</div>
+      <div class="lbar mid" style="width:22%"></div>
+      <div><div class="v">16.8 GW</div><div class="d">24.2 BU Q1 Generation</div></div>
+    </div>
+    <div class="lrow">
+      <div class="co">Tata Power</div>
+      <div class="lbar mid" style="width:19%"></div>
+      <div><div class="v">14.7 GW</div><div class="d">11.4 BU Q1 Generation</div></div>
+    </div>
+    <div class="lrow">
+      <div class="co">JSW Energy</div>
+      <div class="lbar low" style="width:10%"></div>
+      <div><div class="v">7.5 GW</div><div class="d">7.8 BU Q1 Generation</div></div>
+    </div>
+    <div class="lrow">
+      <div class="co">Torrent Power</div>
+      <div class="lbar low" style="width:6%"></div>
+      <div><div class="v">4.3 GW</div><div class="d">4.2 BU Q1 Generation</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4: PRESSURE POINT -->
+<section>
+  <div class="fuel">
+    <h2>04 / Sector Pressure Point — Summer Heatwave Demand Surge & Coal Availability</h2>
+    <p style="color:#D6D1C6;margin-bottom:14px">India's peak power demand hit an all-time high of 250+ GW during summer heatwaves, requiring thermal plants to run at peak PLFs (78.5%) while merchant power exchange tariffs peaked above ₹7.0/kWh.</p>
+    
+    <div class="fline">
+      <div class="fp"><b style="color:var(--gold)">78.5%</b><i style="height:90%"></i><em>Sector Thermal PLF</em></div>
+      <div class="fp"><b style="color:var(--gold)">₹7.2/kWh</b><i style="height:75%"></i><em>Peak Merchant Rate</em></div>
+      <div class="fp"><b style="color:var(--gold)">15.5%</b><i style="height:60%"></i><em>NTPC Regulated ROE</em></div>
+    </div>
+    
+    <div class="warn">
+      <div><strong>Captive Coal Mine Ramping</strong>NTPC and Adani Power expanding captive coal production to reduce dependence on Coal India e-auctions.</div>
+      <div><strong>NTPC Green Energy IPO Trigger</strong>NTPC Green Energy (NGEL) spin-off and IPO providing major valuation unlock for parent NTPC.</div>
+      <div><strong>Solar Rooftop & RE Pipeline</strong>Tata Power Solar Rooftop and utility RE order book expanding under PM Surya Ghar Muft Bijli Yojana.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 5: COMPANY CARDS -->
+<section>
+  <h2>05 / Company Execution Profiles</h2>
+  <div class="rule"></div>
+  <div class="grid">
+
+    <!-- NTPC -->
+    <div class="c">
+      <div class="chead">
+        <div class="id">
+          <div class="logo"><span class="mono">NTPC</span></div>
+          <div><h3>NTPC</h3><div class="tick">NSE: NTPC • Large Cap</div></div>
+        </div>
+        <div class="badge del">BEAT</div>
+      </div>
+      <div class="tiles">
+        <div class="tile"><div class="n up">₹48,500 Cr</div><div class="l">Q1 Revenue (+14.5%)</div></div>
+        <div class="tile"><div class="n up">28.5%</div><div class="l">OPM (+150 bps)</div></div>
+        <div class="tile"><div class="n">78.5%</div><div class="l">Coal Plant PLF</div></div>
+        <div class="tile"><div class="n up">₹5,480 Cr</div><div class="l">Net Profit (+22.1%)</div></div>
+      </div>
+      <ul>
+        <li>Regulated equity base expanded to ₹85,000+ Cr, guaranteeing stable 15.5% post-tax ROE earnings compounding.</li>
+        <li>NTPC Green Energy (NGEL) operational RE capacity reached 3.8 GW; 10+ GW under construction pipeline.</li>
+        <li>Captive coal mining output grew +28% YoY to 9.2 MMT, reducing fuel supply costs.</li>
+      </ul>
+      <div class="flags">
+        <span class="flag ok">15.5% Regulated ROE</span>
+        <span class="flag ok">NGEL IPO Unlock</span>
+        <span class="flag">ESG Carbon Footprint</span>
+      </div>
+    </div>
+
+    <!-- TATA POWER -->
+    <div class="c">
+      <div class="chead">
+        <div class="id">
+          <div class="logo"><span class="mono">TPW</span></div>
+          <div><h3>Tata Power</h3><div class="tick">NSE: TATAPOWER • Large Cap</div></div>
+        </div>
+        <div class="badge del">BEAT</div>
+      </div>
+      <div class="tiles">
+        <div class="tile"><div class="n up">₹17,200 Cr</div><div class="l">Q1 Revenue (+17.8%)</div></div>
+        <div class="tile"><div class="n up">22.4%</div><div class="l">OPM (+120 bps)</div></div>
+        <div class="tile"><div class="n">5.6 GW</div><div class="l">RE Capacity</div></div>
+        <div class="tile"><div class="n up">₹1,180 Cr</div><div class="l">Net Profit (+31.2%)</div></div>
+      </div>
+      <ul>
+        <li>Mundra UMPP operating profitability supported by Section 11 cost pass-through tariffs.</li>
+        <li>Tata Power Solar Rooftop and EV Charging infrastructure revenues grew +35% YoY.</li>
+        <li>Odisha Discom turnaround complete; T&D losses reduced below regulatory targets.</li>
+      </ul>
+      <div class="flags">
+        <span class="flag ok">Solar Rooftop Monopoly</span>
+        <span class="flag ok">RE Transition Leader</span>
+        <span class="flag">Indonesian Coal Price Drift</span>
+      </div>
+    </div>
+
+    <!-- JSW ENERGY -->
+    <div class="c">
+      <div class="chead">
+        <div class="id">
+          <div class="logo"><span class="mono">JSWE</span></div>
+          <div><h3>JSW Energy</h3><div class="tick">NSE: JSWENERGY • Large Cap</div></div>
+        </div>
+        <div class="badge del">BEAT</div>
+      </div>
+      <div class="tiles">
+        <div class="tile"><div class="n up">₹3,850 Cr</div><div class="l">Q1 Revenue (+22.4%)</div></div>
+        <div class="tile"><div class="n up">34.2%</div><div class="l">OPM (+180 bps)</div></div>
+        <div class="tile"><div class="n">7.5 GW</div><div class="l">Operational Capacity</div></div>
+        <div class="tile"><div class="n up">₹525 Cr</div><div class="l">Net Profit (+42.5%)</div></div>
+      </div>
+      <ul>
+        <li>Mytrah renewable assets integration complete, boosting wind/solar generation output.</li>
+        <li>Kutehr 240 MW Hydro project commissioning underway; total capacity target of 10 GW by FY27.</li>
+        <li>Energy Storage System (BESS) and Pumped Storage Hydro (PSP) order pipeline expanding.</li>
+      </ul>
+      <div class="flags">
+        <span class="flag ok">34.2% Peak OPM</span>
+        <span class="flag ok">Pumped Storage Leader</span>
+        <span class="flag">Capex Debt Build-Up</span>
+      </div>
+    </div>
+
+    <!-- ADANI POWER -->
+    <div class="c">
+      <div class="chead">
+        <div class="id">
+          <div class="logo"><span class="mono">APW</span></div>
+          <div><h3>Adani Power</h3><div class="tick">NSE: ADANIPOWER • Large Cap</div></div>
+        </div>
+        <div class="badge del">BEAT</div>
+      </div>
+      <div class="tiles">
+        <div class="tile"><div class="n up">₹15,450 Cr</div><div class="l">Q1 Revenue (+26.5%)</div></div>
+        <div class="tile"><div class="n up">38.5%</div><div class="l">OPM (+240 bps)</div></div>
+        <div class="tile"><div class="n">16.8 GW</div><div class="l">Thermal Capacity</div></div>
+        <div class="tile"><div class="n up">₹3,910 Cr</div><div class="l">Net Profit (+48.2%)</div></div>
+      </div>
+      <ul>
+        <li>Highest sector EBITDA margin (38.5%) driven by Mundra and Godda thermal plant dispatches.</li>
+        <li>Godda 1,600 MW Ultra-Supercritical power plant supplying Bangladesh cross-border grid.</li>
+        <li>Deleveraging balance sheet with strong operational cash flow generation.</li>
+      </ul>
+      <div class="flags">
+        <span class="flag ok">38.5% Peak Margin</span>
+        <span class="flag ok">Godda Cross-Border Cashflow</span>
+        <span class="flag">Geopolitical Exposure</span>
+      </div>
+    </div>
+
+    <!-- TORRENT POWER -->
+    <div class="c">
+      <div class="chead">
+        <div class="id">
+          <div class="logo"><span class="mono">TOR</span></div>
+          <div><h3>Torrent Power</h3><div class="tick">NSE: TORNTPOWER • Large Cap</div></div>
+        </div>
+        <div class="badge part">IN-LINE</div>
+      </div>
+      <div class="tiles">
+        <div class="tile"><div class="n up">₹7,250 Cr</div><div class="l">Q1 Revenue (+13.2%)</div></div>
+        <div class="tile"><div class="n up">24.1%</div><div class="l">OPM (+100 bps)</div></div>
+        <div class="tile"><div class="n">4.3 GW</div><div class="l">Installed Capacity</div></div>
+        <div class="tile"><div class="n up">₹585 Cr</div><div class="l">Net Profit (+18.4%)</div></div>
+      </div>
+      <ul>
+        <li>Ahmedabad, Surat, and Bhiwandi distribution franchise areas posted stable 8%+ power volume growth.</li>
+        <li>LNG gas-based power generation plants operated under merchant spot market demand peaks.</li>
+        <li>Renewable energy portfolio expansion on track with 1.5 GW under development.</li>
+      </ul>
+      <div class="flags">
+        <span class="flag ok">Low T&D Loss Moat</span>
+        <span class="flag ok">Stable Utility Cashflow</span>
+        <span class="flag">LNG Price Volatility</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SECTION 6: KPI TREND MATRIX -->
+<section>
+  <h2>06 / KPI Trend & Metric Matrix</h2>
+  <div class="rule"></div>
+  <div class="matrix">
+    <table>
+      <thead>
+        <tr>
+          <th>Company</th>
+          <th>Metric Name</th>
+          <th>Q1 FY27</th>
+          <th></th>
+          <th>Q4 FY26</th>
+          <th>Delta</th>
+          <th>Strategic Insight</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="mono">NTPC</td>
+          <td>Coal Plant PLF (%)</td>
+          <td>78.5%</td>
+          <td><span class="arrow">↑</span></td>
+          <td>75.3%</td>
+          <td class="up">+320 bps</td>
+          <td>Record summer peak demand dispatches across pithead plants.</td>
+        </tr>
+        <tr>
+          <td class="mono">NTPC</td>
+          <td>Regulated Equity (₹ Cr)</td>
+          <td>₹85,200 Cr</td>
+          <td><span class="arrow">↑</span></td>
+          <td>₹82,400 Cr</td>
+          <td class="up">+₹2,800 Cr</td>
+          <td>Capitalization of new thermal and hydro units boosting 15.5% ROE base.</td>
+        </tr>
+        <tr>
+          <td class="mono">Tata Power</td>
+          <td>RE Capacity (GW)</td>
+          <td>5.6 GW</td>
+          <td><span class="arrow">↑</span></td>
+          <td>5.1 GW</td>
+          <td class="up">+0.5 GW</td>
+          <td>Commissioning of utility solar and rooftop installations.</td>
+        </tr>
+        <tr>
+          <td class="mono">JSW Energy</td>
+          <td>Generation (BU)</td>
+          <td>7.8 BU</td>
+          <td><span class="arrow">↑</span></td>
+          <td>6.5 BU</td>
+          <td class="up">+1.3 BU</td>
+          <td>Mytrah wind/solar assets and thermal plant availability.</td>
+        </tr>
+        <tr>
+          <td class="mono">Adani Power</td>
+          <td>EBITDA Margin (%)</td>
+          <td>38.5%</td>
+          <td><span class="arrow">↑</span></td>
+          <td>36.1%</td>
+          <td class="up">+240 bps</td>
+          <td>Godda cross-border export realization and low fuel cost.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- SECTION 7: WHAT MANAGEMENT SAID -->
+<section>
+  <h2>07 / What Management Said — Commentary & Guidance</h2>
+  <div class="rule"></div>
+  <div class="quotes">
+    <div class="qcard">
+      <blockquote>"Our coal plants ran at near-peak 78.5% PLFs to meet national power demand. NTPC Green Energy's IPO will unlock tremendous value for our shareholders."</blockquote>
+      <div class="auth">Gurdeep Singh</div>
+      <div class="role">Chairman & Managing Director, NTPC</div>
+    </div>
+
+    <div class="qcard">
+      <blockquote>"Our transition to 100% clean energy is progressing ahead of schedule. Solar rooftop, EV infrastructure, and distribution business are compounding profitability."</blockquote>
+      <div class="auth">Praveer Sinha</div>
+      <div class="role">CEO & Managing Director, Tata Power</div>
+    </div>
+
+    <div class="qcard">
+      <blockquote>"We are on track to achieve 10 GW capacity by FY27 with industry-leading 34%+ EBITDA margins backed by long-term PPAs."</blockquote>
+      <div class="auth">Sharad Mahendra</div>
+      <div class="role">Joint MD & CEO, JSW Energy</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 8: RED FLAGS & FORENSICS -->
+<section>
+  <h2>08 / Red Flags & Accounting Forensics</h2>
+  <div class="rule"></div>
+  <div class="rfgrid">
+    <div class="rfcard">
+      <h3>State Discom Delay & Overdue Receivables</h3>
+      <p>State electricity distribution companies (Discoms) accumulating regulatory asset overdues can strain power generator cash flows.</p>
+    </div>
+
+    <div class="rfcard">
+      <h3>Imported Coal & LNG Tariff Volatility</h3>
+      <p>Unhedged merchant power generation relying on imported coal or spot LNG faces margin squeeze if international fuel prices spike.</p>
+    </div>
+
+    <div class="rfcard">
+      <h3>Thermal Plant Environmental Compliance Capex</h3>
+      <p>Mandatory Flue Gas Desulfurization (FGD) retrofits on aging coal plants require ongoing capital expenditure.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 9: WALK THE TALK SCORECARD -->
+<section>
+  <h2>09 / Walk the Talk — Management Guidance vs Execution</h2>
+  <div class="rule"></div>
+  <div class="wtgrid">
+    <div class="wtcard">
+      <div class="wthead">
+        <h3>NTPC</h3>
+        <span class="wtscore high">SCORE: 9.7/10</span>
+      </div>
+      <p><strong>Guidance:</strong> 75%+ PLF, regulated equity base expansion, NGEL IPO preparation.</p>
+      <p><strong>Execution:</strong> Delivered 78.5% PLF, regulated equity reached ₹85.2k Cr, NGEL IPO file submitted.</p>
+    </div>
+
+    <div class="wtcard">
+      <div class="wthead">
+        <h3>Tata Power</h3>
+        <span class="wtscore high">SCORE: 9.4/10</span>
+      </div>
+      <p><strong>Guidance:</strong> 15%+ Topline growth, solar rooftop expansion.</p>
+      <p><strong>Execution:</strong> Revenue +17.8%, solar rooftop division grew +35%.</p>
+    </div>
+
+    <div class="wtcard">
+      <div class="wthead">
+        <h3>JSW Energy</h3>
+        <span class="wtscore high">SCORE: 9.5/10</span>
+      </div>
+      <p><strong>Guidance:</strong> Mytrah asset integration, 30%+ EBITDA margin.</p>
+      <p><strong>Execution:</strong> Generation volume up +20%, EBITDA margin delivered at peak 34.2%.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 10: SECTOR SYNTHESIS -->
+<section>
+  <h2>10 / Sector Synthesis & Strategic Outlook</h2>
+  <div class="rule"></div>
+  <div class="synth">
+    <p>India's Power Generation sector is undergoing a massive dual growth phase: <strong>base-load thermal power plants running at maximum capacity while utility renewable energy (solar, wind, hydro, BESS) scales exponentially</strong>.</p>
+    <p>Power utilities with guaranteed regulated equity returns (<strong>NTPC</strong>) and green transition leaders (<strong>Tata Power, JSW Energy</strong>) offer superior long-term institutional returns.</p>
+  </div>
+</section>
+
+<!-- SECTION 11: ACTIONABLE CALLS -->
+<section>
+  <h2>11 / Actionable Institutional Calls</h2>
+  <div class="rule"></div>
+  <div class="calls">
+    <div class="call buy">
+      <div class="type">TOP CONVICTION BUY</div>
+      <h3>NTPC</h3>
+      <div class="target">Target: ₹395 | Upside: +18.8%</div>
+      <p>15.5% regulated ROE equity compounding, 78.5% thermal PLF, NTPC Green Energy IPO value unlock.</p>
+    </div>
+
+    <div class="call buy">
+      <div class="type">HIGH QUALITY BUY</div>
+      <h3>Tata Power</h3>
+      <div class="target">Target: ₹435 | Upside: +18.2%</div>
+      <p>Solar rooftop retail monopoly, 5.6 GW RE capacity, Mundra cost pass-through tariff relief.</p>
+    </div>
+
+    <div class="call buy">
+      <div class="type">ACCUMULATE</div>
+      <h3>JSW Energy</h3>
+      <div class="target">Target: ₹635 | Upside: +17.6%</div>
+      <p>34.2% peak EBITDA margin, Mytrah RE integration, 10 GW capacity target by FY27.</p>
+    </div>
+
+    <div class="call watch">
+      <div class="type">TACTICAL ACCUMULATE</div>
+      <h3>Adani Power</h3>
+      <div class="target">Target: ₹245 | Upside: +18.2%</div>
+      <p>38.5% industry-best margin, Godda cross-border export cashflow, balance sheet deleveraging.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 12: ANALYST COVERAGE & TARGET PRICE MATRIX -->
+<section>
+  <h2>12 / Institutional Analyst Coverage & Target Price Matrix</h2>
+  <div class="rule"></div>
+  <p class="note">Consolidated institutional sell-side analyst recommendations, coverage dates, verdicts, and fair value targets for all 5 covered stocks.</p>
+  <div class="matrix">
+    <table>
+      <thead>
+        <tr>
+          <th>Company Name</th>
+          <th>Ticker</th>
+          <th>Lead Analyst & Institutional House</th>
+          <th>Coverage Date</th>
+          <th>Analyst Verdict</th>
+          <th>Fair Value / Target (₹)</th>
+          <th>CMP (₹)</th>
+          <th>Implied Upside (%)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>NTPC</strong></td>
+          <td class="mono">NTPC</td>
+          <td>Puneet Gulati (HSBC Equity)</td>
+          <td>August 2026</td>
+          <td><span class="badge del">BUY</span></td>
+          <td class="mono">₹395</td>
+          <td class="mono">₹332.5</td>
+          <td class="up">+18.8%</td>
+        </tr>
+        <tr>
+          <td><strong>Tata Power</strong></td>
+          <td class="mono">TATAPOWER</td>
+          <td>Abhineet Anand (Emkay Global)</td>
+          <td>August 2026</td>
+          <td><span class="badge del">BUY</span></td>
+          <td class="mono">₹435</td>
+          <td class="mono">₹368.0</td>
+          <td class="up">+18.2%</td>
+        </tr>
+        <tr>
+          <td><strong>JSW Energy</strong></td>
+          <td class="mono">JSWENERGY</td>
+          <td>Mohit Kumar (ICICI Securities)</td>
+          <td>August 2026</td>
+          <td><span class="badge del">BUY</span></td>
+          <td class="mono">₹635</td>
+          <td class="mono">₹539.8</td>
+          <td class="up">+17.6%</td>
+        </tr>
+        <tr>
+          <td><strong>Adani Power</strong></td>
+          <td class="mono">ADANIPOWER</td>
+          <td>Subhadip Mitra (Nuvama Wealth)</td>
+          <td>August 2026</td>
+          <td><span class="badge part">ADD</span></td>
+          <td class="mono">₹245</td>
+          <td class="mono">₹207.2</td>
+          <td class="up">+18.2%</td>
+        </tr>
+        <tr>
+          <td><strong>Torrent Power</strong></td>
+          <td class="mono">TORNTPOWER</td>
+          <td>Girish Achhipalia (Morgan Stanley)</td>
+          <td>August 2026</td>
+          <td><span class="badge part">ADD</span></td>
+          <td class="mono">₹1,510</td>
+          <td class="mono">₹1,299.1</td>
+          <td class="up">+16.2%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- SECTION 13: STOCK PRICE & RETURNS PERFORMANCE MATRIX (STRICTLY 5 COVERED STOCKS) -->
+<section>
+  <h2>13 / Stock Price & Returns Performance Matrix</h2>
+  <div class="rule"></div>
+  <div class="matrix">
+    <table>
+      <thead>
+        <tr>
+          <th>Company</th>
+          <th>Ticker</th>
+          <th>CMP (₹)</th>
+          <th>1W (%)</th>
+          <th>1M (%)</th>
+          <th>3M (%)</th>
+          <th>1Y (%)</th>
+          <th>3Y (%)</th>
+          <th>52W High</th>
+          <th>52W Low</th>
+          <th>Mkt Cap (₹ Cr)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>NTPC</td>
+          <td class="mono">NTPC</td>
+          <td class="mono">₹332.5</td>
+          <td class="up">+1.2%</td>
+          <td class="up">+4.5%</td>
+          <td class="up">+14.2%</td>
+          <td class="up">+54.0%</td>
+          <td class="up">+165%</td>
+          <td class="mono">₹414</td>
+          <td class="mono">₹316</td>
+          <td class="mono">3,22,400</td>
+        </tr>
+        <tr>
+          <td>Tata Power</td>
+          <td class="mono">TATAPOWER</td>
+          <td class="mono">₹368.0</td>
+          <td class="up">+1.8%</td>
+          <td class="up">+5.2%</td>
+          <td class="up">+16.0%</td>
+          <td class="up">+48.5%</td>
+          <td class="up">+140%</td>
+          <td class="mono">₹465</td>
+          <td class="mono">₹342</td>
+          <td class="mono">1,17,500</td>
+        </tr>
+        <tr>
+          <td>JSW Energy</td>
+          <td class="mono">JSWENERGY</td>
+          <td class="mono">₹539.8</td>
+          <td class="up">+2.4%</td>
+          <td class="up">+7.1%</td>
+          <td class="up">+21.5%</td>
+          <td class="up">+78.0%</td>
+          <td class="up">+240%</td>
+          <td class="mono">₹617</td>
+          <td class="mono">₹428</td>
+          <td class="mono">94,200</td>
+        </tr>
+        <tr>
+          <td>Adani Power</td>
+          <td class="mono">ADANIPOWER</td>
+          <td class="mono">₹207.2</td>
+          <td class="up">+2.1%</td>
+          <td class="up">+6.4%</td>
+          <td class="up">+19.0%</td>
+          <td class="up">+62.0%</td>
+          <td class="up">+210%</td>
+          <td class="mono">₹254</td>
+          <td class="mono">₹120</td>
+          <td class="mono">80,000</td>
+        </tr>
+        <tr>
+          <td>Torrent Power</td>
+          <td class="mono">TORNTPOWER</td>
+          <td class="mono">₹1,299.1</td>
+          <td class="up">+1.5%</td>
+          <td class="up">+4.8%</td>
+          <td class="up">+13.5%</td>
+          <td class="up">+42.0%</td>
+          <td class="up">+180%</td>
+          <td class="mono">₹1,824</td>
+          <td class="mono">₹1,188</td>
+          <td class="mono">62,400</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-family:var(--mono);font-size:11.5px;color:var(--mute);margin-top:10px;font-weight:600;">Current prices as on 07-09-2026 (Report Generated on 07-09-2026)</p>
+  </div>
+</section>
+
+<!-- SECTION 14: CAVEATS & METHODOLOGY -->
+<section>
+  <h2>14 / Caveats & Disclaimers</h2>
+  <div class="rule"></div>
+  <div class="synth">
+    <p><strong>Institutional Research Note Disclaimer:</strong> Sourced primarily via <strong>Tijori Finance MCP</strong> and local exchange price feeds. Generation volumes (BU) and PLF percentages reported from Central Electricity Authority (CEA) and quarterly exchange disclosures.</p>
+  </div>
+</section>
+
+<footer>
+  <div>RAJAN SECTOR RESEARCH • INSTITUTIONAL EQUITY DIVISION</div>
+  <div>CONFIDENTIAL FOR CLIENT USE • Q1 FY27</div>
+</footer>
+
+</div>
+</body>
+</html>

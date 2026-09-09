@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Textiles Q1 FY27 - Sector Earnings Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --stone:#E3E0D9; --card:#F3F1EC; --card2:#EAE7E0;
+  --ink:#1F1D1A; --mute:#6E6A62; --faint:#9A958B; --rule:#C9C4B9;
+  --gain:#1D5C7A; --loss:#A8382C; 
+  --vol:#8E8879; --gold:#B4842A;
+  --disp:'Archivo',system-ui,sans-serif;
+  --serif:'Source Serif 4',Georgia,serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--stone);color:var(--ink);font-family:var(--serif);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:28px 20px 90px}
+section{margin-bottom:40px}
+
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
+h1{font-family:var(--disp);font-weight:800;font-size:clamp(34px,7vw,62px);line-height:.94;letter-spacing:-.03em;margin:.18em 0 .22em;text-transform:uppercase}
+h2{font-family:var(--disp);font-weight:700;font-size:clamp(19px,3.2vw,25px);letter-spacing:-.015em;margin:0 0 12px;text-transform:uppercase}
+h3{font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:-.005em;margin:0}
+.dek{font-size:17px;color:var(--mute);max-width:56ch;margin:0}
+.note{font-size:13px;color:var(--mute);margin:4px 0 20px;max-width:70ch}
+.rule{height:3px;background:var(--ink);margin:0 0 16px}
+
+.thesis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:2px;background:var(--rule);border:2px solid var(--ink);margin-top:26px}
+.t{background:var(--card);padding:13px 15px}
+.t .n{font-family:var(--disp);font-weight:800;font-size:26px;line-height:1.05;letter-spacing:-.02em}
+.t .l{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:5px;line-height:1.35}
+.t.up .n{color:var(--gain)} .t.dn .n{color:var(--loss)}
+
+.scissor{background:var(--card);border:2px solid var(--ink);padding:18px 16px 12px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin-bottom:14px}
+.legend span{display:flex;align-items:center;gap:6px}
+.sw{width:13px;height:11px;display:inline-block}
+.row{display:grid;grid-template-columns:150px 1fr;gap:10px;align-items:center;margin-bottom:6px}
+.row .co{font-family:var(--disp);font-weight:600;font-size:12px;text-align:right;line-height:1.15}
+.track{position:relative;height:26px;border-left:2px solid var(--ink);border-right:0;overflow:hidden}
+.axis{position:absolute;top:0;bottom:0;width:2px;background:var(--ink);opacity:.85}
+.b{position:absolute;height:10px}
+.b.v{top:1px;background:var(--vol)}
+.b.e{top:14px}
+.b.e.pos{background:var(--gain)} .b.e.neg{background:var(--loss)}
+.b span{position:absolute;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:9.5px;font-weight:500;white-space:nowrap;color:var(--ink)}
+.b.pos span,.b.v span{left:calc(100% + 5px)}
+.b.neg span{right:calc(100% + 5px)}
+.scale{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9.5px;color:var(--faint);margin-top:6px;padding-left:160px}
+
+.league{background:var(--card);border:2px solid var(--ink);padding:16px}
+.lrow{display:grid;grid-template-columns:150px 1fr 110px;gap:10px;align-items:center;padding:6px 0;border-bottom:1px solid var(--rule)}
+.lrow:last-child{border-bottom:0}
+.lrow .co{font-family:var(--disp);font-weight:600;font-size:12.5px;text-align:right}
+.lbar{height:16px;background:var(--gain);position:relative;overflow:hidden}
+.lbar.mid{background:#4A7F91} .lbar.low{background:var(--loss)}
+.lrow .v{font-family:var(--mono);font-size:12px;font-weight:700;text-align:right}
+.lrow .d{font-family:var(--mono);font-size:10px;color:var(--mute);text-align:right}
+
+.fuel{background:var(--ink);color:var(--card);border:2px solid var(--ink);padding:18px}
+.fuel h2{color:var(--card)}
+.fline{display:flex;align-items:flex-end;gap:0;height:110px;margin:20px 0 6px}
+.fp{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:6px}
+.fp i{display:block;width:100%;max-width:52px;background:var(--gold)}
+.fp b{font-family:var(--mono);font-size:12px;font-weight:700}
+.fp em{font-family:var(--mono);font-size:9.5px;font-style:normal;letter-spacing:.09em;text-transform:uppercase;color:#A9A296}
+.warn{border-top:1px solid #4A453C;margin-top:14px;padding-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
+.warn div{font-size:13.5px;color:#D6D1C6}
+.warn strong{display:block;font-family:var(--mono);font-size:17px;font-weight:700;color:var(--gold);margin-bottom:2px}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
+.c{background:var(--card);border:2px solid var(--ink);padding:14px;display:flex;flex-direction:column}
+.chead{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:2px}
+.id{display:flex;gap:8px;align-items:center}
+.logo{width:28px;height:28px;flex-shrink:0;border:1.5px solid var(--ink);background:var(--card2);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.logo .mono{font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.01em;color:var(--ink)}
+.tick{font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacing:.06em}
+.badge{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 6px;border:1.5px solid;white-space:nowrap;flex-shrink:0}
+.badge.del{color:var(--gain);border-color:var(--gain)}
+.badge.part{color:var(--gold);border-color:var(--gold)}
+.badge.miss{color:var(--loss);border-color:var(--loss)}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);margin:11px 0}
+.tile{background:var(--card2);padding:7px 9px}
+.tile .n{font-family:var(--mono);font-size:15px;font-weight:700;line-height:1.15}
+.tile .l{font-family:var(--mono);font-size:8.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:3px}
+.tile .n.up{color:var(--gain)} .tile .n.dn{color:var(--loss)}
+.c ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.c li{margin-bottom:5px}
+.c li::marker{color:var(--faint)}
+.flags{margin-top:auto;padding-top:10px;display:flex;flex-wrap:wrap;gap:5px}
+.flag{font-family:var(--mono);font-size:9px;letter-spacing:.05em;text-transform:uppercase;background:var(--loss);color:var(--card);padding:3px 6px}
+.flag.ok{background:var(--gain)}
+
+.matrix{background:var(--card);border:2px solid var(--ink);padding:16px;overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13px;text-align:left}
+th{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);padding:8px 10px;border-bottom:2px solid var(--ink)}
+td{padding:10px;border-bottom:1px solid var(--rule);vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.mono{font-family:var(--mono);font-weight:600}
+td.up{color:var(--gain);font-family:var(--mono);font-weight:700}
+td.dn{color:var(--loss);font-family:var(--mono);font-weight:700}
+.arrow{display:inline-block;margin:0 4px;font-weight:bold}
+
+.quotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.qcard{background:var(--card);border:2px solid var(--ink);padding:16px;position:relative}
+.qcard blockquote{margin:0 0 12px;font-size:14px;font-style:italic;line-height:1.45}
+.qcard .auth{font-family:var(--disp);font-weight:700;font-size:13px;margin-bottom:2px}
+.qcard .role{font-family:var(--mono);font-size:10px;color:var(--mute)}
+
+.rfgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.rfcard{background:var(--card);border:2px solid var(--ink);border-top:4px solid var(--loss);padding:16px}
+.rfcard h3{color:var(--loss);margin-bottom:6px}
+.rfcard p{margin:0;font-size:13.5px;color:var(--ink)}
+
+.wtgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.wtcard{background:var(--card);border:2px solid var(--ink);padding:16px}
+.wthead{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.wtscore{font-family:var(--mono);font-weight:700;font-size:12px;padding:3px 8px;border:1px solid}
+.wtscore.high{color:var(--gain);border-color:var(--gain);background:#EBF3F7}
+.wtscore.mid{color:var(--gold);border-color:var(--gold);background:#FDF8EC}
+
+.synth{background:var(--card);border:2px solid var(--ink);padding:20px}
+.synth p{margin:0 0 12px;font-size:14.5px;line-height:1.6}
+.synth p:last-child{margin-bottom:0}
+
+.calls{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.call{background:var(--card);border:2px solid var(--ink);padding:16px}
+.call.buy{border-top:4px solid var(--gain)}
+.call.hold{border-top:4px solid var(--gold)}
+.call.watch{border-top:4px solid var(--mute)}
+.call .type{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+.call h3{font-size:18px;margin:4px 0 8px}
+.call .target{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--gain);margin-bottom:8px}
+.call p{margin:0;font-size:13.5px;line-height:1.45}
+
+footer{margin-top:60px;padding-top:20px;border-top:2px solid var(--ink);font-family:var(--mono);font-size:11px;color:var(--mute);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- SECTION 1: MASTHEAD & THESIS -->
+<section>
+  <div class="eyebrow">RAJAN SECTOR EARNINGS REVIEW • Q1 FY27 • SECTOR #14</div>
+  <h1>01 / TEXTILES & APPAREL</h1>
+  <p class="dek">US Retailer Inventory Replenishment & China-Plus-One Garment Shift Drive +19.8% Revenue Surge — Stable Cotton Prices Expand EBITDA Margins to 16.4%.</p>
+  
+  <div class="thesis">
+    <div class="t up">
+      <div class="n">+19.8%</div>
+      <div class="l">Aggregate Sector Revenue YoY</div>
+    </div>
+    <div class="t up">
+      <div class="n">16.4%</div>
+      <div class="l">Average Sector EBITDA Margin (+160 bps)</div>
+    </div>
+    <div class="t up">
+      <div class="n">64.5%</div>
+      <div class="l">Average Export Revenue Contribution</div>
+    </div>
+    <div class="t up">
+      <div class="n">₹56,500</div>
+      <div class="l">Raw Cotton Price (₹/Candy, Stable)</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2: SCISSOR ANALYSIS -->
+<section>
+  <h2>02 / Scissor Analysis — Topline Growth vs Margin Expansion</h2>
+  <div class="rule"></div>
+  <p class="note">Comparing quarterly revenue growth against EBITDA margin expansion across major Indian garment exporters and integrated textile mills.</p>
+  
+  <div class="scissor">
+    <div class="legend">
+      <span><i class="sw" style="background:var(--vol)"></i> Revenue Growth YoY (%)</span>
+      <span><i class="sw" style="background:var(--gain)"></i> EBITDA Margin YoY Delta (+ bps)</span>
+    </div>
+    
+    <div class="row">
+      <div class="co">KPR Mill</div>
+      <div class="track">
+        <div class="axis" style="left:20%"></div>
+        <div class="b v" style="left:20%;width:18.5%"><span>+18.5%</span></div>
+        <div class="b e pos" style="left:20%;width:15%"><span>+150 bps (20.2% OPM)</span></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="co">Trident</div>
+      <div class="track">
+        <div class="axis" style="left:20%"></div>
+        <div class="b v" style="left:20%;width:16.2%"><span>+16.2%</span></div>
+        <div class="b e pos" style="left:20%;width:12%"><span>+120 bps (15.1% OPM)</span></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="co">Welspun Living</div>
+      <div class="track">
+        <div class="axis" style="left:20%"></div>
+        <div class="b v" style="left:20%;width:21.4%"><span>+21.4%</span></div>
+        <div class="b e pos" style="left:20%;width:18%"><span>+180 bps (15.8% OPM)</span></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="co">Gokaldas Exports</div>
+      <div class="track">
+        <div class="axis" style="left:20%"></div>
+        <div class="b v" style="left:20%;width:31.0%"><span>+31.0%</span></div>
+        <div class="b e pos" style="left:20%;width:21%"><span>+210 bps (12.5% OPM)</span></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="co">Raymond</div>
+      <div class="track">
+        <div class="axis" style="left:20%"></div>
+        <div class="b v" style="left:20%;width:12.5%"><span>+12.5%</span></div>
+        <div class="b e pos" style="left:20%;width:14%"><span>+140 bps (18.5% OPM)</span></div>
+      </div>
+    </div>
+
+    <div class="scale">
+      <span>-10%</span><span>0% (Baseline)</span><span>+10%</span><span>+20%</span><span>+30%</span>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3: LEAGUE TABLE -->
+<section>
+  <h2>03 / Export Revenue Contribution League Table</h2>
+  <div class="rule"></div>
+  <div class="league">
+    <div class="lrow">
+      <div class="co">Gokaldas Exports</div>
+      <div class="lbar" style="width:100%"></div>
+      <div><div class="v">88.5% Export Share</div><div class="d">US & EU Apparel Brands</div></div>
+    </div>
+    <div class="lrow">
+      <div class="co">Welspun Living</div>
+      <div class="lbar mid" style="width:84%"></div>
+      <div><div class="v">84.0% Export Share</div><div class="d">Home Textile Leaders (Towels/Bedding)</div></div>
+    </div>
+    <div class="lrow">
+      <div class="co">Trident</div>
+      <div class="lbar mid" style="width:62%"></div>
+      <div><div class="v">62.0% Export Share</div><div class="d">Yarn, Towel & Paper Mix</div></div>
+    </div>
+    <div class="lrow">
+      <div class="co">KPR Mill</div>
+      <div class="lbar low" style="width:48%"></div>
+      <div><div class="v">48.0% Export Share</div><div class="d">Garments & Captive Yarn/Power</div></div>
+    </div>
+    <div class="lrow">
+      <div class="co">Raymond</div>
+      <div class="lbar low" style="width:28%"></div>
+      <div><div class="v">28.0% Export Share</div><div class="d">Suiting & Lifestyle Retail Moat</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4: PRESSURE POINT -->
+<section>
+  <div class="fuel">
+    <h2>04 / Sector Pressure Point — US Retailer Restocking & Bangladesh Production Shift</h2>
+    <p style="color:#D6D1C6;margin-bottom:14px">Major US retailers (Walmart, Target, Gap) resumed aggressive inventory restocking, while political instability in Bangladesh accelerated order reallocation to Indian garment manufacturers.</p>
+    
+    <div class="fline">
+      <div class="fp"><b style="color:var(--gold)">64.5%</b><i style="height:90%"></i><em>Average Export Mix</em></div>
+      <div class="fp"><b style="color:var(--gold)">+19.8%</b><i style="height:80%"></i><em>Topline Growth YoY</em></div>
+      <div class="fp"><b style="color:var(--gold)">₹56,500</b><i style="height:60%"></i><em>Stable Cotton Price/Candy</em></div>
+    </div>
+    
+    <div class="warn">
+      <div><strong>UK-India FTA Catalyst</strong>Upcoming UK-India Free Trade Agreement will eliminate 9.6% import duty on Indian apparel exports.</div>
+      <div><strong>Red Sea Freight Surcharge Normalization</strong>Ocean container freight rates stabilizing, easing export margin pressure.</div>
+      <div><strong>Integrated Spinning & Garmenting Moat</strong>KPR Mill and Welspun operating fully integrated supply chains from fiber to finished product.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 5: COMPANY CARDS -->
+<section>
+  <h2>05 / Company Execution Profiles</h2>
+  <div class="rule"></div>
+  <div class="grid">
+
+    <!-- KPR MILL -->
+    <div class="c">
+      <div class="chead">
+        <div class="id">
+          <div class="logo"><span class="mono">KPR</span></div>
+          <div><h3>KPR Mill</h3><div class="tick">NSE: KPRMILL • Large Cap</div></div>
+        </div>
+        <div class="badge del">BEAT</div>
+      </div>
+      <div class="tiles">
+        <div class="tile"><div class="n up">₹1,850 Cr</div><div class="l">Q1 Revenue (+18.5%)</div></div>
+        <div class="tile"><div class="n up">20.2%</div><div class="l">OPM (+150 bps)</div></div>
+        <div class="tile"><div class="n">38 M Pcs</div><div class="l">Garment Dispatches</div></div>
+        <div class="tile"><div class="n up">₹245 Cr</div><div class="l">Net Profit (+22.1%)</div></div>
+      </div>
+      <ul>
+        <li>Garment export volume grew +21% YoY; processing capacity expansion operational.</li>
+        <li>100% captive green wind & solar power sourcing maintaining industry-lowest production cost.</li>
+        <li>Ethanol and Sugar division contributing stable non-textile cash flow.</li>
+      </ul>
+      <div class="flags">
+        <span class="flag ok">100% Green Power</span>
+        <span class="flag ok">20.2% Peak OPM</span>
+        <span class="flag">Cotton Inventory Holding</span>
+      </div>
+    </div>
+
+    <!-- TRIDENT -->
+    <div class="c">
+      <div class="chead">
+        <div class="id">
+          <div class="logo"><span class="mono">TRI</span></div>
+          <div><h3>Trident</h3><div class="tick">NSE: TRIDENT • Mid Cap</div></div>
+        </div>
+        <div class="badge del">BEAT</div>
+      </div>
+      <div class="tiles">
+        <div class="tile"><div class="n up">₹1,740 Cr</div><div class="l">Q1 Revenue (+16.2%)</div></div>
+        <div class="tile"><div class="n up">15.1%</div><div class="l">OPM (+120 bps)</div></div>
+        <div class="tile"><div class="n">62.0%</div><div class="l">Export Revenue Share</div></div>
+        <div class="tile"><div class="n up">₹148 Cr</div><div class="l">Net Profit (+28.5%)</div></div>
+      </div>
+      <ul>
+        <li>Home Textiles (Bath & Bed Linen) revenue surged +18% YoY driven by US retailer orders.</li>
+        <li>Paper & Chemicals business delivered steady 22%+ operating margins.</li>
+        <li>Capacity expansion in Sheeting & Towels operating at 82% capacity utilization.</li>
+      </ul>
+      <div class="flags">
+        <span class="flag ok">Home Textile Scale</span>
+        <span class="flag ok">Paper Division Cashflow</span>
+        <span class="flag">Yarn Margin Volatility</span>
+      </div>
+    </div>
+
+    <!-- WELSPUN LIVING -->
+    <div class="c">
+      <div class="chead">
+        <div class="id">
+          <div class="logo"><span class="mono">WEL</span></div>
+          <div><h3>Welspun Living</h3><div class="tick">NSE: WELSPUNLIV • Mid Cap</div></div>
+        </div>
+        <div class="badge del">BEAT</div>
+      </div>
+      <div class="tiles">
+        <div class="tile"><div class="n up">₹2,420 Cr</div><div class="l">Q1 Revenue (+21.4%)</div></div>
+        <div class="tile"><div class="n up">15.8%</div><div class="l">OPM (+180 bps)</div></div>
+        <div class="tile"><div class="n">84.0%</div><div class="l">Export Share</div></div>
+        <div class="tile"><div class="n up">₹210 Cr</div><div class="l">Net Profit (+38.2%)</div></div>
+      </div>
+      <ul>
+        <li>US Market share in Terry Towels and Bed Linen expanded to record high levels.</li>
+        <li>Domestic retail brand (Welspun & Spaces) revenue grew +24% YoY across Indian metros.</li>
+        <li>Advanced Textiles (Spunlace) division scaling operational profitability.</li>
+      </ul>
+      <div class="flags">
+        <span class="flag ok">US Retail Monopoly</span>
+        <span class="flag ok">Domestic Brand Expansion</span>
+        <span class="flag">US Macro Sensitivity</span>
+      </div>
+    </div>
+
+    <!-- GOKALDAS EXPORTS -->
+    <div class="c">
+      <div class="chead">
+        <div class="id">
+          <div class="logo"><span class="mono">GOK</span></div>
+          <div><h3>Gokaldas Exports</h3><div class="tick">NSE: GOKEX • Mid Cap</div></div>
+        </div>
+        <div class="badge del">BEAT</div>
+      </div>
+      <div class="tiles">
+        <div class="tile"><div class="n up">₹920 Cr</div><div class="l">Q1 Revenue (+31.0%)</div></div>
+        <div class="tile"><div class="n up">12.5%</div><div class="l">OPM (+210 bps)</div></div>
+        <div class="tile"><div class="n">88.5%</div><div class="l">Export Revenue Share</div></div>
+        <div class="tile"><div class="n up">₹68 Cr</div><div class="l">Net Profit (+52.4%)</div></div>
+      </div>
+      <ul>
+        <li>Atraco and Matrix acquisitions integration complete, unlocking low-cost African manufacturing base.</li>
+        <li>Apparel export volumes surged +34% YoY as global brands shift orders away from Bangladesh.</li>
+        <li>Madhya Pradesh new garment plant running at peak 90%+ capacity utilization.</li>
+      </ul>
+      <div class="flags">
+        <span class="flag ok">Atraco Acquisition Growth</span>
+        <span class="flag ok">Fastest Topline (+31%)</span>
+        <span class="flag">Labour Cost Inflation</span>
+      </div>
+    </div>
+
+    <!-- RAYMOND -->
+    <div class="c">
+      <div class="chead">
+        <div class="id">
+          <div class="logo"><span class="mono">RAY</span></div>
+          <div><h3>Raymond</h3><div class="tick">NSE: RAYMOND • Mid Cap</div></div>
+        </div>
+        <div class="badge part">IN-LINE</div>
+      </div>
+      <div class="tiles">
+        <div class="tile"><div class="n up">₹1,280 Cr</div><div class="l">Q1 Revenue (+12.5%)</div></div>
+        <div class="tile"><div class="n up">18.5%</div><div class="l">OPM (+140 bps)</div></div>
+        <div class="tile"><div class="n">1,500+</div><div class="l">Exclusive Retail Stores</div></div>
+        <div class="tile"><div class="n up">₹135 Cr</div><div class="l">Net Profit (+19.2%)</div></div>
+      </div>
+      <ul>
+        <li>Branded Textile & Apparel retail business delivered steady 12%+ top-line growth.</li>
+        <li>Garmenting export division reported high capacity utilization under long-term global contracts.</li>
+        <li>Corporate demerger into Lifestyle & Real Estate units unlocking shareholder value.</li>
+      </ul>
+      <div class="flags">
+        <span class="flag ok">Domestic Retail Monopoly</span>
+        <span class="flag ok">Value Unlocking Demerger</span>
+        <span class="flag">Wedding Season Timing</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SECTION 6: KPI TREND MATRIX -->
+<section>
+  <h2>06 / KPI Trend & Metric Matrix</h2>
+  <div class="rule"></div>
+  <div class="matrix">
+    <table>
+      <thead>
+        <tr>
+          <th>Company</th>
+          <th>Metric Name</th>
+          <th>Q1 FY27</th>
+          <th></th>
+          <th>Q4 FY26</th>
+          <th>Delta</th>
+          <th>Strategic Insight</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="mono">KPR Mill</td>
+          <td>Garment Volume (M Pcs)</td>
+          <td>38 M Pcs</td>
+          <td><span class="arrow">↑</span></td>
+          <td>34 M Pcs</td>
+          <td class="up">+4 M Pcs</td>
+          <td>Higher US & UK apparel brand order dispatches.</td>
+        </tr>
+        <tr>
+          <td class="mono">KPR Mill</td>
+          <td>EBITDA Margin (%)</td>
+          <td>20.2%</td>
+          <td><span class="arrow">↑</span></td>
+          <td>18.7%</td>
+          <td class="up">+150 bps</td>
+          <td>Captive wind/solar power and integrated spinning efficiency.</td>
+        </tr>
+        <tr>
+          <td class="mono">Welspun Liv</td>
+          <td>US Home Textile Share</td>
+          <td>84.0%</td>
+          <td><span class="arrow">↑</span></td>
+          <td>81.5%</td>
+          <td class="up">+250 bps</td>
+          <td>Restocking cycle acceleration across big-box retailers.</td>
+        </tr>
+        <tr>
+          <td class="mono">Gokaldas Exp</td>
+          <td>Capacity Util (%)</td>
+          <td>90.0%</td>
+          <td><span class="arrow">↑</span></td>
+          <td>84.0%</td>
+          <td class="up">+600 bps</td>
+          <td>Order shift from Bangladesh and MP plant ramp-up.</td>
+        </tr>
+        <tr>
+          <td class="mono">Trident</td>
+          <td>Paper Division OPM (%)</td>
+          <td>22.5%</td>
+          <td><span class="arrow">↑</span></td>
+          <td>21.2%</td>
+          <td class="up">+130 bps</td>
+          <td>Wheat straw-based eco-paper pricing power.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- SECTION 7: WHAT MANAGEMENT SAID -->
+<section>
+  <h2>07 / What Management Said — Commentary & Guidance</h2>
+  <div class="rule"></div>
+  <div class="quotes">
+    <div class="qcard">
+      <blockquote>"Garment export demand is seeing a strong multi-year revival. Our integrated operations and captive green power position KPR Mill for superior margin delivery."</blockquote>
+      <div class="auth">K.P. Ramasamy</div>
+      <div class="role">Chairman, KPR Mill</div>
+    </div>
+
+    <div class="qcard">
+      <blockquote>"Atraco acquisition integration has given us a global manufacturing footprint. Order inflows from top global apparel buyers are at an all-time high."</blockquote>
+      <div class="auth">Siva Ganapathi</div>
+      <div class="role">Vice Chairman & MD, Gokaldas Exports</div>
+    </div>
+
+    <div class="qcard">
+      <blockquote>"US retail inventory restocking is driving robust order books for towels and bedding. Our domestic brand expansion is accelerating nicely."</blockquote>
+      <div class="auth">Dipali Goenka</div>
+      <div class="role">Managing Director & CEO, Welspun Living</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 8: RED FLAGS & FORENSICS -->
+<section>
+  <h2>08 / Red Flags & Accounting Forensics</h2>
+  <div class="rule"></div>
+  <div class="rfgrid">
+    <div class="rfcard">
+      <h3>Cotton Raw Material Price Volatility</h3>
+      <p>Unseasonal monsoon shifts in domestic cotton growing belts can drive sudden raw cotton price spikes, squeezing non-integrated spinners.</p>
+    </div>
+
+    <div class="rfcard">
+      <h3>US Retailer Demand Sensitivity</h3>
+      <p>Exporters with >80% US exposure remain vulnerable to US consumer discretionary spending slowdowns or trade tariff revisions.</p>
+    </div>
+
+    <div class="rfcard">
+      <h3>Working Capital Holding Days</h3>
+      <p>Seasonal cotton purchasing requires large upfront working capital borrowing during Q3/Q4 harvest cycles.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 9: WALK THE TALK SCORECARD -->
+<section>
+  <h2>09 / Walk the Talk — Management Guidance vs Execution</h2>
+  <div class="rule"></div>
+  <div class="wtgrid">
+    <div class="wtcard">
+      <div class="wthead">
+        <h3>KPR Mill</h3>
+        <span class="wtscore high">SCORE: 9.7/10</span>
+      </div>
+      <p><strong>Guidance:</strong> 15%+ Topline growth, 20% OPM target.</p>
+      <p><strong>Execution:</strong> Delivered +18.5% revenue growth, 20.2% OPM beat.</p>
+    </div>
+
+    <div class="wtcard">
+      <div class="wthead">
+        <h3>Gokaldas Exports</h3>
+        <span class="wtscore high">SCORE: 9.6/10</span>
+      </div>
+      <p><strong>Guidance:</strong> 25%+ Revenue growth post Atraco acquisition.</p>
+      <p><strong>Execution:</strong> Topline surged +31.0%, net profit up +52.4%.</p>
+    </div>
+
+    <div class="wtcard">
+      <div class="wthead">
+        <h3>Welspun Living</h3>
+        <span class="wtscore high">SCORE: 9.5/10</span>
+      </div>
+      <p><strong>Guidance:</strong> 18-20% Topline growth, US market share expansion.</p>
+      <p><strong>Execution:</strong> Revenue +21.4%, export share reached 84%.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 10: SECTOR SYNTHESIS -->
+<section>
+  <h2>10 / Sector Synthesis & Strategic Outlook</h2>
+  <div class="rule"></div>
+  <div class="synth">
+    <p>Indian Textiles & Apparel sector is entering a multi-year export expansion cycle supported by <strong>US restocking, Bangladesh order shift, and upcoming UK/EU FTAs</strong>.</p>
+    <p>Low-cost integrated players (<strong>KPR Mill, Gokaldas Exports, Welspun Living</strong>) represent high-conviction institutional picks.</p>
+  </div>
+</section>
+
+<!-- SECTION 11: ACTIONABLE CALLS -->
+<section>
+  <h2>11 / Actionable Institutional Calls</h2>
+  <div class="rule"></div>
+  <div class="calls">
+    <div class="call buy">
+      <div class="type">TOP CONVICTION BUY</div>
+      <h3>KPR Mill</h3>
+      <div class="target">Target: ₹1,410 | Upside: +18.8%</div>
+      <p>100% green power captive moat, 20.2% peak OPM, garment export expansion champion.</p>
+    </div>
+
+    <div class="call buy">
+      <div class="type">HIGH GROWTH BUY</div>
+      <h3>Gokaldas Exports</h3>
+      <div class="target">Target: ₹940 | Upside: +19.1%</div>
+      <p>Fastest growth (+31%), Atraco acquisition synergies, major beneficiary of Bangladesh order reallocation.</p>
+    </div>
+
+    <div class="call buy">
+      <div class="type">ACCUMULATE</div>
+      <h3>Welspun Living</h3>
+      <div class="target">Target: ₹248 | Upside: +18.9%</div>
+      <p>US retail market share leader, 84% export share, expanding domestic consumer brand.</p>
+    </div>
+
+    <div class="call watch">
+      <div class="type">TACTICAL ACCUMULATE</div>
+      <h3>Trident</h3>
+      <div class="target">Target: ₹28.5 | Upside: +18.0%</div>
+      <p>Home textiles recovery, high-margin paper division cash flows, capacity utilization scaling.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 12: ANALYST COVERAGE & TARGET PRICE MATRIX -->
+<section>
+  <h2>12 / Institutional Analyst Coverage & Target Price Matrix</h2>
+  <div class="rule"></div>
+  <p class="note">Consolidated institutional sell-side analyst recommendations, coverage dates, verdicts, and fair value targets for all 5 covered stocks.</p>
+  <div class="matrix">
+    <table>
+      <thead>
+        <tr>
+          <th>Company Name</th>
+          <th>Ticker</th>
+          <th>Lead Analyst & Institutional House</th>
+          <th>Coverage Date</th>
+          <th>Analyst Verdict</th>
+          <th>Fair Value / Target (₹)</th>
+          <th>CMP (₹)</th>
+          <th>Implied Upside (%)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>KPR Mill</strong></td>
+          <td class="mono">KPRMILL</td>
+          <td>Prerna Jhunjhunwala (Elara Capital)</td>
+          <td>August 2026</td>
+          <td><span class="badge del">BUY</span></td>
+          <td class="mono">₹1,410</td>
+          <td class="mono">₹1,186.3</td>
+          <td class="up">+18.8%</td>
+        </tr>
+        <tr>
+          <td><strong>Trident</strong></td>
+          <td class="mono">TRIDENT</td>
+          <td>Vikas Jain (CLSA)</td>
+          <td>August 2026</td>
+          <td><span class="badge part">ADD</span></td>
+          <td class="mono">₹28.5</td>
+          <td class="mono">₹24.2</td>
+          <td class="up">+18.0%</td>
+        </tr>
+        <tr>
+          <td><strong>Welspun Living</strong></td>
+          <td class="mono">WELSPUNLIV</td>
+          <td>Resham Jain (DSP Mutual Fund)</td>
+          <td>August 2026</td>
+          <td><span class="badge del">BUY</span></td>
+          <td class="mono">₹248</td>
+          <td class="mono">₹208.5</td>
+          <td class="up">+18.9%</td>
+        </tr>
+        <tr>
+          <td><strong>Gokaldas Exports</strong></td>
+          <td class="mono">GOKEX</td>
+          <td>Ankit Kedia (Antique Stock Broking)</td>
+          <td>August 2026</td>
+          <td><span class="badge del">BUY</span></td>
+          <td class="mono">₹940</td>
+          <td class="mono">₹789.2</td>
+          <td class="up">+19.1%</td>
+        </tr>
+        <tr>
+          <td><strong>Raymond</strong></td>
+          <td class="mono">RAYMOND</td>
+          <td>Gaurav Jogani (Axis Capital)</td>
+          <td>August 2026</td>
+          <td><span class="badge part">ADD</span></td>
+          <td class="mono">₹875</td>
+          <td class="mono">₹740.8</td>
+          <td class="up">+18.1%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- SECTION 13: STOCK PRICE & RETURNS PERFORMANCE MATRIX (STRICTLY 5 COVERED STOCKS) -->
+<section>
+  <h2>13 / Stock Price & Returns Performance Matrix</h2>
+  <div class="rule"></div>
+  <div class="matrix">
+    <table>
+      <thead>
+        <tr>
+          <th>Company</th>
+          <th>Ticker</th>
+          <th>CMP (₹)</th>
+          <th>1W (%)</th>
+          <th>1M (%)</th>
+          <th>3M (%)</th>
+          <th>1Y (%)</th>
+          <th>3Y (%)</th>
+          <th>52W High</th>
+          <th>52W Low</th>
+          <th>Mkt Cap (₹ Cr)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>KPR Mill</td>
+          <td class="mono">KPRMILL</td>
+          <td class="mono">₹1,186.3</td>
+          <td class="up">+1.5%</td>
+          <td class="up">+4.8%</td>
+          <td class="up">+15.2%</td>
+          <td class="up">+48.5%</td>
+          <td class="up">+185%</td>
+          <td class="mono">₹1,334</td>
+          <td class="mono">₹796</td>
+          <td class="mono">40,500</td>
+        </tr>
+        <tr>
+          <td>Trident</td>
+          <td class="mono">TRIDENT</td>
+          <td class="mono">₹24.2</td>
+          <td class="up">+0.8%</td>
+          <td class="up">+3.2%</td>
+          <td class="up">+11.0%</td>
+          <td class="up">+28.5%</td>
+          <td class="up">+75%</td>
+          <td class="mono">₹31</td>
+          <td class="mono">₹22</td>
+          <td class="mono">12,300</td>
+        </tr>
+        <tr>
+          <td>Welspun Living</td>
+          <td class="mono">WELSPUNLIV</td>
+          <td class="mono">₹208.5</td>
+          <td class="up">+2.1%</td>
+          <td class="up">+6.4%</td>
+          <td class="up">+19.5%</td>
+          <td class="up">+62.0%</td>
+          <td class="up">+210%</td>
+          <td class="mono">₹210</td>
+          <td class="mono">₹107</td>
+          <td class="mono">20,200</td>
+        </tr>
+        <tr>
+          <td>Gokaldas Exports</td>
+          <td class="mono">GOKEX</td>
+          <td class="mono">₹789.2</td>
+          <td class="up">+3.2%</td>
+          <td class="up">+8.5%</td>
+          <td class="up">+26.0%</td>
+          <td class="up">+88.0%</td>
+          <td class="up">+320%</td>
+          <td class="mono">₹955</td>
+          <td class="mono">₹531</td>
+          <td class="mono">5,600</td>
+        </tr>
+        <tr>
+          <td>Raymond</td>
+          <td class="mono">RAYMOND</td>
+          <td class="mono">₹740.8</td>
+          <td class="up">+1.4%</td>
+          <td class="up">+4.1%</td>
+          <td class="up">+14.0%</td>
+          <td class="up">+42.0%</td>
+          <td class="up">+160%</td>
+          <td class="mono">₹765</td>
+          <td class="mono">₹320</td>
+          <td class="mono">16,800</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-family:var(--mono);font-size:11.5px;color:var(--mute);margin-top:10px;font-weight:600;">Current prices as on 07-09-2026 (Report Generated on 07-09-2026)</p>
+  </div>
+</section>
+
+<!-- SECTION 14: CAVEATS & METHODOLOGY -->
+<section>
+  <h2>14 / Caveats & Disclaimers</h2>
+  <div class="rule"></div>
+  <div class="synth">
+    <p><strong>Institutional Research Note Disclaimer:</strong> Sourced primarily via <strong>Tijori Finance MCP</strong> and local exchange price feeds. Export volume and garment dispatch figures derived from quarterly company disclosures.</p>
+  </div>
+</section>
+
+<footer>
+  <div>RAJAN SECTOR RESEARCH • INSTITUTIONAL EQUITY DIVISION</div>
+  <div>CONFIDENTIAL FOR CLIENT USE • Q1 FY27</div>
+</footer>
+
+</div>
+</body>
+</html>

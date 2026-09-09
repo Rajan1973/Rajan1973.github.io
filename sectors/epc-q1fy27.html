@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EPC Infrastructure Q1 FY27 — Sector Earnings Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --stone:#E3E0D9; --card:#F3F1EC; --card2:#EAE7E0;
+  --ink:#1F1D1A; --mute:#6E6A62; --faint:#9A958B; --rule:#C9C4B9;
+  --gain:#1D5C7A; --loss:#A8382C; 
+  --vol:#8E8879; --gold:#B4842A;
+  --disp:'Archivo',system-ui,sans-serif;
+  --serif:'Source Serif 4',Georgia,serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--stone);color:var(--ink);font-family:var(--serif);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:28px 20px 90px}
+section{margin-bottom:40px}
+
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
+h1{font-family:var(--disp);font-weight:800;font-size:clamp(34px,7vw,62px);line-height:.94;letter-spacing:-.03em;margin:.18em 0 .22em;text-transform:uppercase}
+h2{font-family:var(--disp);font-weight:700;font-size:clamp(19px,3.2vw,25px);letter-spacing:-.015em;margin:0 0 12px;text-transform:uppercase}
+h3{font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:-.005em;margin:0}
+.dek{font-size:17px;color:var(--mute);max-width:56ch;margin:0}
+.note{font-size:13px;color:var(--mute);margin:4px 0 20px;max-width:70ch}
+.rule{height:3px;background:var(--ink);margin:0 0 16px}
+
+.thesis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:2px;background:var(--rule);border:2px solid var(--ink);margin-top:26px}
+.t{background:var(--card);padding:13px 15px}
+.t .n{font-family:var(--disp);font-weight:800;font-size:26px;line-height:1.05;letter-spacing:-.02em}
+.t .l{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:5px;line-height:1.35}
+.t.up .n{color:var(--gain)} .t.dn .n{color:var(--loss)}
+
+.scissor{background:var(--card);border:2px solid var(--ink);padding:18px 16px 12px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin-bottom:14px}
+.legend span{display:flex;align-items:center;gap:6px}
+.sw{width:13px;height:11px;display:inline-block}
+.row{display:grid;grid-template-columns:150px 1fr;gap:10px;align-items:center;margin-bottom:6px}
+.row .co{font-family:var(--disp);font-weight:600;font-size:12px;text-align:right;line-height:1.15}
+.track{position:relative;height:26px;border-left:2px solid var(--ink);border-right:0;overflow:hidden}
+.axis{position:absolute;top:0;bottom:0;width:2px;background:var(--ink);opacity:.85}
+.b{position:absolute;height:10px}
+.b.v{top:1px;background:var(--vol)}
+.b.e{top:14px}
+.b.e.pos{background:var(--gain)} .b.e.neg{background:var(--loss)}
+.b span{position:absolute;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:9.5px;font-weight:500;white-space:nowrap;color:var(--ink)}
+.b.pos span,.b.v span{left:calc(100% + 5px)}
+.b.neg span{right:calc(100% + 5px)}
+.scale{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9.5px;color:var(--faint);margin-top:6px;padding-left:160px}
+
+.league{background:var(--card);border:2px solid var(--ink);padding:16px}
+.lrow{display:grid;grid-template-columns:150px 1fr 110px;gap:10px;align-items:center;padding:6px 0;border-bottom:1px solid var(--rule)}
+.lrow:last-child{border-bottom:0}
+.lrow .co{font-family:var(--disp);font-weight:600;font-size:12.5px;text-align:right}
+.lbar{height:16px;background:var(--gain);position:relative;overflow:hidden}
+.lbar.mid{background:#4A7F91} .lbar.low{background:var(--loss)}
+.lrow .v{font-family:var(--mono);font-size:12px;font-weight:700;text-align:right}
+.lrow .d{font-family:var(--mono);font-size:10px;color:var(--mute);text-align:right}
+
+.fuel{background:var(--ink);color:var(--card);border:2px solid var(--ink);padding:18px}
+.fuel h2{color:var(--card)}
+.fline{display:flex;align-items:flex-end;gap:0;height:110px;margin:20px 0 6px}
+.fp{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:6px}
+.fp i{display:block;width:100%;max-width:52px;background:var(--gold)}
+.fp b{font-family:var(--mono);font-size:12px;font-weight:700}
+.fp em{font-family:var(--mono);font-size:9.5px;font-style:normal;letter-spacing:.09em;text-transform:uppercase;color:#A9A296}
+.warn{border-top:1px solid #4A453C;margin-top:14px;padding-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
+.warn div{font-size:13.5px;color:#D6D1C6}
+.warn strong{display:block;font-family:var(--mono);font-size:17px;font-weight:700;color:var(--gold);margin-bottom:2px}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
+.c{background:var(--card);border:2px solid var(--ink);padding:14px;display:flex;flex-direction:column}
+.chead{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:2px}
+.id{display:flex;gap:8px;align-items:center}
+.logo{width:28px;height:28px;flex-shrink:0;border:1.5px solid var(--ink);background:var(--card2);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.logo .mono{font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.01em;color:var(--ink)}
+.tick{font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacing:.06em}
+.badge{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 6px;border:1.5px solid;white-space:nowrap;flex-shrink:0}
+.badge.del{color:var(--gain);border-color:var(--gain)}
+.badge.part{color:var(--gold);border-color:var(--gold)}
+.badge.miss{color:var(--loss);border-color:var(--loss)}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);margin:11px 0}
+.tile{background:var(--card2);padding:7px 9px}
+.tile .n{font-family:var(--mono);font-size:15px;font-weight:700;line-height:1.15}
+.tile .l{font-family:var(--mono);font-size:8.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:3px}
+.tile .n.up{color:var(--gain)} .tile .n.dn{color:var(--loss)}
+.c ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.c li{margin-bottom:5px}
+.c li::marker{color:var(--faint)}
+.flags{margin-top:auto;padding-top:10px;display:flex;flex-wrap:wrap;gap:5px}
+.flag{font-family:var(--mono);font-size:9px;letter-spacing:.05em;text-transform:uppercase;background:var(--loss);color:var(--card);padding:3px 6px}
+.flag.ok{background:var(--gain)}
+
+.table-wrap{background:var(--card);border:2px solid var(--ink);overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:12.5px;text-align:left}
+th,td{padding:9px 12px;border-bottom:1px solid var(--rule)}
+th{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);background:var(--card2);font-weight:600}
+tr:last-child td{border-bottom:0}
+.co{font-family:var(--disp);font-weight:600}
+.num{font-family:var(--mono);font-weight:600}
+.num.up{color:var(--gain)} .num.dn{color:var(--loss)}
+
+.call-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.call-card{background:var(--card);border:2px solid var(--ink);padding:16px}
+.call-card.buy{border-top:6px solid var(--gain)}
+.call-card.hold{border-top:6px solid var(--gold)}
+.call-card.sell{border-top:6px solid var(--loss)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- Section 1: Masthead & Thesis -->
+<section id="sec-1">
+  <div class="eyebrow">Institutional Equity Research • Q1 FY27 Sector Earnings Review</div>
+  <h1>EPC Infrastructure</h1>
+  <p class="dek">Public Capex Disruption & Working Capital Extension: Order Book Execution Diverges as Middle East T&D Surges</p>
+  <div class="rule"></div>
+  <div class="thesis">
+    <div class="t up"><div class="n">+14.2%</div><div class="l">Aggregate Rev YoY</div></div>
+    <div class="t dn"><div class="n">-110 bps</div><div class="l">EBITDA Margin Compression</div></div>
+    <div class="t up"><div class="n">₹9.82 L Cr</div><div class="l">Combined Order Backlog</div></div>
+    <div class="t up"><div class="n">3.1x</div><div class="l">Average Book-to-Bill Ratio</div></div>
+  </div>
+</section>
+
+<!-- Section 2: Scissor Analysis -->
+<section id="sec-2">
+  <h2>01 / Scissor Analysis — Topline Growth vs Margin Expansion</h2>
+  <div class="scissor">
+    <div class="legend">
+      <span><i class="sw" style="background:var(--vol)"></i> Revenue Growth (YoY %)</span>
+      <span><i class="sw" style="background:var(--gain)"></i> EBITDA Margin Expansion</span>
+      <span><i class="sw" style="background:var(--loss)"></i> EBITDA Margin Compression</span>
+    </div>
+    <div class="row"><div class="co">Larsen & Toubro</div><div class="track"><div class="b v" style="left:50%;width:35%"><span>+14.0%</span></div><div class="b e neg" style="right:50%;width:18%"><span>-90 bps</span></div></div></div>
+    <div class="row"><div class="co">Kalpataru Projects</div><div class="track"><div class="b v" style="left:50%;width:46%"><span>+18.4%</span></div><div class="b e pos" style="left:50%;width:8%"><span>+30 bps</span></div></div></div>
+    <div class="row"><div class="co">Afcons Infra</div><div class="track"><div class="b v" style="right:50%;width:50%"><span>-20.3%</span></div><div class="b e neg" style="right:50%;width:68%"><span>-340 bps</span></div></div></div>
+    <div class="row"><div class="co">Engineers India</div><div class="track"><div class="b v" style="right:50%;width:14%"><span>-5.8%</span></div><div class="b e pos" style="left:50%;width:70%"><span>+714 bps</span></div></div></div>
+    <div class="row"><div class="co">PNC Infratech</div><div class="track"><div class="b v" style="left:50%;width:85%"><span>+34.0%</span></div><div class="b e pos" style="left:50%;width:90%"><span>+1230 bps</span></div></div></div>
+    <div class="scale"><span>-50%</span><span>0% (Baseline)</span><span>+50%</span></div>
+  </div>
+</section>
+
+<!-- Section 3: League Table -->
+<section id="sec-3">
+  <h2>02 / Revenue & Scale League Table</h2>
+  <div class="league">
+    <div class="lrow"><div class="co">Larsen & Toubro</div><div class="lbar" style="width:100%"></div><div class="v">₹55,120 Cr</div><div class="d">3.2x Book/Bill</div></div>
+    <div class="lrow"><div class="co">Kalpataru Projects</div><div class="lbar mid" style="width:25%"></div><div class="v">₹4,880 Cr</div><div class="d">2.6x Book/Bill</div></div>
+    <div class="lrow"><div class="co">NCC Limited</div><div class="lbar mid" style="width:22%"></div><div class="v">₹5,842 Cr</div><div class="d">3.5x Book/Bill</div></div>
+    <div class="lrow"><div class="co">Afcons Infra</div><div class="lbar low" style="width:18%"></div><div class="v">₹3,150 Cr</div><div class="d">3.9x Book/Bill</div></div>
+    <div class="lrow"><div class="co">KEC International</div><div class="lbar mid" style="width:16%"></div><div class="v">₹4,512 Cr</div><div class="d">2.0x Book/Bill</div></div>
+  </div>
+</section>
+
+<!-- Section 4: Pressure Point -->
+<section id="sec-4">
+  <h2>03 / Sector Pressure Point — Election Lulls & Working Capital Stress</h2>
+  <div class="fuel">
+    <h2>Public Works Tendering Delays & Payment Realization Lags</h2>
+    <div class="fline">
+      <div class="fp"><b style="color:var(--gold)">₹1.12 L Cr</b><i style="height:85px"></i><em>Q1 National Order Inflows (-18% YoY)</em></div>
+      <div class="fp"><b>114 Days</b><i style="height:65px"></i><em>Working Capital Cycle (+12 days)</em></div>
+      <div class="fp"><b>9.2%</b><i style="height:45px"></i><em>Avg Sector EBITDA Margin (-110 bps)</em></div>
+    </div>
+    <div class="warn">
+      <div><strong>Election Slowdown</strong> Post-elections, government project awards lagged in Q1, pushing inflow targets into H2 FY27.</div>
+      <div><strong>International Pivot</strong> Middle East power T&D and oil & gas contracts offset domestic infrastructure ordering pauses.</div>
+    </div>
+  </div>
+</section>
+
+<!-- Section 5: Company Execution Profiles -->
+<section id="sec-5">
+  <h2>04 / Company Execution Profiles</h2>
+  <div class="grid">
+    <article class="c">
+      <div class="chead"><div class="id"><h3>Larsen & Toubro</h3><div class="tick">LT</div></div><div class="badge del">Delivered</div></div>
+      <div class="tiles"><div class="tile"><div class="n up">₹55,120 Cr</div><div class="l">Revenue (+14%)</div></div><div class="tile"><div class="n dn">9.0%</div><div class="l">EBITDA Margin (-90bps)</div></div></div>
+      <ul><li>Order inflows up 14% YoY to ₹1,08,000 Cr; backlog reaches record ₹7,79,000 Cr.</li><li>Middle East Hydrocarbon & Power T&D execution robust, offsetting domestic monsoon delays.</li><li>Guiding for 10-12% inflow and revenue growth in FY27.</li></ul>
+      <div class="flags"><span class="flag ok">Record Backlog</span><span class="flag ok">Middle East Surge</span></div>
+    </article>
+    <article class="c">
+      <div class="chead"><div class="id"><h3>Kalpataru Projects</h3><div class="tick">KPIL</div></div><div class="badge del">Delivered</div></div>
+      <div class="tiles"><div class="tile"><div class="n up">₹4,880 Cr</div><div class="l">Revenue (+18.4%)</div></div><div class="tile"><div class="n up">8.8%</div><div class="l">EBITDA Margin (+30bps)</div></div></div>
+      <ul><li>Strong execution in T&D and B&F segments; YTD inflows exceeded ₹11,000 Cr.</li><li>Net debt reduced significantly supported by asset monetization.</li><li>Order book stands at ₹66,607 Cr (2.6x trailing revenue).</li></ul>
+      <div class="flags"><span class="flag ok">T&D Inflows</span><span class="flag ok">Deleveraging</span></div>
+    </article>
+    <article class="c">
+      <div class="chead"><div class="id"><h3>Engineers India</h3><div class="tick">ENGINERSIN</div></div><div class="badge del">Delivered</div></div>
+      <div class="tiles"><div class="tile"><div class="n dn">₹514 Cr</div><div class="l">Revenue (-5.8%)</div></div><div class="tile"><div class="n up">15.4%</div><div class="l">EBITDA Margin (+714bps)</div></div></div>
+      <ul><li>PAT surged 141.5% YoY to ₹158 Cr as high-margin consultancy segment expanded.</li><li>Consultancy segment EBIT margin hit 24%, boosting profitability.</li><li>Order book at ₹14,424 Cr; expanding into nuclear & green hydrogen EPC.</li></ul>
+      <div class="flags"><span class="flag ok">PAT +141%</span><span class="flag ok">High Margin Mix</span></div>
+    </article>
+    <article class="c">
+      <div class="chead"><div class="id"><h3>PNC Infratech</h3><div class="tick">PNCINFRA</div></div><div class="badge del">Delivered</div></div>
+      <div class="tiles"><div class="tile"><div class="n up">₹1,518 Cr</div><div class="l">Revenue (+34%)</div></div><div class="tile"><div class="n up">24.7%</div><div class="l">EBITDA Margin (+1230bps)</div></div></div>
+      <ul><li>Standalone PAT surged to ₹271 Cr supported by ₹217 Cr NHAI arbitration award.</li><li>Execution across HAM highway stretches gained strong momentum.</li><li>Unexecuted order book stands at ₹15,670 Cr.</li></ul>
+      <div class="flags"><span class="flag ok">Arbitration Gain</span><span class="flag">NHAI Notice Risk</span></div>
+    </article>
+    <article class="c">
+      <div class="chead"><div class="id"><h3>IRB Infrastructure</h3><div class="tick">IRB</div></div><div class="badge del">Delivered</div></div>
+      <div class="tiles"><div class="tile"><div class="n up">₹1,950 Cr</div><div class="l">Revenue (+1.8%)</div></div><div class="tile"><div class="n up">53.8%</div><div class="l">EBITDA Margin (+840bps)</div></div></div>
+      <ul><li>PAT jumped 51% YoY to ₹306.3 Cr on robust toll revenues across highways.</li><li>Executing ₹4,605 Cr asset transfer to listed IRB InvIT Fund.</li><li>Toll collection growth maintained at 14% YoY across TOT/BOT portfolios.</li></ul>
+      <div class="flags"><span class="flag ok">PAT +51%</span><span class="flag ok">InvIT Transfer</span></div>
+    </article>
+    <article class="c">
+      <div class="chead"><div class="id"><h3>NCC Limited</h3><div class="tick">NCC</div></div><div class="badge del">Delivered</div></div>
+      <div class="tiles"><div class="tile"><div class="n up">₹5,842 Cr</div><div class="l">Revenue (+12.2%)</div></div><div class="tile"><div class="n up">9.8%</div><div class="l">EBITDA Margin (+40bps)</div></div></div>
+      <ul><li>PAT rose 12.6% to ₹216.4 Cr; order book reached record ₹81,214 Cr.</li><li>Q1 inflows stood at ₹3,889 Cr with additional ₹1,053 Cr July orders.</li><li>Targeting FY27 fresh order inflows of ₹22,000–25,000 Cr.</li></ul>
+      <div class="flags"><span class="flag ok">Record Order Book</span><span class="flag ok">3.5x Book/Bill</span></div>
+    </article>
+  </div>
+</section>
+
+<!-- Section 6: KPI Trend Matrix -->
+<section id="sec-6">
+  <h2>05 / KPI Trend & Metric Matrix</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Company</th><th>EBITDA Margin</th><th>Margin Chg</th><th>Rev YoY</th><th>PAT YoY</th><th>Order Backlog</th><th>Book/Bill</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="co">Larsen & Toubro</td><td class="num">9.0%</td><td class="num dn">-90 bps</td><td class="num up">+14.0%</td><td class="num up">+12.0%</td><td class="num">₹7,79,000 Cr</td><td class="num">3.2x</td></tr>
+        <tr><td class="co">Kalpataru Projects</td><td class="num">8.8%</td><td class="num up">+30 bps</td><td class="num up">+18.4%</td><td class="num up">+46.0%</td><td class="num">₹66,607 Cr</td><td class="num">2.6x</td></tr>
+        <tr><td class="co">Engineers India</td><td class="num">15.4%</td><td class="num up">+714 bps</td><td class="num dn">-5.8%</td><td class="num up">+141.5%</td><td class="num">₹14,424 Cr</td><td class="num">4.4x</td></tr>
+        <tr><td class="co">PNC Infratech</td><td class="num">24.7%</td><td class="num up">+1230 bps</td><td class="num up">+34.0%</td><td class="num up">+176.0%</td><td class="num">₹15,670 Cr</td><td class="num">2.6x</td></tr>
+        <tr><td class="co">IRB Infrastructure</td><td class="num">53.8%</td><td class="num up">+840 bps</td><td class="num up">+1.8%</td><td class="num up">+51.0%</td><td class="num">₹4,605 Cr EV</td><td class="num">N/A</td></tr>
+        <tr><td class="co">NCC Limited</td><td class="num">9.8%</td><td class="num up">+40 bps</td><td class="num up">+12.2%</td><td class="num up">+12.6%</td><td class="num">₹81,214 Cr</td><td class="num">3.5x</td></tr>
+        <tr><td class="co">Afcons Infra</td><td class="num">9.6%</td><td class="num dn">-340 bps</td><td class="num dn">-20.3%</td><td class="num dn">-77.9%</td><td class="num">₹43,290 Cr</td><td class="num">3.9x</td></tr>
+        <tr><td class="co">KEC International</td><td class="num">5.8%</td><td class="num dn">-120 bps</td><td class="num">0.0%</td><td class="num dn">-42.0%</td><td class="num">&gt;₹40,000 Cr</td><td class="num">2.0x</td></tr>
+        <tr><td class="co">RITES Ltd</td><td class="num">22.4%</td><td class="num dn">-90 bps</td><td class="num up">+8.6%</td><td class="num up">+7.6%</td><td class="num">₹9,445 Cr</td><td class="num">4.4x</td></tr>
+        <tr><td class="co">IRCON International</td><td class="num">10.5%</td><td class="num dn">-60 bps</td><td class="num up">+9.5%</td><td class="num dn">-43.6%</td><td class="num">₹23,366 Cr</td><td class="num">2.6x</td></tr>
+        <tr><td class="co">GR Infraprojects</td><td class="num">16.8%</td><td class="num dn">-323 bps</td><td class="num up">+40.1%</td><td class="num up">+46.4%</td><td class="num">₹26,470 Cr</td><td class="num">2.4x</td></tr>
+        <tr><td class="co">HG Infra Eng.</td><td class="num">8.5%</td><td class="num dn">-530 bps</td><td class="num dn">-46.9%</td><td class="num dn">-77.5%</td><td class="num">₹14,502 Cr</td><td class="num">2.3x</td></tr>
+        <tr><td class="co">Ashoka Buildcon</td><td class="num">9.5%</td><td class="num dn">-180 bps</td><td class="num dn">-1.0%</td><td class="num up">+3.0%</td><td class="num">₹15,251 Cr</td><td class="num">2.9x</td></tr>
+        <tr><td class="co">Patel Engineering</td><td class="num">14.02%</td><td class="num up">+62 bps</td><td class="num up">+3.8%</td><td class="num up">+24.5%</td><td class="num">₹14,636 Cr</td><td class="num">2.9x</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- Section 7: What Management Said -->
+<section id="sec-7">
+  <h2>06 / What Management Said — Guidance & Strategy</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Company</th><th>Management Commentary & Strategic Focus</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="co">Larsen & Toubro</td><td>"Domestic infra tendering picked up towards end-Q1. Middle East power transmission and hydrocarbon order inflows remain exceptionally strong. Maintaining 10-12% inflow and revenue guidance for FY27."</td></tr>
+        <tr><td class="co">Kalpataru Projects</td><td>"T&D and international execution continue to drive outperformance. Deleveraging goal on track following asset sales and strong cash conversion."</td></tr>
+        <tr><td class="co">Engineers India</td><td>"Expanding consultancy footprint in green hydrogen, bio-refineries, and nuclear. High consultancy share will sustain margins above 15%."</td></tr>
+        <tr><td class="co">NCC Limited</td><td>"Buildings and water segments driving revenue; order backlog of ₹81,214 Cr provides 3.5 years of revenue visibility."</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- Section 8: Red Flags & Accounting Forensics -->
+<section id="sec-8">
+  <h2>07 / Red Flags & Forensics</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Company</th><th>Risk Factor / Accounting Red Flag</th><th>Severity</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="co">Afcons Infra</td><td>Land acquisition delays and monsoon disruptions hit Q1 execution, leading to 78% drop in PAT.</td><td>High</td></tr>
+        <tr><td class="co">PNC Infratech</td><td>NHAI show-cause notice regarding pavement slippage on specific stretches; Q1 PAT boosted by one-off arbitration.</td><td>Medium</td></tr>
+        <tr><td class="co">HG Infra Eng.</td><td>Standalone revenue dropped 46.9% due to delayed project appointments and land handovers.</td><td>Medium</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- Section 9: Walk the Talk -->
+<section id="sec-9">
+  <h2>08 / Walk the Talk — Guidance vs Execution Scorecard</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Company</th><th>Target / Guidance</th><th>Actual Q1 Delivery</th><th>Verdict</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="co">Larsen & Toubro</td><td>10-12% Order & Rev Growth</td><td>₹1.08 L Cr Inflows (+14%), 14% Rev Growth</td><td class="num up">Delivered</td></tr>
+        <tr><td class="co">Kalpataru Projects</td><td>≥15% Rev Growth & Margin Expansion</td><td>Revenue +18.4%, EBITDA Margin +30 bps</td><td class="num up">Delivered</td></tr>
+        <tr><td class="co">Engineers India</td><td>Consultancy Focus & Margin Expansion</td><td>Consultancy Margin 24%, PAT +141.5%</td><td class="num up">Delivered</td></tr>
+        <tr><td class="co">Afcons Infra</td><td>Maintain Execution Momentum</td><td>Revenue -20.3%, PAT -77.9%</td><td class="num dn">Missed</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- Section 10: Sector Synthesis -->
+<section id="sec-10">
+  <h2>09 / Sector Synthesis & Strategic Outlook</h2>
+  <p>The EPC infrastructure sector experienced a bifurcated Q1 FY27. Players with significant international exposure—particularly in Middle East power transmission, substation, and hydrocarbon projects (L&T, Kalpataru)—navigated domestic government tendering slowdowns with ease. Conversely, pure-play domestic road EPC contractors suffered from election-related project sanctioning delays and monsoon disruptions, resulting in margin compression and revenue declines.</p>
+</section>
+
+<!-- Section 11: Actionable Calls -->
+<section id="sec-11">
+  <h2>10 / Actionable Institutional Calls</h2>
+  <div class="call-grid">
+    <div class="call-card buy"><h3>Larsen & Toubro</h3><p><strong>BUY (TP: ₹4,150)</strong> — Mega-order backlog of ₹7.79 L Cr and Middle East capex boom provide unmatched earnings multi-year visibility.</p></div>
+    <div class="call-card buy"><h3>Kalpataru Projects</h3><p><strong>BUY (TP: ₹1,520)</strong> — Strong T&D order inflows and balance sheet deleveraging drive re-rating trajectory.</p></div>
+    <div class="call-card hold"><h3>PNC Infratech</h3><p><strong>HOLD (TP: ₹480)</strong> — Robust execution counterbalanced by NHAI regulatory uncertainty and one-off inflated margins.</p></div>
+  </div>
+</section>
+
+<!-- Section 12: Analyst Coverage -->
+<section id="sec-12">
+  <h2>11 / Institutional Analyst Coverage & Target Price Matrix</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Company</th><th>Brokerage / Analyst</th><th>Coverage Date</th><th>Rating</th><th>CMP (₹)</th><th>Target Price (₹)</th><th>Upside / Downside</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="co">Larsen & Toubro</td><td>ICICI Securities</td><td>02 Aug 2026</td><td>BUY</td><td>3,580.00</td><td>4,150.00</td><td class="num up">+15.9%</td></tr>
+        <tr><td class="co">Kalpataru Projects</td><td>Nuvama Institutional</td><td>12 Aug 2026</td><td>BUY</td><td>1,280.00</td><td>1,520.00</td><td class="num up">+18.8%</td></tr>
+        <tr><td class="co">Afcons Infra</td><td>Axis Capital</td><td>08 Aug 2026</td><td>HOLD</td><td>450.00</td><td>480.00</td><td class="num up">+6.7%</td></tr>
+        <tr><td class="co">KEC International</td><td>Motilal Oswal</td><td>11 Aug 2026</td><td>BUY</td><td>890.00</td><td>1,050.00</td><td class="num up">+18.0%</td></tr>
+        <tr><td class="co">NCC Limited</td><td>Kotak Institutional</td><td>07 Aug 2026</td><td>BUY</td><td>310.00</td><td>375.00</td><td class="num up">+21.0%</td></tr>
+        <tr><td class="co">RITES Ltd</td><td>Antique Stock Broking</td><td>05 Aug 2026</td><td>HOLD</td><td>295.00</td><td>320.00</td><td class="num up">+8.5%</td></tr>
+        <tr><td class="co">Engineers India</td><td>HDFC Securities</td><td>14 Aug 2026</td><td>BUY</td><td>210.00</td><td>260.00</td><td class="num up">+23.8%</td></tr>
+        <tr><td class="co">IRCON International</td><td>IDBI Capital</td><td>13 Aug 2026</td><td>HOLD</td><td>240.00</td><td>255.00</td><td class="num up">+6.3%</td></tr>
+        <tr><td class="co">IRB Infrastructure</td><td>JM Financial</td><td>31 Jul 2026</td><td>BUY</td><td>64.00</td><td>78.00</td><td class="num up">+21.9%</td></tr>
+        <tr><td class="co">GR Infraprojects</td><td>Systematix Institutional</td><td>08 Aug 2026</td><td>HOLD</td><td>1,580.00</td><td>1,720.00</td><td class="num up">+8.9%</td></tr>
+        <tr><td class="co">PNC Infratech</td><td>Sharekhan</td><td>09 Aug 2026</td><td>HOLD</td><td>435.00</td><td>480.00</td><td class="num up">+10.3%</td></tr>
+        <tr><td class="co">HG Infra Engineering</td><td>Emkay Global</td><td>10 Aug 2026</td><td>BUY</td><td>1,320.00</td><td>1,600.00</td><td class="num up">+21.2%</td></tr>
+        <tr><td class="co">Ashoka Buildcon</td><td>Elara Capital</td><td>13 Aug 2026</td><td>HOLD</td><td>225.00</td><td>250.00</td><td class="num up">+11.1%</td></tr>
+        <tr><td class="co">Patel Engineering</td><td>BOB Capital</td><td>11 Aug 2026</td><td>BUY</td><td>58.00</td><td>75.00</td><td class="num up">+29.3%</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- Section 13: Stock Price Performance Matrix -->
+<section id="sec-13">
+  <h2>12 / Stock Price & Returns Performance Matrix</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Company</th><th>Ticker</th><th>Result Date</th><th>CMP (₹)</th><th>1W Return</th><th>1M Return</th><th>3M Return</th><th>YTD Return</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="co">Larsen & Toubro</td><td class="num">LT</td><td>28 Jul 2026</td><td class="num">3,580.00</td><td class="num up">+1.2%</td><td class="num up">+3.4%</td><td class="num up">+8.1%</td><td class="num up">+14.2%</td></tr>
+        <tr><td class="co">Kalpataru Projects</td><td class="num">KPIL</td><td>11 Aug 2026</td><td class="num">1,280.00</td><td class="num up">+2.8%</td><td class="num up">+6.1%</td><td class="num up">+15.4%</td><td class="num up">+32.0%</td></tr>
+        <tr><td class="co">Afcons Infra</td><td class="num">AFCONS</td><td>07 Aug 2026</td><td class="num">450.00</td><td class="num dn">-1.8%</td><td class="num dn">-4.2%</td><td class="num dn">-2.1%</td><td class="num dn">-5.8%</td></tr>
+        <tr><td class="co">KEC International</td><td class="num">KEC</td><td>10 Aug 2026</td><td class="num">890.00</td><td class="num up">+0.5%</td><td class="num up">+1.9%</td><td class="num up">+4.2%</td><td class="num up">+18.5%</td></tr>
+        <tr><td class="co">NCC Limited</td><td class="num">NCC</td><td>06 Aug 2026</td><td class="num">310.00</td><td class="num up">+3.1%</td><td class="num up">+5.8%</td><td class="num up">+12.0%</td><td class="num up">+28.4%</td></tr>
+        <tr><td class="co">RITES Ltd</td><td class="num">RITES</td><td>04 Aug 2026</td><td class="num">295.00</td><td class="num dn">-0.4%</td><td class="num up">+1.1%</td><td class="num up">+3.5%</td><td class="num up">+7.2%</td></tr>
+        <tr><td class="co">Engineers India</td><td class="num">ENGINERSIN</td><td>13 Aug 2026</td><td class="num">210.00</td><td class="num up">+4.5%</td><td class="num up">+9.2%</td><td class="num up">+18.0%</td><td class="num up">+35.1%</td></tr>
+        <tr><td class="co">IRCON International</td><td class="num">IRCON</td><td>12 Aug 2026</td><td class="num">240.00</td><td class="num dn">-2.1%</td><td class="num dn">-3.5%</td><td class="num up">+1.2%</td><td class="num up">+9.8%</td></tr>
+        <tr><td class="co">IRB Infrastructure</td><td class="num">IRB</td><td>30 Jul 2026</td><td class="num">64.00</td><td class="num up">+1.8%</td><td class="num up">+4.0%</td><td class="num up">+10.5%</td><td class="num up">+22.1%</td></tr>
+        <tr><td class="co">GR Infraprojects</td><td class="num">GRINFRA</td><td>07 Aug 2026</td><td class="num">1,580.00</td><td class="num up">+0.8%</td><td class="num up">+2.2%</td><td class="num up">+5.1%</td><td class="num up">+11.4%</td></tr>
+        <tr><td class="co">PNC Infratech</td><td class="num">PNCINFRA</td><td>08 Aug 2026</td><td class="num">435.00</td><td class="num up">+5.2%</td><td class="num up">+8.0%</td><td class="num up">+14.2%</td><td class="num up">+19.0%</td></tr>
+        <tr><td class="co">HG Infra Engineering</td><td class="num">HGINFRA</td><td>09 Aug 2026</td><td class="num">1,320.00</td><td class="num dn">-3.4%</td><td class="num dn">-6.8%</td><td class="num dn">-1.5%</td><td class="num up">+12.8%</td></tr>
+        <tr><td class="co">Ashoka Buildcon</td><td class="num">ASHOKA</td><td>12 Aug 2026</td><td class="num">225.00</td><td class="num dn">-1.1%</td><td class="num up">+0.5%</td><td class="num up">+4.0%</td><td class="num up">+16.3%</td></tr>
+        <tr><td class="co">Patel Engineering</td><td class="num">PATELENG</td><td>10 Aug 2026</td><td class="num">58.00</td><td class="num up">+2.4%</td><td class="num up">+5.5%</td><td class="num up">+11.8%</td><td class="num up">+24.0%</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-family:var(--mono);font-size:11.5px;color:var(--mute);margin-top:10px;font-weight:600;">Current prices as on 07-09-2026 (Report Generated on 07-09-2026)</p>
+</section>
+
+<!-- Section 14: Caveats & Disclaimers -->
+<section id="sec-14">
+  <h2>13 / Caveats & Disclaimers</h2>
+  <p class="note">This research review is compiled for institutional research purposes. Target prices and financial estimates represent consensus parameters derived from analyst coverage data. Past market returns are not indicative of future performance.</p>
+</section>
+
+</div>
+</body>
+</html>

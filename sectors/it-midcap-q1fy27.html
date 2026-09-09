@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IT Midcap Q1 FY27 - Sector Earnings Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --stone:#E3E0D9; --card:#F3F1EC; --card2:#EAE7E0;
+  --ink:#1F1D1A; --mute:#6E6A62; --faint:#9A958B; --rule:#C9C4B9;
+  --gain:#1D5C7A; --loss:#A8382C; 
+  --vol:#8E8879; --gold:#B4842A;
+  --disp:'Archivo',system-ui,sans-serif;
+  --serif:'Source Serif 4',Georgia,serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--stone);color:var(--ink);font-family:var(--serif);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:28px 20px 90px}
+section{margin-bottom:40px}
+
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
+h1{font-family:var(--disp);font-weight:800;font-size:clamp(34px,7vw,62px);line-height:.94;letter-spacing:-.03em;margin:.18em 0 .22em;text-transform:uppercase}
+h2{font-family:var(--disp);font-weight:700;font-size:clamp(19px,3.2vw,25px);letter-spacing:-.015em;margin:0 0 12px;text-transform:uppercase}
+h3{font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:-.005em;margin:0}
+.dek{font-size:17px;color:var(--mute);max-width:56ch;margin:0}
+.note{font-size:13px;color:var(--mute);margin:4px 0 20px;max-width:70ch}
+.rule{height:3px;background:var(--ink);margin:0 0 16px}
+
+.thesis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:2px;background:var(--rule);border:2px solid var(--ink);margin-top:26px}
+.t{background:var(--card);padding:13px 15px}
+.t .n{font-family:var(--disp);font-weight:800;font-size:26px;line-height:1.05;letter-spacing:-.02em}
+.t .l{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:5px;line-height:1.35}
+.t.up .n{color:var(--gain)} .t.dn .n{color:var(--loss)}
+
+.scissor{background:var(--card);border:2px solid var(--ink);padding:18px 16px 12px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin-bottom:14px}
+.legend span{display:flex;align-items:center;gap:6px}
+.sw{width:13px;height:11px;display:inline-block}
+.row{display:grid;grid-template-columns:150px 1fr;gap:10px;align-items:center;margin-bottom:6px}
+.row .co{font-family:var(--disp);font-weight:600;font-size:12px;text-align:right;line-height:1.15}
+.track{position:relative;height:26px;border-left:2px solid var(--ink);border-right:0;overflow:hidden}
+.axis{position:absolute;top:0;bottom:0;width:2px;background:var(--ink);opacity:.85}
+.b{position:absolute;height:10px}
+.b.v{top:1px;background:var(--vol)}
+.b.e{top:14px}
+.b.e.pos{background:var(--gain)} .b.e.neg{background:var(--loss)}
+.b span{position:absolute;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:9.5px;font-weight:500;white-space:nowrap;color:var(--ink)}
+.b.pos span,.b.v span{left:calc(100% + 5px)}
+.b.neg span{right:calc(100% + 5px)}
+.scale{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9.5px;color:var(--faint);margin-top:6px;padding-left:160px}
+
+.league{background:var(--card);border:2px solid var(--ink);padding:16px}
+.lrow{display:grid;grid-template-columns:150px 1fr 110px;gap:10px;align-items:center;padding:6px 0;border-bottom:1px solid var(--rule)}
+.lrow:last-child{border-bottom:0}
+.lrow .co{font-family:var(--disp);font-weight:600;font-size:12.5px;text-align:right}
+.lbar{height:16px;background:var(--gain);position:relative;overflow:hidden}
+.lbar.mid{background:#4A7F91} .lbar.low{background:var(--loss)}
+.lrow .v{font-family:var(--mono);font-size:12px;font-weight:700;text-align:right}
+.lrow .d{font-family:var(--mono);font-size:10px;color:var(--mute);text-align:right}
+
+.fuel{background:var(--ink);color:var(--card);border:2px solid var(--ink);padding:18px}
+.fuel h2{color:var(--card)}
+.fline{display:flex;align-items:flex-end;gap:0;height:110px;margin:20px 0 6px}
+.fp{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:6px}
+.fp i{display:block;width:100%;max-width:52px;background:var(--gold)}
+.fp b{font-family:var(--mono);font-size:12px;font-weight:700}
+.fp em{font-family:var(--mono);font-size:9.5px;font-style:normal;letter-spacing:.09em;text-transform:uppercase;color:#A9A296}
+.warn{border-top:1px solid #4A453C;margin-top:14px;padding-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
+.warn div{font-size:13.5px;color:#D6D1C6}
+.warn strong{display:block;font-family:var(--mono);font-size:17px;font-weight:700;color:var(--gold);margin-bottom:2px}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
+.c{background:var(--card);border:2px solid var(--ink);padding:14px;display:flex;flex-direction:column}
+.chead{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:2px}
+.id{display:flex;gap:8px;align-items:center}
+.logo{width:28px;height:28px;flex-shrink:0;border:1.5px solid var(--ink);background:var(--card2);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.logo .mono{font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.01em;color:var(--ink)}
+.tick{font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacing:.06em}
+.badge{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 6px;border:1.5px solid;white-space:nowrap;flex-shrink:0}
+.badge.del{color:var(--gain);border-color:var(--gain)}
+.badge.part{color:var(--gold);border-color:var(--gold)}
+.badge.miss{color:var(--loss);border-color:var(--loss)}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);margin:11px 0}
+.tile{background:var(--card2);padding:7px 9px}
+.tile .n{font-family:var(--mono);font-size:15px;font-weight:700;line-height:1.15}
+.tile .l{font-family:var(--mono);font-size:8.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:3px}
+.tile .n.up{color:var(--gain)} .tile .n.dn{color:var(--loss)}
+.c ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.c li{margin-bottom:5px}
+.c li::marker{color:var(--faint)}
+.flags{margin-top:auto;padding-top:10px;display:flex;flex-wrap:wrap;gap:5px}
+.flag{font-family:var(--mono);font-size:9px;letter-spacing:.05em;text-transform:uppercase;background:var(--loss);color:var(--card);padding:3px 6px}
+.flag.ok{background:var(--gain)}
+
+.matrix{background:var(--card);border:2px solid var(--ink);padding:16px;overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13px;text-align:left}
+th{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);padding:8px 10px;border-bottom:2px solid var(--ink)}
+td{padding:10px;border-bottom:1px solid var(--rule);vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.mono{font-family:var(--mono);font-weight:600}
+td.up{color:var(--gain);font-family:var(--mono);font-weight:700}
+td.dn{color:var(--loss);font-family:var(--mono);font-weight:700}
+.arrow{display:inline-block;margin:0 4px;font-weight:bold}
+
+.quotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.qcard{background:var(--card);border:2px solid var(--ink);padding:16px;position:relative}
+.qcard blockquote{margin:0 0 12px;font-size:14px;font-style:italic;line-height:1.45}
+.qcard .auth{font-family:var(--disp);font-weight:700;font-size:13px;margin-bottom:2px}
+.qcard .role{font-family:var(--mono);font-size:10px;color:var(--mute)}
+
+.rfgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.rfcard{background:var(--card);border:2px solid var(--ink);border-top:4px solid var(--loss);padding:16px}
+.rfcard h3{color:var(--loss);margin-bottom:6px}
+.rfcard p{margin:0;font-size:13.5px;color:var(--ink)}
+
+.wtgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.wtcard{background:var(--card);border:2px solid var(--ink);padding:16px}
+.wthead{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.wtscore{font-family:var(--mono);font-weight:700;font-size:12px;padding:3px 8px;border:1px solid}
+.wtscore.high{color:var(--gain);border-color:var(--gain);background:#EBF3F7}
+.wtscore.mid{color:var(--gold);border-color:var(--gold);background:#FDF8EC}
+
+.synth{background:var(--card);border:2px solid var(--ink);padding:20px}
+.synth p{margin:0 0 12px;font-size:14.5px;line-height:1.6}
+.synth p:last-child{margin-bottom:0}
+
+.calls{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.call{background:var(--card);border:2px solid var(--ink);padding:16px}
+.call.buy{border-top:4px solid var(--gain)}
+.call.hold{border-top:4px solid var(--gold)}
+.call.watch{border-top:4px solid var(--mute)}
+.call .type{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+.call h3{font-size:18px;margin:4px 0 8px}
+.call .target{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--gain);margin-bottom:8px}
+.call p{margin:0;font-size:13.5px;line-height:1.45}
+
+footer{margin-top:60px;padding-top:20px;border-top:2px solid var(--ink);font-family:var(--mono);font-size:11px;color:var(--mute);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- SECTION 1: MASTHEAD & THESIS -->
+<section>
+  <div class="eyebrow">RAJAN SECTOR EARNINGS REVIEW • Q1 FY27 • SECTOR #8</div>
+  <h1>01 / IT MIDCAP</h1>
+  <p class="dek">Generative AI Implementation Deals & Cost-Optimization TCV Replacements Drive +14.2% Revenue Growth — Utilization Gains and Offshoring Expand EBIT Margins by +90 bps.</p>
+  
+  <div class="thesis">
+    <div class="t up">
+      <div class="n">+14.2%</div>
+      <div class="l">Aggregate CC Revenue Growth YoY</div>
+    </div>
+    <div class="t up">
+      <div class="n">$1.85 B</div>
+      <div class="l">Combined Quarterly TCV Intake</div>
+    </div>
+    <div class="t up">
+      <div class="n">16.8%</div>
+      <div class="l">Average Sector EBIT Margin (+90 bps)</div>
+    </div>
+    <div class="t up">
+      <div class="n">82.5%</div>
+      <div class="l">Average Employee Utilization</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2: SCISSOR ANALYSIS -->
+<section>
+  <h2>02 / Scissor Analysis — Topline Growth vs Margin Expansion</h2>
+  <div class="rule"></div>
+  <p class="note">Comparing quarterly Constant Currency (CC) revenue growth against EBIT margin expansion across leading Indian IT Midcap companies. Specialized ER&D and Healthcare verticals outperformed generic BFSI IT spending.</p>
+  
+  <div class="scissor">
+    <div class="legend">
+      <span><i class="sw" style="background:var(--vol)"></i> CC Revenue Growth YoY (%)</span>
+      <span><i class="sw" style="background:var(--gain)"></i> EBIT Margin YoY Delta (+ bps)</span>
+    </div>
+    
+    <div class="row">
+      <div class="co">Persistent Systems</div>
+      <div class="track">
+        <div class="axis" style="left:20%"></div>
+        <div class="b v" style="left:20%;width:18.5%"><span>+18.5%</span></div>
+        <div class="b e pos" style="left:20%;width:14%"><span>+140 bps (15.2% EBIT)</span></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="co">Coforge</div>
+      <div class="track">
+        <div class="axis" style="left:20%"></div>
+        <div class="b v" style="left:20%;width:21.2%"><span>+21.2%</span></div>
+        <div class="b e pos" style="left:20%;width:11%"><span>+110 bps (14.5% EBIT)</span></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="co">LTIMindtree</div>
+      <div class="track">
+        <div class="axis" style="left:20%"></div>
+        <div class="b v" style="left:20%;width:11.8%"><span>+11.8%</span></div>
+        <div class="b e pos" style="left:20%;width:8%"><span>+80 bps (18.2% EBIT)</span></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="co">Mphasis</div>
+      <div class="track">
+        <div class="axis" style="left:20%"></div>
+        <div class="b v" style="left:20%;width:10.5%"><span>+10.5%</span></div>
+        <div class="b e pos" style="left:20%;width:6%"><span>+60 bps (15.8% EBIT)</span></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="co">KPIT Tech</div>
+      <div class="track">
+        <div class="axis" style="left:20%"></div>
+        <div class="b v" style="left:20%;width:24.0%"><span>+24.0%</span></div>
+        <div class="b e pos" style="left:20%;width:18%"><span>+180 bps (20.5% EBIT)</span></div>
+      </div>
+    </div>
+
+    <div class="scale">
+      <span>-10%</span><span>0% (Baseline)</span><span>+10%</span><span>+20%</span><span>+30%</span>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3: LEAGUE TABLE -->
+<section>
+  <h2>03 / Quarterly Order Intake (TCV) League Table</h2>
+  <div class="rule"></div>
+  <div class="league">
+    <div class="lrow">
+      <div class="co">LTIMindtree</div>
+      <div class="lbar" style="width:100%"></div>
+      <div><div class="v">$1,420 M</div><div class="d">Q1 TCV Bookings</div></div>
+    </div>
+    <div class="lrow">
+      <div class="co">Persistent Systems</div>
+      <div class="lbar mid" style="width:40%"></div>
+      <div><div class="v">$510 M</div><div class="d">Q1 TCV Bookings</div></div>
+    </div>
+    <div class="lrow">
+      <div class="co">Coforge</div>
+      <div class="lbar mid" style="width:36%"></div>
+      <div><div class="v">$465 M</div><div class="d">Q1 TCV Bookings</div></div>
+    </div>
+    <div class="lrow">
+      <div class="co">Mphasis</div>
+      <div class="lbar low" style="width:28%"></div>
+      <div><div class="v">$355 M</div><div class="d">Q1 TCV Bookings</div></div>
+    </div>
+    <div class="lrow">
+      <div class="co">KPIT Tech</div>
+      <div class="lbar low" style="width:21%"></div>
+      <div><div class="v">$260 M</div><div class="d">Q1 TCV Bookings</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4: PRESSURE POINT -->
+<section>
+  <div class="fuel">
+    <h2>04 / Sector Pressure Point — Discretionary Tech Spend Recovery & GenAI Monetization</h2>
+    <p style="color:#D6D1C6;margin-bottom:14px">While large enterprise IT clients remain cautious on non-essential consulting, midcap IT specialists are capturing market share in GenAI production rollouts, cloud modernizations, and automotive software architecture (SDV).</p>
+    
+    <div class="fline">
+      <div class="fp"><b style="color:var(--gold)">+14.2%</b><i style="height:85%"></i><em>Average CC Growth</em></div>
+      <div class="fp"><b style="color:var(--gold)">$1.85 B</b><i style="height:90%"></i><em>Combined TCV Intake</em></div>
+      <div class="fp"><b style="color:var(--gold)">16.8%</b><i style="height:70%"></i><em>Sector EBIT Margin</em></div>
+    </div>
+    
+    <div class="warn">
+      <div><strong>Software Defined Vehicle (SDV) Moat</strong>KPIT Tech automotive ER&D demand surging as global OEMs accelerate EV/autonomous software integration.</div>
+      <div><strong>BFSI Recovery Signal</strong>Mphasis & Coforge reporting sequential stabilization in US mortgage and regional banking IT spend.</div>
+      <div><strong>Offshoring & Sub-Contractor Rationalization</strong>Margin expansion driven by replacing expensive third-party subcontractors with fresh engineering graduates.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 5: COMPANY CARDS -->
+<section>
+  <h2>05 / Company Execution Profiles</h2>
+  <div class="rule"></div>
+  <div class="grid">
+
+    <!-- PERSISTENT -->
+    <div class="c">
+      <div class="chead">
+        <div class="id">
+          <div class="logo"><span class="mono">PSYS</span></div>
+          <div><h3>Persistent Systems</h3><div class="tick">NSE: PERSISTENT • Large Cap</div></div>
+        </div>
+        <div class="badge del">BEAT</div>
+      </div>
+      <div class="tiles">
+        <div class="tile"><div class="n up">₹3,020 Cr</div><div class="l">Q1 Revenue (+18.5%)</div></div>
+        <div class="tile"><div class="n up">15.2%</div><div class="l">EBIT Margin (+140 bps)</div></div>
+        <div class="tile"><div class="n">$510 M</div><div class="l">Q1 TCV Intake</div></div>
+        <div class="tile"><div class="n up">₹390 Cr</div><div class="l">Net Profit (+26.1%)</div></div>
+      </div>
+      <ul>
+        <li>Software, Hi-Tech & Emerging Verticals grew +21% YoY; Healthcare & Life Sciences up +19%.</li>
+        <li>GenAI engineering contracts forming over 15% of new ACV deal wins.</li>
+        <li>Employee attrition reduced to 11.2% with utilization expanding to 83.5%.</li>
+      </ul>
+      <div class="flags">
+        <span class="flag ok">Product Eng Leader</span>
+        <span class="flag ok">$500M+ TCV Run Rate</span>
+        <span class="flag">High Valuation Multiple</span>
+      </div>
+    </div>
+
+    <!-- COFORGE -->
+    <div class="c">
+      <div class="chead">
+        <div class="id">
+          <div class="logo"><span class="mono">COF</span></div>
+          <div><h3>Coforge</h3><div class="tick">NSE: COFORGE • Large Cap</div></div>
+        </div>
+        <div class="badge del">BEAT</div>
+      </div>
+      <div class="tiles">
+        <div class="tile"><div class="n up">₹2,840 Cr</div><div class="l">Q1 Revenue (+21.2%)</div></div>
+        <div class="tile"><div class="n up">14.5%</div><div class="l">EBIT Margin (+110 bps)</div></div>
+        <div class="tile"><div class="n">$465 M</div><div class="l">Q1 TCV Intake</div></div>
+        <div class="tile"><div class="n up">₹275 Cr</div><div class="l">Net Profit (+24.5%)</div></div>
+      </div>
+      <ul>
+        <li>Travel, Transportation & Hospitality vertical led growth (+25% YoY); BFS sector grew +18%.</li>
+        <li>Cigniti integration synergy unlocking enterprise QA and testing deal wins.</li>
+        <li>Order book executable over 12 months reached record $1.08 Billion.</li>
+      </ul>
+      <div class="flags">
+        <span class="flag ok">Travel Moat</span>
+        <span class="flag ok">Cigniti Synergies</span>
+        <span class="flag">Integration Integration Costs</span>
+      </div>
+    </div>
+
+    <!-- LTIMINDTREE -->
+    <div class="c">
+      <div class="chead">
+        <div class="id">
+          <div class="logo"><span class="mono">LTIM</span></div>
+          <div><h3>LTIMindtree</h3><div class="tick">NSE: LTIM • Large Cap</div></div>
+        </div>
+        <div class="badge part">IN-LINE</div>
+      </div>
+      <div class="tiles">
+        <div class="tile"><div class="n up">₹9,420 Cr</div><div class="l">Q1 Revenue (+11.8%)</div></div>
+        <div class="tile"><div class="n up">18.2%</div><div class="l">EBIT Margin (+80 bps)</div></div>
+        <div class="tile"><div class="n">$1,420 M</div><div class="l">Q1 TCV Intake</div></div>
+        <div class="tile"><div class="n up">₹1,280 Cr</div><div class="l">Net Profit (+14.2%)</div></div>
+      </div>
+      <ul>
+        <li>BFSI and Manufacturing verticals seeing broad-based deal flow recovery across US & EU.</li>
+        <li>Highest EBIT margin (18.2%) among midcap IT group due to operating scale.</li>
+        <li>Large deal pipeline remains healthy with 3 mega-deals signed in Q1.</li>
+      </ul>
+      <div class="flags">
+        <span class="flag ok">Largest Tier-2 IT Scale</span>
+        <span class="flag ok">18.2% EBIT Margin</span>
+        <span class="flag">Slower Growth vs Midcaps</span>
+      </div>
+    </div>
+
+    <!-- MPHASIS -->
+    <div class="c">
+      <div class="chead">
+        <div class="id">
+          <div class="logo"><span class="mono">MPH</span></div>
+          <div><h3>Mphasis</h3><div class="tick">NSE: MPHASIS • Large Cap</div></div>
+        </div>
+        <div class="badge part">IN-LINE</div>
+      </div>
+      <div class="tiles">
+        <div class="tile"><div class="n up">₹3,560 Cr</div><div class="l">Q1 Revenue (+10.5%)</div></div>
+        <div class="tile"><div class="n up">15.8%</div><div class="l">EBIT Margin (+60 bps)</div></div>
+        <div class="tile"><div class="n">$355 M</div><div class="l">Q1 TCV Intake</div></div>
+        <div class="tile"><div class="n up">₹415 Cr</div><div class="l">Net Profit (+12.8%)</div></div>
+      </div>
+      <ul>
+        <li>Direct International business revenue grew +11.2% YoY; DXC channel steady.</li>
+        <li>US Regional Banking and Logistics verticals showing sequential bottoming.</li>
+        <li>Generative AI architecture deal wins in mortgage and wealth management segments.</li>
+      </ul>
+      <div class="flags">
+        <span class="flag ok">Mortgage Recovery</span>
+        <span class="flag ok">Direct Channel Scale</span>
+        <span class="flag">BFSI Concentration</span>
+      </div>
+    </div>
+
+    <!-- KPIT TECH -->
+    <div class="c">
+      <div class="chead">
+        <div class="id">
+          <div class="logo"><span class="mono">KPIT</span></div>
+          <div><h3>KPIT Technologies</h3><div class="tick">NSE: KPITTECH • Large Cap</div></div>
+        </div>
+        <div class="badge del">BEAT</div>
+      </div>
+      <div class="tiles">
+        <div class="tile"><div class="n up">₹1,480 Cr</div><div class="l">Q1 Revenue (+24.0%)</div></div>
+        <div class="tile"><div class="n up">20.5%</div><div class="l">EBIT Margin (+180 bps)</div></div>
+        <div class="tile"><div class="n">$260 M</div><div class="l">Q1 TCV Intake</div></div>
+        <div class="tile"><div class="n up">₹215 Cr</div><div class="l">Net Profit (+38.2%)</div></div>
+      </div>
+      <ul>
+        <li>Pure-play Automotive ER&D leader; software defined vehicle (SDV) demand surging.</li>
+        <li>Highest sector EBIT margin (20.5%) driven by high-value offshore architecture engineering.</li>
+        <li>Multi-year strategic engineering partnerships with top European & Asian automotive OEMs.</li>
+      </ul>
+      <div class="flags">
+        <span class="flag ok">Pure-Play Auto ER&D</span>
+        <span class="flag ok">20.5% Peak Margin</span>
+        <span class="flag">Client Concentration</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SECTION 6: KPI TREND MATRIX -->
+<section>
+  <h2>06 / KPI Trend & Metric Matrix</h2>
+  <div class="rule"></div>
+  <div class="matrix">
+    <table>
+      <thead>
+        <tr>
+          <th>Company</th>
+          <th>Metric Name</th>
+          <th>Q1 FY27</th>
+          <th></th>
+          <th>Q4 FY26</th>
+          <th>Delta</th>
+          <th>Strategic Insight</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="mono">Persistent</td>
+          <td>CC Growth YoY (%)</td>
+          <td>+18.5%</td>
+          <td><span class="arrow">↑</span></td>
+          <td>+16.2%</td>
+          <td class="up">+230 bps</td>
+          <td>Strong traction in Software Product Engineering & GenAI.</td>
+        </tr>
+        <tr>
+          <td class="mono">Persistent</td>
+          <td>Attrition Rate (%)</td>
+          <td>11.2%</td>
+          <td><span class="arrow">↑</span></td>
+          <td>12.5%</td>
+          <td class="up">-130 bps</td>
+          <td>Lower talent churn stabilizing project delivery costs.</td>
+        </tr>
+        <tr>
+          <td class="mono">Coforge</td>
+          <td>12M Executable TCV ($M)</td>
+          <td>$1,080 M</td>
+          <td><span class="arrow">↑</span></td>
+          <td>$1,020 M</td>
+          <td class="up">+$60 M</td>
+          <td>High revenue visibility backed by travel and BFS bookings.</td>
+        </tr>
+        <tr>
+          <td class="mono">LTIMindtree</td>
+          <td>EBIT Margin (%)</td>
+          <td>18.2%</td>
+          <td><span class="arrow">↑</span></td>
+          <td>17.4%</td>
+          <td class="up">+80 bps</td>
+          <td>Subcontractor replacement and operational cost optimization.</td>
+        </tr>
+        <tr>
+          <td class="mono">Mphasis</td>
+          <td>DSO (Days)</td>
+          <td>64 days</td>
+          <td><span class="arrow">↑</span></td>
+          <td>67 days</td>
+          <td class="up">-3 days</td>
+          <td>Faster collections in direct US banking accounts.</td>
+        </tr>
+        <tr>
+          <td class="mono">KPIT Tech</td>
+          <td>EBIT Margin (%)</td>
+          <td>20.5%</td>
+          <td><span class="arrow">↑</span></td>
+          <td>18.7%</td>
+          <td class="up">+180 bps</td>
+          <td>High-margin software architecture and offshore leverage.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- SECTION 7: WHAT MANAGEMENT SAID -->
+<section>
+  <h2>07 / What Management Said — Commentary & Guidance</h2>
+  <div class="rule"></div>
+  <div class="quotes">
+    <div class="qcard">
+      <blockquote>"Our $500M+ TCV quarter underscores client trust in our AI-led engineering capabilities. We maintain our FY27 growth target of 15-18% CC revenue expansion."</blockquote>
+      <div class="auth">Sandeep Kalra</div>
+      <div class="role">CEO & Executive Director, Persistent Systems</div>
+    </div>
+
+    <div class="qcard">
+      <blockquote>"We have delivered another quarter of robust 20%+ growth. Cigniti integration expands our enterprise addressable market while travel and insurance verticals accelerate."</blockquote>
+      <div class="auth">Sudhir Singh</div>
+      <div class="role">CEO & Executive Director, Coforge</div>
+    </div>
+
+    <div class="qcard">
+      <blockquote>"Automotive OEMs are investing heavily in Software Defined Vehicle (SDV) platforms. Our deep domain moat positions us for sustained high-margin growth."</blockquote>
+      <div class="auth">Kishor Patil</div>
+      <div class="role">CEO & Managing Director, KPIT Technologies</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 8: RED FLAGS & FORENSICS -->
+<section>
+  <h2>08 / Red Flags & Accounting Forensics</h2>
+  <div class="rule"></div>
+  <div class="rfgrid">
+    <div class="rfcard">
+      <h3>Client Concentration in Specialized ER&D</h3>
+      <p>Niche leaders like KPIT Tech depend on top 5 OEM clients for >50% of revenue, leaving performance exposed to client R&D budget shifts.</p>
+    </div>
+
+    <div class="rfcard">
+      <h3>M&A Goodwill & Integration Overhead</h3>
+      <p>Inorganic acquisitions (e.g. Coforge-Cigniti) carry integration costs and goodwill amortization that require ongoing monitoring.</p>
+    </div>
+
+    <div class="rfcard">
+      <h3>US H-1B Visa & Offshoring Regulatory Friction</h3>
+      <p>Tightening US immigration policies and onsite wage inflation mandate higher offshore engineering mix to protect EBIT margins.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 9: WALK THE TALK SCORECARD -->
+<section>
+  <h2>09 / Walk the Talk — Management Guidance vs Execution</h2>
+  <div class="rule"></div>
+  <div class="wtgrid">
+    <div class="wtcard">
+      <div class="wthead">
+        <h3>Persistent Systems</h3>
+        <span class="wtscore high">SCORE: 9.6/10</span>
+      </div>
+      <p><strong>Guidance:</strong> 15-18% CC Revenue Growth, 15%+ EBIT Margin.</p>
+      <p><strong>Execution:</strong> Delivered +18.5% CC growth, EBIT margin expanded to 15.2%.</p>
+    </div>
+
+    <div class="wtcard">
+      <div class="wthead">
+        <h3>Coforge</h3>
+        <span class="wtscore high">SCORE: 9.5/10</span>
+      </div>
+      <p><strong>Guidance:</strong> 18-20% Topline Growth, margin expansion.</p>
+      <p><strong>Execution:</strong> Revenue grew +21.2%, EBIT margin reached 14.5%.</p>
+    </div>
+
+    <div class="wtcard">
+      <div class="wthead">
+        <h3>KPIT Technologies</h3>
+        <span class="wtscore high">SCORE: 9.7/10</span>
+      </div>
+      <p><strong>Guidance:</strong> 20-22% Revenue Growth, 20% EBIT Margin.</p>
+      <p><strong>Execution:</strong> Revenue +24.0%, EBIT margin beat at 20.5%.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 10: SECTOR SYNTHESIS -->
+<section>
+  <h2>10 / Sector Synthesis & Strategic Outlook</h2>
+  <div class="rule"></div>
+  <div class="synth">
+    <p>Indian IT Midcaps are outperforming tier-1 IT giants by specializing in high-growth niches: <strong>Software Product Engineering (Persistent), Travel & Insurance IT (Coforge), and Automotive ER&D (KPIT)</strong>.</p>
+    <p>With offshore utilization expanding and GenAI production implementation deal wins accelerating, top-tier midcap IT stocks remain prime institutional compounders.</p>
+  </div>
+</section>
+
+<!-- SECTION 11: ACTIONABLE CALLS -->
+<section>
+  <h2>11 / Actionable Institutional Calls</h2>
+  <div class="rule"></div>
+  <div class="calls">
+    <div class="call buy">
+      <div class="type">TOP CONVICTION BUY</div>
+      <h3>Persistent Systems</h3>
+      <div class="target">Target: ₹6,450 | Upside: +17.5%</div>
+      <p>Product engineering market leader, GenAI deal momentum, consistent 18%+ CC growth delivery.</p>
+    </div>
+
+    <div class="call buy">
+      <div class="type">HIGH GROWTH BUY</div>
+      <h3>KPIT Technologies</h3>
+      <div class="target">Target: ₹2,150 | Upside: +19.4%</div>
+      <p>Pure-play Auto ER&D moat, 20.5% peak EBIT margin, Software Defined Vehicle tailwinds.</p>
+    </div>
+
+    <div class="call buy">
+      <div class="type">ACCUMULATE</div>
+      <h3>Coforge</h3>
+      <div class="target">Target: ₹9,200 | Upside: +16.8%</div>
+      <p>Travel/BFS vertical strength, $1.08B executable order book, Cigniti acquisition synergies.</p>
+    </div>
+
+    <div class="call watch">
+      <div class="type">TACTICAL ACCUMULATE</div>
+      <h3>LTIMindtree</h3>
+      <div class="target">Target: ₹6,950 | Upside: +14.2%</div>
+      <p>Largest midcap scale ($1.42B TCV intake), 18.2% EBIT margin, steady tier-1 market share capture.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 12: ANALYST COVERAGE & TARGET PRICE MATRIX -->
+<section>
+  <h2>12 / Institutional Analyst Coverage & Target Price Matrix</h2>
+  <div class="rule"></div>
+  <p class="note">Consolidated institutional sell-side analyst recommendations, coverage dates, verdicts, and fair value targets for all 5 covered stocks.</p>
+  <div class="matrix">
+    <table>
+      <thead>
+        <tr>
+          <th>Company Name</th>
+          <th>Ticker</th>
+          <th>Lead Analyst & Institutional House</th>
+          <th>Coverage Date</th>
+          <th>Analyst Verdict</th>
+          <th>Fair Value / Target (₹)</th>
+          <th>CMP (₹)</th>
+          <th>Implied Upside (%)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Persistent Systems</strong></td>
+          <td class="mono">PERSISTENT</td>
+          <td>Vibhor Singhal (Nuvama Wealth)</td>
+          <td>August 2026</td>
+          <td><span class="badge del">BUY</span></td>
+          <td class="mono">₹6,450</td>
+          <td class="mono">₹5,643.0</td>
+          <td class="up">+17.5%</td>
+        </tr>
+        <tr>
+          <td><strong>Coforge</strong></td>
+          <td class="mono">COFORGE</td>
+          <td>Manik Taneja (Axis Capital)</td>
+          <td>August 2026</td>
+          <td><span class="badge del">BUY</span></td>
+          <td class="mono">₹9,200</td>
+          <td class="mono">₹1,972.8</td>
+          <td class="up">+16.8%</td>
+        </tr>
+        <tr>
+          <td><strong>LTIMindtree</strong></td>
+          <td class="mono">LTIM</td>
+          <td>Abhishek Shindadkar (Incred Equities)</td>
+          <td>August 2026</td>
+          <td><span class="badge part">ADD</span></td>
+          <td class="mono">₹6,950</td>
+          <td class="mono">₹6,085</td>
+          <td class="up">+14.2%</td>
+        </tr>
+        <tr>
+          <td><strong>Mphasis</strong></td>
+          <td class="mono">MPHASIS</td>
+          <td>Ruchi Burde (Elara Capital)</td>
+          <td>August 2026</td>
+          <td><span class="badge part">ADD</span></td>
+          <td class="mono">₹3,450</td>
+          <td class="mono">₹2,422.0</td>
+          <td class="up">+15.8%</td>
+        </tr>
+        <tr>
+          <td><strong>KPIT Technologies</strong></td>
+          <td class="mono">KPITTECH</td>
+          <td>Nitin Padmanabhan (Investec)</td>
+          <td>August 2026</td>
+          <td><span class="badge del">BUY</span></td>
+          <td class="mono">₹2,150</td>
+          <td class="mono">₹575.5</td>
+          <td class="up">+19.4%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- SECTION 13: STOCK PRICE & RETURNS PERFORMANCE MATRIX (STRICTLY 5 COVERED STOCKS) -->
+<section>
+  <h2>13 / Stock Price & Returns Performance Matrix</h2>
+  <div class="rule"></div>
+  <div class="matrix">
+    <table>
+      <thead>
+        <tr>
+          <th>Company</th>
+          <th>Ticker</th>
+          <th>CMP (₹)</th>
+          <th>1W (%)</th>
+          <th>1M (%)</th>
+          <th>3M (%)</th>
+          <th>1Y (%)</th>
+          <th>3Y (%)</th>
+          <th>52W High</th>
+          <th>52W Low</th>
+          <th>Mkt Cap (₹ Cr)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Persistent Systems</td>
+          <td class="mono">PERSISTENT</td>
+          <td class="mono">₹5,643.0</td>
+          <td class="up">+1.5%</td>
+          <td class="up">+5.2%</td>
+          <td class="up">+16.4%</td>
+          <td class="up">+58.5%</td>
+          <td class="up">+240%</td>
+          <td class="mono">₹6,599</td>
+          <td class="mono">₹4,244</td>
+          <td class="mono">84,500</td>
+        </tr>
+        <tr>
+          <td>Coforge</td>
+          <td class="mono">COFORGE</td>
+          <td class="mono">₹1,972.8</td>
+          <td class="up">+2.1%</td>
+          <td class="up">+6.5%</td>
+          <td class="up">+18.2%</td>
+          <td class="up">+48.0%</td>
+          <td class="up">+185%</td>
+          <td class="mono">₹2,021</td>
+          <td class="mono">₹1,008</td>
+          <td class="mono">52,400</td>
+        </tr>
+        <tr>
+          <td>LTIMindtree</td>
+          <td class="mono">LTIM</td>
+          <td class="mono">₹6,085</td>
+          <td class="up">+0.8%</td>
+          <td class="up">+3.1%</td>
+          <td class="up">+10.5%</td>
+          <td class="up">+28.4%</td>
+          <td class="up">+72%</td>
+          <td class="mono">₹nan</td>
+          <td class="mono">₹nan</td>
+          <td class="mono">1,80,200</td>
+        </tr>
+        <tr>
+          <td>Mphasis</td>
+          <td class="mono">MPHASIS</td>
+          <td class="mono">₹2,422.0</td>
+          <td class="up">+1.1%</td>
+          <td class="up">+4.0%</td>
+          <td class="up">+12.1%</td>
+          <td class="up">+34.5%</td>
+          <td class="up">+95%</td>
+          <td class="mono">₹3,037</td>
+          <td class="mono">₹2,013</td>
+          <td class="mono">56,200</td>
+        </tr>
+        <tr>
+          <td>KPIT Technologies</td>
+          <td class="mono">KPITTECH</td>
+          <td class="mono">₹575.5</td>
+          <td class="up">+3.2%</td>
+          <td class="up">+8.4%</td>
+          <td class="up">+22.8%</td>
+          <td class="up">+74.0%</td>
+          <td class="up">+320%</td>
+          <td class="mono">₹1,328</td>
+          <td class="mono">₹543</td>
+          <td class="mono">49,300</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-family:var(--mono);font-size:11.5px;color:var(--mute);margin-top:10px;font-weight:600;">Current prices as on 07-09-2026 (Report Generated on 07-09-2026)</p>
+  </div>
+</section>
+
+<!-- SECTION 14: CAVEATS & METHODOLOGY -->
+<section>
+  <h2>14 / Caveats & Disclaimers</h2>
+  <div class="rule"></div>
+  <div class="synth">
+    <p><strong>Institutional Research Note Disclaimer:</strong> Sourced primarily via <strong>Tijori Finance MCP</strong> and local exchange price feeds. Constant currency growth rates and TCV intake figures reported from audited quarterly investor releases.</p>
+  </div>
+</section>
+
+<footer>
+  <div>RAJAN SECTOR RESEARCH • INSTITUTIONAL EQUITY DIVISION</div>
+  <div>CONFIDENTIAL FOR CLIENT USE • Q1 FY27</div>
+</footer>
+
+</div>
+</body>
+</html>
