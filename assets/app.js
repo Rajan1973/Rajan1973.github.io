@@ -444,10 +444,12 @@ function buildIndex() {
   );
   for (const r of state.reports) {
     const ymd = r.id.slice(0, 10).replace(/-/g, '');
+    const mentions = r.mentions || [];
     out.push({
       kind: r.k === 'fo' ? 'F&O' : r.kind.split(' ')[0],
       label: r.headline, meta: r.date_short + ' · ' + r.kind,
-      hay: [r.headline, r.date_long, r.date_short, r.id, ymd, r.kind, ...(r.tags || [])].join(' ').toLowerCase(),
+      names: mentions,
+      hay: [r.headline, r.date_long, r.date_short, r.id, ymd, r.kind, ...(r.tags || []), ...mentions].join(' ').toLowerCase(),
       act: () => go('#/report/' + r.id),
     });
   }
@@ -457,7 +459,7 @@ function buildIndex() {
     out.push({
       kind: 'Sector', label: s.name,
       meta: (s.quarter || state.quarter) + ' · ' + (live ? 'published' : 'pending'),
-      covers,
+      names: covers,
       hay: [s.name, s.title, s.note, 'sector review earnings', ...covers].join(' ').toLowerCase(),
       act: () => go(live ? '#/sectors/' + s.id : '#/sectors'),
     });
@@ -498,23 +500,45 @@ function searchResults() {
     .sort((a, b) => b.s - a.s)
     .slice(0, 24);
   return scored.map(({ i }) => {
-    // surface which covered company matched, for sector hits
-    if (i.kind === 'Sector' && i.covers && i.covers.length) {
-      const hit = i.covers.filter((c) => tokens.some((t) => c.toLowerCase().includes(t)));
-      if (hit.length) return { ...i, meta: (i.meta.split(' · ')[0]) + ' · covers ' + hit.slice(0, 3).join(', ') };
+    // surface which listed company matched (sector reviews and daily briefs)
+    if (i.names && i.names.length) {
+      const hit = [...new Set(i.names.filter((c) => tokens.some((t) => c.toLowerCase().includes(t))))];
+      if (hit.length) {
+        const verb = i.kind === 'Sector' ? 'covers ' : 'names ';
+        return { ...i, meta: i.meta.split(' · ')[0] + ' · ' + verb + hit.slice(0, 3).join(', ') + (hit.length > 3 ? ' +' + (hit.length - 3) : '') };
+      }
     }
     return i;
   });
 }
 
+/* Build a fragment with query tokens wrapped in <mark>. Longest tokens first so
+ * "apollo hosp" highlights "hosp" inside a word already covered by "apollo". */
+function markMatches(text, tokens) {
+  const frag = document.createDocumentFragment();
+  const toks = [...tokens].filter(Boolean).sort((a, b) => b.length - a.length);
+  if (!toks.length) { frag.append(text); return frag; }
+  const re = new RegExp('(' + toks.map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|') + ')', 'ig');
+  let last = 0, m;
+  while ((m = re.exec(text))) {
+    if (m.index > last) frag.append(text.slice(last, m.index));
+    frag.append(el('mark', { text: m[0] }));
+    last = m.index + m[0].length;
+    if (re.lastIndex === m.index) re.lastIndex++;
+  }
+  if (last < text.length) frag.append(text.slice(last));
+  return frag;
+}
+
 function searchOverlay() {
   const hits = searchResults();
+  const toks = tokenize(state.search.q.trim());
   if (state.search.sel >= hits.length) state.search.sel = Math.max(0, hits.length - 1);
   const list = el('div', { class: 'search-results' }, hits.map((h, i) =>
     el('div', { class: 'sr' + (i === state.search.sel ? ' sel' : ''), onclick: () => { closeSearch(); h.act(); } }, [
       el('span', { class: 'sr-kind', text: h.kind }),
-      el('span', { class: 'sr-label', text: h.label }),
-      el('span', { class: 'sr-meta', text: h.meta }),
+      el('span', { class: 'sr-label' }, [markMatches(h.label, toks)]),
+      el('span', { class: 'sr-meta' }, [markMatches(h.meta, toks)]),
     ])
   ));
   const panel = el('div', { class: 'search-panel', onclick: (e) => e.stopPropagation() }, [
