@@ -1,21 +1,25 @@
 #!/usr/bin/env node
 /* Sync sector earnings reviews into the app.
  *
- *   node scripts/sync-sectors.mjs "<source-dir>"
+ *   node scripts/sync-sectors.mjs "<dir>" ["<dir2>" ...]
  *
- * <source-dir> defaults to $SECTOR_SRC or the local stock-reports project. It copies every
- *   *-q1fy27*.html  (minus obvious non-sector files)
- * into  sectors/<slug>-q1fy27.html  and regenerates  data/sectors.json,
- * preserving the curated one-line "note" for each slug and keeping ladder order.
+ * Each dir is scanned for  *-q1fy27*.html . Files are copied to
+ * sectors/<slug>-q1fy27.html and data/sectors.json is regenerated (curated blurb +
+ * ladder order preserved, plus a `covers` list of companies/tickers for search).
+ * When the same slug appears in more than one dir, the FIRST dir wins — so list
+ * the primary source first and supplementary dirs after.
  *
- * Re-run it whenever the other project produces new or updated reviews. Then commit
+ * Re-run whenever the sector project produces new or updated reviews, then commit
  * sectors/ + data/sectors.json and push — GitHub Pages and Vercel redeploy on their own.
  */
 import { readdirSync, readFileSync, writeFileSync, mkdirSync, copyFileSync, existsSync } from 'node:fs';
 import { join, basename, resolve } from 'node:path';
+import { extractNames } from './lib/extract.mjs';
 
 const ROOT = resolve(new URL('..', import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1'));
-const SRC = process.argv[2] || process.env.SECTOR_SRC || 'D:/Anti Gravity/stock-reports-with-Antigravity';
+const SRCS = process.argv.slice(2).filter(Boolean);
+if (!SRCS.length) SRCS.push(process.env.SECTOR_SRC || 'D:/Anti Gravity/stock-reports-with-Antigravity',
+                            'D:/Anti Gravity/equity-os/data/sectors');
 const OUT_DIR = join(ROOT, 'sectors');
 const MANIFEST = join(ROOT, 'data', 'sectors.json');
 const QUARTER = 'Q1 FY27';
@@ -32,6 +36,7 @@ const LADDER = [
   ['diagnostic-chains',       'Volume growth, pricing, network expansion'],
   ['ems',                     'PLI, customer concentration, RoCE'],
   ['epc',                     'Order book to sales, leverage, NWC days'],
+  ['pipes-building-materials', 'PVC spreads, volume growth, housing demand'],
   ['gold-jewellery',          'SSSG, studded mix, store rollout'],
   ['hospital-chains',         'ARPOB, occupancy, bed-addition pipeline'],
   ['hotels',                  'RevPAR, room additions, F&B mix'],
@@ -48,12 +53,11 @@ const LADDER = [
 const NOTE = new Map(LADDER);
 const ORDER = new Map(LADDER.map(([s], i) => [s, i]));
 
-const normSlug = (name) =>
-  basename(name, '.html')
-    .replace(/-sector-review$/, '')
-    .replace(/-q1fy27$/, '')
-    .replace(/-large$/, '-large')      // keep capital-goods-large distinct
-    .replace(/^autoancillaries$/, 'auto-ancillaries');
+const ALIAS = { autoancillaries: 'auto-ancillaries', 'epc-infrastructure': 'epc', 'recycling-waste': 'recycling' };
+const normSlug = (name) => {
+  const s = basename(name, '.html').replace(/-sector-review$/, '').replace(/-q1fy27$/, '');
+  return ALIAS[s] || s;
+};
 
 const titleOf = (html) => {
   const m = html.match(/<title>([^<]*)<\/title>/i);
@@ -78,46 +82,34 @@ const displayName = (slug, title) => {
   return nice[slug] || clean(title) || slug.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
 };
 
-/* Company names + tickers covered by a review, for search.
- * The reviews use a consistent card head:
- *   <h3>Motherson Sumi</h3><div class="tick">NSE: MOTHERSON • Large Cap</div>
- * plus analyst-table ticker cells. Pull both, dedupe, drop obvious noise. */
-const coversOf = (html) => {
-  const set = new Set();
-  for (const m of html.matchAll(/<h3>\s*([A-Z][^<]{1,40}?)\s*<\/h3>\s*<div class="tick">\s*(?:NSE|BSE)\s*:\s*([A-Z0-9&.\-]{2,20})/gi)) {
-    set.add(m[1].replace(/\s+/g, ' ').trim());
-    set.add(m[2].trim().toUpperCase());
-  }
-  for (const m of html.matchAll(/(?:NSE|BSE)\s*:\s*([A-Z0-9&.\-]{2,20})\b/g)) set.add(m[1].toUpperCase());
-  const NOISE = new Set(['NSE', 'BSE', 'EBITDA', 'OPM', 'CMP', 'BUY', 'SELL', 'HOLD', 'BEAT', 'MISS', 'FY27', 'FY26', 'ADD', 'PAT', 'YOY', 'QOQ', 'ROE', 'ROCE']);
-  return [...set].filter((x) => x && !NOISE.has(x)).sort();
-};
-
-if (!existsSync(SRC)) { console.error('source dir not found: ' + SRC); process.exit(1); }
 mkdirSync(OUT_DIR, { recursive: true });
 
-const files = readdirSync(SRC).filter((f) =>
-  /q1fy27/i.test(f) && /\.html?$/i.test(f) && !/deepdive|deep-dive/i.test(f));
-
-if (!files.length) { console.error('no *-q1fy27*.html files in ' + SRC); process.exit(1); }
-
+const seen = new Set();
 const sectors = [];
-for (const f of files) {
-  const slug = normSlug(f);
-  const html = readFileSync(join(SRC, f), 'utf8');
-  const outName = slug + '-q1fy27.html';
-  copyFileSync(join(SRC, f), join(OUT_DIR, outName));
-  sectors.push({
-    id: slug,
-    name: displayName(slug, titleOf(html)),
-    quarter: QUARTER,
-    status: 'published',
-    path: 'sectors/' + outName,
-    title: titleOf(html) || displayName(slug),
-    note: NOTE.get(slug) || '',
-    covers: coversOf(html),
-  });
+for (const SRC of SRCS) {
+  if (!existsSync(SRC)) { console.warn('skip (not found): ' + SRC); continue; }
+  const files = readdirSync(SRC).filter((f) =>
+    /q1fy27/i.test(f) && /\.html?$/i.test(f) && !/deepdive|deep-dive/i.test(f));
+  for (const f of files) {
+    const slug = normSlug(f);
+    if (seen.has(slug)) continue;                 // first source dir wins
+    seen.add(slug);
+    const html = readFileSync(join(SRC, f), 'utf8');
+    const outName = slug + '-q1fy27.html';
+    copyFileSync(join(SRC, f), join(OUT_DIR, outName));
+    sectors.push({
+      id: slug,
+      name: displayName(slug, titleOf(html)),
+      quarter: QUARTER,
+      status: 'published',
+      path: 'sectors/' + outName,
+      title: titleOf(html) || displayName(slug),
+      note: NOTE.get(slug) || '',
+      covers: extractNames(html),
+    });
+  }
 }
+if (!sectors.length) { console.error('no *-q1fy27*.html files found in: ' + SRCS.join(', ')); process.exit(1); }
 sectors.sort((a, b) => (ORDER.has(a.id) ? ORDER.get(a.id) : 999) - (ORDER.has(b.id) ? ORDER.get(b.id) : 999) || a.name.localeCompare(b.name));
 
 writeFileSync(MANIFEST, JSON.stringify({
