@@ -96,8 +96,7 @@ function sidebar() {
   const active = state.route.name;
   return el('aside', { class: 'sidebar' }, [
     el('div', { class: 'brand-plate' }, [
-      el('img', { src: 'assets/logo.svg', alt: 'Nifty & Beyond' }),
-      el('div', { class: 'brand-tag', text: "What the index doesn't tell you" }),
+      el('img', { src: 'assets/logo.webp', alt: 'Nifty & Beyond — what the index doesn’t tell you', width: '640', height: '463' }),
     ]),
     el('button', { class: 'search-trigger', type: 'button', onclick: () => openSearch() }, [
       el('span', { class: 'k', text: '⌕' }),
@@ -437,29 +436,51 @@ function fillArchiveBody(body, list, layout) {
 function buildIndex() {
   const out = [];
   out.push(
-    { kind: 'Go', label: "Today's close", meta: 'Home', hay: 'home today close overview', act: () => go('#/') },
-    { kind: 'Go', label: 'Daily report', meta: 'Latest edition', hay: 'daily report brief eod post market', act: () => go('#/report') },
-    { kind: 'Go', label: 'Rotation · RRG', meta: 'Weekly graph', hay: 'rrg rotation relative strength momentum sector', act: () => go('#/rotation') },
-    { kind: 'Go', label: 'Sector research', meta: 'Earnings reviews', hay: 'sector research earnings review', act: () => go('#/sectors') },
-    { kind: 'Go', label: 'Archive', meta: 'All reports', hay: 'archive history all reports', act: () => go('#/archive') },
+    { kind: 'Go', label: "Today's close", meta: 'Home', hay: 'home today close overview dashboard', act: () => go('#/') },
+    { kind: 'Go', label: 'Daily report', meta: 'Latest edition', hay: 'daily report brief eod post market close nifty', act: () => go('#/report') },
+    { kind: 'Go', label: 'Rotation · RRG', meta: 'Weekly graph', hay: 'rrg rotation relative strength momentum sector rotation graph', act: () => go('#/rotation') },
+    { kind: 'Go', label: 'Sector research', meta: 'Earnings reviews', hay: 'sector research earnings review desk', act: () => go('#/sectors') },
+    { kind: 'Go', label: 'Archive', meta: 'All reports', hay: 'archive history all reports past editions', act: () => go('#/archive') },
   );
   for (const r of state.reports) {
+    const ymd = r.id.slice(0, 10).replace(/-/g, '');
     out.push({
       kind: r.k === 'fo' ? 'F&O' : r.kind.split(' ')[0],
-      label: r.headline, meta: r.date_short,
-      hay: (r.headline + ' ' + r.date_long + ' ' + r.kind + ' ' + (r.tags || []).join(' ')).toLowerCase(),
+      label: r.headline, meta: r.date_short + ' · ' + r.kind,
+      hay: [r.headline, r.date_long, r.date_short, r.id, ymd, r.kind, ...(r.tags || [])].join(' ').toLowerCase(),
       act: () => go('#/report/' + r.id),
     });
   }
   for (const s of state.sectors) {
     const live = s.status === 'published' && s.path;
+    const covers = s.covers || [];
     out.push({
-      kind: 'Sector', label: s.name, meta: (s.quarter || state.quarter) + ' · ' + (live ? 'published' : 'pending'),
-      hay: (s.name + ' ' + (s.title || '') + ' ' + (s.note || '') + ' sector review').toLowerCase(),
+      kind: 'Sector', label: s.name,
+      meta: (s.quarter || state.quarter) + ' · ' + (live ? 'published' : 'pending'),
+      covers,
+      hay: [s.name, s.title, s.note, 'sector review earnings', ...covers].join(' ').toLowerCase(),
       act: () => go(live ? '#/sectors/' + s.id : '#/sectors'),
     });
   }
   return out;
+}
+
+function tokenize(s) { return s.toLowerCase().split(/[^a-z0-9&.:+₹%-]+/).filter(Boolean); }
+
+function scoreItem(item, tokens, phrase) {
+  const label = item.label.toLowerCase();
+  const meta = item.meta.toLowerCase();
+  let score = 0;
+  for (const t of tokens) {
+    if (!item.hay.includes(t)) return -1;           // AND — every token must appear somewhere
+    if (label.includes(t)) score += 6;
+    else if (meta.includes(t)) score += 3;
+    else score += 1;
+  }
+  if (phrase && item.hay.includes(phrase)) score += 4;
+  if (phrase && label.includes(phrase)) score += 6;
+  if (item.kind === 'Go') score += 1;
+  return score;
 }
 
 function openSearch() { state.search = { open: true, q: '', sel: 0 }; render(); setTimeout(() => { const i = $('#search-input'); if (i) i.focus(); }, 0); }
@@ -468,8 +489,22 @@ function closeSearch() { state.search.open = false; render(); }
 function searchResults() {
   const q = state.search.q.trim().toLowerCase();
   const idx = buildIndex();
-  const hits = q ? idx.filter((i) => i.hay.includes(q)) : idx.filter((i) => i.kind === 'Go').concat(idx.filter((i) => i.kind !== 'Go').slice(0, 4));
-  return hits.slice(0, 24);
+  if (!q) return idx.filter((i) => i.kind === 'Go').concat(idx.filter((i) => i.kind !== 'Go').slice(0, 4)).slice(0, 24);
+  const tokens = tokenize(q);
+  if (!tokens.length) return [];
+  const scored = idx
+    .map((i) => ({ i, s: scoreItem(i, tokens, q) }))
+    .filter((x) => x.s >= 0)
+    .sort((a, b) => b.s - a.s)
+    .slice(0, 24);
+  return scored.map(({ i }) => {
+    // surface which covered company matched, for sector hits
+    if (i.kind === 'Sector' && i.covers && i.covers.length) {
+      const hit = i.covers.filter((c) => tokens.some((t) => c.toLowerCase().includes(t)));
+      if (hit.length) return { ...i, meta: (i.meta.split(' · ')[0]) + ' · covers ' + hit.slice(0, 3).join(', ') };
+    }
+    return i;
+  });
 }
 
 function searchOverlay() {
