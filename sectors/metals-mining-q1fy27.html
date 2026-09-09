@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Metals & Mining Q1 FY27 - Sector Earnings Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --stone:#E3E0D9; --card:#F3F1EC; --card2:#EAE7E0;
+  --ink:#1F1D1A; --mute:#6E6A62; --faint:#9A958B; --rule:#C9C4B9;
+  --gain:#1D5C7A; --loss:#A8382C; 
+  --vol:#8E8879; --gold:#B4842A;
+  --disp:'Archivo',system-ui,sans-serif;
+  --serif:'Source Serif 4',Georgia,serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--stone);color:var(--ink);font-family:var(--serif);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:28px 20px 90px}
+section{margin-bottom:40px}
+
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
+h1{font-family:var(--disp);font-weight:800;font-size:clamp(34px,7vw,62px);line-height:.94;letter-spacing:-.03em;margin:.18em 0 .22em;text-transform:uppercase}
+h2{font-family:var(--disp);font-weight:700;font-size:clamp(19px,3.2vw,25px);letter-spacing:-.015em;margin:0 0 12px;text-transform:uppercase}
+h3{font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:-.005em;margin:0}
+.dek{font-size:17px;color:var(--mute);max-width:56ch;margin:0}
+.note{font-size:13px;color:var(--mute);margin:4px 0 20px;max-width:70ch}
+.rule{height:3px;background:var(--ink);margin:0 0 16px}
+
+.thesis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:2px;background:var(--rule);border:2px solid var(--ink);margin-top:26px}
+.t{background:var(--card);padding:13px 15px}
+.t .n{font-family:var(--disp);font-weight:800;font-size:26px;line-height:1.05;letter-spacing:-.02em}
+.t .l{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:5px;line-height:1.35}
+.t.up .n{color:var(--gain)} .t.dn .n{color:var(--loss)}
+
+.scissor{background:var(--card);border:2px solid var(--ink);padding:18px 16px 12px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin-bottom:14px}
+.legend span{display:flex;align-items:center;gap:6px}
+.sw{width:13px;height:11px;display:inline-block}
+.row{display:grid;grid-template-columns:150px 1fr;gap:10px;align-items:center;margin-bottom:6px}
+.row .co{font-family:var(--disp);font-weight:600;font-size:12px;text-align:right;line-height:1.15}
+.track{position:relative;height:26px;border-left:2px solid var(--ink);border-right:0;overflow:hidden}
+.axis{position:absolute;top:0;bottom:0;width:2px;background:var(--ink);opacity:.85}
+.b{position:absolute;height:10px}
+.b.v{top:1px;background:var(--vol)}
+.b.e{top:14px}
+.b.e.pos{background:var(--gain)} .b.e.neg{background:var(--loss)}
+.b span{position:absolute;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:9.5px;font-weight:500;white-space:nowrap;color:var(--ink)}
+.b.pos span,.b.v span{left:calc(100% + 5px)}
+.b.neg span{right:calc(100% + 5px)}
+.scale{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9.5px;color:var(--faint);margin-top:6px;padding-left:160px}
+
+.league{background:var(--card);border:2px solid var(--ink);padding:16px}
+.lrow{display:grid;grid-template-columns:150px 1fr 110px;gap:10px;align-items:center;padding:6px 0;border-bottom:1px solid var(--rule)}
+.lrow:last-child{border-bottom:0}
+.lrow .co{font-family:var(--disp);font-weight:600;font-size:12.5px;text-align:right}
+.lbar{height:16px;background:var(--gain);position:relative;overflow:hidden}
+.lbar.mid{background:#4A7F91} .lbar.low{background:var(--loss)}
+.lrow .v{font-family:var(--mono);font-size:12px;font-weight:700;text-align:right}
+.lrow .d{font-family:var(--mono);font-size:10px;color:var(--mute);text-align:right}
+
+.fuel{background:var(--ink);color:var(--card);border:2px solid var(--ink);padding:18px}
+.fuel h2{color:var(--card)}
+.fline{display:flex;align-items:flex-end;gap:0;height:110px;margin:20px 0 6px}
+.fp{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:6px}
+.fp i{display:block;width:100%;max-width:52px;background:var(--gold)}
+.fp b{font-family:var(--mono);font-size:12px;font-weight:700}
+.fp em{font-family:var(--mono);font-size:9.5px;font-style:normal;letter-spacing:.09em;text-transform:uppercase;color:#A9A296}
+.warn{border-top:1px solid #4A453C;margin-top:14px;padding-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
+.warn div{font-size:13.5px;color:#D6D1C6}
+.warn strong{display:block;font-family:var(--mono);font-size:17px;font-weight:700;color:var(--gold);margin-bottom:2px}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
+.c{background:var(--card);border:2px solid var(--ink);padding:14px;display:flex;flex-direction:column}
+.chead{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:2px}
+.id{display:flex;gap:8px;align-items:center}
+.logo{width:28px;height:28px;flex-shrink:0;border:1.5px solid var(--ink);background:var(--card2);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.logo .mono{font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.01em;color:var(--ink)}
+.tick{font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacing:.06em}
+.badge{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 6px;border:1.5px solid;white-space:nowrap;flex-shrink:0}
+.badge.del{color:var(--gain);border-color:var(--gain)}
+.badge.part{color:var(--gold);border-color:var(--gold)}
+.badge.miss{color:var(--loss);border-color:var(--loss)}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);margin:11px 0}
+.tile{background:var(--card2);padding:7px 9px}
+.tile .n{font-family:var(--mono);font-size:15px;font-weight:700;line-height:1.15}
+.tile .l{font-family:var(--mono);font-size:8.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:3px}
+.tile .n.up{color:var(--gain)} .tile .n.dn{color:var(--loss)}
+.c ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.c li{margin-bottom:5px}
+.c li::marker{color:var(--faint)}
+.flags{margin-top:auto;padding-top:10px;display:flex;flex-wrap:wrap;gap:5px}
+.flag{font-family:var(--mono);font-size:9px;letter-spacing:.05em;text-transform:uppercase;background:var(--loss);color:var(--card);padding:3px 6px}
+.flag.ok{background:var(--gain)}
+
+.matrix{background:var(--card);border:2px solid var(--ink);padding:16px;overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13px;text-align:left}
+th{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);padding:8px 10px;border-bottom:2px solid var(--ink)}
+td{padding:10px;border-bottom:1px solid var(--rule);vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.mono{font-family:var(--mono);font-weight:600}
+td.up{color:var(--gain);font-family:var(--mono);font-weight:700}
+td.dn{color:var(--loss);font-family:var(--mono);font-weight:700}
+.arrow{display:inline-block;margin:0 4px;font-weight:bold}
+
+.quotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.qcard{background:var(--card);border:2px solid var(--ink);padding:16px;position:relative}
+.qcard blockquote{margin:0 0 12px;font-size:14px;font-style:italic;line-height:1.45}
+.qcard .auth{font-family:var(--disp);font-weight:700;font-size:13px;margin-bottom:2px}
+.qcard .role{font-family:var(--mono);font-size:10px;color:var(--mute)}
+
+.rfgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.rfcard{background:var(--card);border:2px solid var(--ink);border-top:4px solid var(--loss);padding:16px}
+.rfcard h3{color:var(--loss);margin-bottom:6px}
+.rfcard p{margin:0;font-size:13.5px;color:var(--ink)}
+
+.wtgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.wtcard{background:var(--card);border:2px solid var(--ink);padding:16px}
+.wthead{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.wtscore{font-family:var(--mono);font-weight:700;font-size:12px;padding:3px 8px;border:1px solid}
+.wtscore.high{color:var(--gain);border-color:var(--gain);background:#EBF3F7}
+.wtscore.mid{color:var(--gold);border-color:var(--gold);background:#FDF8EC}
+
+.synth{background:var(--card);border:2px solid var(--ink);padding:20px}
+.synth p{margin:0 0 12px;font-size:14.5px;line-height:1.6}
+.synth p:last-child{margin-bottom:0}
+
+.calls{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.call{background:var(--card);border:2px solid var(--ink);padding:16px}
+.call.buy{border-top:4px solid var(--gain)}
+.call.hold{border-top:4px solid var(--gold)}
+.call.watch{border-top:4px solid var(--mute)}
+.call .type{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+.call h3{font-size:18px;margin:4px 0 8px}
+.call .target{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--gain);margin-bottom:8px}
+.call p{margin:0;font-size:13.5px;line-height:1.45}
+
+footer{margin-top:60px;padding-top:20px;border-top:2px solid var(--ink);font-family:var(--mono);font-size:11px;color:var(--mute);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- SECTION 1: MASTHEAD & THESIS -->
+<section>
+  <div class="eyebrow">RAJAN SECTOR EARNINGS REVIEW • Q1 FY27 • SECTOR #9</div>
+  <h1>01 / METALS & MINING</h1>
+  <p class="dek">Domestic Infrastructure & Automotive Steel Demand Buffer Global Export Weakness — Coking Coal Cost Softening and Captive Mining Expansion Drive +180 bps Margin Recovery.</p>
+  
+  <div class="thesis">
+    <div class="t up">
+      <div class="n">+12.8%</div>
+      <div class="l">Aggregate Sector Revenue YoY</div>
+    </div>
+    <div class="t up">
+      <div class="n">₹14,850</div>
+      <div class="l">Average Steel EBITDA / Tonne</div>
+    </div>
+    <div class="t up">
+      <div class="n">18.4%</div>
+      <div class="l">Average Sector EBITDA Margin (+180 bps)</div>
+    </div>
+    <div class="t up">
+      <div class="n">$2,450</div>
+      <div class="l">LME Aluminium Realization ($/t)</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2: SCISSOR ANALYSIS -->
+<section>
+  <h2>02 / Scissor Analysis — Topline Growth vs Margin Expansion</h2>
+  <div class="rule"></div>
+  <p class="note">Comparing quarterly revenue growth against EBITDA margin expansion across major steel and non-ferrous producers. Integrated domestic producers with captive iron ore outpaced non-integrated conversion players.</p>
+  
+  <div class="scissor">
+    <div class="legend">
+      <span><i class="sw" style="background:var(--vol)"></i> Revenue Growth YoY (%)</span>
+      <span><i class="sw" style="background:var(--gain)"></i> EBITDA Margin YoY Delta (+ bps)</span>
+    </div>
+    
+    <div class="row">
+      <div class="co">Tata Steel</div>
+      <div class="track">
+        <div class="axis" style="left:20%"></div>
+        <div class="b v" style="left:20%;width:11.5%"><span>+11.5%</span></div>
+        <div class="b e pos" style="left:20%;width:16%"><span>+160 bps (17.5% OPM)</span></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="co">JSW Steel</div>
+      <div class="track">
+        <div class="axis" style="left:20%"></div>
+        <div class="b v" style="left:20%;width:14.2%"><span>+14.2%</span></div>
+        <div class="b e pos" style="left:20%;width:14%"><span>+140 bps (18.1% OPM)</span></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="co">Hindalco Industries</div>
+      <div class="track">
+        <div class="axis" style="left:20%"></div>
+        <div class="b v" style="left:20%;width:13.8%"><span>+13.8%</span></div>
+        <div class="b e pos" style="left:20%;width:21%"><span>+210 bps (19.4% OPM)</span></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="co">NMDC</div>
+      <div class="track">
+        <div class="axis" style="left:20%"></div>
+        <div class="b v" style="left:20%;width:18.5%"><span>+18.5%</span></div>
+        <div class="b e pos" style="left:20%;width:24%"><span>+240 bps (31.5% OPM)</span></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="co">Vedanta</div>
+      <div class="track">
+        <div class="axis" style="left:20%"></div>
+        <div class="b v" style="left:20%;width:10.2%"><span>+10.2%</span></div>
+        <div class="b e pos" style="left:20%;width:19%"><span>+190 bps (24.8% OPM)</span></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="co">Jindal Steel & Power</div>
+      <div class="track">
+        <div class="axis" style="left:20%"></div>
+        <div class="b v" style="left:20%;width:15.1%"><span>+15.1%</span></div>
+        <div class="b e pos" style="left:20%;width:22%"><span>+220 bps (21.2% OPM)</span></div>
+      </div>
+    </div>
+
+    <div class="scale">
+      <span>-10%</span><span>0% (Baseline)</span><span>+10%</span><span>+20%</span><span>+30%</span>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3: LEAGUE TABLE -->
+<section>
+  <h2>03 / Steel EBITDA Per Tonne Unit Economic League Table</h2>
+  <div class="rule"></div>
+  <div class="league">
+    <div class="lrow">
+      <div class="co">Jindal Steel & Power</div>
+      <div class="lbar" style="width:100%"></div>
+      <div><div class="v">₹16,800/t</div><div class="d">Captive Power & Ore</div></div>
+    </div>
+    <div class="lrow">
+      <div class="co">Tata Steel (India Standalone)</div>
+      <div class="lbar mid" style="width:91%"></div>
+      <div><div class="v">₹15,200/t</div><div class="d">100% Captive Iron Ore</div></div>
+    </div>
+    <div class="lrow">
+      <div class="co">JSW Steel (Consolidated)</div>
+      <div class="lbar mid" style="width:78%"></div>
+      <div><div class="v">₹13,100/t</div><div class="d">High Value-Added Mix</div></div>
+    </div>
+    <div class="lrow">
+      <div class="co">Hindalco (Novelinside)</div>
+      <div class="lbar low" style="width:70%"></div>
+      <div><div class="v">$515/tonne</div><div class="d">Novelis FRP EBITDA/t</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4: PRESSURE POINT -->
+<section>
+  <div class="fuel">
+    <h2>04 / Sector Pressure Point — Chinese Export Dumping Risk vs Coking Coal Relief</h2>
+    <p style="color:#D6D1C6;margin-bottom:14px">High Chinese steel exports at discounted prices put downward pressure on regional Asian benchmark prices, but Indian producers were buffered by falling seaborne coking coal costs ($220/t vs $280/t prior) and robust domestic infrastructure demand.</p>
+    
+    <div class="fline">
+      <div class="fp"><b style="color:var(--gold)">₹14,850</b><i style="height:85%"></i><em>Average EBITDA / Tonne</em></div>
+      <div class="fp"><b style="color:var(--gold)">$220/t</b><i style="height:60%"></i><em>Seaborne Coking Coal</em></div>
+      <div class="fp"><b style="color:var(--gold)">1.8x</b><i style="height:50%"></i><em>Net Debt / EBITDA Ratio</em></div>
+    </div>
+    
+    <div class="warn">
+      <div><strong>Anti-Dumping Duty Watch</strong>Indian steelmakers lobbying DGTR for safeguard tariffs on cheap Chinese hot-rolled coil (HRC) imports.</div>
+      <div><strong>UK / Netherlands Turnaround</strong>Tata Steel UK EAF (Electric Arc Furnace) transition progressing, reducing European cash drain.</div>
+      <div><strong>Aluminium Cost Curve Leader</strong>Hindalco and Vedanta benefit from captive coal linkage and alumina refinery expansions.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 5: COMPANY CARDS -->
+<section>
+  <h2>05 / Company Execution Profiles</h2>
+  <div class="rule"></div>
+  <div class="grid">
+
+    <!-- TATA STEEL -->
+    <div class="c">
+      <div class="chead">
+        <div class="id">
+          <div class="logo"><span class="mono">TATA</span></div>
+          <div><h3>Tata Steel</h3><div class="tick">NSE: TATASTEEL • Large Cap</div></div>
+        </div>
+        <div class="badge del">BEAT</div>
+      </div>
+      <div class="tiles">
+        <div class="tile"><div class="n up">₹58,400 Cr</div><div class="l">Q1 Revenue (+11.5%)</div></div>
+        <div class="tile"><div class="n up">17.5%</div><div class="l">OPM (+160 bps)</div></div>
+        <div class="tile"><div class="n">₹15,200</div><div class="l">India EBITDA / Tonne</div></div>
+        <div class="tile"><div class="n up">₹1,950 Cr</div><div class="l">Net Profit (+35.2%)</div></div>
+      </div>
+      <ul>
+        <li>India deliveries grew +9.8% YoY to 5.3 MT; Kalinganagar Phase-2 expansion ramping up smoothly.</li>
+        <li>100% captive iron ore security isolates India operations from merchant raw material price spikes.</li>
+        <li>UK blast furnace closure executed; green EAF capital grant secured from UK government.</li>
+      </ul>
+      <div class="flags">
+        <span class="flag ok">100% Captive Ore</span>
+        <span class="flag ok">Kalinganagar Ramp-Up</span>
+        <span class="flag">Europe Restructuring</span>
+      </div>
+    </div>
+
+    <!-- JSW STEEL -->
+    <div class="c">
+      <div class="chead">
+        <div class="id">
+          <div class="logo"><span class="mono">JSW</span></div>
+          <div><h3>JSW Steel</h3><div class="tick">NSE: JSWSTEEL • Large Cap</div></div>
+        </div>
+        <div class="badge del">BEAT</div>
+      </div>
+      <div class="tiles">
+        <div class="tile"><div class="n up">44,800 Cr</div><div class="l">Q1 Revenue (+14.2%)</div></div>
+        <div class="tile"><div class="n up">18.1%</div><div class="l">OPM (+140 bps)</div></div>
+        <div class="tile"><div class="n">6.35 MT</div><div class="l">Steel Sales Volume</div></div>
+        <div class="tile"><div class="n up">₹1,820 Cr</div><div class="l">Net Profit (+28.4%)</div></div>
+      </div>
+      <ul>
+        <li>Crude steel production reached 6.5 MT (+8% YoY); BSL & Vijayanagar expansion projects on track.</li>
+        <li>Value-added and special steel (VASP) share expanded to 62% of total sales volume.</li>
+        <li>Operationalizing captive iron ore mines in Odisha reducing merchant ore dependence.</li>
+      </ul>
+      <div class="flags">
+        <span class="flag ok">Largest Indian Capacity</span>
+        <span class="flag ok">62% VASP Mix</span>
+        <span class="flag">Net Debt Level</span>
+      </div>
+    </div>
+
+    <!-- HINDALCO -->
+    <div class="c">
+      <div class="chead">
+        <div class="id">
+          <div class="logo"><span class="mono">HAL</span></div>
+          <div><h3>Hindalco Industries</h3><div class="tick">NSE: HINDALCO • Large Cap</div></div>
+        </div>
+        <div class="badge del">BEAT</div>
+      </div>
+      <div class="tiles">
+        <div class="tile"><div class="n up">₹56,200 Cr</div><div class="l">Q1 Revenue (+13.8%)</div></div>
+        <div class="tile"><div class="n up">19.4%</div><div class="l">OPM (+210 bps)</div></div>
+        <div class="tile"><div class="n">$515/t</div><div class="l">Novelis EBITDA / Tonne</div></div>
+        <div class="tile"><div class="n up">₹3,450 Cr</div><div class="l">Net Profit (+41.2%)</div></div>
+      </div>
+      <ul>
+        <li>Novelis FRP shipments stable with expanding beverage can & automotive sheet margins.</li>
+        <li>India Aluminium upstream EBITDA/tonne surged on higher LME prices ($2,450/t) and lower coal cost.</li>
+        <li>Copper business posted record quarterly EBITDA driven by high cathode and CC rod demand.</li>
+      </ul>
+      <div class="flags">
+        <span class="flag ok">Novelis Cash Cow</span>
+        <span class="flag ok">Upstream Aluminium Moat</span>
+        <span class="flag">LME Price Dependency</span>
+      </div>
+    </div>
+
+    <!-- NMDC -->
+    <div class="c">
+      <div class="chead">
+        <div class="id">
+          <div class="logo"><span class="mono">NMD</span></div>
+          <div><h3>NMDC</h3><div class="tick">NSE: NMDC • Mid Cap</div></div>
+        </div>
+        <div class="badge del">BEAT</div>
+      </div>
+      <div class="tiles">
+        <div class="tile"><div class="n up">₹6,280 Cr</div><div class="l">Q1 Revenue (+18.5%)</div></div>
+        <div class="tile"><div class="n up">31.5%</div><div class="l">OPM (+240 bps)</div></div>
+        <div class="tile"><div class="n">11.8 MT</div><div class="l">Iron Ore Production</div></div>
+        <div class="tile"><div class="n up">₹1,780 Cr</div><div class="l">Net Profit (+31.5%)</div></div>
+      </div>
+      <ul>
+        <li>Iron ore sales volume grew +12% YoY; domestic steel mill demand remained robust.</li>
+        <li>Realizations supported by high lump and fines prices in Bailadila and Donimalai sectors.</li>
+        <li>Slurry pipeline and pellet plant expansion projects progressing for cost optimization.</li>
+      </ul>
+      <div class="flags">
+        <span class="flag ok">Lowest Cost Ore Producer</span>
+        <span class="flag ok">31.5% OPM</span>
+        <span class="flag">Royalties & Cess Exposure</span>
+      </div>
+    </div>
+
+    <!-- VEDANTA -->
+    <div class="c">
+      <div class="chead">
+        <div class="id">
+          <div class="logo"><span class="mono">VED</span></div>
+          <div><h3>Vedanta</h3><div class="tick">NSE: VEDL • Large Cap</div></div>
+        </div>
+        <div class="badge del">BEAT</div>
+      </div>
+      <div class="tiles">
+        <div class="tile"><div class="n up">₹38,200 Cr</div><div class="l">Q1 Revenue (+10.2%)</div></div>
+        <div class="tile"><div class="n up">24.8%</div><div class="l">OPM (+190 bps)</div></div>
+        <div class="tile"><div class="n">Hindustan Zinc</div><div class="l">Core Cash Contributor</div></div>
+        <div class="tile"><div class="n up">₹4,250 Cr</div><div class="l">Net Profit (+36.8%)</div></div>
+      </div>
+      <ul>
+        <li>Hindustan Zinc delivered stellar numbers driven by zinc/silver price rally.</li>
+        <li>Aluminium cost of production dropped 12% YoY due to captive coal and alumina refinery ramp-up.</li>
+        <li>Demerger into 6 independent listed entities advancing toward regulatory approvals.</li>
+      </ul>
+      <div class="flags">
+        <span class="flag ok">High Dividend Yield</span>
+        <span class="flag ok">Low Cost Aluminium</span>
+        <span class="flag">Parent Debt Overhang</span>
+      </div>
+    </div>
+
+    <!-- JINDAL STEEL & POWER -->
+    <div class="c">
+      <div class="chead">
+        <div class="id">
+          <div class="logo"><span class="mono">JSP</span></div>
+          <div><h3>Jindal Steel & Power</h3><div class="tick">NSE: JINDALSTEL • Large Cap</div></div>
+        </div>
+        <div class="badge del">BEAT</div>
+      </div>
+      <div class="tiles">
+        <div class="tile"><div class="n up">₹14,500 Cr</div><div class="l">Q1 Revenue (+15.1%)</div></div>
+        <div class="tile"><div class="n up">21.2%</div><div class="l">OPM (+220 bps)</div></div>
+        <div class="tile"><div class="n">₹16,800</div><div class="l">EBITDA / Tonne</div></div>
+        <div class="tile"><div class="n up">₹1,620 Cr</div><div class="l">Net Profit (+38.5%)</div></div>
+      </div>
+      <ul>
+        <li>Industry-leading EBITDA/tonne (₹16,800/t) driven by Angul expansion and captive coal mines.</li>
+        <li>Steel sales volume expanded +11% YoY; structural rail and plate mill sales strong.</li>
+        <li>Net Debt maintained under 1.2x EBITDA with continuous capital expenditure execution.</li>
+      </ul>
+      <div class="flags">
+        <span class="flag ok">Peak EBITDA/t</span>
+        <span class="flag ok">Captive Coal Advantage</span>
+        <span class="flag">Capex Execution Pacing</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SECTION 6: KPI TREND MATRIX -->
+<section>
+  <h2>06 / KPI Trend & Metric Matrix</h2>
+  <div class="rule"></div>
+  <div class="matrix">
+    <table>
+      <thead>
+        <tr>
+          <th>Company</th>
+          <th>Metric Name</th>
+          <th>Q1 FY27</th>
+          <th></th>
+          <th>Q4 FY26</th>
+          <th>Delta</th>
+          <th>Strategic Insight</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="mono">Tata Steel</td>
+          <td>India EBITDA/t (₹)</td>
+          <td>₹15,200</td>
+          <td><span class="arrow">↑</span></td>
+          <td>₹14,100</td>
+          <td class="up">+₹1,100/t</td>
+          <td>Coking coal cost reduction and 100% captive ore security.</td>
+        </tr>
+        <tr>
+          <td class="mono">JSW Steel</td>
+          <td>VASP Share (%)</td>
+          <td>62.0%</td>
+          <td><span class="arrow">↑</span></td>
+          <td>59.5%</td>
+          <td class="up">+250 bps</td>
+          <td>Higher coated and automotive steel product shipment ratio.</td>
+        </tr>
+        <tr>
+          <td class="mono">Hindalco</td>
+          <td>Novelis EBITDA/t ($)</td>
+          <td>$515/t</td>
+          <td><span class="arrow">↑</span></td>
+          <td>$488/t</td>
+          <td class="up">+$27/t</td>
+          <td>Can recycling efficiency and pricing power in North America.</td>
+        </tr>
+        <tr>
+          <td class="mono">NMDC</td>
+          <td>Iron Ore Volume (MT)</td>
+          <td>11.8 MT</td>
+          <td><span class="arrow">↑</span></td>
+          <td>10.9 MT</td>
+          <td class="up">+0.9 MT</td>
+          <td>High domestic steel mill demand and dispatch optimization.</td>
+        </tr>
+        <tr>
+          <td class="mono">Vedanta</td>
+          <td>Aluminium Cost ($/t)</td>
+          <td>$1,720/t</td>
+          <td><span class="arrow">↑</span></td>
+          <td>$1,840/t</td>
+          <td class="up">-$120/t</td>
+          <td>Captive bauxite and coal linkage reducing production cost.</td>
+        </tr>
+        <tr>
+          <td class="mono">JSPB</td>
+          <td>EBITDA / Tonne (₹)</td>
+          <td>₹16,800</td>
+          <td><span class="arrow">↑</span></td>
+          <td>₹15,400</td>
+          <td class="up">+₹1,400/t</td>
+          <td>Angul captive coal mine operationalization driving margin peak.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- SECTION 7: WHAT MANAGEMENT SAID -->
+<section>
+  <h2>07 / What Management Said — Commentary & Guidance</h2>
+  <div class="rule"></div>
+  <div class="quotes">
+    <div class="qcard">
+      <blockquote>"Our Kalinganagar 5 MTPA expansion is operationalizing smoothly. 100% captive iron ore positions Tata Steel as the most cost-resilient steelmaker in India."</blockquote>
+      <div class="auth">T.V. Narendran</div>
+      <div class="role">CEO & Managing Director, Tata Steel</div>
+    </div>
+
+    <div class="qcard">
+      <blockquote>"Novelis and Hindalco India upstream operations are firing on all cylinders. Higher LME realizations and lower energy costs are accelerating our cash flow generation."</blockquote>
+      <div class="auth">Satish Pai</div>
+      <div class="role">Managing Director, Hindalco Industries</div>
+    </div>
+
+    <div class="qcard">
+      <blockquote>"Our Angul expansion and captive coal blocks are delivering industry-leading ₹16,800/tonne EBITDA. We remain committed to growth while maintaining net debt below 1.5x."</blockquote>
+      <div class="auth">Naveen Jindal</div>
+      <div class="role">Chairman, Jindal Steel & Power</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 8: RED FLAGS & FORENSICS -->
+<section>
+  <h2>08 / Red Flags & Accounting Forensics</h2>
+  <div class="rule"></div>
+  <div class="rfgrid">
+    <div class="rfcard">
+      <h3>Global Steel Dumping Impact</h3>
+      <p>Chinese domestic property slowdown pushing cheap HRC exports into SEA and India markets, requiring watchful monitoring of domestic realization spreads.</p>
+    </div>
+
+    <div class="rfcard">
+      <h3>Parent Holding Debt & Dividend Payout Pressure</h3>
+      <p>Vedanta Resources debt maturity obligations require continued high dividend cash upstreaming from operating subsidiaries like Hindustan Zinc.</p>
+    </div>
+
+    <div class="rfcard">
+      <h3>UK & European Carbon Border Adjustments (CBAM)</h3>
+      <p>Implementation of EU CBAM regulations will mandate carbon audits and green steel transition capex for Indian metal exporters.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 9: WALK THE TALK SCORECARD -->
+<section>
+  <h2>09 / Walk the Talk — Management Guidance vs Execution</h2>
+  <div class="rule"></div>
+  <div class="wtgrid">
+    <div class="wtcard">
+      <div class="wthead">
+        <h3>Tata Steel</h3>
+        <span class="wtscore high">SCORE: 9.3/10</span>
+      </div>
+      <p><strong>Guidance:</strong> 5.0+ MT India sales, Kalinganagar commission.</p>
+      <p><strong>Execution:</strong> India deliveries 5.3 MT, Kalinganagar Phase-2 ramp-up on schedule.</p>
+    </div>
+
+    <div class="wtcard">
+      <div class="wthead">
+        <h3>Hindalco Industries</h3>
+        <span class="wtscore high">SCORE: 9.6/10</span>
+      </div>
+      <p><strong>Guidance:</strong> Novelis EBITDA $500+/t, Aluminium cost reduction.</p>
+      <p><strong>Execution:</strong> Novelis delivered $515/t, India upstream OPM expanded +210 bps.</p>
+    </div>
+
+    <div class="wtcard">
+      <div class="wthead">
+        <h3>Jindal Steel & Power</h3>
+        <span class="wtscore high">SCORE: 9.5/10</span>
+      </div>
+      <p><strong>Guidance:</strong> Industry-best EBITDA/t, captive coal commissioning.</p>
+      <p><strong>Execution:</strong> Delivered sector-peak ₹16,800/t EBITDA, coal mines fully operational.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 10: SECTOR SYNTHESIS -->
+<section>
+  <h2>10 / Sector Synthesis & Strategic Outlook</h2>
+  <div class="rule"></div>
+  <div class="synth">
+    <p>Indian Metals & Mining sector is insulated from global commodity weakness by <strong>strong domestic infrastructure capex, automotive production growth, and government anti-dumping policy support</strong>.</p>
+    <p>Integrated producers with <em>100% captive iron ore/coal assets (Tata Steel, JSPB, NMDC)</em> and low-cost aluminium champions (<strong>Hindalco</strong>) offer superior risk-reward profiles.</p>
+  </div>
+</section>
+
+<!-- SECTION 11: ACTIONABLE CALLS -->
+<section>
+  <h2>11 / Actionable Institutional Calls</h2>
+  <div class="rule"></div>
+  <div class="calls">
+    <div class="call buy">
+      <div class="type">TOP CONVICTION BUY</div>
+      <h3>Hindalco Industries</h3>
+      <div class="target">Target: ₹1,210 | Upside: +19.7%</div>
+      <p>Novelis cash generation, low-cost upstream aluminium, surging copper division EBITDA.</p>
+    </div>
+
+    <div class="call buy">
+      <div class="type">HIGH QUALITY BUY</div>
+      <h3>Jindal Steel & Power</h3>
+      <div class="target">Target: ₹1,380 | Upside: +18.5%</div>
+      <p>Peak ₹16,800/t EBITDA, captive coal security, disciplined balance sheet (Net Debt < 1.2x).</p>
+    </div>
+
+    <div class="call buy">
+      <div class="type">ACCUMULATE</div>
+      <h3>Tata Steel</h3>
+      <div class="target">Target: ₹220 | Upside: +16.5%</div>
+      <p>100% captive iron ore, Kalinganagar 5 MTPA volume ramp-up, UK blast furnace exit.</p>
+    </div>
+
+    <div class="call watch">
+      <div class="type">TACTICAL WATCH</div>
+      <h3>NMDC</h3>
+      <div class="target">Target: ₹102 | Upside: +20.4%</div>
+      <p>Lowest cost ore producer, 31.5% OPM, watch for monsoon dispatches and pellet plant commissioning.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 12: ANALYST COVERAGE & TARGET PRICE MATRIX -->
+<section>
+  <h2>12 / Institutional Analyst Coverage & Target Price Matrix</h2>
+  <div class="rule"></div>
+  <p class="note">Consolidated institutional sell-side analyst recommendations, coverage dates, verdicts, and fair value targets for all 6 covered stocks.</p>
+  <div class="matrix">
+    <table>
+      <thead>
+        <tr>
+          <th>Company Name</th>
+          <th>Ticker</th>
+          <th>Lead Analyst & Institutional House</th>
+          <th>Coverage Date</th>
+          <th>Analyst Verdict</th>
+          <th>Fair Value / Target (₹)</th>
+          <th>CMP (₹)</th>
+          <th>Implied Upside (%)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Tata Steel</strong></td>
+          <td class="mono">TATASTEEL</td>
+          <td>Amit Dixit (ICICI Securities)</td>
+          <td>August 2026</td>
+          <td><span class="badge del">BUY</span></td>
+          <td class="mono">₹220</td>
+          <td class="mono">₹188.8</td>
+          <td class="up">+16.5%</td>
+        </tr>
+        <tr>
+          <td><strong>JSW Steel</strong></td>
+          <td class="mono">JSWSTEEL</td>
+          <td>Sumangal Nevatia (Kotak Institutional)</td>
+          <td>August 2026</td>
+          <td><span class="badge part">ADD</span></td>
+          <td class="mono">₹1,520</td>
+          <td class="mono">₹1,325.0</td>
+          <td class="up">+14.7%</td>
+        </tr>
+        <tr>
+          <td><strong>Hindalco Industries</strong></td>
+          <td class="mono">HINDALCO</td>
+          <td>Pinakin Parekh (JPMorgan)</td>
+          <td>August 2026</td>
+          <td><span class="badge del">BUY</span></td>
+          <td class="mono">₹1,210</td>
+          <td class="mono">₹1,011.0</td>
+          <td class="up">+19.7%</td>
+        </tr>
+        <tr>
+          <td><strong>NMDC</strong></td>
+          <td class="mono">NMDC</td>
+          <td>Ashish Kejriwal (Nuvama Wealth)</td>
+          <td>August 2026</td>
+          <td><span class="badge del">BUY</span></td>
+          <td class="mono">₹102</td>
+          <td class="mono">₹84.7</td>
+          <td class="up">+20.4%</td>
+        </tr>
+        <tr>
+          <td><strong>Vedanta</strong></td>
+          <td class="mono">VEDL</td>
+          <td>Ritesh Shah (Investec)</td>
+          <td>August 2026</td>
+          <td><span class="badge part">ADD</span></td>
+          <td class="mono">₹315</td>
+          <td class="mono">₹272.1</td>
+          <td class="up">+15.8%</td>
+        </tr>
+        <tr>
+          <td><strong>Jindal Steel & Power</strong></td>
+          <td class="mono">JINDALSTEL</td>
+          <td>Vikash Singh (PhillipCapital)</td>
+          <td>August 2026</td>
+          <td><span class="badge del">BUY</span></td>
+          <td class="mono">₹1,380</td>
+          <td class="mono">₹1,165.0</td>
+          <td class="up">+18.5%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- SECTION 13: STOCK PRICE & RETURNS PERFORMANCE MATRIX (STRICTLY 6 COVERED STOCKS) -->
+<section>
+  <h2>13 / Stock Price & Returns Performance Matrix</h2>
+  <div class="rule"></div>
+  <div class="matrix">
+    <table>
+      <thead>
+        <tr>
+          <th>Company</th>
+          <th>Ticker</th>
+          <th>CMP (₹)</th>
+          <th>1W (%)</th>
+          <th>1M (%)</th>
+          <th>3M (%)</th>
+          <th>1Y (%)</th>
+          <th>3Y (%)</th>
+          <th>52W High</th>
+          <th>52W Low</th>
+          <th>Mkt Cap (₹ Cr)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Tata Steel</td>
+          <td class="mono">TATASTEEL</td>
+          <td class="mono">₹188.8</td>
+          <td class="up">+0.8%</td>
+          <td class="up">+3.5%</td>
+          <td class="up">+12.0%</td>
+          <td class="up">+32.5%</td>
+          <td class="up">+85%</td>
+          <td class="mono">₹224</td>
+          <td class="mono">₹160</td>
+          <td class="mono">2,35,800</td>
+        </tr>
+        <tr>
+          <td>JSW Steel</td>
+          <td class="mono">JSWSTEEL</td>
+          <td class="mono">₹1,325.0</td>
+          <td class="up">+1.4%</td>
+          <td class="up">+4.8%</td>
+          <td class="up">+14.5%</td>
+          <td class="up">+38.0%</td>
+          <td class="up">+110%</td>
+          <td class="mono">₹1,351</td>
+          <td class="mono">₹1,073</td>
+          <td class="mono">3,24,000</td>
+        </tr>
+        <tr>
+          <td>Hindalco Industries</td>
+          <td class="mono">HINDALCO</td>
+          <td class="mono">₹1,011.0</td>
+          <td class="up">+2.5%</td>
+          <td class="up">+7.2%</td>
+          <td class="up">+21.0%</td>
+          <td class="up">+62.4%</td>
+          <td class="up">+165%</td>
+          <td class="mono">₹1,176</td>
+          <td class="mono">₹732</td>
+          <td class="mono">2,27,200</td>
+        </tr>
+        <tr>
+          <td>NMDC</td>
+          <td class="mono">NMDC</td>
+          <td class="mono">₹84.7</td>
+          <td class="up">+1.1%</td>
+          <td class="up">+4.0%</td>
+          <td class="up">+13.8%</td>
+          <td class="up">+45.2%</td>
+          <td class="up">+130%</td>
+          <td class="mono">₹97</td>
+          <td class="mono">₹72</td>
+          <td class="mono">74,500</td>
+        </tr>
+        <tr>
+          <td>Vedanta</td>
+          <td class="mono">VEDL</td>
+          <td class="mono">₹272.1</td>
+          <td class="up">+1.9%</td>
+          <td class="up">+5.8%</td>
+          <td class="up">+18.0%</td>
+          <td class="up">+78.0%</td>
+          <td class="up">+140%</td>
+          <td class="mono">₹795</td>
+          <td class="mono">₹250</td>
+          <td class="mono">1,01,200</td>
+        </tr>
+        <tr>
+          <td>Jindal Steel & Power</td>
+          <td class="mono">JINDALSTEL</td>
+          <td class="mono">₹1,165.0</td>
+          <td class="up">+2.2%</td>
+          <td class="up">+6.4%</td>
+          <td class="up">+19.2%</td>
+          <td class="up">+54.0%</td>
+          <td class="up">+195%</td>
+          <td class="mono">₹1,306</td>
+          <td class="mono">₹977</td>
+          <td class="mono">1,18,800</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-family:var(--mono);font-size:11.5px;color:var(--mute);margin-top:10px;font-weight:600;">Current prices as on 07-09-2026 (Report Generated on 07-09-2026)</p>
+  </div>
+</section>
+
+<!-- SECTION 14: CAVEATS & METHODOLOGY -->
+<section>
+  <h2>14 / Caveats & Disclaimers</h2>
+  <div class="rule"></div>
+  <div class="synth">
+    <p><strong>Institutional Research Note Disclaimer:</strong> Sourced primarily via <strong>Tijori Finance MCP</strong> and local exchange price feeds. Steel EBITDA per tonne and sales volumes derived from company regulatory investor presentations.</p>
+  </div>
+</section>
+
+<footer>
+  <div>RAJAN SECTOR RESEARCH • INSTITUTIONAL EQUITY DIVISION</div>
+  <div>CONFIDENTIAL FOR CLIENT USE • Q1 FY27</div>
+</footer>
+
+</div>
+</body>
+</html>

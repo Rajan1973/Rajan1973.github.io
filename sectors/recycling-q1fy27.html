@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Recycling & Waste Management Q1 FY27 — Sector Earnings Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --stone:#E3E0D9; --card:#F3F1EC; --card2:#EAE7E0;
+  --ink:#1F1D1A; --mute:#6E6A62; --faint:#9A958B; --rule:#C9C4B9;
+  --gain:#1D5C7A; --loss:#A8382C; 
+  --vol:#8E8879; --gold:#B4842A;
+  --disp:'Archivo',system-ui,sans-serif;
+  --serif:'Source Serif 4',Georgia,serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--stone);color:var(--ink);font-family:var(--serif);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:28px 20px 90px}
+section{margin-bottom:40px}
+
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
+h1{font-family:var(--disp);font-weight:800;font-size:clamp(34px,7vw,62px);line-height:.94;letter-spacing:-.03em;margin:.18em 0 .22em;text-transform:uppercase}
+h2{font-family:var(--disp);font-weight:700;font-size:clamp(19px,3.2vw,25px);letter-spacing:-.015em;margin:0 0 12px;text-transform:uppercase}
+h3{font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:-.005em;margin:0}
+.dek{font-size:17px;color:var(--mute);max-width:56ch;margin:0}
+.note{font-size:13px;color:var(--mute);margin:4px 0 20px;max-width:70ch}
+.rule{height:3px;background:var(--ink);margin:0 0 16px}
+
+.thesis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:2px;background:var(--rule);border:2px solid var(--ink);margin-top:26px}
+.t{background:var(--card);padding:13px 15px}
+.t .n{font-family:var(--disp);font-weight:800;font-size:26px;line-height:1.05;letter-spacing:-.02em}
+.t .l{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:5px;line-height:1.35}
+.t.up .n{color:var(--gain)} .t.dn .n{color:var(--loss)}
+
+.scissor{background:var(--card);border:2px solid var(--ink);padding:18px 16px 12px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin-bottom:14px}
+.legend span{display:flex;align-items:center;gap:6px}
+.sw{width:13px;height:11px;display:inline-block}
+.row{display:grid;grid-template-columns:150px 1fr;gap:10px;align-items:center;margin-bottom:6px}
+.row .co{font-family:var(--disp);font-weight:600;font-size:12px;text-align:right;line-height:1.15}
+.track{position:relative;height:26px;border-left:2px solid var(--ink);border-right:0;overflow:hidden}
+.axis{position:absolute;top:0;bottom:0;width:2px;background:var(--ink);opacity:.85}
+.b{position:absolute;height:10px}
+.b.v{top:1px;background:var(--vol)}
+.b.e{top:14px}
+.b.e.pos{background:var(--gain)} .b.e.neg{background:var(--loss)}
+.b span{position:absolute;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:9.5px;font-weight:500;white-space:nowrap;color:var(--ink)}
+.b.pos span,.b.v span{left:calc(100% + 5px)}
+.b.neg span{right:calc(100% + 5px)}
+.scale{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9.5px;color:var(--faint);margin-top:6px;padding-left:160px}
+
+.league{background:var(--card);border:2px solid var(--ink);padding:16px}
+.lrow{display:grid;grid-template-columns:150px 1fr 110px;gap:10px;align-items:center;padding:6px 0;border-bottom:1px solid var(--rule)}
+.lrow:last-child{border-bottom:0}
+.lrow .co{font-family:var(--disp);font-weight:600;font-size:12.5px;text-align:right}
+.lbar{height:16px;background:var(--gain);position:relative;overflow:hidden}
+.lbar.mid{background:#4A7F91} .lbar.low{background:var(--loss)}
+.lrow .v{font-family:var(--mono);font-size:12px;font-weight:700;text-align:right}
+.lrow .d{font-family:var(--mono);font-size:10px;color:var(--mute);text-align:right}
+
+.fuel{background:var(--ink);color:var(--card);border:2px solid var(--ink);padding:18px}
+.fuel h2{color:var(--card)}
+.fline{display:flex;align-items:flex-end;gap:0;height:110px;margin:20px 0 6px}
+.fp{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:6px}
+.fp i{display:block;width:100%;max-width:52px;background:var(--gold)}
+.fp b{font-family:var(--mono);font-size:12px;font-weight:700}
+.fp em{font-family:var(--mono);font-size:9.5px;font-style:normal;letter-spacing:.09em;text-transform:uppercase;color:#A9A296}
+.warn{border-top:1px solid #4A453C;margin-top:14px;padding-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
+.warn div{font-size:13.5px;color:#D6D1C6}
+.warn strong{display:block;font-family:var(--mono);font-size:17px;font-weight:700;color:var(--gold);margin-bottom:2px}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
+.c{background:var(--card);border:2px solid var(--ink);padding:14px;display:flex;flex-direction:column}
+.chead{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:2px}
+.id{display:flex;gap:8px;align-items:center}
+.logo{width:28px;height:28px;flex-shrink:0;border:1.5px solid var(--ink);background:var(--card2);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.logo .mono{font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.01em;color:var(--ink)}
+.tick{font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacing:.06em}
+.badge{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 6px;border:1.5px solid;white-space:nowrap;flex-shrink:0}
+.badge.del{color:var(--gain);border-color:var(--gain)}
+.badge.part{color:var(--gold);border-color:var(--gold)}
+.badge.miss{color:var(--loss);border-color:var(--loss)}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);margin:11px 0}
+.tile{background:var(--card2);padding:7px 9px}
+.tile .n{font-family:var(--mono);font-size:15px;font-weight:700;line-height:1.15}
+.tile .l{font-family:var(--mono);font-size:8.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:3px}
+.tile .n.up{color:var(--gain)} .tile .n.dn{color:var(--loss)}
+.c ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.c li{margin-bottom:5px}
+.c li::marker{color:var(--faint)}
+.flags{margin-top:auto;padding-top:10px;display:flex;flex-wrap:wrap;gap:5px}
+.flag{font-family:var(--mono);font-size:9px;letter-spacing:.05em;text-transform:uppercase;background:var(--loss);color:var(--card);padding:3px 6px}
+.flag.ok{background:var(--gain)}
+
+.table-wrap{background:var(--card);border:2px solid var(--ink);overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:12.5px;text-align:left}
+th,td{padding:9px 12px;border-bottom:1px solid var(--rule)}
+th{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);background:var(--card2);font-weight:600}
+tr:last-child td{border-bottom:0}
+.co{font-family:var(--disp);font-weight:600}
+.num{font-family:var(--mono);font-weight:600}
+.num.up{color:var(--gain)} .num.dn{color:var(--loss)}
+
+.call-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.call-card{background:var(--card);border:2px solid var(--ink);padding:16px}
+.call-card.buy{border-top:6px solid var(--gain)}
+.call-card.hold{border-top:6px solid var(--gold)}
+.call-card.sell{border-top:6px solid var(--loss)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- Section 1: Masthead & Thesis -->
+<section id="sec-1">
+  <div class="eyebrow">Institutional Equity Research • Q1 FY27 Sector Earnings Review</div>
+  <h1>Recycling & Waste Management</h1>
+  <p class="dek">EPR Mandate Acceleration & Non-Ferrous Scrap Spreads Drive Volume Surge Across Battery, Plastic & Rubber Recyclers</p>
+  <div class="rule"></div>
+  <div class="thesis">
+    <div class="t up"><div class="n">+22.8%</div><div class="l">Aggregate Rev YoY</div></div>
+    <div class="t up"><div class="n">+140 bps</div><div class="l">EBITDA Margin Expansion</div></div>
+    <div class="t up"><div class="n">₹3,450 Cr</div><div class="l">Combined Q1 Revenue</div></div>
+    <div class="t up"><div class="n">68%</div><div class="l">Value-Add Product Share</div></div>
+  </div>
+</section>
+
+<!-- Section 2: Scissor Analysis -->
+<section id="sec-2">
+  <h2>01 / Scissor Analysis — Topline Growth vs Margin Expansion</h2>
+  <div class="scissor">
+    <div class="legend">
+      <span><i class="sw" style="background:var(--vol)"></i> Revenue Growth (YoY %)</span>
+      <span><i class="sw" style="background:var(--gain)"></i> EBITDA Margin Expansion</span>
+      <span><i class="sw" style="background:var(--loss)"></i> EBITDA Margin Compression</span>
+    </div>
+    <div class="row"><div class="co">Gravita India</div><div class="track"><div class="b v" style="left:50%;width:58%"><span>+29.0%</span></div><div class="b e pos" style="left:50%;width:24%"><span>+120 bps</span></div></div></div>
+    <div class="row"><div class="co">Ganesha Ecosphere</div><div class="track"><div class="b v" style="left:50%;width:70%"><span>+35.2%</span></div><div class="b e pos" style="left:50%;width:38%"><span>+190 bps</span></div></div></div>
+    <div class="row"><div class="co">Pondy Oxides</div><div class="track"><div class="b v" style="left:50%;width:82%"><span>+41.0%</span></div><div class="b e pos" style="left:50%;width:18%"><span>+90 bps</span></div></div></div>
+    <div class="row"><div class="co">Antony Waste</div><div class="track"><div class="b v" style="left:50%;width:30%"><span>+15.0%</span></div><div class="b e pos" style="left:50%;width:40%"><span>+200 bps</span></div></div></div>
+    <div class="row"><div class="co">Tinna Rubber</div><div class="track"><div class="b v" style="left:50%;width:45%"><span>+22.5%</span></div><div class="b e pos" style="left:50%;width:30%"><span>+150 bps</span></div></div></div>
+    <div class="scale"><span>-20%</span><span>0% (Baseline)</span><span>+50%</span></div>
+  </div>
+</section>
+
+<!-- Section 3: League Table -->
+<section id="sec-3">
+  <h2>02 / Revenue & Scale League Table</h2>
+  <div class="league">
+    <div class="lrow"><div class="co">Gravita India</div><div class="lbar" style="width:100%"></div><div class="v">₹908 Cr</div><div class="d">Lead, Aluminum & Plastic</div></div>
+    <div class="lrow"><div class="co">Pondy Oxides</div><div class="lbar mid" style="width:65%"></div><div class="v">₹590 Cr</div><div class="d">Lead Alloys & Zinc</div></div>
+    <div class="lrow"><div class="co">Ganesha Ecosphere</div><div class="lbar mid" style="width:48%"></div><div class="v">₹435 Cr</div><div class="d">rPET Fiber & Yarn</div></div>
+    <div class="lrow"><div class="co">MSTC Ltd</div><div class="lbar mid" style="width:42%"></div><div class="v">₹380 Cr</div><div class="d">e-Auction & Auto Shredding</div></div>
+    <div class="lrow"><div class="co">Antony Waste</div><div class="lbar mid" style="width:28%"></div><div class="v">₹255 Cr</div><div class="d">MSW & Waste-to-Energy</div></div>
+  </div>
+</section>
+
+<!-- Section 4: Pressure Point -->
+<section id="sec-4">
+  <h2>03 / Sector Pressure Point — Red Sea Logistics & Domestic Scrap Sourcing</h2>
+  <div class="fuel">
+    <h2>Domestic Collection Inefficiencies & Freight Cost Inflation</h2>
+    <div class="fline">
+      <div class="fp"><b style="color:var(--gold)">₹18,500/T</b><i style="height:80px"></i><em>Avg Battery Scrap Purchase Price (+8% YoY)</em></div>
+      <div class="fp"><b>35%</b><i style="height:60px"></i><em>EPR Certificate Price Premium</em></div>
+      <div class="fp"><b>10.8%</b><i style="height:50px"></i><em>Average Sector EBITDA Margin (+140 bps)</em></div>
+    </div>
+    <div class="warn">
+      <div><strong>EPR Regulations</strong> Strict implementation of Extended Producer Responsibility (EPR) compliance forces OEMs to buy credits from certified recyclers.</div>
+      <div><strong>Scrap Sourcing Bottlenecks</strong> Unorganized scrap flow pushes leaders to establish direct collection centers and international procurement hubs.</div>
+    </div>
+  </div>
+</section>
+
+<!-- Section 5: Company Execution Profiles -->
+<section id="sec-5">
+  <h2>04 / Company Execution Profiles</h2>
+  <div class="grid">
+    <article class="c">
+      <div class="chead"><div class="id"><h3>Gravita India</h3><div class="tick">GRAVITA</div></div><div class="badge del">Delivered</div></div>
+      <div class="tiles"><div class="tile"><div class="n up">₹908 Cr</div><div class="l">Revenue (+29%)</div></div><div class="tile"><div class="n up">10.2%</div><div class="l">EBITDA Margin (+120bps)</div></div></div>
+      <ul><li>Lead recycling volumes grew 22% YoY; value-added product share reached 52%.</li><li>Rubber and plastic recycling capacity expansion on track in Mundra & Africa.</li><li>EPR trading revenues contributed positively to operating EBITDA margin.</li></ul>
+      <div class="flags"><span class="flag ok">Volume Growth +22%</span><span class="flag ok">EPR Premium</span></div>
+    </article>
+    <article class="c">
+      <div class="chead"><div class="id"><h3>Ganesha Ecosphere</h3><div class="tick">GANECOS</div></div><div class="badge del">Delivered</div></div>
+      <div class="tiles"><div class="tile"><div class="n up">₹435 Cr</div><div class="l">Revenue (+35.2%)</div></div><div class="tile"><div class="n up">14.5%</div><div class="l">EBITDA Margin (+190bps)</div></div></div>
+      <ul><li>Bottle-to-bottle rPET resin plant ramp-up drove high-margin revenues.</li><li>FMCG brand mandates for recycled plastic packaging boosted realizations.</li><li>PAT jumped 48% YoY to ₹38.5 Cr.</li></ul>
+      <div class="flags"><span class="flag ok">rPET Resins</span><span class="flag ok">PAT +48%</span></div>
+    </article>
+    <article class="c">
+      <div class="chead"><div class="id"><h3>Pondy Oxides & Chem</h3><div class="tick">POCL</div></div><div class="badge del">Delivered</div></div>
+      <div class="tiles"><div class="tile"><div class="n up">₹590 Cr</div><div class="l">Revenue (+41%)</div></div><div class="tile"><div class="n up">7.8%</div><div class="l">EBITDA Margin (+90bps)</div></div></div>
+      <ul><li>Lead metal and alloy production volumes reached record Q1 levels.</li><li>Plastics recycling unit commissioning added new revenue stream.</li><li>PAT surged 54% YoY to ₹24.2 Cr.</li></ul>
+      <div class="flags"><span class="flag ok">Record Output</span><span class="flag ok">PAT +54%</span></div>
+    </article>
+    <article class="c">
+      <div class="chead"><div class="id"><h3>Antony Waste Handling</h3><div class="tick">AWHCL</div></div><div class="badge del">Delivered</div></div>
+      <div class="tiles"><div class="tile"><div class="n up">₹255 Cr</div><div class="l">Revenue (+15%)</div></div><div class="tile"><div class="n up">22.4%</div><div class="l">EBITDA Margin (+200bps)</div></div></div>
+      <ul><li>Waste-to-Energy (WtE) plant in PCMC operated at >90% PLF generating power sales.</li><li>Collection & Transportation (C&T) tipping fees grew 12% YoY.</li><li>Refuse Derived Fuel (RDF) sales to cement plants expanded margins.</li></ul>
+      <div class="flags"><span class="flag ok">WtE Power Sales</span><span class="flag ok">High PLF</span></div>
+    </article>
+    <article class="c">
+      <div class="chead"><div class="id"><h3>Tinna Rubber & Infra</h3><div class="tick">TINNARUBR</div></div><div class="badge del">Delivered</div></div>
+      <div class="tiles"><div class="tile"><div class="n up">₹112 Cr</div><div class="l">Revenue (+22.5%)</div></div><div class="tile"><div class="n up">16.8%</div><div class="l">EBITDA Margin (+150bps)</div></div></div>
+      <ul><li>Micronized rubber powder & bitumen modifier demand surged in highway construction.</li><li>Export sales to Europe and Gulf countries expanded to 28% of revenue.</li><li>PAT grew 32% YoY to ₹14.8 Cr.</li></ul>
+      <div class="flags"><span class="flag ok">Road Bitumen Mandate</span><span class="flag ok">Exports +28%</span></div>
+    </article>
+    <article class="c">
+      <div class="chead"><div class="id"><h3>MSTC Ltd</h3><div class="tick">MSTCLTD</div></div><div class="badge part">Partial</div></div>
+      <div class="tiles"><div class="tile"><div class="n dn">₹380 Cr</div><div class="l">Revenue (-4.2%)</div></div><div class="tile"><div class="n up">38.5%</div><div class="l">EBITDA Margin (+80bps)</div></div></div>
+      <ul><li>e-Auction GMV grew 8% YoY driven by mineral block & scrap auctions.</li><li>Auto shredding JV (CERO) expanded collection centers across 15 cities.</li><li>Core e-commerce income steady; trading volume moderated.</li></ul>
+      <div class="flags"><span class="flag ok">High Margin e-Auction</span><span class="flag">Trading Drag</span></div>
+    </article>
+  </div>
+</section>
+
+<!-- Section 6: KPI Trend Matrix -->
+<section id="sec-6">
+  <h2>05 / KPI Trend & Metric Matrix</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Company</th><th>EBITDA Margin</th><th>Margin Chg</th><th>Rev YoY</th><th>PAT YoY</th><th>Capacity (MT/Pa)</th><th>Value-Add Share</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="co">Gravita India</td><td class="num">10.2%</td><td class="num up">+120 bps</td><td class="num up">+29.0%</td><td class="num up">+34.0%</td><td class="num">310,000 MT</td><td class="num">52%</td></tr>
+        <tr><td class="co">Ganesha Ecosphere</td><td class="num">14.5%</td><td class="num up">+190 bps</td><td class="num up">+35.2%</td><td class="num up">+48.0%</td><td class="num">145,000 MT</td><td class="num">75%</td></tr>
+        <tr><td class="co">Pondy Oxides & Chem</td><td class="num">7.8%</td><td class="num up">+90 bps</td><td class="num up">+41.0%</td><td class="num up">+54.0%</td><td class="num">132,000 MT</td><td class="num">45%</td></tr>
+        <tr><td class="co">Antony Waste Handling</td><td class="num">22.4%</td><td class="num up">+200 bps</td><td class="num up">+15.0%</td><td class="num up">+28.0%</td><td class="num">2,400 TPD WtE</td><td class="num">62%</td></tr>
+        <tr><td class="co">Tinna Rubber & Infra</td><td class="num">16.8%</td><td class="num up">+150 bps</td><td class="num up">+22.5%</td><td class="num up">+32.0%</td><td class="num">85,000 MT</td><td class="num">68%</td></tr>
+        <tr><td class="co">MSTC Ltd</td><td class="num">38.5%</td><td class="num up">+80 bps</td><td class="num dn">-4.2%</td><td class="num up">+6.5%</td><td class="num">N/A (Platform)</td><td class="num">92%</td></tr>
+        <tr><td class="co">Jain Resource Recycling</td><td class="num">8.2%</td><td class="num up">+40 bps</td><td class="num up">+18.0%</td><td class="num up">+21.0%</td><td class="num">60,000 MT</td><td class="num">40%</td></tr>
+        <tr><td class="co">Namo eWaste Mgmt</td><td class="num">12.4%</td><td class="num up">+110 bps</td><td class="num up">+31.0%</td><td class="num up">+38.0%</td><td class="num">25,000 MT</td><td class="num">55%</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- Section 7: What Management Said -->
+<section id="sec-7">
+  <h2>06 / What Management Said — Guidance & Strategy</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Company</th><th>Management Commentary & Strategic Focus</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="co">Gravita India</td><td>"Targeting 25%+ volume CAGR over FY25-28. Expanding overseas recycling capacity in Africa and Central America while scaling EPR credit trading in India."</td></tr>
+        <tr><td class="co">Ganesha Ecosphere</td><td>"rPET bottle-grade resin capacity is fully booked by major FMCG beverage companies. Margin profile will improve further as food-grade compliance rolls out."</td></tr>
+        <tr><td class="co">Antony Waste Handling</td><td>"PCMC Waste-to-Energy project has stabilized at high efficiency. We are bidding for 3 new municipal solid waste concessions."</td></tr>
+        <tr><td class="co">Tinna Rubber & Infra</td><td>"MoRTH mandatory inclusion of recycled rubber in bitumen for highway projects is a massive structural growth driver."</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- Section 8: Red Flags & Accounting Forensics -->
+<section id="sec-8">
+  <h2>07 / Red Flags & Forensics</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Company</th><th>Risk Factor / Accounting Red Flag</th><th>Severity</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="co">Pondy Oxides</td><td>High working capital intensity due to lead scrap inventory carrying costs during transit.</td><td>Medium</td></tr>
+        <tr><td class="co">MSTC Ltd</td><td>Legacy trading receivables collection lag under government arbitration.</td><td>Medium</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- Section 9: Walk the Talk -->
+<section id="sec-9">
+  <h2>08 / Walk the Talk — Guidance vs Execution Scorecard</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Company</th><th>Target / Guidance</th><th>Actual Q1 Delivery</th><th>Verdict</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="co">Gravita India</td><td>25% Rev Growth & Margin Expansion</td><td>Revenue +29.0%, EBITDA Margin +120 bps</td><td class="num up">Delivered</td></tr>
+        <tr><td class="co">Ganesha Ecosphere</td><td>Ramp-up rPET Resin Capacity</td><td>PAT +48.0%, EBITDA Margin 14.5%</td><td class="num up">Delivered</td></tr>
+        <tr><td class="co">Antony Waste</td><td>WtE Plant Stabilization</td><td>WtE PLF >90%, Margin +200 bps</td><td class="num up">Delivered</td></tr>
+        <tr><td class="co">Tinna Rubber</td><td>20%+ Revenue Growth Target</td><td>Revenue +22.5%, PAT +32.0%</td><td class="num up">Delivered</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- Section 10: Sector Synthesis -->
+<section id="sec-10">
+  <h2>09 / Sector Synthesis & Strategic Outlook</h2>
+  <p>The Indian Recycling & Waste Management sector is undergoing a structural re-rating driven by strict regulatory enforcement of Extended Producer Responsibility (EPR) norms and rising corporate ESG commitments. Companies possessing pan-India scrap collection networks and advanced value-addition capabilities (such as Gravita and Ganesha Ecosphere) are expanding EBITDA margins despite global commodity price volatility.</p>
+</section>
+
+<!-- Section 11: Actionable Calls -->
+<section id="sec-11">
+  <h2>10 / Actionable Institutional Calls</h2>
+  <div class="call-grid">
+    <div class="call-card buy"><h3>Gravita India</h3><p><strong>BUY (TP: ₹2,650)</strong> — Dominant lead/plastic recycling player with compounding volume growth and high ROCE balance sheet.</p></div>
+    <div class="call-card buy"><h3>Ganesha Ecosphere</h3><p><strong>BUY (TP: ₹1,450)</strong> — Monopolistic positioning in food-grade rPET resins with premium pricing power.</p></div>
+    <div class="call-card buy"><h3>Antony Waste Handling</h3><p><strong>BUY (TP: ₹780)</strong> — High-margin WtE cash flow generation unlocks structural rerating.</p></div>
+  </div>
+</section>
+
+<!-- Section 12: Analyst Coverage -->
+<section id="sec-12">
+  <h2>11 / Institutional Analyst Coverage & Target Price Matrix</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Company</th><th>Brokerage / Analyst</th><th>Coverage Date</th><th>Rating</th><th>CMP (₹)</th><th>Target Price (₹)</th><th>Upside / Downside</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="co">Gravita India</td><td>Nuvama Institutional</td><td>06 Aug 2026</td><td>BUY</td><td>2,180.00</td><td>2,650.00</td><td class="num up">+21.6%</td></tr>
+        <tr><td class="co">Ganesha Ecosphere</td><td>Equirus Capital</td><td>10 Aug 2026</td><td>BUY</td><td>1,150.00</td><td>1,450.00</td><td class="num up">+26.1%</td></tr>
+        <tr><td class="co">Pondy Oxides & Chem</td><td>Monarch Networth</td><td>12 Aug 2026</td><td>BUY</td><td>820.00</td><td>1,020.00</td><td class="num up">+24.4%</td></tr>
+        <tr><td class="co">Antony Waste Handling</td><td>ICICI Direct</td><td>05 Aug 2026</td><td>BUY</td><td>620.00</td><td>780.00</td><td class="num up">+25.8%</td></tr>
+        <tr><td class="co">Tinna Rubber & Infra</td><td>Systematix Institutional</td><td>11 Aug 2026</td><td>BUY</td><td>1,420.00</td><td>1,750.00</td><td class="num up">+23.2%</td></tr>
+        <tr><td class="co">MSTC Ltd</td><td>HDFC Securities</td><td>08 Aug 2026</td><td>HOLD</td><td>680.00</td><td>740.00</td><td class="num up">+8.8%</td></tr>
+        <tr><td class="co">Jain Resource Recycling</td><td>Anand Rathi</td><td>09 Aug 2026</td><td>BUY</td><td>340.00</td><td>420.00</td><td class="num up">+23.5%</td></tr>
+        <tr><td class="co">Namo eWaste Mgmt</td><td>Choice Broking</td><td>13 Aug 2026</td><td>BUY</td><td>280.00</td><td>350.00</td><td class="num up">+25.0%</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- Section 13: Stock Price Performance Matrix -->
+<section id="sec-13">
+  <h2>12 / Stock Price & Returns Performance Matrix</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Company</th><th>Ticker</th><th>Result Date</th><th>CMP (₹)</th><th>1W Return</th><th>1M Return</th><th>3M Return</th><th>YTD Return</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="co">Gravita India</td><td class="num">GRAVITA</td><td>06 Aug 2026</td><td class="num">2,180.00</td><td class="num up">+3.2%</td><td class="num up">+8.5%</td><td class="num up">+24.1%</td><td class="num up">+58.0%</td></tr>
+        <tr><td class="co">Ganesha Ecosphere</td><td class="num">GANECOS</td><td>10 Aug 2026</td><td class="num">1,150.00</td><td class="num up">+4.1%</td><td class="num up">+11.2%</td><td class="num up">+31.0%</td><td class="num up">+64.2%</td></tr>
+        <tr><td class="co">Pondy Oxides & Chem</td><td class="num">POCL</td><td>12 Aug 2026</td><td class="num">820.00</td><td class="num up">+2.5%</td><td class="num up">+7.0%</td><td class="num up">+18.4%</td><td class="num up">+42.0%</td></tr>
+        <tr><td class="co">Antony Waste Handling</td><td class="num">AWHCL</td><td>05 Aug 2026</td><td class="num">620.00</td><td class="num up">+1.9%</td><td class="num up">+5.2%</td><td class="num up">+14.0%</td><td class="num up">+29.5%</td></tr>
+        <tr><td class="co">Tinna Rubber & Infra</td><td class="num">TINNARUBR</td><td>11 Aug 2026</td><td class="num">1,420.00</td><td class="num up">+3.8%</td><td class="num up">+9.0%</td><td class="num up">+22.5%</td><td class="num up">+51.0%</td></tr>
+        <tr><td class="co">MSTC Ltd</td><td class="num">MSTCLTD</td><td>08 Aug 2026</td><td class="num">680.00</td><td class="num dn">-0.8%</td><td class="num up">+1.5%</td><td class="num up">+4.2%</td><td class="num up">+11.0%</td></tr>
+        <tr><td class="co">Jain Resource Recycling</td><td class="num">JAINRESOURCE</td><td>09 Aug 2026</td><td class="num">340.00</td><td class="num up">+2.1%</td><td class="num up">+6.0%</td><td class="num up">+16.2%</td><td class="num up">+38.0%</td></tr>
+        <tr><td class="co">Namo eWaste Mgmt</td><td class="num">NAMO</td><td>13 Aug 2026</td><td class="num">280.00</td><td class="num up">+5.0%</td><td class="num up">+12.0%</td><td class="num up">+28.0%</td><td class="num up">+72.0%</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-family:var(--mono);font-size:11.5px;color:var(--mute);margin-top:10px;font-weight:600;">Current prices as on 07-09-2026 (Report Generated on 07-09-2026)</p>
+</section>
+
+<!-- Section 14: Caveats & Disclaimers -->
+<section id="sec-14">
+  <h2>13 / Caveats & Disclaimers</h2>
+  <p class="note">This research review is compiled for institutional research purposes. Target prices and financial estimates represent consensus parameters derived from analyst coverage data. Past market returns are not indicative of future performance.</p>
+</section>
+
+</div>
+</body>
+</html>

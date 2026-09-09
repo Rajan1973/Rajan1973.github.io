@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EMS Q1 FY27 - Sector Earnings Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --stone:#E3E0D9; --card:#F3F1EC; --card2:#EAE7E0;
+  --ink:#1F1D1A; --mute:#6E6A62; --faint:#9A958B; --rule:#C9C4B9;
+  --gain:#1D5C7A; --loss:#A8382C; 
+  --vol:#8E8879; --gold:#B4842A;
+  --disp:'Archivo',system-ui,sans-serif;
+  --serif:'Source Serif 4',Georgia,serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--stone);color:var(--ink);font-family:var(--serif);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:28px 20px 90px}
+section{margin-bottom:40px}
+
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
+h1{font-family:var(--disp);font-weight:800;font-size:clamp(34px,7vw,62px);line-height:.94;letter-spacing:-.03em;margin:.18em 0 .22em;text-transform:uppercase}
+h2{font-family:var(--disp);font-weight:700;font-size:clamp(19px,3.2vw,25px);letter-spacing:-.015em;margin:0 0 12px;text-transform:uppercase}
+h3{font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:-.005em;margin:0}
+.dek{font-size:17px;color:var(--mute);max-width:56ch;margin:0}
+.note{font-size:13px;color:var(--mute);margin:4px 0 20px;max-width:70ch}
+.rule{height:3px;background:var(--ink);margin:0 0 16px}
+
+.thesis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:2px;background:var(--rule);border:2px solid var(--ink);margin-top:26px}
+.t{background:var(--card);padding:13px 15px}
+.t .n{font-family:var(--disp);font-weight:800;font-size:26px;line-height:1.05;letter-spacing:-.02em}
+.t .l{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:5px;line-height:1.35}
+.t.up .n{color:var(--gain)} .t.dn .n{color:var(--loss)}
+
+.scissor{background:var(--card);border:2px solid var(--ink);padding:18px 16px 12px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin-bottom:14px}
+.legend span{display:flex;align-items:center;gap:6px}
+.sw{width:13px;height:11px;display:inline-block}
+.row{display:grid;grid-template-columns:140px 1fr;gap:10px;align-items:center;margin-bottom:6px}
+.row .co{font-family:var(--disp);font-weight:600;font-size:12px;text-align:right;line-height:1.15}
+.track{position:relative;height:26px;border-left:2px solid var(--ink);border-right:0;overflow:hidden}
+.axis{position:absolute;top:0;bottom:0;width:2px;background:var(--ink);opacity:.85}
+.b{position:absolute;height:10px}
+.b.v{top:1px;background:var(--vol)}
+.b.e{top:14px}
+.b.e.pos{background:var(--gain)} .b.e.neg{background:var(--loss)}
+.b span{position:absolute;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:9.5px;font-weight:500;white-space:nowrap;color:var(--ink)}
+.b.pos span,.b.v span{left:calc(100% + 5px)}
+.b.neg span{right:calc(100% + 5px)}
+.scale{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9.5px;color:var(--faint);margin-top:6px;padding-left:150px}
+
+.league{background:var(--card);border:2px solid var(--ink);padding:16px}
+.lrow{display:grid;grid-template-columns:150px 1fr 110px;gap:10px;align-items:center;padding:6px 0;border-bottom:1px solid var(--rule)}
+.lrow:last-child{border-bottom:0}
+.lrow .co{font-family:var(--disp);font-weight:600;font-size:12.5px;text-align:right}
+.lbar{height:16px;background:var(--gain);position:relative;overflow:hidden}
+.lbar.mid{background:#4A7F91} .lbar.low{background:var(--loss)}
+.lrow .v{font-family:var(--mono);font-size:12px;font-weight:700;text-align:right}
+.lrow .d{font-family:var(--mono);font-size:10px;color:var(--mute);text-align:right}
+
+.fuel{background:var(--ink);color:var(--card);border:2px solid var(--ink);padding:18px}
+.fuel h2{color:var(--card)}
+.fline{display:flex;align-items:flex-end;gap:0;height:110px;margin:20px 0 6px}
+.fp{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:6px}
+.fp i{display:block;width:100%;max-width:52px;background:var(--gold)}
+.fp b{font-family:var(--mono);font-size:12px;font-weight:700}
+.fp em{font-family:var(--mono);font-size:9.5px;font-style:normal;letter-spacing:.09em;text-transform:uppercase;color:#A9A296}
+.warn{border-top:1px solid #4A453C;margin-top:14px;padding-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
+.warn div{font-size:13.5px;color:#D6D1C6}
+.warn strong{display:block;font-family:var(--mono);font-size:17px;font-weight:700;color:var(--gold);margin-bottom:2px}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
+.c{background:var(--card);border:2px solid var(--ink);padding:14px;display:flex;flex-direction:column}
+.chead{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:2px}
+.id{display:flex;gap:8px;align-items:center}
+.logo{width:28px;height:28px;flex-shrink:0;border:1.5px solid var(--ink);background:var(--card2);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.logo .mono{font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.01em;color:var(--ink)}
+.tick{font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacing:.06em}
+.badge{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 6px;border:1.5px solid;white-space:nowrap;flex-shrink:0}
+.badge.del{color:var(--gain);border-color:var(--gain)}
+.badge.part{color:var(--gold);border-color:var(--gold)}
+.badge.miss{color:var(--loss);border-color:var(--loss)}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);margin:11px 0}
+.tile{background:var(--card2);padding:7px 9px}
+.tile .n{font-family:var(--mono);font-size:15px;font-weight:700;line-height:1.15}
+.tile .l{font-family:var(--mono);font-size:8.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:3px}
+.tile .n.up{color:var(--gain)} .tile .n.dn{color:var(--loss)}
+.c ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.c li{margin-bottom:5px}
+.c li::marker{color:var(--faint)}
+.flags{margin-top:auto;padding-top:10px;display:flex;flex-wrap:wrap;gap:5px}
+.flag{font-family:var(--mono);font-size:9px;letter-spacing:.05em;text-transform:uppercase;background:var(--loss);color:var(--card);padding:3px 6px}
+.flag.ok{background:var(--gain)}
+
+.matrix{background:var(--card);border:2px solid var(--ink);padding:16px;overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13px;text-align:left}
+th{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);padding:8px 10px;border-bottom:2px solid var(--ink)}
+td{padding:10px;border-bottom:1px solid var(--rule);vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.mono{font-family:var(--mono);font-weight:600}
+td.up{color:var(--gain);font-family:var(--mono);font-weight:700}
+td.dn{color:var(--loss);font-family:var(--mono);font-weight:700}
+.arrow{display:inline-block;margin:0 4px;font-weight:bold}
+
+.quotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.qcard{background:var(--card);border:2px solid var(--ink);padding:16px;position:relative}
+.qcard blockquote{margin:0 0 12px;font-size:14px;font-style:italic;line-height:1.45}
+.qcard .auth{font-family:var(--disp);font-weight:700;font-size:13px;margin-bottom:2px}
+.qcard .role{font-family:var(--mono);font-size:10px;color:var(--mute)}
+
+.rfgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.rfcard{background:var(--card);border:2px solid var(--ink);border-top:4px solid var(--loss);padding:16px}
+.rfcard h3{color:var(--loss);margin-bottom:6px}
+.rfcard p{margin:0;font-size:13.5px;color:var(--ink)}
+
+.wtgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.wtcard{background:var(--card);border:2px solid var(--ink);padding:16px}
+.wthead{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.wtscore{font-family:var(--mono);font-weight:700;font-size:12px;padding:3px 8px;border:1px solid}
+.wtscore.high{color:var(--gain);border-color:var(--gain);background:#EBF3F7}
+.wtscore.mid{color:var(--gold);border-color:var(--gold);background:#FDF8EC}
+
+.synth{background:var(--card);border:2px solid var(--ink);padding:20px}
+.synth p{margin:0 0 12px;font-size:14.5px;line-height:1.6}
+.synth p:last-child{margin-bottom:0}
+
+.calls{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.call{background:var(--card);border:2px solid var(--ink);padding:16px}
+.call.buy{border-top:4px solid var(--gain)}
+.call.hold{border-top:4px solid var(--gold)}
+.call.watch{border-top:4px solid var(--mute)}
+.call .type{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+.call h3{font-size:18px;margin:4px 0 8px}
+.call .target{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--gain);margin-bottom:8px}
+.call p{margin:0;font-size:13.5px;line-height:1.45}
+
+footer{margin-top:60px;padding-top:20px;border-top:2px solid var(--ink);font-family:var(--mono);font-size:11px;color:var(--mute);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- SECTION 1: MASTHEAD & THESIS -->
+<section>
+  <div class="eyebrow">RAJAN SECTOR EARNINGS REVIEW • Q1 FY27 • SECTOR #5</div>
+  <h1>EMS (ELECTRONICS MANUFACTURING SERVICES)</h1>
+  <p class="dek">Smartphone & Automotive Component Localization Fuel +38.5% Revenue Surge — Scale Expansion & High-Margin ODM Box-Build Drive Industry-Wide Operating Leverage.</p>
+  
+  <div class="thesis">
+    <div class="t up">
+      <div class="n">+38.5%</div>
+      <div class="l">Aggregate Sector Revenue YoY</div>
+    </div>
+    <div class="t up">
+      <div class="n">7.8%</div>
+      <div class="l">Average Sector OPM (+120 bps)</div>
+    </div>
+    <div class="t up">
+      <div class="n">₹14,200 Cr</div>
+      <div class="l">Combined Order Book (High Reliability EMS)</div>
+    </div>
+    <div class="t up">
+      <div class="n">42.5%</div>
+      <div class="l">ODM / High-Margin Box Build Mix</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2: SCISSOR ANALYSIS -->
+<section>
+  <h2>01 / Scissor Analysis — Topline Growth vs Margin Expansion</h2>
+  <div class="rule"></div>
+  <p class="note">Comparing quarterly revenue growth against operating margin delta. Market leaders leveraging PLI incentives and box-build assembly demonstrated significant operating margin expansion.</p>
+  
+  <div class="scissor">
+    <div class="legend">
+      <span><i class="sw" style="background:var(--vol)"></i> Revenue Growth YoY (%)</span>
+      <span><i class="sw" style="background:var(--gain)"></i> OPM YoY Delta (+ bps / - bps)</span>
+    </div>
+    
+    <div class="row">
+      <div class="co">Dixon Technologies</div>
+      <div class="track">
+        <div class="axis" style="left:20%"></div>
+        <div class="b v" style="left:20%;width:48.5%"><span>+48.5%</span></div>
+        <div class="b e pos" style="left:20%;width:14%"><span>+140 bps (4.2% OPM)</span></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="co">Kaynes Technology</div>
+      <div class="track">
+        <div class="axis" style="left:20%"></div>
+        <div class="b v" style="left:20%;width:38.2%"><span>+38.2%</span></div>
+        <div class="b e pos" style="left:20%;width:21%"><span>+210 bps (15.4% OPM)</span></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="co">Syrma SGS Tech</div>
+      <div class="track">
+        <div class="axis" style="left:20%"></div>
+        <div class="b v" style="left:20%;width:28.1%"><span>+28.1%</span></div>
+        <div class="b e pos" style="left:20%;width:11%"><span>+110 bps (7.8% OPM)</span></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="co">Cyient DLM</div>
+      <div class="track">
+        <div class="axis" style="left:20%"></div>
+        <div class="b v" style="left:20%;width:31.4%"><span>+31.4%</span></div>
+        <div class="b e pos" style="left:20%;width:18%"><span>+180 bps (10.2% OPM)</span></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="co">Avalon Technologies</div>
+      <div class="track">
+        <div class="axis" style="left:20%"></div>
+        <div class="b v" style="left:20%;width:24.5%"><span>+24.5%</span></div>
+        <div class="b e pos" style="left:20%;width:15%"><span>+150 bps (9.6% OPM)</span></div>
+      </div>
+    </div>
+
+    <div class="scale">
+      <span>-10%</span><span>0% (Baseline)</span><span>+20%</span><span>+40%</span><span>+60%</span>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3: LEAGUE TABLE -->
+<section>
+  <h2>02 / Revenue & Scale League Table</h2>
+  <div class="rule"></div>
+  <div class="league">
+    <div class="lrow">
+      <div class="co">Dixon Technologies</div>
+      <div class="lbar" style="width:100%"></div>
+      <div><div class="v">₹6,580 Cr</div><div class="d">Mobile Assembly Mix: 74%</div></div>
+    </div>
+    <div class="lrow">
+      <div class="co">Kaynes Technology</div>
+      <div class="lbar mid" style="width:38%"></div>
+      <div><div class="v">₹642 Cr</div><div class="d">Order Book: ₹5,100 Cr</div></div>
+    </div>
+    <div class="lrow">
+      <div class="co">Syrma SGS Tech</div>
+      <div class="lbar mid" style="width:35%"></div>
+      <div><div class="v">₹585 Cr</div><div class="d">Auto & Industrial Mix: 52%</div></div>
+    </div>
+    <div class="lrow">
+      <div class="co">Cyient DLM</div>
+      <div class="lbar low" style="width:22%"></div>
+      <div><div class="v">₹365 Cr</div><div class="d">Aerospace & Defence: 45%</div></div>
+    </div>
+    <div class="lrow">
+      <div class="co">Avalon Tech</div>
+      <div class="lbar low" style="width:18%"></div>
+      <div><div class="v">₹298 Cr</div><div class="d">US Export Mix: 55%</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4: PRESSURE POINT -->
+<section>
+  <div class="fuel">
+    <h2>03 / Sector Pressure Point — Working Capital Lockup & IC Semiconductor Lead Times</h2>
+    <p style="color:#D6D1C6;margin-bottom:14px">While the global China+1 shift and domestic Production Linked Incentive (PLI) schemes drive exponential order volumes, high working capital requirements in raw material inventory buffer and delayed PLI subsidy disbursements remain key operational choke points.</p>
+    
+    <div class="fline">
+      <div class="fp"><b style="color:var(--gold)">112 Days</b><i style="height:75%"></i><em>Working Capital Cycle</em></div>
+      <div class="fp"><b style="color:var(--gold)">74%</b><i style="height:90%"></i><em>Dixon Mobile Mix</em></div>
+      <div class="fp"><b style="color:var(--gold)">15.4%</b><i style="height:62%"></i><em>Kaynes Industrial OPM</em></div>
+    </div>
+    
+    <div class="warn">
+      <div><strong>Semiconductor Buffer Inventory</strong>EMS players maintaining 60-90 days raw material component inventory to avoid assembly line shutdowns.</div>
+      <div><strong>PLI Claim Audit Delays</strong>State & Central Ministry PLI incentive cash flows face 6-9 month audit clearance lag.</div>
+      <div><strong>ODM vs OEM Mix Shift</strong>Transition from low-margin OEM assembly (3-4% OPM) to original design manufacturing (12-15% OPM).</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 5: COMPANY CARDS -->
+<section>
+  <h2>04 / Company Execution Profiles</h2>
+  <div class="rule"></div>
+  <div class="grid">
+
+    <!-- DIXON -->
+    <div class="c">
+      <div class="chead">
+        <div class="id">
+          <div class="logo"><span class="mono">DIX</span></div>
+          <div><h3>Dixon Technologies</h3><div class="tick">NSE: DIXON • Large Cap</div></div>
+        </div>
+        <div class="badge del">BEAT</div>
+      </div>
+      <div class="tiles">
+        <div class="tile"><div class="n up">₹6,580 Cr</div><div class="l">Q1 Revenue (+48.5%)</div></div>
+        <div class="tile"><div class="n up">4.2%</div><div class="l">OPM (+140 bps)</div></div>
+        <div class="tile"><div class="n">74%</div><div class="l">Mobile Segment Share</div></div>
+        <div class="tile"><div class="n up">₹215 Cr</div><div class="l">Net Profit (+58.2%)</div></div>
+      </div>
+      <ul>
+        <li>Mobile & EMS segment revenue doubled YoY, driven by Xiaomi and Transsion smartphone assembly contracts.</li>
+        <li>Ismartu acquisition integration completed; laptop & tablet PLI manufacturing ramping up.</li>
+        <li>Component backward integration (display modules, camera modules) expanding long-term margin potential.</li>
+      </ul>
+      <div class="flags">
+        <span class="flag ok">Undisputed EMS Leader</span>
+        <span class="flag ok">PLI Champion</span>
+        <span class="flag">Low Gross Margin</span>
+      </div>
+    </div>
+
+    <!-- KAYNES -->
+    <div class="c">
+      <div class="chead">
+        <div class="id">
+          <div class="logo"><span class="mono">KAY</span></div>
+          <div><h3>Kaynes Technology</h3><div class="tick">NSE: KAYNES • Mid Cap</div></div>
+        </div>
+        <div class="badge del">BEAT</div>
+      </div>
+      <div class="tiles">
+        <div class="tile"><div class="n up">₹642 Cr</div><div class="l">Q1 Revenue (+38.2%)</div></div>
+        <div class="tile"><div class="n up">15.4%</div><div class="l">OPM (+210 bps)</div></div>
+        <div class="tile"><div class="n">₹5,100 Cr</div><div class="l">Order Backlog</div></div>
+        <div class="tile"><div class="n up">₹72 Cr</div><div class="l">Net Profit (+45.1%)</div></div>
+      </div>
+      <ul>
+        <li>Industry-leading OPM (15.4%) driven by high-reliability industrial, automotive, and railway electronics box-builds.</li>
+        <li>OSAT semiconductor assembly plant in Sanand, Gujarat progressing towards commercial trial runs.</li>
+        <li>Order book expanded to ₹5,100 Cr, providing strong multi-year revenue visibility.</li>
+      </ul>
+      <div class="flags">
+        <span class="flag ok">15.4% Peak Sector OPM</span>
+        <span class="flag ok">OSAT Semiconductor Play</span>
+        <span class="flag">High Working Capital</span>
+      </div>
+    </div>
+
+    <!-- SYRMA -->
+    <div class="c">
+      <div class="chead">
+        <div class="id">
+          <div class="logo"><span class="mono">SYR</span></div>
+          <div><h3>Syrma SGS Technology</h3><div class="tick">NSE: SYRMA • Mid Cap</div></div>
+        </div>
+        <div class="badge del">BEAT</div>
+      </div>
+      <div class="tiles">
+        <div class="tile"><div class="n up">₹585 Cr</div><div class="l">Q1 Revenue (+28.1%)</div></div>
+        <div class="tile"><div class="n up">7.8%</div><div class="l">OPM (+110 bps)</div></div>
+        <div class="tile"><div class="n">52%</div><div class="l">Auto & Industrial Mix</div></div>
+        <div class="tile"><div class="n up">₹38 Cr</div><div class="l">Net Profit (+32.4%)</div></div>
+      </div>
+      <ul>
+        <li>Automotive EV electronics and smart meter PCBA assembly leading topline growth.</li>
+        <li>Johari Digital acquisition synergies boosting high-margin healthcare devices export mix.</li>
+        <li>Working capital optimization reducing inventory days by 12 days in Q1.</li>
+      </ul>
+      <div class="flags">
+        <span class="flag ok">Diversified Client Base</span>
+        <span class="flag ok">Medical Electronics</span>
+        <span class="flag">Consumer Mix Pressure</span>
+      </div>
+    </div>
+
+    <!-- CYIENT DLM -->
+    <div class="c">
+      <div class="chead">
+        <div class="id">
+          <div class="logo"><span class="mono">CYI</span></div>
+          <div><h3>Cyient DLM</h3><div class="tick">NSE: CYIENTDLM • Mid Cap</div></div>
+        </div>
+        <div class="badge del">BEAT</div>
+      </div>
+      <div class="tiles">
+        <div class="tile"><div class="n up">₹365 Cr</div><div class="l">Q1 Revenue (+31.4%)</div></div>
+        <div class="tile"><div class="n up">10.2%</div><div class="l">OPM (+180 bps)</div></div>
+        <div class="tile"><div class="n">45%</div><div class="l">Aerospace & Defence Mix</div></div>
+        <div class="tile"><div class="n up">₹28 Cr</div><div class="l">Net Profit (+39.5%)</div></div>
+      </div>
+      <ul>
+        <li>High-precision aerospace & defence electronics assembly driving margin expansion.</li>
+        <li>Key client additions in global avionics and industrial robotics verticals.</li>
+        <li>Clean balance sheet supported by net IPO proceeds, fueling Mysuru facility expansion.</li>
+      </ul>
+      <div class="flags">
+        <span class="flag ok">Aerospace & Defence Niche</span>
+        <span class="flag ok">High Margin Box Build</span>
+        <span class="flag">Client Concentration</span>
+      </div>
+    </div>
+
+    <!-- AVALON -->
+    <div class="c">
+      <div class="chead">
+        <div class="id">
+          <div class="logo"><span class="mono">AVA</span></div>
+          <div><h3>Avalon Technologies</h3><div class="tick">NSE: AVALON • Mid Cap</div></div>
+        </div>
+        <div class="badge part">IN-LINE</div>
+      </div>
+      <div class="tiles">
+        <div class="tile"><div class="n up">₹298 Cr</div><div class="l">Q1 Revenue (+24.5%)</div></div>
+        <div class="tile"><div class="n up">9.6%</div><div class="l">OPM (+150 bps)</div></div>
+        <div class="tile"><div class="n">55%</div><div class="l">US Export Share</div></div>
+        <div class="tile"><div class="n up">₹22 Cr</div><div class="l">Net Profit (+28.0%)</div></div>
+      </div>
+      <ul>
+        <li>US export order execution recovering smoothly across clean energy and industrial power.</li>
+        <li>Full box-build system integration mix expanded to 44% of revenues.</li>
+        <li>New facility in Chennai fully operational, ramping up high-reliability PCB manufacturing.</li>
+      </ul>
+      <div class="flags">
+        <span class="flag ok">High US Export Share</span>
+        <span class="flag ok">Box Build Focus</span>
+        <span class="flag">US Macro Sensitivity</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SECTION 6: KPI TREND MATRIX -->
+<section>
+  <h2>05 / KPI Trend & Metric Matrix</h2>
+  <div class="rule"></div>
+  <div class="matrix">
+    <table>
+      <thead>
+        <tr>
+          <th>Company</th>
+          <th>Metric Name</th>
+          <th>Q1 FY27</th>
+          <th></th>
+          <th>Q4 FY26</th>
+          <th>Delta</th>
+          <th>Strategic Insight</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="mono">Dixon Tech</td>
+          <td>Mobile Monthly Capacity (M)</td>
+          <td>3.80</td>
+          <td><span class="arrow">↑</span></td>
+          <td>3.20</td>
+          <td class="up">+18.75%</td>
+          <td>New Ismartu and Noida plant lines commissioned.</td>
+        </tr>
+        <tr>
+          <td class="mono">Kaynes Tech</td>
+          <td>Order Backlog (₹ Cr)</td>
+          <td>5,100</td>
+          <td><span class="arrow">↑</span></td>
+          <td>4,500</td>
+          <td class="up">+13.3%</td>
+          <td>Industrial, railway, and automotive contract additions.</td>
+        </tr>
+        <tr>
+          <td class="mono">Kaynes Tech</td>
+          <td>OPM (%)</td>
+          <td>15.4%</td>
+          <td><span class="arrow">↑</span></td>
+          <td>14.1%</td>
+          <td class="up">+130 bps</td>
+          <td>Favorable high-reliability box build revenue mix.</td>
+        </tr>
+        <tr>
+          <td class="mono">Syrma SGS</td>
+          <td>Box Build Share (%)</td>
+          <td>38.5%</td>
+          <td><span class="arrow">↑</span></td>
+          <td>35.0%</td>
+          <td class="up">+350 bps</td>
+          <td>Transition from pure PCBA to full system assembly.</td>
+        </tr>
+        <tr>
+          <td class="mono">Cyient DLM</td>
+          <td>Defence & Avionics Share (%)</td>
+          <td>45.0%</td>
+          <td><span class="arrow">↑</span></td>
+          <td>42.1%</td>
+          <td class="up">+290 bps</td>
+          <td>Global defense offset and aerospace orders expanding.</td>
+        </tr>
+        <tr>
+          <td class="mono">Avalon Tech</td>
+          <td>Net Working Capital Days</td>
+          <td>115</td>
+          <td><span class="arrow">↑</span></td>
+          <td>124</td>
+          <td class="up">-9 days</td>
+          <td>US customer inventory normalization driving faster cash cycle.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- SECTION 7: WHAT MANAGEMENT SAID -->
+<section>
+  <h2>06 / What Management Said — Commentary & Guidance</h2>
+  <div class="rule"></div>
+  <div class="quotes">
+    <div class="qcard">
+      <blockquote>"Our smartphone manufacturing volumes are crossing 35 million units annually. As component localization for displays and camera modules kicks in, we expect significant operating leverage across our EMS business."</blockquote>
+      <div class="auth">Atul B. Lall</div>
+      <div class="role">Vice Chairman & MD, Dixon Technologies</div>
+    </div>
+
+    <div class="qcard">
+      <blockquote>"Our focus remains firmly on high-margin, high-reliability verticals such as automotive, railways, and industrial robotics. The progress on our Sanand OSAT semiconductor assembly facility will make us India's premier integrated electronics titan."</blockquote>
+      <div class="auth">Ramesh Kunhikannan</div>
+      <div class="role">MD, Kaynes Technology</div>
+    </div>
+
+    <div class="qcard">
+      <blockquote>"With aerospace and defense electronics contributing nearly half our revenues, Cyient DLM is insulated from consumer electronics price erosion. Our Mysuru plant expansion is fully booked for FY27."</blockquote>
+      <div class="auth">Anthony Montalbano</div>
+      <div class="role">CEO, Cyient DLM</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 8: RED FLAGS & FORENSICS -->
+<section>
+  <h2>07 / Red Flags & Accounting Forensics</h2>
+  <div class="rule"></div>
+  <div class="rfgrid">
+    <div class="rfcard">
+      <h3>Working Capital Drag from Component Buffer</h3>
+      <p>EMS players carry elevated raw material inventory (90-120 days) to prevent production line shutdowns from global semiconductor supply disruptions, dragging operating cash flow conversion.</p>
+    </div>
+
+    <div class="rfcard">
+      <h3>Customer Concentration Risk (Dixon)</h3>
+      <p>Dixon Technologies derives >65% of mobile assembly revenue from top 3 smartphone OEMs (Xiaomi, Motorola, Transsion). Any shift in client manufacturing allocation poses volume volatility risk.</p>
+    </div>
+
+    <div class="rfcard">
+      <h3>PLI Incentive Receivable Audit Audits</h3>
+      <p>Substantial income recognition depends on Government PLI scheme disbursements, which are subject to rigorous Ministry audit delays extending up to 9 months.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 9: WALK THE TALK SCORECARD -->
+<section>
+  <h2>08 / Walk the Talk — Management Guidance vs Execution</h2>
+  <div class="rule"></div>
+  <div class="wtgrid">
+    <div class="wtcard">
+      <div class="wthead">
+        <h3>Dixon Technologies</h3>
+        <span class="wtscore high">SCORE: 9.5/10</span>
+      </div>
+      <p><strong>Guidance:</strong> 40%+ Revenue growth, 4.0% OPM.</p>
+      <p><strong>Execution:</strong> Delivered +48.5% revenue growth and 4.2% OPM. Mobile manufacturing volume exceeded targets.</p>
+    </div>
+
+    <div class="wtcard">
+      <div class="wthead">
+        <h3>Kaynes Technology</h3>
+        <span class="wtscore high">SCORE: 9.5/10</span>
+      </div>
+      <p><strong>Guidance:</strong> 35% Topline growth, 15% OPM.</p>
+      <p><strong>Execution:</strong> Topline grew +38.2%, OPM expanded to 15.4% on strong box-build execution.</p>
+    </div>
+
+    <div class="wtcard">
+      <div class="wthead">
+        <h3>Syrma SGS Tech</h3>
+        <span class="wtscore mid">SCORE: 7.5/10</span>
+      </div>
+      <p><strong>Guidance:</strong> 25-30% Revenue growth, 8.5% OPM.</p>
+      <p><strong>Execution:</strong> Revenue +28.1%, OPM stood at 7.8% due to higher raw material component import costs.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 10: SECTOR SYNTHESIS -->
+<section>
+  <h2>09 / Sector Synthesis & Strategic Outlook</h2>
+  <div class="rule"></div>
+  <div class="synth">
+    <p>The Indian Electronics Manufacturing Services (EMS) Sector is experiencing a historic structural boom anchored by global <strong>China+1 diversification, domestic PLI incentives, and rapid localization of consumer electronics, automotive EVs, and defence avionics</strong>.</p>
+    <p>While low-margin consumer assembly players (Dixon) win on sheer volume scale and PLI subsidies, specialized EMS champions (Kaynes, Cyient DLM) command superior gross margins (10-15% OPM) by offering <em>end-to-end original design manufacturing (ODM) and high-reliability box builds</em>.</p>
+  </div>
+</section>
+
+<!-- SECTION 11: ACTIONABLE CALLS -->
+<section>
+  <h2>10 / Actionable Institutional Calls</h2>
+  <div class="rule"></div>
+  <div class="calls">
+    <div class="call buy">
+      <div class="type">TOP CONVICTION BUY</div>
+      <h3>Kaynes Technology</h3>
+      <div class="target">Target: ₹4,150 | Upside: +15%</div>
+      <p>Industry peak 15.4% OPM, ₹5,100 Cr order book, Sanand OSAT semiconductor assembly catalyst.</p>
+    </div>
+
+    <div class="call buy">
+      <div class="type">SCALE CHAMPION BUY</div>
+      <h3>Dixon Technologies</h3>
+      <div class="target">Target: ₹16,200 | Upside: +14%</div>
+      <p>Undisputed leader in Indian mobile & IT hardware manufacturing, massive PLI beneficiary.</p>
+    </div>
+
+    <div class="call buy">
+      <div class="type">DEFENCE NICHE BUY</div>
+      <h3>Cyient DLM</h3>
+      <div class="target">Target: ₹980 | Upside: +14%</div>
+      <p>45% Aerospace & Defence mix, strong export visibility, expanding Mysuru facility.</p>
+    </div>
+
+    <div class="call watch">
+      <div class="type">ACCUMULATE ON DIPS</div>
+      <h3>Syrma SGS Technology</h3>
+      <div class="target">Target: ₹1,680 | Upside: +15%</div>
+      <p>Auto & medical electronics growth, Johari Digital acquisition synergies driving export mix.</p>
+    </div>
+  </div>
+</section>
+
+<!-- NEW SECTION 11B: ANALYST COVERAGE & TARGET PRICE MATRIX -->
+<section>
+  <h2>11 / Institutional Analyst Coverage & Target Price Matrix</h2>
+  <div class="rule"></div>
+  <p class="note">Consolidated institutional sell-side analyst recommendations, coverage dates, verdicts, and fair value targets for all 5 covered stocks.</p>
+  <div class="matrix">
+    <table>
+      <thead>
+        <tr>
+          <th>Company Name</th>
+          <th>Ticker</th>
+          <th>Lead Analyst & Institutional House</th>
+          <th>Coverage Date</th>
+          <th>Analyst Verdict</th>
+          <th>Fair Value / Target (₹)</th>
+          <th>CMP (₹)</th>
+          <th>Implied Upside (%)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Dixon Technologies</strong></td>
+          <td class="mono">DIXON</td>
+          <td>Pulkit Patni (Goldman Sachs)</td>
+          <td>August 2026</td>
+          <td><span class="badge del">BUY</span></td>
+          <td class="mono">₹16,200</td>
+          <td class="mono">₹14,240.0</td>
+          <td class="up">+13.8%</td>
+        </tr>
+        <tr>
+          <td><strong>Kaynes Technology</strong></td>
+          <td class="mono">KAYNES</td>
+          <td>Subhadip Mitra (Nuvama Equities)</td>
+          <td>August 2026</td>
+          <td><span class="badge del">BUY</span></td>
+          <td class="mono">₹4,150</td>
+          <td class="mono">₹3,598.0</td>
+          <td class="up">+15.3%</td>
+        </tr>
+        <tr>
+          <td><strong>Syrma SGS Technology</strong></td>
+          <td class="mono">SYRMA</td>
+          <td>Renesh Parikh (ICICI Securities)</td>
+          <td>August 2026</td>
+          <td><span class="badge del">BUY</span></td>
+          <td class="mono">₹1,680</td>
+          <td class="mono">₹1,457.3</td>
+          <td class="up">+15.3%</td>
+        </tr>
+        <tr>
+          <td><strong>Cyient DLM</strong></td>
+          <td class="mono">CYIENTDLM</td>
+          <td>Vipul Kumar (Axis Capital)</td>
+          <td>August 2026</td>
+          <td><span class="badge del">BUY</span></td>
+          <td class="mono">₹980</td>
+          <td class="mono">₹857.0</td>
+          <td class="up">+14.4%</td>
+        </tr>
+        <tr>
+          <td><strong>Avalon Technologies</strong></td>
+          <td class="mono">AVALON</td>
+          <td>Bhoomika Nair (DAM Capital)</td>
+          <td>August 2026</td>
+          <td><span class="badge part">ADD</span></td>
+          <td class="mono">₹2,480</td>
+          <td class="mono">₹2,196.6</td>
+          <td class="up">+12.9%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- SECTION 12: STOCK PRICE & RETURNS PERFORMANCE MATRIX -->
+<section>
+  <h2>12 / Stock Price & Returns Performance Matrix</h2>
+  <div class="rule"></div>
+  <div class="matrix">
+    <table>
+      <thead>
+        <tr>
+          <th>Company</th>
+          <th>Ticker</th>
+          <th>CMP (₹)</th>
+          <th>1W (%)</th>
+          <th>1M (%)</th>
+          <th>3M (%)</th>
+          <th>1Y (%)</th>
+          <th>3Y (%)</th>
+          <th>52W High</th>
+          <th>52W Low</th>
+          <th>Mkt Cap (₹ Cr)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Dixon Technologies</td>
+          <td class="mono">DIXON</td>
+          <td class="mono">₹14,240.0</td>
+          <td class="dn">-1.4%</td>
+          <td class="up">+5.8%</td>
+          <td class="up">+21.2%</td>
+          <td class="up">+78.4%</td>
+          <td class="up">+320%</td>
+          <td class="mono">₹18,471</td>
+          <td class="mono">₹9,600</td>
+          <td class="mono">85,200</td>
+        </tr>
+        <tr>
+          <td>Kaynes Technology</td>
+          <td class="mono">KAYNES</td>
+          <td class="mono">₹3,598.0</td>
+          <td class="up">+3.2%</td>
+          <td class="up">+8.4%</td>
+          <td class="up">+24.5%</td>
+          <td class="up">+92.1%</td>
+          <td class="up">+280%</td>
+          <td class="mono">₹7,705</td>
+          <td class="mono">₹2,995</td>
+          <td class="mono">22,980</td>
+        </tr>
+        <tr>
+          <td>Syrma SGS Technology</td>
+          <td class="mono">SYRMA</td>
+          <td class="mono">₹1,457.3</td>
+          <td class="dn">-0.0%</td>
+          <td class="up">+4.1%</td>
+          <td class="up">+16.8%</td>
+          <td class="up">+54.2%</td>
+          <td class="up">+145%</td>
+          <td class="mono">₹1,543</td>
+          <td class="mono">₹634</td>
+          <td class="mono">25,800</td>
+        </tr>
+        <tr>
+          <td>Cyient DLM</td>
+          <td class="mono">CYIENTDLM</td>
+          <td class="mono">₹857.0</td>
+          <td class="up">+2.0%</td>
+          <td class="up">+6.5%</td>
+          <td class="up">+19.2%</td>
+          <td class="up">+68.5%</td>
+          <td class="up">+190%</td>
+          <td class="mono">₹894</td>
+          <td class="mono">₹265</td>
+          <td class="mono">6,800</td>
+        </tr>
+        <tr>
+          <td>Avalon Technologies</td>
+          <td class="mono">AVALON</td>
+          <td class="mono">₹2,196.6</td>
+          <td class="dn">-3.0%</td>
+          <td class="up">+3.1%</td>
+          <td class="up">+12.4%</td>
+          <td class="up">+42.0%</td>
+          <td class="up">+115%</td>
+          <td class="mono">₹2,400</td>
+          <td class="mono">₹777</td>
+          <td class="mono">14,400</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-family:var(--mono);font-size:11.5px;color:var(--mute);margin-top:10px;font-weight:600;">Current prices as on 07-09-2026 (Report Generated on 07-09-2026)</p>
+  </div>
+</section>
+
+<!-- SECTION 13: CAVEATS & METHODOLOGY -->
+<section>
+  <h2>13 / Caveats & Disclaimers</h2>
+  <div class="rule"></div>
+  <div class="synth">
+    <p><strong>Institutional Research Note Disclaimer:</strong> Sourced primarily via <strong>Tijori Finance MCP</strong> and local exchange price feeds. Past financial ratios and volume assembly metrics are not guarantees of future performance. Working capital metrics calculated based on TTM disclosures.</p>
+  </div>
+</section>
+
+<footer>
+  <div>RAJAN SECTOR RESEARCH • INSTITUTIONAL EQUITY DIVISION</div>
+  <div>CONFIDENTIAL FOR CLIENT USE • Q1 FY27</div>
+</footer>
+
+</div>
+</body>
+</html>

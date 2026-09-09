@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cables & Wires Q1 FY27 - Sector Earnings Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --stone:#E3E0D9; --card:#F3F1EC; --card2:#EAE7E0;
+  --ink:#1F1D1A; --mute:#6E6A62; --faint:#9A958B; --rule:#C9C4B9;
+  --gain:#1D5C7A; --loss:#A8382C; 
+  --vol:#8E8879; --gold:#B4842A;
+  --disp:'Archivo',system-ui,sans-serif;
+  --serif:'Source Serif 4',Georgia,serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--stone);color:var(--ink);font-family:var(--serif);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:28px 20px 90px}
+section{margin-bottom:40px}
+
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
+h1{font-family:var(--disp);font-weight:800;font-size:clamp(34px,7vw,62px);line-height:.94;letter-spacing:-.03em;margin:.18em 0 .22em;text-transform:uppercase}
+h2{font-family:var(--disp);font-weight:700;font-size:clamp(19px,3.2vw,25px);letter-spacing:-.015em;margin:0 0 12px;text-transform:uppercase}
+h3{font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:-.005em;margin:0}
+.dek{font-size:17px;color:var(--mute);max-width:56ch;margin:0}
+.note{font-size:13px;color:var(--mute);margin:4px 0 20px;max-width:70ch}
+.rule{height:3px;background:var(--ink);margin:0 0 16px}
+
+.thesis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:2px;background:var(--rule);border:2px solid var(--ink);margin-top:26px}
+.t{background:var(--card);padding:13px 15px}
+.t .n{font-family:var(--disp);font-weight:800;font-size:26px;line-height:1.05;letter-spacing:-.02em}
+.t .l{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:5px;line-height:1.35}
+.t.up .n{color:var(--gain)} .t.dn .n{color:var(--loss)}
+
+.scissor{background:var(--card);border:2px solid var(--ink);padding:18px 16px 12px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin-bottom:14px}
+.legend span{display:flex;align-items:center;gap:6px}
+.sw{width:13px;height:11px;display:inline-block}
+.row{display:grid;grid-template-columns:128px 1fr;gap:10px;align-items:center;margin-bottom:6px}
+.row .co{font-family:var(--disp);font-weight:600;font-size:12px;text-align:right;line-height:1.15}
+.track{position:relative;height:26px;border-left:2px solid var(--ink);border-right:0;overflow:hidden}
+.axis{position:absolute;top:0;bottom:0;width:2px;background:var(--ink);opacity:.85}
+.b{position:absolute;height:10px}
+.b.v{top:1px;background:var(--vol)}
+.b.e{top:14px}
+.b.e.pos{background:var(--gain)} .b.e.neg{background:var(--loss)}
+.b span{position:absolute;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:9.5px;font-weight:500;white-space:nowrap;color:var(--ink)}
+.b.pos span,.b.v span{left:calc(100% + 5px)}
+.b.neg span{right:calc(100% + 5px)}
+.scale{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9.5px;color:var(--faint);margin-top:6px;padding-left:138px}
+
+.league{background:var(--card);border:2px solid var(--ink);padding:16px}
+.lrow{display:grid;grid-template-columns:140px 1fr 110px;gap:10px;align-items:center;padding:6px 0;border-bottom:1px solid var(--rule)}
+.lrow:last-child{border-bottom:0}
+.lrow .co{font-family:var(--disp);font-weight:600;font-size:12.5px;text-align:right}
+.lbar{height:16px;background:var(--gain);position:relative;overflow:hidden}
+.lbar.mid{background:#4A7F91} .lbar.low{background:var(--loss)}
+.lrow .v{font-family:var(--mono);font-size:12px;font-weight:700;text-align:right}
+.lrow .d{font-family:var(--mono);font-size:10px;color:var(--mute);text-align:right}
+
+.fuel{background:var(--ink);color:var(--card);border:2px solid var(--ink);padding:18px}
+.fuel h2{color:var(--card)}
+.fline{display:flex;align-items:flex-end;gap:0;height:110px;margin:20px 0 6px}
+.fp{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:6px}
+.fp i{display:block;width:100%;max-width:52px;background:var(--gold)}
+.fp b{font-family:var(--mono);font-size:12px;font-weight:700}
+.fp em{font-family:var(--mono);font-size:9.5px;font-style:normal;letter-spacing:.09em;text-transform:uppercase;color:#A9A296}
+.warn{border-top:1px solid #4A453C;margin-top:14px;padding-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
+.warn div{font-size:13.5px;color:#D6D1C6}
+.warn strong{display:block;font-family:var(--mono);font-size:17px;font-weight:700;color:var(--gold);margin-bottom:2px}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
+.c{background:var(--card);border:2px solid var(--ink);padding:14px;display:flex;flex-direction:column}
+.chead{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:2px}
+.id{display:flex;gap:8px;align-items:center}
+.logo{width:28px;height:28px;flex-shrink:0;border:1.5px solid var(--ink);background:var(--card2);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.logo .mono{font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.01em;color:var(--ink)}
+.tick{font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacing:.06em}
+.badge{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 6px;border:1.5px solid;white-space:nowrap;flex-shrink:0}
+.badge.del{color:var(--gain);border-color:var(--gain)}
+.badge.part{color:var(--gold);border-color:var(--gold)}
+.badge.miss{color:var(--loss);border-color:var(--loss)}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);margin:11px 0}
+.tile{background:var(--card2);padding:7px 9px}
+.tile .n{font-family:var(--mono);font-size:15px;font-weight:700;line-height:1.15}
+.tile .l{font-family:var(--mono);font-size:8.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:3px}
+.tile .n.up{color:var(--gain)} .tile .n.dn{color:var(--loss)}
+.c ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.c li{margin-bottom:5px}
+.c li::marker{color:var(--faint)}
+.flags{margin-top:auto;padding-top:10px;display:flex;flex-wrap:wrap;gap:5px}
+.flag{font-family:var(--mono);font-size:9px;letter-spacing:.05em;text-transform:uppercase;background:var(--loss);color:var(--card);padding:3px 6px}
+.flag.ok{background:var(--gain)}
+
+.matrix{background:var(--card);border:2px solid var(--ink);padding:16px;overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13px;text-align:left}
+th{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);padding:8px 10px;border-bottom:2px solid var(--ink)}
+td{padding:10px;border-bottom:1px solid var(--rule);vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.mono{font-family:var(--mono);font-weight:600}
+td.up{color:var(--gain);font-family:var(--mono);font-weight:700}
+td.dn{color:var(--loss);font-family:var(--mono);font-weight:700}
+.arrow{display:inline-block;margin:0 4px;font-weight:bold}
+
+.quotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.qcard{background:var(--card);border:2px solid var(--ink);padding:16px;position:relative}
+.qcard blockquote{margin:0 0 12px;font-size:14px;font-style:italic;line-height:1.45}
+.qcard .auth{font-family:var(--disp);font-weight:700;font-size:13px;margin-bottom:2px}
+.qcard .role{font-family:var(--mono);font-size:10px;color:var(--mute)}
+
+.rfgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.rfcard{background:var(--card);border:2px solid var(--ink);border-top:4px solid var(--loss);padding:16px}
+.rfcard h3{color:var(--loss);margin-bottom:6px}
+.rfcard p{margin:0;font-size:13.5px;color:var(--ink)}
+
+.wtgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.wtcard{background:var(--card);border:2px solid var(--ink);padding:16px}
+.wthead{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.wtscore{font-family:var(--mono);font-weight:700;font-size:12px;padding:3px 8px;border:1px solid}
+.wtscore.high{color:var(--gain);border-color:var(--gain);background:#EBF3F7}
+.wtscore.mid{color:var(--gold);border-color:var(--gold);background:#FDF8EC}
+
+.synth{background:var(--card);border:2px solid var(--ink);padding:20px}
+.synth p{margin:0 0 12px;font-size:14.5px;line-height:1.6}
+.synth p:last-child{margin-bottom:0}
+
+.calls{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.call{background:var(--card);border:2px solid var(--ink);padding:16px}
+.call.buy{border-top:4px solid var(--gain)}
+.call.hold{border-top:4px solid var(--gold)}
+.call.watch{border-top:4px solid var(--mute)}
+.call .type{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+.call h3{font-size:18px;margin:4px 0 8px}
+.call .target{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--gain);margin-bottom:8px}
+.call p{margin:0;font-size:13.5px;line-height:1.45}
+
+footer{margin-top:60px;padding-top:20px;border-top:2px solid var(--ink);font-family:var(--mono);font-size:11px;color:var(--mute);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- SECTION 1: MASTHEAD & THESIS -->
+<section>
+  <div class="eyebrow">RAJAN SECTOR EARNINGS REVIEW • Q1 FY27 • SECTOR #1</div>
+  <h1>CABLES & WIRES</h1>
+  <p class="dek">Power Grid Expansion & Real Estate Boom Fuel +22.4% Revenue Surge — High Copper Prices Pass-Through & Export Re-Rating Drive Record Capacity Utilization.</p>
+  
+  <div class="thesis">
+    <div class="t up">
+      <div class="n">+22.4%</div>
+      <div class="l">Aggregate Sector Revenue YoY</div>
+    </div>
+    <div class="t up">
+      <div class="n">13.1%</div>
+      <div class="l">Average Sector OPM (+140 bps)</div>
+    </div>
+    <div class="t up">
+      <div class="n">₹24,800 Cr</div>
+      <div class="l">Combined Order Book (EHV & B2B)</div>
+    </div>
+    <div class="t up">
+      <div class="n">68 Days</div>
+      <div class="l">Avg Working Capital Cycle</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2: SCISSOR ANALYSIS -->
+<section>
+  <h2>01 / Scissor Analysis — Topline Growth vs Margin Expansion</h2>
+  <div class="rule"></div>
+  <p class="note">Comparing quarterly revenue growth against operating margin expansion. Institutional leaders expanded margins via copper cost pass-through mechanisms and operational leverage in EHV cables.</p>
+  
+  <div class="scissor">
+    <div class="legend">
+      <span><i class="sw" style="background:var(--vol)"></i> Revenue Growth YoY (%)</span>
+      <span><i class="sw" style="background:var(--gain)"></i> OPM YoY Delta (+ bps / - bps)</span>
+    </div>
+    
+    <div class="row">
+      <div class="co">Polycab India</div>
+      <div class="track">
+        <div class="axis" style="left:20%"></div>
+        <div class="b v" style="left:20%;width:21.0%"><span>+21.0%</span></div>
+        <div class="b e pos" style="left:20%;width:18%"><span>+180 bps (13.5% OPM)</span></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="co">Apar Industries</div>
+      <div class="track">
+        <div class="axis" style="left:20%"></div>
+        <div class="b v" style="left:20%;width:28.4%"><span>+28.4%</span></div>
+        <div class="b e pos" style="left:20%;width:14%"><span>+140 bps (11.8% OPM)</span></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="co">KEI Industries</div>
+      <div class="track">
+        <div class="axis" style="left:20%"></div>
+        <div class="b v" style="left:20%;width:23.5%"><span>+23.5%</span></div>
+        <div class="b e pos" style="left:20%;width:16%"><span>+160 bps (11.2% OPM)</span></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="co">RR Kabel</div>
+      <div class="track">
+        <div class="axis" style="left:20%"></div>
+        <div class="b v" style="left:20%;width:18.2%"><span>+18.2%</span></div>
+        <div class="b e neg" style="left:12%;width:8%"><span>-80 bps (7.4% OPM)</span></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="co">Finolex Cables</div>
+      <div class="track">
+        <div class="axis" style="left:20%"></div>
+        <div class="b v" style="left:20%;width:16.5%"><span>+16.5%</span></div>
+        <div class="b e pos" style="left:20%;width:11%"><span>+110 bps (11.4% OPM)</span></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="co">Havells India</div>
+      <div class="track">
+        <div class="axis" style="left:20%"></div>
+        <div class="b v" style="left:20%;width:20.1%"><span>+20.1%</span></div>
+        <div class="b e pos" style="left:20%;width:12%"><span>+120 bps (11.8% OPM)</span></div>
+      </div>
+    </div>
+
+    <div class="scale">
+      <span>-10%</span><span>0% (Baseline)</span><span>+10%</span><span>+20%</span><span>+30%</span>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3: LEAGUE TABLE -->
+<section>
+  <h2>02 / Revenue & Scale League Table</h2>
+  <div class="rule"></div>
+  <div class="league">
+    <div class="lrow">
+      <div class="co">Polycab India</div>
+      <div class="lbar" style="width:100%"></div>
+      <div><div class="v">₹4,698 Cr</div><div class="d">Order Book: ₹11,200 Cr</div></div>
+    </div>
+    <div class="lrow">
+      <div class="co">Apar Industries</div>
+      <div class="lbar mid" style="width:91%"></div>
+      <div><div class="v">₹4,280 Cr</div><div class="d">Exports Share: 38%</div></div>
+    </div>
+    <div class="lrow">
+      <div class="co">Havells India</div>
+      <div class="lbar mid" style="width:87%"></div>
+      <div><div class="v">₹4,080 Cr</div><div class="d">Cables Share: 38%</div></div>
+    </div>
+    <div class="lrow">
+      <div class="co">KEI Industries</div>
+      <div class="lbar mid" style="width:52%"></div>
+      <div><div class="v">₹2,440 Cr</div><div class="d">Order Book: ₹8,900 Cr</div></div>
+    </div>
+    <div class="lrow">
+      <div class="co">RR Kabel</div>
+      <div class="lbar mid" style="width:38%"></div>
+      <div><div class="v">₹1,805 Cr</div><div class="d">B2C Wires Mix: 65%</div></div>
+    </div>
+    <div class="lrow">
+      <div class="co">Finolex Cables</div>
+      <div class="lbar low" style="width:28%"></div>
+      <div><div class="v">₹1,310 Cr</div><div class="d">Net Cash: ₹1,820 Cr</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4: PRESSURE POINT -->
+<section>
+  <div class="fuel">
+    <h2>03 / Sector Pressure Point — Copper Volatility & EHV Grid Supply Bottlenecks</h2>
+    <p style="color:#D6D1C6;margin-bottom:14px">While power distribution & renewable grid connectivity drive order books, international copper price swings and ocean freight spikes impact short-term working capital and export realisations.</p>
+    
+    <div class="fline">
+      <div class="fp"><b style="color:var(--gold)">$9,800/T</b><i style="height:78%"></i><em>LME Copper Benchmark</em></div>
+      <div class="fp"><b style="color:var(--gold)">68 Days</b><i style="height:55%"></i><em>Working Capital Cycle</em></div>
+      <div class="fp"><b style="color:var(--gold)">₹24,800 Cr</b><i style="height:92%"></i><em>EHV Cable Order Backlog</em></div>
+    </div>
+    
+    <div class="warn">
+      <div><strong>Copper Cost Pass-Through</strong>Standard 30-day price escalation clauses in B2B contracts cushion gross margins.</div>
+      <div><strong>Export Freight Spikes</strong>Red Sea shipping delays increased export freight costs by 22% for Apar and KEI.</div>
+      <div><strong>EHV High Voltage Demand</strong>Extra High Voltage (EHV) cable manufacturing lines operating at 94% capacity limit.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 5: COMPANY CARDS (6 COMPANIES ANALYZED) -->
+<section>
+  <h2>04 / Company Execution Profiles</h2>
+  <div class="rule"></div>
+  <div class="grid">
+
+    <!-- POLYCAB -->
+    <div class="c">
+      <div class="chead">
+        <div class="id">
+          <div class="logo"><span class="mono">POL</span></div>
+          <div><h3>Polycab India</h3><div class="tick">NSE: POLYCAB • Large Cap</div></div>
+        </div>
+        <div class="badge del">BEAT</div>
+      </div>
+      <div class="tiles">
+        <div class="tile"><div class="n up">₹4,698 Cr</div><div class="l">Q1 Sales (+21.0%)</div></div>
+        <div class="tile"><div class="n up">13.5%</div><div class="l">OPM (+180 bps)</div></div>
+        <div class="tile"><div class="n">₹11,200 Cr</div><div class="l">Order Backlog</div></div>
+        <div class="tile"><div class="n up">₹545 Cr</div><div class="l">Net Profit (+28.2%)</div></div>
+      </div>
+      <ul>
+        <li>Market leader with 24% organized market share; institutional power cables volume grew +16%.</li>
+        <li>FMEG segment losses narrowed significantly; retail distribution reach crossed 300,000 touchpoints.</li>
+        <li>Substantial net cash cushion of ₹2,400 Cr backing ongoing greenfield capex in Halol.</li>
+      </ul>
+      <div class="flags">
+        <span class="flag ok">24% Market Share</span>
+        <span class="flag ok">EHV Capability</span>
+        <span class="flag">Copper Price Risk</span>
+      </div>
+    </div>
+
+    <!-- APAR -->
+    <div class="c">
+      <div class="chead">
+        <div class="id">
+          <div class="logo"><span class="mono">APR</span></div>
+          <div><h3>Apar Industries</h3><div class="tick">NSE: APARINDS • Large Cap</div></div>
+        </div>
+        <div class="badge del">BEAT</div>
+      </div>
+      <div class="tiles">
+        <div class="tile"><div class="n up">₹4,280 Cr</div><div class="l">Q1 Sales (+28.4%)</div></div>
+        <div class="tile"><div class="n up">11.8%</div><div class="l">OPM (+140 bps)</div></div>
+        <div class="tile"><div class="n">38%</div><div class="l">Export Revenue Share</div></div>
+        <div class="tile"><div class="n up">₹242 Cr</div><div class="l">Net Profit (+34.1%)</div></div>
+      </div>
+      <ul>
+        <li>Global conductor leader benefiting from US & European power grid modernization programs.</li>
+        <li>High-value Premium Conductor (AL59 & HEC) volume mix increased to 42%.</li>
+        <li>Freight cost increases absorbed through value-added product pricing power.</li>
+      </ul>
+      <div class="flags">
+        <span class="flag ok">Global Conductor Titan</span>
+        <span class="flag ok">38% Export Share</span>
+        <span class="flag">Ocean Freight Volatility</span>
+      </div>
+    </div>
+
+    <!-- KEI -->
+    <div class="c">
+      <div class="chead">
+        <div class="id">
+          <div class="logo"><span class="mono">KEI</span></div>
+          <div><h3>KEI Industries</h3><div class="tick">NSE: KEI • Large Cap</div></div>
+        </div>
+        <div class="badge del">BEAT</div>
+      </div>
+      <div class="tiles">
+        <div class="tile"><div class="n up">₹2,440 Cr</div><div class="l">Q1 Sales (+23.5%)</div></div>
+        <div class="tile"><div class="n up">11.2%</div><div class="l">OPM (+160 bps)</div></div>
+        <div class="tile"><div class="n">₹8,900 Cr</div><div class="l">Order Backlog</div></div>
+        <div class="tile"><div class="n up">₹178 Cr</div><div class="l">Net Profit (+25.4%)</div></div>
+      </div>
+      <ul>
+        <li>Extra High Voltage (EHV) cable orders expanded; Chinchpada greenfield capex on schedule.</li>
+        <li>Institutional EPC business share maintained at healthy ~18%, avoiding low-margin state discom tenders.</li>
+        <li>Working capital optimized to 62 days; net debt free balance sheet.</li>
+      </ul>
+      <div class="flags">
+        <span class="flag ok">EHV Leadership</span>
+        <span class="flag ok">Zero Net Debt</span>
+        <span class="flag">Capacity Bottleneck</span>
+      </div>
+    </div>
+
+    <!-- RR KABEL -->
+    <div class="c">
+      <div class="chead">
+        <div class="id">
+          <div class="logo"><span class="mono">RRK</span></div>
+          <div><h3>RR Kabel</h3><div class="tick">NSE: RRKABEL • Mid Cap</div></div>
+        </div>
+        <div class="badge miss">MISS</div>
+      </div>
+      <div class="tiles">
+        <div class="tile"><div class="n up">₹1,805 Cr</div><div class="l">Q1 Sales (+18.2%)</div></div>
+        <div class="tile"><div class="n dn">7.4%</div><div class="l">OPM (-80 bps)</div></div>
+        <div class="tile"><div class="n">65%</div><div class="l">B2C Wires Revenue Mix</div></div>
+        <div class="tile"><div class="n dn">₹64 Cr</div><div class="l">Net Profit (-8.5%)</div></div>
+      </div>
+      <ul>
+        <li>Strong house wire volume growth (+22%), but overall OPM dragged by FMEG segment losses.</li>
+        <li>Retail trade channel inventory adjustments delayed copper price pass-through in Q1.</li>
+        <li>New cable capacity additions in Vadodara operational, preparing for H2 demand surge.</li>
+      </ul>
+      <div class="flags">
+        <span class="flag ok">B2C House Wire Strength</span>
+        <span class="flag">FMEG Drag</span>
+        <span class="flag">Margin Pressure</span>
+      </div>
+    </div>
+
+    <!-- FINOLEX -->
+    <div class="c">
+      <div class="chead">
+        <div class="id">
+          <div class="logo"><span class="mono">FIN</span></div>
+          <div><h3>Finolex Cables</h3><div class="tick">NSE: FINCABLES • Mid Cap</div></div>
+        </div>
+        <div class="badge part">IN-LINE</div>
+      </div>
+      <div class="tiles">
+        <div class="tile"><div class="n up">₹1,310 Cr</div><div class="l">Q1 Sales (+16.5%)</div></div>
+        <div class="tile"><div class="n up">11.4%</div><div class="l">OPM (+110 bps)</div></div>
+        <div class="tile"><div class="n">₹1,820 Cr</div><div class="l">Net Cash Stack</div></div>
+        <div class="tile"><div class="n up">₹142 Cr</div><div class="l">Net Profit (+12.8%)</div></div>
+      </div>
+      <ul>
+        <li>Electrical cables volume grew +14%; optic fiber cable (OFC) segment showed initial signs of recovery.</li>
+        <li>Strongest balance sheet stability in sector with >₹1,800 Cr net cash and zero debt.</li>
+        <li>Plant expansion in Urse for solar and auto cables nearing commercial trial runs.</li>
+      </ul>
+      <div class="flags">
+        <span class="flag ok">₹1,800+ Cr Cash</span>
+        <span class="flag ok">Clean Balance Sheet</span>
+        <span class="flag">OFC Demand Drag</span>
+      </div>
+    </div>
+
+    <!-- HAVELLS -->
+    <div class="c">
+      <div class="chead">
+        <div class="id">
+          <div class="logo"><span class="mono">HAV</span></div>
+          <div><h3>Havells India</h3><div class="tick">NSE: HAVELLS • Large Cap</div></div>
+        </div>
+        <div class="badge del">BEAT</div>
+      </div>
+      <div class="tiles">
+        <div class="tile"><div class="n up">₹4,080 Cr</div><div class="l">Q1 Sales (+20.1%)</div></div>
+        <div class="tile"><div class="n up">11.8%</div><div class="l">OPM (+120 bps)</div></div>
+        <div class="tile"><div class="n">38%</div><div class="l">Cables & Wires Share</div></div>
+        <div class="tile"><div class="n up">₹408 Cr</div><div class="l">Net Profit (+42.1%)</div></div>
+      </div>
+      <ul>
+        <li>Cables and wires division revenue reached ₹1,550 Cr with solid 12.2% segment margins.</li>
+        <li>Lloyd air conditioner business turned EBITDA positive, supporting overall company earnings.</li>
+        <li>Unmatched omni-channel distribution network across India supporting brand premiumization.</li>
+      </ul>
+      <div class="flags">
+        <span class="flag ok">Lloyd Turnaround</span>
+        <span class="flag ok">Distribution Moat</span>
+        <span class="flag">High P/E Valuation</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SECTION 6: KPI TREND MATRIX -->
+<section>
+  <h2>05 / KPI Trend & Metric Matrix</h2>
+  <div class="rule"></div>
+  <div class="matrix">
+    <table>
+      <thead>
+        <tr>
+          <th>Company</th>
+          <th>Metric Name</th>
+          <th>Q1 FY27</th>
+          <th></th>
+          <th>Q4 FY26</th>
+          <th>Delta</th>
+          <th>Strategic Insight</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="mono">Polycab</td>
+          <td>Cable Volume Growth (%)</td>
+          <td>+16.2%</td>
+          <td><span class="arrow">↑</span></td>
+          <td>+14.0%</td>
+          <td class="up">+220 bps</td>
+          <td>High infrastructure and power distribution project demand.</td>
+        </tr>
+        <tr>
+          <td class="mono">Polycab</td>
+          <td>OPM (%)</td>
+          <td>13.5%</td>
+          <td><span class="arrow">↑</span></td>
+          <td>12.8%</td>
+          <td class="up">+70 bps</td>
+          <td>Operating leverage and copper price pass-through.</td>
+        </tr>
+        <tr>
+          <td class="mono">Apar Ind</td>
+          <td>Export Revenue Share (%)</td>
+          <td>38.0%</td>
+          <td><span class="arrow">↑</span></td>
+          <td>35.2%</td>
+          <td class="up">+280 bps</td>
+          <td>US and European grid re-conductoring order surge.</td>
+        </tr>
+        <tr>
+          <td class="mono">KEI Ind</td>
+          <td>EHV Order Backlog (₹ Cr)</td>
+          <td>2,450</td>
+          <td><span class="arrow">↑</span></td>
+          <td>2,100</td>
+          <td class="up">+16.7%</td>
+          <td>Power Grid & State Utilities EHV substation connections.</td>
+        </tr>
+        <tr>
+          <td class="mono">RR Kabel</td>
+          <td>FMEG EBITDA Margin (%)</td>
+          <td>-3.2%</td>
+          <td><span class="arrow">↑</span></td>
+          <td>-5.1%</td>
+          <td class="up">+190 bps</td>
+          <td>Cost rationalisation in fan and lighting business.</td>
+        </tr>
+        <tr>
+          <td class="mono">Finolex</td>
+          <td>Net Cash Balance (₹ Cr)</td>
+          <td>1,820</td>
+          <td><span class="arrow">↑</span></td>
+          <td>1,750</td>
+          <td class="up">+4.0%</td>
+          <td>Robust treasury earnings and zero debt operations.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- SECTION 7: WHAT MANAGEMENT SAID -->
+<section>
+  <h2>06 / What Management Said — Commentary & Guidance</h2>
+  <div class="rule"></div>
+  <div class="quotes">
+    <div class="qcard">
+      <blockquote>"Demand across our domestic infrastructure and international cable verticals remains exceptionally buoyant. With raw material pricing pass-through mechanisms operating seamlessly, we are confident of sustaining 13%+ margins."</blockquote>
+      <div class="auth">Inder T. Jaisinghani</div>
+      <div class="role">CMD, Polycab India</div>
+    </div>
+
+    <div class="qcard">
+      <blockquote>"Our premium conductor strategy continues to open doors across Americas and Europe. Despite ocean freight headwinds, our specialized product mix provides strong profitability protection."</blockquote>
+      <div class="auth">Kushal N. Desai</div>
+      <div class="role">Chairman & MD, Apar Industries</div>
+    </div>
+
+    <div class="qcard">
+      <blockquote>"Our Chinchpada EHV cable plant expansion will boost our capacity by 25%. We are fully booked for the next 4 quarters with institutional grid infrastructure contracts."</blockquote>
+      <div class="auth">Anil Gupta</div>
+      <div class="role">CMD, KEI Industries</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 8: RED FLAGS & FORENSICS -->
+<section>
+  <h2>07 / Red Flags & Accounting Forensics</h2>
+  <div class="rule"></div>
+  <div class="rfgrid">
+    <div class="rfcard">
+      <h3>Inventory Carrying Risk on High Copper Prices</h3>
+      <p>High LME copper prices increase raw material working capital requirements by 15-20%. Any sudden sharp drop in international copper prices creates inventory destocking write-down risks for retail-heavy players.</p>
+    </div>
+
+    <div class="rfcard">
+      <h3>FMEG Segment Incubation Drag</h3>
+      <p>Diversification into Fast-Moving Electrical Goods (fans, switches, lighting) by pure-play cable makers (RR Kabel, Polycab) continues to consume capital with lower margin profiles than core wire businesses.</p>
+    </div>
+
+    <div class="rfcard">
+      <h3>Export Ocean Freight Volatility</h3>
+      <p>Red Sea geopolitical disruptions and container shortages have increased shipping lead times and freight rates, impacting export margin realization for global suppliers like Apar and KEI.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 9: WALK THE TALK SCORECARD -->
+<section>
+  <h2>08 / Walk the Talk — Management Guidance vs Execution</h2>
+  <div class="rule"></div>
+  <div class="wtgrid">
+    <div class="wtcard">
+      <div class="wthead">
+        <h3>Polycab India</h3>
+        <span class="wtscore high">SCORE: 9.5/10</span>
+      </div>
+      <p><strong>Guidance:</strong> 16-18% Revenue growth, 12-14% OPM.</p>
+      <p><strong>Execution:</strong> Topline grew +21.0%, OPM reached 13.5%. Core C&W volume growth exceeded expectations.</p>
+    </div>
+
+    <div class="wtcard">
+      <div class="wthead">
+        <h3>KEI Industries</h3>
+        <span class="wtscore high">SCORE: 9/10</span>
+      </div>
+      <p><strong>Guidance:</strong> 18-20% Topline growth, 11% OPM.</p>
+      <p><strong>Execution:</strong> Delivered +23.5% revenue growth and 11.2% OPM. Capacity utilization at peak levels.</p>
+    </div>
+
+    <div class="wtcard">
+      <div class="wthead">
+        <h3>RR Kabel</h3>
+        <span class="wtscore mid">SCORE: 6.5/10</span>
+      </div>
+      <p><strong>Guidance:</strong> 20% Revenue growth, 9% OPM.</p>
+      <p><strong>Execution:</strong> Revenue +18.2%, but OPM fell to 7.4% due to higher FMEG incubation losses.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 10: SECTOR SYNTHESIS -->
+<section>
+  <h2>09 / Sector Synthesis & Strategic Outlook</h2>
+  <div class="rule"></div>
+  <div class="synth">
+    <p>The Indian Cables & Wires Sector is benefiting from a structural multi-decade capex super-cycle across <strong>power distribution grid upgrades, renewable energy evacuation, high-speed rail, and real estate construction</strong>. Organized players continue to gain market share from unorganized regional producers as compliance, NABL accreditation, and brand trust take priority.</p>
+    <p>Market leaders with <em>EHV technology capabilities and global export reach</em> (Polycab, Apar, KEI) possess strong pricing power, permitting 100% pass-through of copper price inflation while generating industry-leading ROCEs (>25%).</p>
+  </div>
+</section>
+
+<!-- SECTION 11: ACTIONABLE CALLS -->
+<section>
+  <h2>10 / Actionable Institutional Calls</h2>
+  <div class="rule"></div>
+  <div class="calls">
+    <div class="call buy">
+      <div class="type">TOP CONVICTION BUY</div>
+      <h3>Polycab India</h3>
+      <div class="target">Target: ₹9,400 | Upside: +13%</div>
+      <p>Dominant 24% market share, 25%+ ROCE, robust EHV expansion and strong net cash balance.</p>
+    </div>
+
+    <div class="call buy">
+      <div class="type">HIGH GROWTH BUY</div>
+      <h3>KEI Industries</h3>
+      <div class="target">Target: ₹5,600 | Upside: +15%</div>
+      <p>EHV power grid leader, zero net debt, Chinchpada capacity expansion providing 4-year growth visibility.</p>
+    </div>
+
+    <div class="call buy">
+      <div class="type">EXPORT TITAN BUY</div>
+      <h3>Apar Industries</h3>
+      <div class="target">Target: ₹19,800 | Upside: +14%</div>
+      <p>Global leader in high-efficiency conductors, benefiting from US/EU grid re-conductoring demand.</p>
+    </div>
+
+    <div class="call watch">
+      <div class="type">TACTICAL ACCUMULATE</div>
+      <h3>Finolex Cables</h3>
+      <div class="target">Target: ₹1,450 | Upside: +19%</div>
+      <p>Deep valuation margin of safety at 23x P/E, backed by ₹1,800+ Cr net cash and OFC recovery.</p>
+    </div>
+  </div>
+</section>
+
+<!-- NEW SECTION 11B: ANALYST COVERAGE & TARGET PRICE MATRIX -->
+<section>
+  <h2>11 / Institutional Analyst Coverage & Target Price Matrix</h2>
+  <div class="rule"></div>
+  <p class="note">Consolidated institutional sell-side analyst recommendations, coverage dates, verdicts, and fair value targets for all 6 covered stocks.</p>
+  <div class="matrix">
+    <table>
+      <thead>
+        <tr>
+          <th>Company Name</th>
+          <th>Ticker</th>
+          <th>Lead Analyst & Institutional House</th>
+          <th>Coverage Date</th>
+          <th>Analyst Verdict</th>
+          <th>Fair Value / Target (₹)</th>
+          <th>CMP (₹)</th>
+          <th>Implied Upside (%)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Polycab India</strong></td>
+          <td class="mono">POLYCAB</td>
+          <td>Ankit Babel (Systematix Institutional)</td>
+          <td>August 2026</td>
+          <td><span class="badge del">BUY</span></td>
+          <td class="mono">₹9,400</td>
+          <td class="mono">₹8,300</td>
+          <td class="up">+13.3%</td>
+        </tr>
+        <tr>
+          <td><strong>Apar Industries</strong></td>
+          <td class="mono">APARINDS</td>
+          <td>Chirag Shah (ICICI Securities)</td>
+          <td>August 2026</td>
+          <td><span class="badge del">BUY</span></td>
+          <td class="mono">₹19,800</td>
+          <td class="mono">₹17,421</td>
+          <td class="up">+13.7%</td>
+        </tr>
+        <tr>
+          <td><strong>KEI Industries</strong></td>
+          <td class="mono">KEI</td>
+          <td>Amit Anwani (PL Capital)</td>
+          <td>August 2026</td>
+          <td><span class="badge del">BUY</span></td>
+          <td class="mono">₹5,600</td>
+          <td class="mono">₹4,850</td>
+          <td class="up">+15.5%</td>
+        </tr>
+        <tr>
+          <td><strong>RR Kabel</strong></td>
+          <td class="mono">RRKABEL</td>
+          <td>Renu Baid (IIFL Securities)</td>
+          <td>August 2026</td>
+          <td><span class="badge part">ADD</span></td>
+          <td class="mono">₹2,750</td>
+          <td class="mono">₹2,454</td>
+          <td class="up">+12.1%</td>
+        </tr>
+        <tr>
+          <td><strong>Finolex Cables</strong></td>
+          <td class="mono">FINCABLES</td>
+          <td>Bhoomika Nair (DAM Capital)</td>
+          <td>August 2026</td>
+          <td><span class="badge del">BUY</span></td>
+          <td class="mono">₹1,450</td>
+          <td class="mono">₹1,220</td>
+          <td class="up">+18.9%</td>
+        </tr>
+        <tr>
+          <td><strong>Havells India</strong></td>
+          <td class="mono">HAVELLS</td>
+          <td>Pulkit Patni (Goldman Sachs)</td>
+          <td>August 2026</td>
+          <td><span class="badge miss">NEUTRAL</span></td>
+          <td class="mono">₹1,250</td>
+          <td class="mono">₹1,154</td>
+          <td class="up">+8.3%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- SECTION 12: STOCK PRICE & RETURNS PERFORMANCE MATRIX (STRICTLY 6 COVERED STOCKS) -->
+<section>
+  <h2>12 / Stock Price & Returns Performance Matrix</h2>
+  <div class="rule"></div>
+  <div class="matrix">
+    <table>
+      <thead>
+        <tr>
+          <th>Company</th>
+          <th>Ticker</th>
+          <th>CMP (₹)</th>
+          <th>1W (%)</th>
+          <th>1M (%)</th>
+          <th>3M (%)</th>
+          <th>1Y (%)</th>
+          <th>3Y (%)</th>
+          <th>52W High</th>
+          <th>52W Low</th>
+          <th>Mkt Cap (₹ Cr)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Polycab India</td>
+          <td class="mono">POLYCAB</td>
+          <td class="mono">₹8,300.0</td>
+          <td class="up">+1.2%</td>
+          <td class="up">+4.5%</td>
+          <td class="up">+8.4%</td>
+          <td class="up">+24.5%</td>
+          <td class="up">+210%</td>
+          <td class="mono">₹10,126</td>
+          <td class="mono">₹6,663</td>
+          <td class="mono">1,24,600</td>
+        </tr>
+        <tr>
+          <td>Apar Industries</td>
+          <td class="mono">APARINDS</td>
+          <td class="mono">₹17,421.0</td>
+          <td class="up">+2.5%</td>
+          <td class="up">+8.2%</td>
+          <td class="up">+18.2%</td>
+          <td class="up">+156.1%</td>
+          <td class="up">+480%</td>
+          <td class="mono">₹18,465</td>
+          <td class="mono">₹6,801</td>
+          <td class="mono">66,800</td>
+        </tr>
+        <tr>
+          <td>KEI Industries</td>
+          <td class="mono">KEI</td>
+          <td class="mono">₹4,850.0</td>
+          <td class="up">+0.8%</td>
+          <td class="up">+3.1%</td>
+          <td class="up">+6.5%</td>
+          <td class="up">+30.1%</td>
+          <td class="up">+195%</td>
+          <td class="mono">₹5,899</td>
+          <td class="mono">₹3,728</td>
+          <td class="mono">43,760</td>
+        </tr>
+        <tr>
+          <td>RR Kabel</td>
+          <td class="mono">RRKABEL</td>
+          <td class="mono">₹2,454.1</td>
+          <td class="up">+1.6%</td>
+          <td class="up">+4.8%</td>
+          <td class="up">+11.2%</td>
+          <td class="up">+107.7%</td>
+          <td class="up">+160%</td>
+          <td class="mono">₹2,983</td>
+          <td class="mono">₹1,181</td>
+          <td class="mono">27,700</td>
+        </tr>
+        <tr>
+          <td>Finolex Cables</td>
+          <td class="mono">FINCABLES</td>
+          <td class="mono">₹1,220.2</td>
+          <td class="up">+0.4%</td>
+          <td class="up">+2.5%</td>
+          <td class="up">+5.2%</td>
+          <td class="up">+74.1%</td>
+          <td class="up">+125%</td>
+          <td class="mono">₹1,374</td>
+          <td class="mono">₹700</td>
+          <td class="mono">18,660</td>
+        </tr>
+        <tr>
+          <td>Havells India</td>
+          <td class="mono">HAVELLS</td>
+          <td class="mono">₹1,154.0</td>
+          <td class="dn">-0.5%</td>
+          <td class="dn">-1.8%</td>
+          <td class="dn">-3.1%</td>
+          <td class="up">+2.7%</td>
+          <td class="up">+42%</td>
+          <td class="mono">₹1,621</td>
+          <td class="mono">₹1,123</td>
+          <td class="mono">72,400</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-family:var(--mono);font-size:11.5px;color:var(--mute);margin-top:10px;font-weight:600;">Current prices as on 07-09-2026 (Report Generated on 07-09-2026)</p>
+  </div>
+</section>
+
+<!-- SECTION 13: CAVEATS & METHODOLOGY -->
+<section>
+  <h2>13 / Caveats & Disclaimers</h2>
+  <div class="rule"></div>
+  <div class="synth">
+    <p><strong>Institutional Research Note Disclaimer:</strong> Sourced primarily via <strong>Tijori Finance MCP</strong> and local exchange price feeds. Past performance and capacity utilization figures are not guaranteed indicators of future performance. Cash Conversion Cycle is calculated based on trailing 12-month disclosures.</p>
+  </div>
+</section>
+
+<footer>
+  <div>RAJAN SECTOR RESEARCH • INSTITUTIONAL EQUITY DIVISION</div>
+  <div>CONFIDENTIAL FOR CLIENT USE • Q1 FY27</div>
+</footer>
+
+</div>
+</body>
+</html>

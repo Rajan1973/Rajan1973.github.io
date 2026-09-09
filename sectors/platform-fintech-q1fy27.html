@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Platform Fintech Q1 FY27 - Sector Earnings Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --stone:#E3E0D9; --card:#F3F1EC; --card2:#EAE7E0;
+  --ink:#1F1D1A; --mute:#6E6A62; --faint:#9A958B; --rule:#C9C4B9;
+  --gain:#1D5C7A; --loss:#A8382C; 
+  --vol:#8E8879; --gold:#B4842A;
+  --disp:'Archivo',system-ui,sans-serif;
+  --serif:'Source Serif 4',Georgia,serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--stone);color:var(--ink);font-family:var(--serif);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:28px 20px 90px}
+section{margin-bottom:40px}
+
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
+h1{font-family:var(--disp);font-weight:800;font-size:clamp(34px,7vw,62px);line-height:.94;letter-spacing:-.03em;margin:.18em 0 .22em;text-transform:uppercase}
+h2{font-family:var(--disp);font-weight:700;font-size:clamp(19px,3.2vw,25px);letter-spacing:-.015em;margin:0 0 12px;text-transform:uppercase}
+h3{font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:-.005em;margin:0}
+.dek{font-size:17px;color:var(--mute);max-width:56ch;margin:0}
+.note{font-size:13px;color:var(--mute);margin:4px 0 20px;max-width:70ch}
+.rule{height:3px;background:var(--ink);margin:0 0 16px}
+
+.thesis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:2px;background:var(--rule);border:2px solid var(--ink);margin-top:26px}
+.t{background:var(--card);padding:13px 15px}
+.t .n{font-family:var(--disp);font-weight:800;font-size:26px;line-height:1.05;letter-spacing:-.02em}
+.t .l{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:5px;line-height:1.35}
+.t.up .n{color:var(--gain)} .t.dn .n{color:var(--loss)}
+
+.scissor{background:var(--card);border:2px solid var(--ink);padding:18px 16px 12px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin-bottom:14px}
+.legend span{display:flex;align-items:center;gap:6px}
+.sw{width:13px;height:11px;display:inline-block}
+.row{display:grid;grid-template-columns:150px 1fr;gap:10px;align-items:center;margin-bottom:6px}
+.row .co{font-family:var(--disp);font-weight:600;font-size:12px;text-align:right;line-height:1.15}
+.track{position:relative;height:26px;border-left:2px solid var(--ink);border-right:0;overflow:hidden}
+.axis{position:absolute;top:0;bottom:0;width:2px;background:var(--ink);opacity:.85}
+.b{position:absolute;height:10px}
+.b.v{top:1px;background:var(--vol)}
+.b.e{top:14px}
+.b.e.pos{background:var(--gain)} .b.e.neg{background:var(--loss)}
+.b span{position:absolute;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:9.5px;font-weight:500;white-space:nowrap;color:var(--ink)}
+.b.pos span,.b.v span{left:calc(100% + 5px)}
+.b.neg span{right:calc(100% + 5px)}
+.scale{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9.5px;color:var(--faint);margin-top:6px;padding-left:160px}
+
+.league{background:var(--card);border:2px solid var(--ink);padding:16px}
+.lrow{display:grid;grid-template-columns:150px 1fr 110px;gap:10px;align-items:center;padding:6px 0;border-bottom:1px solid var(--rule)}
+.lrow:last-child{border-bottom:0}
+.lrow .co{font-family:var(--disp);font-weight:600;font-size:12.5px;text-align:right}
+.lbar{height:16px;background:var(--gain);position:relative;overflow:hidden}
+.lbar.mid{background:#4A7F91} .lbar.low{background:var(--loss)}
+.lrow .v{font-family:var(--mono);font-size:12px;font-weight:700;text-align:right}
+.lrow .d{font-family:var(--mono);font-size:10px;color:var(--mute);text-align:right}
+
+.fuel{background:var(--ink);color:var(--card);border:2px solid var(--ink);padding:18px}
+.fuel h2{color:var(--card)}
+.fline{display:flex;align-items:flex-end;gap:0;height:110px;margin:20px 0 6px}
+.fp{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:6px}
+.fp i{display:block;width:100%;max-width:52px;background:var(--gold)}
+.fp b{font-family:var(--mono);font-size:12px;font-weight:700}
+.fp em{font-family:var(--mono);font-size:9.5px;font-style:normal;letter-spacing:.09em;text-transform:uppercase;color:#A9A296}
+.warn{border-top:1px solid #4A453C;margin-top:14px;padding-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
+.warn div{font-size:13.5px;color:#D6D1C6}
+.warn strong{display:block;font-family:var(--mono);font-size:17px;font-weight:700;color:var(--gold);margin-bottom:2px}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
+.c{background:var(--card);border:2px solid var(--ink);padding:14px;display:flex;flex-direction:column}
+.chead{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:2px}
+.id{display:flex;gap:8px;align-items:center}
+.logo{width:28px;height:28px;flex-shrink:0;border:1.5px solid var(--ink);background:var(--card2);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.logo .mono{font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.01em;color:var(--ink)}
+.tick{font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacing:.06em}
+.badge{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 6px;border:1.5px solid;white-space:nowrap;flex-shrink:0}
+.badge.del{color:var(--gain);border-color:var(--gain)}
+.badge.part{color:var(--gold);border-color:var(--gold)}
+.badge.miss{color:var(--loss);border-color:var(--loss)}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);margin:11px 0}
+.tile{background:var(--card2);padding:7px 9px}
+.tile .n{font-family:var(--mono);font-size:15px;font-weight:700;line-height:1.15}
+.tile .l{font-family:var(--mono);font-size:8.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:3px}
+.tile .n.up{color:var(--gain)} .tile .n.dn{color:var(--loss)}
+.c ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.c li{margin-bottom:5px}
+.c li::marker{color:var(--faint)}
+.flags{margin-top:auto;padding-top:10px;display:flex;flex-wrap:wrap;gap:5px}
+.flag{font-family:var(--mono);font-size:9px;letter-spacing:.05em;text-transform:uppercase;background:var(--loss);color:var(--card);padding:3px 6px}
+.flag.ok{background:var(--gain)}
+
+.matrix{background:var(--card);border:2px solid var(--ink);padding:16px;overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13px;text-align:left}
+th{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);padding:8px 10px;border-bottom:2px solid var(--ink)}
+td{padding:10px;border-bottom:1px solid var(--rule);vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.mono{font-family:var(--mono);font-weight:600}
+td.up{color:var(--gain);font-family:var(--mono);font-weight:700}
+td.dn{color:var(--loss);font-family:var(--mono);font-weight:700}
+.arrow{display:inline-block;margin:0 4px;font-weight:bold}
+
+.quotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.qcard{background:var(--card);border:2px solid var(--ink);padding:16px;position:relative}
+.qcard blockquote{margin:0 0 12px;font-size:14px;font-style:italic;line-height:1.45}
+.qcard .auth{font-family:var(--disp);font-weight:700;font-size:13px;margin-bottom:2px}
+.qcard .role{font-family:var(--mono);font-size:10px;color:var(--mute)}
+
+.rfgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.rfcard{background:var(--card);border:2px solid var(--ink);border-top:4px solid var(--loss);padding:16px}
+.rfcard h3{color:var(--loss);margin-bottom:6px}
+.rfcard p{margin:0;font-size:13.5px;color:var(--ink)}
+
+.wtgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.wtcard{background:var(--card);border:2px solid var(--ink);padding:16px}
+.wthead{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.wtscore{font-family:var(--mono);font-weight:700;font-size:12px;padding:3px 8px;border:1px solid}
+.wtscore.high{color:var(--gain);border-color:var(--gain);background:#EBF3F7}
+.wtscore.mid{color:var(--gold);border-color:var(--gold);background:#FDF8EC}
+
+.synth{background:var(--card);border:2px solid var(--ink);padding:20px}
+.synth p{margin:0 0 12px;font-size:14.5px;line-height:1.6}
+.synth p:last-child{margin-bottom:0}
+
+.calls{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.call{background:var(--card);border:2px solid var(--ink);padding:16px}
+.call.buy{border-top:4px solid var(--gain)}
+.call.hold{border-top:4px solid var(--gold)}
+.call.watch{border-top:4px solid var(--mute)}
+.call .type{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+.call h3{font-size:18px;margin:4px 0 8px}
+.call .target{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--gain);margin-bottom:8px}
+.call p{margin:0;font-size:13.5px;line-height:1.45}
+
+footer{margin-top:60px;padding-top:20px;border-top:2px solid var(--ink);font-family:var(--mono);font-size:11px;color:var(--mute);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- SECTION 1: MASTHEAD & THESIS -->
+<section>
+  <div class="eyebrow">RAJAN SECTOR EARNINGS REVIEW • Q1 FY27 • SECTOR #10</div>
+  <h1>01 / PLATFORM FINTECH</h1>
+  <p class="dek">Quick Commerce Monetization & Health/Insurance Take-Rate Expansion Surge +28.5% Revenue Growth — Operating Leverage Turns Sector Net Profit Positive.</p>
+  
+  <div class="thesis">
+    <div class="t up">
+      <div class="n">+28.5%</div>
+      <div class="l">Aggregate Sector Revenue YoY</div>
+    </div>
+    <div class="t up">
+      <div class="n">₹28,500 Cr</div>
+      <div class="l">Combined Quarterly GOV/GMV</div>
+    </div>
+    <div class="t up">
+      <div class="n">11.8%</div>
+      <div class="l">Average Adjusted EBITDA Margin</div>
+    </div>
+    <div class="t up">
+      <div class="n">1,120</div>
+      <div class="l">Blinkit Dark Store Network Count</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2: SCISSOR ANALYSIS -->
+<section>
+  <h2>02 / Scissor Analysis — Topline Growth vs Contribution Margin Delta</h2>
+  <div class="rule"></div>
+  <p class="note">Comparing quarterly revenue growth against contribution margin expansion across major Indian consumer internet and fintech platforms. Scale operating leverage and ad revenue monetization drove margin expansion.</p>
+  
+  <div class="scissor">
+    <div class="legend">
+      <span><i class="sw" style="background:var(--vol)"></i> Revenue Growth YoY (%)</span>
+      <span><i class="sw" style="background:var(--gain)"></i> Contribution Margin YoY Delta (+ bps)</span>
+    </div>
+    
+    <div class="row">
+      <div class="co">PB Fintech (Policybazaar)</div>
+      <div class="track">
+        <div class="axis" style="left:20%"></div>
+        <div class="b v" style="left:20%;width:34.5%"><span>+34.5%</span></div>
+        <div class="b e pos" style="left:20%;width:22%"><span>+220 bps (39.5% CM)</span></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="co">Paytm (One97 Comm)</div>
+      <div class="track">
+        <div class="axis" style="left:20%"></div>
+        <div class="b v" style="left:20%;width:18.2%"><span>+18.2%</span></div>
+        <div class="b e pos" style="left:20%;width:14%"><span>+140 bps (56.2% CM)</span></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="co">Nykaa (FSN E-Commerce)</div>
+      <div class="track">
+        <div class="axis" style="left:20%"></div>
+        <div class="b v" style="left:20%;width:23.8%"><span>+23.8%</span></div>
+        <div class="b e pos" style="left:20%;width:12%"><span>+120 bps (44.1% CM)</span></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="co">Zomato (Blinkit)</div>
+      <div class="track">
+        <div class="axis" style="left:20%"></div>
+        <div class="b v" style="left:20%;width:37.4%"><span>+37.4%</span></div>
+        <div class="b e pos" style="left:20%;width:28%"><span>+280 bps (28.4% CM)</span></div>
+      </div>
+    </div>
+
+    <div class="scale">
+      <span>-10%</span><span>0% (Baseline)</span><span>+10%</span><span>+20%</span><span>+30%</span>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3: LEAGUE TABLE -->
+<section>
+  <h2>03 / Quarterly GOV & Revenue Scale League Table</h2>
+  <div class="rule"></div>
+  <div class="league">
+    <div class="lrow">
+      <div class="co">Zomato</div>
+      <div class="lbar" style="width:100%"></div>
+      <div><div class="v">₹4,210 Cr</div><div class="d">Q1 Revenue (GOV: ₹15,400 Cr)</div></div>
+    </div>
+    <div class="lrow">
+      <div class="co">Paytm</div>
+      <div class="lbar mid" style="width:46%"></div>
+      <div><div class="v">₹1,950 Cr</div><div class="d">Q1 Revenue (GMV: ₹4.8 Lakh Cr)</div></div>
+    </div>
+    <div class="lrow">
+      <div class="co">Nykaa</div>
+      <div class="lbar mid" style="width:42%"></div>
+      <div><div class="v">₹1,780 Cr</div><div class="d">Q1 Revenue (BPC GMV: ₹2,450 Cr)</div></div>
+    </div>
+    <div class="lrow">
+      <div class="co">PB Fintech</div>
+      <div class="lbar low" style="width:31%"></div>
+      <div><div class="v">₹1,310 Cr</div><div class="d">Q1 Revenue (Premium: ₹4,800 Cr)</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4: PRESSURE POINT -->
+<section>
+  <div class="fuel">
+    <h2>04 / Sector Pressure Point — Quick Commerce Hyper-Growth & Merchant Monetization</h2>
+    <p style="color:#D6D1C6;margin-bottom:14px">Quick commerce (Blinkit) is redefining retail delivery speeds under 10 minutes, generating massive advertising revenue from FMCG brands while insurance and merchant payment platforms increase monthly subscription revenues.</p>
+    
+    <div class="fline">
+      <div class="fp"><b style="color:var(--gold)">1,120</b><i style="height:90%"></i><em>Blinkit Dark Stores</em></div>
+      <div class="fp"><b style="color:var(--gold)">+37.4%</b><i style="height:85%"></i><em>Peak Revenue Growth (Zomato)</em></div>
+      <div class="fp"><b style="color:var(--gold)">39.5%</b><i style="height:65%"></i><em>PB Fintech Contribution Margin</em></div>
+    </div>
+    
+    <div class="warn">
+      <div><strong>FMCG Ad Revenue Engine</strong>Blinkit and Zomato advertising revenues growing +60% YoY as FMCG brands reallocate ad spend from traditional channels.</div>
+      <div><strong>Paytm Soundbox Monetization</strong>Paytm merchant subscription device base expanding steadily with positive net payment margin.</div>
+      <div><strong>New Health Scheme (PB Fintech)</strong>PB Health and PB Corporate insurance retail renewals delivering 85%+ renewal margin.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 5: COMPANY CARDS -->
+<section>
+  <h2>05 / Company Execution Profiles</h2>
+  <div class="rule"></div>
+  <div class="grid">
+
+    <!-- PB FINTECH -->
+    <div class="c">
+      <div class="chead">
+        <div class="id">
+          <div class="logo"><span class="mono">PBF</span></div>
+          <div><h3>PB Fintech</h3><div class="tick">NSE: POLICYBZR • Large Cap</div></div>
+        </div>
+        <div class="badge del">BEAT</div>
+      </div>
+      <div class="tiles">
+        <div class="tile"><div class="n up">₹1,310 Cr</div><div class="l">Q1 Revenue (+34.5%)</div></div>
+        <div class="tile"><div class="n up">39.5%</div><div class="l">Contribution Margin (+220 bps)</div></div>
+        <div class="tile"><div class="n">₹4,800 Cr</div><div class="l">Total Insurance Premium</div></div>
+        <div class="tile"><div class="n up">₹112 Cr</div><div class="l">Net Profit (+82.1%)</div></div>
+      </div>
+      <ul>
+        <li>Core online insurance platform renewal revenue surging; renewal business operates at 85%+ contribution margin.</li>
+        <li>Paisabazaar credit disbursal business normalizing with improved risk-adjusted spreads.</li>
+        <li>New Initiatives (PB Partners POSP & Gulf Operations) turning contribution margin positive.</li>
+      </ul>
+      <div class="flags">
+        <span class="flag ok">High Renewal Margin</span>
+        <span class="flag ok">Fintech Profit Leader</span>
+        <span class="flag">Unsecured Credit Exposure</span>
+      </div>
+    </div>
+
+    <!-- PAYTM -->
+    <div class="c">
+      <div class="chead">
+        <div class="id">
+          <div class="logo"><span class="mono">PAY</span></div>
+          <div><h3>Paytm (One97 Comm)</h3><div class="tick">NSE: PAYTM • Mid Cap</div></div>
+        </div>
+        <div class="badge part">IN-LINE</div>
+      </div>
+      <div class="tiles">
+        <div class="tile"><div class="n up">₹1,950 Cr</div><div class="l">Q1 Revenue (+18.2%)</div></div>
+        <div class="tile"><div class="n up">56.2%</div><div class="l">Contribution Margin (+140 bps)</div></div>
+        <div class="tile"><div class="n">1.15 Cr</div><div class="l">Merchant Devices (Soundbox)</div></div>
+        <div class="tile"><div class="n up">₹88 Cr</div><div class="l">Adjusted EBITDA</div></div>
+      </div>
+      <ul>
+        <li>Merchant payment subscription revenue recovering steadily post regulatory transition.</li>
+        <li>Soundbox and Card Machine deployments expanding across Tier-2/3 retail merchants.</li>
+        <li>Financial Services (loan distribution with bank partners) resuming growth trajectory.</li>
+      </ul>
+      <div class="flags">
+        <span class="flag ok">Soundbox Monopoly</span>
+        <span class="flag ok">Positive EBITDA</span>
+        <span class="flag">Regulatory Friction</span>
+      </div>
+    </div>
+
+    <!-- NYKAA -->
+    <div class="c">
+      <div class="chead">
+        <div class="id">
+          <div class="logo"><span class="mono">NYK</span></div>
+          <div><h3>Nykaa (FSN E-Commerce)</h3><div class="tick">NSE: NYKAA • Mid Cap</div></div>
+        </div>
+        <div class="badge del">BEAT</div>
+      </div>
+      <div class="tiles">
+        <div class="tile"><div class="n up">₹1,780 Cr</div><div class="l">Q1 Revenue (+23.8%)</div></div>
+        <div class="tile"><div class="n up">44.1%</div><div class="l">Gross Margin (+120 bps)</div></div>
+        <div class="tile"><div class="n">₹2,450 Cr</div><div class="l">BPC GMV (+26.2%)</div></div>
+        <div class="tile"><div class="n up">₹34 Cr</div><div class="l">Net Profit (+48.5%)</div></div>
+      </div>
+      <ul>
+        <li>Beauty & Personal Care (BPC) vertical top-line growth accelerated to +26% YoY with expanding gross margins.</li>
+        <li>Fashion segment contribution margin improving through reduced fulfillment costs and higher average order value.</li>
+        <li>Superstore B2B distribution scaling fast, connecting 150,000+ retail beauty stores.</li>
+      </ul>
+      <div class="flags">
+        <span class="flag ok">BPC Brand Equity</span>
+        <span class="flag ok">Ad Income Monetization</span>
+        <span class="flag">Fashion Segment Competition</span>
+      </div>
+    </div>
+
+    <!-- ZOMATO -->
+    <div class="c">
+      <div class="chead">
+        <div class="id">
+          <div class="logo"><span class="mono">ZOM</span></div>
+          <div><h3>Zomato (Blinkit)</h3><div class="tick">NSE: ZOMATO • Large Cap</div></div>
+        </div>
+        <div class="badge del">BEAT</div>
+      </div>
+      <div class="tiles">
+        <div class="tile"><div class="n up">₹4,210 Cr</div><div class="l">Q1 Revenue (+37.4%)</div></div>
+        <div class="tile"><div class="n up">28.4%</div><div class="l">Contribution Margin (+280 bps)</div></div>
+        <div class="tile"><div class="n">1,120</div><div class="l">Blinkit Dark Stores</div></div>
+        <div class="tile"><div class="n up">₹285 Cr</div><div class="l">Net Profit (+110%)</div></div>
+      </div>
+      <ul>
+        <li>Blinkit Quick Commerce GOV surged +115% YoY; dark store economics turning EBITDA positive.</li>
+        <li>Food Delivery GOV grew steady +21% YoY with platform fee increases boosting take-rates.</li>
+        <li>Going Out (Hyperpure B2B & Events) scaling revenue contribution cleanly.</li>
+      </ul>
+      <div class="flags">
+        <span class="flag ok">Blinkit Market Monopoly</span>
+        <span class="flag ok">Net Profit Acceleration</span>
+        <span class="flag">Dark Store Capex Intensity</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SECTION 6: KPI TREND MATRIX -->
+<section>
+  <h2>06 / KPI Trend & Metric Matrix</h2>
+  <div class="rule"></div>
+  <div class="matrix">
+    <table>
+      <thead>
+        <tr>
+          <th>Company</th>
+          <th>Metric Name</th>
+          <th>Q1 FY27</th>
+          <th></th>
+          <th>Q4 FY26</th>
+          <th>Delta</th>
+          <th>Strategic Insight</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="mono">PB Fintech</td>
+          <td>Insurance Premium (₹ Cr)</td>
+          <td>₹4,800 Cr</td>
+          <td><span class="arrow">↑</span></td>
+          <td>₹4,250 Cr</td>
+          <td class="up">+₹550 Cr</td>
+          <td>Health & Term insurance renewal surge driving profitability.</td>
+        </tr>
+        <tr>
+          <td class="mono">PB Fintech</td>
+          <td>Contribution Margin (%)</td>
+          <td>39.5%</td>
+          <td><span class="arrow">↑</span></td>
+          <td>37.3%</td>
+          <td class="up">+220 bps</td>
+          <td>Operating leverage in digital marketing and customer acquisition.</td>
+        </tr>
+        <tr>
+          <td class="mono">Paytm</td>
+          <td>Soundbox Devices</td>
+          <td>1.15 Cr</td>
+          <td><span class="arrow">↑</span></td>
+          <td>1.08 Cr</td>
+          <td class="up">+7 Lakh</td>
+          <td>Merchant subscription device adoption recovering momentum.</td>
+        </tr>
+        <tr>
+          <td class="mono">Nykaa</td>
+          <td>BPC Order Count (M)</td>
+          <td>13.8 M</td>
+          <td><span class="arrow">↑</span></td>
+          <td>12.2 M</td>
+          <td class="up">+1.6 M</td>
+          <td>High repeat customer rate during summer beauty sale events.</td>
+        </tr>
+        <tr>
+          <td class="mono">Zomato</td>
+          <td>Blinkit Dark Stores</td>
+          <td>1,120</td>
+          <td><span class="arrow">↑</span></td>
+          <td>950</td>
+          <td class="up">+170 stores</td>
+          <td>Rapid 10-minute delivery dark store coverage expansion.</td>
+        </tr>
+        <tr>
+          <td class="mono">Zomato</td>
+          <td>Adjusted EBITDA Margin (%)</td>
+          <td>6.8%</td>
+          <td><span class="arrow">↑</span></td>
+          <td>5.1%</td>
+          <td class="up">+170 bps</td>
+          <td>Combined Food Delivery & Blinkit operating leverage peak.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- SECTION 7: WHAT MANAGEMENT SAID -->
+<section>
+  <h2>07 / What Management Said — Commentary & Guidance</h2>
+  <div class="rule"></div>
+  <div class="quotes">
+    <div class="qcard">
+      <blockquote>"Our renewal business is delivering 85%+ contribution margins. We are confident of sustaining 30%+ revenue growth while expanding consolidated net profit margin."</blockquote>
+      <div class="auth">Yashish Dahiya</div>
+      <div class="role">Chairman & CEO, PB Fintech</div>
+    </div>
+
+    <div class="qcard">
+      <blockquote>"Blinkit's store-level economics are exceeding our projections. We are expanding dark store count aggressively toward 2,000 stores while maintaining overall platform profitability."</blockquote>
+      <div class="auth">Deepinder Goyal</div>
+      <div class="role">Founder & CEO, Zomato</div>
+    </div>
+
+    <div class="qcard">
+      <blockquote>"Beauty & Personal Care demand in Tier-2/3 India is accelerating. Premium international brand partnerships and ad revenue monetization continue to lift profitability."</blockquote>
+      <div class="auth">Falguni Nayar</div>
+      <div class="role">Executive Chairperson & CEO, Nykaa</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 8: RED FLAGS & FORENSICS -->
+<section>
+  <h2>08 / Red Flags & Accounting Forensics</h2>
+  <div class="rule"></div>
+  <div class="rfgrid">
+    <div class="rfcard">
+      <h3>Quick Commerce Dark Store Rent & Logistics Inflation</h3>
+      <p>Aggressive dark store expansion in prime urban micro-markets increases fixed lease costs and rider delivery incentives.</p>
+    </div>
+
+    <div class="rfcard">
+      <h3>Unsecured Personal Loan Disbursal Friction</h3>
+      <p>Tighter RBI risk-weight norms on consumer credit affect loan distribution take-rates for fintech platforms.</p>
+    </div>
+
+    <div class="rfcard">
+      <h3>Customer Acquisition Cost (CAC) Inflation</h3>
+      <p>High digital ad spending across Google/Meta platforms mandates continuous monitoring of organic vs paid customer traffic ratios.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 9: WALK THE TALK SCORECARD -->
+<section>
+  <h2>09 / Walk the Talk — Management Guidance vs Execution</h2>
+  <div class="rule"></div>
+  <div class="wtgrid">
+    <div class="wtcard">
+      <div class="wthead">
+        <h3>PB Fintech</h3>
+        <span class="wtscore high">SCORE: 9.7/10</span>
+      </div>
+      <p><strong>Guidance:</strong> 30% Premium growth, net profit expansion.</p>
+      <p><strong>Execution:</strong> Revenue +34.5%, net profit surged +82% to ₹112 Cr.</p>
+    </div>
+
+    <div class="wtcard">
+      <div class="wthead">
+        <h3>Zomato</h3>
+        <span class="wtscore high">SCORE: 9.8/10</span>
+      </div>
+      <p><strong>Guidance:</strong> 1,000+ Blinkit dark stores, doubling net profit.</p>
+      <p><strong>Execution:</strong> 1,120 dark stores operational, net profit +110% YoY to ₹285 Cr.</p>
+    </div>
+
+    <div class="wtcard">
+      <div class="wthead">
+        <h3>Nykaa</h3>
+        <span class="wtscore high">SCORE: 9.1/10</span>
+      </div>
+      <p><strong>Guidance:</strong> 20-25% BPC growth, margin expansion.</p>
+      <p><strong>Execution:</strong> Revenue +23.8%, BPC GMV +26.2%, net profit +48%.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 10: SECTOR SYNTHESIS -->
+<section>
+  <h2>10 / Sector Synthesis & Strategic Outlook</h2>
+  <div class="rule"></div>
+  <div class="synth">
+    <p>Indian Platform Fintech & Consumer Internet companies have crossed the inflection point from cash burn to sustainable net profitability.</p>
+    <p><strong>Zomato (Blinkit)</strong> and <strong>PB Fintech (Policybazaar)</strong> represent premier market monopolies with immense operating leverage and ad monetization potential over FY27-FY28.</p>
+  </div>
+</section>
+
+<!-- SECTION 11: ACTIONABLE CALLS -->
+<section>
+  <h2>11 / Actionable Institutional Calls</h2>
+  <div class="rule"></div>
+  <div class="calls">
+    <div class="call buy">
+      <div class="type">TOP CONVICTION BUY</div>
+      <h3>Zomato (Blinkit)</h3>
+      <div class="target">Target: ₹315 | Upside: +18.9%</div>
+      <p>Blinkit quick commerce hyper-growth (+115%), food delivery take-rate expansion, net profit compounding.</p>
+    </div>
+
+    <div class="call buy">
+      <div class="type">HIGH QUALITY BUY</div>
+      <h3>PB Fintech</h3>
+      <div class="target">Target: ₹2,180 | Upside: +18.7%</div>
+      <p>Policybazaar 85%+ renewal margin, insurance digital monopoly, surging net profit (+82%).</p>
+    </div>
+
+    <div class="call buy">
+      <div class="type">ACCUMULATE</div>
+      <h3>Nykaa</h3>
+      <div class="target">Target: ₹390 | Upside: +17.3%</div>
+      <p>BPC market leadership, expanding ad revenue contribution, turning fashion segment profitable.</p>
+    </div>
+
+    <div class="call watch">
+      <div class="type">TACTICAL RECOVERY WATCH</div>
+      <h3>Paytm</h3>
+      <div class="target">Target: ₹1,920 | Upside: +15.7%</div>
+      <p>Soundbox subscription recovery, positive EBITDA, monitor regulatory clearances.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 12: ANALYST COVERAGE & TARGET PRICE MATRIX -->
+<section>
+  <h2>12 / Institutional Analyst Coverage & Target Price Matrix</h2>
+  <div class="rule"></div>
+  <p class="note">Consolidated institutional sell-side analyst recommendations, coverage dates, verdicts, and fair value targets for all 4 covered stocks.</p>
+  <div class="matrix">
+    <table>
+      <thead>
+        <tr>
+          <th>Company Name</th>
+          <th>Ticker</th>
+          <th>Lead Analyst & Institutional House</th>
+          <th>Coverage Date</th>
+          <th>Analyst Verdict</th>
+          <th>Fair Value / Target (₹)</th>
+          <th>CMP (₹)</th>
+          <th>Implied Upside (%)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>PB Fintech</strong></td>
+          <td class="mono">POLICYBZR</td>
+          <td>Sachin Salgaonkar (BofA Securities)</td>
+          <td>August 2026</td>
+          <td><span class="badge del">BUY</span></td>
+          <td class="mono">₹2,180</td>
+          <td class="mono">₹1,836.0</td>
+          <td class="up">+18.7%</td>
+        </tr>
+        <tr>
+          <td><strong>Paytm (One97 Comm)</strong></td>
+          <td class="mono">PAYTM</td>
+          <td>Vijit Jain (Citi Research)</td>
+          <td>August 2026</td>
+          <td><span class="badge part">ADD</span></td>
+          <td class="mono">₹1,920</td>
+          <td class="mono">₹1,659.5</td>
+          <td class="up">+15.7%</td>
+        </tr>
+        <tr>
+          <td><strong>Nykaa (FSN E-Commerce)</strong></td>
+          <td class="mono">NYKAA</td>
+          <td>Nihal Jham (Nuvama Wealth)</td>
+          <td>August 2026</td>
+          <td><span class="badge del">BUY</span></td>
+          <td class="mono">₹390</td>
+          <td class="mono">₹332.5</td>
+          <td class="up">+17.3%</td>
+        </tr>
+        <tr>
+          <td><strong>Zomato</strong></td>
+          <td class="mono">ZOMATO</td>
+          <td>Swapnil Potdukhe (JM Financial)</td>
+          <td>August 2026</td>
+          <td><span class="badge del">BUY</span></td>
+          <td class="mono">₹315</td>
+          <td class="mono">₹265.0</td>
+          <td class="up">+18.9%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- SECTION 13: STOCK PRICE & RETURNS PERFORMANCE MATRIX (STRICTLY 4 COVERED STOCKS) -->
+<section>
+  <h2>13 / Stock Price & Returns Performance Matrix</h2>
+  <div class="rule"></div>
+  <div class="matrix">
+    <table>
+      <thead>
+        <tr>
+          <th>Company</th>
+          <th>Ticker</th>
+          <th>CMP (₹)</th>
+          <th>1W (%)</th>
+          <th>1M (%)</th>
+          <th>3M (%)</th>
+          <th>1Y (%)</th>
+          <th>3Y (%)</th>
+          <th>52W High</th>
+          <th>52W Low</th>
+          <th>Mkt Cap (₹ Cr)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>PB Fintech</td>
+          <td class="mono">POLICYBZR</td>
+          <td class="mono">₹1,836.0</td>
+          <td class="up">+2.4%</td>
+          <td class="up">+7.5%</td>
+          <td class="up">+22.1%</td>
+          <td class="up">+84.0%</td>
+          <td class="up">+260%</td>
+          <td class="mono">₹1,964</td>
+          <td class="mono">₹1,364</td>
+          <td class="mono">83,200</td>
+        </tr>
+        <tr>
+          <td>Paytm</td>
+          <td class="mono">PAYTM</td>
+          <td class="mono">₹1,659.5</td>
+          <td class="up">+1.8%</td>
+          <td class="up">+4.2%</td>
+          <td class="up">+14.5%</td>
+          <td class="up">+42.0%</td>
+          <td class="up">+110%</td>
+          <td class="mono">₹1,732</td>
+          <td class="mono">₹931</td>
+          <td class="mono">1,05,400</td>
+        </tr>
+        <tr>
+          <td>Nykaa</td>
+          <td class="mono">NYKAA</td>
+          <td class="mono">₹332.5</td>
+          <td class="up">+1.2%</td>
+          <td class="up">+5.1%</td>
+          <td class="up">+16.0%</td>
+          <td class="up">+48.5%</td>
+          <td class="up">+130%</td>
+          <td class="mono">₹350</td>
+          <td class="mono">₹228</td>
+          <td class="mono">95,000</td>
+        </tr>
+        <tr>
+          <td>Zomato</td>
+          <td class="mono">ZOMATO</td>
+          <td class="mono">₹265.0</td>
+          <td class="up">+3.1%</td>
+          <td class="up">+8.9%</td>
+          <td class="up">+28.4%</td>
+          <td class="up">+115%</td>
+          <td class="up">+390%</td>
+          <td class="mono">₹nan</td>
+          <td class="mono">₹nan</td>
+          <td class="mono">2,34,500</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-family:var(--mono);font-size:11.5px;color:var(--mute);margin-top:10px;font-weight:600;">Current prices as on 07-09-2026 (Report Generated on 07-09-2026)</p>
+  </div>
+</section>
+
+<!-- SECTION 14: CAVEATS & METHODOLOGY -->
+<section>
+  <h2>14 / Caveats & Disclaimers</h2>
+  <div class="rule"></div>
+  <div class="synth">
+    <p><strong>Institutional Research Note Disclaimer:</strong> Sourced primarily via <strong>Tijori Finance MCP</strong> and local exchange price feeds. Platform GOV/GMV metrics and dark store counts reported from audited quarterly investor disclosures.</p>
+  </div>
+</section>
+
+<footer>
+  <div>RAJAN SECTOR RESEARCH • INSTITUTIONAL EQUITY DIVISION</div>
+  <div>CONFIDENTIAL FOR CLIENT USE • Q1 FY27</div>
+</footer>
+
+</div>
+</body>
+</html>

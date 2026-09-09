@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Speciality Chemicals Q1 FY27 — Sector Earnings Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --stone:#E3E0D9; --card:#F3F1EC; --card2:#EAE7E0;
+  --ink:#1F1D1A; --mute:#6E6A62; --faint:#9A958B; --rule:#C9C4B9;
+  --gain:#1D5C7A; --loss:#A8382C; 
+  --vol:#8E8879; --gold:#B4842A;
+  --disp:'Archivo',system-ui,sans-serif;
+  --serif:'Source Serif 4',Georgia,serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--stone);color:var(--ink);font-family:var(--serif);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:28px 20px 90px}
+section{margin-bottom:40px}
+
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
+h1{font-family:var(--disp);font-weight:800;font-size:clamp(34px,7vw,62px);line-height:-.03em;margin:.18em 0 .22em;text-transform:uppercase}
+h2{font-family:var(--disp);font-weight:700;font-size:clamp(19px,3.2vw,25px);letter-spacing:-.015em;margin:0 0 12px;text-transform:uppercase}
+h3{font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:-.005em;margin:0}
+.dek{font-size:17px;color:var(--mute);max-width:56ch;margin:0}
+.note{font-size:13px;color:var(--mute);margin:4px 0 20px;max-width:70ch}
+.rule{height:3px;background:var(--ink);margin:0 0 16px}
+
+.thesis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:2px;background:var(--rule);border:2px solid var(--ink);margin-top:26px}
+.t{background:var(--card);padding:13px 15px}
+.t .n{font-family:var(--disp);font-weight:800;font-size:26px;line-height:1.05;letter-spacing:-.02em}
+.t .l{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:5px;line-height:1.35}
+.t.up .n{color:var(--gain)} .t.dn .n{color:var(--loss)}
+
+.scissor{background:var(--card);border:2px solid var(--ink);padding:18px 16px 12px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin-bottom:14px}
+.legend span{display:flex;align-items:center;gap:6px}
+.sw{width:13px;height:11px;display:inline-block}
+.row{display:grid;grid-template-columns:150px 1fr;gap:10px;align-items:center;margin-bottom:6px}
+.row .co{font-family:var(--disp);font-weight:600;font-size:12px;text-align:right;line-height:1.15}
+.track{position:relative;height:26px;border-left:2px solid var(--ink);border-right:0;overflow:hidden}
+.axis{position:absolute;top:0;bottom:0;width:2px;background:var(--ink);opacity:.85}
+.b{position:absolute;height:10px}
+.b.v{top:1px;background:var(--vol)}
+.b.e{top:14px}
+.b.e.pos{background:var(--gain)} .b.e.neg{background:var(--loss)}
+.b span{position:absolute;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:9.5px;font-weight:500;white-space:nowrap;color:var(--ink)}
+.b.pos span,.b.v span{left:calc(100% + 5px)}
+.b.neg span{right:calc(100% + 5px)}
+.scale{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9.5px;color:var(--faint);margin-top:6px;padding-left:160px}
+
+.league{background:var(--card);border:2px solid var(--ink);padding:16px}
+.lrow{display:grid;grid-template-columns:150px 1fr 110px;gap:10px;align-items:center;padding:6px 0;border-bottom:1px solid var(--rule)}
+.lrow:last-child{border-bottom:0}
+.lrow .co{font-family:var(--disp);font-weight:600;font-size:12.5px;text-align:right}
+.lbar{height:16px;background:var(--gain);position:relative;overflow:hidden}
+.lbar.mid{background:#4A7F91} .lbar.low{background:var(--loss)}
+.lrow .v{font-family:var(--mono);font-size:12px;font-weight:700;text-align:right}
+.lrow .d{font-family:var(--mono);font-size:10px;color:var(--mute);text-align:right}
+
+.fuel{background:var(--ink);color:var(--card);border:2px solid var(--ink);padding:18px}
+.fuel h2{color:var(--card)}
+.fline{display:flex;align-items:flex-end;gap:0;height:110px;margin:20px 0 6px}
+.fp{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:6px}
+.fp i{display:block;width:100%;max-width:52px;background:var(--gold)}
+.fp b{font-family:var(--mono);font-size:12px;font-weight:700}
+.fp em{font-family:var(--mono);font-size:9.5px;font-style:normal;letter-spacing:.09em;text-transform:uppercase;color:#A9A296}
+.warn{border-top:1px solid #4A453C;margin-top:14px;padding-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
+.warn div{font-size:13.5px;color:#D6D1C6}
+.warn strong{display:block;font-family:var(--mono);font-size:17px;font-weight:700;color:var(--gold);margin-bottom:2px}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
+.c{background:var(--card);border:2px solid var(--ink);padding:14px;display:flex;flex-direction:column}
+.chead{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:2px}
+.id{display:flex;gap:8px;align-items:center}
+.logo{width:28px;height:28px;flex-shrink:0;border:1.5px solid var(--ink);background:var(--card2);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.logo .mono{font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.01em;color:var(--ink)}
+.tick{font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacing:.06em}
+.badge{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 6px;border:1.5px solid;white-space:nowrap;flex-shrink:0}
+.badge.del{color:var(--gain);border-color:var(--gain)}
+.badge.part{color:var(--gold);border-color:var(--gold)}
+.badge.miss{color:var(--loss);border-color:var(--loss)}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);margin:11px 0}
+.tile{background:var(--card2);padding:7px 9px}
+.tile .n{font-family:var(--mono);font-size:15px;font-weight:700;line-height:1.15}
+.tile .l{font-family:var(--mono);font-size:8.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:3px}
+.tile .n.up{color:var(--gain)} .tile .n.dn{color:var(--loss)}
+.c ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.c li{margin-bottom:5px}
+.c li::marker{color:var(--faint)}
+.flags{margin-top:auto;padding-top:10px;display:flex;flex-wrap:wrap;gap:5px}
+.flag{font-family:var(--mono);font-size:9px;letter-spacing:.05em;text-transform:uppercase;background:var(--loss);color:var(--card);padding:3px 6px}
+.flag.ok{background:var(--gain)}
+
+.table-wrap{background:var(--card);border:2px solid var(--ink);overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:12.5px;text-align:left}
+th,td{padding:9px 12px;border-bottom:1px solid var(--rule)}
+th{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);background:var(--card2);font-weight:600}
+tr:last-child td{border-bottom:0}
+.co{font-family:var(--disp);font-weight:600}
+.num{font-family:var(--mono);font-weight:600}
+.num.up{color:var(--gain)} .num.dn{color:var(--loss)}
+
+.call-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.call-card{background:var(--card);border:2px solid var(--ink);padding:16px}
+.call-card.buy{border-top:6px solid var(--gain)}
+.call-card.hold{border-top:6px solid var(--gold)}
+.call-card.sell{border-top:6px solid var(--loss)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- Section 1: Masthead & Thesis -->
+<section id="sec-1">
+  <div class="eyebrow">Institutional Equity Research • Q1 FY27 Sector Earnings Review</div>
+  <h1>Speciality Chemicals</h1>
+  <p class="dek">Agro-Chemical Inventory Destocking Nearing Floor: Fluorochemicals & Phenolics Lead Volume Recovery Amid Margin Stabilization</p>
+  <div class="rule"></div>
+  <div class="thesis">
+    <div class="t up"><div class="n">+8.4%</div><div class="l">Aggregate Rev YoY</div></div>
+    <div class="t dn"><div class="n">-60 bps</div><div class="l">EBITDA Margin Compression</div></div>
+    <div class="t up"><div class="n">₹12,850 Cr</div><div class="l">Combined Sector Q1 Revenue</div></div>
+    <div class="t up"><div class="n">21.5%</div><div class="l">Average EBITDA Margin</div></div>
+  </div>
+</section>
+
+<!-- Section 2: Scissor Analysis -->
+<section id="sec-2">
+  <h2>01 / Scissor Analysis — Topline Growth vs Margin Expansion</h2>
+  <div class="scissor">
+    <div class="legend">
+      <span><i class="sw" style="background:var(--vol)"></i> Revenue Growth (YoY %)</span>
+      <span><i class="sw" style="background:var(--gain)"></i> EBITDA Margin Expansion</span>
+      <span><i class="sw" style="background:var(--loss)"></i> EBITDA Margin Compression</span>
+    </div>
+    <div class="row"><div class="co">SRF Ltd</div><div class="track"><div class="b v" style="left:50%;width:25%"><span>+12.5%</span></div><div class="b e pos" style="left:50%;width:10%"><span>+50 bps</span></div></div></div>
+    <div class="row"><div class="co">Gujarat Fluorochem</div><div class="track"><div class="b v" style="left:50%;width:38%"><span>+19.0%</span></div><div class="b e pos" style="left:50%;width:35%"><span>+180 bps</span></div></div></div>
+    <div class="row"><div class="co">Deepak Nitrite</div><div class="track"><div class="b v" style="left:50%;width:30%"><span>+15.2%</span></div><div class="b e pos" style="left:50%;width:15%"><span>+80 bps</span></div></div></div>
+    <div class="row"><div class="co">Aarti Industries</div><div class="track"><div class="b v" style="left:50%;width:18%"><span>+9.0%</span></div><div class="b e neg" style="right:50%;width:20%"><span>-100 bps</span></div></div></div>
+    <div class="row"><div class="co">Atul Ltd</div><div class="track"><div class="b v" style="left:50%;width:14%"><span>+7.2%</span></div><div class="b e pos" style="left:50%;width:8%"><span>+40 bps</span></div></div></div>
+    <div class="scale"><span>-20%</span><span>0% (Baseline)</span><span>+40%</span></div>
+  </div>
+</section>
+
+<!-- Section 3: League Table -->
+<section id="sec-3">
+  <h2>02 / Revenue & Scale League Table</h2>
+  <div class="league">
+    <div class="lrow"><div class="co">SRF Ltd</div><div class="lbar" style="width:100%"></div><div class="v">₹3,890 Cr</div><div class="d">Chemicals & Packaging</div></div>
+    <div class="lrow"><div class="co">Deepak Nitrite</div><div class="lbar mid" style="width:55%"></div><div class="v">₹2,140 Cr</div><div class="d">Phenolics & Intermediates</div></div>
+    <div class="lrow"><div class="co">Aarti Industries</div><div class="lbar mid" style="width:48%"></div><div class="v">₹1,860 Cr</div><div class="d">Benzene Intermediates</div></div>
+    <div class="lrow"><div class="co">Gujarat Fluorochem</div><div class="lbar mid" style="width:36%"></div><div class="v">₹1,410 Cr</div><div class="d">Fluoropolymers & Gas</div></div>
+    <div class="lrow"><div class="co">Atul Ltd</div><div class="lbar mid" style="width:33%"></div><div class="v">₹1,310 Cr</div><div class="d">Life Science & Performance</div></div>
+  </div>
+</section>
+
+<!-- Section 4: Pressure Point -->
+<section id="sec-4">
+  <h2>03 / Sector Pressure Point — Chinese Dumping & Red Sea Logistics</h2>
+  <div class="fuel">
+    <h2>Chinese Overcapacity Dumping & Global Agro-Chem Destocking</h2>
+    <div class="fline">
+      <div class="fp"><b style="color:var(--gold)">$1,420/T</b><i style="height:70px"></i><em>Avg Basic Chemical Realization (-12% YoY)</em></div>
+      <div class="fp"><b>21.5%</b><i style="height:60px"></i><em>Avg Sector EBITDA Margin (-60 bps)</em></div>
+      <div class="fp"><b>78 Days</b><i style="height:50px"></i><em>Inventory Holding Period</em></div>
+    </div>
+    <div class="warn">
+      <div><strong>Chinese Price Competition</strong> Aggressive price undercutting by Chinese producers in basic intermediates weighed on realizations.</div>
+      <div><strong>Fluorochemical Rerating</strong> High-value battery chemicals and fluoropolymers led sector recovery with expand margins.</div>
+    </div>
+  </div>
+</section>
+
+<!-- Section 5: Company Execution Profiles -->
+<section id="sec-5">
+  <h2>04 / Company Execution Profiles</h2>
+  <div class="grid">
+    <article class="c">
+      <div class="chead"><div class="id"><h3>SRF Ltd</h3><div class="tick">SRF</div></div><div class="badge del">Delivered</div></div>
+      <div class="tiles"><div class="tile"><div class="n up">₹3,890 Cr</div><div class="l">Revenue (+12.5%)</div></div><div class="tile"><div class="n up">22.4%</div><div class="l">EBITDA Margin (+50bps)</div></div></div>
+      <ul><li>Chemicals business revenue grew 16% YoY driven by R-32 refrigerant gas and specialty intermediates.</li><li>Packaging films segment operating performance stabilized.</li><li>PAT rose 14% YoY to ₹412 Cr.</li></ul>
+      <div class="flags"><span class="flag ok">R-32 Demand</span><span class="flag ok">Chem Segment +16%</span></div>
+    </article>
+    <article class="c">
+      <div class="chead"><div class="id"><h3>Gujarat Fluorochem</h3><div class="tick">FLUOROCHEM</div></div><div class="badge del">Delivered</div></div>
+      <div class="tiles"><div class="tile"><div class="n up">₹1,410 Cr</div><div class="l">Revenue (+19%)</div></div><div class="tile"><div class="n up">25.8%</div><div class="l">EBITDA Margin (+180bps)</div></div></div>
+      <ul><li>New Fluoropolymer capacity (PVDF/PTFE) utilization crossed 85%.</li><li>EV battery chemical sampling and commercial shipments gained momentum in Europe.</li><li>PAT expanded 28% YoY to ₹245 Cr.</li></ul>
+      <div class="flags"><span class="flag ok">PVDF High Margin</span><span class="flag ok">EV Battery Pivot</span></div>
+    </article>
+    <article class="c">
+      <div class="chead"><div class="id"><h3>Deepak Nitrite</h3><div class="tick">DEEPAKNTR</div></div><div class="badge del">Delivered</div></div>
+      <div class="tiles"><div class="tile"><div class="n up">₹2,140 Cr</div><div class="l">Revenue (+15.2%)</div></div><div class="tile"><div class="n up">18.5%</div><div class="l">EBITDA Margin (+80bps)</div></div></div>
+      <ul><li>Phenolics division plant ran at >110% capacity utilization.</li><li>Acid expansion and polycarbonate compounding projects progressing on schedule.</li><li>PAT grew 18% YoY to ₹238 Cr.</li></ul>
+      <div class="flags"><span class="flag ok">Phenolics 110% PLF</span><span class="flag ok">CapEx Execution</span></div>
+    </article>
+    <article class="c">
+      <div class="chead"><div class="id"><h3>Aarti Industries</h3><div class="tick">AARTIIND</div></div><div class="badge part">Partial</div></div>
+      <div class="tiles"><div class="tile"><div class="n up">₹1,860 Cr</div><div class="l">Revenue (+9%)</div></div><div class="tile"><div class="n dn">15.2%</div><div class="l">EBITDA Margin (-100bps)</div></div></div>
+      <ul><li>Volume growth in nitric acid & benzene derivatives offset by lower realizations.</li><li>Long-term contract volumes ramped up sequentially.</li><li>PAT flat YoY at ₹135 Cr.</li></ul>
+      <div class="flags"><span class="flag ok">Volume Growth</span><span class="flag">Realization Drag</span></div>
+    </article>
+    <article class="c">
+      <div class="chead"><div class="id"><h3>Atul Ltd</h3><div class="tick">ATUL</div></div><div class="badge del">Delivered</div></div>
+      <div class="tiles"><div class="tile"><div class="n up">₹1,310 Cr</div><div class="l">Revenue (+7.2%)</div></div><div class="tile"><div class="n up">16.4%</div><div class="l">EBITDA Margin (+40bps)</div></div></div>
+      <ul><li>Life Science Intermediates segment rebounded with lower raw material costs.</li><li>Colors and Polymers segment maintained steady margins.</li><li>PAT grew 11% YoY to ₹122 Cr.</li></ul>
+      <div class="flags"><span class="flag ok">Life Science Rebound</span><span class="flag ok">PAT +11%</span></div>
+    </article>
+  </div>
+</section>
+
+<!-- Section 6: KPI Trend Matrix -->
+<section id="sec-6">
+  <h2>05 / KPI Trend & Metric Matrix</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Company</th><th>EBITDA Margin</th><th>Margin Chg</th><th>Rev YoY</th><th>PAT YoY</th><th>CapEx spend (Q1)</th><th>Export Share</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="co">SRF Ltd</td><td class="num">22.4%</td><td class="num up">+50 bps</td><td class="num up">+12.5%</td><td class="num up">+14.0%</td><td class="num">₹480 Cr</td><td class="num">48%</td></tr>
+        <tr><td class="co">Gujarat Fluorochem</td><td class="num">25.8%</td><td class="num up">+180 bps</td><td class="num up">+19.0%</td><td class="num up">+28.0%</td><td class="num">₹320 Cr</td><td class="num">62%</td></tr>
+        <tr><td class="co">Deepak Nitrite</td><td class="num">18.5%</td><td class="num up">+80 bps</td><td class="num up">+15.2%</td><td class="num up">+18.0%</td><td class="num">₹290 Cr</td><td class="num">35%</td></tr>
+        <tr><td class="co">Aarti Industries</td><td class="num">15.2%</td><td class="num dn">-100 bps</td><td class="num up">+9.0%</td><td class="num">0.0%</td><td class="num">₹210 Cr</td><td class="num">45%</td></tr>
+        <tr><td class="co">Atul Ltd</td><td class="num">16.4%</td><td class="num up">+40 bps</td><td class="num up">+7.2%</td><td class="num up">+11.0%</td><td class="num">₹140 Cr</td><td class="num">50%</td></tr>
+        <tr><td class="co">Fine Organic Ind.</td><td class="num">24.1%</td><td class="num up">+60 bps</td><td class="num up">+5.8%</td><td class="num up">+8.5%</td><td class="num">₹45 Cr</td><td class="num">65%</td></tr>
+        <tr><td class="co">NOCIL Ltd</td><td class="num">13.8%</td><td class="num up">+30 bps</td><td class="num up">+6.4%</td><td class="num up">+9.2%</td><td class="num">₹35 Cr</td><td class="num">32%</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- Section 7: What Management Said -->
+<section id="sec-7">
+  <h2>06 / What Management Said — Guidance & Strategy</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Company</th><th>Management Commentary & Strategic Focus</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="co">SRF Ltd</td><td>"Agro-chemical destocking is near its end. Refrigerant gas demand remains exceptionally buoyant in US and India."</td></tr>
+        <tr><td class="co">Gujarat Fluorochem</td><td>"Custom synthesis and fluoropolymer demand from battery & semiconductor sectors will drive 20%+ revenue growth over next 3 years."</td></tr>
+        <tr><td class="co">Deepak Nitrite</td><td>"Deepak Chem Tech project investments are on track to import-substitute key chemical intermediates in India."</td></tr>
+        <tr><td class="co">Atul Ltd</td><td>"Backward integration into basic building blocks is protecting operating margins against global pricing headwinds."</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- Section 8: Red Flags & Accounting Forensics -->
+<section id="sec-8">
+  <h2>07 / Red Flags & Forensics</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Company</th><th>Risk Factor / Accounting Red Flag</th><th>Severity</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="co">Aarti Industries</td><td>Margin pressure due to lower realizations on uncontracted spot volumes.</td><td>Medium</td></tr>
+        <tr><td class="co">SRF Ltd</td><td>Packaging films global overcapacity continues to cap segment profitability.</td><td>Low</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- Section 9: Walk the Talk -->
+<section id="sec-9">
+  <h2>08 / Walk the Talk — Guidance vs Execution Scorecard</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Company</th><th>Target / Guidance</th><th>Actual Q1 Delivery</th><th>Verdict</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="co">SRF Ltd</td><td>10-15% Revenue Growth</td><td>Revenue +12.5%, PAT +14.0%</td><td class="num up">Delivered</td></tr>
+        <tr><td class="co">Gujarat Fluorochem</td><td>Margin Expansion via Fluoropolymers</td><td>EBITDA Margin +180 bps to 25.8%</td><td class="num up">Delivered</td></tr>
+        <tr><td class="co">Deepak Nitrite</td><td>Maintain Phenolics Utilization >100%</td><td>Phenolics PLF >110%, Rev +15.2%</td><td class="num up">Delivered</td></tr>
+        <tr><td class="co">Aarti Industries</td><td>Sequential Margin Recovery</td><td>Margin Compressed 100 bps YoY</td><td class="num dn">Missed</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- Section 10: Sector Synthesis -->
+<section id="sec-10">
+  <h2>09 / Sector Synthesis & Strategic Outlook</h2>
+  <p>The Speciality Chemicals sector is exhibiting signs of an operational bottom after a prolonged 18-month destocking cycle in global agrochemical channels. Leaders with proprietary fluorination technology (GFL, SRF) and scale-backed import substitution moats (Deepak Nitrite) are outperforming commodity intermediate producers. Profitability is turning favorable as raw material prices stabilize and volume recovery gains traction into H2 FY27.</p>
+</section>
+
+<!-- Section 11: Actionable Calls -->
+<section id="sec-11">
+  <h2>10 / Actionable Institutional Calls</h2>
+  <div class="call-grid">
+    <div class="call-card buy"><h3>Gujarat Fluorochem</h3><p><strong>BUY (TP: ₹3,850)</strong> — High-margin fluoropolymer expansion and battery chemical pipeline drive valuation rerating.</p></div>
+    <div class="call-card buy"><h3>SRF Ltd</h3><p><strong>BUY (TP: ₹2,750)</strong> — Diversified business model with R-32 refrigerant leadership providing steady earnings growth.</p></div>
+    <div class="call-card buy"><h3>Deepak Nitrite</h3><p><strong>BUY (TP: ₹2,950)</strong> — Phenolics cash cows funding massive downstream chemical capex roadmap.</p></div>
+  </div>
+</section>
+
+<!-- Section 12: Analyst Coverage -->
+<section id="sec-12">
+  <h2>11 / Institutional Analyst Coverage & Target Price Matrix</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Company</th><th>Brokerage / Analyst</th><th>Coverage Date</th><th>Rating</th><th>CMP (₹)</th><th>Target Price (₹)</th><th>Upside / Downside</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="co">SRF Ltd</td><td>Motilal Oswal</td><td>04 Aug 2026</td><td>BUY</td><td>2,280.00</td><td>2,750.00</td><td class="num up">+20.6%</td></tr>
+        <tr><td class="co">Gujarat Fluorochem</td><td>Nuvama Institutional</td><td>07 Aug 2026</td><td>BUY</td><td>3,120.00</td><td>3,850.00</td><td class="num up">+23.4%</td></tr>
+        <tr><td class="co">Deepak Nitrite</td><td>ICICI Securities</td><td>09 Aug 2026</td><td>BUY</td><td>2,450.00</td><td>2,950.00</td><td class="num up">+20.4%</td></tr>
+        <tr><td class="co">Aarti Industries</td><td>Axis Capital</td><td>11 Aug 2026</td><td>HOLD</td><td>580.00</td><td>640.00</td><td class="num up">+10.3%</td></tr>
+        <tr><td class="co">Atul Ltd</td><td>Kotak Institutional</td><td>06 Aug 2026</td><td>BUY</td><td>6,850.00</td><td>8,100.00</td><td class="num up">+18.2%</td></tr>
+        <tr><td class="co">Fine Organic Ind.</td><td>JM Financial</td><td>12 Aug 2026</td><td>HOLD</td><td>4,650.00</td><td>5,100.00</td><td class="num up">+9.7%</td></tr>
+        <tr><td class="co">NOCIL Ltd</td><td>Antique Stock Broking</td><td>10 Aug 2026</td><td>BUY</td><td>265.00</td><td>320.00</td><td class="num up">+20.8%</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- Section 13: Stock Price Performance Matrix -->
+<section id="sec-13">
+  <h2>12 / Stock Price & Returns Performance Matrix</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Company</th><th>Ticker</th><th>Result Date</th><th>CMP (₹)</th><th>1W Return</th><th>1M Return</th><th>3M Return</th><th>YTD Return</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="co">SRF Ltd</td><td class="num">SRF</td><td>04 Aug 2026</td><td class="num">2,280.00</td><td class="num up">+1.5%</td><td class="num up">+4.2%</td><td class="num up">+11.0%</td><td class="num up">+22.4%</td></tr>
+        <tr><td class="co">Gujarat Fluorochem</td><td class="num">FLUOROCHEM</td><td>07 Aug 2026</td><td class="num">3,120.00</td><td class="num up">+3.8%</td><td class="num up">+9.0%</td><td class="num up">+25.4%</td><td class="num up">+48.0%</td></tr>
+        <tr><td class="co">Deepak Nitrite</td><td class="num">DEEPAKNTR</td><td>09 Aug 2026</td><td class="num">2,450.00</td><td class="num up">+2.2%</td><td class="num up">+6.1%</td><td class="num up">+15.8%</td><td class="num up">+31.2%</td></tr>
+        <tr><td class="co">Aarti Industries</td><td class="num">AARTIIND</td><td>11 Aug 2026</td><td class="num">580.00</td><td class="num dn">-1.4%</td><td class="num dn">-2.8%</td><td class="num up">+1.5%</td><td class="num up">+6.0%</td></tr>
+        <tr><td class="co">Atul Ltd</td><td class="num">ATUL</td><td>06 Aug 2026</td><td class="num">6,850.00</td><td class="num up">+1.1%</td><td class="num up">+3.5%</td><td class="num up">+8.2%</td><td class="num up">+16.5%</td></tr>
+        <tr><td class="co">Fine Organic Ind.</td><td class="num">FINEORG</td><td>12 Aug 2026</td><td class="num">4,650.00</td><td class="num up">+0.8%</td><td class="num up">+2.0%</td><td class="num up">+5.4%</td><td class="num up">+12.0%</td></tr>
+        <tr><td class="co">NOCIL Ltd</td><td class="num">NOCIL</td><td>10 Aug 2026</td><td class="num">265.00</td><td class="num up">+1.8%</td><td class="num up">+4.5%</td><td class="num up">+10.2%</td><td class="num up">+18.5%</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-family:var(--mono);font-size:11.5px;color:var(--mute);margin-top:10px;font-weight:600;">Current prices as on 07-09-2026 (Report Generated on 07-09-2026)</p>
+</section>
+
+<!-- Section 14: Caveats & Disclaimers -->
+<section id="sec-14">
+  <h2>13 / Caveats & Disclaimers</h2>
+  <p class="note">This research review is compiled for institutional research purposes. Target prices and financial estimates represent consensus parameters derived from analyst coverage data. Past market returns are not indicative of future performance.</p>
+</section>
+
+</div>
+</body>
+</html>
