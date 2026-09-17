@@ -3,46 +3,49 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Diagnostic Chains Q1 FY27 - Sector Earnings Review</title>
+<title>Diagnostic Chains Q1 FY27 — Sector Earnings Review</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Roboto+Mono:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
 <style>
 :root{
   --stone:#E3E0D9; --card:#F3F1EC; --card2:#EAE7E0;
   --ink:#1F1D1A; --mute:#6E6A62; --faint:#9A958B; --rule:#C9C4B9;
-  --gain:#1D5C7A; --loss:#A8382C; 
+  --gain:#1D5C7A; --loss:#A8382C;
   --vol:#8E8879; --gold:#B4842A;
   --disp:'Archivo',system-ui,sans-serif;
   --serif:'Source Serif 4',Georgia,serif;
-  --mono:'IBM Plex Mono',ui-monospace,monospace;
+  --mono:'Roboto Mono',ui-monospace,monospace;
 }
 *{box-sizing:border-box}
 body{margin:0;background:var(--stone);color:var(--ink);font-family:var(--serif);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
 .wrap{max-width:1080px;margin:0 auto;padding:28px 20px 90px}
 section{margin-bottom:40px}
 
+/* type */
 .eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
 h1{font-family:var(--disp);font-weight:800;font-size:clamp(34px,7vw,62px);line-height:.94;letter-spacing:-.03em;margin:.18em 0 .22em;text-transform:uppercase}
-h2{font-family:var(--disp);font-weight:700;font-size:clamp(19px,3.2vw,25px);letter-spacing:-.015em;margin:0 0 12px;text-transform:uppercase}
+h2{font-family:var(--disp);font-weight:700;font-size:clamp(19px,3.2vw,25px);letter-spacing:-.015em;margin:0 0 4px;text-transform:uppercase}
 h3{font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:-.005em;margin:0}
 .dek{font-size:17px;color:var(--mute);max-width:56ch;margin:0}
 .note{font-size:13px;color:var(--mute);margin:4px 0 20px;max-width:70ch}
 .rule{height:3px;background:var(--ink);margin:0 0 16px}
 
+/* thesis stats */
 .thesis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:2px;background:var(--rule);border:2px solid var(--ink);margin-top:26px}
 .t{background:var(--card);padding:13px 15px}
 .t .n{font-family:var(--disp);font-weight:800;font-size:26px;line-height:1.05;letter-spacing:-.02em}
 .t .l{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:5px;line-height:1.35}
 .t.up .n{color:var(--gain)} .t.dn .n{color:var(--loss)}
 
+/* SIGNATURE: the scissor */
 .scissor{background:var(--card);border:2px solid var(--ink);padding:18px 16px 12px}
 .legend{display:flex;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin-bottom:14px}
 .legend span{display:flex;align-items:center;gap:6px}
 .sw{width:13px;height:11px;display:inline-block}
-.row{display:grid;grid-template-columns:140px 1fr;gap:10px;align-items:center;margin-bottom:6px}
+.row{display:grid;grid-template-columns:104px 1fr;gap:10px;align-items:center;margin-bottom:3px}
 .row .co{font-family:var(--disp);font-weight:600;font-size:12px;text-align:right;line-height:1.15}
-.track{position:relative;height:26px;border-left:2px solid var(--ink);border-right:0;overflow:hidden}
+.track{position:relative;height:26px;border-left:2px solid var(--ink);border-right:0}
 .axis{position:absolute;top:0;bottom:0;width:2px;background:var(--ink);opacity:.85}
 .b{position:absolute;height:10px}
 .b.v{top:1px;background:var(--vol)}
@@ -51,17 +54,19 @@ h3{font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:-.005em
 .b span{position:absolute;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:9.5px;font-weight:500;white-space:nowrap;color:var(--ink)}
 .b.pos span,.b.v span{left:calc(100% + 5px)}
 .b.neg span{right:calc(100% + 5px)}
-.scale{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9.5px;color:var(--faint);margin-top:6px;padding-left:150px}
+.scale{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9.5px;color:var(--faint);margin-top:6px;padding-left:114px}
 
+/* league bars */
 .league{background:var(--card);border:2px solid var(--ink);padding:16px}
-.lrow{display:grid;grid-template-columns:150px 1fr 110px;gap:10px;align-items:center;padding:6px 0;border-bottom:1px solid var(--rule)}
+.lrow{display:grid;grid-template-columns:112px 1fr 96px;gap:10px;align-items:center;padding:4px 0;border-bottom:1px solid var(--rule)}
 .lrow:last-child{border-bottom:0}
 .lrow .co{font-family:var(--disp);font-weight:600;font-size:12.5px;text-align:right}
-.lbar{height:16px;background:var(--gain);position:relative;overflow:hidden}
+.lbar{height:16px;background:var(--gain);position:relative}
 .lbar.mid{background:#4A7F91} .lbar.low{background:var(--loss)}
 .lrow .v{font-family:var(--mono);font-size:12px;font-weight:700;text-align:right}
 .lrow .d{font-family:var(--mono);font-size:10px;color:var(--mute);text-align:right}
 
+/* fuel strip */
 .fuel{background:var(--ink);color:var(--card);border:2px solid var(--ink);padding:18px}
 .fuel h2{color:var(--card)}
 .fline{display:flex;align-items:flex-end;gap:0;height:110px;margin:20px 0 6px}
@@ -73,12 +78,10 @@ h3{font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:-.005em
 .warn div{font-size:13.5px;color:#D6D1C6}
 .warn strong{display:block;font-family:var(--mono);font-size:17px;font-weight:700;color:var(--gold);margin-bottom:2px}
 
+/* company cards */
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
 .c{background:var(--card);border:2px solid var(--ink);padding:14px;display:flex;flex-direction:column}
 .chead{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:2px}
-.id{display:flex;gap:8px;align-items:center}
-.logo{width:28px;height:28px;flex-shrink:0;border:1.5px solid var(--ink);background:var(--card2);display:flex;align-items:center;justify-content:center;overflow:hidden}
-.logo .mono{font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.01em;color:var(--ink)}
 .tick{font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacing:.06em}
 .badge{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 6px;border:1.5px solid;white-space:nowrap;flex-shrink:0}
 .badge.del{color:var(--gain);border-color:var(--gain)}
@@ -96,725 +99,514 @@ h3{font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:-.005em
 .flag{font-family:var(--mono);font-size:9px;letter-spacing:.05em;text-transform:uppercase;background:var(--loss);color:var(--card);padding:3px 6px}
 .flag.ok{background:var(--gain)}
 
-.matrix{background:var(--card);border:2px solid var(--ink);padding:16px;overflow-x:auto}
-table{width:100%;border-collapse:collapse;font-size:13px;text-align:left}
-th{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);padding:8px 10px;border-bottom:2px solid var(--ink)}
-td{padding:10px;border-bottom:1px solid var(--rule);vertical-align:top}
+table{width:100%;border-collapse:collapse;background:var(--card);border:2px solid var(--ink)}
+th{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;text-align:left;padding:9px 10px;background:var(--ink);color:var(--card)}
+td{padding:9px 10px;border-bottom:1px solid var(--rule);font-size:13.5px;vertical-align:top}
 tr:last-child td{border-bottom:0}
-td.mono{font-family:var(--mono);font-weight:600}
-td.up{color:var(--gain);font-family:var(--mono);font-weight:700}
-td.dn{color:var(--loss);font-family:var(--mono);font-weight:700}
-.arrow{display:inline-block;margin:0 4px;font-weight:bold}
+td.co{font-family:var(--disp);font-weight:700;font-size:13px;white-space:nowrap}
+td.vd{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;white-space:nowrap}
+.vd.del{color:var(--gain)} .vd.part{color:var(--gold)} .vd.miss{color:var(--loss)}
 
-.quotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
-.qcard{background:var(--card);border:2px solid var(--ink);padding:16px;position:relative}
-.qcard blockquote{margin:0 0 12px;font-size:14px;font-style:italic;line-height:1.45}
-.qcard .auth{font-family:var(--disp);font-weight:700;font-size:13px;margin-bottom:2px}
-.qcard .role{font-family:var(--mono);font-size:10px;color:var(--mute)}
+/* call */
+.calls{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.call{border:2px solid var(--ink);padding:15px;background:var(--card)}
+.call.buy{border-left:9px solid var(--gain)}
+.call.wait{border-left:9px solid var(--gold)}
+.call.avoid{border-left:9px solid var(--loss)}
+.call .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.call h3{margin:4px 0 7px;font-size:17px}
+.call p{margin:0;font-size:13.5px}
 
-.rfgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
-.rfcard{background:var(--card);border:2px solid var(--ink);border-top:4px solid var(--loss);padding:16px}
-.rfcard h3{color:var(--loss);margin-bottom:6px}
-.rfcard p{margin:0;font-size:13.5px;color:var(--ink)}
+/* commentary */
+.themes{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.th{background:var(--card);border:2px solid var(--ink);padding:14px}
+.th .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--mute);border-bottom:2px solid var(--ink);padding-bottom:6px;margin-bottom:9px}
+.th ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.th li{margin-bottom:6px}
+.th li::marker{color:var(--faint)}
+.th b{font-family:var(--mono);font-size:12.5px;font-weight:700}
 
-.wtgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
-.wtcard{background:var(--card);border:2px solid var(--ink);padding:16px}
-.wthead{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
-.wtscore{font-family:var(--mono);font-weight:700;font-size:12px;padding:3px 8px;border:1px solid}
-.wtscore.high{color:var(--gain);border-color:var(--gain);background:#EBF3F7}
-.wtscore.mid{color:var(--gold);border-color:var(--gold);background:#FDF8EC}
+/* red flags */
+.rf{background:var(--card);border:2px solid var(--ink)}
+.rfg{border-bottom:2px solid var(--ink)}
+.rfg:last-child{border-bottom:0}
+.rfh{display:flex;align-items:center;gap:9px;padding:8px 13px;background:var(--card2)}
+.sev{width:11px;height:11px;flex-shrink:0}
+.sev.hi{background:var(--loss)} .sev.md{background:var(--gold)} .sev.lo{background:var(--faint)}
+.rfh span{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase}
+.rfr{display:grid;grid-template-columns:118px 1fr;gap:12px;padding:9px 13px;border-top:1px solid var(--rule);font-size:13.5px}
+.rfr b{font-family:var(--disp);font-weight:700;font-size:12.5px}
 
-.synth{background:var(--card);border:2px solid var(--ink);padding:20px}
-.synth p{margin:0 0 12px;font-size:14.5px;line-height:1.6}
-.synth p:last-child{margin-bottom:0}
+/* ind-ra verdict */
+.indra{background:var(--card);border:2px solid var(--ink);padding:16px}
+.split{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:2px;background:var(--rule);border:1px solid var(--rule);margin-bottom:16px}
+.sp{background:var(--card2);padding:13px 14px}
+.sp .n{font-family:var(--disp);font-weight:800;font-size:34px;line-height:1;letter-spacing:-.03em;color:var(--loss)}
+.sp.ok .n{color:var(--gain)}
+.sp .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-top:6px}
+.sp .w{font-size:12.5px;color:var(--mute);margin-top:7px}
+.vs{display:grid;grid-template-columns:82px 1fr;gap:11px;padding:7px 0;border-bottom:1px solid var(--rule);font-size:13.5px;align-items:start}
+.vs:last-child{border-bottom:0}
+.vs em{font-family:var(--mono);font-size:9.5px;font-style:normal;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding-top:2px}
+.vs em.y{color:var(--gain)} .vs em.n{color:var(--loss)} .vs em.p{color:var(--gold)}
 
-.calls{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
-.call{background:var(--card);border:2px solid var(--ink);padding:16px}
-.call.buy{border-top:4px solid var(--gain)}
-.call.hold{border-top:4px solid var(--gold)}
-.call.watch{border-top:4px solid var(--mute)}
-.call .type{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
-.call h3{font-size:18px;margin:4px 0 8px}
-.call .target{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--gain);margin-bottom:8px}
-.call p{margin:0;font-size:13.5px;line-height:1.45}
+/* regional strip */
+.reg{display:grid;grid-template-columns:repeat(auto-fit,minmax(112px,1fr));gap:2px;background:var(--rule);border:2px solid var(--ink);margin-top:16px}
+.rg{background:var(--card2);padding:11px 12px;text-align:center}
+.rg .n{font-family:var(--mono);font-size:15px;font-weight:700}
+.rg .n.up{color:var(--gain)} .rg .n.dn{color:var(--loss)}
+.rg .l{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-top:4px}
 
-footer{margin-top:60px;padding-top:20px;border-top:2px solid var(--ink);font-family:var(--mono);font-size:11px;color:var(--mute);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+/* triggers */
+.trigs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:14px}
+.tg{border:2px solid var(--ink);padding:14px;background:var(--card)}
+.tg .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
+.tg.tg-up .k{color:var(--gain)} .tg.tg-dn .k{color:var(--loss)}
+.tg ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.tg li{margin-bottom:6px}
+
+/* caveats */
+.cav{background:var(--card2);border:2px solid var(--ink);padding:15px 15px 15px 30px;margin:0;font-size:13.5px;line-height:1.55}
+.cav li{margin-bottom:8px}
+.cav li:last-child{margin-bottom:0}
+.cav b{font-family:var(--mono);font-size:12px;font-weight:700}
+
+/* wide data tables */
+.tw{overflow-x:auto;border:2px solid var(--ink);background:var(--card)}
+.tw table{border:0;min-width:660px}
+.tw th{position:sticky;top:0}
+td.num{font-family:var(--mono);font-size:12px;font-weight:700;text-align:right;white-space:nowrap}
+td.num.up{color:var(--gain)} td.num.dn{color:var(--loss)} td.num.ns{color:var(--faint);font-weight:400}
+th.r{text-align:right}
+td.kpi{font-family:var(--mono);font-size:11.5px;text-align:right;white-space:nowrap}
+.asof{font-family:var(--mono);font-size:11px;color:var(--mute);margin-top:10px;line-height:1.6}
+.asof b{color:var(--ink)}
+
+footer{border-top:3px solid var(--ink);padding-top:15px;font-size:12.5px;color:var(--mute)}
+footer p{margin:0 0 8px;max-width:80ch}
+
+@media(max-width:620px){
+  .row{grid-template-columns:74px 1fr;gap:7px}
+  .row .co{font-size:10.5px}
+  .scale{padding-left:81px}
+  .lrow{grid-template-columns:80px 1fr 74px}
+  .lrow .co{font-size:11px}
+  .wrap{padding:20px 13px 60px}
+  td.hide,th.hide{display:none}
+}
+@media(prefers-reduced-motion:no-preference){
+  .b,.lbar,.fp i{animation:g .7s cubic-bezier(.2,.7,.3,1) both}
+  @keyframes g{from{transform:scaleX(.001);opacity:0}to{transform:scaleX(1);opacity:1}}
+  .b.neg{transform-origin:right} .b.v,.b.pos,.lbar{transform-origin:left}
+  .fp i{animation-name:gy;transform-origin:bottom}
+  @keyframes gy{from{transform:scaleY(.001)}to{transform:scaleY(1)}}
+}
 </style>
 </head>
 <body>
 <div class="wrap">
 
-<!-- SECTION 1: MASTHEAD & THESIS -->
-<section>
-  <div class="eyebrow">RAJAN SECTOR EARNINGS REVIEW • Q1 FY27 • SECTOR #4</div>
-  <h1>DIAGNOSTIC CHAINS</h1>
-  <p class="dek">Volume-Driven Recovery Meets Price Rationalisation — Specialized & B2C Wellness Bundling Drives Operating Margin Expansion Across Organized Players.</p>
-  
+<header>
+  <div class="eyebrow">Sector earnings review · Quarter ended 30 June 2026</div>
+  <h1>Diagnostic<br>Chains</h1>
+  <p class="dek">Every listed name grew volumes this quarter. Almost none raised prices. A temporary CGHS/ECHS tariff cycle is doing more for realisation than any company's own pricing power — and the two names that put a number on it said it fades within two to three quarters.</p>
   <div class="thesis">
-    <div class="t up">
-      <div class="n">+14.8%</div>
-      <div class="l">Aggregate Sector Revenue YoY</div>
-    </div>
-    <div class="t up">
-      <div class="n">27.2%</div>
-      <div class="l">Average Sector OPM (+190 bps)</div>
-    </div>
-    <div class="t up">
-      <div class="n">+11.5%</div>
-      <div class="l">Patient Volume Growth YoY</div>
-    </div>
-    <div class="t up">
-      <div class="n">22.4%</div>
-      <div class="l">Wellness & Bundled Test Contribution</div>
-    </div>
+    <div class="t up"><div class="n">6/6</div><div class="l">Comparable names grew patient or test volumes YoY</div></div>
+    <div class="t dn"><div class="n">20 mo</div><div class="l">Longest run without a broad price hike — Metropolis</div></div>
+    <div class="t dn"><div class="n">−19%</div><div class="l">Krsnaa PAT YoY — the sector's only profit decline</div></div>
+    <div class="t"><div class="n">2–3 qtrs</div><div class="l">How long Dr Lal's CGHS tailwind is guided to last before fading</div></div>
   </div>
-</section>
+</header>
 
-<!-- SECTION 2: SCISSOR ANALYSIS -->
 <section>
-  <h2>01 / Scissor Analysis — Topline Growth vs Margin Expansion</h2>
+  <h2>The scissor</h2>
   <div class="rule"></div>
-  <p class="note">Comparing quarterly revenue growth against operating margin delta. Regional leaders (Vijaya) and specialized test pioneers (Dr Lal, Metropolis) demonstrated operating leverage as discount wars from online tech aggregators cooled off.</p>
-  
+  <p class="note">Patient/test volume growth against realisation change, same scale, same axis — the sector's own scissor pair. Thyrocare is the mirror image of Dr Lal: volume up 28% YoY, realisation per test <em>down</em> 2%. Krsnaa and Suraksha (marked *) are derived — blended revenue growth against volume growth, not a company-disclosed per-patient figure — because neither discloses revenue per patient directly. See caveats.</p>
   <div class="scissor">
     <div class="legend">
-      <span><i class="sw" style="background:var(--vol)"></i> Revenue Growth YoY (%)</span>
-      <span><i class="sw" style="background:var(--gain)"></i> OPM YoY Delta (+ bps / - bps)</span>
+      <span><i class="sw" style="background:var(--vol)"></i>Volume growth YoY</span>
+      <span><i class="sw" style="background:var(--gain)"></i>Realisation gain</span>
+      <span><i class="sw" style="background:var(--loss)"></i>Realisation loss</span>
     </div>
-    
-    <div class="row">
-      <div class="co">Dr Lal PathLabs</div>
-      <div class="track">
-        <div class="axis" style="left:25%"></div>
-        <div class="b v" style="left:25%;width:13.2%"><span>+13.2%</span></div>
-        <div class="b e pos" style="left:25%;width:22%"><span>+220 bps (28.4% OPM)</span></div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="co">Metropolis Healthcare</div>
-      <div class="track">
-        <div class="axis" style="left:25%"></div>
-        <div class="b v" style="left:25%;width:15.1%"><span>+15.1%</span></div>
-        <div class="b e pos" style="left:25%;width:18%"><span>+180 bps (26.8% OPM)</span></div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="co">Vijaya Diagnostic</div>
-      <div class="track">
-        <div class="axis" style="left:25%"></div>
-        <div class="b v" style="left:25%;width:18.5%"><span>+18.5%</span></div>
-        <div class="b e pos" style="left:25%;width:26%"><span>+260 bps (39.2% OPM)</span></div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="co">Thyrocare Tech</div>
-      <div class="track">
-        <div class="axis" style="left:25%"></div>
-        <div class="b v" style="left:25%;width:16.8%"><span>+16.8%</span></div>
-        <div class="b e pos" style="left:25%;width:24%"><span>+240 bps (25.1% OPM)</span></div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="co">Krsnaa Diagnostics</div>
-      <div class="track">
-        <div class="axis" style="left:25%"></div>
-        <div class="b v" style="left:25%;width:21.4%"><span>+21.4%</span></div>
-        <div class="b e pos" style="left:25%;width:12%"><span>+120 bps (24.2% OPM)</span></div>
-      </div>
-    </div>
-
-    <div class="scale">
-      <span>-10%</span><span>0% (Baseline)</span><span>+10%</span><span>+20%</span><span>+30%</span>
-    </div>
+    <div id="scissor"></div>
+    <div class="scale"><span>−10%</span><span>0</span><span>+15%</span><span>+30%</span></div>
   </div>
 </section>
 
-<!-- SECTION 3: LEAGUE TABLE -->
 <section>
-  <h2>02 / Revenue & Scale League Table</h2>
+  <h2>Revenue per patient — the league table</h2>
   <div class="rule"></div>
-  <div class="league">
-    <div class="lrow">
-      <div class="co">Dr Lal PathLabs</div>
-      <div class="lbar" style="width:100%"></div>
-      <div><div class="v">₹602 Cr</div><div class="d">Patient Vol: 7.2M</div></div>
-    </div>
-    <div class="lrow">
-      <div class="co">Metropolis Healthcare</div>
-      <div class="lbar mid" style="width:58%"></div>
-      <div><div class="v">₹352 Cr</div><div class="d">Patient Vol: 3.8M</div></div>
-    </div>
-    <div class="lrow">
-      <div class="co">Thyrocare Tech</div>
-      <div class="lbar mid" style="width:31%"></div>
-      <div><div class="v">₹188 Cr</div><div class="d">Test Vol: 28.5M</div></div>
-    </div>
-    <div class="lrow">
-      <div class="co">Krsnaa Diagnostics</div>
-      <div class="lbar mid" style="width:29%"></div>
-      <div><div class="v">₹175 Cr</div><div class="d">PPP Centers: 2,400+</div></div>
-    </div>
-    <div class="lrow">
-      <div class="co">Vijaya Diagnostic</div>
-      <div class="lbar low" style="width:26%"></div>
-      <div><div class="v">₹160 Cr</div><div class="d">Integrated Hubs: 155</div></div>
-    </div>
-  </div>
+  <p class="note">The sector's core unit economic, ranked. The spread is wide because the business models are genuinely different: Vijaya's radiology-heavy Hyderabad hubs sit at the premium end, Thyrocare's bulk wellness/franchise model sits at the low end by design — not by weakness. Krsnaa's figure is derived (revenue ÷ patients, not company-disclosed). Suraksha does not disclose a per-patient figure.</p>
+  <div class="league" id="league"></div>
 </section>
 
-<!-- SECTION 4: PRESSURE POINT -->
 <section>
+  <h2>The pricing freeze</h2>
+  <div class="rule"></div>
   <div class="fuel">
-    <h2>03 / Sector Pressure Point — Aggregator Price Wars Abate as Focus Shifts to Specialized Genomics</h2>
-    <p style="color:#D6D1C6;margin-bottom:14px">The aggressive zero-margin pricing by health-tech aggregators (1mg, PharmEasy) has largely cooled off as capital discipline returns. Organized chains are now capitalizing on high-margin specialized diagnostics (oncology, prenatal, rare diseases) and direct-to-consumer (B2C) wellness packages.</p>
-    
-    <div class="fline">
-      <div class="fp"><b style="color:var(--gold)">68%</b><i style="height:68%"></i><em>B2C Patient Revenue Mix</em></div>
-      <div class="fp"><b style="color:var(--gold)">₹835</b><i style="height:82%"></i><em>Avg Realisation Per Patient</em></div>
-      <div class="fp"><b style="color:var(--gold)">34%</b><i style="height:55%"></i><em>Specialized Test Margin Contribution</em></div>
-    </div>
-    
+    <h2>Months since last broad price action, by company</h2>
+    <div class="fline" id="fuel"></div>
     <div class="warn">
-      <div><strong>Specialized Test Mix</strong>Genomic and molecular testing expanding at >22% CAGR, providing yield protection against routine blood test price erosion.</div>
-      <div><strong>B2G PPP Working Capital</strong>Public-Private Partnership contracts (Krsnaa) require tight monitoring of government trade receivables.</div>
-      <div><strong>B2C Wellness Upselling</strong>Comprehensive health checkup packages now represent 22%+ of top-line revenue for major chains.</div>
+      <div><strong>2–3 qtrs</strong>How long Dr Lal management itself says the CGHS/ECHS tariff tailwind (2–3% of revenue this quarter) keeps flowing before it fades.</div>
+      <div><strong>+1.5–3%</strong>The revenue contribution named by Dr Lal and Suraksha specifically from government tariff revisions — narrow, regulatory, and not repeatable at will.</div>
+      <div><strong>Not price</strong>Every major that named a driver this quarter named volume or mix, not pricing. When the CGHS effect fades, growth reverts to a straight volume story sector-wide.</div>
     </div>
   </div>
 </section>
 
-<!-- SECTION 5: COMPANY CARDS -->
 <section>
-  <h2>04 / Company Execution Profiles</h2>
+  <h2>Company by company</h2>
   <div class="rule"></div>
-  <div class="grid">
-
-    <!-- DR LAL -->
-    <div class="c">
-      <div class="chead">
-        <div class="id">
-          <div class="logo"><span class="mono">LAL</span></div>
-          <div><h3>Dr Lal PathLabs</h3><div class="tick">NSE: LALPATHLAB • Large Cap</div></div>
-        </div>
-        <div class="badge del">BEAT</div>
-      </div>
-      <div class="tiles">
-        <div class="tile"><div class="n up">₹602 Cr</div><div class="l">Q1 Revenue (+13.2%)</div></div>
-        <div class="tile"><div class="n up">28.4%</div><div class="l">OPM (+220 bps)</div></div>
-        <div class="tile"><div class="n">7.2M</div><div class="l">Patients Served</div></div>
-        <div class="tile"><div class="n up">₹134 Cr</div><div class="l">Net Profit (+28.5%)</div></div>
-      </div>
-      <ul>
-        <li>B2C revenue share reached 70%, backed by Suburban Diagnostics acquisition integration in Tier-2/3 West markets.</li>
-        <li>'SwasthFit' wellness package revenue surged +24% YoY, pushing realization per patient to ₹835.</li>
-        <li>Net cash balance of ₹1,150 Cr provides flexibility for further regional bolt-on acquisitions.</li>
-      </ul>
-      <div class="flags">
-        <span class="flag ok">Market Leader</span>
-        <span class="flag ok">SwasthFit Growth</span>
-        <span class="flag">Suburban Integration Drag</span>
-      </div>
-    </div>
-
-    <!-- METROPOLIS -->
-    <div class="c">
-      <div class="chead">
-        <div class="id">
-          <div class="logo"><span class="mono">MET</span></div>
-          <div><h3>Metropolis Healthcare</h3><div class="tick">NSE: METROPOLIS • Mid Cap</div></div>
-        </div>
-        <div class="badge del">BEAT</div>
-      </div>
-      <div class="tiles">
-        <div class="tile"><div class="n up">₹352 Cr</div><div class="l">Q1 Revenue (+15.1%)</div></div>
-        <div class="tile"><div class="n up">26.8%</div><div class="l">OPM (+180 bps)</div></div>
-        <div class="tile"><div class="n">3.8M</div><div class="l">Patients Served</div></div>
-        <div class="tile"><div class="n up">₹48 Cr</div><div class="l">Net Profit (+31.2%)</div></div>
-      </div>
-      <ul>
-        <li>Specialized testing share expanded to 39% of total revenues (driven by oncology and autoimmune panels).</li>
-        <li>'TruHealth' wellness brand grew +28% YoY; B2C revenue contribution reached 64%.</li>
-        <li>Expanded lab network by 30 new collection centers in Q1 across South and West India.</li>
-      </ul>
-      <div class="flags">
-        <span class="flag ok">39% Specialized Mix</span>
-        <span class="flag ok">B2C Pivot</span>
-        <span class="flag">B2B Price Competition</span>
-      </div>
-    </div>
-
-    <!-- VIJAYA -->
-    <div class="c">
-      <div class="chead">
-        <div class="id">
-          <div class="logo"><span class="mono">VIJ</span></div>
-          <div><h3>Vijaya Diagnostic Centre</h3><div class="tick">NSE: VIJAYA • Mid Cap</div></div>
-        </div>
-        <div class="badge del">BEAT</div>
-      </div>
-      <div class="tiles">
-        <div class="tile"><div class="n up">₹160 Cr</div><div class="l">Q1 Revenue (+18.5%)</div></div>
-        <div class="tile"><div class="n up">39.2%</div><div class="l">OPM (+260 bps)</div></div>
-        <div class="tile"><div class="n">155</div><div class="l">Integrated Hubs</div></div>
-        <div class="tile"><div class="n up">₹38 Cr</div><div class="l">Net Profit (+34.0%)</div></div>
-      </div>
-      <ul>
-        <li>Industry-leading OPM (39.2%) driven by simultaneous MRI/CT imaging & pathology hub-and-spoke model.</li>
-        <li>Recent acquisition of PH Diagnostic in Pune expanding presence beyond core Andhra/Telangana market.</li>
-        <li>High realization per patient (₹1,420) owing to heavy advanced radiology component.</li>
-      </ul>
-      <div class="flags">
-        <span class="flag ok">39.2% Industry Peak OPM</span>
-        <span class="flag ok">Integrated Radiology</span>
-        <span class="flag">Regional Concentration</span>
-      </div>
-    </div>
-
-    <!-- THYROCARE -->
-    <div class="c">
-      <div class="chead">
-        <div class="id">
-          <div class="logo"><span class="mono">THY</span></div>
-          <div><h3>Thyrocare Technologies</h3><div class="tick">NSE: THYROCARE • Mid Cap</div></div>
-        </div>
-        <div class="badge del">BEAT</div>
-      </div>
-      <div class="tiles">
-        <div class="tile"><div class="n up">₹188 Cr</div><div class="l">Q1 Revenue (+16.8%)</div></div>
-        <div class="tile"><div class="n up">25.1%</div><div class="l">OPM (+240 bps)</div></div>
-        <div class="tile"><div class="n">28.5M</div><div class="l">Tests Processed</div></div>
-        <div class="tile"><div class="n up">₹28 Cr</div><div class="l">Net Profit (+42.1%)</div></div>
-      </div>
-      <ul>
-        <li>Franchise & API B2B volume growth accelerated following API Holdings (PharmEasy) operational synergy integration.</li>
-        <li>Cost per test optimization drove significant margin leverage at central processing laboratory (CPL) in Navi Mumbai.</li>
-        <li>Phlebotomist network expansion improving sample pickup turnaround time across Tier-2/3 towns.</li>
-      </ul>
-      <div class="flags">
-        <span class="flag ok">Lowest Cost Producer</span>
-        <span class="flag ok">Volume Leader</span>
-        <span class="flag">Parent Debt Overhang</span>
-      </div>
-    </div>
-
-    <!-- KRSNAA -->
-    <div class="c">
-      <div class="chead">
-        <div class="id">
-          <div class="logo"><span class="mono">KRS</span></div>
-          <div><h3>Krsnaa Diagnostics</h3><div class="tick">NSE: KRSNAA • Small Cap</div></div>
-        </div>
-        <div class="badge part">IN-LINE</div>
-      </div>
-      <div class="tiles">
-        <div class="tile"><div class="n up">₹175 Cr</div><div class="l">Q1 Revenue (+21.4%)</div></div>
-        <div class="tile"><div class="n up">24.2%</div><div class="l">OPM (+120 bps)</div></div>
-        <div class="tile"><div class="n">2,400+</div><div class="l">PPP Tele-Radiology Hubs</div></div>
-        <div class="tile"><div class="n up">₹22 Cr</div><div class="l">Net Profit (+18.5%)</div></div>
-      </div>
-      <ul>
-        <li>PPP contract implementation in Punjab, Maharashtra, and Assam driving volume expansion in CT/MRI tele-radiology.</li>
-        <li>Capital expenditure on new government hospital diagnostic centers on track.</li>
-        <li>Receivables days slightly stretched due to delayed state government invoice disbursements.</li>
-      </ul>
-      <div class="flags">
-        <span class="flag ok">Highest Topline Growth</span>
-        <span class="flag ok">Tele-Radiology Scale</span>
-        <span class="flag">State Govt Receivable Risk</span>
-      </div>
-    </div>
-
-  </div>
+  <p class="note">Badge shows whether Q1 delivery matched what management guided at the prior call. Red chips are flags to carry into the next quarter. Entero is included because the sector-universe list groups it here, not because it is a diagnostics business — see its card and the caveats.</p>
+  <div class="grid" id="cards"></div>
 </section>
 
-<!-- SECTION 6: KPI TREND MATRIX -->
 <section>
-  <h2>05 / KPI Trend & Metric Matrix</h2>
+  <h2>KPI comparison</h2>
   <div class="rule"></div>
-  <div class="matrix">
-    <table>
-      <thead>
-        <tr>
-          <th>Company</th>
-          <th>Metric Name</th>
-          <th>Q1 FY27</th>
-          <th></th>
-          <th>Q4 FY26</th>
-          <th>Delta</th>
-          <th>Strategic Insight</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="mono">Dr Lal PathLabs</td>
-          <td>Patient Volume (M)</td>
-          <td>7.20</td>
-          <td><span class="arrow">↑</span></td>
-          <td>6.85</td>
-          <td class="up">+5.1%</td>
-          <td>Tier-2 market network expansion boosting footfalls.</td>
-        </tr>
-        <tr>
-          <td class="mono">Dr Lal PathLabs</td>
-          <td>Realisation / Patient (₹)</td>
-          <td>835</td>
-          <td><span class="arrow">↑</span></td>
-          <td>810</td>
-          <td class="up">+3.1%</td>
-          <td>Higher intake of SwasthFit bundled packages.</td>
-        </tr>
-        <tr>
-          <td class="mono">Metropolis</td>
-          <td>Specialized Test Share (%)</td>
-          <td>39.0%</td>
-          <td><span class="arrow">↑</span></td>
-          <td>36.5%</td>
-          <td class="up">+250 bps</td>
-          <td>Oncology & auto-immune panel volume surge.</td>
-        </tr>
-        <tr>
-          <td class="mono">Vijaya Diagnostic</td>
-          <td>Radiology Revenue Share (%)</td>
-          <td>36.2%</td>
-          <td><span class="arrow">↑</span></td>
-          <td>34.8%</td>
-          <td class="up">+140 bps</td>
-          <td>High-margin 3T MRI & 128-slice CT scan utilization.</td>
-        </tr>
-        <tr>
-          <td class="mono">Thyrocare</td>
-          <td>Test Volume (M)</td>
-          <td>28.5</td>
-          <td><span class="arrow">↑</span></td>
-          <td>25.2</td>
-          <td class="up">+13.1%</td>
-          <td>CPL automation enabling higher batch throughput.</td>
-        </tr>
-        <tr>
-          <td class="mono">Krsnaa</td>
-          <td>Trade Receivable Days</td>
-          <td>142</td>
-          <td><span class="arrow">↑</span></td>
-          <td>130</td>
-          <td class="dn">+12 days</td>
-          <td>State government PPP billing clearance delay.</td>
-        </tr>
-      </tbody>
-    </table>
+  <p class="note">Vijaya discloses "revenue per footfall," not per patient — treated as the same column but not perfectly like-for-like. Krsnaa's revenue/patient is derived (revenue ÷ patients), not company-disclosed, marked *. Entero's diagnostics-specific columns are marked n/a — it is a distributor, not a lab chain, and its own economics are covered separately in its card.</p>
+  <div class="tw">
+  <table>
+    <thead><tr>
+      <th>Company</th><th class="r">Rev/patient (₹)</th><th class="r">Change YoY</th><th class="r">Revenue growth</th>
+      <th class="r">PAT growth</th><th class="r">B2C mix</th><th class="r">Network</th><th class="r">FY27 capex guide</th>
+    </tr></thead>
+    <tbody id="kpi"></tbody>
+  </table>
   </div>
+  <p class="asof">Thyrocare's ₹404/patient and ₹39.8/test sit far below peers by design — a bulk, franchise-led wellness model, not a quality signal. Krsnaa and Suraksha do not disclose a clean B2C/B2B split; Krsnaa's "B2C mix" below is its small private retail (RPL) arm only, against a PPP/government base that dominates the rest.</p>
 </section>
 
-<!-- SECTION 7: WHAT MANAGEMENT SAID -->
 <section>
-  <h2>06 / What Management Said — Commentary & Guidance</h2>
+  <h2>What management said</h2>
   <div class="rule"></div>
-  <div class="quotes">
-    <div class="qcard">
-      <blockquote>"The era of deep-discounting by unviable online aggregators is effectively over. Patients and clinicians are prioritizing diagnostic accuracy, specialized test depth, and brand trust. Our SwasthFit portfolio continues to lead our B2C growth."</blockquote>
-      <div class="auth">Om Manchanda</div>
-      <div class="role">Managing Director, Dr Lal PathLabs</div>
-    </div>
+  <p class="note">From the Q1 FY27 calls and releases. Grouped by theme, because the companies are answering the same questions.</p>
+  <div class="themes">
 
-    <div class="qcard">
-      <blockquote>"Our focus on specialty diagnostic segments—particularly molecular pathology and chronic condition management—has elevated our realization metrics while shielding our EBITDA margins from routine test price pressures."</blockquote>
-      <div class="auth">Ameera Shah</div>
-      <div class="role">Executive Chairperson, Metropolis Healthcare</div>
-    </div>
+    <div class="th"><div class="k">Pricing — the freeze</div><ul>
+      <li>Metropolis: no hike since <b>January 2025</b>, "not contemplating" one now.</li>
+      <li>Vijaya: last hike <b>June 2025</b>, Hyderabad-only; next review Q2/Q3 FY27.</li>
+      <li>Dr Lal: no broad hike planned for <b>H1FY27</b>; will reassess after.</li>
+      <li>Suraksha: only price action was the <b>October 2025</b> CGHS-linked revision.</li>
+    </ul></div>
 
-    <div class="qcard">
-      <blockquote>"Our integrated radiology plus pathology model remains our distinct competitive moat. As we scale PH Diagnostic hubs in Maharashtra, we expect margin synergies to materialize rapidly."</blockquote>
-      <div class="auth">Suprita Reddy</div>
-      <div class="role">MD & CEO, Vijaya Diagnostic Centre</div>
-    </div>
+    <div class="th"><div class="k">Volume &amp; demand</div><ul>
+      <li>Thyrocare: test volumes <b>+28% YoY</b>, fastest in the sector.</li>
+      <li>Metropolis: patient +10%, test +11%, broad-based across tiers.</li>
+      <li>Suraksha: growth nearly halved to <b>10–11%</b> from over 20%.</li>
+      <li>Krsnaa: blended volumes flat (+2%) as new-project ramp dilutes +12% like-for-like growth.</li>
+    </ul></div>
+
+    <div class="th"><div class="k">Margin &amp; cost</div><ul>
+      <li>Krsnaa: margin <b>−200bps</b> YoY on Rajasthan's front-loaded staffing.</li>
+      <li>Dr Lal: printed 31% but held guidance at 27–28%, citing reinvestment.</li>
+      <li>Metropolis: +210bps in Q1 alone; full-year guide only 100–150bps.</li>
+      <li>Suraksha: 36% this quarter, guided "not below <b>34%</b>" for FY27.</li>
+    </ul></div>
+
+    <div class="th"><div class="k">Expansion &amp; capex</div><ul>
+      <li>Vijaya: FY27 capex raised to <b>₹190–195cr</b> for 9 hubs, up from 4–5 guided in May.</li>
+      <li>Metropolis: lab additions frozen for <b>five straight quarters</b> to protect utilisation.</li>
+      <li>Suraksha: expansion split 50-50 between West Bengal and new states.</li>
+      <li>Krsnaa: 34-centre CT win in Himachal Pradesh; new Pune private partnership.</li>
+    </ul></div>
+
+    <div class="th"><div class="k">M&amp;A &amp; corporate actions</div><ul>
+      <li>Metropolis: Core Diagnostics genomics bolt-on now <b>~18%</b> of revenue.</li>
+      <li>Thyrocare: board evaluating a demerger of the Nueclear Healthcare imaging arm.</li>
+      <li>Dr Lal: small international bolt-ons in Ghana and a new Dubai subsidiary.</li>
+      <li>Krsnaa: ₹91.75cr promoter-warrant issue pending shareholder e-voting.</li>
+    </ul></div>
+
+    <div class="th"><div class="k">CGHS / ECHS — the one real tailwind</div><ul>
+      <li>Dr Lal: adds <b>2–3%</b> to revenue, flowing for another 2–3 quarters.</li>
+      <li>Suraksha: October 2025 revision added <b>~1.5%</b> to revenue.</li>
+      <li>Krsnaa: PPP tariffs are contract-fixed; CGHS moves don't flow through directly.</li>
+      <li>No company frames this as durable beyond the current cycle.</li>
+    </ul></div>
+
   </div>
 </section>
 
-<!-- SECTION 8: RED FLAGS & FORENSICS -->
 <section>
-  <h2>07 / Red Flags & Accounting Forensics</h2>
+  <h2>Red flags</h2>
   <div class="rule"></div>
-  <div class="rfgrid">
-    <div class="rfcard">
-      <h3>State Govt Receivable Delays (PPP Models)</h3>
-      <p>Krsnaa Diagnostics carries trade receivables of ~142 days due to bureaucracy in state health department milestone clearances. While default risk is low, working capital drag impacts net operating cash flows.</p>
+  <p class="note">Ranked by how much they should change position sizing, not by how alarming they sound.</p>
+  <div class="rf">
+
+    <div class="rfg">
+      <div class="rfh"><i class="sev hi"></i><span>Act on these</span></div>
+      <div class="rfr"><b>Krsnaa Diagnostics</b><div>EPS missed by ~18% even as revenue beat. Government receivable days jumped to 163 from 110; working capital swung from −18 days to +66. Net debt/EBITDA ~2.2x — the only real leverage in the sector. CFO resigned in January, a board reshuffle followed in April, and a dilutive promoter-warrant issue is pending shareholder vote.</div></div>
+      <div class="rfr"><b>Thyrocare Technologies</b><div>Parent API Holdings (PharmEasy) had to redeem ₹1,700cr of NCDs and fully release its pledge on Thyrocare shares by selling down ~10pp of promoter holding. The pledge overhang is genuinely gone — but the reason it's gone is real financial stress one level up the ownership chain.</div></div>
     </div>
 
-    <div class="rfcard">
-      <h3>M&A Goodwill & Integration Risks</h3>
-      <p>Acquisitions like Suburban Diagnostics (Dr Lal) and PH Diagnostic (Vijaya) carry significant goodwill on balance sheets. Slower-than-expected revenue integration or customer churn poses potential impairment risks.</p>
+    <div class="rfg">
+      <div class="rfh"><i class="sev md"></i><span>Monitor next quarter</span></div>
+      <div class="rfr"><b>Vijaya Diagnostic</b><div>FY27 capex guidance jumped from ₹140–150cr to ₹190–195cr and hub count from 4–5 to 9 within one quarter — an aggressive re-guide, not a miss, but execution risk worth watching. Hyderabad is still 67% of revenue.</div></div>
+      <div class="rfr"><b>Suraksha Diagnostic</b><div>Test volume growth nearly halved (20%+ to 10–11%) even as PAT grew 38–40% off a weak, noisy Q4FY26 base. AGM postponed with no new date given. ₹130cr of reported debt is unusual for this sector and its lease-vs-borrowing composition is unclear from available disclosure.</div></div>
+      <div class="rfr"><b>Metropolis Healthcare</b><div>Trailing P/E ~63x against a 5-year EBIT CAGR of only ~2%. The stock fell ~1.7% on results day despite a clean beat — the market's own verdict that this is priced for perfection, not a value opportunity.</div></div>
     </div>
 
-    <div class="rfcard">
-      <h3>Collection Center Density Cannibalisation</h3>
-      <p>Rapid addition of franchisee sample collection centers (PSC) in Metro Tier-1 markets risks cannibalizing existing store footfalls if same-store patient volume growth tapers off.</p>
+    <div class="rfg">
+      <div class="rfh"><i class="sev lo"></i><span>Note and move on</span></div>
+      <div class="rfr"><b>Dr Lal PathLabs</b><div>FY27 lab-addition target quietly trimmed to 12–15 from 15–20 even as revenue guidance was raised. Genomics and international remain under 5% of revenue years into being called a strategic priority.</div></div>
+      <div class="rfr"><b>Entero Healthcare</b><div>Not a diagnostics business — a pharma distributor grouped into this universe by name. OCF/EBITDA conversion ~36% against management's own ≥50% guide, and a ~60x P/E on a 5% EBITDA margin. Judge separately from the six lab chains above.</div></div>
+      <div class="rfr"><b>Sector-wide</b><div>Not one of the six comparable diagnostics names has taken a broad private-pay price hike in over a year. Growth this quarter is volume, mix and a narrow regulatory tailwind — not pricing power. That question resurfaces the moment the CGHS effect fades.</div></div>
     </div>
+
   </div>
 </section>
 
-<!-- SECTION 9: WALK THE TALK SCORECARD -->
 <section>
-  <h2>08 / Walk the Talk — Management Guidance vs Execution</h2>
+  <h2>Walk the talk</h2>
   <div class="rule"></div>
-  <div class="wtgrid">
-    <div class="wtcard">
-      <div class="wthead">
-        <h3>Dr Lal PathLabs</h3>
-        <span class="wtscore high">SCORE: 9/10</span>
-      </div>
-      <p><strong>Guidance:</strong> Double-digit volume growth, 27-28% OPM.</p>
-      <p><strong>Execution:</strong> Topline grew +13.2%, OPM reached 28.4%. SwasthFit package traction exceeded targets.</p>
-    </div>
-
-    <div class="wtcard">
-      <div class="wthead">
-        <h3>Vijaya Diagnostic</h3>
-        <span class="wtscore high">SCORE: 9.5/10</span>
-      </div>
-      <p><strong>Guidance:</strong> 16-18% Revenue growth, 38%+ OPM.</p>
-      <p><strong>Execution:</strong> Revenue +18.5%, OPM expanded to 39.2%. Expansion into Pune progressing as planned.</p>
-    </div>
-
-    <div class="wtcard">
-      <div class="wthead">
-        <h3>Krsnaa Diagnostics</h3>
-        <span class="wtscore mid">SCORE: 7/10</span>
-      </div>
-      <p><strong>Guidance:</strong> 25% Topline growth, 25% OPM.</p>
-      <p><strong>Execution:</strong> Revenue grew +21.4%, OPM stood at 24.2% due to delayed launch of select state PPP tenders.</p>
-    </div>
-  </div>
+  <p class="note">What was promised at the prior call, against what Q1 FY27 actually delivered.</p>
+  <table>
+    <thead><tr><th>Company</th><th>Promised</th><th class="hide">Delivered</th><th>Verdict</th></tr></thead>
+    <tbody id="score"></tbody>
+  </table>
 </section>
 
-<!-- SECTION 10: SECTOR SYNTHESIS -->
 <section>
-  <h2>09 / Sector Synthesis & Strategic Outlook</h2>
+  <h2>Was the Street right?</h2>
   <div class="rule"></div>
-  <div class="synth">
-    <p>The Indian Diagnostic Industry is undergoing a healthy structural shift towards <strong>organized regional and national chains</strong>. Unorganized standalone labs (~60% market share) continue to lose ground due to rising NABL accreditation standards, expensive automated equipment costs, and consumer preference for brand reliability post-pandemic.</p>
-    <p>With price wars from online aggregators subsiding, growth is now anchored on <em>volume expansion, specialized genomic testing, and bundled preventive health checkups</em>. Companies with integrated radiology-pathology offerings (Vijaya) or scale-driven low cost processing (Thyrocare, Dr Lal) are best positioned to deliver superior ROCE (>25%).</p>
+  <p class="note">No single rating agency published a sector-wide Diagnostic Chains call this quarter the way India Ratings does for cement — this is a constructed synthesis of the broker notes gathered during research (ICICI Securities, ICICI Direct, consensus-revision data), not a scored call against one named source. Treat it as directional, not authoritative.</p>
+  <div class="indra">
+    <div class="split">
+      <div class="sp ok"><div class="n">5/6</div><div class="l">Comparable names beat or met revenue consensus</div><div class="w">Only Krsnaa's headline revenue also beat — its EPS still missed by ~18%.</div></div>
+      <div class="sp"><div class="n">1/6</div><div class="l">Posted a profit decline</div><div class="w">Krsnaa, on margin compression, not a revenue problem.</div></div>
+      <div class="sp"><div class="n">0/6</div><div class="l">Took a broad private-pay price hike this quarter</div><div class="w">Growth was volume, mix and CGHS — not pricing, anywhere.</div></div>
+    </div>
+
+    <div class="vs"><em class="y">Right</em><div><b>Volume-led growth would continue.</b> Every comparable name grew patient or test volumes YoY, several well into double digits.</div></div>
+    <div class="vs"><em class="y">Right</em><div><b>No broad pricing action.</b> Confirmed across every major and mid-cap that disclosed a pricing stance.</div></div>
+    <div class="vs"><em class="p">Partly</em><div><b>Margin stability sector-wide.</b> True for four of six names, but margin dispersion was wider than a "stable sector" framing implies — Krsnaa down 200bps while Vijaya and Suraksha expanded 150–350bps.</div></div>
+    <div class="vs"><em class="n">Wrong</em><div><b>Government/PPP exposure as a stabiliser.</b> Krsnaa's PPP model was the single worst-performing balance sheet in the sector this quarter — receivables and leverage, not demand, are the risk in that model.</div></div>
   </div>
 </section>
 
-<!-- SECTION 11: ACTIONABLE CALLS -->
 <section>
-  <h2>10 / Actionable Institutional Calls</h2>
+  <h2>The call</h2>
   <div class="rule"></div>
   <div class="calls">
     <div class="call buy">
-      <div class="type">TOP CONVICTION BUY</div>
-      <h3>Vijaya Diagnostic</h3>
-      <div class="target">Target: ₹1,780 | Upside: +19%</div>
-      <p>Industry-leading 39% OPM, unique radiology-pathology hub moat, strong balance sheet with high ROCE.</p>
-    </div>
-
-    <div class="call buy">
-      <div class="type">QUALITY COMPOUNDER</div>
+      <div class="k">Own now</div>
       <h3>Dr Lal PathLabs</h3>
-      <div class="target">Target: ₹2,250 | Upside: +20%</div>
-      <p>Market leader in North India, SwasthFit package momentum, high net cash cushion for strategic M&A.</p>
+      <p>Debt-free, ROCE ~45% ex-cash, clean 27% PAT beat with no exceptional items, and the sector's most disciplined margin guidance — held at 27–28% despite printing 31%. Not cheap at ~55x, and the lab-target trim is worth a direct question, but this is the highest-quality balance sheet in the universe.</p>
     </div>
-
-    <div class="call buy">
-      <div class="type">ACCUMULATE</div>
-      <h3>Metropolis Healthcare</h3>
-      <div class="target">Target: ₹710 | Upside: +21%</div>
-      <p>Surging specialized test mix (39%), TruHealth brand traction, expanding presence in West & South India.</p>
+    <div class="call wait">
+      <div class="k">Priced for perfection — wait for a reset</div>
+      <h3>Metropolis · Vijaya · Suraksha</h3>
+      <p>All three delivered strong quarters. All three trade at multiples (63x, 82x, ~49x) that already assume it continues. Metropolis's own stock fell on a beat. Vijaya just tripled down on capex ambition. Suraksha's volume growth is decelerating under a rich small-cap multiple. Good businesses, bad entry points right now.</p>
     </div>
-
-    <div class="call watch">
-      <div class="type">TACTICAL WATCH</div>
+    <div class="call avoid">
+      <div class="k">Stay out</div>
       <h3>Krsnaa Diagnostics</h3>
-      <div class="target">Target: Neutral | Range: ₹520-610</div>
-      <p>Monitor state government receivable clearance cycles before initiating aggressive long positions.</p>
+      <p>The only name in the sector where the operating story, not just the valuation, is genuinely stressed this quarter: an EPS miss, rising government receivables, real leverage, and leadership churn clustering in the same half-year. Thyrocare's overhang just resolved; Krsnaa's has not started to.</p>
     </div>
   </div>
-</section>
 
-<!-- NEW SECTION 11B: ANALYST COVERAGE & TARGET PRICE MATRIX -->
-<section>
-  <h2>11 / Institutional Analyst Coverage & Target Price Matrix</h2>
-  <div class="rule"></div>
-  <p class="note">Consolidated institutional sell-side analyst recommendations, coverage dates, verdicts, and fair value targets for all 5 covered stocks.</p>
-  <div class="matrix">
-    <table>
-      <thead>
-        <tr>
-          <th>Company Name</th>
-          <th>Ticker</th>
-          <th>Lead Analyst & Institutional House</th>
-          <th>Coverage Date</th>
-          <th>Analyst Verdict</th>
-          <th>Fair Value / Target (₹)</th>
-          <th>CMP (₹)</th>
-          <th>Implied Upside (%)</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong>Dr Lal PathLabs</strong></td>
-          <td class="mono">LALPATHLAB</td>
-          <td>Shyam Srinivasan (Goldman Sachs)</td>
-          <td>August 2026</td>
-          <td><span class="badge del">BUY</span></td>
-          <td class="mono">₹2,250</td>
-          <td class="mono">₹1,877.5</td>
-          <td class="up">+19.8%</td>
-        </tr>
-        <tr>
-          <td><strong>Metropolis Healthcare</strong></td>
-          <td class="mono">METROPOLIS</td>
-          <td>Param Desai (Nuvama Equities)</td>
-          <td>August 2026</td>
-          <td><span class="badge del">BUY</span></td>
-          <td class="mono">₹710</td>
-          <td class="mono">₹588.7</td>
-          <td class="up">+20.6%</td>
-        </tr>
-        <tr>
-          <td><strong>Vijaya Diagnostic Centre</strong></td>
-          <td class="mono">VIJAYA</td>
-          <td>Bansi Desai (HDFC Securities)</td>
-          <td>August 2026</td>
-          <td><span class="badge del">BUY</span></td>
-          <td class="mono">₹1,780</td>
-          <td class="mono">₹1,493.2</td>
-          <td class="up">+19.2%</td>
-        </tr>
-        <tr>
-          <td><strong>Thyrocare Technologies</strong></td>
-          <td class="mono">THYROCARE</td>
-          <td>Alok Dalal (Jefferies India)</td>
-          <td>August 2026</td>
-          <td><span class="badge part">ADD</span></td>
-          <td class="mono">₹670</td>
-          <td class="mono">₹576.2</td>
-          <td class="up">+16.3%</td>
-        </tr>
-        <tr>
-          <td><strong>Krsnaa Diagnostics</strong></td>
-          <td class="mono">KRSNAA</td>
-          <td>Kunal Randeria (Systematix Institutional)</td>
-          <td>August 2026</td>
-          <td><span class="badge part">HOLD</span></td>
-          <td class="mono">₹610</td>
-          <td class="mono">₹560.0</td>
-          <td class="up">+8.9%</td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="trigs">
+    <div class="tg tg-up"><div class="k">What would make us more positive</div><ul>
+      <li>A broad-based B2C price hike sticking for <b>two or more quarters</b> across at least two of the majors.</li>
+      <li>Krsnaa's Rajasthan PPP revenue actually <b>doubling</b> in Q2 as management guided, and government receivable days turning down from 163.</li>
+      <li>Confirmation the CGHS/ECHS realisation gain extends into a durable, repeated government-reimbursement cycle rather than a one-time step-up.</li>
+    </ul></div>
+    <div class="tg tg-dn"><div class="k">What would make us cut</div><ul>
+      <li>Krsnaa's debtor days pushing past <b>180</b>, or the promoter-warrant vote failing to pass.</li>
+      <li>Any second parent-level distress event at Thyrocare's promoter entity, or a fresh pledge reappearing.</li>
+      <li>Vijaya's newly raised FY27 hub target (9) slipping the way Dr Lal's own lab target was just quietly trimmed.</li>
+    </ul></div>
   </div>
 </section>
 
-<!-- SECTION 12: STOCK PRICE & RETURNS PERFORMANCE MATRIX -->
 <section>
-  <h2>12 / Stock Price & Returns Performance Matrix</h2>
+  <h2>Price and returns</h2>
   <div class="rule"></div>
-  <div class="matrix">
-    <table>
-      <thead>
-        <tr>
-          <th>Company</th>
-          <th>Ticker</th>
-          <th>CMP (₹)</th>
-          <th>1W (%)</th>
-          <th>1M (%)</th>
-          <th>3M (%)</th>
-          <th>1Y (%)</th>
-          <th>3Y (%)</th>
-          <th>52W High</th>
-          <th>52W Low</th>
-          <th>Mkt Cap (₹ Cr)</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Dr Lal PathLabs</td>
-          <td class="mono">LALPATHLAB</td>
-          <td class="mono">₹1,877.5</td>
-          <td class="dn">-2.5%</td>
-          <td class="up">+1.8%</td>
-          <td class="up">+14.2%</td>
-          <td class="up">+32.5%</td>
-          <td class="up">+48%</td>
-          <td class="mono">₹1,989</td>
-          <td class="mono">₹1,273</td>
-          <td class="mono">15,680</td>
-        </tr>
-        <tr>
-          <td>Metropolis Healthcare</td>
-          <td class="mono">METROPOLIS</td>
-          <td class="mono">₹588.7</td>
-          <td class="dn">-0.5%</td>
-          <td class="up">+3.2%</td>
-          <td class="up">+11.8%</td>
-          <td class="up">+28.4%</td>
-          <td class="up">+35%</td>
-          <td class="mono">₹609</td>
-          <td class="mono">₹412</td>
-          <td class="mono">8,950</td>
-        </tr>
-        <tr>
-          <td>Vijaya Diagnostic Centre</td>
-          <td class="mono">VIJAYA</td>
-          <td class="mono">₹1,493.2</td>
-          <td class="dn">-0.9%</td>
-          <td class="up">+5.4%</td>
-          <td class="up">+18.5%</td>
-          <td class="up">+64.2%</td>
-          <td class="up">+185%</td>
-          <td class="mono">₹1,573</td>
-          <td class="mono">₹848</td>
-          <td class="mono">7,620</td>
-        </tr>
-        <tr>
-          <td>Thyrocare Technologies</td>
-          <td class="mono">THYROCARE</td>
-          <td class="mono">₹576.2</td>
-          <td class="dn">-0.4%</td>
-          <td class="up">+2.1%</td>
-          <td class="up">+9.5%</td>
-          <td class="up">+42.0%</td>
-          <td class="up">+55%</td>
-          <td class="mono">₹662</td>
-          <td class="mono">₹343</td>
-          <td class="mono">3,050</td>
-        </tr>
-        <tr>
-          <td>Krsnaa Diagnostics</td>
-          <td class="mono">KRSNAA</td>
-          <td class="mono">₹560.0</td>
-          <td class="up">+1.6%</td>
-          <td class="dn">-1.2%</td>
-          <td class="up">+5.8%</td>
-          <td class="dn">-8.5%</td>
-          <td class="up">+22%</td>
-          <td class="mono">₹894</td>
-          <td class="mono">₹515</td>
-          <td class="mono">1,780</td>
-        </tr>
-      </tbody>
-    </table>
-    <p style="font-family:var(--mono);font-size:11.5px;color:var(--mute);margin-top:10px;font-weight:600;">Current prices as on 07-09-2026 (Report Generated on 07-09-2026)</p>
+  <p class="note">Results date against market performance, so the reader can see where a good quarter did or did not earn a re-rating. Sorted by one-year return.</p>
+  <div class="tw">
+  <table>
+    <thead><tr>
+      <th>Company</th><th>Ticker</th><th>Results date</th><th class="r">CMP (₹)</th>
+      <th class="r">1 year</th><th class="r">6 months</th><th class="r">3 months</th><th class="r">MTD</th>
+    </tr></thead>
+    <tbody id="ret"></tbody>
+  </table>
   </div>
+  <p class="asof">
+    <b>Prices as on 3 Sep 2026, ~11:28 IST</b> — an intraday snapshot during market hours, not the day's close, via Kite Connect live quotes.<br>
+    Historical anchors are Kite Connect daily-candle closes on or immediately before each anchor date (1yr: 3 Sep 2025; 6mo: 3 Mar 2026, using 2 Mar close as the nearest prior trading day; 3mo: 3 Jun 2026; MTD: 31 Aug 2026 close).<br>
+    Kite carries no fundamentals — P/E, ROCE and market cap figures elsewhere in this report are sourced from Screener.in, MarketsMojo and broker notes, not Kite, and showed minor variance across sources for some names (noted per company where material).<br>
+    Krsnaa's, Suraksha's and Entero's exact results dates were not confirmed to a specific day in the sources reviewed and are shown as approximate.
+  </p>
 </section>
 
-<!-- SECTION 13: CAVEATS & METHODOLOGY -->
 <section>
-  <h2>13 / Caveats & Disclaimers</h2>
+  <h2>Caveats</h2>
   <div class="rule"></div>
-  <div class="synth">
-    <p><strong>Institutional Research Note Disclaimer:</strong> Sourced primarily via <strong>Tijori Finance MCP</strong> and local exchange price feeds. Past financial ratios and volume growth metrics are not guarantees of future performance. Realisation metrics are calculated based on reported company patient footfall numbers.</p>
-  </div>
+  <ul class="cav">
+    <li><b>Entero Healthcare is not a diagnostics company.</b> It is a pharmaceutical/healthcare distributor, included only because the source sector-universe list groups it under "Diagnostic Chains." Its figures are excluded from the scissor, the league table and the diagnostics-specific KPI columns, and it is scored on distributor economics (cash conversion, working capital) rather than revenue per patient.</li>
+    <li><b>Some figures are derived, not company-disclosed.</b> Krsnaa's revenue-per-patient (~₹461) and both Krsnaa's and Suraksha's scissor realisation values are computed from reported revenue and volume growth, not stated directly by the company — marked with * where shown. Do not rank these against directly-disclosed peer figures on small differences.</li>
+    <li><b>Reporting is complete.</b> All seven names reported Q1 FY27 within or ahead of the 14 August 2026 SEBI deadline. Exact results dates for Krsnaa, Suraksha and Entero were not pinned to a specific day in the sources reviewed and are shown as approximate in the returns table.</li>
+    <li><b>No single named rating-agency call exists for this sector this quarter</b> the way India Ratings publishes one for cement. The "Was the Street right?" section is this report's own synthesis of the broker and consensus-revision data gathered (ICICI Securities, ICICI Direct, Simply Wall St), not a scored call against a published third-party thesis.</li>
+    <li><b>Research leaned on secondary sources.</b> Primary earnings-call transcripts were not directly fetchable for several names; figures are corroborated across financial-media and broker coverage (Business Standard, Whalesbook, Investing.com, ScanX, Screener.in, MarketsMojo) rather than verified against a single exchange filing in every case. Cross-check before position sizing, particularly for Suraksha (thin analyst coverage, no formal consensus) and Krsnaa (some figures showed source-to-source variance).</li>
+    <li><b>Basis differences across companies.</b> Vijaya discloses "revenue per footfall," not per patient. Thyrocare's per-test economics reflect a bulk, franchise-led wellness model and are not comparable in absolute terms to the more consultative, specialised-test-heavy peers. Metropolis reports Franchise/Partnership channels rather than strict B2C/B2B; Krsnaa's B2C figure is its small private retail arm only, against a dominant government/PPP base.</li>
+    <li><b>Forward statements are guidance, not outcomes.</b> FY27 capex, margin and expansion targets cited throughout are management's or analysts' stated expectations as of the Q1 FY27 calls, not verified results.</li>
+    <li><b>CMP is an intraday snapshot, not a closing price.</b> Pulled via Kite Connect at ~11:28 IST on 3 September 2026, during market hours — the day's eventual close will differ.</li>
+  </ul>
 </section>
 
 <footer>
-  <div>RAJAN SECTOR RESEARCH • INSTITUTIONAL EQUITY DIVISION</div>
-  <div>CONFIDENTIAL FOR CLIENT USE • Q1 FY27</div>
+  <p><b>Universe:</b> 7 companies in the Diagnostic Chains sector-universe list (6 pathology/diagnostics chains plus 1 healthcare distributor grouped here by the source list), quarter ended 30 June 2026. Sources: company press releases, investor presentations and exchange filings, supplemented by Business Standard, Economic Times, Moneycontrol, Investing.com, ScanX, ICICI Securities/ICICI Direct, Simply Wall St, MarketsMojo, Screener.in and Whalesbook. Price and returns data via Zerodha Kite Connect.</p>
 </footer>
 
 </div>
+<script>
+/* SCISSOR: [company, growthMetric%, marginMetric%]. Krsnaa* and Suraksha* are derived (revenue growth vs volume growth), not company-disclosed per-patient realisation. */
+const SC=[
+ ["Dr Lal PathLabs",8.2,10],
+ ["Metropolis",10,6],
+ ["Vijaya Diagnostic",16.5,5.5],
+ ["Thyrocare",28,-2],
+ ["Krsnaa Diag.*",2,19.6],
+ ["Suraksha Diag.*",10.5,9.5]
+];
+const MIN=-10,MAX=30,SPAN=MAX-MIN,Z=(0-MIN)/SPAN*100;
+document.getElementById("scissor").innerHTML=SC.map(([n,v,e],i)=>{
+ const bar=(val,cls)=>{const w=Math.abs(val)/SPAN*100;
+  const l=val>=0?Z:Z-w;
+  return `<i class="b ${cls} ${val>=0?'pos':'neg'}" style="left:${l}%;width:${w}%;animation-delay:${i*45}ms"><span>${val>0?'+':''}${val}%</span></i>`;};
+ return `<div class="row"><div class="co">${n}</div><div class="track"><i class="axis" style="left:${Z}%"></i>${bar(v,'v')}${bar(e,'e')}</div></div>`;
+}).join("");
+
+/* LEAGUE: [company, revenuePerPatient, subLabel]. Entero excluded (different business). Suraksha shown at 0 = not disclosed. */
+const LG=[
+ ["Vijaya Diagnostic",1860,"per footfall, +9% YoY"],
+ ["Metropolis",1219,"+6% YoY"],
+ ["Dr Lal PathLabs",968,"+10% YoY"],
+ ["Krsnaa Diag.",461,"derived, rev÷patients *"],
+ ["Thyrocare",404,"+7% YoY, bulk/franchise model"],
+ ["Suraksha Diag.",0,"n/d — not disclosed"]
+];
+const LMAX=2000;
+document.getElementById("league").innerHTML=LG.map(([n,v,d],i)=>{
+ const cls=v>=900?"":v>=500?"mid":"low";
+ return `<div class="lrow"><div class="co">${n}</div>
+ <div><i class="lbar ${cls}" style="display:block;width:${v/LMAX*100}%;animation-delay:${i*40}ms"></i></div>
+ <div><div class="v">${v?'₹'+v.toLocaleString('en-IN'):'—'}</div><div class="d">${d}</div></div></div>`;
+}).join("");
+
+/* PRESSURE POINT: months since last broad price hike. Thyrocare and Krsnaa excluded - no comparable "price hike" concept (bulk/franchise pricing and fixed PPP contracts respectively). */
+const FU=[["Dr Lal (CGHS active)",0],["Suraksha (Oct-25)",11],["Vijaya (Jun-25)",15],["Metropolis (Jan-25)",20]];
+document.getElementById("fuel").innerHTML=FU.map(([l,v],i)=>
+ `<div class="fp"><b>${v} mo</b><i style="height:${(v||2)/22*88}px;animation-delay:${i*120}ms"></i><em>${l}</em></div>`).join("");
+
+/* CARDS */
+const CO=[
+ {n:"Dr Lal PathLabs",t:"LALPATHLAB",b:"part",bl:"Split",
+  k:[["+19.1%","Revenue YoY",1],["31.0%","EBITDA margin",1],["+27.2%","PAT YoY",1],["₹1,693cr","Net cash",1]],
+  p:["CGHS/ECHS tariff hike added 2–3% to revenue — management itself says this fades within 2–3 quarters, not indefinitely repeatable.",
+     "No broad price hike planned for H1FY27; this quarter's growth is regulatory realisation, not private pricing power.",
+     "FY27 lab-addition target quietly trimmed to 12–15 from 15–20, even as revenue guidance was raised — worth a direct question next call.",
+     "Genomics and international remain under 5% of revenue years into being called a strategic priority."],
+  f:[["CGHS tailwind fades in 2-3 qtrs",""],["Debt-free, ROCE ~45%","ok"]]},
+ {n:"Metropolis Healthcare",t:"METROPOLIS",b:"del",bl:"Delivered",
+  k:[["+16.6%","Revenue YoY",1],["25.2%","EBITDA margin",1],["+25.8%","PAT YoY",1],["~63x","Trailing P/E",-1]],
+  p:["No price hike since January 2025 — 20 months and counting; growth is entirely volume and mix.",
+     "Beat consensus on revenue and EPS, but the stock fell ~1.7% on results day — the market is already pricing this quality in.",
+     "Centre-to-lab ratio worsened to 24:1 from 21:1 during a five-quarter lab-expansion freeze — a utilisation strain worth watching.",
+     "Five-year EBIT CAGR of only ~2% against a 63x trailing multiple is the real tension here, not this quarter's print."],
+  f:[["Valuation ahead of earnings quality",""],["Volume +10%, mix upgrading","ok"]]},
+ {n:"Vijaya Diagnostic Centre",t:"VIJAYA",b:"del",bl:"Delivered / scaled up",
+  k:[["+22.8%","Revenue YoY",1],["42.7%","EBITDA margin",1],["+37.6%","PAT YoY",1],["~82x","Trailing P/E",-1]],
+  p:["FY27 capex guidance raised from ₹140–150cr to ₹190–195cr — 9 hubs planned against 4–5 originally, the most aggressive re-guide in the sector.",
+     "Hyderabad alone is still 67% of revenue; the Karnataka and Kolkata expansion is one hub each, unproven at scale.",
+     "Last price action was Hyderabad-only, June 2025; next review flagged for Q2/Q3 FY27.",
+     "FII holding fell from 19.6% to 13.4% over the past year — predates this print, worth tracking into Q2."],
+  f:[["Richest multiple in the sector (~82x)",""],["Capex step-up is opportunistic, not yet proven",""]]},
+ {n:"Thyrocare Technologies",t:"THYROCARE",b:"del",bl:"Delivered, margin still building",
+  k:[["+26.1%","Standalone rev YoY",1],["32.2%","EBITDA margin",1],["+34.1%","PAT YoY",1],["₹39.8","Rev/test (-2% YoY)",-1]],
+  p:["Test volumes up 28% YoY while revenue per test fell 2% YoY — the sector's clearest volume-over-price pattern, though management frames it as bundling, not discounting.",
+     "Parent API Holdings (PharmEasy) fully redeemed ₹1,700cr of NCDs and released its entire pledge on Thyrocare shares — a real overhang removed, funded by promoter entity Docon selling down ~10pp of its stake.",
+     "Radiology arm (Nueclear Healthcare) revenue down 4% YoY; board is evaluating a demerger.",
+     "Franchise adds already ~900 in Q1 against a full-year target of ~1,700 — pacing ahead."],
+  f:[["Pledge overhang resolved this quarter","ok"],["Resolution funded by parent-level distress",""]]},
+ {n:"Krsnaa Diagnostics",t:"KRSNAA",b:"miss",bl:"Missed",
+  k:[["+22%","Revenue YoY",1],["25%","EBITDA margin (-200bps)",-1],["-19%","PAT YoY",-1],["163 days","Debtor days (was 110)",-1]],
+  p:["Revenue beat by ~5.6% but EPS missed by ~18% — margin, not the top line, is the problem. Rajasthan's PPP contract is front-loaded on cost, with ~4,000 staff onboarded ahead of revenue maturity.",
+     "Rajasthan delivered ₹26cr against a ₹100–150cr full-year target; management calls it 'conservative' but it needs to roughly double next quarter to stay credible.",
+     "Government receivable days jumped to 163 from 110; working capital swung from −18 days to +66 — the structural risk this PPP model always carried is now showing up in cash.",
+     "CFO resigned in January, a broader board reshuffle followed in April, and a ₹91.75cr dilutive promoter-warrant issue is pending shareholder approval — a lot of moving parts in one half-year."],
+  f:[["EPS miss + receivable stretch + leadership churn",""],["Only real leverage in the sector (~2.2x)",""]]},
+ {n:"Suraksha Diagnostic",t:"SURAKSHA",b:"part",bl:"Split",
+  k:[["+21%","Revenue YoY",1],["36%","EBITDA margin",1],["+38–40%","PAT YoY",1],["10–11%","Test vol. growth (was 20%+)",-1]],
+  p:["Headline print is strong, but test volume growth has nearly halved from over 20% — margin and PAT gains are increasingly pricing- and mix-led (CGHS, genomics), not core volume.",
+     "Q4FY26 PAT fell 15% YoY on a spiked 38% tax rate — this quarter's 38–40% PAT growth is flattered by that weak, noisy base.",
+     "AGM originally set for 2 September was postponed citing only 'unavoidable circumstances,' with no new date given — a soft governance flag on an already thinly-covered name.",
+     "Reported ₹130cr of debt sits oddly against the sector's usual net-cash profile; unclear from available disclosure how much is lease liability versus real borrowing."],
+  f:[["No formal analyst coverage — thin disclosure",""],["Genomics vertical +136% YoY, still <2% of revenue","ok"]]},
+ {n:"Entero Healthcare Solutions",t:"ENTERO",b:"part",bl:"Different business — see caveats",
+  k:[["+38.2%","Revenue YoY",1],["5.0%","EBITDA margin",1],["+72%","PAT YoY (consol.)",1],["~36%","OCF/EBITDA (guided ≥50%)",-1]],
+  p:["This is a pharma/healthcare distributor, not a diagnostics lab chain — grouped into this sector universe by name, not by business model. Revenue-per-patient economics do not apply.",
+     "Hit its full-year 5% EBITDA margin guidance in the first quarter, on revenue growth of 38% against a 23% full-year guide.",
+     "Cash conversion is the catch: FY26 OCF/EBITDA ran at ~36%, below the ≥50% management itself has guided for FY27 — a working-capital-intensive model that hasn't yet proven it converts profit to cash at scale.",
+     "Minority interest still took ~27% of quarterly profit from prior acquisitions; per-share economics stay diluted until that normalises."],
+  f:[["Not a diagnostics business — do not compare to peers above",""],["Cash conversion trailing its own guidance",""]]}
+];
+document.getElementById("cards").innerHTML=CO.map(c=>`
+ <article class="c">
+  <div class="chead"><div><h3>${c.n}</h3><div class="tick">${c.t}</div></div><div class="badge ${c.b}">${c.bl}</div></div>
+  <div class="tiles">${c.k.map(([n,l,s])=>`<div class="tile"><div class="n ${s===1?'up':s===-1?'dn':''}">${n}</div><div class="l">${l}</div></div>`).join("")}</div>
+  <ul>${c.p.map(x=>`<li>${x}</li>`).join("")}</ul>
+  <div class="flags">${c.f.map(([t,k])=>`<span class="flag ${k}">${t}</span>`).join("")}</div>
+ </article>`).join("");
+
+/* KPI TABLE: [company, revPerPatient, change, revGrowth, patGrowth, b2cMix, network, capex] */
+const KPI=[
+ ["Dr Lal PathLabs","₹968","+10%","+19.1%","+27.2%","75%","312 labs / 7,727 PSCs","₹140–150cr"],
+ ["Metropolis","₹1,219","+6%","+16.6%","+25.8%","57%","209 labs / 5,003 centres","~₹65cr"],
+ ["Vijaya Diagnostic","₹1,860*","+9%","+22.8%","+37.6%","92%","166 centres (51 hub/115 spoke)","₹190–195cr"],
+ ["Thyrocare","₹404","+7%","+26.1%","+34.1%","n/d (franchise-led)","44 labs / 11,700 franchisees","n/d"],
+ ["Krsnaa Diag.","~₹461*","n/d","+22%","-19%","~8–9% (RPL retail)","31 mother labs / 62 hub labs / 1,228 centres + CT149/MRI42","n/d"],
+ ["Suraksha Diag.","n/d","n/d","+21%","+38–40%","n/d","72 centres","₹70–80cr"],
+ ["Entero Healthcare","n/a — distributor","n/a","+38.2%","+72%","n/a","138 warehouses","n/d"]
+];
+document.getElementById("kpi").innerHTML=KPI.map(r=>
+ `<tr><td class="co">${r[0]}</td>`+r.slice(1).map(c=>`<td class="kpi">${c}</td>`).join("")+`</tr>`).join("");
+
+/* RETURNS: [company, ticker, resultsDate, cmp, 1y, 6m, 3m, mtd]. Sorted by 1-year return. Source: Kite Connect, 3 Sep 2026 ~11:28 IST. */
+const RET=[
+ ["Entero Healthcare","ENTERO","Aug 2026 (approx.)","1,800.90","+53.1%","+75.7%","+59.7%","-0.5%"],
+ ["Vijaya Diagnostic","VIJAYA","7 Aug 2026","1,485.40","+39.5%","+51.7%","+16.1%","-2.2%"],
+ ["Thyrocare","THYROCARE","23 Jul 2026","577.05","+33.0%","+50.1%","+9.9%","-4.5%"],
+ ["Dr Lal PathLabs","LALPATHLAB","24 Jul 2026 (approx.)","1,925.00","+15.4%","+36.9%","+22.6%","-0.5%"],
+ ["Suraksha Diag.","SURAKSHA","11 Aug 2026 (approx.)","338.50","+11.7%","+26.9%","+16.2%","0.0%"],
+ ["Metropolis","METROPOLIS","5 Aug 2026 (approx.)","581.50","+5.3%","+25.1%","+8.5%","-0.1%"],
+ ["Krsnaa Diag.","KRSNAA","Aug 2026 (approx.)","552.00","-31.4%","-12.6%","+2.0%","-0.3%"]
+];
+document.getElementById("ret").innerHTML=RET.map(r=>{
+ const cell=v=>{
+   if(v==="n/s") return `<td class="num ns">n/s</td>`;
+   const cls=v.startsWith("+")?"up":v.startsWith("-")?"dn":"";
+   return `<td class="num ${cls}">${v}</td>`;
+ };
+ return `<tr><td class="co">${r[0]}</td><td class="tick">${r[1]}</td><td>${r[2]}</td>`
+  +`<td class="num">${r[3]==="n/s"?'<span class="ns">n/s</span>':r[3]}</td>`
+  +r.slice(4).map(cell).join("")+`</tr>`;
+}).join("");
+
+/* SCORECARD: [company, promised, delivered, "del"|"part"|"miss", verdictLabel] */
+const SCORE=[
+ ["Dr Lal PathLabs","FY27 revenue 'early-to-mid teens'; margin 27–28%; 15–20 new labs, 700–800 collection centres; ₹140–150cr capex (Q4FY26 call).","Revenue +19.1% YoY (guide raised to 'mid-teens'); margin held at 27–28% despite a 31% print; lab target trimmed to 12–15; capex unchanged.","part","Split"],
+ ["Metropolis","Volume growth 8–9%; revenue growth 14–15% (3-yr CAGR); EBITDA margin +125–150bps for FY27; ~₹65cr capex (FY26 exit call).","Patient +10%, test +11%; revenue +16.6% YoY; margin +210bps in Q1 alone; capex reaffirmed.","del","Delivered"],
+ ["Vijaya Diagnostic","4–5 new hubs, 10–12 spokes, ₹140–150cr FY27 capex (Q4FY26 call); no explicit revenue/margin guidance given then.","Capex raised to ₹190–195cr for 9 hubs; FY27 revenue now guided 17–19%, margin >40% — guidance scaled up, not just met.","del","Delivered / scaled up"],
+ ["Thyrocare","FY27 revenue 'mid-to-high teens'; ~34% normalised EBITDA margin target; ~1,700 net franchisee adds (FY26 exit call).","Revenue +24–26% YoY, well ahead of guide; margin 32.2%, improving but below the 34% target; ~900 franchisee adds already booked, >50% of the full-year target.","del","Delivered, margin still building"],
+ ["Krsnaa Diagnostics","Rajasthan PPP revenue toward ₹100–150cr FY27; double-digit EBITDA margin recovery by FY27-end; retail EBITDA breakeven targeted Q2FY27 (FY26 exit call).","Rajasthan delivered only ₹26cr in Q1; EBITDA margin fell 200bps YoY, the wrong direction; EPS missed consensus by ~18%; retail breakeven still unproven.","miss","Missed"],
+ ["Suraksha Diagnostic","100 centres by FY28; EBITDA margin discipline above 30%; ₹70–80cr FY27 capex (prior-call framing, per available coverage).","72 centres as of Q1, on pace; margin 36%, comfortably above the 30% floor; capex reiterated — but test-volume growth nearly halved and PAT is flattered by a weak Q4FY26 base.","part","Split"],
+ ["Entero Healthcare","FY27 revenue growth ~23%; EBITDA margin ~5%; OCF/EBITDA conversion ≥50%; minority interest normalising to 25–27% of PAT (Q4FY26 call).","Revenue +38.2% YoY; EBITDA margin hit the full-year 5% target in Q1 itself; OCF/EBITDA conversion still only ~36%; NCI still ~27% of profit.","part","Split — growth ahead, cash conversion behind"]
+];
+document.getElementById("score").innerHTML=SCORE.map(([c,p,d,k,v])=>
+ `<tr><td class="co">${c}</td><td>${p}</td><td class="hide">${d}</td><td class="vd ${k}">${v}</td></tr>`).join("");
+</script>
 </body>
 </html>
