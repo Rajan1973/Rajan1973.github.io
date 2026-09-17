@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Small Finance Banks Q1 FY27 — Sector Earnings Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Roboto+Mono:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --stone:#E3E0D9; --card:#F3F1EC; --card2:#EAE7E0;
+  --ink:#1F1D1A; --mute:#6E6A62; --faint:#9A958B; --rule:#C9C4B9;
+  --gain:#1D5C7A; --loss:#A8382C;
+  --vol:#8E8879; --gold:#B4842A;
+  --disp:'Archivo',system-ui,sans-serif;
+  --serif:'Source Serif 4',Georgia,serif;
+  --mono:'Roboto Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--stone);color:var(--ink);font-family:var(--serif);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:28px 20px 90px}
+section{margin-bottom:40px}
+
+/* type */
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
+h1{font-family:var(--disp);font-weight:800;font-size:clamp(34px,7vw,62px);line-height:.94;letter-spacing:-.03em;margin:.18em 0 .22em;text-transform:uppercase}
+h2{font-family:var(--disp);font-weight:700;font-size:clamp(19px,3.2vw,25px);letter-spacing:-.015em;margin:0 0 4px;text-transform:uppercase}
+h3{font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:-.005em;margin:0}
+.dek{font-size:17px;color:var(--mute);max-width:56ch;margin:0}
+.note{font-size:13px;color:var(--mute);margin:4px 0 20px;max-width:70ch}
+.rule{height:3px;background:var(--ink);margin:0 0 16px}
+
+/* thesis stats */
+.thesis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:2px;background:var(--rule);border:2px solid var(--ink);margin-top:26px}
+.t{background:var(--card);padding:13px 15px}
+.t .n{font-family:var(--disp);font-weight:800;font-size:26px;line-height:1.05;letter-spacing:-.02em}
+.t .l{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:5px;line-height:1.35}
+.t.up .n{color:var(--gain)} .t.dn .n{color:var(--loss)}
+
+/* SIGNATURE: the scissor */
+.scissor{background:var(--card);border:2px solid var(--ink);padding:18px 16px 12px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin-bottom:14px}
+.legend span{display:flex;align-items:center;gap:6px}
+.sw{width:13px;height:11px;display:inline-block}
+.row{display:grid;grid-template-columns:104px 1fr;gap:10px;align-items:center;margin-bottom:3px}
+.row .co{font-family:var(--disp);font-weight:600;font-size:12px;text-align:right;line-height:1.15}
+.track{position:relative;height:26px;border-left:2px solid var(--ink);border-right:0}
+.axis{position:absolute;top:0;bottom:0;width:2px;background:var(--ink);opacity:.85}
+.b{position:absolute;height:10px}
+.b.v{top:1px;background:var(--vol)}
+.b.e{top:14px}
+.b.e.pos{background:var(--gain)} .b.e.neg{background:var(--loss)}
+.b span{position:absolute;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:9.5px;font-weight:500;white-space:nowrap;color:var(--ink)}
+.b.pos span,.b.v span{left:calc(100% + 5px)}
+.b.neg span{right:calc(100% + 5px)}
+.scale{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9.5px;color:var(--faint);margin-top:6px;padding-left:114px}
+
+/* league bars */
+.league{background:var(--card);border:2px solid var(--ink);padding:16px}
+.lrow{display:grid;grid-template-columns:112px 1fr 96px;gap:10px;align-items:center;padding:4px 0;border-bottom:1px solid var(--rule)}
+.lrow:last-child{border-bottom:0}
+.lrow .co{font-family:var(--disp);font-weight:600;font-size:12.5px;text-align:right}
+.lbar{height:16px;background:var(--gain);position:relative}
+.lbar.mid{background:#4A7F91} .lbar.low{background:var(--loss)}
+.lrow .v{font-family:var(--mono);font-size:12px;font-weight:700;text-align:right}
+.lrow .d{font-family:var(--mono);font-size:10px;color:var(--mute);text-align:right}
+
+/* fuel strip */
+.fuel{background:var(--ink);color:var(--card);border:2px solid var(--ink);padding:18px}
+.fuel h2{color:var(--card)}
+.fline{display:flex;align-items:flex-end;gap:0;height:110px;margin:20px 0 6px}
+.fp{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:6px}
+.fp i{display:block;width:100%;max-width:52px;background:var(--gold)}
+.fp b{font-family:var(--mono);font-size:12px;font-weight:700}
+.fp em{font-family:var(--mono);font-size:9.5px;font-style:normal;letter-spacing:.09em;text-transform:uppercase;color:#A9A296}
+.warn{border-top:1px solid #4A453C;margin-top:14px;padding-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
+.warn div{font-size:13.5px;color:#D6D1C6}
+.warn strong{display:block;font-family:var(--mono);font-size:17px;font-weight:700;color:var(--gold);margin-bottom:2px}
+
+/* company cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
+.c{background:var(--card);border:2px solid var(--ink);padding:14px;display:flex;flex-direction:column}
+.chead{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:2px}
+.tick{font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacing:.06em}
+.badge{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 6px;border:1.5px solid;white-space:nowrap;flex-shrink:0}
+.badge.del{color:var(--gain);border-color:var(--gain)}
+.badge.part{color:var(--gold);border-color:var(--gold)}
+.badge.miss{color:var(--loss);border-color:var(--loss)}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);margin:11px 0}
+.tile{background:var(--card2);padding:7px 9px}
+.tile .n{font-family:var(--mono);font-size:15px;font-weight:700;line-height:1.15}
+.tile .l{font-family:var(--mono);font-size:8.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:3px}
+.tile .n.up{color:var(--gain)} .tile .n.dn{color:var(--loss)}
+.c ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.c li{margin-bottom:5px}
+.c li::marker{color:var(--faint)}
+.flags{margin-top:auto;padding-top:10px;display:flex;flex-wrap:wrap;gap:5px}
+.flag{font-family:var(--mono);font-size:9px;letter-spacing:.05em;text-transform:uppercase;background:var(--loss);color:var(--card);padding:3px 6px}
+.flag.ok{background:var(--gain)}
+
+table{width:100%;border-collapse:collapse;background:var(--card);border:2px solid var(--ink)}
+th{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;text-align:left;padding:9px 10px;background:var(--ink);color:var(--card)}
+td{padding:9px 10px;border-bottom:1px solid var(--rule);font-size:13.5px;vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.co{font-family:var(--disp);font-weight:700;font-size:13px;white-space:nowrap}
+td.vd{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;white-space:nowrap}
+.vd.del{color:var(--gain)} .vd.part{color:var(--gold)} .vd.miss{color:var(--loss)}
+
+/* call */
+.calls{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.call{border:2px solid var(--ink);padding:15px;background:var(--card)}
+.call.buy{border-left:9px solid var(--gain)}
+.call.wait{border-left:9px solid var(--gold)}
+.call.avoid{border-left:9px solid var(--loss)}
+.call .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.call h3{margin:4px 0 7px;font-size:17px}
+.call p{margin:0;font-size:13.5px}
+
+/* commentary */
+.themes{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.th{background:var(--card);border:2px solid var(--ink);padding:14px}
+.th .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--mute);border-bottom:2px solid var(--ink);padding-bottom:6px;margin-bottom:9px}
+.th ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.th li{margin-bottom:6px}
+.th li::marker{color:var(--faint)}
+.th b{font-family:var(--mono);font-size:12.5px;font-weight:700}
+
+/* red flags */
+.rf{background:var(--card);border:2px solid var(--ink)}
+.rfg{border-bottom:2px solid var(--ink)}
+.rfg:last-child{border-bottom:0}
+.rfh{display:flex;align-items:center;gap:9px;padding:8px 13px;background:var(--card2)}
+.sev{width:11px;height:11px;flex-shrink:0}
+.sev.hi{background:var(--loss)} .sev.md{background:var(--gold)} .sev.lo{background:var(--faint)}
+.rfh span{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase}
+.rfr{display:grid;grid-template-columns:118px 1fr;gap:12px;padding:9px 13px;border-top:1px solid var(--rule);font-size:13.5px}
+.rfr b{font-family:var(--disp);font-weight:700;font-size:12.5px}
+
+/* ind-ra verdict */
+.indra{background:var(--card);border:2px solid var(--ink);padding:16px}
+.split{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:2px;background:var(--rule);border:1px solid var(--rule);margin-bottom:16px}
+.sp{background:var(--card2);padding:13px 14px}
+.sp .n{font-family:var(--disp);font-weight:800;font-size:34px;line-height:1;letter-spacing:-.03em;color:var(--loss)}
+.sp.ok .n{color:var(--gain)}
+.sp .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-top:6px}
+.sp .w{font-size:12.5px;color:var(--mute);margin-top:7px}
+.vs{display:grid;grid-template-columns:82px 1fr;gap:11px;padding:7px 0;border-bottom:1px solid var(--rule);font-size:13.5px;align-items:start}
+.vs:last-child{border-bottom:0}
+.vs em{font-family:var(--mono);font-size:9.5px;font-style:normal;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding-top:2px}
+.vs em.y{color:var(--gain)} .vs em.n{color:var(--loss)} .vs em.p{color:var(--gold)}
+
+/* regional strip -> reused as per-bank GNPA-change strip */
+.reg{display:grid;grid-template-columns:repeat(auto-fit,minmax(112px,1fr));gap:2px;background:var(--rule);border:2px solid var(--ink);margin-top:16px}
+.rg{background:var(--card2);padding:11px 12px;text-align:center}
+.rg .n{font-family:var(--mono);font-size:15px;font-weight:700}
+.rg .n.up{color:var(--gain)} .rg .n.dn{color:var(--loss)}
+.rg .l{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-top:4px}
+
+/* triggers */
+.trigs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:14px}
+.tg{border:2px solid var(--ink);padding:14px;background:var(--card)}
+.tg .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
+.tg.tg-up .k{color:var(--gain)} .tg.tg-dn .k{color:var(--loss)}
+.tg ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.tg li{margin-bottom:6px}
+
+/* caveats */
+.cav{background:var(--card2);border:2px solid var(--ink);padding:15px 15px 15px 30px;margin:0;font-size:13.5px;line-height:1.55}
+.cav li{margin-bottom:8px}
+.cav li:last-child{margin-bottom:0}
+.cav b{font-family:var(--mono);font-size:12px;font-weight:700}
+
+/* wide data tables */
+.tw{overflow-x:auto;border:2px solid var(--ink);background:var(--card)}
+.tw table{border:0;min-width:660px}
+.tw th{position:sticky;top:0}
+td.num{font-family:var(--mono);font-size:12px;font-weight:700;text-align:right;white-space:nowrap}
+td.num.up{color:var(--gain)} td.num.dn{color:var(--loss)} td.num.ns{color:var(--faint);font-weight:400}
+th.r{text-align:right}
+td.kpi{font-family:var(--mono);font-size:11.5px;text-align:right;white-space:nowrap}
+.asof{font-family:var(--mono);font-size:11px;color:var(--mute);margin-top:10px;line-height:1.6}
+.asof b{color:var(--ink)}
+
+footer{border-top:3px solid var(--ink);padding-top:15px;font-size:12.5px;color:var(--mute)}
+footer p{margin:0 0 8px;max-width:80ch}
+
+@media(max-width:620px){
+  .row{grid-template-columns:74px 1fr;gap:7px}
+  .row .co{font-size:10.5px}
+  .scale{padding-left:81px}
+  .lrow{grid-template-columns:80px 1fr 74px}
+  .lrow .co{font-size:11px}
+  .wrap{padding:20px 13px 60px}
+  td.hide,th.hide{display:none}
+}
+@media(prefers-reduced-motion:no-preference){
+  .b,.lbar,.fp i{animation:g .7s cubic-bezier(.2,.7,.3,1) both}
+  @keyframes g{from{transform:scaleX(.001);opacity:0}to{transform:scaleX(1);opacity:1}}
+  .b.neg{transform-origin:right} .b.v,.b.pos,.lbar{transform-origin:left}
+  .fp i{animation-name:gy;transform-origin:bottom}
+  @keyframes gy{from{transform:scaleY(.001)}to{transform:scaleY(1)}}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Sector earnings review · Quarter ended 30 June 2026</div>
+  <h1>Small Finance<br>Banks · Q1 FY27</h1>
+  <p class="dek">Every one of the seven improved asset quality year-on-year. But the sector split clean in two: the names that finished de-risking are growing loans 23–32%, and the two that haven't are stuck between 2% and 19% while still carrying the highest NPAs in the cohort.</p>
+  <div class="thesis">
+    <div class="t up"><div class="n">7/7</div><div class="l">Improved GNPA YoY</div></div>
+    <div class="t dn"><div class="n">2%→32.5%</div><div class="l">Range in advances growth YoY</div></div>
+    <div class="t dn"><div class="n">1 of 3</div><div class="l">Universal-bank bids RBI approved</div></div>
+    <div class="t dn"><div class="n">−₹34cr</div><div class="l">Still a loss: Utkarsh, after an 86% YoY narrowing</div></div>
+  </div>
+</header>
+
+<section>
+  <h2>The scissor</h2>
+  <div class="rule"></div>
+  <p class="note">Advances/AUM growth YoY against the change in GNPA YoY, same scale, same axis. Every bar on the quality side points the same way — improvement — which almost never happens across a full sector. The growth side is where the story actually is: Suryoday grew loans sixteen times faster than Utkarsh did.</p>
+  <div class="scissor">
+    <div class="legend">
+      <span><i class="sw" style="background:var(--vol)"></i>Advances/AUM growth YoY</span>
+      <span><i class="sw" style="background:var(--gain)"></i>GNPA improvement (YoY, pp)</span>
+      <span><i class="sw" style="background:var(--loss)"></i>GNPA deterioration (YoY, pp)</span>
+    </div>
+    <div id="scissor"></div>
+    <div class="scale"><span>−10pp</span><span>0</span><span>+15%</span><span>+35%</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>Net interest margin — the league table</h2>
+  <div class="rule"></div>
+  <p class="note">The core unit economic for a bank: what it earns on its book before costs and provisions. Not in the skill's sector library — derived for this report; see caveats. Ujjivan's book is the smallest and the highest-yielding; AU's is the largest and the cheapest to fund, which is exactly why its NIM is the lowest.</p>
+  <div class="league" id="league"></div>
+</section>
+
+<section>
+  <h2>The pressure point: asset quality is clearing — unevenly</h2>
+  <div class="rule"></div>
+  <div class="fuel">
+    <h2>Sector-average GNPA, equal-weighted across the 7 (%)</h2>
+    <div class="fline" id="fuel"></div>
+    <div class="warn">
+      <div><strong>7 of 7</strong>Banks improved GNPA year-on-year — a clean sweep, unusual for a sector that was mid-crisis eighteen months ago.</div>
+      <div><strong>2%–32.5%</strong>The same clean-up produced this range in loan growth. Finished de-risking means growth resumed. Still de-risking (Utkarsh) means the book is barely moving.</div>
+      <div><strong>1 of 3</strong>Universal-bank applications that actually cleared RBI. Ujjivan and Jana hit their own GNPA targets and got returned anyway — the bar is portfolio composition, not just the NPA print.</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Company by company</h2>
+  <div class="rule"></div>
+  <p class="note">Badge shows whether Q1 delivery matched what each bank's own FY26-exit commentary implied. Red chips are flags to carry into Q2.</p>
+  <div class="grid" id="cards"></div>
+</section>
+
+<section>
+  <h2>KPI comparison</h2>
+  <div class="rule"></div>
+  <p class="note">Small Finance Banks is not in the skill's sector-metrics library — this is a derived banking map: NIM as the core unit economic, CRAR/PCR standing in for leverage (banks don't carry net debt/EBITDA), and unsecured/microfinance mix as the sector-specific red-flag column. "n/d" means the bank did not disclose the figure in its Q1 FY27 release or investor call.</p>
+  <div class="tw">
+  <table>
+    <thead><tr>
+      <th>Company</th><th class="r">NIM</th><th class="r">NIM chg</th><th class="r">Advances YoY</th>
+      <th class="r">Deposits YoY</th><th class="r">GNPA</th><th class="r">Credit cost</th><th class="r">CASA</th><th class="r">Unsecured/MFI mix</th>
+    </tr></thead>
+    <tbody id="kpi"></tbody>
+  </table>
+  </div>
+  <p class="asof">AU's unsecured-mix figure (~33%) is a complement of a ~67% secured-book disclosure from mid-2025, not from the Q1 FY27 release itself — treat as approximate. Equitas's 10% is MFI specifically, as the bank itself defines and discloses it, not total unsecured. Ujjivan, Jana and Utkarsh figures are the complement of each bank's own stated secured-book share.</p>
+</section>
+
+<section>
+  <h2>What management said</h2>
+  <div class="rule"></div>
+  <p class="note">From the Q1 FY27 calls and releases (15–31 July 2026). Grouped by theme, because the seven banks are all fighting variations of the same battle.</p>
+  <div class="themes">
+
+    <div class="th"><div class="k">Universal-bank ambitions</div><ul>
+      <li>AU: filed in March 2026, and reported an <b>in-principle RBI approval</b> alongside its Q1 FY27 results — the only SFB to clear the bar so far.</li>
+      <li>Ujjivan: application <b>returned</b> by RBI in April 2026, with unsecured loans still 52% of the book.</li>
+      <li>Jana: application <b>returned</b> in October 2025 despite holding GNPA below 3% for two straight years and 72.5% secured assets.</li>
+      <li>RBI's message across both rejections: portfolio composition matters as much as the NPA print.</li>
+    </ul></div>
+
+    <div class="th"><div class="k">Microfinance &amp; unsecured book</div><ul>
+      <li>ESAF cut MFI/unsecured from <b>69% to 38%</b> of advances in about a year — the fastest de-risking in the cohort.</li>
+      <li>Equitas is holding MFI deliberately at <b>~10%</b> of advances through FY27.</li>
+      <li>Jana targets <b>10–12%</b> MFI growth off a smaller base; management sees no material weather or geopolitical hit to the portfolio.</li>
+      <li>Utkarsh's classic JLG book grew just <b>5% YoY</b> while its non-JLG micro-banking loans surged <b>93%</b> — diversifying inside the "micro" book itself.</li>
+      <li>Sector context: MFIN says stress is <b>"past the peak,"</b> roughly six to seven months before its February 2026 statement — but flags a funding winter as the real constraint on recovery.</li>
+    </ul></div>
+
+    <div class="th"><div class="k">Funding cost &amp; NIM</div><ul>
+      <li>Equitas: cost of funds <b>rose</b> QoQ to 7.05%; NIM compressed to 7.24% from 7.36%.</li>
+      <li>Ujjivan: cost of funds <b>down 71bps</b> YoY to 6.9%, NIM held flat at a sector-best 8.5%.</li>
+      <li>Utkarsh: cost of funds still the <b>highest in the cohort</b> at 7.7%, down only ~40bps YoY — a legacy of its weaker credit profile.</li>
+      <li>AU's scale gives it a funding-cost advantage none of the smaller six can match, even though it shows up as the <b>lowest</b> NIM in the table.</li>
+    </ul></div>
+
+    <div class="th"><div class="k">Growth composition</div><ul>
+      <li>Jana: gold loans <b>+113%</b> YoY, vehicle loans <b>+78%</b>, Micro-LAP slowed sharply to <b>+5%</b> — a visible mix shift.</li>
+      <li>Ujjivan is expanding gold-loan branches from <b>~430 to ~575</b> by year-end, a direct secured-mix play.</li>
+      <li>Utkarsh's secured share rose to <b>51%</b> from 45% YoY, targeting ~55% — but not until its own FY28 guidance.</li>
+      <li>AU's disbursements grew <b>42%</b> YoY across an already-diversified vehicle/SBL/home-loan/credit-card book.</li>
+    </ul></div>
+
+    <div class="th"><div class="k">Capital actions</div><ul>
+      <li>ESAF raised <b>₹85cr</b> of Tier II capital in Q1; CRAR now 23.9%.</li>
+      <li>Utkarsh plans a <b>₹500cr</b> Tier 2 NCD issue and is redeeming a ₹195cr, 12.5%-coupon tranche in mid-August — a ~₹20cr/yr saving and a ~250bps CRAR lift.</li>
+      <li>Utkarsh also has a holding-company amalgamation before the <b>NCLT</b>, hearing scheduled 6 August 2026.</li>
+      <li>AU's Tier I at 17.1% and CRAR at 18.9% give it room to absorb the CRR/SLR obligations a universal-bank licence will bring.</li>
+    </ul></div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Red flags</h2>
+  <div class="rule"></div>
+  <p class="note">Ranked by how much they should change position sizing, not by how alarming they sound.</p>
+  <div class="rf">
+
+    <div class="rfg">
+      <div class="rfh"><i class="sev hi"></i><span>Act on these</span></div>
+      <div class="rfr"><b>Utkarsh</b><div>Still loss-making (−₹34cr) with the highest GNPA in the cohort (5.9%) and loan growth of just 2.0% YoY. A holding-company amalgamation is before the NCLT on top of the operating repair. This is years behind the other six, not one quarter behind.</div></div>
+      <div class="rfr"><b>Suryoday</b><div>GNPA still 6.6%, second-highest in the cohort, and NNPA% was not disclosed in the Q1 release. About 98% of the Inclusive Finance book sits under CGFMU guarantee cover — the guarantee, not organic recovery, is doing real work in keeping reported credit cost down.</div></div>
+      <div class="rfr"><b>Ujjivan &amp; Jana</b><div>Both had universal-bank applications returned by RBI despite hitting their own asset-quality benchmarks (sub-3% GNPA for two years at Jana; steady improvement at Ujjivan). The multi-year re-rating catalyst both stocks are partly priced for is now pushed out with no confirmed timeline.</div></div>
+    </div>
+
+    <div class="rfg">
+      <div class="rfh"><i class="sev md"></i><span>Monitor next quarter</span></div>
+      <div class="rfr"><b>ESAF</b><div>The turnaround is real, but MFI/unsecured exposure was cut from 69% to 38% of advances in barely a year — a violently fast de-risking. CARE's outlook upgrade to Stable is eight days old as of this report (2 September 2026).</div></div>
+      <div class="rfr"><b>Equitas</b><div>NIM already compressing QoQ (7.36%→7.24%) against a management-guided "sustainable ~7%" floor, with cost of funds still rising QoQ. Cost-to-income remains elevated at 68.4%.</div></div>
+      <div class="rfr"><b>AU</b><div>The universal-bank transition is an execution project, not a free re-rating — CRR/SLR and priority-sector obligations change once the licence converts, and the bank has never operated under them.</div></div>
+    </div>
+
+    <div class="rfg">
+      <div class="rfh"><i class="sev lo"></i><span>Note and move on</span></div>
+      <div class="rfr"><b>Sector-wide</b><div>Every GNPA figure in this report improved YoY, but against an unusually stressed FY25–26 base — MFIN's own characterisation of the worst microfinance stress cycle in years. A beat against that base is not the same as absolute health for the two names still above 5% GNPA.</div></div>
+      <div class="rfr"><b>Jana</b><div>Micro-LAP growth slowed to just 5% YoY even as gold and vehicle loans surged 78–113% — a quiet mix shift toward more commoditised, lower-margin secured products.</div></div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Walk the talk</h2>
+  <div class="rule"></div>
+  <p class="note">What each bank's FY26-exit commentary implied, against what Q1 FY27 actually delivered. Where a bank's own numeric FY27 guidance was issued only this quarter (Jana, Ujjivan's upgraded RoA target) rather than at the prior call, the promised column reflects the trajectory implied by FY26-exit commentary instead — flagged inline.</p>
+  <table>
+    <thead><tr><th>Company</th><th>Promised</th><th class="hide">Delivered</th><th>Verdict</th></tr></thead>
+    <tbody id="score"></tbody>
+  </table>
+</section>
+
+<section>
+  <h2>Was MFIN right?</h2>
+  <div class="rule"></div>
+  <p class="note">MFIN told BusinessToday in February 2026 that microfinance stress was "past the peak," roughly six to seven months earlier, with recovery capped mainly by a "funding winter." Scored against what this cohort of seven actually delivered in Q1 FY27.</p>
+  <div class="indra">
+    <div class="split">
+      <div class="sp ok"><div class="n">−32%</div><div class="l">Sector-avg GNPA, YoY</div><div class="w">Equal-weighted across the 7, from ~5.6% to ~3.8%. Every single name improved.</div></div>
+      <div class="sp"><div class="n">2–32.5%</div><div class="l">Loan growth range, YoY</div><div class="w">The same clean-up produced this spread. The average hides a widening gap between banks done de-risking and banks still mid-cycle.</div></div>
+      <div class="sp"><div class="n">1 of 3</div><div class="l">Universal-bank bids approved</div><div class="w">AU in-principle approved. Ujjivan and Jana returned despite hitting their own GNPA and secured-mix targets.</div></div>
+    </div>
+
+    <div class="vs"><em class="y">Right</em><div><b>Past the peak.</b> Equal-weighted GNPA across the cohort fell from roughly 5.6% to 3.8% YoY — none of the seven deteriorated.</div></div>
+    <div class="vs"><em class="y">Right</em><div><b>Recovery is uneven.</b> Utkarsh and Suryoday, the two banks with the worst legacy MFI stress, still carry the highest GNPA (5.9% and 6.6%) and the weakest, or most guarantee-dependent, growth.</div></div>
+    <div class="vs"><em class="p">Partly</em><div><b>Funding winter caps the recovery.</b> True for cost of funds at Equitas and Utkarsh, which are still elevated — but growth accelerated hard at the de-risked names (ESAF +27%, Suryoday +32.5%) regardless. The funding-cost relief MFIN flagged hasn't shown up sector-wide; the growth recovery already has.</div></div>
+    <div class="vs"><em class="n">Wrong</em><div><b>Clean-up would translate mechanically into universal-bank approval.</b> Jana held GNPA below 3% for two years and still got its application returned. RBI is weighing portfolio composition, not just the headline NPA number.</div></div>
+
+    <div class="reg">
+      <div class="rg"><div class="n up">−0.37pp</div><div class="l">AU GNPA YoY</div></div>
+      <div class="rg"><div class="n up">−0.46pp</div><div class="l">Equitas GNPA YoY</div></div>
+      <div class="rg"><div class="n up">−0.35pp</div><div class="l">Ujjivan GNPA YoY</div></div>
+      <div class="rg"><div class="n up">−0.56pp</div><div class="l">Jana GNPA YoY</div></div>
+      <div class="rg"><div class="n up">−3.14pp</div><div class="l">ESAF GNPA YoY</div></div>
+      <div class="rg"><div class="n up">−5.50pp</div><div class="l">Utkarsh GNPA YoY</div></div>
+      <div class="rg"><div class="n up">−1.90pp</div><div class="l">Suryoday GNPA YoY</div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>The call</h2>
+  <div class="rule"></div>
+  <div class="calls">
+    <div class="call buy">
+      <div class="k">Own now</div>
+      <h3>AU Small Finance Bank</h3>
+      <p>The only SFB with in-principle universal-bank approval, 37% profit growth, the best GNPA print in the cohort, and disbursements up 42% YoY. The growth-versus-de-risking trade-off that defines the rest of the sector barely applies here — AU never carried a large MFI book after the Fincare merger diluted it further.</p>
+    </div>
+    <div class="call wait">
+      <div class="k">Confirm the trend before sizing up</div>
+      <h3>Equitas · Ujjivan · ESAF · Jana</h3>
+      <p>Genuine turnarounds across all four — two flipped from loss to profit, one trebled PAT. But each carries an open question: NIM compression at Equitas, an unresolved universal-bank ambition at Ujjivan and Jana, and a ratings upgrade at ESAF that is eight days old. One or two more clean quarters, not this one alone, should decide position size.</p>
+    </div>
+    <div class="call avoid">
+      <div class="k">Stay out except at deep value</div>
+      <h3>Utkarsh · Suryoday</h3>
+      <p>Both still post the two highest GNPA numbers in the cohort and lean on CGFMU guarantee claims to keep credit cost presentable. Utkarsh's loan book has essentially stalled at +2% YoY with an NCLT amalgamation still pending. Neither has earned the growth re-rating the other five are starting to get.</p>
+    </div>
+  </div>
+
+  <div class="trigs">
+    <div class="tg tg-up"><div class="k">What would make us more positive</div><ul>
+      <li>A <b>second SFB</b> clearing RBI's universal-bank bar — Ujjivan's unsecured share falling toward 40% or below would be the tell.</li>
+      <li>Utkarsh's loan book re-accelerating past <b>15–20%</b> YoY without a GNPA relapse.</li>
+      <li>Sector-wide credit costs falling further as <b>CGFMU claims taper</b> — the signal that repair is organic, not guarantee-subsidised.</li>
+    </ul></div>
+    <div class="tg tg-dn"><div class="k">What would make us cut</div><ul>
+      <li>Any single quarter where <b>sector-average GNPA rises again</b> — it would undercut the entire "past the peak" thesis this report leans on.</li>
+      <li><b>AU</b> losing its in-principle universal-bank approval, or missing final RBI conditions on the way to full conversion.</li>
+      <li>A reversal in <b>CASA/retail-deposit growth</b> across the cohort — this quarter's NIM resilience rests on falling cost of funds, which depends on retail deposits continuing to out-grow bulk funding.</li>
+    </ul></div>
+  </div>
+</section>
+
+<section>
+  <h2>Price and returns</h2>
+  <div class="rule"></div>
+  <p class="note">Results date against market performance, so the reader can see where a good quarter did or did not earn a re-rating.</p>
+  <div class="tw">
+  <table>
+    <thead><tr>
+      <th>Company</th><th>Ticker</th><th>Results date</th><th class="r">CMP (₹)</th>
+      <th class="r">1 year</th><th class="r">6 months</th><th class="r">3 months</th><th class="r">MTD</th>
+    </tr></thead>
+    <tbody id="ret"></tbody>
+  </table>
+  </div>
+  <p class="asof">
+    <b>Prices as on 10 Sep 2026 close</b>, sourced from Zerodha Kite Connect (one feed, one date, across the whole table). AU Bank's 1-year return (+47.8%) and current price (₹1,054.70) were cross-checked against Screener.in (₹1,055, "48% CAGR") — no material disagreement found. Utkarsh's −19.4% 1-year figure was cross-checked against public reporting of the stock hitting an all-time low around its Q3 FY26 results (February 2026) — consistent with a genuine decline, not a data error or corporate action.<br>
+    ESAF trades on the NSE under the trade-to-trade "BE" series (ESAFSFB-BE); the CMP shown is that series' closing price.<br>
+    Utkarsh's exact results date could not be confirmed to the day from public sources and is shown as an approximate month.
+  </p>
+</section>
+
+<section>
+  <h2>Caveats</h2>
+  <div class="rule"></div>
+  <ul class="cav">
+    <li><b>Universe built from web search.</b> Small Finance Banks is not in the skill's sector-universe reference file. An eighth listed SFB, Capital Small Finance Bank (CAPITALSFB, ~₹1,236cr market cap), was not identified during phase 1 and is not covered in this report — it can be added on request.</li>
+    <li><b>Metric map is derived, not standard.</b> Small Finance Banks is also not in the skill's sector-metrics library. NIM% was chosen as the core unit economic, advances/AUM growth vs GNPA change as the scissor pair, and CRAR/PCR in place of net debt/EBITDA as the leverage measure — a banking-standard framework built for this report, not drawn from a pre-existing map.</li>
+    <li><b>Several cells are marked n/d</b> because the bank did not disclose the figure in its Q1 FY27 release or earnings call: Ujjivan/ESAF/Suryoday credit cost, Jana/Suryoday CASA ratio, Suryoday NIM and NNPA%. None of these were estimated.</li>
+    <li><b>AU's universal-bank timeline shows some source inconsistency.</b> One report suggested in-principle approval as early as August 2025; AU's own press releases describe filing in March 2026 and reporting the in-principle approval alongside Q1 FY27 results. This report follows the company's own releases.</li>
+    <li><b>Sector-average GNPA figures</b> (used in "the pressure point" and "Was MFIN right?") are simple equal-weighted averages across the 7 companies in this report, not size-weighted, and not the full 11-bank SFB universe that MFIN and CareEdge track at the industry level.</li>
+    <li><b>"Promised" in the walk-the-talk table is not uniformly a verified prior-quarter number.</b> Where the specific Q4 FY26 guidance could not be independently sourced (Ujjivan, Jana, Utkarsh, Suryoday), the promised column reflects the trajectory implied by each bank's FY26-exit commentary rather than a quoted figure — flagged in that section's note.</li>
+    <li><b>Price data is single-sourced to Kite,</b> per the skill's requirement, and spot-checked against Screener.in for AU Bank and against public reporting for Utkarsh; no discrepancies were found large enough to suggest an unadjusted corporate action or a wrong instrument token.</li>
+    <li><b>Valuation multiples are out of scope for this report.</b> Kite carries no fundamentals (no P/E, market cap or EPS), and standard bank valuation (P/B, P/E vs RoE) was not sourced independently this cycle — the KPI table and price table should not be read as a valuation call.</li>
+  </ul>
+</section>
+
+<footer>
+  <p><b>Universe:</b> 7 of 8 listed small finance banks (Capital Small Finance Bank omitted — see caveats), quarter ended 30 June 2026. Sources: company press releases and investor presentations (AU, Equitas, Ujjivan, Jana, ESAF, Utkarsh, Suryoday Small Finance Banks), Zerodha Kite Connect, CARE Ratings, MFIN, and reporting from Business Standard, EquityBulls, Business Upturn, ScanX, Sahi News, Free Press Journal and Yahoo Finance/GuruFocus earnings-call summaries.</p>
+</footer>
+
+</div>
+<script>
+/* SCISSOR: [company, advancesGrowthYoY%, gnpaChangeYoY(pp, negative=improvement)] */
+const SC=[
+ ["Suryoday",32.5,-1.90],["Ujjivan",28.9,-0.35],["ESAF",27.0,-3.14],["Equitas",27.0,-0.46],
+ ["Jana",26.0,-0.56],["AU",23.0,-0.37],["Utkarsh",2.0,-5.50]
+];
+const MIN=-10,MAX=35,SPAN=MAX-MIN,Z=(0-MIN)/SPAN*100;
+document.getElementById("scissor").innerHTML=SC.map(([n,v,e],i)=>{
+ const bar=(val,cls)=>{const w=Math.abs(val)/SPAN*100;
+  const l=val>=0?Z:Z-w;
+  return `<i class="b ${cls} ${val>=0?'pos':'neg'}" style="left:${l}%;width:${w}%;animation-delay:${i*45}ms"><span>${val>0?'+':''}${val}${cls==='v'?'%':'pp'}</span></i>`;};
+ return `<div class="row"><div class="co">${n}</div><div class="track"><i class="axis" style="left:${Z}%"></i>${bar(v,'v')}${bar(e,'e')}</div></div>`;
+}).join("");
+
+/* LEAGUE: [company, NIM%, subLabel] — core unit economic for this sector */
+const LG=[["Ujjivan",8.5,"steady YoY"],["ESAF",7.9,"from 6.0% YoY"],["Jana",7.5,"+30bps QoQ"],
+ ["Equitas",7.24,"-12bps QoQ"],["Utkarsh",6.1,"+~20bps YoY"],["AU",5.9,"+47bps YoY"],
+ ["Suryoday",0,"n/d — not disclosed in Q1 release"]];
+const LMAX=9;
+document.getElementById("league").innerHTML=LG.map(([n,v,d],i)=>{
+ const cls=v===0?"low":v>=7.5?"":v>=6?"mid":"low";
+ return `<div class="lrow"><div class="co">${n}</div>
+ <div><i class="lbar ${cls}" style="display:block;width:${v/LMAX*100}%;animation-delay:${i*40}ms"></i></div>
+ <div><div class="v">${v===0?'n/d':v+'%'}</div><div class="d">${d}</div></div></div>`;
+}).join("");
+
+/* PRESSURE POINT: [label, sector-avg GNPA%] equal-weighted across the 7 */
+const FU=[["Q1 FY26",5.58],["Q1 FY27",3.82]];
+const FMAX=6.5;
+document.getElementById("fuel").innerHTML=FU.map(([l,v],i)=>
+ `<div class="fp"><b>${v}%</b><i style="height:${v/FMAX*88}px;animation-delay:${i*120}ms"></i><em>${l}</em></div>`).join("");
+
+/* CARDS */
+const CO=[
+ {n:"AU Small Finance Bank",t:"AUBANK",b:"del",bl:"Delivered",
+  k:[["+37%","PAT growth YoY",1],["5.9%","NIM, +47bps YoY",1],["2.10%","GNPA, best in cohort",1],["18.9%","CRAR",1]],
+  p:["Only SFB with an in-principle RBI approval to become a universal bank — the rest of the sector is still trying.",
+     "Advances grew 23% YoY to ₹1.44 lakh crore while GNPA fell to 2.10%, the lowest in this cohort by a wide margin.",
+     "NIM is the lowest of the seven at 5.9% — the cost of running the largest, most diversified, least microfinance-dependent book in the sector.",
+     "Disbursements up 42% YoY signal a bank now underwriting for growth, not just cleaning up."],
+  f:[["Universal-bank execution risk",""],["Best asset quality in cohort","ok"]]},
+
+ {n:"Ujjivan Small Finance Bank",t:"UJJIVANSFB",b:"part",bl:"Partial",
+  k:[["+207%","PAT growth YoY",1],["8.5%","NIM, highest in cohort",1],["2.17%","GNPA",1],["49.6%","Unsecured share of book",-1]],
+  p:["RBI returned Ujjivan's universal-bank application in April 2026 — unsecured loans were 52% of the book at the time.",
+     "Everything else in this print is strong: PAT up 207%, NIM steady at a sector-best 8.5%, GNPA down to 2.17%, CASA up 38% YoY.",
+     "Management is responding — gold-loan branches going from ~430 to ~575 by year-end is a direct secured-mix play aimed at clearing the same bar next time.",
+     "The strategic setback and the operating strength are both real and don't cancel out: the re-rating case rests on the licence, not the quarter."],
+  f:[["Universal-bank application returned",""],["Sector-best NIM & GNPA","ok"]]},
+
+ {n:"Equitas Small Finance Bank",t:"EQUITASBNK",b:"del",bl:"Delivered",
+  k:[["₹184cr","PAT, vs ₹224cr LOSS YoY",1],["7.24%","NIM, -12bps QoQ",-1],["+27%","Advances YoY, beat 20% guide",1],["1.18%","ROA, tracking 1.2-1.25% guide",1]],
+  p:["A year ago this was a loss-making bank with 6.48% credit cost. This quarter: profit, credit cost of 1.37%, GNPA down to 2.36%.",
+     "NIM is already compressing quarter-on-quarter (7.36%→7.24%) even as management guides 'sustainable ~7%' — the direction is arriving faster than the number suggests comfort with.",
+     "Cost of funds rose QoQ to 7.05% while cost-to-income stayed elevated at 68.4% — funding-cost relief hasn't shown up yet.",
+     "Microfinance is now just 10% of advances — the book looks nothing like the one that lost money a year ago."],
+  f:[["NIM compressing QoQ",""],["Loss-to-profit turnaround","ok"]]},
+
+ {n:"Jana Small Finance Bank",t:"JSFB",b:"part",bl:"Partial",
+  k:[["+52%","PAT growth YoY",1],["7.5%","NIM, +30bps QoQ",1],["0.45%","Credit cost, best in cohort",1],["73%","Secured share, +29% YoY",1]],
+  p:["Held GNPA below 3% for two straight years specifically to support a universal-bank application — RBI returned it anyway in October 2025, at 72.5% secured assets.",
+     "Gold loans up 113% YoY and vehicle loans up 78% are carrying growth; Micro-LAP slowed sharply to just 5% YoY, a visible mix shift.",
+     "FY27 guidance of 19-21% asset growth and 80%+ PAT growth was set this quarter — Q1's 52% PAT growth is a reasonable start but not yet at that run-rate.",
+     "Best credit cost in the cohort at 0.45%, flat QoQ — the cleanest book of the four small-cap names."],
+  f:[["Universal-bank application returned",""],["Cleanest credit cost in cohort","ok"]]},
+
+ {n:"Utkarsh Small Finance Bank",t:"UTKARSHBNK",b:"miss",bl:"Missed",
+  k:[["−₹34cr","Net loss, improved 86% YoY",0],["5.9%","GNPA, highest in cohort",-1],["+2.0%","Advances YoY — weakest by far",-1],["17.4%","CRAR, lowest cushion in cohort",-1]],
+  p:["Still loss-making, with the highest GNPA and by far the weakest loan growth in the cohort — the recovery here is real but years behind the other six.",
+     "Gross loan portfolio grew just 2.0% YoY to ₹19,610cr while deposits grew 3% — this bank is still repairing, not growing.",
+     "Management's own growth and margin targets are pinned to FY28, not FY27 — an implicit admission that FY27 is still a stabilisation year.",
+     "A holding-company amalgamation is before the NCLT (hearing scheduled 6 August 2026) — a structural distraction layered on the operating repair."],
+  f:[["Still loss-making, 2% loan growth",""],["Loss narrowed 86% YoY","ok"]]},
+
+ {n:"ESAF Small Finance Bank",t:"ESAFSFB",b:"del",bl:"Delivered",
+  k:[["₹80cr","PAT, vs ₹81cr LOSS YoY",1],["5.4%","GNPA, from 8.54% YoY",1],["38%","Unsecured/MFI share, from 69%",1],["7.9%","NIM, from 6.0% YoY",1]],
+  p:["Five consecutive quarterly losses through FY25–H1FY26, then two straight profitable quarters since Q3 FY26 — the sharpest turnaround in the cohort.",
+     "Cut microfinance and unsecured exposure from 69% to 38% of advances in about a year — one of the fastest de-risking moves in Indian banking, not just this sector.",
+     "CARE Ratings moved the outlook to Stable from Negative on 2 September 2026 — eight days before this report, reaffirming CARE A-.",
+     "Cost-to-income fell from 78.2% to 58.1% — a lot of the profit recovery is operating leverage on a book that stopped bleeding, not yet a mature run-rate."],
+  f:[["Rating outlook only 8 days old",""],["Fastest de-risking in cohort","ok"]]},
+
+ {n:"Suryoday Small Finance Bank",t:"SURYODAY",b:"part",bl:"Partial",
+  k:[["+113%","PAT growth YoY",1],["1.6%","ROA, from 0.9% YoY",1],["6.6%","GNPA, second-highest in cohort",-1],["+32.5%","Advances YoY, fastest in cohort",1]],
+  p:["Fastest loan growth in the cohort at 32.5% YoY, and PAT more than doubled — on paper the standout small-cap print.",
+     "GNPA at 6.6% is still the second-highest in the cohort, and NNPA% was not disclosed in the Q1 release or investor presentation.",
+     "About 98% of the Inclusive Finance (microfinance) book sits under CGFMU credit-guarantee cover, with ₹387cr already claimed — the guarantee is doing real work in keeping reported credit cost down.",
+     "CASA ratio up 326bps YoY to 21.0% and bulk deposits down 11% YoY — the funding mix is genuinely improving, independent of the guarantee support."],
+  f:[["NNPA% undisclosed",""],["Fastest loan growth in cohort","ok"]]}
+];
+document.getElementById("cards").innerHTML=CO.map(c=>`
+ <article class="c">
+  <div class="chead"><div><h3>${c.n}</h3><div class="tick">${c.t}</div></div><div class="badge ${c.b}">${c.bl}</div></div>
+  <div class="tiles">${c.k.map(([n,l,s])=>`<div class="tile"><div class="n ${s===1?'up':s===-1?'dn':''}">${n}</div><div class="l">${l}</div></div>`).join("")}</div>
+  <ul>${c.p.map(x=>`<li>${x}</li>`).join("")}</ul>
+  <div class="flags">${c.f.map(([t,k])=>`<span class="flag ${k}">${t}</span>`).join("")}</div>
+ </article>`).join("");
+
+/* KPI TABLE: [company, NIM, NIMchg, advYoY, depYoY, GNPA, creditCost, CASA, unsecuredMix] */
+const KPI=[
+ ["AU","5.9%","+47bps YoY","+23%","+24%","2.10%","0.8%","29%","~33%"],
+ ["Ujjivan","8.5%","steady","+28.9%","+24.6%","2.17%","n/d","26.9%","49.6%"],
+ ["Equitas","7.24%","-12bps QoQ","+27%","+10%","2.36%","1.37%","25%","10% (MFI)"],
+ ["Jana","7.5%","+30bps QoQ","+26%","+22%","2.24%","0.45%","n/d","27%"],
+ ["Utkarsh","6.1%","+~20bps YoY","+2.0%","+3%","5.9%","2.3%","22%","49%"],
+ ["ESAF","7.9%","from 6.0% YoY","+27%","+19%","5.4%","n/d","23.4%","38%"],
+ ["Suryoday","n/d","n/d","+32.5%","+29.4%","6.6%","n/d","21.0%","n/d"]
+];
+document.getElementById("kpi").innerHTML=KPI.map(r=>
+ `<tr><td class="co">${r[0]}</td>`+r.slice(1).map(c=>`<td class="kpi">${c}</td>`).join("")+`</tr>`).join("");
+
+/* RETURNS: [company, ticker, resultsDate, cmp, 1y, 6m, 3m, mtd] — sorted by 1Y desc, Kite, 10 Sep 2026 close */
+const RET=[
+ ["AU","AUBANK","25 Jul 2026","1,054.70","+47.8%","+12.4%","+10.0%","-2.9%"],
+ ["ESAF","ESAFSFB","31 Jul 2026","40.39","+38.3%","+60.3%","+48.0%","-6.0%"],
+ ["Ujjivan","UJJIVANSFB","23 Jul 2026","66.52","+37.6%","+18.7%","+25.7%","-3.7%"],
+ ["Equitas","EQUITASBNK","29 Jul 2026","72.63","+33.9%","+24.7%","-1.2%","-1.8%"],
+ ["Suryoday","SURYODAY","24 Jul 2026","151.06","+19.3%","+12.9%","-11.1%","-2.3%"],
+ ["Jana","JSFB","15 Jul 2026","514.75","+9.4%","+44.8%","+10.3%","-4.2%"],
+ ["Utkarsh","UTKARSHBNK","late Jul 2026","14.80","-19.4%","+16.8%","+18.0%","-1.7%"]
+];
+document.getElementById("ret").innerHTML=RET.map(r=>{
+ const cell=v=>{
+   if(v==="n/s") return `<td class="num ns">n/s</td>`;
+   const cls=v.startsWith("+")?"up":v.startsWith("-")?"dn":"";
+   return `<td class="num ${cls}">${v}</td>`;
+ };
+ return `<tr><td class="co">${r[0]}</td><td class="tick">${r[1]}</td><td>${r[2]}</td>`
+  +`<td class="num">${r[3]==="n/s"?'<span class="ns">n/s</span>':r[3]}</td>`
+  +r.slice(4).map(cell).join("")+`</tr>`;
+}).join("");
+
+/* SCORECARD: [company, promised, delivered, "del"|"part"|"miss", verdictLabel] */
+const SCORE=[
+ ["AU","Continue the FY26 credit-cost normalisation trend (0.96% exit); no numeric FY27 target given, alongside progressing the universal-bank filing.","Credit cost improved further to 0.8%, GNPA to 2.10%, and the bank reported in-principle universal-bank approval.","del","Delivered"],
+ ["Equitas","NIM ~7% sustainable, ROA 1.2-1.25% FY27, ~20% advances growth, credit cost normalising to ~1.5% FY27.","NIM 7.24% (above target, but falling), ROA 1.18% (on track), advances +27% (beat), credit cost 1.37% (better than guide).","del","Delivered"],
+ ["Ujjivan","Sustain NIM and asset quality while diversifying away from unsecured to clear RBI's universal-bank bar (trajectory implied by FY26-exit commentary).","NIM held at 8.5%, GNPA improved to 2.17% — but RBI returned the universal-bank application in April 2026 with unsecured book still at 52%.","part","Partial"],
+ ["Jana","Maintain sub-3% GNPA and grow the secured book to support a universal-bank application (trajectory implied by FY26-exit commentary).","GNPA held at 2.24%, secured book raised to 73% — but RBI had already returned the application in October 2025 despite hitting these benchmarks.","part","Partial"],
+ ["ESAF","Return to sustainable profitability after five straight quarterly losses and keep cutting MFI/unsecured exposure (trajectory implied by FY26-exit commentary).","₹80cr profit, a second straight profitable quarter; unsecured/MFI cut to 38% from 69%; CARE upgraded the outlook to Stable.","del","Delivered"],
+ ["Utkarsh","Stabilise slippages and narrow losses through FY27 (trajectory implied by FY26-exit commentary; formal growth/margin targets are pinned to FY28).","Loss narrowed 86% YoY to ₹34cr and slippages fell from ~₹400cr to ~₹125cr YoY — but GNPA (5.9%) stays highest in cohort and loan growth is just 2.0%.","part","Partial"],
+ ["Suryoday","Continue advances growth and asset-quality repair (trajectory implied by FY26-exit commentary).","PAT +113%, advances +32.5%, GNPA improved from 8.5% to 6.6% — but GNPA and undisclosed NNPA leave asset quality unresolved.","part","Partial"]
+];
+document.getElementById("score").innerHTML=SCORE.map(([c,p,d,k,v])=>
+ `<tr><td class="co">${c}</td><td>${p}</td><td class="hide">${d}</td><td class="vd ${k}">${v}</td></tr>`).join("");
+</script>
+</body>
+</html>
