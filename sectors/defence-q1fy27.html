@@ -2,47 +2,50 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Defence Q1 FY27 - Sector Earnings Review</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Defence Q1 FY27 — Sector Earnings Review</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Roboto+Mono:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
 <style>
+
+
+
+
 :root{
   --stone:#E3E0D9; --card:#F3F1EC; --card2:#EAE7E0;
   --ink:#1F1D1A; --mute:#6E6A62; --faint:#9A958B; --rule:#C9C4B9;
-  --gain:#1D5C7A; --loss:#A8382C; 
-  --vol:#8E8879; --gold:#B4842A;
+  --gain:#1D5C7A; --loss:#A8382C; --vol:#8E8879; --gold:#B4842A;
   --disp:'Archivo',system-ui,sans-serif;
   --serif:'Source Serif 4',Georgia,serif;
-  --mono:'IBM Plex Mono',ui-monospace,monospace;
+  --mono:'Roboto Mono',ui-monospace,monospace;
 }
 *{box-sizing:border-box}
 body{margin:0;background:var(--stone);color:var(--ink);font-family:var(--serif);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
 .wrap{max-width:1080px;margin:0 auto;padding:28px 20px 90px}
 section{margin-bottom:40px}
-
 .eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
-h1{font-family:var(--disp);font-weight:800;font-size:clamp(34px,7vw,62px);line-height:.94;letter-spacing:-.03em;margin:.18em 0 .22em;text-transform:uppercase}
-h2{font-family:var(--disp);font-weight:700;font-size:clamp(19px,3.2vw,25px);letter-spacing:-.015em;margin:0 0 12px;text-transform:uppercase}
+h1{font-family:var(--disp);font-weight:800;font-size:clamp(32px,6.8vw,60px);line-height:.94;letter-spacing:-.03em;margin:.18em 0 .22em;text-transform:uppercase}
+h2{font-family:var(--disp);font-weight:700;font-size:clamp(19px,3.2vw,25px);letter-spacing:-.015em;margin:0 0 4px;text-transform:uppercase}
 h3{font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:-.005em;margin:0}
-.dek{font-size:17px;color:var(--mute);max-width:56ch;margin:0}
-.note{font-size:13px;color:var(--mute);margin:4px 0 20px;max-width:70ch}
+.dek{font-size:17px;color:var(--mute);max-width:58ch;margin:0}
+.note{font-size:13px;color:var(--mute);margin:4px 0 20px;max-width:72ch}
 .rule{height:3px;background:var(--ink);margin:0 0 16px}
 
 .thesis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:2px;background:var(--rule);border:2px solid var(--ink);margin-top:26px}
 .t{background:var(--card);padding:13px 15px}
-.t .n{font-family:var(--disp);font-weight:800;font-size:26px;line-height:1.05;letter-spacing:-.02em}
+.t .n{font-family:var(--disp);font-weight:800;font-size:25px;line-height:1.05;letter-spacing:-.02em}
 .t .l{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:5px;line-height:1.35}
 .t.up .n{color:var(--gain)} .t.dn .n{color:var(--loss)}
 
+/* scissor */
 .scissor{background:var(--card);border:2px solid var(--ink);padding:18px 16px 12px}
 .legend{display:flex;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin-bottom:14px}
 .legend span{display:flex;align-items:center;gap:6px}
 .sw{width:13px;height:11px;display:inline-block}
-.row{display:grid;grid-template-columns:128px 1fr;gap:10px;align-items:center;margin-bottom:6px}
+.row{display:grid;grid-template-columns:110px 1fr;gap:10px;align-items:center;margin-bottom:3px}
 .row .co{font-family:var(--disp);font-weight:600;font-size:12px;text-align:right;line-height:1.15}
-.track{position:relative;height:26px;border-left:2px solid var(--ink);border-right:0;overflow:hidden}
+.track{position:relative;height:26px}
 .axis{position:absolute;top:0;bottom:0;width:2px;background:var(--ink);opacity:.85}
 .b{position:absolute;height:10px}
 .b.v{top:1px;background:var(--vol)}
@@ -51,42 +54,50 @@ h3{font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:-.005em
 .b span{position:absolute;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:9.5px;font-weight:500;white-space:nowrap;color:var(--ink)}
 .b.pos span,.b.v span{left:calc(100% + 5px)}
 .b.neg span{right:calc(100% + 5px)}
-.scale{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9.5px;color:var(--faint);margin-top:6px;padding-left:138px}
+.scale{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9.5px;color:var(--faint);margin-top:6px;padding-left:120px}
 
+/* league */
 .league{background:var(--card);border:2px solid var(--ink);padding:16px}
-.lrow{display:grid;grid-template-columns:140px 1fr 110px;gap:10px;align-items:center;padding:6px 0;border-bottom:1px solid var(--rule)}
+.lrow{display:grid;grid-template-columns:118px 1fr 108px;gap:10px;align-items:center;padding:5px 0;border-bottom:1px solid var(--rule)}
 .lrow:last-child{border-bottom:0}
 .lrow .co{font-family:var(--disp);font-weight:600;font-size:12.5px;text-align:right}
-.lbar{height:16px;background:var(--gain);position:relative;overflow:hidden}
-.lbar.mid{background:#4A7F91} .lbar.low{background:var(--loss)}
+.lbar{height:16px;background:var(--gain);display:block}
+.lbar.mid{background:#4A7F91} .lbar.low{background:var(--loss)} .lbar.na{background:var(--rule)}
 .lrow .v{font-family:var(--mono);font-size:12px;font-weight:700;text-align:right}
 .lrow .d{font-family:var(--mono);font-size:10px;color:var(--mute);text-align:right}
 
+/* pressure point — incremental margin */
 .fuel{background:var(--ink);color:var(--card);border:2px solid var(--ink);padding:18px}
 .fuel h2{color:var(--card)}
-.fline{display:flex;align-items:flex-end;gap:0;height:110px;margin:20px 0 6px}
-.fp{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:6px}
-.fp i{display:block;width:100%;max-width:52px;background:var(--gold)}
-.fp b{font-family:var(--mono);font-size:12px;font-weight:700}
-.fp em{font-family:var(--mono);font-size:9.5px;font-style:normal;letter-spacing:.09em;text-transform:uppercase;color:#A9A296}
-.warn{border-top:1px solid #4A453C;margin-top:14px;padding-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
+.fuel .note{color:#A9A296}
+.inc{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:#3A352E;margin:18px 0 0}
+.ic{background:#26231F;padding:15px}
+.ic .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:#A9A296;margin-bottom:8px}
+.ic .big{font-family:var(--disp);font-weight:800;font-size:38px;line-height:1;letter-spacing:-.03em;color:var(--gold)}
+.ic .sub{font-size:13px;color:#D6D1C6;margin-top:8px}
+.stack{margin-top:14px;display:flex;flex-direction:column;gap:6px}
+.sb{display:grid;grid-template-columns:64px 1fr;gap:8px;align-items:center;font-family:var(--mono);font-size:10px;color:#A9A296}
+.sb i{display:block;height:14px;background:var(--gold)}
+.sb i.dim{background:#5A5348}
+@media(max-width:620px){.inc{grid-template-columns:1fr}}
+.warn{border-top:1px solid #4A453C;margin-top:16px;padding-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px}
 .warn div{font-size:13.5px;color:#D6D1C6}
-.warn strong{display:block;font-family:var(--mono);font-size:17px;font-weight:700;color:var(--gold);margin-bottom:2px}
+.warn strong{display:block;font-family:var(--mono);font-size:16px;font-weight:700;color:var(--gold);margin-bottom:2px}
 
+/* cards */
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
 .c{background:var(--card);border:2px solid var(--ink);padding:14px;display:flex;flex-direction:column}
+.c.pending{background:var(--card2);border-style:dashed}
 .chead{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:2px}
-.id{display:flex;gap:8px;align-items:center}
-.logo{width:28px;height:28px;flex-shrink:0;border:1.5px solid var(--ink);background:var(--card2);display:flex;align-items:center;justify-content:center;overflow:hidden}
-.logo .mono{font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.01em;color:var(--ink)}
 .tick{font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacing:.06em}
 .badge{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 6px;border:1.5px solid;white-space:nowrap;flex-shrink:0}
 .badge.del{color:var(--gain);border-color:var(--gain)}
 .badge.part{color:var(--gold);border-color:var(--gold)}
 .badge.miss{color:var(--loss);border-color:var(--loss)}
+.badge.na{color:var(--faint);border-color:var(--faint)}
 .tiles{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);margin:11px 0}
 .tile{background:var(--card2);padding:7px 9px}
-.tile .n{font-family:var(--mono);font-size:15px;font-weight:700;line-height:1.15}
+.tile .n{font-family:var(--mono);font-size:14.5px;font-weight:700;line-height:1.15}
 .tile .l{font-family:var(--mono);font-size:8.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:3px}
 .tile .n.up{color:var(--gain)} .tile .n.dn{color:var(--loss)}
 .c ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
@@ -95,955 +106,617 @@ h3{font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:-.005em
 .flags{margin-top:auto;padding-top:10px;display:flex;flex-wrap:wrap;gap:5px}
 .flag{font-family:var(--mono);font-size:9px;letter-spacing:.05em;text-transform:uppercase;background:var(--loss);color:var(--card);padding:3px 6px}
 .flag.ok{background:var(--gain)}
+.flag.nu{background:var(--faint)}
 
-.matrix{background:var(--card);border:2px solid var(--ink);padding:16px;overflow-x:auto}
-table{width:100%;border-collapse:collapse;font-size:13px;text-align:left}
-th{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);padding:8px 10px;border-bottom:2px solid var(--ink)}
-td{padding:10px;border-bottom:1px solid var(--rule);vertical-align:top}
+/* themes */
+.themes{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.th{background:var(--card);border:2px solid var(--ink);padding:14px}
+.th .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--mute);border-bottom:2px solid var(--ink);padding-bottom:6px;margin-bottom:9px}
+.th ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.th li{margin-bottom:6px}
+.th li::marker{color:var(--faint)}
+.th b{font-family:var(--mono);font-size:12.5px;font-weight:700}
+
+/* red flags */
+.rf{background:var(--card);border:2px solid var(--ink)}
+.rfg{border-bottom:2px solid var(--ink)}
+.rfg:last-child{border-bottom:0}
+.rfh{display:flex;align-items:center;gap:9px;padding:8px 13px;background:var(--card2)}
+.sev{width:11px;height:11px;flex-shrink:0}
+.sev.hi{background:var(--loss)} .sev.md{background:var(--gold)} .sev.lo{background:var(--faint)}
+.rfh span{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase}
+.rfr{display:grid;grid-template-columns:126px 1fr;gap:12px;padding:9px 13px;border-top:1px solid var(--rule);font-size:13.5px}
+.rfr b{font-family:var(--disp);font-weight:700;font-size:12.5px}
+@media(max-width:560px){.rfr{grid-template-columns:1fr;gap:3px}}
+
+table{width:100%;border-collapse:collapse;background:var(--card);border:2px solid var(--ink)}
+th{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;text-align:left;padding:9px 10px;background:var(--ink);color:var(--card)}
+td{padding:9px 10px;border-bottom:1px solid var(--rule);font-size:13.5px;vertical-align:top}
 tr:last-child td{border-bottom:0}
-td.mono{font-family:var(--mono);font-weight:600}
-td.up{color:var(--gain);font-family:var(--mono);font-weight:700}
-td.dn{color:var(--loss);font-family:var(--mono);font-weight:700}
-.arrow{display:inline-block;margin:0 4px;font-weight:bold}
+td.co{font-family:var(--disp);font-weight:700;font-size:13px;white-space:nowrap}
+td.vd{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;white-space:nowrap}
+.vd.del{color:var(--gain)} .vd.part{color:var(--gold)} .vd.miss{color:var(--loss)} .vd.na{color:var(--faint)}
 
-.quotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
-.qcard{background:var(--card);border:2px solid var(--ink);padding:16px;position:relative}
-.qcard blockquote{margin:0 0 12px;font-size:14px;font-style:italic;line-height:1.45}
-.qcard .auth{font-family:var(--disp);font-weight:700;font-size:13px;margin-bottom:2px}
-.qcard .role{font-family:var(--mono);font-size:10px;color:var(--mute)}
+.indra{background:var(--card);border:2px solid var(--ink);padding:16px}
+.vs{display:grid;grid-template-columns:82px 1fr;gap:11px;padding:7px 0;border-bottom:1px solid var(--rule);font-size:13.5px;align-items:start}
+.vs:last-child{border-bottom:0}
+.vs em{font-family:var(--mono);font-size:9.5px;font-style:normal;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding-top:2px}
+.vs em.y{color:var(--gain)} .vs em.n{color:var(--loss)} .vs em.p{color:var(--gold)}
 
-.rfgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
-.rfcard{background:var(--card);border:2px solid var(--ink);border-top:4px solid var(--loss);padding:16px}
-.rfcard h3{color:var(--loss);margin-bottom:6px}
-.rfcard p{margin:0;font-size:13.5px;color:var(--ink)}
+.calls{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.call{border:2px solid var(--ink);padding:15px;background:var(--card)}
+.call.buy{border-left:9px solid var(--gain)}
+.call.wait{border-left:9px solid var(--gold)}
+.call.avoid{border-left:9px solid var(--loss)}
+.call .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.call h3{margin:4px 0 7px;font-size:17px}
+.call p{margin:0;font-size:13.5px}
+.trigs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:14px}
+.tg{border:2px solid var(--ink);padding:14px;background:var(--card)}
+.tg .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
+.tg.tg-up .k{color:var(--gain)} .tg.tg-dn .k{color:var(--loss)}
+.tg ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.tg li{margin-bottom:6px}
 
-.wtgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
-.wtcard{background:var(--card);border:2px solid var(--ink);padding:16px}
-.wthead{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
-.wtscore{font-family:var(--mono);font-weight:700;font-size:12px;padding:3px 8px;border:1px solid}
-.wtscore.high{color:var(--gain);border-color:var(--gain);background:#EBF3F7}
-.wtscore.mid{color:var(--gold);border-color:var(--gold);background:#FDF8EC}
+.cav{background:var(--card2);border:2px solid var(--ink);padding:15px 15px 15px 30px;margin:0;font-size:13.5px;line-height:1.55}
+.cav li{margin-bottom:8px}
+.cav li:last-child{margin-bottom:0}
+.cav b{font-family:var(--mono);font-size:12px;font-weight:700}
 
-.synth{background:var(--card);border:2px solid var(--ink);padding:20px}
-.synth p{margin:0 0 12px;font-size:14.5px;line-height:1.6}
-.synth p:last-child{margin-bottom:0}
 
-.calls{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
-.call{background:var(--card);border:2px solid var(--ink);padding:16px}
-.call.buy{border-top:4px solid var(--gain)}
-.call.hold{border-top:4px solid var(--gold)}
-.call.watch{border-top:4px solid var(--mute)}
-.call .type{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
-.call h3{font-size:18px;margin:4px 0 8px}
-.call .target{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--gain);margin-bottom:8px}
-.call p{margin:0;font-size:13.5px;line-height:1.45}
+/* wide data tables */
+.tw{overflow-x:auto;border:2px solid var(--ink);background:var(--card)}
+.tw table{border:0;min-width:660px}
+.tw th{position:sticky;top:0}
+td.num{font-family:var(--mono);font-size:12px;font-weight:700;text-align:right;white-space:nowrap}
+td.num.up{color:var(--gain)} td.num.dn{color:var(--loss)} td.num.ns{color:var(--faint);font-weight:400}
+th.r{text-align:right}
+td.kpi{font-family:var(--mono);font-size:11.5px;text-align:right;white-space:nowrap}
+tr.sep td{border-top:2px solid var(--ink);background:var(--card2)}
+.asof{font-family:var(--mono);font-size:11px;color:var(--mute);margin-top:10px;line-height:1.6}
+.asof b{color:var(--ink)}
 
-footer{margin-top:60px;padding-top:20px;border-top:2px solid var(--ink);font-family:var(--mono);font-size:11px;color:var(--mute);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+footer{border-top:3px solid var(--ink);padding-top:15px;font-size:12.5px;color:var(--mute)}
+footer p{margin:0 0 8px;max-width:80ch}
+
+@media(max-width:620px){
+  .row{grid-template-columns:76px 1fr;gap:7px}
+  .row .co{font-size:10.5px}
+  .scale{padding-left:83px}
+  .lrow{grid-template-columns:84px 1fr 88px}
+  .lrow .co{font-size:11px}
+  .wrap{padding:20px 13px 60px}
+  td.hide,th.hide{display:none}
+}
+@media(prefers-reduced-motion:no-preference){
+  .b,.lbar,.sb i{animation:g .7s cubic-bezier(.2,.7,.3,1) both}
+  @keyframes g{from{transform:scaleX(.001);opacity:0}to{transform:scaleX(1);opacity:1}}
+  .b.neg{transform-origin:right} .b.v,.b.pos,.lbar,.sb i{transform-origin:left}
+}
+
+/* group tags */
+.grouptag{display:inline-block;font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;background:var(--ink);color:var(--card);padding:3px 8px;margin-bottom:10px}
+.grouptag.gt-erd{background:var(--gold)}
+.grouptag.gt-cpaas{background:var(--loss)}
+
+.grouptag{display:inline-block;font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;background:var(--ink);color:var(--card);padding:3px 8px;margin-bottom:10px}
+.gold{position:relative}
+.goldline{position:absolute;top:0;bottom:0;width:3px;background:var(--gold);z-index:3}
+.goldlbl{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);font-weight:700}
+
+.grouptag{display:inline-block;font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;background:var(--ink);color:var(--card);padding:3px 8px;margin-bottom:10px}
+.gold{position:relative}
+.goldline{position:absolute;top:0;bottom:0;width:3px;background:var(--gold);z-index:3}
+.goldlbl{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);font-weight:700}
+.duty{background:var(--ink);color:var(--card);border:2px solid var(--ink);padding:18px;margin-bottom:14px}
+.duty h2{color:var(--card)}
+.duty .big{font-family:var(--disp);font-weight:800;font-size:clamp(38px,8vw,62px);line-height:1;letter-spacing:-.03em;color:var(--gold);margin:10px 0 6px}
+.duty p{color:#D6D1C6;font-size:14px;margin:0;max-width:64ch}
+.grp{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+
+.grouptag{display:inline-block;font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;background:var(--ink);color:var(--card);padding:3px 8px;margin-bottom:10px}
+.split-note{border:2px solid var(--gold);padding:14px 18px;margin:14px 0;background:var(--card)}
+.split-note h3{margin:0 0 6px;font-size:13px;color:var(--gold);letter-spacing:.08em;text-transform:uppercase}
+.split-note p{margin:0;font-size:13px;line-height:1.65}
 </style>
 </head>
 <body>
 <div class="wrap">
 
-<!-- SECTION 1: MASTHEAD & THESIS -->
-<section>
-  <div class="eyebrow">RAJAN SECTOR EARNINGS REVIEW • Q1 FY27 • SECTOR #3</div>
-  <h1>DEFENCE</h1>
-  <p class="dek">Record ₹3.8 Lakh Cr Order Backlogs Meet Capacity & Supply Chain Bottlenecks — PSU Shipbuilders & Defence Electronics Outperform, Munitions Accelerates Global Export Drive.</p>
-  
+<header>
+  <div class="eyebrow">Sector earnings review · Quarter ended 30 June 2026 · 14 companies</div>
+  <h1>Defence<br>Q1 FY27</h1>
+  <p class="dek">MTAR Technologies is up 336% over a year. BDL is down 26%. Both are defence stocks. Both had strong quarters. The market is not pricing the defence budget — it is pricing who captures it and when.</p>
   <div class="thesis">
-    <div class="t up">
-      <div class="n">+22.4%</div>
-      <div class="l">Aggregate Sector Revenue YoY</div>
-    </div>
-    <div class="t up">
-      <div class="n">26.8%</div>
-      <div class="l">Average Sector OPM (+180 bps)</div>
-    </div>
-    <div class="t up">
-      <div class="n">₹3.82L Cr</div>
-      <div class="l">Combined Order Backlog (4.8x Book-to-Bill)</div>
-    </div>
-    <div class="t dn">
-      <div class="n">185 Days</div>
-      <div class="l">Avg Working Capital Lockup (MoD Receivables)</div>
-    </div>
+    <div class="t up"><div class="n">+336%</div><div class="l">MTAR Tech, 1-year return</div></div>
+    <div class="t up"><div class="n">₹2.55L cr</div><div class="l">HAL order book</div></div>
+    <div class="t dn"><div class="n">−26%</div><div class="l">BDL, 1-year return</div></div>
+    <div class="t dn"><div class="n">55%</div><div class="l">BEL material cost surge YoY</div></div>
+  </div>
+</header>
+
+<section>
+  <div class="grouptag">Four business models</div>
+  <h2>The structural split the returns are pricing</h2>
+  <div class="rule"></div>
+  <div class="split-note">
+    <h3>Private vs PSU — five names above +50% in one year, five names negative</h3>
+    <p>MTAR (+336%), Paras (+107%), Data Patterns (+78%), Astra (+55%), Solar (+54%) are all private or mixed-commercial. BDL (−26%), Cochin (−24%), Mazagon (−20%), GRSE (−6%), BEML (−9%) are all defence PSUs. The Nifty Defence Index hit a fresh 52-week high on 13 August 2026 — the index is being driven by the private names while the PSU shipbuilders correct from peak valuations. Same defence budget, very different stock outcomes depending on execution certainty and order-book conversion speed.</p>
+  </div>
+  <div class="themes">
+    <div class="th"><div class="k">PSU primes — 6</div><ul>
+      <li>HAL, BEL, BDL: aircraft, electronics, missiles.</li>
+      <li>Mazagon Dock, Cochin Shipyard, GRSE: naval shipbuilding.</li>
+      <li>Judged on <b>EBITDA margin and order book/revenue</b>.</li>
+      <li>Hunt for: MoD receivables, provisional pricing, provision write-backs flattering margins.</li>
+    </ul></div>
+    <div class="th"><div class="k">Diversified PSU — 1</div><ul>
+      <li>BEML: defence, rail &amp; metro, mining equipment.</li>
+      <li>Still loss-making at PAT level but first positive Q1 EBITDA in 10 years.</li>
+    </ul></div>
+    <div class="th"><div class="k">Private defence electronics — 4</div><ul>
+      <li>Data Patterns, Astra Microwave, Zen Technologies, Paras Defence.</li>
+      <li>Beneficiaries of indigenisation, sub-system orders flowing from PSU primes.</li>
+      <li>Lumpy quarterly recognition is normal — one order can swing a quarter either way.</li>
+    </ul></div>
+    <div class="th"><div class="k">Niche / emerging — 3</div><ul>
+      <li>MTAR Technologies: precision machining for nuclear, aerospace, defence.</li>
+      <li>Solar Industries India: commercial explosives + fast-growing defence segment.</li>
+      <li>ideaForge Technology: indigenous UAV leader, first positive EBITDA quarter.</li>
+    </ul></div>
   </div>
 </section>
 
-<!-- SECTION 2: SCISSOR ANALYSIS -->
 <section>
-  <h2>01 / Scissor Analysis — Revenue Growth vs Margin Divergence</h2>
+  <h2>The scissor — revenue growth vs EBITDA margin change</h2>
   <div class="rule"></div>
-  <p class="note">Comparing quarterly net sales growth against operating margin expansion. Shipbuilders and electronics suppliers expanded margins on operating leverage, while missile & ammunition players faced raw material price pressures.</p>
-  
+  <p class="note">Same axis. Margin change in basis points divided by ten. The widest positive spread — HAL at +47% EBITDA on +14% revenue — is also the most questioned.</p>
   <div class="scissor">
     <div class="legend">
-      <span><i class="sw" style="background:var(--vol)"></i> Revenue Growth YoY (%)</span>
-      <span><i class="sw" style="background:var(--gain)"></i> OPM YoY Delta (+ bps / - bps)</span>
+      <span><i class="sw" style="background:var(--vol)"></i>Revenue growth YoY</span>
+      <span><i class="sw" style="background:var(--gain)"></i>Margin expansion</span>
+      <span><i class="sw" style="background:var(--loss)"></i>Margin contraction</span>
     </div>
-    
-    <div class="row">
-      <div class="co">Hindustan Aero</div>
-      <div class="track">
-        <div class="axis" style="left:30%"></div>
-        <div class="b v" style="left:30%;width:26.8%"><span>+26.8%</span></div>
-        <div class="b e pos" style="left:30%;width:18%"><span>+180 bps (27.7% OPM)</span></div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="co">Bharat Electronics</div>
-      <div class="track">
-        <div class="axis" style="left:30%"></div>
-        <div class="b v" style="left:30%;width:20.1%"><span>+20.1%</span></div>
-        <div class="b e pos" style="left:30%;width:21%"><span>+210 bps (28.6% OPM)</span></div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="co">Mazagon Dock</div>
-      <div class="track">
-        <div class="axis" style="left:30%"></div>
-        <div class="b v" style="left:30%;width:34.2%"><span>+34.2%</span></div>
-        <div class="b e pos" style="left:30%;width:32%"><span>+320 bps (24.1% OPM)</span></div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="co">Solar Industries</div>
-      <div class="track">
-        <div class="axis" style="left:30%"></div>
-        <div class="b v" style="left:30%;width:28.5%"><span>+28.5%</span></div>
-        <div class="b e pos" style="left:30%;width:15%"><span>+150 bps (25.4% OPM)</span></div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="co">Bharat Dynamics</div>
-      <div class="track">
-        <div class="axis" style="left:30%"></div>
-        <div class="b v" style="left:30%;width:14.2%"><span>+14.2%</span></div>
-        <div class="b e neg" style="left:18%;width:12%"><span>-120 bps (19.8% OPM)</span></div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="co">Cochin Shipyard</div>
-      <div class="track">
-        <div class="axis" style="left:30%"></div>
-        <div class="b v" style="left:30%;width:31.0%"><span>+31.0%</span></div>
-        <div class="b e pos" style="left:30%;width:24%"><span>+240 bps (22.5% OPM)</span></div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="co">GRSE</div>
-      <div class="track">
-        <div class="axis" style="left:30%"></div>
-        <div class="b v" style="left:30%;width:29.4%"><span>+29.4%</span></div>
-        <div class="b e pos" style="left:30%;width:19%"><span>+190 bps (18.2% OPM)</span></div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="co">Data Patterns</div>
-      <div class="track">
-        <div class="axis" style="left:30%"></div>
-        <div class="b v" style="left:30%;width:24.8%"><span>+24.8%</span></div>
-        <div class="b e pos" style="left:30%;width:28%"><span>+280 bps (38.5% OPM)</span></div>
-      </div>
-    </div>
-
-    <div class="scale">
-      <span>-20%</span><span>0% (Baseline)</span><span>+20%</span><span>+40%</span><span>+60%</span>
-    </div>
+    <div id="scissor"></div>
+    <div class="scale"><span>−20</span><span>0</span><span>+30</span><span>+60</span><span>+90</span><span>+130</span></div>
   </div>
 </section>
 
-<!-- SECTION 3: LEAGUE TABLE -->
 <section>
-  <h2>02 / Revenue & Order Book League Table</h2>
+  <h2>Order book / revenue — the execution league</h2>
   <div class="rule"></div>
-  <div class="league">
-    <div class="lrow">
-      <div class="co">Hindustan Aero</div>
-      <div class="lbar" style="width:100%"></div>
-      <div><div class="v">₹5,515 Cr</div><div class="d">Backlog: ₹94,000 Cr</div></div>
-    </div>
-    <div class="lrow">
-      <div class="co">Bharat Electronics</div>
-      <div class="lbar mid" style="width:78%"></div>
-      <div><div class="v">₹4,280 Cr</div><div class="d">Backlog: ₹76,500 Cr</div></div>
-    </div>
-    <div class="lrow">
-      <div class="co">Mazagon Dock</div>
-      <div class="lbar mid" style="width:58%"></div>
-      <div><div class="v">₹3,180 Cr</div><div class="d">Backlog: ₹38,200 Cr</div></div>
-    </div>
-    <div class="lrow">
-      <div class="co">Solar Industries</div>
-      <div class="lbar mid" style="width:36%"></div>
-      <div><div class="v">₹1,985 Cr</div><div class="d">Backlog: ₹5,100 Cr</div></div>
-    </div>
-    <div class="lrow">
-      <div class="co">Cochin Shipyard</div>
-      <div class="lbar mid" style="width:28%"></div>
-      <div><div class="v">₹1,520 Cr</div><div class="d">Backlog: ₹22,400 Cr</div></div>
-    </div>
-    <div class="lrow">
-      <div class="co">Bharat Dynamics</div>
-      <div class="lbar low" style="width:22%"></div>
-      <div><div class="v">₹1,180 Cr</div><div class="d">Backlog: ₹19,800 Cr</div></div>
-    </div>
-  </div>
+  <p class="note">Order book divided by trailing revenue gives a coverage multiple. Higher is more visibility; above 10× is usually PSU-timing risk, not structural strength. Private names cluster at 2–5×, which converts faster.</p>
+  <div class="league" id="league"></div>
 </section>
 
-<!-- SECTION 4: PRESSURE POINT -->
 <section>
+  <h2>The pressure point: HAL's EBITDA quality</h2>
+  <div class="rule"></div>
   <div class="fuel">
-    <h2>03 / Sector Pressure Point — Supply Chain Lead Times & MoD Milestone Clearances</h2>
-    <p style="color:#D6D1C6;margin-bottom:14px">While defence order books sit at historical highs of ~4.8x annual revenues, execution velocity remains bottlenecked by foreign component availability (geopolitical delays in GE engines, French sonar arrays) and Ministry of Defence (MoD) staged milestone sign-offs.</p>
-    
-    <div class="fline">
-      <div class="fp"><b style="color:var(--gold)">42%</b><i style="height:42%"></i><em>Engine & Avionics Imports</em></div>
-      <div class="fp"><b style="color:var(--gold)">185 Days</b><i style="height:70%"></i><em>MoD Working Capital Cycle</em></div>
-      <div class="fp"><b style="color:var(--gold)">₹18,500 Cr</b><i style="height:88%"></i><em>Export Order Pipeline</em></div>
-    </div>
-    
+    <h2>Revenue grew 14%. EBITDA grew 47%. Margin jumped 610bps.</h2>
+    <p class="note">That spread is unusual for a manufacturing business where costs are largely fixed. The metric map says hunt for provision write-backs flattering PSU margins. HAL's prices are still provisional — "FPQ sales provisionally recognized using previous years' prices due to ongoing price finalization." InCred has turned cautious on earnings quality. The order book at ₹2.54 lakh crore is real; what portion of Q1 EBITDA is also real is the question the next few quarters will answer.</p>
     <div class="warn">
-      <div><strong>GE F404 Engine Delays</strong>Delivery of LCA Tejas Mk1A jet engines delayed by 6-9 months, capping HAL's Q1 aircraft deliveries.</div>
-      <div><strong>Staged Payment Milestones</strong>Shipbuilders face delayed cash conversion until sea trials and final MoD acceptance certificates are issued.</div>
-      <div><strong>Critical Raw Materials</strong>Specialty alloys, propellant chemicals, and military-grade semiconductors face global supply tightness.</div>
+      <div><strong>₹1,526cr</strong>HAL Q1 EBITDA. Revenue was ₹5,515cr — implying ₹1,526cr on ₹5,515cr of revenue at 27.7%. Q1 FY26 was 21.6%.</div>
+      <div><strong>Provisional prices</strong>HAL has not finalised aircraft prices for FY26 and Q1 FY27. Revenue is booked at prior-year rates with no escalation applied yet.</div>
+      <div><strong>InCred cautious</strong>Post-results note prefers BEL within the defence PSU space on earnings quality grounds. The bull-bear debate has moved from order book to execution quality.</div>
     </div>
   </div>
 </section>
 
-<!-- SECTION 5: COMPANY CARDS (12 COMPANIES) -->
 <section>
-  <h2>04 / Company Execution Profiles</h2>
+  <h2>Company by company</h2>
   <div class="rule"></div>
-  <div class="grid">
-
-    <!-- HAL -->
-    <div class="c">
-      <div class="chead">
-        <div class="id">
-          <div class="logo"><span class="mono">HAL</span></div>
-          <div><h3>Hindustan Aeronautics</h3><div class="tick">NSE: HAL • Large Cap</div></div>
-        </div>
-        <div class="badge del">BEAT</div>
-      </div>
-      <div class="tiles">
-        <div class="tile"><div class="n up">₹5,515 Cr</div><div class="l">Q1 Sales (+26.8%)</div></div>
-        <div class="tile"><div class="n up">27.7%</div><div class="l">OPM (+180 bps)</div></div>
-        <div class="tile"><div class="n">₹94,000 Cr</div><div class="l">Order Backlog</div></div>
-        <div class="tile"><div class="n up">₹1,578 Cr</div><div class="l">Net Profit (+10.3%)</div></div>
-      </div>
-      <ul>
-        <li>Repair & Overhaul (ROH) contributed 51.3% of revenue with steady ~32% EBITDA margins.</li>
-        <li>Tejas Mk1A delivery ramp-up underway; initial engine integration bottleneck easing.</li>
-        <li>Substantial cash reserves of >₹24,000 Cr generating high interest income (₹900 Cr in Q1).</li>
-      </ul>
-      <div class="flags">
-        <span class="flag ok">Zero Debt</span>
-        <span class="flag ok">ROH Margin Driver</span>
-        <span class="flag">Engine Delivery Risk</span>
-      </div>
-    </div>
-
-    <!-- BEL -->
-    <div class="c">
-      <div class="chead">
-        <div class="id">
-          <div class="logo"><span class="mono">BEL</span></div>
-          <div><h3>Bharat Electronics</h3><div class="tick">NSE: BEL • Large Cap</div></div>
-        </div>
-        <div class="badge del">BEAT</div>
-      </div>
-      <div class="tiles">
-        <div class="tile"><div class="n up">₹4,280 Cr</div><div class="l">Q1 Sales (+20.1%)</div></div>
-        <div class="tile"><div class="n up">28.6%</div><div class="l">OPM (+210 bps)</div></div>
-        <div class="tile"><div class="n">₹76,500 Cr</div><div class="l">Order Backlog</div></div>
-        <div class="tile"><div class="n up">₹945 Cr</div><div class="l">Net Profit (+21.8%)</div></div>
-      </div>
-      <ul>
-        <li>Strong execution across Akash Air Defence Systems, Radar Upgrades, and Naval Sonars.</li>
-        <li>Non-defence revenue mix maintained at ~10% (electronic voting machines, medical electronics).</li>
-        <li>Working capital optimized to 135 days; stellar ROCE profile exceeding 32%.</li>
-      </ul>
-      <div class="flags">
-        <span class="flag ok">32%+ ROCE</span>
-        <span class="flag ok">Radar Leadership</span>
-        <span class="flag">Receivables Rise</span>
-      </div>
-    </div>
-
-    <!-- MAZDOCK -->
-    <div class="c">
-      <div class="chead">
-        <div class="id">
-          <div class="logo"><span class="mono">MDL</span></div>
-          <div><h3>Mazagon Dock Shipbuilders</h3><div class="tick">NSE: MAZDOCK • Large Cap</div></div>
-        </div>
-        <div class="badge del">BEAT</div>
-      </div>
-      <div class="tiles">
-        <div class="tile"><div class="n up">₹3,180 Cr</div><div class="l">Q1 Sales (+34.2%)</div></div>
-        <div class="tile"><div class="n up">24.1%</div><div class="l">OPM (+320 bps)</div></div>
-        <div class="tile"><div class="n">₹38,200 Cr</div><div class="l">Order Backlog</div></div>
-        <div class="tile"><div class="n up">₹620 Cr</div><div class="l">Net Profit (+41.5%)</div></div>
-      </div>
-      <ul>
-        <li>Project 15B Destroyers and Project 17A Frigates milestone recognition accelerated in Q1.</li>
-        <li>Submarine overhaul (P-75 Kalvari class) driving high-margin repair income.</li>
-        <li>Massive interest income from MoD advance buyer deposits.</li>
-      </ul>
-      <div class="flags">
-        <span class="flag ok">Submarine Monopoly</span>
-        <span class="flag ok">High Cash Balance</span>
-        <span class="flag">Lumpy Order Inflow</span>
-      </div>
-    </div>
-
-    <!-- SOLARINDS -->
-    <div class="c">
-      <div class="chead">
-        <div class="id">
-          <div class="logo"><span class="mono">SIL</span></div>
-          <div><h3>Solar Industries India</h3><div class="tick">NSE: SOLARINDS • Large Cap</div></div>
-        </div>
-        <div class="badge del">BEAT</div>
-      </div>
-      <div class="tiles">
-        <div class="tile"><div class="n up">₹1,985 Cr</div><div class="l">Q1 Sales (+28.5%)</div></div>
-        <div class="tile"><div class="n up">25.4%</div><div class="l">OPM (+150 bps)</div></div>
-        <div class="tile"><div class="n">₹5,100 Cr</div><div class="l">Order Backlog</div></div>
-        <div class="tile"><div class="n up">₹342 Cr</div><div class="l">Net Profit (+32.1%)</div></div>
-      </div>
-      <ul>
-        <li>Defence segment revenue surged +65% YoY driven by Pinaka rockets and military explosives.</li>
-        <li>Export shipments to European and Middle Eastern defence clients growing rapidly.</li>
-        <li>Commercial explosives pricing stable; raw material input costs well pass-through.</li>
-      </ul>
-      <div class="flags">
-        <span class="flag ok">Pinaka Rocket Spike</span>
-        <span class="flag ok">Export Surge</span>
-        <span class="flag">Ammonium Nitrate Price Risk</span>
-      </div>
-    </div>
-
-    <!-- BDL -->
-    <div class="c">
-      <div class="chead">
-        <div class="id">
-          <div class="logo"><span class="mono">BDL</span></div>
-          <div><h3>Bharat Dynamics</h3><div class="tick">NSE: BDL • Mid Cap</div></div>
-        </div>
-        <div class="badge miss">MISS</div>
-      </div>
-      <div class="tiles">
-        <div class="tile"><div class="n up">₹1,180 Cr</div><div class="l">Q1 Sales (+14.2%)</div></div>
-        <div class="tile"><div class="n dn">19.8%</div><div class="l">OPM (-120 bps)</div></div>
-        <div class="tile"><div class="n">₹19,800 Cr</div><div class="l">Order Backlog</div></div>
-        <div class="tile"><div class="n dn">₹185 Cr</div><div class="l">Net Profit (-5.2%)</div></div>
-      </div>
-      <ul>
-        <li>Execution delayed by sub-component supply delays for Astra & Helina missile systems.</li>
-        <li>OPM contracted due to adverse product mix and higher raw material consumption.</li>
-        <li>Export order pipeline for Akash systems provides strong multi-year visibility.</li>
-      </ul>
-      <div class="flags">
-        <span class="flag ok">Akash Export Driver</span>
-        <span class="flag">Component Bottleneck</span>
-        <span class="flag">Margin Compression</span>
-      </div>
-    </div>
-
-    <!-- COCHINSHIP -->
-    <div class="c">
-      <div class="chead">
-        <div class="id">
-          <div class="logo"><span class="mono">CSL</span></div>
-          <div><h3>Cochin Shipyard</h3><div class="tick">NSE: COCHINSHIP • Mid Cap</div></div>
-        </div>
-        <div class="badge del">BEAT</div>
-      </div>
-      <div class="tiles">
-        <div class="tile"><div class="n up">₹1,520 Cr</div><div class="l">Q1 Sales (+31.0%)</div></div>
-        <div class="tile"><div class="n up">22.5%</div><div class="l">OPM (+240 bps)</div></div>
-        <div class="tile"><div class="n">₹22,400 Cr</div><div class="l">Order Backlog</div></div>
-        <div class="tile"><div class="n up">₹275 Cr</div><div class="l">Net Profit (+38.2%)</div></div>
-      </div>
-      <ul>
-        <li>Ship repair division posted record turnover; dry dock utilization reached 92%.</li>
-        <li>Next-Gen Missile Vessel (NGMV) construction gaining operational speed.</li>
-        <li>European commercial green vessel orders contributing ~15% to total order book.</li>
-      </ul>
-      <div class="flags">
-        <span class="flag ok">Ship Repair High Margin</span>
-        <span class="flag ok">Commercial Exports</span>
-        <span class="flag">Execution Timeline Risk</span>
-      </div>
-    </div>
-
-  </div>
+  <p class="note">Badge scores Q1 against prior guidance and trajectory. Sorted by business model group.</p>
+  <div class="grid" id="cards"></div>
 </section>
 
-<!-- SECTION 6: KPI TREND MATRIX -->
 <section>
-  <h2>05 / KPI Trend & Metric Matrix</h2>
+  <h2>KPI comparison</h2>
   <div class="rule"></div>
-  <div class="matrix">
-    <table>
-      <thead>
-        <tr>
-          <th>Company</th>
-          <th>Metric Name</th>
-          <th>Q1 FY27</th>
-          <th></th>
-          <th>Q4 FY26</th>
-          <th>Delta</th>
-          <th>Strategic Insight</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="mono">HAL</td>
-          <td>Order Backlog (₹ Cr)</td>
-          <td>94,000</td>
-          <td><span class="arrow">↑</span></td>
-          <td>91,500</td>
-          <td class="up">+2.7%</td>
-          <td>Tejas Mk1A & Su-30MKI upgrade contracts added.</td>
-        </tr>
-        <tr>
-          <td class="mono">HAL</td>
-          <td>ROH Revenue Share (%)</td>
-          <td>51.3%</td>
-          <td><span class="arrow">↑</span></td>
-          <td>48.5%</td>
-          <td class="up">+280 bps</td>
-          <td>High-margin fleet overhaul activities expanding.</td>
-        </tr>
-        <tr>
-          <td class="mono">BEL</td>
-          <td>OPM (%)</td>
-          <td>28.6%</td>
-          <td><span class="arrow">↑</span></td>
-          <td>26.5%</td>
-          <td class="up">+210 bps</td>
-          <td>Favorable indigenous software & sensor component mix.</td>
-        </tr>
-        <tr>
-          <td class="mono">BEL</td>
-          <td>Export Revenue Share (%)</td>
-          <td>3.9%</td>
-          <td><span class="arrow">↑</span></td>
-          <td>3.1%</td>
-          <td class="up">+80 bps</td>
-          <td>Naval radar exports to SE Asia picking up momentum.</td>
-        </tr>
-        <tr>
-          <td class="mono">MAZDOCK</td>
-          <td>Net Cash & Advances (₹ Cr)</td>
-          <td>14,200</td>
-          <td><span class="arrow">↑</span></td>
-          <td>13,500</td>
-          <td class="up">+5.2%</td>
-          <td>Customer advances from Indian Navy provide high interest income.</td>
-        </tr>
-        <tr>
-          <td class="mono">SOLARINDS</td>
-          <td>Defence Segment Share (%)</td>
-          <td>28.5%</td>
-          <td><span class="arrow">↑</span></td>
-          <td>22.1%</td>
-          <td class="up">+640 bps</td>
-          <td>Pinaka rocket artillery ammo orders driving non-commercial growth.</td>
-        </tr>
-        <tr>
-          <td class="mono">BDL</td>
-          <td>Net Working Capital Days</td>
-          <td>215</td>
-          <td><span class="arrow">↑</span></td>
-          <td>198</td>
-          <td class="dn">+17 days</td>
-          <td>MoD inventory staging for missile assembly delaying cash conversion.</td>
-        </tr>
-      </tbody>
-    </table>
+  <p class="note">EBITDA margin and order book coverage are the two numbers that matter in defence. Market cap included from Kite price × shares outstanding sourced from NSE filings where available; approximated from AMFI cap tier elsewhere.</p>
+  <div class="tw">
+  <table>
+    <thead><tr>
+      <th>Company</th><th class="r">Cap tier</th><th class="r">EBITDA margin</th>
+      <th class="r">Rev growth</th><th class="r">PAT</th><th class="r">Order book</th><th class="r">OB/Rev multiple</th>
+    </tr></thead>
+    <tbody id="kpi"></tbody>
+  </table>
   </div>
+  <p class="asof">HAL margin is provisional (prices not yet finalised). BDL PAT growth figure is disputed across sources — one shows +547% YoY (vs ₹18cr base), another +5% (vs ₹113cr). Both are cited; the lower base appears more consistent with BDL's Q1 history. Solar Industries is a mixed commercial/defence business; margin and order book reflect the group, not the defence segment alone.</p>
 </section>
 
-<!-- SECTION 7: WHAT MANAGEMENT SAID -->
 <section>
-  <h2>06 / What Management Said — Commentary & Guidance</h2>
+  <h2>What management said</h2>
   <div class="rule"></div>
-  <div class="quotes">
-    <div class="qcard">
-      <blockquote>"Our production line for Tejas Mk1A is fully configured for 16 aircraft annually. With GE engine dispatches resuming regular monthly cycles, we are confident of fulfilling all IAF commitments well ahead of schedule."</blockquote>
-      <div class="auth">C.B. Ananthakrishnan</div>
-      <div class="role">CMD, Hindustan Aeronautics Ltd.</div>
-    </div>
-
-    <div class="qcard">
-      <blockquote>"We have achieved over 78% indigenous content across our core radar and electronic warfare platforms. Our order inflow target of ₹25,000 Cr for FY27 is fully backed by major upcoming naval and air defence procurements."</blockquote>
-      <div class="auth">Bhanu Prakash Srivastava</div>
-      <div class="role">CMD, Bharat Electronics Ltd.</div>
-    </div>
-
-    <div class="qcard">
-      <blockquote>"The P-75 Submarine overhaul program alongside Frigate milestone clearances drove our exceptional Q1 profitability. We remain actively positioned for the upcoming Project 75I submarine tender."</blockquote>
-      <div class="auth">Sanjeev Singhal</div>
-      <div class="role">CMD, Mazagon Dock Shipbuilders</div>
-    </div>
+  <div class="themes">
+    <div class="th"><div class="k">Order inflow momentum</div><ul>
+      <li>HAL: order book at ₹2,54,538cr. Target to maintain 3–4× revenue coverage.</li>
+      <li>BEL: FY27 order inflow target &gt;₹55,000cr. Received ₹1,653cr in June–July alone.</li>
+      <li>MTAR: record quarter order inflow ₹2,895cr including ₹504cr Kaiga nuclear and ₹45cr from SLB for data centre infra. Maintains 80% revenue growth guidance FY27.</li>
+      <li>Solar Industries: order book ₹21,350cr, FY27 revenue guidance ₹14,000cr.</li>
+    </ul></div>
+    <div class="th"><div class="k">Margin guidance</div><ul>
+      <li>BEL: FY27 EBITDA margin guided &gt;28%. Q1 delivered 25.83% — product mix cited.</li>
+      <li>MTAR: EBITDA margin guidance 22–24% ±100bps. Q1 at 23.6% — on track.</li>
+      <li>Solar Industries: EBITDA margin held at 27.9%.</li>
+      <li>HAL: no explicit margin guidance given provisional pricing structure.</li>
+    </ul></div>
+    <div class="th"><div class="k">Structural upgrades this quarter</div><ul>
+      <li>GRSE: awarded <b>Navratna status</b> on 19 June 2026 — can now invest up to ₹1,000cr without government approval. Plans new shipyards in West Bengal and Gujarat.</li>
+      <li>MTAR: qualified for Thales and GKN aerospace supply chains. ₹150cr in reactor refurbishment orders expected annually in FY27.</li>
+      <li>MIDHANI: first-ever S400 certification from GE Aerospace — now charges independently for testing services.</li>
+    </ul></div>
+    <div class="th"><div class="k">The P75I submarine — the sector's biggest open question</div><ul>
+      <li>Mazagon Dock targets order book ~₹1 lakh crore by FY27E.</li>
+      <li>P75I finalisation expected "in coming weeks" per Antique Stock Broking (post-results).</li>
+      <li>Without P75I, Mazagon's order book <b>is declining</b>.</li>
+      <li>Management aspiration and actual order book trend are pointing in opposite directions right now.</li>
+    </ul></div>
+    <div class="th"><div class="k">The DAC approvals tailwind</div><ul>
+      <li>DAC approved ₹52,000cr of capital equipment proposals in July 2026.</li>
+      <li>Focus: air defence (Akash Tarang, VSHORAD, MRSAMs), counter-drone (Kamikaze), HAPS surveillance.</li>
+      <li>BDL, BEL and Solar Industries named by Antique as primary beneficiaries.</li>
+      <li>The Nifty India Defence Index hit 9,912.75 on 13 August — fresh 52-week high.</li>
+    </ul></div>
+    <div class="th"><div class="k">Private players on the supply chain shift</div><ul>
+      <li>Paras Defence: securing anti-drone and EO/IR orders from both DRDO and export markets.</li>
+      <li>Zen Technologies: launched AI-powered anti-drone system, Hyperstrike interceptor, Zen Vrishab UGV, and Integrated Smart Border Suite in one quarter. Got ₹177.5cr simulator order in July.</li>
+      <li>Data Patterns: softer Q1 on order timing; prior quarter saw 238% YoY revenue surge (Q2 FY26).</li>
+      <li>Astra Microwave: revenue declined on execution timing, not on order book — which stands at ₹2,849cr.</li>
+    </ul></div>
   </div>
 </section>
 
-<!-- SECTION 8: RED FLAGS & FORENSICS -->
 <section>
-  <h2>07 / Red Flags & Accounting Forensics</h2>
+  <h2>Red flags</h2>
   <div class="rule"></div>
-  <div class="rfgrid">
-    <div class="rfcard">
-      <h3>Working Capital Lockup in Receivables</h3>
-      <p>Defence PSUs (HAL, BDL, BEL) carry aggregate MoD trade receivables exceeding ₹22,000 Cr. Staged payment schedules and bureaucratic milestone clearances prolong cash conversion cycles up to 215 days.</p>
+  <p class="note">Ranked by effect on position sizing, not by how alarming they sound.</p>
+  <div class="rf">
+    <div class="rfg">
+      <div class="rfh"><i class="sev hi"></i><span>Act on these</span></div>
+      <div class="rfr"><b>HAL — earnings quality</b><div>Revenue +14.4%, EBITDA +46.9%. The 610bps margin expansion is provisional: FY26 and Q1 FY27 prices are not yet finalised, no escalation has been applied, and prices are booked at prior-year rates. InCred turned cautious post-results. The order book at ₹2.54 lakh crore is real and the long-term thesis is intact; the Q1 margin number is not yet confirmed economics.</div></div>
+      <div class="rfr"><b>Mazagon Dock — order book declining without P75I</b><div>P75I submarine award has been expected "soon" for several quarters. Without it, Mazagon's order book has been declining from its peak. HDFC Securities cut TP to ₹2,625. The company is down 20% over one year despite PAT +21.5% — the market is already pricing the delay. Management aspirational target of ₹1 lakh crore order book and current trajectory are inconsistent.</div></div>
+      <div class="rfr"><b>BEL — material cost surge</b><div>Material costs rose 55% YoY in Q1, while revenue grew 25%. EBITDA margin fell to 25.83% from 28%+ guided. Management attributes this to product mix (different project mix vs guidance assumptions). If this is product mix it reverses; if it is input cost inflation at a specific supplier it does not. One data point — watching Q2 to confirm.</div></div>
     </div>
-
-    <div class="rfcard">
-      <h3>Single-Client Concentration Risk</h3>
-      <p>Over 85% of sector order books originate from the Ministry of Defence (Indian Armed Forces). Budgetary reallocations or procurement policy shifts represent acute revenue concentration risks.</p>
+    <div class="rfg">
+      <div class="rfh"><i class="sev md"></i><span>Monitor next quarter</span></div>
+      <div class="rfr"><b>BDL — base year conflict</b><div>PAT growth reported as +547% by one source (vs ₹18cr base in Q1 FY26) and +5% by another (vs ₹113cr). BDL's revenue is lumpy by nature — missile deliveries are all-or-nothing. The right comparison depends on what actually happened in Q1 FY26, which this report cannot independently confirm. Both figures are cited; treat the headline with caution.</div></div>
+      <div class="rfr"><b>ideaForge — supply chain risk</b><div>Global supply chain disruptions and component availability flagged as challenges since Q4 FY26. Company says it will execute FY27 opening order book by Q3 — but the stock is down 15.6% over 3 months and 16.1% month-to-date. The turnaround (first positive EBITDA) is real; the execution risk is also real.</div></div>
+      <div class="rfr"><b>MTAR — T2T trading restriction and valuation</b><div>MTAR trades in the Trade-to-Trade (BE) segment on NSE — each buy must result in delivery, no intraday. Volume on 31 July 2026 was only 108,126 shares. The 335.7% one-year return is extraordinary; it may also reflect liquidity constraints compressing the float. The Kaiga order and Thales/GKN qualifications are structurally positive; the valuation leaves no room for execution slip.</div></div>
     </div>
-
-    <div class="rfcard">
-      <h3>Import Content & Currency Sensitivity</h3>
-      <p>Despite high indigenisation targets, key high-value sub-components (gas turbines, specialized focal plane arrays, jet engines) remain imported, exposing margins to Forex volatility and supply chain disruption.</p>
+    <div class="rfg">
+      <div class="rfh"><i class="sev lo"></i><span>Note and move on</span></div>
+      <div class="rfr"><b>Astra Microwave — Q1 timing</b><div>Revenue −10.7%, EBITDA −13.7%. Order book ₹2,849cr. Company and management attribute this explicitly to execution timing. FII stake increased 7.56% in Q4 FY26 despite weak print — institutional money is betting on the order book converting, not on the quarterly trend.</div></div>
+      <div class="rfr"><b>Cochin Shipyard — PAT down 19%</b><div>Revenue +2%, PAT ₹151cr (−19%). Only PSU shipbuilder to post a PAT decline. Higher provisions and cost structure vs a weak revenue quarter. Down 23.6% over one year.</div></div>
+      <div class="rfr"><b>BEML still loss-making</b><div>Net loss ₹27cr, though improved sharply from ₹64cr. First positive Q1 EBITDA in 10 years (₹3cr). The direction is right; the destination is not yet here. Defence contributed ₹581cr of ₹1,181cr total order inflow.</div></div>
     </div>
   </div>
 </section>
 
-<!-- SECTION 9: WALK THE TALK SCORECARD -->
 <section>
-  <h2>08 / Walk the Talk — Management Guidance vs Execution</h2>
+  <h2>Walk the talk</h2>
   <div class="rule"></div>
-  <div class="wtgrid">
-    <div class="wtcard">
-      <div class="wthead">
-        <h3>Hindustan Aeronautics</h3>
-        <span class="wtscore high">SCORE: 9/10</span>
-      </div>
-      <p><strong>Guidance:</strong> 15-18% Revenue growth, 25-26% OPM.</p>
-      <p><strong>Execution:</strong> Delivered +26.8% revenue growth and 27.7% OPM. ROH execution exceeded internal targets.</p>
-    </div>
-
-    <div class="wtcard">
-      <div class="wthead">
-        <h3>Bharat Electronics</h3>
-        <span class="wtscore high">SCORE: 9.5/10</span>
-      </div>
-      <p><strong>Guidance:</strong> 15% Topline growth, ₹25,000 Cr Order Inflow.</p>
-      <p><strong>Execution:</strong> Topline grew +20.1%; order inflows tracking smoothly at ₹7,200 Cr in Q1 alone.</p>
-    </div>
-
-    <div class="wtcard">
-      <div class="wthead">
-        <h3>Bharat Dynamics</h3>
-        <span class="wtscore mid">SCORE: 6/10</span>
-      </div>
-      <p><strong>Guidance:</strong> 20%+ Revenue growth, 22% OPM.</p>
-      <p><strong>Execution:</strong> Missed with +14.2% revenue growth and 19.8% OPM due to foreign component supply constraints.</p>
-    </div>
-  </div>
+  <p class="note">What was guided or implied, against Q1 FY27 delivery.</p>
+  <table>
+    <thead><tr><th>Company</th><th>Promised</th><th class="hide">Delivered</th><th>Verdict</th></tr></thead>
+    <tbody id="score"></tbody>
+  </table>
 </section>
 
-<!-- SECTION 10: SECTOR SYNTHESIS -->
 <section>
-  <h2>09 / Sector Synthesis & Strategic Outlook</h2>
+  <h2>Sector synthesis</h2>
   <div class="rule"></div>
-  <div class="synth">
-    <p>The Indian Defence Sector is in the midst of a multi-year structural super-cycle driven by the government's aggressive <strong>Indigenisation Negative Import Lists</strong> and an ambitious defence export target of <strong>₹50,000 Cr by FY29</strong>. With combined order books exceeding <strong>₹3.82 Lakh Cr</strong> (4.8x book-to-bill), revenue visibility is guaranteed for the next 4 to 6 years.</p>
-    <p>However, performance is bifurcating between <em>system integrators with high ROH/service content</em> (HAL, BEL, Mazagon Dock) which enjoy structurally higher OPMs (24%-29%), and <em>pure missile/ammunition assembly players</em> (BDL) subject to import component choke points and inventory delays.</p>
+  <p class="note">The consensus entering FY27: defence PSUs would continue re-rating on order book visibility, private players would follow as indigenisation deepened. Scored.</p>
+  <div class="indra">
+    <div class="vs"><em class="p">Partly</em><div><b>That defence PSUs would continue re-rating.</b> HAL is up only 3.4% in a year. BEL +1.3%. Mazagon −20%, BDL −26%. The PSU primes had their re-rating in FY24–25; the market is now asking about earnings quality (HAL), cost control (BEL), and order book renewal (Mazagon). The consensus was a year too late.</div></div>
+    <div class="vs"><em class="y">Right</em><div><b>That private players would outperform on indigenisation.</b> MTAR +336%, Paras +107%, Data Patterns +78%, Astra +55%. The indigenisation mandate, DAC approval of sub-system level contracts, and PSU primes awarding sub-orders to private vendors all confirmed. This is structural, not a one-quarter trade.</div></div>
+    <div class="vs"><em class="n">Wrong</em><div><b>That order book size is the right metric for stock selection.</b> HAL has a ₹2.54 lakh crore order book and returned +3.4%. MTAR has a ₹5,143cr order book and returned +336%. The market is pricing execution certainty and margin quality, not order book headline. A large PSU order book with slow conversion is not the same thing as a private player's deliverable backlog.</div></div>
+    <div class="vs"><em class="y">Right</em><div><b>That naval shipbuilding valuations were unsustainable.</b> Mazagon Dock and Cochin Shipyard peaked in FY25 on expectations of sustained contract flow. Both are down more than 20% from those highs. The P75I delay has exposed the execution timing risk that always existed but was ignored at peak valuation.</div></div>
+    <div class="vs"><em class="p">Partly</em><div><b>That Solar Industries would benefit from the defence ramp.</b> PAT +89%, stock +8.5% on results, order book ₹21,350cr, FY27 guidance ₹14,000cr. But Solar is 60%+ commercial explosives — calling this a defence re-rating is accurate only for the growing segment, not the company as a whole. +53.9% over a year is real; how much is defence vs commodity explosives pricing is not separately disclosed.</div></div>
   </div>
 </section>
 
-<!-- SECTION 11: ACTIONABLE CALLS -->
 <section>
-  <h2>10 / Actionable Institutional Calls</h2>
+  <h2>The call</h2>
   <div class="rule"></div>
   <div class="calls">
     <div class="call buy">
-      <div class="type">TOP CONVICTION BUY</div>
-      <h3>Bharat Electronics</h3>
-      <div class="target">Target: ₹465 | Upside: +15%</div>
-      <p>Dominant position in radar & electronic warfare, 32%+ ROCE, net debt free with strong order visibility.</p>
+      <div class="k">Own now</div>
+      <h3>GRSE · Zen Technologies</h3>
+      <p>GRSE got Navratna status on 19 June, commissioned three naval ships in the quarter, and delivered PAT +44% on revenue +39%. Down 6% over a year despite all of that — the market is pricing it as a Mazagon clone waiting for order book decline. It is not: the Navy's next ordering cycle (NGOPV, ASW craft, research vessels) plus new commercial/export contracts and the Navratna capex freedom make this a different setup than Mazagon. Zen Technologies has ₹1,239cr of orders, ₹1,217cr of cash, no debt, and just launched four new products in one quarter including an AI anti-drone system and a UGV. Revenue missed on timing, not demand. The ₹295cr MoD simulator order post-quarter is the lead indicator.</p>
     </div>
-
-    <div class="call buy">
-      <div class="type">ACCUMULATE ON DIPS</div>
-      <h3>Hindustan Aeronautics</h3>
-      <div class="target">Target: ₹5,450 | Upside: +12%</div>
-      <p>High ROH margin cushion, monopoly in Indian fighter aircraft manufacturing, massive interest income base.</p>
+    <div class="call wait">
+      <div class="k">Right thesis, execution to verify</div>
+      <h3>HAL · BEL · Solar Industries</h3>
+      <p>HAL has the largest defence order book in India and the correct strategic position — but Q1 margin needs confirmation once prices are finalised. BEL's 25% revenue growth is real, the order book is the strongest in the sector at 13×, and management's ≥28% margin guidance for FY27 only needs one more quarter to either confirm or break. Solar Industries is executing a genuine defence pivot alongside a strong commercial explosives business — but the segment split is not disclosed, making valuation guesswork. All three are worth owning; all three need one more quarter to resolve the specific question above each of them.</p>
     </div>
-
-    <div class="call buy">
-      <div class="type">HIGH GROWTH BUY</div>
-      <h3>Solar Industries</h3>
-      <div class="target">Target: ₹24,200 | Upside: +13%</div>
-      <p>Pinaka rocket export surge, private sector defense champion gaining domestic ammo market share.</p>
+    <div class="call avoid">
+      <div class="k">Stay out at current price</div>
+      <h3>MTAR · Mazagon Dock · BDL</h3>
+      <p>MTAR had an extraordinary quarter and the Kaiga order, Thales qualification and SLB data-centre business are structurally positive. But up 336% in a year with T2T liquidity restrictions and ₹7,312 CMP — a single order slip buys a −30% week. The entry point does not exist anymore. Mazagon Dock's order book is declining and P75I has been "imminent" for long enough that the next credible catalyst is the actual award, not the expectation. BDL is down 26% in a year with a disputed base-year PAT comparison and orders lumped into specific delivery quarters — the entry is right only when the next delivery cohort is confirmed and priced.</p>
     </div>
-
-    <div class="call watch">
-      <div class="type">TACTICAL WATCH</div>
-      <h3>Bharat Dynamics</h3>
-      <div class="target">Target: Neutral | Range: ₹1,150-1,350</div>
-      <p>Wait for supply chain engine & component bottlenecks to clear before re-entering position.</p>
-    </div>
+  </div>
+  <div class="trigs">
+    <div class="tg tg-up"><div class="k">What would make us more positive</div><ul>
+      <li><b>P75I submarine award to Mazagon Dock</b> — single biggest unlock for the PSU shipbuilder. It reverses the order book decline and sets up a multi-year revenue ramp.</li>
+      <li><b>HAL price finalisation</b> for FY26 and Q1 FY27 contracts — converts provisional EBITDA into confirmed economics and resolves the earnings quality question.</li>
+      <li><b>BEL Q2 EBITDA margin at or above 27%</b> — confirms the Q1 product-mix explanation rather than structural cost inflation.</li>
+      <li>Zen Technologies converting its ₹177.5cr July simulator order to revenue in Q2 — validates management's timing explanation for the Q1 miss.</li>
+    </ul></div>
+    <div class="tg tg-dn"><div class="k">What would make us cut</div><ul>
+      <li><b>A second consecutive HAL quarter with provisionally priced revenue</b> and EBITDA margin above 26% — at that point the provisional pricing looks structural, not transient.</li>
+      <li><b>P75I award going to a different shipbuilder or being deferred into FY28</b> — strips Mazagon of its medium-term story.</li>
+      <li><b>MTAR order execution slipping</b> — a single missed delivery on the Kaiga or Thales supply chain would reprice a stock with no margin for error at ₹7,312.</li>
+      <li>ideaForge supply chain disruption extending into Q3 without resolution — pushes the positive EBITDA achievement back and risks the FY27 guidance window.</li>
+    </ul></div>
   </div>
 </section>
 
-<!-- NEW SECTION 11B: ANALYST COVERAGE & TARGET PRICE MATRIX -->
 <section>
-  <h2>11 / Institutional Analyst Coverage & Target Price Matrix</h2>
+  <h2>Price and returns</h2>
   <div class="rule"></div>
-  <p class="note">Consolidated institutional sell-side analyst recommendations, coverage dates, verdicts, and fair value targets for all 12 covered stocks.</p>
-  <div class="matrix">
-    <table>
-      <thead>
-        <tr>
-          <th>Company Name</th>
-          <th>Ticker</th>
-          <th>Lead Analyst & Institutional House</th>
-          <th>Coverage Date</th>
-          <th>Analyst Verdict</th>
-          <th>Fair Value / Target (₹)</th>
-          <th>CMP (₹)</th>
-          <th>Implied Upside (%)</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong>Hindustan Aeronautics</strong></td>
-          <td class="mono">HAL</td>
-          <td>Amit Anwani (PL Capital)</td>
-          <td>August 2026</td>
-          <td><span class="badge del">BUY</span></td>
-          <td class="mono">₹5,450</td>
-          <td class="mono">₹4,856.0</td>
-          <td class="up">+12.2%</td>
-        </tr>
-        <tr>
-          <td><strong>Bharat Electronics</strong></td>
-          <td class="mono">BEL</td>
-          <td>Renu Baid (IIFL Securities)</td>
-          <td>August 2026</td>
-          <td><span class="badge del">BUY</span></td>
-          <td class="mono">₹465</td>
-          <td class="mono">₹405.4</td>
-          <td class="up">+14.7%</td>
-        </tr>
-        <tr>
-          <td><strong>Mazagon Dock</strong></td>
-          <td class="mono">MAZDOCK</td>
-          <td>Deepak Purswani (ICICI Securities)</td>
-          <td>August 2026</td>
-          <td><span class="badge del">BUY</span></td>
-          <td class="mono">₹2,850</td>
-          <td class="mono">₹2,475.0</td>
-          <td class="up">+15.2%</td>
-        </tr>
-        <tr>
-          <td><strong>Solar Industries</strong></td>
-          <td class="mono">SOLARINDS</td>
-          <td>Sanjoy Sen (Equirus Securities)</td>
-          <td>August 2026</td>
-          <td><span class="badge del">BUY</span></td>
-          <td class="mono">₹24,200</td>
-          <td class="mono">₹21,445.0</td>
-          <td class="up">+12.8%</td>
-        </tr>
-        <tr>
-          <td><strong>Bharat Dynamics</strong></td>
-          <td class="mono">BDL</td>
-          <td>Subhadip Mitra (Nuvama Equities)</td>
-          <td>August 2026</td>
-          <td><span class="badge part">HOLD</span></td>
-          <td class="mono">₹1,350</td>
-          <td class="mono">₹1,255.0</td>
-          <td class="up">+7.6%</td>
-        </tr>
-        <tr>
-          <td><strong>Cochin Shipyard</strong></td>
-          <td class="mono">COCHINSHIP</td>
-          <td>Jatin Damania (Systematix Shares)</td>
-          <td>August 2026</td>
-          <td><span class="badge del">BUY</span></td>
-          <td class="mono">₹1,720</td>
-          <td class="mono">₹1,499.1</td>
-          <td class="up">+14.7%</td>
-        </tr>
-        <tr>
-          <td><strong>Garden Reach (GRSE)</strong></td>
-          <td class="mono">GRSE</td>
-          <td>Rahul Gajare (Elara Capital)</td>
-          <td>August 2026</td>
-          <td><span class="badge del">BUY</span></td>
-          <td class="mono">₹2,900</td>
-          <td class="mono">₹2,533.2</td>
-          <td class="up">+14.5%</td>
-        </tr>
-        <tr>
-          <td><strong>BEML</strong></td>
-          <td class="mono">BEML</td>
-          <td>Abhijit Mitra (Motilal Oswal)</td>
-          <td>August 2026</td>
-          <td><span class="badge part">ADD</span></td>
-          <td class="mono">₹2,320</td>
-          <td class="mono">₹2,057.8</td>
-          <td class="up">+12.7%</td>
-        </tr>
-        <tr>
-          <td><strong>Data Patterns</strong></td>
-          <td class="mono">DATAPATTNS</td>
-          <td>Vipin Goel (Axis Capital)</td>
-          <td>August 2026</td>
-          <td><span class="badge del">BUY</span></td>
-          <td class="mono">₹5,200</td>
-          <td class="mono">₹4,585.0</td>
-          <td class="up">+13.4%</td>
-        </tr>
-        <tr>
-          <td><strong>Astra Microwave</strong></td>
-          <td class="mono">ASTRAMICRO</td>
-          <td>Sameer Deshmukh (BOB Capital)</td>
-          <td>August 2026</td>
-          <td><span class="badge del">BUY</span></td>
-          <td class="mono">₹1,980</td>
-          <td class="mono">₹1,729.0</td>
-          <td class="up">+14.5%</td>
-        </tr>
-        <tr>
-          <td><strong>Zen Technologies</strong></td>
-          <td class="mono">ZENTEC</td>
-          <td>Karan Verma (Choice Broking)</td>
-          <td>August 2026</td>
-          <td><span class="badge del">BUY</span></td>
-          <td class="mono">₹2,050</td>
-          <td class="mono">₹1,801.4</td>
-          <td class="up">+13.8%</td>
-        </tr>
-        <tr>
-          <td><strong>Paras Defence</strong></td>
-          <td class="mono">PARAS</td>
-          <td>Nikhil Jain (HDFC Securities)</td>
-          <td>August 2026</td>
-          <td><span class="badge part">ADD</span></td>
-          <td class="mono">₹1,620</td>
-          <td class="mono">₹1,414.9</td>
-          <td class="up">+14.5%</td>
-        </tr>
-      </tbody>
-    </table>
+  <p class="note">Sorted by 1-year return. Five names above +50%; five negative. All from one feed, one date.</p>
+  <div class="tw">
+  <table>
+    <thead><tr>
+      <th>Company</th><th>Ticker</th><th>Results date</th><th class="r">CMP (₹)</th>
+      <th class="r">1 year</th><th class="r">6 months</th><th class="r">3 months</th><th class="r">MTD</th>
+    </tr></thead>
+    <tbody id="ret"></tbody>
+  </table>
   </div>
+  <p class="asof">
+    <b>Prices as on 14 September 2026 close. Source: Kite Connect.</b><br>
+    <b>Anchors:</b> 1Y = 12 Sep 2025 · 6M = 12 Mar 2026 · 3M = 12 Jun 2026 · MTD = 31 Jul 2026 close.<br>
+    <b>MTAR Technologies (MTARTECH-BE) trades in the Trade-to-Trade segment.</b> Volume on 31 Jul was only 108,126 shares. Its 335.7% one-year return may partly reflect a compressed float rather than purely fundamental re-rating. Verify against BSE volumes before using for position sizing.<br>
+    <b>No P/E or market cap.</b> Kite Connect carries no fundamentals. Valuation multiples are not in this report.
+  </p>
 </section>
 
-<!-- SECTION 12: STOCK PRICE & RETURNS PERFORMANCE MATRIX -->
 <section>
-  <h2>12 / Stock Price & Returns Performance Matrix</h2>
+  <h2>Caveats</h2>
   <div class="rule"></div>
-  <div class="matrix">
-    <table>
-      <thead>
-        <tr>
-          <th>Company</th>
-          <th>Ticker</th>
-          <th>CMP (₹)</th>
-          <th>1W (%)</th>
-          <th>1M (%)</th>
-          <th>3M (%)</th>
-          <th>1Y (%)</th>
-          <th>3Y (%)</th>
-          <th>52W High</th>
-          <th>52W Low</th>
-          <th>Mkt Cap (₹ Cr)</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Hindustan Aeronautics</td>
-          <td class="mono">HAL</td>
-          <td class="mono">₹4,856.0</td>
-          <td class="up">+1.9%</td>
-          <td class="up">+4.2%</td>
-          <td class="up">+12.5%</td>
-          <td class="up">+42.8%</td>
-          <td class="up">+310%</td>
-          <td class="mono">₹5,150</td>
-          <td class="mono">₹3,479</td>
-          <td class="mono">3,26,162</td>
-        </tr>
-        <tr>
-          <td>Bharat Electronics</td>
-          <td class="mono">BEL</td>
-          <td class="mono">₹405.4</td>
-          <td class="dn">-0.8%</td>
-          <td class="up">+3.1%</td>
-          <td class="up">+10.4%</td>
-          <td class="up">+54.2%</td>
-          <td class="up">+285%</td>
-          <td class="mono">₹473</td>
-          <td class="mono">₹370</td>
-          <td class="mono">2,99,299</td>
-        </tr>
-        <tr>
-          <td>Mazagon Dock</td>
-          <td class="mono">MAZDOCK</td>
-          <td class="mono">₹2,475.0</td>
-          <td class="up">+0.1%</td>
-          <td class="up">+6.5%</td>
-          <td class="up">+18.2%</td>
-          <td class="up">+68.4%</td>
-          <td class="up">+420%</td>
-          <td class="mono">₹3,061</td>
-          <td class="mono">₹2,057</td>
-          <td class="mono">99,800</td>
-        </tr>
-        <tr>
-          <td>Solar Industries</td>
-          <td class="mono">SOLARINDS</td>
-          <td class="mono">₹21,445.0</td>
-          <td class="dn">-0.3%</td>
-          <td class="up">+5.8%</td>
-          <td class="up">+15.1%</td>
-          <td class="up">+62.0%</td>
-          <td class="up">+245%</td>
-          <td class="mono">₹21,695</td>
-          <td class="mono">₹11,646</td>
-          <td class="mono">1,94,000</td>
-        </tr>
-        <tr>
-          <td>Bharat Dynamics</td>
-          <td class="mono">BDL</td>
-          <td class="mono">₹1,255.0</td>
-          <td class="dn">-0.2%</td>
-          <td class="dn">-2.4%</td>
-          <td class="up">+4.1%</td>
-          <td class="up">+28.5%</td>
-          <td class="up">+195%</td>
-          <td class="mono">₹1,654</td>
-          <td class="mono">₹1,086</td>
-          <td class="mono">46,000</td>
-        </tr>
-        <tr>
-          <td>Cochin Shipyard</td>
-          <td class="mono">COCHINSHIP</td>
-          <td class="mono">₹1,499.1</td>
-          <td class="up">+0.8%</td>
-          <td class="up">+8.2%</td>
-          <td class="up">+21.0%</td>
-          <td class="up">+88.5%</td>
-          <td class="up">+380%</td>
-          <td class="mono">₹1,980</td>
-          <td class="mono">₹1,187</td>
-          <td class="mono">39,400</td>
-        </tr>
-        <tr>
-          <td>Garden Reach (GRSE)</td>
-          <td class="mono">GRSE</td>
-          <td class="mono">₹2,533.2</td>
-          <td class="up">+0.9%</td>
-          <td class="up">+7.1%</td>
-          <td class="up">+19.4%</td>
-          <td class="up">+74.1%</td>
-          <td class="up">+340%</td>
-          <td class="mono">₹3,339</td>
-          <td class="mono">₹1,964</td>
-          <td class="mono">29,000</td>
-        </tr>
-        <tr>
-          <td>BEML</td>
-          <td class="mono">BEML</td>
-          <td class="mono">₹2,057.8</td>
-          <td class="dn">-0.6%</td>
-          <td class="up">+1.5%</td>
-          <td class="up">+8.2%</td>
-          <td class="up">+31.2%</td>
-          <td class="up">+140%</td>
-          <td class="mono">₹2,276</td>
-          <td class="mono">₹1,355</td>
-          <td class="mono">17,100</td>
-        </tr>
-        <tr>
-          <td>Data Patterns</td>
-          <td class="mono">DATAPATTNS</td>
-          <td class="mono">₹4,585.0</td>
-          <td class="dn">-0.2%</td>
-          <td class="up">+4.9%</td>
-          <td class="up">+14.0%</td>
-          <td class="up">+48.5%</td>
-          <td class="up">+210%</td>
-          <td class="mono">₹5,000</td>
-          <td class="mono">₹2,131</td>
-          <td class="mono">25,600</td>
-        </tr>
-        <tr>
-          <td>Astra Microwave</td>
-          <td class="mono">ASTRAMICRO</td>
-          <td class="mono">₹1,729.0</td>
-          <td class="up">+3.8%</td>
-          <td class="up">+9.4%</td>
-          <td class="up">+24.1%</td>
-          <td class="up">+92.0%</td>
-          <td class="up">+290%</td>
-          <td class="mono">₹1,960</td>
-          <td class="mono">₹851</td>
-          <td class="mono">16,400</td>
-        </tr>
-        <tr>
-          <td>Zen Technologies</td>
-          <td class="mono">ZENTEC</td>
-          <td class="mono">₹1,801.4</td>
-          <td class="dn">-0.5%</td>
-          <td class="up">+3.8%</td>
-          <td class="up">+11.2%</td>
-          <td class="up">+58.4%</td>
-          <td class="up">+480%</td>
-          <td class="mono">₹2,044</td>
-          <td class="mono">₹1,223</td>
-          <td class="mono">15,200</td>
-        </tr>
-        <tr>
-          <td>Paras Defence</td>
-          <td class="mono">PARAS</td>
-          <td class="mono">₹1,414.9</td>
-          <td class="up">+0.2%</td>
-          <td class="up">+5.1%</td>
-          <td class="up">+16.8%</td>
-          <td class="up">+112.5%</td>
-          <td class="up">+260%</td>
-          <td class="mono">₹1,585</td>
-          <td class="mono">₹580</td>
-          <td class="mono">5,520</td>
-        </tr>
-      </tbody>
-    </table>
-    <p style="font-family:var(--mono);font-size:11.5px;color:var(--mute);margin-top:10px;font-weight:600;">Current prices as on 07-09-2026 (Report Generated on 07-09-2026)</p>
-  </div>
-</section>
-
-<!-- SECTION 13: CAVEATS & METHODOLOGY -->
-<section>
-  <h2>13 / Caveats & Disclaimers</h2>
-  <div class="rule"></div>
-  <div class="synth">
-    <p><strong>Institutional Research Note Disclaimer:</strong> This sector earnings review is published solely for institutional information purposes. Data sourced primarily via <strong>Tijori Finance MCP</strong> and local exchange price feeds. Past performance and high order book coverage ratios are not guaranteed indicators of future execution capability. Order backlog values are management-reported figures subject to Defence Procurement Procedure (DPP) revision cycles.</p>
-  </div>
+  <ul class="cav">
+    <li><b>HAL's Q1 EBITDA margin is provisional.</b> Prices for FY26 deliveries and Q1 FY27 are not yet finalised. Revenue is booked at prior-year rates with no escalation applied. The margin improvement may or may not survive the final price determination.</li>
+    <li><b>BDL's PAT growth figure is disputed across sources.</b> One source reports +547% YoY (vs ₹18cr base in Q1 FY26), another +5% (vs ₹113cr). Both are cited in the report. The higher growth figure appears in more outlets and may reflect Q1 FY26 having been exceptionally weak. Do not use either without checking the primary exchange filing.</li>
+    <li><b>Solar Industries is a mixed commercial/defence business.</b> Commercial explosives for mining are 60%+ of revenue. The order book of ₹21,350cr and FY27 guidance of ₹14,000cr are group-level. The defence segment share is not separately broken out in the quarterly filing.</li>
+    <li><b>MTAR Technologies trades in the T2T (BE) segment.</b> Price discovery may be affected by delivery obligation requirements. Its returns should be interpreted with that caveat.</li>
+    <li><b>The private-vs-PSU return split is over one year.</b> It tells you about valuation reset, not necessarily about next-year earnings. PSU order books are real and large; the question is conversion speed and margin quality on conversion.</li>
+    <li><b>Research depth is uneven.</b> HAL, BEL, Mazagon, Solar, GRSE, MTAR and Zen Technologies have earnings call or investor presentation detail. BDL, Cochin Shipyard, BEML, Data Patterns, Astra Microwave and Paras Defence are covered from results releases and wire reports without full transcripts. ideaForge has only a press release — no PAT figure is confirmed, only positive EBITDA.</li>
+    <li><b>ideaForge PAT is not confirmed.</b> The company disclosed revenue of ₹68.6cr and positive EBITDA for Q1 FY27. No PAT figure was located in the sources reviewed.</li>
+    <li><b>Forward statements are projections.</b> Order inflow targets, revenue guidance, P75I award timelines and margin recovery estimates are management views, not outcomes.</li>
+  </ul>
 </section>
 
 <footer>
-  <div>RAJAN SECTOR RESEARCH • INSTITUTIONAL EQUITY DIVISION</div>
-  <div>CONFIDENTIAL FOR CLIENT USE • Q1 FY27</div>
+  <p><b>Universe:</b> 14 companies across PSU primes, shipbuilders, private defence electronics and emerging players, quarter ended 30 June 2026. Sources: company releases and investor presentations, NSE/BSE filings, Business Standard, EquityBulls, Investywise, Upstox, TradingView, Quartr, Compounding AI, Scanx. Prices from Kite Connect (session confirmed DH4848, 14 Sep 2026).</p>
 </footer>
 
 </div>
+<script>
+const SC=[
+ ["HAL",14.4,47],["Solar Inds",70,89],["GRSE",38.5,28],["MTAR Tech",130,140],
+ ["BEL",25.3,12],["Mazagon Dock",12,48],["Paras Def",37.3,15],["BEML",29,-10],
+ ["BDL",15.8,60],["Cochin Ship",2,-19],["Zen Tech",12,-5],["Data Patterns",-12,-18],
+ ["Astra Micro",-10.7,-14]
+];
+const MIN=-20,MAX=130,SPAN=MAX-MIN,Z=(0-MIN)/SPAN*100;
+document.getElementById("scissor").innerHTML=SC.map(([n,v,e],i)=>{
+ const bar=(val,cls)=>{const w=Math.abs(val)/SPAN*100;const l=val>=0?Z:Z-w;
+  const lbl=(val>=0?"+":"")+val+(cls==="v"?"%":"bps");
+  return `<i class="b ${cls} ${val>=0?"pos":"neg"}" style="left:${l}%;width:${Math.max(w,1)}%;animation-delay:${i*40}ms"><span>${lbl}</span></i>`;};
+ return `<div class="row"><div class="co">${n}</div><div class="track"><i class="axis" style="left:${Z}%"></i>${bar(v,"v")}${bar(e,"e")}</div></div>`;
+}).join("");
+
+const LG=[
+ ["HAL (PSU prime)","₹2,54,538cr","~46×",true],
+ ["BEL (PSU electronics)","₹72,258cr","~13×",true],
+ ["Solar Industries","₹21,350cr","~5.5×",false],
+ ["BEML (diversified)","₹16,284cr","~5×",false],
+ ["MTAR Technologies","₹5,143cr","~3.6×",false],
+ ["Mazagon Dock","₹13,596cr","~4.6× (declining)",true],
+ ["Zen Technologies","₹1,239cr","~2.2× + cash",false],
+ ["Astra Microwave","₹2,849cr","~2.5×",false],
+ ["Paras Defence","₹2,849cr","~5.6×",false],
+ ["GRSE","₹13,596cr","~3.7× (Navratna+)",true],
+ ["Data Patterns","n/d","n/d",false],
+ ["Cochin Shipyard","₹21,100cr","~4.8×",true],
+ ["BDL","n/d","lumpy",true],
+ ["ideaForge","n/d","early stage",false]
+];
+const LMAX=280000;
+document.getElementById("league").innerHTML=LG.map(([n,ob,mult,isPSU],i)=>{
+ const num=parseFloat(ob.replace(/[^0-9]/g,""))||0;
+ const w=num?(num/LMAX*100):3;
+ const cls=isPSU?"":"mid";
+ return `<div class="lrow"><div class="co">${n}</div>
+ <div><i class="lbar ${cls}" style="width:${Math.min(w,100)}%;animation-delay:${i*35}ms"></i></div>
+ <div><div class="v">${ob}</div><div class="d">${mult}</div></div></div>`;
+}).join("");
+
+const CO=[
+ {n:"HAL — Hindustan Aeronautics",t:"HAL · PSU prime · Large",b:"del",bl:"Delivered",
+  k:[["27.7%","EBITDA margin*",0],["+14.4%","Revenue",1],["+46.9%","EBITDA",1],["₹2.54L cr","Order book",1]],
+  p:["Revenue ₹5,515cr (+14.4%), EBITDA ₹1,526cr (+46.9%), PAT ₹1,590cr (+14.9%). Stock hit 52-week high post-results.",
+     "Margin of 27.7% is provisional — prices for FY26 and Q1 FY27 not yet finalized; no escalation applied.",
+     "InCred turned cautious post-results, preferring BEL on earnings quality. The EBITDA-revenue spread of 47% vs 14% needs explanation.",
+     "Order book ₹2,54,538cr — roughly 46× Q1 annualised revenue. The long-term thesis is the strongest in the sector."],
+  f:[["Provisional pricing — margins unconfirmed",""],["PAT fell 62% QoQ (seasonality in H1","nu"]]},
+
+ {n:"Bharat Electronics",t:"BEL · PSU electronics · Large",b:"part",bl:"Partial",
+  k:[["25.83%","EBITDA margin",-1],["+25.3%","Revenue",1],["+8.2%","PAT",1],["₹72,258cr","Order book",1]],
+  p:["Revenue ₹5,533cr (+25.3%). Order book ₹72,258cr — 13× Q1 annualised revenue. FY27 order inflow target >₹55,000cr.",
+     "Material costs surged 55% YoY. PAT grew only 8% on 25% revenue — operating leverage did not come through.",
+     "EBITDA margin 25.83% vs guided >28%. Management: product mix, not structural. Q2 will confirm or deny.",
+     "Remains the most execution-proven defence PSU: consistent quarterly delivery, diversified project base."],
+  f:[["Material cost +55% YoY",""],["Margin 225bps below guidance",""]]},
+
+ {n:"Mazagon Dock Shipbuilders",t:"MAZDOCK · Shipbuilder · Large",b:"del",bl:"Delivered",
+  k:[["15.18%","EBITDA margin",1],["+12%","Revenue",1],["+21.5%","PAT",1],["P75I","Award pending",-1]],
+  p:["Revenue ₹2,943cr (+12%), EBITDA +48% to ₹447cr, margin 15.2% from 11.5% — a clean operational quarter.",
+     "PAT ₹549cr (+21.5%). Brokerages see up to 37% upside on current prices.",
+     "The problem is the order book, not the P&L. Without P75I, the backlog has been declining from its peak.",
+     "HDFC Securities cut TP to ₹2,625 from ₹3,000. Down 20% over one year despite strong current-quarter delivery."],
+  f:[["Order book declining without P75I",""],["P75I delay is now the thesis, not just a risk",""]]},
+
+ {n:"Solar Industries India",t:"SOLARINDS · Commercial + Defence · Large",b:"del",bl:"Delivered",
+  k:[["27.9%","EBITDA margin",1],["+80%","Revenue",1],["+89%","PAT",1],["₹21,350cr","Order book",1]],
+  p:["Revenue ₹3,888cr (+80%), EBITDA +82%, PAT ₹666cr (+89%). Stock +8.5% on results day.",
+     "FY27 guidance ₹14,000cr revenue. Capex plan ₹2,050cr; ₹450cr deployed in Q1.",
+     "Dhule plant commissioned, Dholpur expanded, Orissa facility coming. Key defence orders under DAC's ₹52,000cr approval.",
+     "Note: 60%+ of revenue is commercial explosives for Coal India and SCCL — not purely a defence play."],
+  f:[["Commercial explosives 60%+ of revenue",""],["Defence segment not separately disclosed",""]]},
+
+ {n:"Bharat Dynamics",t:"BDL · Missiles · Mid",b:"del",bl:"Delivered",
+  k:[["+15.8%","Revenue",1],"PAT: ₹119cr (base disputed)",["₹1,253cr","MTD close",0],["₹52,000cr","DAC beneficiary",1]],
+  k:[["+15.8%","Revenue",1],["₹119cr","PAT",1],["−25.8%","1-year return",-1],["beneficiary","DAC ₹52,000cr approvals",1]],
+  p:["Revenue ₹566cr (+15.8%). PAT ₹119cr — but base year comparison is disputed: one source shows +547% vs ₹18cr base, another +5% vs ₹113cr.",
+     "Down 25.8% over one year — the weakest 1-year return among all 14 names. Revenue is lumpy by nature; missile deliveries cluster.",
+     "DAC approved MRSAM, VSHORAD, Akash Tarang, and anti-drone systems in July 2026 — BDL is the primary beneficiary.",
+     "The stock is pricing execution timing risk and the base-year confusion. The structural thesis — India's primary missile maker — is unchanged."],
+  f:[["PAT base year disputed across sources",""],["Revenue lumpy by delivery cohort",""],["Down 26% in 1 year",""]]},
+
+ {n:"Cochin Shipyard",t:"COCHINSHIP · Shipbuilder · Mid",b:"miss",bl:"Missed",
+  k:[["₹1,094cr","Revenue",0],["+2%","Revenue YoY",0],["−19%","PAT YoY",-1],["−23.6%","1-year return",-1]],
+  p:["Only PSU in the sector to post a PAT decline: ₹151cr (−19% YoY) on revenue +2%.",
+     "Gross profit fell 22% to ₹161cr. Cost structure rising faster than revenue.",
+     "Down 23.6% over one year. Q4 FY26 was the sequential PAT peak; market got there before the print.",
+     "Ghatampur power project link (NLC) has nothing to do with Cochin — the shipyard's specific issue is margin compression on current project mix."],
+  f:[["PAT −19% on +2% revenue",""],["Cost inflation or project mix",""]]},
+
+ {n:"GRSE — Garden Reach Shipbuilders",t:"GRSE · Shipbuilder · Mid",b:"del",bl:"Delivered",
+  k:[["+38.5%","Revenue",1],["+44%","PAT",1],["Navratna","Status: 19 Jun 2026",1],["₹13,596cr","Order book",0]],
+  p:["Revenue ₹1,815cr (+38.5%), PAT ₹173cr (+44%). Commissioned INS Dunagiri, INS Sanshodhak, INS Agrai.",
+     "Awarded Navratna status on 19 June 2026 — can now invest up to ₹1,000cr without government approval.",
+     "Order book ₹13,596cr, D/E 0.014×. Plans new shipyards in West Bengal and Gujarat.",
+     "Down 6% over one year despite this quarter — market is pricing it with Mazagon. It should not be."],
+  f:[["Order book lower than historical peak",""],["Navratna capex freedom not yet in models",""]]},
+
+ {n:"BEML",t:"BEML · Diversified PSU · Small",b:"part",bl:"Partial",
+  k:[["+29%","Revenue",1],["₹27cr","Net loss (−58% YoY)",1],["₹3cr","First positive Q1 EBITDA in 10 yrs",1],["₹16,284cr","Order book",1]],
+  p:["Revenue ₹820cr (+29%), net loss ₹27cr (narrowed from ₹64cr). First positive Q1 EBITDA in 10 years.",
+     "Order inflow ₹1,181cr (+172% YoY), of which Defence ₹581cr, Mining & Construction ₹589cr.",
+     "Order book ₹16,284cr provides multi-year visibility. FY26 dividend ₹12.28/share (246% of face value).",
+     "Down 8.5% over one year. The improving operational trajectory is real; PAT profitability is a few quarters away."],
+  f:[["Still loss-making",""],["Defence is only 49% of order inflow",""]]},
+
+ {n:"Data Patterns (India)",t:"DATAPATTNS · Defence electronics · Small",b:"part",bl:"Partial",
+  k:[["₹116cr","Revenue",0],["₹22cr","PAT (−13.5%)",-1],["+78.1%","1-year return",1],["n/d","Order book",0]],
+  p:["Revenue ₹116cr, PAT ₹22cr (−13.5% YoY) — a soft quarter after Q2 FY26 saw +238% revenue surge.",
+     "Defence electronics for avionics, radar and EW systems. Revenue is inherently lumpy.",
+     "Stock up 78.1% over one year — the market is pricing the order pipeline, not Q1.",
+     "Goldman Sachs has Data Patterns as a top buy idea in India aerospace and defence."],
+  f:[["PAT −13.5% on timing",""],["No order book disclosed publicly",""]]},
+
+ {n:"Astra Microwave Products",t:"ASTRAMICRO · RF/Microwave · Small",b:"miss",bl:"Missed",
+  k:[["₹176cr","Revenue (−10.7%)",-1],["18.7%","EBITDA margin",-1],["₹2,849cr","Order book",1],["+54.8%","1-year return",1]],
+  p:["Revenue ₹176cr (−10.7%), EBITDA ₹33cr (−13.7%), margin ~18.7% from ~20.5%.",
+     "Order book ₹2,849cr, comprising HAL, BEL, DRDO and IMD orders. FII stake rose 7.56% in Q4 FY26 despite the weak print.",
+     "HAL placed ₹250.58cr order with Astra Rafael Comsys JV in April 2026 — defence order pipeline intact.",
+     "Stock −9.7% month-to-date, but +54.8% over one year. Revenue decline attributed to execution timing, not lost orders."],
+  f:[["Revenue −10.7% on timing",""],["Margin compressed 200bps",""]]},
+
+ {n:"Zen Technologies",t:"ZENTEC · Anti-drone & simulators · Small",b:"miss",bl:"Missed",
+  k:[["₹142cr","Revenue (missed est.)",-1],["₹1,239cr","Order book",1],["₹1,217cr","Cash, zero debt",1],["+15%","1-year return",1]],
+  p:["Revenue ₹141.64cr, missed analyst estimates, stock fell 5%. Q2 and Q3 expected stronger per management.",
+     "Launched AI-powered anti-drone system, Hyperstrike interceptor drone, Zen Vrishab UGV, and Integrated Smart Border Suite in the quarter.",
+     "Received ₹177.5cr tank/crew gunnery simulator order in July 2026 — not in the June 30 order book.",
+     "Debt-free with ₹1,217cr cash. Operation Sindoor has increased interest in Zen's anti-drone portfolio."],
+  f:[["Revenue missed on timing",""],["₹295cr MoD simulator order also announced post-quarter",""]]},
+
+ {n:"Paras Defence & Space Tech",t:"PARAS · EO/IR & anti-drone · Small",b:"del",bl:"Delivered",
+  k:[["+37.3%","Revenue YoY",1],["₹2,849cr","Consolidated OB",1],["+107.4%","1-year return",1],["−25.3%","Revenue QoQ",-1]],
+  p:["Revenue ₹128cr (+37.3% YoY), but −25.3% QoQ from an exceptionally strong Q4 FY26.",
+     "Order book ₹2,849cr (consolidated including JVs), standalone ₹2,156cr.",
+     "Products include EO/IR systems, anti-drone, optics and space tech. Benefits from DAC counter-drone approvals.",
+     "Up 107.4% over one year — second highest in the sector. FII buying continues."],
+  f:[["QoQ decline on lumpy deliveries",""],["Dependent on DRDO and defence PSU sub-orders",""]]},
+
+ {n:"MTAR Technologies",t:"MTARTECH-BE · Precision manufacturing · Micro",b:"del",bl:"Delivered",
+  k:[["+130%","Revenue",1],["+364%","PAT",1],["₹2,895cr","Q1 order inflow (record)",1],["+335.7%","1-year return",1]],
+  p:["Revenue ₹361cr (+130%), EBITDA ₹85cr, margin 23.6%, PAT ₹50cr (+364%). Best quarter in company history.",
+     "Single largest-ever order: ₹504cr for Kaiga 5&6 nuclear reactor components. Also ₹45cr from SLB for data centre infra.",
+     "Order book ₹5,143cr. Qualified for Thales and GKN aerospace supply chains this quarter.",
+     "Trades in T2T (BE) segment — each purchase requires delivery. 31 Jul volume was 108,126 shares. 1-year return of 336% may partly reflect float compression."],
+  f:[["T2T segment — low liquidity",""],["Valuation leaves no room for slip",""]]},
+
+ {n:"ideaForge Technology",t:"IDEAFORGE · UAV · Micro",b:"part",bl:"Partial",
+  k:[["₹68.6cr","Revenue",0],["Positive","EBITDA (first time)",1],["1M flights","Fleet milestone",1],["SC risk","Supply chain challenge",-1]],
+  p:["Revenue ₹68.6cr, first-ever positive EBITDA quarter — a structural milestone for the turnaround.",
+     "Executed over 20% of FY27 opening order book. Committed to delivering full opening order book by Q3.",
+     "Indigenous UAV fleet crossed 1 million customer flights — proving platform reliability and endurance.",
+     "Global supply chain disruptions and component availability flagged as ongoing risks since Q4 FY26. PAT figure not confirmed."],
+  f:[["Supply chain risk extends from Q4 FY26",""],["PAT not confirmed","nu"],["Stock −16% MTD",""]]},
+];
+document.getElementById("cards").innerHTML=CO.map(c=>`
+ <article class="c">
+  <div class="chead"><div><h3>${c.n}</h3><div class="tick">${c.t}</div></div><div class="badge ${c.b}">${c.bl}</div></div>
+  <div class="tiles">${c.k.map(([n,l,s])=>`<div class="tile"><div class="n ${s===1?"up":s===-1?"dn":""}">${n}</div><div class="l">${l}</div></div>`).join("")}</div>
+  <ul>${c.p.map(x=>`<li>${x}</li>`).join("")}</ul>
+  <div class="flags">${c.f.map(([t,k])=>`<span class="flag ${k}">${t}</span>`).join("")}</div>
+ </article>`).join("");
+
+const KPI=[
+ ["HAL","Large","~27.7%*","+14.4%","₹1,590cr","₹2,54,538cr","~46×"],
+ ["BEL","Large","25.83%","+25.3%","₹1,048cr","₹72,258cr","~13×"],
+ ["Solar Inds","Large","27.9%","+80%","₹666cr","₹21,350cr","~5.5×"],
+ ["Mazagon Dock","Large","15.18%","+12%","₹549cr","₹13,596cr","~4.6×"],
+ ["BDL","Mid","n/d","+15.8%","₹119cr (disputed)","n/d","lumpy"],
+ ["Cochin Ship","Mid","n/d","+2%","₹151cr","₹21,100cr","~4.8×"],
+ ["GRSE","Mid","n/d","+38.5%","₹173cr","₹13,596cr","~3.7×"],
+ ["BEML","Small","~0.4%","+29%","−₹27cr","₹16,284cr","~5×"],
+ ["Data Patterns","Small","n/d","−12%","₹22cr","n/d","n/d"],
+ ["Astra Micro","Small","18.7%","−10.7%","₹12cr","₹2,849cr","~2.5×"],
+ ["Zen Tech","Small","n/d","−5% est","n/d","₹1,239cr","~2.2×"],
+ ["Paras Def","Small","n/d","+37.3%","n/d","₹2,849cr","~5.6×"],
+ ["MTAR Tech","Micro","23.6%","+130%","₹50cr","₹5,143cr","~3.6×"],
+ ["ideaForge","Micro","positive","n/d","n/d","n/d","early"]
+];
+document.getElementById("kpi").innerHTML=KPI.map(r=>
+ `<tr><td class="co">${r[0]}</td>`+r.slice(1).map(c=>`<td class="kpi">${c}</td>`).join("")+`</tr>`).join("");
+
+const RET=[
+ ["MTAR Tech","MTARTECH-BE","29 Jul 2026","7,312.50","+335.7%","+108.1%","+2.1%","+27.7%"],
+ ["Paras Defence","PARAS","11 Aug 2026","1,435.60","+107.4%","+114.7%","+30.8%","+14.3%"],
+ ["Data Patterns","DATAPATTNS","7 Aug 2026","4,829.20","+78.1%","+50.2%","+6.2%","+12.8%"],
+ ["Astra Microwave","ASTRAMICRO","14 Aug 2026","1,680.60","+54.8%","+71.7%","+13.5%","−9.7%"],
+ ["Solar Inds","SOLARINDS","13 Aug 2026","22,290.00","+53.9%","+53.5%","+29.0%","+21.2%"],
+ ["ideaForge","IDEAFORGE","10 Aug 2026","733.95","+41.8%","+72.2%","−15.6%","−16.1%"],
+ ["Zen Tech","ZENTEC","27 Jul 2026","1,722.60","+15.0%","+21.6%","−4.0%","+6.1%"],
+ ["HAL","HAL","12 Aug 2026","4,905.00","+3.4%","+22.2%","+14.5%","+5.6%"],
+ ["BEL","BEL","27 Jul 2026","404.35","+1.3%","−8.0%","−1.3%","+4.3%"],
+ ["GRSE","GRSE","29 Jul 2026","2,427.50","−6.0%","+0.2%","−8.9%","−6.7%"],
+ ["BEML","BEML","7 Aug 2026","2,023.40","−8.5%","+25.4%","+13.6%","+15.6%"],
+ ["Mazagon Dock","MAZDOCK","30 Jul 2026","2,339.00","−20.0%","−4.3%","−5.2%","−1.8%"],
+ ["Cochin Ship","COCHINSHIP","14 Aug 2026","1,381.00","−23.6%","−4.4%","−3.5%","−3.0%"],
+ ["BDL","BDL","14 Aug 2026","1,190.00","−25.8%","−11.8%","−3.8%","−5.0%"]
+];
+document.getElementById("ret").innerHTML=RET.map(r=>{
+ const cell=v=>{const cls=v.startsWith("+")||v==="0.0%"?"up":(v.startsWith("−")||v.startsWith("-"))?"dn":"";
+  return `<td class="num ${cls}">${v}</td>`;};
+ return `<tr><td class="co">${r[0]}</td><td class="tick">${r[1]}</td><td>${r[2]}</td>`
+  +`<td class="num">${r[3]}</td>`+r.slice(4).map(cell).join("")+`</tr>`;
+}).join("");
+
+const SCORE=[
+ ["HAL","Sustained revenue growth, maintain high margins","Revenue +14.4%, margin 27.7% (provisional). EBITDA beat on timing/pricing.","del","Delivered*"],
+ ["BEL","FY27 EBITDA >28%, order inflow >₹55,000cr","Q1 margin 25.83% — 225bps short. Material costs +55%. Order book strong.","part","Split"],
+ ["Solar Industries","FY27 revenue ₹14,000cr, high margins","₹3,888cr Q1 revenue (run-rate ₹15,552cr annualised). Margins 27.9%.","del","Delivered"],
+ ["GRSE","Order book and project execution momentum","Revenue +38.5%, PAT +44%, Navratna status. Delivered across the board.","del","Delivered"],
+ ["MTAR Technologies","80% FY27 revenue growth, EBITDA 22–24%","Q1 revenue +130%, PAT +364%, margin 23.6% — ahead on all counts.","del","Delivered"],
+ ["Zen Technologies","Strong order conversion in H2","Q1 revenue missed. July order inflow strong. Timing, not demand.","part","Split"],
+ ["BEML","Path to Q1 EBITDA positive","First positive Q1 EBITDA in 10 years (₹3cr). Direction confirmed.","del","Delivered"],
+ ["Mazagon Dock","Order book to ~₹1 lakh crore by FY27","Order book declining without P75I. Target and trend inconsistent.","miss","Missed"],
+ ["BDL","Order inflow visibility from DAC approvals","Strong DAC approvals. PAT base disputed. Revenue +15.8%.","part","Split"],
+ ["Cochin Shipyard","Revenue growth and margin stability","Revenue +2%, PAT −19%. Margin compression.","miss","Missed"],
+ ["Data Patterns","Order book execution","Revenue −12% on timing. Order pipeline intact.","part","Split"],
+ ["Astra Microwave","Order inflow ₹1,300cr+ and revenue ₹1,000cr+ FY27","Revenue −10.7% on timing. Order book ₹2,849cr.","part","Split"],
+ ["Paras Defence","Anti-drone and EO/IR order wins","Revenue +37.3% YoY. Order book ₹2,849cr.","del","Delivered"],
+ ["ideaForge","First positive EBITDA and order book execution","Positive EBITDA achieved. Supply chain risk flagged.","del","Delivered"]
+];
+document.getElementById("score").innerHTML=SCORE.map(([c,p,d,k,v])=>
+ `<tr><td class="co">${c}</td><td>${p}</td><td class="hide">${d}</td><td class="vd ${k}">${v}</td></tr>`).join("");
+</script>
 </body>
 </html>
