@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cement Q1 FY27 — Sector Earnings Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Roboto+Mono:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --stone:#E3E0D9; --card:#F3F1EC; --card2:#EAE7E0;
+  --ink:#1F1D1A; --mute:#6E6A62; --faint:#9A958B; --rule:#C9C4B9;
+  --gain:#1D5C7A; --loss:#A8382C; 
+  --vol:#8E8879; --gold:#B4842A;
+  --disp:'Archivo',system-ui,sans-serif;
+  --serif:'Source Serif 4',Georgia,serif;
+  --mono:'Roboto Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--stone);color:var(--ink);font-family:var(--serif);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:28px 20px 90px}
+section{margin-bottom:40px}
+
+/* type */
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
+h1{font-family:var(--disp);font-weight:800;font-size:clamp(34px,7vw,62px);line-height:.94;letter-spacing:-.03em;margin:.18em 0 .22em;text-transform:uppercase}
+h2{font-family:var(--disp);font-weight:700;font-size:clamp(19px,3.2vw,25px);letter-spacing:-.015em;margin:0 0 4px;text-transform:uppercase}
+h3{font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:-.005em;margin:0}
+.dek{font-size:17px;color:var(--mute);max-width:56ch;margin:0}
+.note{font-size:13px;color:var(--mute);margin:4px 0 20px;max-width:70ch}
+.rule{height:3px;background:var(--ink);margin:0 0 16px}
+
+/* thesis stats */
+.thesis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:2px;background:var(--rule);border:2px solid var(--ink);margin-top:26px}
+.t{background:var(--card);padding:13px 15px}
+.t .n{font-family:var(--disp);font-weight:800;font-size:26px;line-height:1.05;letter-spacing:-.02em}
+.t .l{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:5px;line-height:1.35}
+.t.up .n{color:var(--gain)} .t.dn .n{color:var(--loss)}
+
+/* SIGNATURE: the scissor */
+.scissor{background:var(--card);border:2px solid var(--ink);padding:18px 16px 12px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin-bottom:14px}
+.legend span{display:flex;align-items:center;gap:6px}
+.sw{width:13px;height:11px;display:inline-block}
+.row{display:grid;grid-template-columns:104px 1fr;gap:10px;align-items:center;margin-bottom:3px}
+.row .co{font-family:var(--disp);font-weight:600;font-size:12px;text-align:right;line-height:1.15}
+.track{position:relative;height:26px;border-left:2px solid var(--ink);border-right:0}
+.axis{position:absolute;top:0;bottom:0;width:2px;background:var(--ink);opacity:.85}
+.b{position:absolute;height:10px}
+.b.v{top:1px;background:var(--vol)}
+.b.e{top:14px}
+.b.e.pos{background:var(--gain)} .b.e.neg{background:var(--loss)}
+.b span{position:absolute;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:9.5px;font-weight:500;white-space:nowrap;color:var(--ink)}
+.b.pos span,.b.v span{left:calc(100% + 5px)}
+.b.neg span{right:calc(100% + 5px)}
+.scale{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9.5px;color:var(--faint);margin-top:6px;padding-left:114px}
+
+/* league bars */
+.league{background:var(--card);border:2px solid var(--ink);padding:16px}
+.lrow{display:grid;grid-template-columns:112px 1fr 96px;gap:10px;align-items:center;padding:4px 0;border-bottom:1px solid var(--rule)}
+.lrow:last-child{border-bottom:0}
+.lrow .co{font-family:var(--disp);font-weight:600;font-size:12.5px;text-align:right}
+.lbar{height:16px;background:var(--gain);position:relative}
+.lbar.mid{background:#4A7F91} .lbar.low{background:var(--loss)}
+.lrow .v{font-family:var(--mono);font-size:12px;font-weight:700;text-align:right}
+.lrow .d{font-family:var(--mono);font-size:10px;color:var(--mute);text-align:right}
+
+/* fuel strip */
+.fuel{background:var(--ink);color:var(--card);border:2px solid var(--ink);padding:18px}
+.fuel h2{color:var(--card)}
+.fline{display:flex;align-items:flex-end;gap:0;height:110px;margin:20px 0 6px}
+.fp{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:6px}
+.fp i{display:block;width:100%;max-width:52px;background:var(--gold)}
+.fp b{font-family:var(--mono);font-size:12px;font-weight:700}
+.fp em{font-family:var(--mono);font-size:9.5px;font-style:normal;letter-spacing:.09em;text-transform:uppercase;color:#A9A296}
+.warn{border-top:1px solid #4A453C;margin-top:14px;padding-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
+.warn div{font-size:13.5px;color:#D6D1C6}
+.warn strong{display:block;font-family:var(--mono);font-size:17px;font-weight:700;color:var(--gold);margin-bottom:2px}
+
+/* company cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
+.c{background:var(--card);border:2px solid var(--ink);padding:14px;display:flex;flex-direction:column}
+.chead{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:2px}
+.tick{font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacing:.06em}
+.badge{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 6px;border:1.5px solid;white-space:nowrap;flex-shrink:0}
+.badge.del{color:var(--gain);border-color:var(--gain)}
+.badge.part{color:var(--gold);border-color:var(--gold)}
+.badge.miss{color:var(--loss);border-color:var(--loss)}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);margin:11px 0}
+.tile{background:var(--card2);padding:7px 9px}
+.tile .n{font-family:var(--mono);font-size:15px;font-weight:700;line-height:1.15}
+.tile .l{font-family:var(--mono);font-size:8.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:3px}
+.tile .n.up{color:var(--gain)} .tile .n.dn{color:var(--loss)}
+.c ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.c li{margin-bottom:5px}
+.c li::marker{color:var(--faint)}
+.flags{margin-top:auto;padding-top:10px;display:flex;flex-wrap:wrap;gap:5px}
+.flag{font-family:var(--mono);font-size:9px;letter-spacing:.05em;text-transform:uppercase;background:var(--loss);color:var(--card);padding:3px 6px}
+.flag.ok{background:var(--gain)}
+
+/* scorecard */
+table{width:100%;border-collapse:collapse;background:var(--card);border:2px solid var(--ink)}
+th{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;text-align:left;padding:9px 10px;background:var(--ink);color:var(--card)}
+td{padding:9px 10px;border-bottom:1px solid var(--rule);font-size:13.5px;vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.co{font-family:var(--disp);font-weight:700;font-size:13px;white-space:nowrap}
+td.vd{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;white-space:nowrap}
+.vd.del{color:var(--gain)} .vd.part{color:var(--gold)} .vd.miss{color:var(--loss)}
+
+/* call */
+.calls{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.call{border:2px solid var(--ink);padding:15px;background:var(--card)}
+.call.buy{border-left:9px solid var(--gain)}
+.call.wait{border-left:9px solid var(--gold)}
+.call.avoid{border-left:9px solid var(--loss)}
+.call .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.call h3{margin:4px 0 7px;font-size:17px}
+.call p{margin:0;font-size:13.5px}
+
+
+/* commentary */
+.themes{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.th{background:var(--card);border:2px solid var(--ink);padding:14px}
+.th .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--mute);border-bottom:2px solid var(--ink);padding-bottom:6px;margin-bottom:9px}
+.th ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.th li{margin-bottom:6px}
+.th li::marker{color:var(--faint)}
+.th b{font-family:var(--mono);font-size:12.5px;font-weight:700}
+
+/* red flags */
+.rf{background:var(--card);border:2px solid var(--ink)}
+.rfg{border-bottom:2px solid var(--ink)}
+.rfg:last-child{border-bottom:0}
+.rfh{display:flex;align-items:center;gap:9px;padding:8px 13px;background:var(--card2)}
+.sev{width:11px;height:11px;flex-shrink:0}
+.sev.hi{background:var(--loss)} .sev.md{background:var(--gold)} .sev.lo{background:var(--faint)}
+.rfh span{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase}
+.rfr{display:grid;grid-template-columns:118px 1fr;gap:12px;padding:9px 13px;border-top:1px solid var(--rule);font-size:13.5px}
+.rfr b{font-family:var(--disp);font-weight:700;font-size:12.5px}
+
+/* ind-ra verdict */
+.indra{background:var(--card);border:2px solid var(--ink);padding:16px}
+.split{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:2px;background:var(--rule);border:1px solid var(--rule);margin-bottom:16px}
+.sp{background:var(--card2);padding:13px 14px}
+.sp .n{font-family:var(--disp);font-weight:800;font-size:34px;line-height:1;letter-spacing:-.03em;color:var(--loss)}
+.sp.ok .n{color:var(--gain)}
+.sp .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-top:6px}
+.sp .w{font-size:12.5px;color:var(--mute);margin-top:7px}
+.vs{display:grid;grid-template-columns:82px 1fr;gap:11px;padding:7px 0;border-bottom:1px solid var(--rule);font-size:13.5px;align-items:start}
+.vs:last-child{border-bottom:0}
+.vs em{font-family:var(--mono);font-size:9.5px;font-style:normal;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding-top:2px}
+.vs em.y{color:var(--gain)} .vs em.n{color:var(--loss)} .vs em.p{color:var(--gold)}
+
+/* regional strip */
+.reg{display:grid;grid-template-columns:repeat(auto-fit,minmax(112px,1fr));gap:2px;background:var(--rule);border:2px solid var(--ink);margin-top:16px}
+.rg{background:var(--card2);padding:11px 12px;text-align:center}
+.rg .n{font-family:var(--mono);font-size:15px;font-weight:700}
+.rg .n.up{color:var(--gain)} .rg .n.dn{color:var(--loss)}
+.rg .l{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-top:4px}
+
+/* triggers */
+.trigs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:14px}
+.tg{border:2px solid var(--ink);padding:14px;background:var(--card)}
+.tg .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
+.tg.tg-up .k{color:var(--gain)} .tg.tg-dn .k{color:var(--loss)}
+.tg ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.tg li{margin-bottom:6px}
+
+/* caveats */
+.cav{background:var(--card2);border:2px solid var(--ink);padding:15px 15px 15px 30px;margin:0;font-size:13.5px;line-height:1.55}
+.cav li{margin-bottom:8px}
+.cav li:last-child{margin-bottom:0}
+.cav b{font-family:var(--mono);font-size:12px;font-weight:700}
+
+footer{border-top:3px solid var(--ink);padding-top:15px;font-size:12.5px;color:var(--mute)}
+footer p{margin:0 0 8px;max-width:80ch}
+
+@media(max-width:620px){
+  .row{grid-template-columns:74px 1fr;gap:7px}
+  .row .co{font-size:10.5px}
+  .scale{padding-left:81px}
+  .lrow{grid-template-columns:80px 1fr 74px}
+  .lrow .co{font-size:11px}
+  .wrap{padding:20px 13px 60px}
+  td.hide,th.hide{display:none}
+}
+@media(prefers-reduced-motion:no-preference){
+  .b,.lbar,.fp i{animation:g .7s cubic-bezier(.2,.7,.3,1) both}
+  @keyframes g{from{transform:scaleX(.001);opacity:0}to{transform:scaleX(1);opacity:1}}
+  .b.neg{transform-origin:right} .b.v,.b.pos,.lbar{transform-origin:left}
+  .fp i{animation-name:gy;transform-origin:bottom}
+  @keyframes gy{from{transform:scaleY(.001)}to{transform:scaleY(1)}}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Sector earnings review · Quarter ended 30 June 2026</div>
+  <h1>Cement<br>Q1 FY27</h1>
+  <p class="dek">Volumes grew almost everywhere. Margin per tonne fell almost everywhere. Only UltraTech held both — and the fuel bill has not finished arriving.</p>
+  <div class="thesis">
+    <div class="t"><div class="n">13/14</div><div class="l">Companies grew volume</div></div>
+    <div class="t dn"><div class="n">9/13</div><div class="l">Lost EBITDA per tonne</div></div>
+    <div class="t dn"><div class="n">−₹140</div><div class="l">Guided Q2 cost rise per tonne</div></div>
+    <div class="t up"><div class="n">1</div><div class="l">Delivered on guidance in full</div></div>
+  </div>
+</header>
+
+<section>
+  <h2>The scissor</h2>
+  <div class="rule"></div>
+  <p class="note">Volume growth against change in EBITDA per tonne, same scale, same axis. The gap between the two bars is the quarter: companies sold more cement and earned less on each tonne of it. Four names closed the gap. Nine widened it.</p>
+  <div class="scissor">
+    <div class="legend">
+      <span><i class="sw" style="background:var(--vol)"></i>Volume growth YoY</span>
+      <span><i class="sw" style="background:var(--gain)"></i>EBITDA/t gain</span>
+      <span><i class="sw" style="background:var(--loss)"></i>EBITDA/t loss</span>
+    </div>
+    <div id="scissor"></div>
+    <div class="scale"><span>−50%</span><span>−25%</span><span>0</span><span>+25%</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>EBITDA per tonne — the league table</h2>
+  <div class="rule"></div>
+  <p class="note">The only number that matters in cement. Below roughly ₹700 a tonne, a plant struggles to fund its own maintenance capex. Four companies are there.</p>
+  <div class="league" id="league"></div>
+</section>
+
+<section>
+  <h2>The fuel bill is late</h2>
+  <div class="rule"></div>
+  <div class="fuel">
+    <h2>Imported petcoke, US$ per tonne</h2>
+    <div class="fline" id="fuel"></div>
+    <div class="warn">
+      <div><strong>2–3 months</strong>Fuel sits in inventory before it reaches the P&amp;L. April's peak-priced cargo only started burning in June.</div>
+      <div><strong>+₹130–150/t</strong>What UltraTech, JK Cement and Ambuja each guide as the further sequential cost rise in Q2 FY27.</div>
+      <div><strong>Q2 &gt; Q1</strong>The margin damage in this report is the first instalment, not the total. Q2 prints worse for most names.</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Company by company</h2>
+  <div class="rule"></div>
+  <p class="note">Badge shows whether Q1 delivery matched what management guided at the Q4 FY26 call. Red chips are flags to carry into the next quarter.</p>
+  <div class="grid" id="cards"></div>
+</section>
+
+
+<section>
+  <h2>What management said</h2>
+  <div class="rule"></div>
+  <p class="note">From the Q1 FY27 calls and releases. Grouped by theme, because the companies said broadly the same things.</p>
+  <div class="themes">
+
+    <div class="th"><div class="k">Demand — FY27</div><ul>
+      <li>UltraTech reiterates <b>double-digit</b> volume growth.</li>
+      <li>Ambuja guides industry demand at <b>~5%</b>.</li>
+      <li>Motilal Oswal pegs FY27 at <b>7–8%</b>.</li>
+      <li>Nuvoco cites central capex <b>+13% YoY</b> to May 2026.</li>
+      <li>Drivers named: infrastructure, housing, rural.</li>
+    </ul></div>
+
+    <div class="th"><div class="k">Pricing</div><ul>
+      <li>April hikes only <b>partly stuck</b>.</li>
+      <li>Net Q1 gain roughly <b>₹10–12/bag</b> (Nuvama checks).</li>
+      <li>Managements expect prices broadly steady through monsoon.</li>
+      <li>Sagar reports prices <b>flat</b> March to July 2026.</li>
+    </ul></div>
+
+    <div class="th"><div class="k">Cost — the key guidance</div><ul>
+      <li>UltraTech: <b>+₹130–140/t</b> sequentially in Q2. Costs near peak.</li>
+      <li>JK Cement: <b>+₹150/t</b> — fuel ₹75–100, diesel and logistics ~₹50.</li>
+      <li>Ambuja guides similar.</li>
+      <li>Easing expected only in H2 FY27.</li>
+    </ul></div>
+
+    <div class="th"><div class="k">West Asia impact</div><ul>
+      <li>Cited by <b>nearly every</b> company.</li>
+      <li>Higher imported fuel, freight and shipping.</li>
+      <li>Ambuja flagged packaging inflation of <b>25–30%</b>.</li>
+      <li>Supply-chain disruption, not just price.</li>
+    </ul></div>
+
+    <div class="th"><div class="k">Green power &amp; premium mix</div><ul>
+      <li>JK Lakshmi <b>49%</b> green power — sector best.</li>
+      <li>UltraTech <b>45.6%</b>, targeting 85% by FY30.</li>
+      <li>Ambuja <b>34%</b>, targeting 60% by FY28.</li>
+      <li>India Cements <b>6%</b> today, 80% by FY29.</li>
+      <li>Premium share of trade: ACC 44%, Ambuja 34%, Dalmia 25%.</li>
+    </ul></div>
+
+    <div class="th"><div class="k">Diversification</div><ul>
+      <li>UltraTech into wires and cables: <b>₹1,800 cr</b>, ₹888 cr committed, Q3 FY27 launch.</li>
+      <li>JK Cement paint: <b>₹125 cr</b> Q1 revenue, EBITDA breakeven, ₹500–550 cr FY27 target.</li>
+      <li>RMC expansion at ACC (119 plants) and JK Cement (50 by year-end).</li>
+      <li>Both are margin-dilutive near term.</li>
+    </ul></div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Red flags</h2>
+  <div class="rule"></div>
+  <p class="note">Ranked by how much they should change position sizing, not by how alarming they sound.</p>
+  <div class="rf">
+
+    <div class="rfg">
+      <div class="rfh"><i class="sev hi"></i><span>Act on these</span></div>
+      <div class="rfr"><b>Sagar</b><div>Loss-making. FY27 EBITDA/t guidance of ₹500–550 already unreachable after one quarter. Net debt ₹1,599 cr, long-term debt/equity 0.78x.</div></div>
+      <div class="rfr"><b>India Cements</b><div>Trailing P/E ~158x and EV/EBITDA ~35x on a depressed base. The turnaround is real. The valuation leaves no margin of safety.</div></div>
+      <div class="rfr"><b>Ramco</b><div>Tamil Nadu mineral-bearing land tax of ~₹84/t is structural, not cyclical. Asset monetisation has delivered ₹24 cr of a ₹1,098 cr two-year plan.</div></div>
+    </div>
+
+    <div class="rfg">
+      <div class="rfh"><i class="sev md"></i><span>Monitor next quarter</span></div>
+      <div class="rfr"><b>Dalmia Bharat</b><div>CFO changed 1 August. ₹182 cr exceptional charge. Leverage jumped from ~0.33x to 1.47x.</div></div>
+      <div class="rfr"><b>JK Lakshmi</b><div>₹130 cr exceptional charge. Agrani mining contract cancelled, arbitration filed in Delhi High Court.</div></div>
+      <div class="rfr"><b>ACC</b><div>PAT down 61%. Growing share of volume routed through supply arrangements with parent Ambuja — a related-party dependency. Merger execution risk on top.</div></div>
+      <div class="rfr"><b>JK Cement</b><div>1.69x leverage, highest of the majors, still rising. Captive Mahan coal only produces from end-FY28.</div></div>
+    </div>
+
+    <div class="rfg">
+      <div class="rfh"><i class="sev lo"></i><span>Note and move on</span></div>
+      <div class="rfr"><b>Ambuja</b><div>The ~80 MT FY27 volume guidance is hard to reconcile with a 7% volume decline in Q1.</div></div>
+      <div class="rfr"><b>Shree Cement</b><div>Steered investors to consolidated numbers mid-year. Not improper, but it changes the comparison base.</div></div>
+      <div class="rfr"><b>Birla Corp</b><div>ROCE ~7.0%, ROE ~5.2%. Barely above cost of capital despite 98% utilisation.</div></div>
+      <div class="rfr"><b>Sector-wide</b><div>Every company except UltraTech missed its own margin guidance. Treat FY27 margin targets sceptically.</div></div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Walk the talk</h2>
+  <div class="rule"></div>
+  <p class="note">What was promised at the FY26 exit call, against what Q1 FY27 actually delivered.</p>
+  <table>
+    <thead><tr><th>Company</th><th>Promised</th><th class="hide">Delivered</th><th>Verdict</th></tr></thead>
+    <tbody id="score"></tbody>
+  </table>
+</section>
+
+
+<section>
+  <h2>Was Ind-Ra right?</h2>
+  <div class="rule"></div>
+  <p class="note">India Ratings called a double-digit EBITDA/t decline in Q1 FY27, with tier-2 players hit hardest. Here is the scorecard on the call itself.</p>
+  <div class="indra">
+    <div class="split">
+      <div class="sp ok"><div class="n">−8%</div><div class="l">Scale leaders, avg EBITDA/t</div><div class="w">UltraTech, Nuvoco, Dalmia, Shree. Absorbed the shock.</div></div>
+      <div class="sp"><div class="n">−34%</div><div class="l">Tier-2, avg EBITDA/t</div><div class="w">Ramco, Heidelberg, ACC, Sagar, JK Lakshmi. Did not.</div></div>
+      <div class="sp"><div class="n">−14.5%</div><div class="l">Sector average (Systematix)</div><div class="w">₹848/t, also −5.3% QoQ.</div></div>
+    </div>
+
+    <div class="vs"><em class="y">Right</em><div><b>Double-digit EBITDA/t decline.</b> Sector average came in at −14.5% YoY. Called correctly.</div></div>
+    <div class="vs"><em class="y">Right</em><div><b>Tier-2 hit hardest.</b> The most accurate part of the call. Leverage, regional concentration and low operating flexibility played out exactly as flagged.</div></div>
+    <div class="vs"><em class="p">Partly</em><div><b>Utilisation stuck at 68–69%.</b> True in aggregate, but UltraTech ran 81% and Birla Corp 98%. The average hides the spread.</div></div>
+    <div class="vs"><em class="n">Wrong</em><div><b>Demand moderating to mid-single-digit.</b> Volumes grew 5–18%. Ind-Ra was too cautious.</div></div>
+    <div class="vs"><em class="n">Wrong</em><div><b>Generalising the margin call across scale.</b> UltraTech grew EBITDA/t. Nuvoco grew EBITDA/t. Scale and green power were a real hedge.</div></div>
+
+    <div class="reg">
+      <div class="rg"><div class="n">Flat</div><div class="l">North</div></div>
+      <div class="rg"><div class="n">Flat</div><div class="l">South</div></div>
+      <div class="rg"><div class="n dn">−₹15–20</div><div class="l">East /bag</div></div>
+      <div class="rg"><div class="n up">+₹10</div><div class="l">West /bag</div></div>
+      <div class="rg"><div class="n">Flat</div><div class="l">Central</div></div>
+      <div class="rg"><div class="n up">+₹10–12</div><div class="l">Net Q1 /bag</div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>The call</h2>
+  <div class="rule"></div>
+  <div class="calls">
+    <div class="call buy">
+      <div class="k">Own now</div>
+      <h3>UltraTech</h3>
+      <p>The only company to grow EBITDA/t in a cost-shock quarter. Beat consensus, deleveraged to 0.87x, hit 200 MTPA a year early, and is turning India Cements around faster than guided. Green power at 45.6% is the structural hedge against exactly this fuel cycle.</p>
+    </div>
+    <div class="call wait">
+      <div class="k">Accumulate into Q2 weakness</div>
+      <h3>Nuvoco · Shree · Ambuja</h3>
+      <p>Management has pre-announced that Q2 is the peak-cost quarter. Expect a second leg down in the print and likely in the price. Nuvoco delivered record Q1 EBITDA and commissioned ahead of schedule; Shree and Ambuja carry net cash. Buy the cost peak, not before it.</p>
+    </div>
+    <div class="call avoid">
+      <div class="k">Stay out</div>
+      <h3>Sagar · Ramco · ACC standalone</h3>
+      <p>Sagar is loss-making with leverage rising and its own FY27 guidance already unreachable. Ramco carries a structural Tamil Nadu land-tax drag of about ₹84 a tonne. ACC's earnings depend increasingly on intra-group supply arrangements with its own parent.</p>
+    </div>
+  </div>
+
+  <div class="trigs">
+    <div class="tg tg-up"><div class="k">What would make us more positive</div><ul>
+      <li>Price hikes of <b>₹15–20/bag</b> sticking into Q3 FY27.</li>
+      <li>Petcoke sustained <b>below $120/t</b>.</li>
+      <li>Either one alone is not enough. Both together mean a broad H2 EBITDA/t rebound — buy the sector, not just the leaders.</li>
+    </ul></div>
+    <div class="tg tg-dn"><div class="k">What would make us cut</div><ul>
+      <li>Any sign of <b>market-share-led discounting</b> among the top three. Consolidation is holding pricing discipline together; if that breaks, tier-2 has no cushion.</li>
+      <li>UltraTech specifically: net debt/EBITDA above <b>1.0x</b>, or EBITDA/t below <b>₹1,150</b> in Q2.</li>
+      <li>Ambuja specifically: the ~80 MT FY27 target being quietly dropped.</li>
+    </ul></div>
+  </div>
+</section>
+
+<section>
+  <h2>Caveats</h2>
+  <div class="rule"></div>
+  <ul class="cav">
+    <li><b>Reporting is incomplete.</b> Star Cement reported 7 August. Smaller names may file up to the 14 August SEBI deadline. Granularity is thinner for the small caps.</li>
+    <li><b>Some EBITDA/t figures are derived.</b> Company-reported for UltraTech, Ambuja, Dalmia, JK Cement, Ramco, Heidelberg, India Cements. Computed from EBITDA ÷ volume for ACC, Nuvoco, Shree, JK Lakshmi, Birla Corp, Sagar. Do not rank the derived ones against each other on small differences.</li>
+    <li><b>Year-on-year reads are distorted by M&amp;A.</b> UltraTech (India Cements, Kesoram), Ambuja (Penna, Sanghi, Orient), Dalmia (Jaiprakash), JK Lakshmi (Udaipur Cement). Sequential and like-for-like are more reliable this quarter.</li>
+    <li><b>Standalone and consolidated bases differ.</b> Most visible at Shree Cement and JK Cement, where overseas and subsidiary operations now matter.</li>
+    <li><b>Beat/miss is confirmed only for UltraTech and JK Cement.</b> For other names, consensus context comes from broker previews rather than confirmed post-result comparisons.</li>
+    <li><b>Regional absolute price levels are indicative.</b> The reliable data is in change terms from brokerage channel checks. Absolute per-bag levels drawn partly from trade aggregators.</li>
+    <li><b>Forward statements are projections, not outcomes.</b> Q2 cost guidance, H2 recovery, merger timing and FY27 capacity targets are all management or analyst views.</li>
+    <li><b>Ambuja capacity timing is ambiguous across sources.</b> The near-term ~119 MTPA appears FY27-linked in the company release; the larger expansion has reportedly moved toward FY30. Treat with caution pending the investor presentation.</li>
+  </ul>
+</section>
+
+<footer>
+  <p><b>Universe:</b> 14 listed cement companies, quarter ended 30 June 2026. Sources: company press releases, investor presentations and exchange filings, supplemented by Business Standard, Systematix, JM Financial, Motilal Oswal, Nuvama and India Ratings.</p>
+</footer>
+
+</div>
+<script>
+/* volume growth %, EBITDA/t change % */
+const SC=[
+ ["India Cements",18.5,57.9],["UltraTech",13.1,1.3],["Nuvoco",5.0,2.0],["Ambuja",-7.0,27.0],
+ ["Birla Corp",5.4,-8.7],["Dalmia Bharat",9.0,-16.0],["Shree Cement",17.0,-18.5],
+ ["JK Cement",18.0,-20.0],["JK Lakshmi",8.2,-24.6],["Heidelberg",3.6,-27.0],
+ ["Ramco",12.0,-31.0],["ACC",0.0,-41.0],["Sagar",13.0,-47.0]
+];
+const MIN=-50,MAX=30,SPAN=MAX-MIN,Z=(0-MIN)/SPAN*100;
+document.getElementById("scissor").innerHTML=SC.map(([n,v,e],i)=>{
+ const bar=(val,cls)=>{const w=Math.abs(val)/SPAN*100;
+  const l=val>=0?Z:Z-w;
+  return `<i class="b ${cls} ${val>=0?'pos':'neg'}" style="left:${l}%;width:${w}%;animation-delay:${i*45}ms"><span>${val>0?'+':''}${val}%</span></i>`;};
+ return `<div class="row"><div class="co">${n}</div><div class="track"><i class="axis" style="left:${Z}%"></i>${bar(v,'v')}${bar(e,'e')}</div></div>`;
+}).join("");
+
+/* EBITDA/t league */
+const LG=[["UltraTech",1214,"+1.3% YoY"],["Nuvoco",1079,"derived"],["Dalmia Bharat",1055,"−16% YoY"],
+ ["Shree Cement",1024,"derived"],["JK Cement",982,"−20% YoY"],["Ambuja",931,"+27% QoQ"],
+ ["Ramco",681,"−31% YoY"],["India Cements",603,"+₹221 YoY"],["Heidelberg",514,"−27% YoY"],
+ ["ACC",457,"derived"],["Sagar",451,"−47% YoY"]];
+const LMAX=1300;
+document.getElementById("league").innerHTML=LG.map(([n,v,d],i)=>{
+ const cls=v>=1000?"":v>=700?"mid":"low";
+ return `<div class="lrow"><div class="co">${n}</div>
+ <div><i class="lbar ${cls}" style="display:block;width:${v/LMAX*100}%;animation-delay:${i*40}ms"></i></div>
+ <div><div class="v">₹${v.toLocaleString('en-IN')}</div><div class="d">${d}</div></div></div>`;
+}).join("");
+
+/* fuel */
+const FU=[["Feb 26",115],["Apr 26",160],["Jun 26",130]];
+document.getElementById("fuel").innerHTML=FU.map(([l,v],i)=>
+ `<div class="fp"><b>$${v}</b><i style="height:${v/160*88}px;animation-delay:${i*120}ms"></i><em>${l}</em></div>`).join("");
+
+/* company cards */
+const CO=[
+ {n:"UltraTech Cement",t:"ULTRACEMCO",b:"del",bl:"Delivered",
+  k:[["₹1,214","EBITDA/t",1],["+13.1%","Volume",1],["+17.2%","PAT",1],["0.87x","Net debt/EBITDA",1]],
+  p:["Only major to grow EBITDA/t through the fuel shock.","Beat the Bloomberg poll on both revenue and profit.","Crossed 200 MTPA in April, a full year ahead of plan.","Green power at 45.6%, targeting 85% by FY30."],
+  f:[["Cleanest print in the sector","ok"]]},
+
+ {n:"Ambuja Cements",t:"AMBUJACEM",b:"part",bl:"Partial",
+  k:[["₹931","EBITDA/t",1],["−7.0%","Volume",-1],["−37%","PAT",-1],["Net cash","Balance sheet",1]],
+  p:["Cost per tonne fell ₹206 QoQ to ₹4,241 — already inside its FY27 target.","Volume decline was deliberate: walked away from low-margin non-trade.","That makes the ~80 MT FY27 volume guidance look unreachable.","ACC merger filed with NCLT on 29 June."],
+  f:[["FY27 volume guidance at risk","" ]]},
+
+ {n:"ACC",t:"ACC",b:"miss",bl:"Missed",
+  k:[["₹457","EBITDA/t",-1],["−41%","EBITDA",-1],["−61%","PAT",-1],["7.9%","Margin",-1]],
+  p:["Weakest EBITDA/t among the majors.","Hit by planned maintenance on large integrated units.","Growing share of volume now flows through supply arrangements with parent Ambuja.","Net worth ₹20,562 cr, still net cash."],
+  f:[["Related-party volume mix",""],["Merger execution risk",""]]},
+
+ {n:"Shree Cement",t:"SHREECEM",b:"part",bl:"Partial",
+  k:[["₹1,024","EBITDA/t",0],["+17%","Volume",1],["−17.5%","PAT",-1],["₹8,348cr","Net cash",1]],
+  p:["Volume target on track; Kodla lifted India capacity to 69.3 MTPA.","Margins missed the Street despite the volume beat.","RMC volume up 156% off a small base.","Management now steering investors to consolidated, not standalone, numbers."],
+  f:[["Reporting-base change mid-year",""]]},
+
+ {n:"Dalmia Bharat",t:"DALBHARAT",b:"part",bl:"Partial",
+  k:[["₹1,055","EBITDA/t",0],["+9%","Volume",1],["−52%","PAT",-1],["1.47x","Net debt/EBITDA",-1]],
+  p:["Volume growth beat the industry; Jaiprakash deal closed and integrated fast.","Chunar dispatched within 22 days of commissioning.","PAT fall includes a ₹182 cr exceptional acquisition charge.","Leverage jumped from roughly 0.33x — deleveraging story is paused."],
+  f:[["CFO transition 1 Aug",""],["Leverage step-up",""]]},
+
+ {n:"JK Cement",t:"JKCEMENT",b:"part",bl:"Partial",
+  k:[["₹982","EBITDA/t",-1],["+18%","Grey volume",1],["−15.3%","PAT",-1],["1.69x","Net debt/EBITDA",-1]],
+  p:["Beat on EPS despite the margin squeeze; white cement up 29%.","Highest leverage among the majors and still rising.","Guides a further ₹150/t cost increase in Q2.","Captive Mahan coal only starts producing end-FY28 — no near-term relief."],
+  f:[["Highest leverage of the majors",""]]},
+
+ {n:"Ramco Cements",t:"RAMCOCEM",b:"miss",bl:"Missed",
+  k:[["₹681","EBITDA/t",-1],["+12%","Volume",1],["−62.8%","PAT",-1],["₹4,007cr","Total debt",-1]],
+  p:["Volume grew but profitability collapsed.","Tamil Nadu mineral-bearing land tax adds roughly ₹84/t — structural, not cyclical.","Realisation fell 5% YoY even as volumes rose.","Asset monetisation running slow: ₹24 cr of a ₹1,098 cr two-year plan."],
+  f:[["Regional tax drag",""],["Monetisation behind plan",""]]},
+
+ {n:"Nuvoco Vistas",t:"NUVOCO",b:"del",bl:"Delivered",
+  k:[["₹1,079","EBITDA/t",1],["+5%","Volume",1],["+20%","PAT",1],["18.2%","Margin",1]],
+  p:["Highest-ever Q1 EBITDA — one of only two majors to grow it.","Limla grinding unit commissioned ahead of schedule.","Stock rose 8–13% on the print.","Kutch on track for Q3 FY27; 35 MTPA target by FY28."],
+  f:[["Delivered ahead of guidance","ok"]]},
+
+ {n:"JK Lakshmi Cement",t:"JKLAKSHMI",b:"part",bl:"Partial",
+  k:[["−24.6%","EBITDA/t",-1],["+8.2%","Volume",1],["−28%","PAT",-1],["49%","Green power",1]],
+  p:["Highest green-power share in the sector — best structurally hedged against fuel.","PAT includes a ₹130 cr exceptional charge.","Agrani mining contract cancelled; arbitration filed in Delhi High Court.","Durg expansion ₹3,000 cr, target March 2028."],
+  f:[["Live mining arbitration",""]]},
+
+ {n:"Birla Corporation",t:"BIRLACORPN",b:"part",bl:"Partial",
+  k:[["−8.7%","EBITDA/t",-1],["+5.4%","Volume",1],["98%","Utilisation",1],["~7.0%","ROCE",-1]],
+  p:["Best capacity utilisation in the sector at 98%.","Smallest margin decline among the mid-caps.","Management refused to shift from trade to non-trade despite competition.","ROCE around 7% is barely above cost of capital."],
+  f:[["Returns below cost of capital",""]]},
+
+ {n:"India Cements",t:"INDIACEM",b:"del",bl:"Delivered",
+  k:[["₹603","EBITDA/t",1],["+₹221","EBITDA/t YoY",1],["+18.5%","Volume",1],["~158x","Trailing P/E",-1]],
+  p:["Turnaround under UltraTech is running ahead of plan: ₹333 → ₹497 → ₹603 per tonne over three quarters.","Back to profit before exceptionals after a year-ago loss.","Green power roadmap 6% today to 80% by FY29.","Valuation is entirely a turnaround bet on a depressed earnings base."],
+  f:[["Valuation offers no margin of safety",""]]},
+
+ {n:"Heidelberg India",t:"HEIDELBERG",b:"miss",bl:"Missed",
+  k:[["₹514","EBITDA/t",-1],["+3.6%","Volume",-1],["−36.7%","PAT",-1],["₹404cr","Net cash",1]],
+  p:["Weakest volume growth among the majors.","Raw material costs up 21%; alternate fuels only 12% of mix.","Debt-free, which limits the downside.","Promoter confirmed zero pledging."],
+  f:[["Low alternate-fuel mix",""]]},
+
+ {n:"Sagar Cements",t:"SAGCEM",b:"miss",bl:"Missed",
+  k:[["₹451","EBITDA/t",-1],["−₹28cr","Net loss",-1],["+13%","Volume",1],["₹1,599cr","Net debt",-1]],
+  p:["Swung from profit to loss; worst EBITDA/t in the coverage set.","Realisation fell 6% to ₹4,396/t while power and fuel cost ₹1,484/t.","Its own FY27 guidance of ₹500–550/t is already out of reach after one quarter.","Vizag land sale of ₹150 cr this year is earmarked for debt reduction — the balance sheet needs it."],
+  f:[["Loss-making",""],["Guidance unreachable",""],["Rising leverage",""]]}
+];
+document.getElementById("cards").innerHTML=CO.map(c=>`
+ <article class="c">
+  <div class="chead"><div><h3>${c.n}</h3><div class="tick">${c.t}</div></div><div class="badge ${c.b}">${c.bl}</div></div>
+  <div class="tiles">${c.k.map(([n,l,s])=>`<div class="tile"><div class="n ${s===1?'up':s===-1?'dn':''}">${n}</div><div class="l">${l}</div></div>`).join("")}</div>
+  <ul>${c.p.map(x=>`<li>${x}</li>`).join("")}</ul>
+  <div class="flags">${c.f.map(([t,k])=>`<span class="flag ${k}">${t}</span>`).join("")}</div>
+ </article>`).join("");
+
+/* scorecard */
+const SCORE=[
+ ["UltraTech","Double-digit volume growth, 200 MTPA capacity, net debt/EBITDA under 1x","+13.1% volume, 200.1 MTPA in April, 0.87x","del","Delivered"],
+ ["Nuvoco","35 MTPA by FY28, Limla commissioning in Q1","Limla commissioned early, record Q1 EBITDA","del","Delivered"],
+ ["Ambuja","~80 MT FY27 volume, cost/t down to ₹4,250","Cost/t ₹4,241 — beaten. Volume fell 7%","part","Split"],
+ ["Shree Cement","~40 MT FY27 volume, margin expansion","Volume on track. Margins missed","part","Split"],
+ ["Dalmia Bharat","JP integration, continued deleveraging","JP closed and integrated. Leverage rose to 1.47x","part","Split"],
+ ["JK Cement","22.5–23 MT grey, 40 MTPA by FY28","+18% volume on track. EBITDA/t −20%","part","Split"],
+ ["Ramco","Margin recovery, ₹1,098 cr asset monetisation","EBITDA/t −31%. ₹24 cr monetised","miss","Missed"],
+ ["Sagar","FY27 EBITDA/t of ₹500–550","₹451 in Q1, and trending down","miss","Missed"]
+];
+document.getElementById("score").innerHTML=SCORE.map(([c,p,d,k,v])=>
+ `<tr><td class="co">${c}</td><td>${p}</td><td class="hide">${d}</td><td class="vd ${k}">${v}</td></tr>`).join("");
+</script>
+</body>
+</html>
