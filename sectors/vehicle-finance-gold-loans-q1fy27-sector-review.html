@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vehicle Finance &amp; Gold Loans — Q1 FY27 Sector Earnings Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Roboto+Mono:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --stone:#E3E0D9; --card:#F3F1EC; --card2:#EAE7E0;
+  --ink:#1F1D1A; --mute:#6E6A62; --faint:#9A958B; --rule:#C9C4B9;
+  --gain:#1D5C7A; --loss:#A8382C;
+  --vol:#8E8879; --gold:#B4842A;
+  --disp:'Archivo',system-ui,sans-serif;
+  --serif:'Source Serif 4',Georgia,serif;
+  --mono:'Roboto Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--stone);color:var(--ink);font-family:var(--serif);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:28px 20px 90px}
+section{margin-bottom:40px}
+
+/* type */
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
+h1{font-family:var(--disp);font-weight:800;font-size:clamp(34px,7vw,62px);line-height:.94;letter-spacing:-.03em;margin:.18em 0 .22em;text-transform:uppercase}
+h2{font-family:var(--disp);font-weight:700;font-size:clamp(19px,3.2vw,25px);letter-spacing:-.015em;margin:0 0 4px;text-transform:uppercase}
+h3{font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:-.005em;margin:0}
+.dek{font-size:17px;color:var(--mute);max-width:56ch;margin:0}
+.note{font-size:13px;color:var(--mute);margin:4px 0 20px;max-width:70ch}
+.rule{height:3px;background:var(--ink);margin:0 0 16px}
+
+/* thesis stats */
+.thesis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:2px;background:var(--rule);border:2px solid var(--ink);margin-top:26px}
+.t{background:var(--card);padding:13px 15px}
+.t .n{font-family:var(--disp);font-weight:800;font-size:26px;line-height:1.05;letter-spacing:-.02em}
+.t .l{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:5px;line-height:1.35}
+.t.up .n{color:var(--gain)} .t.dn .n{color:var(--loss)}
+
+/* SIGNATURE: the scissor */
+.scissor{background:var(--card);border:2px solid var(--ink);padding:18px 16px 12px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin-bottom:14px}
+.legend span{display:flex;align-items:center;gap:6px}
+.sw{width:13px;height:11px;display:inline-block}
+.row{display:grid;grid-template-columns:104px 1fr;gap:10px;align-items:center;margin-bottom:3px}
+.row .co{font-family:var(--disp);font-weight:600;font-size:12px;text-align:right;line-height:1.15}
+.track{position:relative;height:26px;border-left:2px solid var(--ink);border-right:0}
+.axis{position:absolute;top:0;bottom:0;width:2px;background:var(--ink);opacity:.85}
+.b{position:absolute;height:10px}
+.b.v{top:1px;background:var(--vol)}
+.b.e{top:14px}
+.b.e.pos{background:var(--gain)} .b.e.neg{background:var(--loss)}
+.b span{position:absolute;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:9.5px;font-weight:500;white-space:nowrap;color:var(--ink)}
+.b.pos span,.b.v span{left:calc(100% + 5px)}
+.b.neg span{right:calc(100% + 5px)}
+.scale{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9.5px;color:var(--faint);margin-top:6px;padding-left:114px}
+
+/* league bars */
+.league{background:var(--card);border:2px solid var(--ink);padding:16px}
+.lrow{display:grid;grid-template-columns:112px 1fr 96px;gap:10px;align-items:center;padding:4px 0;border-bottom:1px solid var(--rule)}
+.lrow:last-child{border-bottom:0}
+.lrow .co{font-family:var(--disp);font-weight:600;font-size:12.5px;text-align:right}
+.lbar{height:16px;background:var(--gain);position:relative}
+.lbar.mid{background:#4A7F91} .lbar.low{background:var(--loss)}
+.lrow .v{font-family:var(--mono);font-size:12px;font-weight:700;text-align:right}
+.lrow .d{font-family:var(--mono);font-size:10px;color:var(--mute);text-align:right}
+
+/* fuel strip */
+.fuel{background:var(--ink);color:var(--card);border:2px solid var(--ink);padding:18px}
+.fuel h2{color:var(--card)}
+.fline{display:flex;align-items:flex-end;gap:0;height:110px;margin:20px 0 6px}
+.fp{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:6px}
+.fp i{display:block;width:100%;max-width:52px;background:var(--gold)}
+.fp b{font-family:var(--mono);font-size:12px;font-weight:700}
+.fp em{font-family:var(--mono);font-size:9.5px;font-style:normal;letter-spacing:.09em;text-transform:uppercase;color:#A9A296}
+.warn{border-top:1px solid #4A453C;margin-top:14px;padding-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
+.warn div{font-size:13.5px;color:#D6D1C6}
+.warn strong{display:block;font-family:var(--mono);font-size:17px;font-weight:700;color:var(--gold);margin-bottom:2px}
+
+/* company cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
+.c{background:var(--card);border:2px solid var(--ink);padding:14px;display:flex;flex-direction:column}
+.chead{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:2px}
+.tick{font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacing:.06em}
+.badge{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 6px;border:1.5px solid;white-space:nowrap;flex-shrink:0}
+.badge.del{color:var(--gain);border-color:var(--gain)}
+.badge.part{color:var(--gold);border-color:var(--gold)}
+.badge.miss{color:var(--loss);border-color:var(--loss)}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);margin:11px 0}
+.tile{background:var(--card2);padding:7px 9px}
+.tile .n{font-family:var(--mono);font-size:15px;font-weight:700;line-height:1.15}
+.tile .l{font-family:var(--mono);font-size:8.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:3px}
+.tile .n.up{color:var(--gain)} .tile .n.dn{color:var(--loss)}
+.c ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.c li{margin-bottom:5px}
+.c li::marker{color:var(--faint)}
+.flags{margin-top:auto;padding-top:10px;display:flex;flex-wrap:wrap;gap:5px}
+.flag{font-family:var(--mono);font-size:9px;letter-spacing:.05em;text-transform:uppercase;background:var(--loss);color:var(--card);padding:3px 6px}
+.flag.ok{background:var(--gain)}
+
+table{width:100%;border-collapse:collapse;background:var(--card);border:2px solid var(--ink)}
+th{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;text-align:left;padding:9px 10px;background:var(--ink);color:var(--card)}
+td{padding:9px 10px;border-bottom:1px solid var(--rule);font-size:13.5px;vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.co{font-family:var(--disp);font-weight:700;font-size:13px;white-space:nowrap}
+td.vd{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;white-space:nowrap}
+.vd.del{color:var(--gain)} .vd.part{color:var(--gold)} .vd.miss{color:var(--loss)}
+
+/* call */
+.calls{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.call{border:2px solid var(--ink);padding:15px;background:var(--card)}
+.call.buy{border-left:9px solid var(--gain)}
+.call.wait{border-left:9px solid var(--gold)}
+.call.avoid{border-left:9px solid var(--loss)}
+.call .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.call h3{margin:4px 0 7px;font-size:17px}
+.call p{margin:0;font-size:13.5px}
+
+/* commentary */
+.themes{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.th{background:var(--card);border:2px solid var(--ink);padding:14px}
+.th .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--mute);border-bottom:2px solid var(--ink);padding-bottom:6px;margin-bottom:9px}
+.th ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.th li{margin-bottom:6px}
+.th li::marker{color:var(--faint)}
+.th b{font-family:var(--mono);font-size:12.5px;font-weight:700}
+
+/* red flags */
+.rf{background:var(--card);border:2px solid var(--ink)}
+.rfg{border-bottom:2px solid var(--ink)}
+.rfg:last-child{border-bottom:0}
+.rfh{display:flex;align-items:center;gap:9px;padding:8px 13px;background:var(--card2)}
+.sev{width:11px;height:11px;flex-shrink:0}
+.sev.hi{background:var(--loss)} .sev.md{background:var(--gold)} .sev.lo{background:var(--faint)}
+.rfh span{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase}
+.rfr{display:grid;grid-template-columns:118px 1fr;gap:12px;padding:9px 13px;border-top:1px solid var(--rule);font-size:13.5px}
+.rfr b{font-family:var(--disp);font-weight:700;font-size:12.5px}
+
+/* consensus verdict */
+.indra{background:var(--card);border:2px solid var(--ink);padding:16px}
+.split{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:2px;background:var(--rule);border:1px solid var(--rule);margin-bottom:16px}
+.sp{background:var(--card2);padding:13px 14px}
+.sp .n{font-family:var(--disp);font-weight:800;font-size:34px;line-height:1;letter-spacing:-.03em;color:var(--loss)}
+.sp.ok .n{color:var(--gain)}
+.sp .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-top:6px}
+.sp .w{font-size:12.5px;color:var(--mute);margin-top:7px}
+.vs{display:grid;grid-template-columns:82px 1fr;gap:11px;padding:7px 0;border-bottom:1px solid var(--rule);font-size:13.5px;align-items:start}
+.vs:last-child{border-bottom:0}
+.vs em{font-family:var(--mono);font-size:9.5px;font-style:normal;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding-top:2px}
+.vs em.y{color:var(--gain)} .vs em.n{color:var(--loss)} .vs em.p{color:var(--gold)}
+
+/* triggers */
+.trigs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:14px}
+.tg{border:2px solid var(--ink);padding:14px;background:var(--card)}
+.tg .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
+.tg.tg-up .k{color:var(--gain)} .tg.tg-dn .k{color:var(--loss)}
+.tg ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.tg li{margin-bottom:6px}
+
+/* caveats */
+.cav{background:var(--card2);border:2px solid var(--ink);padding:15px 15px 15px 30px;margin:0;font-size:13.5px;line-height:1.55}
+.cav li{margin-bottom:8px}
+.cav li:last-child{margin-bottom:0}
+.cav b{font-family:var(--mono);font-size:12px;font-weight:700}
+
+/* wide data tables */
+.tw{overflow-x:auto;border:2px solid var(--ink);background:var(--card)}
+.tw table{border:0;min-width:660px}
+.tw th{position:sticky;top:0}
+td.num{font-family:var(--mono);font-size:12px;font-weight:700;text-align:right;white-space:nowrap}
+td.num.up{color:var(--gain)} td.num.dn{color:var(--loss)} td.num.ns{color:var(--faint);font-weight:400}
+th.r{text-align:right}
+td.kpi{font-family:var(--mono);font-size:11.5px;text-align:right;white-space:nowrap}
+.asof{font-family:var(--mono);font-size:11px;color:var(--mute);margin-top:10px;line-height:1.6}
+.asof b{color:var(--ink)}
+
+footer{border-top:3px solid var(--ink);padding-top:15px;font-size:12.5px;color:var(--mute)}
+footer p{margin:0 0 8px;max-width:80ch}
+
+@media(max-width:620px){
+  .row{grid-template-columns:74px 1fr;gap:7px}
+  .row .co{font-size:10.5px}
+  .scale{padding-left:81px}
+  .lrow{grid-template-columns:80px 1fr 74px}
+  .lrow .co{font-size:11px}
+  .wrap{padding:20px 13px 60px}
+  td.hide,th.hide{display:none}
+}
+@media(prefers-reduced-motion:no-preference){
+  .b,.lbar,.fp i{animation:g .7s cubic-bezier(.2,.7,.3,1) both}
+  @keyframes g{from{transform:scaleX(.001);opacity:0}to{transform:scaleX(1);opacity:1}}
+  .b.neg{transform-origin:right} .b.v,.b.pos,.lbar{transform-origin:left}
+  .fp i{animation-name:gy;transform-origin:bottom}
+  @keyframes gy{from{transform:scaleY(.001)}to{transform:scaleY(1)}}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Sector earnings review · Quarter ended 30 June 2026</div>
+  <h1>Vehicle Finance<br>&amp; Gold Loans</h1>
+  <p class="dek">Loan books grew everywhere and profit outgrew the balance sheet in every cleanly comparable year-on-year print — but the gold-loan story split in two: Muthoot gave back 300 basis points of yield to smaller, faster-growing rivals in the same quarter Manappuram's 30-year family-promoter model began handing over to a professional CEO.</p>
+  <div class="thesis">
+    <div class="t up"><div class="n">6/6</div><div class="l">Clean YoY prints where PAT growth met or beat AUM growth</div></div>
+    <div class="t dn"><div class="n">−300bps</div><div class="l">Muthoot's QoQ gold-loan yield compression</div></div>
+    <div class="t"><div class="n">18%</div><div class="l">Bain Capital's new stake in Manappuram, ending founder-led management</div></div>
+    <div class="t"><div class="n">88pp</div><div class="l">Spread: best (Shriram Fin.) vs worst (CSB Bank) 1-year return</div></div>
+  </div>
+</header>
+
+<section>
+  <h2>The scissor</h2>
+  <div class="rule"></div>
+  <p class="note">AUM/advances growth against PAT growth, both YoY, same axis — for the six names where both figures are clean, comparable year-on-year numbers. In every one of them, profit grew at least as fast as the book: this was a quarter of operating leverage, not just balance-sheet expansion. Manappuram (+341% PAT), IIFL (+160%) and Poonawalla (+391%) are excluded here because their growth is measured off a depressed Q1 FY26 base — real, but not a comparable multiple. Mahindra Finance is excluded because AUM growth itself was not disclosed in the sources reviewed.</p>
+  <div class="scissor">
+    <div class="legend">
+      <span><i class="sw" style="background:var(--vol)"></i>AUM / advances growth YoY</span>
+      <span><i class="sw" style="background:var(--gain)"></i>PAT growth YoY</span>
+    </div>
+    <div id="scissor"></div>
+    <div class="scale"><span>0%</span><span>+20%</span><span>+40%</span><span>+60%</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>NIM / yield — the league table</h2>
+  <div class="rule"></div>
+  <p class="note">This universe spans a bank, gold-loan NBFCs and vehicle/diversified NBFCs with structurally different margin bases — a bank's ~3.7% NIM is not "worse" than a gold lender's ~18% yield, it's a different business model. Rank within groups, not across the table. L&amp;T Finance, Sundaram Finance and Mahindra Finance did not disclose NIM this quarter and are not shown here (see the KPI table for what each did disclose).</p>
+  <div class="league" id="league"></div>
+</section>
+
+<section>
+  <h2>The pressure point: gold-loan yield is a share war, not a sector squeeze</h2>
+  <div class="rule"></div>
+  <div class="fuel">
+    <h2>Gold loan yield this quarter, %</h2>
+    <div class="fline" id="fuel"></div>
+    <div class="warn">
+      <div><strong>−300bps</strong>Muthoot's QoQ yield compression to 17.93% — management calls last year's yield a "windfall" that will not repeat.</div>
+      <div><strong>+59bps / +24bps</strong>Manappuram and IIFL both gained yield QoQ in the same quarter Muthoot lost the most of it.</div>
+      <div><strong>Not sector-wide</strong>The largest, most premium-priced lender is losing pricing power to smaller, faster-growing NBFC rivals — and to banks, per Muthoot's own commentary on the ₹4 lakh crore NBFC book versus banks' larger one.</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Company by company</h2>
+  <div class="rule"></div>
+  <p class="note">Badge reflects delivery against the company's own stated guidance or standing targets where one could be sourced, and overall quality of the print where it could not.</p>
+  <div class="grid" id="cards"></div>
+</section>
+
+<section>
+  <h2>KPI comparison</h2>
+  <div class="rule"></div>
+  <p class="note">Sector-derived columns — this universe has no standard metric template. "AUM/Adv. growth" is disbursement growth for Mahindra Finance and QoQ (not YoY) for Poonawalla, both labelled. "CRAR / D-E" mixes capital-adequacy ratios and one debt-equity figure; read within business model.</p>
+  <div class="tw">
+  <table>
+    <thead><tr>
+      <th>Company</th><th class="r">AUM/Adv. growth</th><th class="r">NIM / yield</th>
+      <th class="r">GNPA</th><th class="r">NNPA</th><th class="r">CRAR / D-E</th><th class="r">PAT growth YoY</th>
+    </tr></thead>
+    <tbody id="kpi"></tbody>
+  </table>
+  </div>
+  <p class="asof">PAT growth shown here uses the most-cited consolidated figure per company; see Caveats for names where sources disagree on the exact number.</p>
+</section>
+
+<section>
+  <h2>What management said</h2>
+  <div class="rule"></div>
+  <p class="note">From the Q1 FY27 releases, calls and transcripts reviewed. Grouped by theme.</p>
+  <div class="themes">
+
+    <div class="th"><div class="k">Gold-loan yield &amp; bank competition</div><ul>
+      <li>Muthoot: last year's yield was a <b>"windfall,"</b> unlikely to recur; FY27 profit growth guided "limited to single digits."</li>
+      <li>Muthoot flags the NBFC gold-loan book (~₹4 lakh cr) is still far smaller than banks' comparable book — competitive pressure from both sides.</li>
+      <li>Manappuram and IIFL both report gold yield <b>improving</b> QoQ, taking share while Muthoot gives up pricing.</li>
+      <li>Manappuram guides <b>25–30%</b> gold-loan AUM growth for FY27 plus 500 new branches.</li>
+    </ul></div>
+
+    <div class="th"><div class="k">Vehicle finance &amp; rural cycle</div><ul>
+      <li>L&amp;T Finance: "disciplined execution amidst an evolving macro environment... geopolitical uncertainties, inflationary pressures and elevated borrowing costs."</li>
+      <li>L&amp;T Finance's Lakshya 2031 plan targets book growth &gt;20%/yr, credit cost &lt;2%, RoA 3–3.2%, RoE 16–18%.</li>
+      <li>Shriram Finance guides FY27 AUM growth of 15–18% and NIM of 8.5–9.0%, aided by lower cost of funds.</li>
+      <li>Sundaram Finance flags interest costs rising faster than revenue as the quarter's margin drag.</li>
+    </ul></div>
+
+    <div class="th"><div class="k">Capital &amp; governance events</div><ul>
+      <li>Shriram Finance: MUFG equity infusion lifts CRAR from 20.40% to 34.17% — a funding event, not an underwriting one.</li>
+      <li>Manappuram: Bain Capital invests ₹4,385cr for an 18% stake (RBI-cleared to 41.7% via open offer); founder V P Nandakumar moves to non-executive chairman.</li>
+      <li>Manappuram's incoming CEO Ashish Singh (ex-IDFC FIRST) takes charge from 1 January 2027.</li>
+      <li>IIFL Finance: management notes "any equity raise would impact ROE" against its 16–20% target band.</li>
+    </ul></div>
+
+    <div class="th"><div class="k">Subsidiary and segment stress</div><ul>
+      <li>Cholamandalam's insurance arm (Chola MS General): combined ratio worsened to <b>120.4%</b> from 114.8%; PAT fell 19.7% to ₹86cr.</li>
+      <li>Manappuram's Asirvad Microfinance returned to profit (₹21cr) but AUM fell 5.8% QoQ.</li>
+      <li>Manappuram's Vehicle &amp; Equipment Finance unit has <b>paused new disbursements</b> to focus on collections and asset-quality recovery.</li>
+      <li>L&amp;T Finance's Personal Loans book grew 80% YoY (126% on disbursements) off a small base — a segment to watch, not yet a flag.</li>
+    </ul></div>
+
+    <div class="th"><div class="k">Diversification promises vs. delivery</div><ul>
+      <li>CSB Bank: gold loans rose to <b>54%</b> of advances from 47% a year ago, even as management restates a plan to bring the mix to ~30% by FY2030.</li>
+      <li>CSB Bank guides deposit growth of 25%+ and an ROE goal of ~15%, up from FY26's 14.26%.</li>
+      <li>Poonawalla Fincorp: management cites "no concerning trends" in early delinquencies across segments.</li>
+      <li>IIFL Finance guides ~25% AUM growth for FY27 with credit cost of 1.5–1.7%.</li>
+    </ul></div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Red flags</h2>
+  <div class="rule"></div>
+  <p class="note">Ranked by how much they should change position sizing, not by how alarming they sound.</p>
+  <div class="rf">
+
+    <div class="rfg">
+      <div class="rfh"><i class="sev hi"></i><span>Act on these</span></div>
+      <div class="rfr"><b>Muthoot Finance</b><div>Yield down ~300bps QoQ to 17.93%; management itself declined to give FY27 profit guidance beyond "single digits." As the largest listed gold lender, this sets the tone for the whole vertical.</div></div>
+      <div class="rfr"><b>Manappuram Finance</b><div>Bain Capital's ₹4,385cr stake ends 30 years of family-promoter management; new CEO starts 1 Jan 2027. Market has read it positively so far, but leadership transitions at lenders carry execution risk regardless of initial reception.</div></div>
+      <div class="rfr"><b>CSB Bank</b><div>Gold-loan concentration rose to 54% of advances from 47%, moving away from — not toward — management's own stated FY2030 diversification target, in the same quarter it restated that target.</div></div>
+    </div>
+
+    <div class="rfg">
+      <div class="rfh"><i class="sev md"></i><span>Monitor next quarter</span></div>
+      <div class="rfr"><b>Cholamandalam</b><div>Insurance subsidiary combined ratio at 120.4%, PAT down 19.7% — masked at group level by the NBFC's 42% profit growth.</div></div>
+      <div class="rfr"><b>Mahindra Finance</b><div>D/E at 4.82x, the highest disclosed leverage in the set, and GNPA/NNPA were not disclosed this quarter — leverage plus an asset-quality disclosure gap, together.</div></div>
+      <div class="rfr"><b>L&amp;T Finance</b><div>Personal Loans AUM +80% YoY, disbursements +126% YoY off a small base. Not a flag yet; a credit-cost line to watch into FY27.</div></div>
+      <div class="rfr"><b>IIFL Finance</b><div>PAT for the quarter is reported inconsistently across sources (₹467cr to ₹713cr) depending on standalone/consolidated basis; the "+160% YoY" headline is measured off a depressed, RBI-restriction-affected base.</div></div>
+    </div>
+
+    <div class="rfg">
+      <div class="rfh"><i class="sev lo"></i><span>Note and move on</span></div>
+      <div class="rfr"><b>Poonawalla Fincorp</b><div>+391.5% PAT growth is a low-base effect against a weak Q1 FY26; the quarter's disclosed asset-quality trend is genuinely clean.</div></div>
+      <div class="rfr"><b>Sundaram Finance</b><div>NIM, GNPA and NNPA were not disclosed in the sources reviewed, and the exact results date could not be pinned to one source — thinner disclosure than most peers.</div></div>
+      <div class="rfr"><b>Shriram Finance</b><div>CRAR's jump to 34.17% is a one-time MUFG capital infusion, not organic capital generation — strip it out when assessing underlying capital trajectory.</div></div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Walk the talk</h2>
+  <div class="rule"></div>
+  <p class="note">Scored only where a traceable prior-quarter commitment or standing multi-year target could be sourced — four of ten companies. The other six either set their relevant guidance this quarter or no explicit forward commitment was found in the material reviewed (see Caveats).</p>
+  <table>
+    <thead><tr><th>Company</th><th>Promised</th><th class="hide">Delivered</th><th>Verdict</th></tr></thead>
+    <tbody id="score"></tbody>
+  </table>
+</section>
+
+<section>
+  <h2>Was CRISIL right?</h2>
+  <div class="rule"></div>
+  <p class="note">CRISIL Ratings called NBFC vehicle-loan AUM to grow 16–17% annually to ₹11 lakh crore by FY27 (10 Dec 2025), and gold-loan NBFC AUM to compound at ~40% FY25–FY27 with profitability staying "robust" (22 Jan 2026). Scored against this quarter's prints.</p>
+  <div class="indra">
+    <div class="split">
+      <div class="sp ok"><div class="n">16–17%</div><div class="l">CRISIL's vehicle-loan AUM growth call</div><div class="w">Shriram Fin. (+15.3%) and Sundaram Fin. (+17%) landed right inside it.</div></div>
+      <div class="sp"><div class="n">+22–28%</div><div class="l">Cholamandalam &amp; L&amp;T Finance actual growth</div><div class="w">Running well ahead of the sector-wide call — share consolidating toward larger diversified platforms.</div></div>
+      <div class="sp ok"><div class="n">~40%</div><div class="l">CRISIL's gold-loan NBFC AUM CAGR call</div><div class="w">Muthoot (+43–44%) landed on it; Manappuram (+58–98%) and IIFL (+38–114%) ran well past it.</div></div>
+    </div>
+
+    <div class="vs"><em class="y">Right</em><div><b>Vehicle-loan AUM growth for the traditional players.</b> Shriram Finance and Sundaram Finance both landed inside CRISIL's 16–17% guided band almost exactly.</div></div>
+    <div class="vs"><em class="n">Underestimated</em><div><b>Vehicle-loan growth for the diversified NBFCs.</b> Cholamandalam (+22%) and L&amp;T Finance (+27–28%) ran well ahead of the sector-wide call — the aggregate number hides share moving to the larger, faster platforms.</div></div>
+    <div class="vs"><em class="y">Right</em><div><b>Gold-loan AUM growth, directionally.</b> The ~40% CAGR call held for Muthoot and was beaten by a wide margin at Manappuram and IIFL.</div></div>
+    <div class="vs"><em class="p">Being tested</em><div><b>Gold-loan NBFC profitability "staying robust."</b> True in the Q1 print, but Muthoot's own management is now flagging yield compression risk that the January note did not emphasise — the next two quarters are the real test of this call.</div></div>
+  </div>
+</section>
+
+<section>
+  <h2>The call</h2>
+  <div class="rule"></div>
+  <div class="calls">
+    <div class="call buy">
+      <div class="k">Own now</div>
+      <h3>Shriram Finance · L&amp;T Finance</h3>
+      <p>Shriram delivered against every metric in its own FY27 guidance and raised capital from MUFG on top. L&amp;T Finance is running ahead of the >20% book-growth leg of its newly launched Lakshya 2031 plan. Both are the cleanest prints in the set with a normal prior-year base.</p>
+    </div>
+    <div class="call wait">
+      <div class="k">Wait for clarity</div>
+      <h3>Cholamandalam · Manappuram · IIFL · Sundaram Finance · Poonawalla Fincorp</h3>
+      <p>Each has a genuinely strong core business obscured by something else: Cholamandalam's insurance losses, Manappuram's leadership transition, IIFL's inconsistent PAT reporting and low base, Sundaram's thin disclosure and margin drag, Poonawalla's low-base growth rate. Own the businesses; wait for the noise to clear over the next one or two quarters.</p>
+    </div>
+    <div class="call avoid">
+      <div class="k">Stay out for now</div>
+      <h3>Muthoot Finance · CSB Bank · Mahindra Finance</h3>
+      <p>Muthoot is the largest gold lender losing the most pricing power, with management itself cautious on FY27 profit. CSB Bank is moving further from its own diversification target and the stock has already voted with a 6.7% post-result drop. Mahindra Finance combines the highest disclosed leverage in the set with an asset-quality disclosure gap this quarter.</p>
+    </div>
+  </div>
+
+  <div class="trigs">
+    <div class="tg tg-up"><div class="k">What would make us more positive</div><ul>
+      <li>Muthoot's gold-loan yield <b>stabilising or rising</b> QoQ next quarter rather than continuing to erode.</li>
+      <li>Manappuram's incoming CEO articulating a clear FY27–29 roadmap without disrupting the gold-loan growth engine.</li>
+      <li>CSB Bank's gold-loan mix actually turning down toward its own stated FY2030 path.</li>
+    </ul></div>
+    <div class="tg tg-dn"><div class="k">What would make us cut further</div><ul>
+      <li>Shriram Finance or L&amp;T Finance giving back this quarter's NIM/growth gains without a stated reason.</li>
+      <li>A second consecutive quarter of Cholamandalam's insurance combined ratio above 120%.</li>
+      <li>Mahindra Finance's D/E rising further without a matching improvement in disclosed asset quality.</li>
+    </ul></div>
+  </div>
+</section>
+
+<section>
+  <h2>Price and returns</h2>
+  <div class="rule"></div>
+  <p class="note">Results date against market performance, sorted by one-year return.</p>
+  <div class="tw">
+  <table>
+    <thead><tr>
+      <th>Company</th><th>Ticker</th><th>Results date</th><th class="r">CMP (₹)</th>
+      <th class="r">1 year</th><th class="r">6 months</th><th class="r">3 months</th><th class="r">MTD</th>
+    </tr></thead>
+    <tbody id="ret"></tbody>
+  </table>
+  </div>
+  <p class="asof">
+    <b>Prices as on 10 Sep 2026 close</b>, sourced from NSE via Zerodha Kite Connect — one feed, one date, all ten names.<br>
+    1-year and MTD figures for Shriram Finance and CSB Bank were cross-checked against a public aggregator (Tickertape): +71.6%/+70.85% and −16.4%/−16.37% respectively — both matched closely.<br>
+    Shriram Finance's 1:5 stock split (record date January 2025) predates every anchor date used here and does not distort any of the returns shown. No circuit-day or unadjusted-corporate-action distortion was found in any anchor window checked.
+  </p>
+</section>
+
+<section>
+  <h2>Caveats</h2>
+  <div class="rule"></div>
+  <ul class="cav">
+    <li><b>PAT figures disagree across sources.</b> Cholamandalam (₹1,789cr/+42% vs. ₹1,656cr/+46% cited elsewhere), L&amp;T Finance (₹902cr/+29% vs. ₹916cr), Sundaram Finance (₹636.19cr/+33.9% vs. ₹522cr), Mahindra Finance (₹926.03cr vs. ₹899cr vs. ₹927cr) and IIFL Finance (₹467cr standalone vs. ₹675–713cr consolidated cited across outlets) — most likely standalone-vs-consolidated or pre/post-minority-interest differences that could not be fully reconciled from public reporting in the time available. Treat PAT growth rates as directionally right, not exact to the decimal.</li>
+    <li><b>This sector has no standard metric template.</b> NIM/yield, AUM growth and PAT growth are derived from first principles, not a standing sector library entry. Mahindra Finance's scale metric is disbursement growth (+21% YoY) because AUM growth itself was not disclosed.</li>
+    <li><b>Cross-model comparability is limited.</b> The universe spans a bank (CSB Bank, NIM ~3.7%), gold-loan NBFCs (Muthoot, Manappuram, IIFL — yields 16–18%) and vehicle/diversified NBFCs (NIM 8–9% where disclosed). A higher number on the league table is not "better" across business models.</li>
+    <li><b>Several figures are marked n/d rather than estimated.</b> L&amp;T Finance, Sundaram Finance and Mahindra Finance did not disclose NIM/GNPA/NNPA in the sources reviewed. Poonawalla Fincorp's and Mahindra Finance's true YoY AUM growth were not found (QoQ or disbursement growth used as the closest available proxy, labelled). Sundaram Finance's exact results date could not be pinned to one source.</li>
+    <li><b>Three growth rates are low-base artefacts.</b> Poonawalla Fincorp (+391.5% PAT), Manappuram (+341% consolidated PAT) and IIFL Finance (+160% PAT) compare against a depressed Q1 FY26. Excluded from the AUM-vs-PAT scissor for that reason; the growth is real but the multiple is not a run-rate.</li>
+    <li><b>IndoStar Capital Finance</b> was in the phase-1 universe (11 names) but was not part of the "1–10" selection and is not covered in this report.</li>
+    <li><b>The scissor, league table and pressure-point chart</b> use only companies with clean, comparably-sourced figures for that specific metric. Exclusions are noted at each chart rather than filled with an estimate.</li>
+    <li><b>Walk-the-talk covers 4 of 10 companies</b> — Shriram Finance, Cholamandalam, L&amp;T Finance and CSB Bank — because a traceable prior-quarter or standing multi-year commitment could be sourced only for these four. Muthoot, Manappuram and IIFL set their relevant guidance this quarter rather than last; no explicit forward commitment was found for Sundaram Finance, Mahindra Finance or Poonawalla Fincorp in the material reviewed.</li>
+    <li><b>"Was CRISIL right?"</b> scores two specific CRISIL Ratings notes (22 Jan 2026 on gold-loan NBFCs, 10 Dec 2025 on vehicle-loan NBFCs) against this quarter's prints. Other agencies' company-specific notes were not systematically cross-checked.</li>
+  </ul>
+</section>
+
+<footer>
+  <p><b>Universe:</b> 10 of 11 companies presented at selection (Shriram Finance, Cholamandalam Investment &amp; Finance, Muthoot Finance, L&amp;T Finance, Sundaram Finance, Mahindra &amp; Mahindra Financial Services, Poonawalla Fincorp, Manappuram Finance, IIFL Finance, CSB Bank); IndoStar Capital Finance excluded from selection. Quarter ended 30 June 2026. Sources: company press releases and investor presentations; Business Standard, EquityBulls, Investing.com, GuruFocus, Yahoo Finance, ScanX, Sahi, MarketsMojo, Free Press Journal, Upstox; CRISIL Ratings; and NSE via Zerodha Kite Connect for price data.</p>
+</footer>
+
+</div>
+<script>
+/* SCISSOR: [company, AUM/advances growth% YoY, PAT growth% YoY] — six clean comparable names only. */
+const SC=[
+ ["Shriram Finance",15.26,59.79],
+ ["Cholamandalam",22,42],
+ ["Muthoot Finance",43,43],
+ ["L&T Finance",27,29],
+ ["Sundaram Finance",17,33.88],
+ ["CSB Bank",24,27]
+];
+const MIN=0,MAX=65,SPAN=MAX-MIN,Z=(0-MIN)/SPAN*100;
+document.getElementById("scissor").innerHTML=SC.map(([n,v,e],i)=>{
+ const bar=(val,cls)=>{const w=Math.abs(val)/SPAN*100;
+  const l=val>=0?Z:Z-w;
+  return `<i class="b ${cls} ${val>=0?'pos':'neg'}" style="left:${l}%;width:${w}%;animation-delay:${i*45}ms"><span>${val>0?'+':''}${val}%</span></i>`;};
+ return `<div class="row"><div class="co">${n}</div><div class="track"><i class="axis" style="left:${Z}%"></i>${bar(v,'v')}${bar(e,'e')}</div></div>`;
+}).join("");
+
+/* LEAGUE: [company, NIM/yield %, sub-label]. Sorted descending. Cross-model — single neutral colour used throughout. */
+const LG=[
+ ["Muthoot Finance",17.93,"−300bps QoQ"],
+ ["Manappuram (gold)",17.7,"+59bps QoQ"],
+ ["IIFL Finance",16.53,"+24bps"],
+ ["Poonawalla Fincorp",9.10,"+5bps QoQ"],
+ ["Shriram Finance",9.04,"+93bps YoY"],
+ ["Cholamandalam",8.2,"+40bps YoY"],
+ ["CSB Bank",3.66,"+12bps, bank NIM"]
+];
+const LMAX=20;
+document.getElementById("league").innerHTML=LG.map(([n,v,d],i)=>{
+ return `<div class="lrow"><div class="co">${n}</div>
+ <div><i class="lbar mid" style="display:block;width:${v/LMAX*100}%;animation-delay:${i*40}ms"></i></div>
+ <div><div class="v">${v}%</div><div class="d">${d}</div></div></div>`;
+}).join("");
+
+/* PRESSURE POINT: gold-loan yield level this quarter, %. Label carries the QoQ direction. */
+const FU=[["Muthoot 17.93%",17.93],["Manappuram 17.7%",17.7],["IIFL 16.53%",16.53]];
+document.getElementById("fuel").innerHTML=FU.map(([l,v],i)=>
+ `<div class="fp"><b>${v}%</b><i style="height:${v/20*88}px;animation-delay:${i*120}ms"></i><em>${l}</em></div>`).join("");
+
+/* CARDS */
+const CO=[
+ {n:"Shriram Finance",t:"SHRIRAMFIN",b:"del",bl:"Delivered",
+  k:[["+15.3%","AUM YoY",1],["9.04%","NIM",1],["+59.8%","PAT YoY",1],["34.2%","CRAR",1]],
+  p:["AUM crossed ₹3.14 lakh crore, up 15.3% YoY — the low end of its own 15–18% FY27 guided range, but NIM at 9.04% beat the top of its 8.5–9.0% guided band.",
+     "CRAR jumped to 34.17% from 20.40% on a MUFG equity infusion, not organic capital generation — read it as a funding event, not an underwriting one.",
+     "Gold loans, the smallest book at ₹7,514cr, grew fastest in the mix at 45.8% YoY — early cross-sell into the group's core CV/PV base.",
+     "Delivered against its own guidance on every metric that can be checked this quarter."],
+  f:[["Capital raise inflates CRAR",""],["Guidance met or beaten","ok"]]},
+
+ {n:"Cholamandalam Investment &amp; Finance",t:"CHOLAFIN",b:"part",bl:"Partial",
+  k:[["+22%","NBFC AUM YoY",1],["8.2%","NIM",1],["+42%","PAT YoY",1],["−19.7%","Insurance PAT",-1]],
+  p:["The NBFC engine is executing well: AUM up 22% YoY to ₹2.34 lakh crore, NIM widened 40bps to 8.2%, disbursements up 22% — management says AUM is tracking FY27 guidance.",
+     "Group profit growth of 42% hides a real problem: Chola MS General Insurance's combined ratio worsened to 120.4% from 114.8%, on motor own-damage and third-party claims running above historical ranges.",
+     "Insurance PAT fell 19.7% to ₹86cr and RoNW to 2.6% from 3.4% — management's own fix (loss ratios to \"late 70s,\" then \"mid-70s\") is a multi-quarter repair.",
+     "Two different businesses inside one headline number — read the NBFC and the insurer separately until the combined ratio actually turns."],
+  f:[["Insurance underwriting loss",""],["NBFC on guided AUM path","ok"]]},
+
+ {n:"Muthoot Finance",t:"MUTHOOTFIN",b:"part",bl:"Partial",
+  k:[["+43%","Consol. AUM YoY",1],["17.93%","Gold yield",-1],["+43%","Consol. PAT YoY",1],["0.05%","GNPA",1]],
+  p:["Consolidated AUM grew 43% YoY to ~₹1.91 lakh crore and consolidated PAT grew in lockstep at 43% — a clean quarter on the surface.",
+     "Yield fell ~300bps QoQ to 17.93%. Management's own explanation: last year's yield was a one-off \"windfall,\" plus a mix shift toward lower-yielding products.",
+     "Management declined explicit FY27 profit guidance, instead flagging growth \"limited to single digits\" for the year — a sharp deceleration signal inside an otherwise strong print.",
+     "The largest gold lender is the one losing the most pricing power. That sets the tone for the whole vertical, not just for Muthoot."],
+  f:[["Yield down 300bps QoQ",""],["Single-digit FY27 profit guide",""]]},
+
+ {n:"L&amp;T Finance",t:"LTF",b:"del",bl:"Delivered",
+  k:[["+28%","Retail AUM YoY",1],["+29%","Consol. PAT YoY",1],["+80%","Personal loans YoY",0],["+36%","Disbursements YoY",1]],
+  p:["Retail book grew 28% YoY to ₹1.28 lakh crore, ahead of the >20% annual book-growth target in the newly launched Lakshya 2031 plan.",
+     "Growth is broad-based: Rural Business Finance +22%, Housing/LAP +20%, Two-wheeler +22%, Farmer Finance +11% — no single segment carries the print.",
+     "The outlier is Personal Loans, +80% YoY on AUM and +126% on disbursements. Smallest book today, but that pace, sustained, is a credit-cost question for FY27.",
+     "Credit cost, RoA and RoE — the plan's other three metrics — were not disclosed in the material reviewed, so only the growth leg can be scored yet."],
+  f:[["Personal loans growing 80% YoY",""],["Ahead of Lakshya 2031 growth target","ok"]]},
+
+ {n:"Sundaram Finance",t:"SUNDARMFIN",b:"part",bl:"Partial",
+  k:[["+17%","AUM YoY",1],["+33.9%","Consol. PAT YoY",1],["+7.2%","Interest cost YoY",-1],["+22%","Disbursements YoY",1]],
+  p:["AUM grew 17% YoY to ₹62,275cr, disbursements 22% to ₹8,947cr — squarely at the top of CRISIL's 16–17% guided range for the vehicle-finance NBFC segment.",
+     "Consolidated PAT grew 33.9% YoY, but PAT margin compressed to 21.51% from 24.50% a year ago as interest costs (+7.2%) outpaced revenue (+12.6%) — a cost-of-funds drag, not a credit one.",
+     "NIM and GNPA/NNPA were not disclosed in the sources reviewed, and the exact results date could not be pinned down either — thinner disclosure than most peers here.",
+     "A steady, unglamorous quarter: growth in line with the sector call, profitability quietly eroding at the margin."],
+  f:[["NIM/GNPA not disclosed",""],["Cost of funds outpacing revenue",""]]},
+
+ {n:"Mahindra Finance",t:"M&amp;MFIN",b:"part",bl:"Partial",
+  k:[["+21%","Disbursements YoY",1],["+75.4%","Consol. PAT YoY",1],["4.82x","D/E",-1],["n/d","GNPA",0]],
+  p:["Disbursements grew 21% YoY to ₹15,560cr and consolidated PAT surged 75% YoY to ₹926cr — the strongest headline profit growth among the six vehicle financiers with a normal prior-year base.",
+     "AUM growth itself was not disclosed in the sources reviewed — disbursement growth is the closest available proxy for balance-sheet momentum this quarter.",
+     "D/E stands at 4.82x, among the highest leverage in the peer set, and GNPA/NNPA were not disclosed — high leverage plus an asset-quality disclosure gap is the thing to watch.",
+     "A profit beat that raises a transparency question rather than settling one."],
+  f:[["GNPA/NNPA not disclosed",""],["D/E 4.82x, highest in set",""]]},
+
+ {n:"Poonawalla Fincorp",t:"POONAWALLA",b:"part",bl:"Partial",
+  k:[["₹67,054cr","AUM (+11.1% QoQ)",1],["+391.5%","PAT YoY",0],["9.10%","NIM",1],["1.37%","GNPA",1]],
+  p:["PAT jumped nearly fivefold YoY to ₹307.71cr — but Q1 FY26 was a deliberately weak base during a credit-cost reset, so the growth rate says more about last year than this one.",
+     "AUM crossed ₹67,000cr, up 11.1% sequentially; a true YoY AUM growth figure was not found in the sources reviewed.",
+     "Asset quality improved on every metric disclosed: GNPA to 1.37% from 1.44%, NNPA to 0.70% from 0.74%; management cites \"no concerning trends\" in early delinquencies.",
+     "The quarter is genuinely clean. The growth-rate headline is not the number to underwrite on."],
+  f:[["PAT growth off a low base",""],["Asset quality improving","ok"]]},
+
+ {n:"Manappuram Finance",t:"MANAPPURAM",b:"part",bl:"Partial",
+  k:[["+57.2%","Consol. AUM YoY",1],["+97.9%","Gold AUM YoY",1],["+341%","Consol. PAT YoY",1],["Paused","Vehicle Fin. disb.",-1]],
+  p:["Gold loans are now 82% of consolidated AUM, up from 65% a year ago, after growing 97.9% YoY to ₹57,006cr — gold yield improved 59bps QoQ to 17.7% even as Muthoot's fell.",
+     "Asirvad Microfinance returned to profit (₹21cr) but AUM kept shrinking, −5.8% QoQ. Vehicle &amp; Equipment Finance is worse: management paused new disbursements entirely to focus on collections.",
+     "The bigger story is governance: Bain Capital invests ₹4,385cr for an 18% stake (RBI-cleared to 41.7% via open offer); founder V P Nandakumar moves to non-executive chairman; incoming CEO Ashish Singh (ex-IDFC FIRST) starts 1 Jan 2027.",
+     "An excellent gold-loan quarter arriving alongside a 30-year family-promoter model stepping back — the operating momentum is real, the next four quarters are a leadership test too."],
+  f:[["Promoter-to-professional CEO transition",""],["Vehicle finance disbursements paused",""]]},
+
+ {n:"IIFL Finance",t:"IIFL",b:"part",bl:"Partial",
+  k:[["+38%","Consol. AUM YoY",1],["+114%","Gold AUM YoY",1],["19.5%","ROE",1],["n/d","PAT (disputed)",0]],
+  p:["Consolidated AUM grew 38% YoY to ₹1.15 lakh crore, gold loans the standout at +114% YoY to ₹58,406cr — recovering off the low base left by the prior year's RBI-driven gold-loan restrictions.",
+     "ROE reached 19.5%, near the top of its own 16–20% target band; portfolio yield improved 24bps to 16.53% even as Muthoot's fell — IIFL is taking gold-loan yield share, not losing it.",
+     "PAT for the quarter is reported inconsistently across sources — ₹467cr to ₹713cr depending on standalone/consolidated basis — so the \"+160% YoY\" headline is directionally right, not precisely sourced here.",
+     "Guides ~25% AUM growth for FY27 with credit cost of 1.5–1.7% — credible given the quarter just posted, but the base-effect noise needs another quarter or two to clear."],
+  f:[["PAT figure inconsistent across sources",""],["Gaining gold-loan yield share","ok"]]},
+
+ {n:"CSB Bank",t:"CSBBANK",b:"part",bl:"Partial",
+  k:[["+24%","Advances YoY",1],["54%","Gold loan mix",-1],["+27%","PAT YoY",1],["3.66%","NIM",1]],
+  p:["PAT grew 27% YoY to ₹150cr on 26% NII growth, NIM improved 12bps to 3.66% — a solid headline that still sent the stock down 6.7% on results day.",
+     "The market's reaction points at what the headline hides: fee income fell as treasury gains collapsed to ₹3cr from ₹53cr a year ago, and 52% of term deposits are now bulk deposits — a funding-cost dependency.",
+     "Gold loans rose to 54% of total advances from 47% a year ago — moving further from, not toward, management's own stated target of ~30% by FY2030.",
+     "A bank whose own diversification story went the wrong way in the same quarter it restated the target."],
+  f:[["Gold mix rising against own target",""],["Funding cost pressure from bulk deposits",""]]}
+];
+document.getElementById("cards").innerHTML=CO.map(c=>`
+ <article class="c">
+  <div class="chead"><div><h3>${c.n}</h3><div class="tick">${c.t}</div></div><div class="badge ${c.b}">${c.bl}</div></div>
+  <div class="tiles">${c.k.map(([n,l,s])=>`<div class="tile"><div class="n ${s===1?'up':s===-1?'dn':''}">${n}</div><div class="l">${l}</div></div>`).join("")}</div>
+  <ul>${c.p.map(x=>`<li>${x}</li>`).join("")}</ul>
+  <div class="flags">${c.f.map(([t,k])=>`<span class="flag ${k}">${t}</span>`).join("")}</div>
+ </article>`).join("");
+
+/* KPI TABLE: [company, AUM/Adv growth, NIM/yield, GNPA, NNPA, CRAR/D-E, PAT growth YoY] */
+const KPI=[
+ ["Shriram Finance","+15.3% YoY","9.04%","4.64%","2.33%","34.17%","+59.8%"],
+ ["Cholamandalam","+22% YoY","8.2%","4.50%","2.95%","n/d","+42%"],
+ ["Muthoot Finance","+43% YoY","17.93%","0.05%","n/d","n/d","+43%"],
+ ["L&T Finance","+27% YoY","n/d","n/d","n/d","n/d","+29%"],
+ ["Sundaram Finance","+17% YoY","n/d","n/d","n/d","n/d","+33.9%"],
+ ["Mahindra Finance","+21% YoY (disb.)","n/d","n/d","n/d","4.82x (D/E)","+75.4%"],
+ ["Poonawalla Fincorp","+11.1% QoQ","9.10%","1.37%","0.70%","n/d","+391.5%"],
+ ["Manappuram Finance","+57.2% YoY","17.7% (gold)","1.6%","1.1%","21.3%","+341%"],
+ ["IIFL Finance","+38% YoY","16.53%","1.6%","0.8%","n/d","≈+160%"],
+ ["CSB Bank","+24% YoY","3.66%","1.75%","0.39%","n/d","+27%"]
+];
+document.getElementById("kpi").innerHTML=KPI.map(r=>
+ `<tr><td class="co">${r[0]}</td>`+r.slice(1).map(c=>`<td class="kpi">${c}</td>`).join("")+`</tr>`).join("");
+
+/* RETURNS: [company, ticker, resultsDate, cmp, 1y, 6m, 3m, mtd] — sorted by 1-year return. */
+const RET=[
+ ["Shriram Finance","SHRIRAMFIN","24 Jul 2026","1,038.00","+71.6%","−2.3%","+15.7%","−6.5%"],
+ ["Mahindra Finance","M&MFIN","21 Jul 2026","359.25","+36.4%","+1.8%","+32.5%","−3.7%"],
+ ["IIFL Finance","IIFL","22 Jul 2026","607.65","+35.8%","+23.7%","+22.4%","−6.1%"],
+ ["L&T Finance","LTF","10 Jul 2026","311.30","+33.8%","+13.6%","+19.6%","−3.0%"],
+ ["Cholamandalam","CHOLAFIN","28 Jul 2026","1,859.00","+22.1%","+14.6%","+26.2%","+0.1%"],
+ ["Manappuram Finance","MANAPPURAM","11 Aug 2026","330.80","+14.9%","+26.4%","+14.8%","−2.7%"],
+ ["Sundaram Finance","SUNDARMFIN","Jul 2026 (imprecise)","4,703.00","+3.1%","−13.8%","+11.9%","+3.6%"],
+ ["Poonawalla Fincorp","POONAWALLA","17 Jul 2026","449.40","−0.2%","+5.9%","+18.2%","−3.1%"],
+ ["Muthoot Finance","MUTHOOTFIN","1 Aug 2026","2,841.50","−2.0%","−13.5%","−2.0%","−4.6%"],
+ ["CSB Bank","CSBBANK","22 Jul 2026","307.60","−16.4%","−14.3%","−15.0%","−10.5%"]
+];
+document.getElementById("ret").innerHTML=RET.map(r=>{
+ const cell=v=>{
+   if(v==="n/s") return `<td class="num ns">n/s</td>`;
+   const cls=v.startsWith("+")?"up":v.startsWith("−")||v.startsWith("-")?"dn":"";
+   return `<td class="num ${cls}">${v}</td>`;
+ };
+ return `<tr><td class="co">${r[0]}</td><td class="tick">${r[1]}</td><td>${r[2]}</td>`
+  +`<td class="num">${r[3]==="n/s"?'<span class="ns">n/s</span>':r[3]}</td>`
+  +r.slice(4).map(cell).join("")+`</tr>`;
+}).join("");
+
+/* SCORECARD: [company, promised, delivered, "del"|"part"|"miss", verdictLabel] */
+const SCORE=[
+ ["Shriram Finance","AUM growth 15–18% YoY, NIM 8.5–9.0%, cost/income 26–27% (Q4 FY26 call, May 2026).","AUM +15.3% YoY (low end but inside range); NIM 9.04% (above range); CRAR lifted to 34.17% via MUFG capital infusion.","del","Delivered"],
+ ["Cholamandalam","AUM growth on FY27 guided trajectory (Q4 FY26 call); no explicit insurance-arm commitment prior to this quarter.","NBFC AUM +22% YoY, on guided path; insurance combined ratio worsened to 120.4%, a problem management is only now committing to fix.","part","Split"],
+ ["L&T Finance","Lakshya 2031: book growth &gt;20%/yr, credit cost &lt;2%, RoA 3–3.2%, RoE 16–18% (unveiled with FY26 results).","Retail AUM +28% YoY, total book +27% — ahead of the growth target; credit cost/RoA/RoE not disclosed this quarter.","del","Delivered (growth leg)"],
+ ["CSB Bank","Gradually reduce gold-loan share of advances from ~47% toward ~30% by FY2030 (standing multi-year target).","Gold loans rose to 54% of advances, up from 47% a year ago — moving away from the stated target.","miss","Missed"]
+];
+document.getElementById("score").innerHTML=SCORE.map(([c,p,d,k,v])=>
+ `<tr><td class="co">${c}</td><td>${p}</td><td class="hide">${d}</td><td class="vd ${k}">${v}</td></tr>`).join("");
+</script>
+</body>
+</html>
