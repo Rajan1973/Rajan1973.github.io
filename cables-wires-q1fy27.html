@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cables &amp; Wires Q1 FY27 — Sector Earnings Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Roboto+Mono:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --stone:#E3E0D9; --card:#F3F1EC; --card2:#EAE7E0;
+  --ink:#1F1D1A; --mute:#6E6A62; --faint:#9A958B; --rule:#C9C4B9;
+  --gain:#1D5C7A; --loss:#A8382C; --vol:#8E8879; --gold:#B4842A;
+  --disp:'Archivo',system-ui,sans-serif;
+  --serif:'Source Serif 4',Georgia,serif;
+  --mono:'Roboto Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--stone);color:var(--ink);font-family:var(--serif);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:28px 20px 90px}
+section{margin-bottom:40px}
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
+h1{font-family:var(--disp);font-weight:800;font-size:clamp(32px,6.8vw,60px);line-height:.94;letter-spacing:-.03em;margin:.18em 0 .22em;text-transform:uppercase}
+h2{font-family:var(--disp);font-weight:700;font-size:clamp(19px,3.2vw,25px);letter-spacing:-.015em;margin:0 0 4px;text-transform:uppercase}
+h3{font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:-.005em;margin:0}
+.dek{font-size:17px;color:var(--mute);max-width:58ch;margin:0}
+.note{font-size:13px;color:var(--mute);margin:4px 0 20px;max-width:72ch}
+.rule{height:3px;background:var(--ink);margin:0 0 16px}
+
+.thesis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:2px;background:var(--rule);border:2px solid var(--ink);margin-top:26px}
+.t{background:var(--card);padding:13px 15px}
+.t .n{font-family:var(--disp);font-weight:800;font-size:25px;line-height:1.05;letter-spacing:-.02em}
+.t .l{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:5px;line-height:1.35}
+.t.up .n{color:var(--gain)} .t.dn .n{color:var(--loss)}
+
+/* scissor */
+.scissor{background:var(--card);border:2px solid var(--ink);padding:18px 16px 12px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin-bottom:14px}
+.legend span{display:flex;align-items:center;gap:6px}
+.sw{width:13px;height:11px;display:inline-block}
+.row{display:grid;grid-template-columns:110px 1fr;gap:10px;align-items:center;margin-bottom:3px}
+.row .co{font-family:var(--disp);font-weight:600;font-size:12px;text-align:right;line-height:1.15}
+.track{position:relative;height:26px}
+.axis{position:absolute;top:0;bottom:0;width:2px;background:var(--ink);opacity:.85}
+.b{position:absolute;height:10px}
+.b.v{top:1px;background:var(--vol)}
+.b.e{top:14px}
+.b.e.pos{background:var(--gain)} .b.e.neg{background:var(--loss)}
+.b span{position:absolute;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:9.5px;font-weight:500;white-space:nowrap;color:var(--ink)}
+.b.pos span,.b.v span{left:calc(100% + 5px)}
+.b.neg span{right:calc(100% + 5px)}
+.scale{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9.5px;color:var(--faint);margin-top:6px;padding-left:120px}
+
+/* league */
+.league{background:var(--card);border:2px solid var(--ink);padding:16px}
+.lrow{display:grid;grid-template-columns:118px 1fr 108px;gap:10px;align-items:center;padding:5px 0;border-bottom:1px solid var(--rule)}
+.lrow:last-child{border-bottom:0}
+.lrow .co{font-family:var(--disp);font-weight:600;font-size:12.5px;text-align:right}
+.lbar{height:16px;background:var(--gain);display:block}
+.lbar.mid{background:#4A7F91} .lbar.low{background:var(--loss)} .lbar.na{background:var(--rule)}
+.lrow .v{font-family:var(--mono);font-size:12px;font-weight:700;text-align:right}
+.lrow .d{font-family:var(--mono);font-size:10px;color:var(--mute);text-align:right}
+
+/* pressure point — incremental margin */
+.fuel{background:var(--ink);color:var(--card);border:2px solid var(--ink);padding:18px}
+.fuel h2{color:var(--card)}
+.fuel .note{color:#A9A296}
+.inc{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:#3A352E;margin:18px 0 0}
+.ic{background:#26231F;padding:15px}
+.ic .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:#A9A296;margin-bottom:8px}
+.ic .big{font-family:var(--disp);font-weight:800;font-size:38px;line-height:1;letter-spacing:-.03em;color:var(--gold)}
+.ic .sub{font-size:13px;color:#D6D1C6;margin-top:8px}
+.stack{margin-top:14px;display:flex;flex-direction:column;gap:6px}
+.sb{display:grid;grid-template-columns:64px 1fr;gap:8px;align-items:center;font-family:var(--mono);font-size:10px;color:#A9A296}
+.sb i{display:block;height:14px;background:var(--gold)}
+.sb i.dim{background:#5A5348}
+@media(max-width:620px){.inc{grid-template-columns:1fr}}
+.warn{border-top:1px solid #4A453C;margin-top:16px;padding-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px}
+.warn div{font-size:13.5px;color:#D6D1C6}
+.warn strong{display:block;font-family:var(--mono);font-size:16px;font-weight:700;color:var(--gold);margin-bottom:2px}
+
+/* cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
+.c{background:var(--card);border:2px solid var(--ink);padding:14px;display:flex;flex-direction:column}
+.c.pending{background:var(--card2);border-style:dashed}
+.chead{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:2px}
+.tick{font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacing:.06em}
+.badge{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 6px;border:1.5px solid;white-space:nowrap;flex-shrink:0}
+.badge.del{color:var(--gain);border-color:var(--gain)}
+.badge.part{color:var(--gold);border-color:var(--gold)}
+.badge.miss{color:var(--loss);border-color:var(--loss)}
+.badge.na{color:var(--faint);border-color:var(--faint)}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);margin:11px 0}
+.tile{background:var(--card2);padding:7px 9px}
+.tile .n{font-family:var(--mono);font-size:14.5px;font-weight:700;line-height:1.15}
+.tile .l{font-family:var(--mono);font-size:8.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:3px}
+.tile .n.up{color:var(--gain)} .tile .n.dn{color:var(--loss)}
+.c ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.c li{margin-bottom:5px}
+.c li::marker{color:var(--faint)}
+.flags{margin-top:auto;padding-top:10px;display:flex;flex-wrap:wrap;gap:5px}
+.flag{font-family:var(--mono);font-size:9px;letter-spacing:.05em;text-transform:uppercase;background:var(--loss);color:var(--card);padding:3px 6px}
+.flag.ok{background:var(--gain)}
+.flag.nu{background:var(--faint)}
+
+/* themes */
+.themes{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.th{background:var(--card);border:2px solid var(--ink);padding:14px}
+.th .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--mute);border-bottom:2px solid var(--ink);padding-bottom:6px;margin-bottom:9px}
+.th ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.th li{margin-bottom:6px}
+.th li::marker{color:var(--faint)}
+.th b{font-family:var(--mono);font-size:12.5px;font-weight:700}
+
+/* red flags */
+.rf{background:var(--card);border:2px solid var(--ink)}
+.rfg{border-bottom:2px solid var(--ink)}
+.rfg:last-child{border-bottom:0}
+.rfh{display:flex;align-items:center;gap:9px;padding:8px 13px;background:var(--card2)}
+.sev{width:11px;height:11px;flex-shrink:0}
+.sev.hi{background:var(--loss)} .sev.md{background:var(--gold)} .sev.lo{background:var(--faint)}
+.rfh span{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase}
+.rfr{display:grid;grid-template-columns:126px 1fr;gap:12px;padding:9px 13px;border-top:1px solid var(--rule);font-size:13.5px}
+.rfr b{font-family:var(--disp);font-weight:700;font-size:12.5px}
+@media(max-width:560px){.rfr{grid-template-columns:1fr;gap:3px}}
+
+table{width:100%;border-collapse:collapse;background:var(--card);border:2px solid var(--ink)}
+th{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;text-align:left;padding:9px 10px;background:var(--ink);color:var(--card)}
+td{padding:9px 10px;border-bottom:1px solid var(--rule);font-size:13.5px;vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.co{font-family:var(--disp);font-weight:700;font-size:13px;white-space:nowrap}
+td.vd{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;white-space:nowrap}
+.vd.del{color:var(--gain)} .vd.part{color:var(--gold)} .vd.miss{color:var(--loss)} .vd.na{color:var(--faint)}
+
+.indra{background:var(--card);border:2px solid var(--ink);padding:16px}
+.vs{display:grid;grid-template-columns:82px 1fr;gap:11px;padding:7px 0;border-bottom:1px solid var(--rule);font-size:13.5px;align-items:start}
+.vs:last-child{border-bottom:0}
+.vs em{font-family:var(--mono);font-size:9.5px;font-style:normal;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding-top:2px}
+.vs em.y{color:var(--gain)} .vs em.n{color:var(--loss)} .vs em.p{color:var(--gold)}
+
+.calls{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.call{border:2px solid var(--ink);padding:15px;background:var(--card)}
+.call.buy{border-left:9px solid var(--gain)}
+.call.wait{border-left:9px solid var(--gold)}
+.call.avoid{border-left:9px solid var(--loss)}
+.call .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.call h3{margin:4px 0 7px;font-size:17px}
+.call p{margin:0;font-size:13.5px}
+.trigs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:14px}
+.tg{border:2px solid var(--ink);padding:14px;background:var(--card)}
+.tg .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
+.tg.tg-up .k{color:var(--gain)} .tg.tg-dn .k{color:var(--loss)}
+.tg ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.tg li{margin-bottom:6px}
+
+.cav{background:var(--card2);border:2px solid var(--ink);padding:15px 15px 15px 30px;margin:0;font-size:13.5px;line-height:1.55}
+.cav li{margin-bottom:8px}
+.cav li:last-child{margin-bottom:0}
+.cav b{font-family:var(--mono);font-size:12px;font-weight:700}
+
+
+/* wide data tables */
+.tw{overflow-x:auto;border:2px solid var(--ink);background:var(--card)}
+.tw table{border:0;min-width:660px}
+.tw th{position:sticky;top:0}
+td.num{font-family:var(--mono);font-size:12px;font-weight:700;text-align:right;white-space:nowrap}
+td.num.up{color:var(--gain)} td.num.dn{color:var(--loss)} td.num.ns{color:var(--faint);font-weight:400}
+th.r{text-align:right}
+td.kpi{font-family:var(--mono);font-size:11.5px;text-align:right;white-space:nowrap}
+tr.sep td{border-top:2px solid var(--ink);background:var(--card2)}
+.asof{font-family:var(--mono);font-size:11px;color:var(--mute);margin-top:10px;line-height:1.6}
+.asof b{color:var(--ink)}
+
+footer{border-top:3px solid var(--ink);padding-top:15px;font-size:12.5px;color:var(--mute)}
+footer p{margin:0 0 8px;max-width:80ch}
+
+@media(max-width:620px){
+  .row{grid-template-columns:76px 1fr;gap:7px}
+  .row .co{font-size:10.5px}
+  .scale{padding-left:83px}
+  .lrow{grid-template-columns:84px 1fr 88px}
+  .lrow .co{font-size:11px}
+  .wrap{padding:20px 13px 60px}
+  td.hide,th.hide{display:none}
+}
+@media(prefers-reduced-motion:no-preference){
+  .b,.lbar,.sb i{animation:g .7s cubic-bezier(.2,.7,.3,1) both}
+  @keyframes g{from{transform:scaleX(.001);opacity:0}to{transform:scaleX(1);opacity:1}}
+  .b.neg{transform-origin:right} .b.v,.b.pos,.lbar,.sb i{transform-origin:left}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Sector earnings review · Quarter ended 30 June 2026</div>
+  <h1>Cables<br>&amp; Wires<br>Q1 FY27</h1>
+  <p class="dek">The best quarter this sector has had. Revenue up 23% to 54% at the pure plays, margins expanding almost everywhere. And UltraTech's Bharuch plant opens in December.</p>
+  <div class="thesis">
+    <div class="t up"><div class="n">9/9</div><div class="l">Reported · all grew revenue</div></div>
+    <div class="t up"><div class="n">+247bps</div><div class="l">KEI margin expansion, best</div></div>
+    <div class="t dn"><div class="n">2.3%</div><div class="l">Havells cables incremental margin</div></div>
+    <div class="t dn"><div class="n">−13.6%</div><div class="l">Havells 1Y, only negative in sector</div></div>
+  </div>
+</header>
+
+<section>
+  <h2>The scissor</h2>
+  <div class="rule"></div>
+  <p class="note">Revenue growth against margin change, same scale, same axis. In most quarters these bars point in opposite directions. This quarter almost every pure play grew both — which is precisely what makes the entrant threat interesting rather than academic.</p>
+  <div class="scissor">
+    <div class="legend">
+      <span><i class="sw" style="background:var(--vol)"></i>Revenue growth YoY</span>
+      <span><i class="sw" style="background:var(--gain)"></i>Margin expansion (bps/10)</span>
+      <span><i class="sw" style="background:var(--loss)"></i>Margin contraction</span>
+    </div>
+    <div id="scissor"></div>
+    <div class="scale"><span>−30</span><span>−15</span><span>0</span><span>+20</span><span>+40</span><span>+60</span></div>
+  </div>
+  <p class="note" style="margin-top:12px">Margin change is shown in basis points divided by ten so it shares an axis with revenue growth. KEI's +25 on the chart means +247bps. Paramount and Precision Wires sit at the two extremes: Paramount has the lowest revenue growth and the largest margin gain, Precision Wires the highest revenue growth and a margin decline. Both are measured on operating margin.</p>
+</section>
+
+<section>
+  <h2>EBITDA margin — the league table</h2>
+  <div class="rule"></div>
+  <p class="note">The core unit economic in this sector. Note the two group-level figures at the bottom: those are diversified companies where cables are one segment, not comparable to the pure plays above them.</p>
+  <div class="league" id="league"></div>
+</section>
+
+<section>
+  <h2>The pressure point: what the growth actually earned</h2>
+  <div class="rule"></div>
+  <div class="fuel">
+    <h2>Incremental margin on new revenue</h2>
+    <p class="note">Not the reported margin — the margin earned on each rupee of *additional* revenue. It shows whether growth is being bought or won. Havells' number is the one to look at.</p>
+    <div class="inc">
+      <div class="ic">
+        <div class="k">Havells · cables segment</div>
+        <div class="big">2.3%</div>
+        <div class="sub">Sold ₹522cr more cable year on year. Kept ₹12cr of it. Segment margin fell from 12.6% to 10.4%.</div>
+        <div class="stack">
+          <div class="sb"><span>Revenue</span><i style="width:100%"></i></div>
+          <div class="sb"><span>+₹522cr</span><i style="width:100%"></i></div>
+          <div class="sb"><span>EBIT kept</span><i class="dim" style="width:2.3%"></i></div>
+        </div>
+      </div>
+      <div class="ic">
+        <div class="k">And yet</div>
+        <div class="big">₹1,400cr</div>
+        <div class="sub">Havells' FY27 capex guidance, directed primarily at cables capacity — announced in the same disclosure cycle as the margin fall. Either a counter-cyclical bet or capacity added into a squeeze.</div>
+      </div>
+    </div>
+    <div class="warn">
+      <div><strong>Dec 2026</strong>UltraTech's Bharuch plant becomes operational. ₹1,800cr committed. Nothing of this appears in any Q1 P&amp;L.</div>
+      <div><strong>6–24 months</strong>Nuvama's estimate for how long customer approvals take across railways, oil and gas and solar. The moat is distribution and certification, not manufacturing.</div>
+      <div><strong>73%</strong>Organised share of the market, up from 68% in FY19. The entrants may take share from the unorganised segment rather than from incumbents.</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Company by company</h2>
+  <div class="rule"></div>
+  <p class="note">Badge scores Q1 against prior guidance and trajectory. Red chips carry into next quarter.</p>
+  <div class="grid" id="cards"></div>
+</section>
+
+
+<section>
+  <h2>KPI comparison</h2>
+  <div class="rule"></div>
+  <p class="note">Sector-specific metrics side by side. W&amp;C share matters because it tells you how much of each company's result is actually a cables read. Distribution reach is the entrant moat.</p>
+  <div class="tw">
+  <table>
+    <thead><tr>
+      <th>Company</th><th class="r">EBITDA margin</th><th class="r">Margin chg</th><th class="r">Rev growth</th>
+      <th class="r">PAT growth</th><th class="r">W&amp;C share</th><th class="r">Distribution</th><th class="r">Capex plan</th>
+    </tr></thead>
+    <tbody id="kpi"></tbody>
+  </table>
+  </div>
+  <p class="asof">Margin basis differs by company and is labelled in the league table above. Havells and Apar are group-level figures for diversified businesses, not cable margins. Capex figures are the stated multi-year commitment, not Q1 spend.</p>
+</section>
+
+<section>
+  <h2>What management said</h2>
+  <div class="rule"></div>
+  <div class="themes">
+    <div class="th"><div class="k">Demand</div><ul>
+      <li>Uniformly strong. Nobody flagged a demand problem.</li>
+      <li>Drivers named repeatedly: <b>power, real estate, railways, solar, data centres</b>.</li>
+      <li>Market sized at <b>₹1.2 trillion</b> by end-FY27.</li>
+      <li>Organised share <b>68% to 73%</b> since FY19 — the structural tailwind.</li>
+    </ul></div>
+
+    <div class="th"><div class="k">Margin guidance</div><ul>
+      <li>RR Kabel holds <b>10.5% FY28</b> guidance despite nearly hitting 10% already. Deliberately conservative.</li>
+      <li>KEI margin expanded on mix — <b>EHV up 47.7%</b>, dealer share 51% to 59%.</li>
+      <li>Havells blamed <b>A&amp;P doubling</b> to 4.4% of revenue, says it normalises over the year.</li>
+      <li>Finolex watching whether double-digit margins survive copper.</li>
+    </ul></div>
+
+    <div class="th"><div class="k">Capex — everyone is building</div><ul>
+      <li>Polycab: <b>₹6,000–8,000cr</b> over five years.</li>
+      <li>Havells: <b>₹1,400cr</b> FY27, mostly cables.</li>
+      <li>RR Kabel Project Rise: <b>₹1,200cr</b> FY26–28, ₹650cr in FY27.</li>
+      <li>KEI: <b>₹600–700cr</b> annually; Sanand target raised to ₹7,000cr capacity.</li>
+      <li>Dynamic Cables commissioning Reengus greenfield.</li>
+    </ul></div>
+
+    <div class="th"><div class="k">Exports and tariffs</div><ul>
+      <li>KEI expects exports back to <b>17–18%</b> of revenue in FY27 as Middle East resumes.</li>
+      <li>RR Kabel is the sector's largest exporter — the most tariff-exposed.</li>
+      <li>Paramount says the <b>US Supreme Court struck down the IEEPA punitive duties</b>, restoring India's competitive position. Its exports rose ~77% sequentially.</li>
+      <li>Havells saw <b>switchgear export disruption</b> from West Asia.</li>
+      <li>That ruling matters most for <b>RR Kabel</b>, the largest exporter here, which has not been re-read against it.</li>
+    </ul></div>
+
+    <div class="th"><div class="k">On the entrants</div><ul>
+      <li>Conspicuous silence. No incumbent management addressed it directly in Q1 commentary.</li>
+      <li>Nuvama's view: distribution must be <b>built afresh</b> for wires; approvals take 6–24 months.</li>
+      <li>Analyst consensus is that profitability stays stable <b>initially</b>. The word doing the work is "initially".</li>
+      <li>Adani's advantage is <b>captive copper</b>; UltraTech's is dealer overlap with cement.</li>
+    </ul></div>
+
+    <div class="th"><div class="k">Broker positioning</div><ul>
+      <li>CLSA initiated: <b>RR Kabel and Polycab Outperform</b>, KEI Hold.</li>
+      <li>KEI's downgrade is on <b>valuation</b>, not execution — it had the best margin print.</li>
+      <li>Polycab holds <b>26–27%</b> organised share, up from 18–19% in FY20.</li>
+      <li>RR Kabel trades near 56x trailing.</li>
+    </ul></div>
+  </div>
+</section>
+
+<section>
+  <h2>Red flags</h2>
+  <div class="rule"></div>
+  <p class="note">Ranked by effect on position sizing, not by how alarming they sound.</p>
+  <div class="rf">
+    <div class="rfg">
+      <div class="rfh"><i class="sev hi"></i><span>Act on these</span></div>
+      <div class="rfr"><b>Havells</b><div>Cables incremental margin of 2.3%, segment margin down 218bps to 10.4% — and ₹1,400cr of capex going into that segment. PAT fell 16.6% while revenue grew 19.5%. Raw material cost rose 33.6%, well ahead of revenue.</div></div>
+      <div class="rfr"><b>Sector-wide</b><div>Every incumbent is adding capacity simultaneously, into a market two conglomerates are entering. Polycab ₹6,000–8,000cr, Havells ₹1,400cr, RR Kabel ₹1,200cr, KEI ₹600–700cr a year. That is a lot of supply arriving at once.</div></div>
+      <div class="rfr"><b>RR Kabel</b><div>56x trailing earnings after an 84% one-year move. Promoter holding has declined every quarter, down to 61.38% from 61.76%. Small, but consistently one-directional.</div></div>
+    </div>
+    <div class="rfg">
+      <div class="rfh"><i class="sev md"></i><span>Monitor next quarter</span></div>
+      <div class="rfr"><b>KEI</b><div>Two different EBITDA margins are being reported: 13.04% standalone (+155bps) and 12.43% consolidated (+247bps). Both appear in circulation. The base years differ too. Reconcile against the filing before modelling.</div></div>
+      <div class="rfr"><b>Polycab</b><div>Revenue fell 7.4% sequentially. FMEG grew faster than wires and cables — good for mix, but the core segment is the one with the moat. EPC declined on timing.</div></div>
+      <div class="rfr"><b>Paramount</b><div>Three different EBITDA figures are circulating for the same quarter — ₹37.8cr, ₹34.7cr and ₹30.3cr, depending on treatment of other income. Reconcile against the filing before modelling. Finance costs rising, and the preferential issue at ₹42 dilutes well below the current market price.</div></div>
+    </div>
+    <div class="rfg">
+      <div class="rfh"><i class="sev lo"></i><span>Note and move on</span></div>
+      <div class="rfr"><b>Finolex</b><div>Stock jumped 12% on the print. Communication cables and agricultural wires were the pressure points a year ago; watch whether the fibre draw expansion lands into demand.</div></div>
+      <div class="rfr"><b>Dynamic Cables</b><div>Order book essentially flat sequentially at ₹811cr against ₹808cr. Revenue fell 1.8% QoQ. Growth is real but the book is not building.</div></div>
+      <div class="rfr"><b>Precision Wires</b><div>Operating margin fell to 4.78% from 5.34% while revenue grew 60%. That growth is copper price passing through a conversion business, not improving economics. The ₹150cr CCD issue converts at ₹400 within 12–18 months — dilution is scheduled, not hypothetical.</div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Walk the talk</h2>
+  <div class="rule"></div>
+  <p class="note">What was promised or guided previously, against Q1 FY27 delivery.</p>
+  <table>
+    <thead><tr><th>Company</th><th>Promised</th><th class="hide">Delivered</th><th>Verdict</th></tr></thead>
+    <tbody id="score"></tbody>
+  </table>
+</section>
+
+<section>
+  <h2>Sector synthesis</h2>
+  <div class="rule"></div>
+  <p class="note">The market repriced this sector twice in 2025 on entrant fear — stocks fell up to 15% on the UltraTech announcement and again on Adani's. Scored against what Q1 FY27 actually shows.</p>
+  <div class="indra">
+    <div class="vs"><em class="n">Wrong</em><div><b>That entrant fear would show up in incumbent numbers by now.</b> It has not. KEI expanded margin 247bps, RR Kabel 204bps, Finolex grew EBITDA 79%. No pure play shows pricing pressure.</div></div>
+    <div class="vs"><em class="y">Right</em><div><b>That the moat is distribution, not manufacturing.</b> KEI's dealer-led sales rose 41.98% and now carry 59% of revenue against 51% a year ago. Its active dealer count is 2,128. That network is what an entrant has to replicate.</div></div>
+    <div class="vs"><em class="p">Partly</em><div><b>That the organised shift protects everyone.</b> Organised share is up 68% to 73%, so entrants can grow without taking incumbent share. But that logic works until the market matures, and it says nothing about pricing.</div></div>
+    <div class="vs"><em class="y">Right</em><div><b>That the diversified players would look weaker.</b> Havells fell 16.6% on PAT with cables incremental margin at 2.3%. The FMEG and A&amp;P drag is real and the cables segment is not compensating.</div></div>
+    <div class="vs"><em class="n">Wrong</em><div><b>That Q1 tells you anything about the entrant threat.</b> UltraTech's plant opens in December. The first quarter that contains any entrant volume is Q4 FY27 at the earliest, and meaningful volume a year after that. This report cannot answer the question the sector is actually being priced on.</div></div>
+  </div>
+</section>
+
+<section>
+  <h2>The call</h2>
+  <div class="rule"></div>
+  <div class="calls">
+    <div class="call buy">
+      <div class="k">Own now</div>
+      <h3>KEI Industries</h3>
+      <p>Best margin expansion in the sector, and expansion of the right kind — mix-driven, from EHV up 47.7% and a dealer channel that went from 51% to 59% of sales. That dealer network is the specific asset an entrant cannot buy quickly. CLSA has it at Hold on valuation, which is a reason to size carefully, not to avoid it.</p>
+    </div>
+    <div class="call wait">
+      <div class="k">Right business, wrong price</div>
+      <h3>RR Kabel · Polycab</h3>
+      <p>RR Kabel had the sector's best quarter outright — revenue up 54%, PAT up 129%, FMEG at breakeven, debt/equity 0.1x, ROCE 25.8%. At 56x trailing it is priced for it. Polycab is the scale leader with 26–27% organised share. Both are quality; neither offers a margin of safety at these multiples. Buy on entrant-driven weakness, which the sector has produced twice before.</p>
+    </div>
+    <div class="call avoid">
+      <div class="k">Stay out</div>
+      <h3>Havells</h3>
+      <p>The cables business grew 27% and earned 2.3% on the increment. Group PAT fell 16.6%. Management is directing ₹1,400cr of capex into the segment where its margin just fell 218bps, while A&amp;P doubled to 4.4% of revenue. The market has already voted: −13.6% over one year, the only negative return in this universe, while RR Kabel and Apar more than doubled. The bull case is that A&amp;P normalises — a promise about costs, not a change in unit economics.</p>
+    </div>
+  </div>
+  <div class="trigs">
+    <div class="tg tg-up"><div class="k">What would make us more positive</div><ul>
+      <li>A second consecutive quarter of <b>margin expansion at the pure plays</b>, confirming Q1 was mix and not copper timing.</li>
+      <li>KEI exports recovering to the guided <b>17–18%</b> of revenue.</li>
+      <li>Any <b>entrant-driven selloff</b> of the kind seen in Feb and Mar 2025, when quality names fell 13–15% on announcement rather than on numbers.</li>
+    </ul></div>
+    <div class="tg tg-dn"><div class="k">What would make us cut</div><ul>
+      <li>Evidence of <b>discounting</b> once Bharuch ships — watch realisation per unit, not revenue.</li>
+      <li>Incumbent <b>dealer counts falling</b>, or dealer share of revenue dropping. This is the leading indicator, ahead of margin.</li>
+      <li>A <b>copper spike</b> that the pass-through lag cannot absorb. Havells already shows raw material cost rising 33.6% against 19.5% revenue.</li>
+      <li>Capex plans being raised again across the board into an entrant wave.</li>
+    </ul></div>
+  </div>
+</section>
+
+
+<section>
+  <h2>Price and returns</h2>
+  <div class="rule"></div>
+  <p class="note">Results date against market performance, priced from the exchange feed. Havells is the only name in the sector with a negative one-year return, in a year when two peers more than doubled. The market has been discriminating within this sector for twelve months, not derating it as a whole.</p>
+  <div class="tw">
+  <table>
+    <thead><tr>
+      <th>Company</th><th>Ticker</th><th>Results date</th><th class="r">CMP (₹)</th>
+      <th class="r">1 year</th><th class="r">6 months</th><th class="r">3 months</th><th class="r">MTD</th>
+    </tr></thead>
+    <tbody id="ret"></tbody>
+  </table>
+  </div>
+  <p class="asof">
+    <b>Prices as on 12 August 2026 close. Source: Kite Connect.</b> CMP is the last traded price; every return is computed from that against the daily close on the anchor date, from the same feed. Sorted by one-year return.<br>
+    <b>Anchors:</b> 1Y = 12 Aug 2025 · 6M = 12 Feb 2026 · 3M = 12 May 2026 · MTD = 31 Jul 2026 close.<br>
+    <b>Dynamic Cables' 3-month figure is distorted.</b> The 12 May 2026 anchor is a day the stock closed at its 20% lower circuit. Measured from any adjacent day the return is materially lower. Its 1-year and 6-month figures are unaffected.<br>
+    <b>These figures resolve a disagreement between public aggregators.</b> Finolex's one-year return was quoted as +18.1%, +6.6% and +51.7% by three different providers; the exchange data gives +51.7%. Polycab was quoted at +35.0% and +37.3%; the feed gives +36.5%.<br>
+    <b>Paramount and Precision Wires results dates are their Q1 FY27 board approvals</b>, both falling after the 12 August price date.
+  </p>
+</section>
+
+<section>
+  <h2>Caveats</h2>
+  <div class="rule"></div>
+  <ul class="cav">
+    <li><b>The central question cannot be answered from this quarter.</b> UltraTech's plant is operational from December 2026 and Adani's venture is earlier stage. No entrant volume exists in any Q1 FY27 number. Everything in the synthesis about the entrant threat is inference from industry structure, not from the data.</li>
+    <li><b>Havells is not a cables company.</b> Cables are ₹2,456cr of ₹6,518cr group revenue. Its group EBITDA margin of 7.15% is not a cable margin and is shown separately in the league table for that reason.</li>
+    <li><b>The Havells incremental margin is derived.</b> Computed from reported segment revenue and EBIT against a prior-year base of roughly ₹1,934cr revenue and ₹243cr EBIT that was itself worked back from disclosed growth rates. The 2.3% figure is the report's sharpest claim and its least directly sourced. Verify against the segment filing before acting on it.</li>
+    <li><b>KEI's margin is reported two ways.</b> 13.04% standalone against a 11.49% base, and 12.43% consolidated against a 9.96% base. This report uses the consolidated pair. The two are not reconcilable from public summaries.</li>
+    <li><b>All nine companies have now reported.</b> Paramount and Precision Wires filed on 11 and 10 August respectively, after this report was first built. Their cards have been rewritten from the filings rather than left blank.</li>
+    <li><b>Precision Wires is still a different business.</b> Winding wire for transformers and motors, sold on conversion margin. Its 4.78% operating margin is structurally lower than a building-wire margin for reasons that are not underperformance. It appears in the league table with that label attached; do not rank it against Polycab or KEI on the number alone.</li>
+    <li><b>Paramount's EBITDA is reported three ways.</b> ₹37.8cr at a 7.1% margin from the earnings call, ₹34.74cr from one wire service, ₹30.31cr from another. This report uses operating profit excluding other income — ₹34.7cr at 6.6% — because that is what management framed the quarter around. The league table uses the 7.1% call figure and is flagged accordingly.</li>
+    <li><b>Apar was covered separately in the Power Transmission review.</b> Its Q1 profit growth came mainly from speciality oils; conductor volumes fell on high metal prices. Reading its group numbers as a cables signal would be wrong.</li>
+    <li><b>Price and return data is exchange-sourced; fundamentals are not.</b> Every figure in the returns table comes from Kite Connect on a single date. P/E and market cap are absent because that API carries neither — it has no EPS or shares-outstanding field. Do not infer valuation from this report.</li>
+    <li><b>Research depth is uneven on the earnings side.</b> Polycab, KEI, Havells, RR Kabel, Paramount and Dynamic Cables are well covered. Finolex and Precision Wires are moderate — no Precision Wires earnings call transcript was located, so there is no management commentary for it in this report.</li>
+    <li><b>Precision Wires is the best performer in the table.</b> Up 146.9% over a year, now shown with its Q1 numbers. The market is paying for the transformer and motor capex cycle, not for cable economics. Its 60% revenue growth on a falling operating margin is the same copper pass-through visible across the sector, only sharper because conversion margins are thinner.</li>
+    <li><b>Forward statements are projections.</b> FY27 capex, margin and export targets are management guidance, not outcomes.</li>
+  </ul>
+</section>
+
+<footer>
+  <p><b>Universe:</b> 9 companies selected, quarter ended 30 June 2026. Sources: company releases and investor presentations, NSE/BSE filings, Business Standard, EquityBulls, Investing.com, Nuvama and CLSA commentary as reported.</p>
+</footer>
+
+</div>
+<script>
+/* SCISSOR: [company, revenue growth %, margin change in bps/10] */
+const SC=[
+ ["Precision Wires",60.4,-5.6],["RR Kabel",53.9,20.4],["Finolex Cables",44.0,15.0],
+ ["Polycab",39.0,2.0],["Dynamic Cables",33.2,6.0],["KEI Industries",23.0,24.7],
+ ["Havells (group)",19.5,-23.0],["Paramount",17.4,32.0]
+];
+const MIN=-30,MAX=60,SPAN=MAX-MIN,Z=(0-MIN)/SPAN*100;
+document.getElementById("scissor").innerHTML=SC.map(([n,v,e],i)=>{
+ const bar=(val,cls,suffix)=>{const w=Math.abs(val)/SPAN*100;
+  const l=val>=0?Z:Z-w;
+  const lbl = cls==='v' ? (val>0?'+':'')+val+'%' : (val>0?'+':'')+Math.round(val*10)+'bps';
+  return `<i class="b ${cls} ${val>=0?'pos':'neg'}" style="left:${l}%;width:${w}%;animation-delay:${i*45}ms"><span>${lbl}</span></i>`;};
+ return `<div class="row"><div class="co">${n}</div><div class="track"><i class="axis" style="left:${Z}%"></i>${bar(v,'v')}${bar(e,'e')}</div></div>`;
+}).join("");
+
+/* LEAGUE: EBITDA margin % */
+const LG=[["KEI Industries",12.43,"+247bps · consol"],["Dynamic Cables",10.9,"+60bps"],
+ ["RR Kabel",8.94,"+204bps · op margin"],["Finolex Cables",0,"EBITDA +79% · % n/d"],
+ ["Polycab",0,"contribution 23.8%"],["Havells (group)",7.15,"−230bps · not a cable margin"],
+ ["Paramount",7.1,"+320bps op · EBITDA basis varies"],
+ ["Precision Wires",4.78,"−56bps · conversion margin"]];
+const LMAX=14;
+document.getElementById("league").innerHTML=LG.map(([n,v,d],i)=>{
+ const cls=v===0?"na":v>=10?"":v>=8?"mid":"low";
+ return `<div class="lrow"><div class="co">${n}</div>
+ <div><i class="lbar ${cls}" style="width:${v?v/LMAX*100:2}%;animation-delay:${i*40}ms"></i></div>
+ <div><div class="v">${v?v.toFixed(2)+'%':'n/d'}</div><div class="d">${d}</div></div></div>`;
+}).join("");
+
+/* CARDS */
+const CO=[
+ {n:"RR Kabel",t:"RRKABEL",b:"del",bl:"Delivered",
+  k:[["+53.9%","Revenue",1],["+129%","PAT",1],["8.94%","Op margin",1],["0.1x","Debt/equity",1]],
+  p:["Best quarter in the sector outright, and its best ever.","W&C revenue up 57%; FMEG reached breakeven for the first time.","Debtor days improved to 31 from 34; ROCE 25.8%.","Holding 10.5% FY28 margin guidance despite nearly hitting 10% now — conservative, which is a good sign."],
+  f:[["56x trailing earnings",""],["Promoter stake drifting down",""]]},
+
+ {n:"KEI Industries",t:"KEI",b:"del",bl:"Delivered",
+  k:[["+247bps","EBITDA margin",1],["+23.0%","Revenue",1],["+40.1%","PAT",1],["2,128","Active dealers",1]],
+  p:["Best margin expansion in the sector, and it came from mix rather than price.","EHV cables up 47.7%; dealer-led sales up 42% to 59% of revenue.","That dealer network is the specific asset an entrant cannot buy quickly.","Sanand capacity target raised to ₹7,000cr from ₹6,000cr."],
+  f:[["Two margin figures circulating",""],["CLSA Hold on valuation",""]]},
+
+ {n:"Polycab India",t:"POLYCAB",b:"del",bl:"Delivered",
+  k:[["+39.0%","Revenue",1],["+32.8%","PAT",1],["₹10,900cr","Order book",1],["26–27%","Organised share",1]],
+  p:["Highest-ever Q1 across revenue, operating earnings and profit.","W&C up 37.7% to ₹7,202cr; FMEG hit a record and grew faster.","Share of the organised market up from 18–19% in FY20 — the clearest evidence of consolidation.","₹6,000–8,000cr capex planned over five years."],
+  f:[["Revenue −7.4% QoQ",""],["Core segment lagging FMEG",""]]},
+
+ {n:"Finolex Cables",t:"FINCABLES",b:"del",bl:"Delivered",
+  k:[["+44%","Revenue",1],["+79%","EBITDA",1],["+53%","PAT",1],["₹249cr","PAT",1]],
+  p:["Stock rose 12% on the print — the strongest reaction in the sector.","EBITDA growth well ahead of revenue: this was an operating leverage quarter.","Fibre draw facility reaching 4mn fibre km capacity by Q3 FY27.","Communication cables recovered from being a drag a year ago."],
+  f:[["Margin % not disclosed",""],["Copper exposure flagged by management",""]]},
+
+ {n:"Dynamic Cables",t:"DYCL",b:"part",bl:"Partial",
+  k:[["+33.2%","Revenue",1],["+37.1%","PAT",1],["10.9%","Op margin",1],["₹811cr","Order book",0]],
+  p:["Highest-ever Q1 on revenue, operating profit and PAT.","Essentially net cash; debt/EBITDA 0.33x.","But the order book is flat sequentially — ₹811cr against ₹808cr.","Revenue also fell 1.8% QoQ. Growth is real; momentum is not building."],
+  f:[["Order book flat",""],["Micro-cap liquidity",""]]},
+
+ {n:"Havells India",t:"HAVELLS",b:"miss",bl:"Missed",
+  k:[["−16.6%","PAT",-1],["+19.5%","Revenue",1],["2.3%","Cables incr. margin",-1],["7.15%","Group EBITDA",-1]],
+  p:["Cables revenue grew 27% and the segment earned 2.3% on the increment.","Segment margin fell from about 12.6% to 10.4%.","A&P doubled to 4.4% of revenue; raw material cost rose 33.6% against 19.5% revenue growth.","Directing ₹1,400cr of FY27 capex mostly into the segment whose margin just fell."],
+  f:[["Capex into a margin squeeze",""],["PAT −60% QoQ",""],["Only 38% of revenue is cables",""]]},
+
+ {n:"Apar Industries",t:"APARINDS",b:"del",bl:"Delivered",
+  k:[["12.4%","EBITDA margin",1],["+29.1%","Revenue",1],["+77.8%","PAT",1],["27.5%","Export mix",-1]],
+  p:["Covered in full in the Power Transmission review — same quarter, different frame.","Profit growth came mainly from speciality oils, not from cables or conductors.","Conductor volumes actually fell on high aluminium and copper prices.","Do not read its headline as a cables signal."],
+  f:[["Gains not from cables","nu"],["Export mix down from 31.6%",""]]},
+
+ {n:"Paramount Communications",t:"PARACABLES",b:"del",bl:"Delivered",
+  k:[["+320bps","Operating margin",1],["+17.4%","Revenue",1],["+129%","Operating profit",1],["₹615cr","Order book",1]],
+  p:["The turnaround the FY26 numbers said was needed. Operating margin went 3.4% to 6.6%.","PAT rose only 3.7% because other income collapsed from ₹17.7cr to ₹3.1cr — the operating business improved far more than the bottom line shows.","Exports ₹155cr, 29.3% of revenue, up ~77% sequentially after the US Supreme Court struck down the IEEPA punitive duties.","B2B industrial up 90% YoY to ₹296cr. Working capital 96 days from 101; receivables 64 days from 79."],
+  f:[["Three EBITDA figures circulating",""],["Rising finance costs",""],["Equity dilution at ₹42",""]]},
+
+ {n:"Precision Wires India",t:"PRECWIRE",b:"part",bl:"Partial",
+  k:[["4.78%","Operating margin",-1],["+60.4%","Revenue",1],["+71.5%","PAT",1],["−56bps","Margin change",-1]],
+  p:["Revenue up 60% and operating margin down 56bps to 4.78% — the growth is copper price, not conversion economics.","PAT still rose 71.5% to ₹46.5cr on operating leverage over a thin base. EPS ₹2.54 from ₹1.52.","Capacity 55,000 MT/pa heading to ~65,400 by Q4 FY27. Copper rod plant at Valvada live since March, Zaroli recycling in trial from Q2 FY27.","Raising ₹150cr via 12% CCDs at ₹400 to two non-promoter investors, convertible in 12–18 months. EGM 5 September."],
+  f:[["Operating margin fell",""],["CCD dilution pending",""],["Not a building-wire peer","nu"]]}
+];
+document.getElementById("cards").innerHTML=CO.map(c=>`
+ <article class="c${c.b==='na'?' pending':''}">
+  <div class="chead"><div><h3>${c.n}</h3><div class="tick">${c.t}</div></div><div class="badge ${c.b}">${c.bl}</div></div>
+  <div class="tiles">${c.k.map(([n,l,s])=>`<div class="tile"><div class="n ${s===1?'up':s===-1?'dn':''}">${n}</div><div class="l">${l}</div></div>`).join("")}</div>
+  <ul>${c.p.map(x=>`<li>${x}</li>`).join("")}</ul>
+  <div class="flags">${c.f.map(([t,k])=>`<span class="flag ${k}">${t}</span>`).join("")}</div>
+ </article>`).join("");
+
+
+/* KPI TABLE: [company, margin, marginChg, revGrowth, patGrowth, W&C share, distribution, capex] */
+const KPI=[
+ ["KEI Industries","12.43%","+247bps","+23.0%","+40.1%","97.1%","2,128 dealers","₹600–700cr/yr"],
+ ["Polycab","23.8% contrib.","n/d","+39.0%","+32.8%","87.7%","26–27% org. share","₹6,000–8,000cr/5yr"],
+ ["RR Kabel","8.94% op","+204bps","+53.9%","+129%","91%","largest exporter","₹1,200cr FY26–28"],
+ ["Finolex Cables","n/d","n/d","+44.0%","+53.0%","n/d","n/d","fibre draw expansion"],
+ ["Dynamic Cables","10.9% op","+60bps","+33.2%","+37.1%","100%","₹811cr order book","Reengus greenfield"],
+ ["Havells (group)","7.15%","−230bps","+19.5%","−16.6%","37.7%","A&P 4.4% of rev","₹1,400cr FY27"],
+ ["Apar (group)","12.4%","+260bps","+29.1%","+77.8%","cables minority","27.5% exports","UK + Brazil"],
+ ["Paramount","6.6% op","+320bps","+17.4%","+3.7%","100%","₹615cr order book","₹300cr EHV plant"],
+ ["Precision Wires","4.78% op","−56bps","+60.4%","+71.5%","winding wire","55,000 MT/pa","₹150cr CCDs"]
+];
+document.getElementById("kpi").innerHTML=KPI.map(r=>
+ `<tr><td class="co">${r[0]}</td>`+r.slice(1).map(c=>`<td class="kpi">${c}</td>`).join("")+`</tr>`).join("");
+
+/* RETURNS: sourced from Kite Connect, one feed, one date.
+   [company, ticker, resultsDate, cmp, 1y, 6m, 3m, mtd] */
+const RET=[
+ ["Precision Wires","PRECWIRE","10 Aug 2026","422.30","+146.9%","+51.4%","+8.5%","+13.3%"],
+ ["RR Kabel","RRKABEL","27 Jul 2026","2,789.60","+130.5%","+95.3%","+43.9%","+7.2%"],
+ ["Apar Industries","APARINDS","24 Jul 2026","18,000.00","+104.2%","+89.0%","+44.5%","+25.5%"],
+ ["KEI Industries","KEI","3 Aug 2026","5,754.00","+52.8%","+25.3%","+15.1%","+15.1%"],
+ ["Finolex Cables","FINCABLES","11 Aug 2026","1,280.05","+51.7%","+56.3%","+19.2%","+29.6%"],
+ ["Polycab India","POLYCAB","16 Jul 2026","9,289.00","+36.5%","+19.6%","+3.0%","+2.0%"],
+ ["Paramount Comm.","PARACABLES","11 Aug 2026","68.22","+31.5%","+84.9%","+25.8%","+5.1%"],
+ ["Dynamic Cables","DYCL","20 Jul 2026","454.00","+15.0%","+49.6%","+38.1%","+14.9%"],
+ ["Havells India","HAVELLS","17 Jul 2026","1,265.00","−13.6%","−9.7%","+6.2%","+0.3%"]
+];
+document.getElementById("ret").innerHTML=RET.map(r=>{
+ const cell=v=>{
+   if(v==="n/s") return `<td class="num ns">n/s</td>`;
+   const cls=v.startsWith("+")?"up":(v.startsWith("-")||v.startsWith("\u2212"))?"dn":"";
+   return `<td class="num ${cls}">${v}</td>`;
+ };
+ return `<tr><td class="co">${r[0]}</td><td class="tick">${r[1]}</td><td>${r[2]}</td>`
+  +`<td class="num">${r[3]}</td>`+r.slice(4).map(cell).join("")+`</tr>`;
+}).join("");
+
+/* SCORECARD */
+const SCORE=[
+ ["KEI Industries","Margin expansion on mix; Sanand ramp; exports back to 17–18%","Margin +247bps on EHV and dealer mix. Sanand target raised. Exports still soft","del","Delivered"],
+ ["RR Kabel","10.5% EBITDA margin by FY28; Project Rise ₹1,200cr","Nearly 10% already in Q1, two years early. Guidance held rather than raised","del","Delivered"],
+ ["Polycab","Sustained W&C leadership; ₹6,000–8,000cr capex","Highest-ever Q1. Organised share 26–27%","del","Delivered"],
+ ["Finolex","Fibre draw expansion; electrical cables as growth engine","EBITDA +79%. Fibre facility on track for Q3 FY27","del","Delivered"],
+ ["Dynamic Cables","Reengus commissioning; margin expansion via HV and solar","Margin 10.3% to 10.9%. Order book flat","part","Split"],
+ ["Havells","Cables growth; A&P to normalise; ₹1,400cr capex","Revenue delivered. Margin did not. A&P doubled instead","miss","Missed"],
+ ["Paramount","Q4 FY26 export disruption to normalise in early FY27","Exports back to 29.3% of revenue, operating margin +320bps","del","Delivered"],
+ ["Precision Wires","Capacity to 65,400 MT/pa; copper rod vertical integration","Valvada live from March, Silvassa on track, Zaroli trial Q2 FY27","del","Delivered"]
+];
+document.getElementById("score").innerHTML=SCORE.map(([c,p,d,k,v])=>
+ `<tr><td class="co">${c}</td><td>${p}</td><td class="hide">${d}</td><td class="vd ${k}">${v}</td></tr>`).join("");
+</script>
+</body>
+</html>
