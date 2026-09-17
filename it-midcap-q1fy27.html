@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IT Midcap Q1 FY27 — Sector Earnings Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Roboto+Mono:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --stone:#E3E0D9; --card:#F3F1EC; --card2:#EAE7E0;
+  --ink:#1F1D1A; --mute:#6E6A62; --faint:#9A958B; --rule:#C9C4B9;
+  --gain:#1D5C7A; --loss:#A8382C; --vol:#8E8879; --gold:#B4842A;
+  --disp:'Archivo',system-ui,sans-serif;
+  --serif:'Source Serif 4',Georgia,serif;
+  --mono:'Roboto Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--stone);color:var(--ink);font-family:var(--serif);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:28px 20px 90px}
+section{margin-bottom:40px}
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
+h1{font-family:var(--disp);font-weight:800;font-size:clamp(32px,6.8vw,60px);line-height:.94;letter-spacing:-.03em;margin:.18em 0 .22em;text-transform:uppercase}
+h2{font-family:var(--disp);font-weight:700;font-size:clamp(19px,3.2vw,25px);letter-spacing:-.015em;margin:0 0 4px;text-transform:uppercase}
+h3{font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:-.005em;margin:0}
+.dek{font-size:17px;color:var(--mute);max-width:58ch;margin:0}
+.note{font-size:13px;color:var(--mute);margin:4px 0 20px;max-width:72ch}
+.rule{height:3px;background:var(--ink);margin:0 0 16px}
+
+.thesis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:2px;background:var(--rule);border:2px solid var(--ink);margin-top:26px}
+.t{background:var(--card);padding:13px 15px}
+.t .n{font-family:var(--disp);font-weight:800;font-size:25px;line-height:1.05;letter-spacing:-.02em}
+.t .l{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:5px;line-height:1.35}
+.t.up .n{color:var(--gain)} .t.dn .n{color:var(--loss)}
+
+/* scissor */
+.scissor{background:var(--card);border:2px solid var(--ink);padding:18px 16px 12px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin-bottom:14px}
+.legend span{display:flex;align-items:center;gap:6px}
+.sw{width:13px;height:11px;display:inline-block}
+.row{display:grid;grid-template-columns:110px 1fr;gap:10px;align-items:center;margin-bottom:3px}
+.row .co{font-family:var(--disp);font-weight:600;font-size:12px;text-align:right;line-height:1.15}
+.track{position:relative;height:26px}
+.axis{position:absolute;top:0;bottom:0;width:2px;background:var(--ink);opacity:.85}
+.b{position:absolute;height:10px}
+.b.v{top:1px;background:var(--vol)}
+.b.e{top:14px}
+.b.e.pos{background:var(--gain)} .b.e.neg{background:var(--loss)}
+.b span{position:absolute;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:9.5px;font-weight:500;white-space:nowrap;color:var(--ink)}
+.b.pos span,.b.v span{left:calc(100% + 5px)}
+.b.neg span{right:calc(100% + 5px)}
+.scale{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9.5px;color:var(--faint);margin-top:6px;padding-left:120px}
+
+/* league */
+.league{background:var(--card);border:2px solid var(--ink);padding:16px}
+.lrow{display:grid;grid-template-columns:118px 1fr 108px;gap:10px;align-items:center;padding:5px 0;border-bottom:1px solid var(--rule)}
+.lrow:last-child{border-bottom:0}
+.lrow .co{font-family:var(--disp);font-weight:600;font-size:12.5px;text-align:right}
+.lbar{height:16px;background:var(--gain);display:block}
+.lbar.mid{background:#4A7F91} .lbar.low{background:var(--loss)} .lbar.na{background:var(--rule)}
+.lrow .v{font-family:var(--mono);font-size:12px;font-weight:700;text-align:right}
+.lrow .d{font-family:var(--mono);font-size:10px;color:var(--mute);text-align:right}
+
+/* pressure point — incremental margin */
+.fuel{background:var(--ink);color:var(--card);border:2px solid var(--ink);padding:18px}
+.fuel h2{color:var(--card)}
+.fuel .note{color:#A9A296}
+.inc{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:#3A352E;margin:18px 0 0}
+.ic{background:#26231F;padding:15px}
+.ic .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:#A9A296;margin-bottom:8px}
+.ic .big{font-family:var(--disp);font-weight:800;font-size:38px;line-height:1;letter-spacing:-.03em;color:var(--gold)}
+.ic .sub{font-size:13px;color:#D6D1C6;margin-top:8px}
+.stack{margin-top:14px;display:flex;flex-direction:column;gap:6px}
+.sb{display:grid;grid-template-columns:64px 1fr;gap:8px;align-items:center;font-family:var(--mono);font-size:10px;color:#A9A296}
+.sb i{display:block;height:14px;background:var(--gold)}
+.sb i.dim{background:#5A5348}
+@media(max-width:620px){.inc{grid-template-columns:1fr}}
+.warn{border-top:1px solid #4A453C;margin-top:16px;padding-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px}
+.warn div{font-size:13.5px;color:#D6D1C6}
+.warn strong{display:block;font-family:var(--mono);font-size:16px;font-weight:700;color:var(--gold);margin-bottom:2px}
+
+/* cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
+.c{background:var(--card);border:2px solid var(--ink);padding:14px;display:flex;flex-direction:column}
+.c.pending{background:var(--card2);border-style:dashed}
+.chead{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:2px}
+.tick{font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacing:.06em}
+.badge{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 6px;border:1.5px solid;white-space:nowrap;flex-shrink:0}
+.badge.del{color:var(--gain);border-color:var(--gain)}
+.badge.part{color:var(--gold);border-color:var(--gold)}
+.badge.miss{color:var(--loss);border-color:var(--loss)}
+.badge.na{color:var(--faint);border-color:var(--faint)}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);margin:11px 0}
+.tile{background:var(--card2);padding:7px 9px}
+.tile .n{font-family:var(--mono);font-size:14.5px;font-weight:700;line-height:1.15}
+.tile .l{font-family:var(--mono);font-size:8.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:3px}
+.tile .n.up{color:var(--gain)} .tile .n.dn{color:var(--loss)}
+.c ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.c li{margin-bottom:5px}
+.c li::marker{color:var(--faint)}
+.flags{margin-top:auto;padding-top:10px;display:flex;flex-wrap:wrap;gap:5px}
+.flag{font-family:var(--mono);font-size:9px;letter-spacing:.05em;text-transform:uppercase;background:var(--loss);color:var(--card);padding:3px 6px}
+.flag.ok{background:var(--gain)}
+.flag.nu{background:var(--faint)}
+
+/* themes */
+.themes{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.th{background:var(--card);border:2px solid var(--ink);padding:14px}
+.th .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--mute);border-bottom:2px solid var(--ink);padding-bottom:6px;margin-bottom:9px}
+.th ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.th li{margin-bottom:6px}
+.th li::marker{color:var(--faint)}
+.th b{font-family:var(--mono);font-size:12.5px;font-weight:700}
+
+/* red flags */
+.rf{background:var(--card);border:2px solid var(--ink)}
+.rfg{border-bottom:2px solid var(--ink)}
+.rfg:last-child{border-bottom:0}
+.rfh{display:flex;align-items:center;gap:9px;padding:8px 13px;background:var(--card2)}
+.sev{width:11px;height:11px;flex-shrink:0}
+.sev.hi{background:var(--loss)} .sev.md{background:var(--gold)} .sev.lo{background:var(--faint)}
+.rfh span{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase}
+.rfr{display:grid;grid-template-columns:126px 1fr;gap:12px;padding:9px 13px;border-top:1px solid var(--rule);font-size:13.5px}
+.rfr b{font-family:var(--disp);font-weight:700;font-size:12.5px}
+@media(max-width:560px){.rfr{grid-template-columns:1fr;gap:3px}}
+
+table{width:100%;border-collapse:collapse;background:var(--card);border:2px solid var(--ink)}
+th{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;text-align:left;padding:9px 10px;background:var(--ink);color:var(--card)}
+td{padding:9px 10px;border-bottom:1px solid var(--rule);font-size:13.5px;vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.co{font-family:var(--disp);font-weight:700;font-size:13px;white-space:nowrap}
+td.vd{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;white-space:nowrap}
+.vd.del{color:var(--gain)} .vd.part{color:var(--gold)} .vd.miss{color:var(--loss)} .vd.na{color:var(--faint)}
+
+.indra{background:var(--card);border:2px solid var(--ink);padding:16px}
+.vs{display:grid;grid-template-columns:82px 1fr;gap:11px;padding:7px 0;border-bottom:1px solid var(--rule);font-size:13.5px;align-items:start}
+.vs:last-child{border-bottom:0}
+.vs em{font-family:var(--mono);font-size:9.5px;font-style:normal;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding-top:2px}
+.vs em.y{color:var(--gain)} .vs em.n{color:var(--loss)} .vs em.p{color:var(--gold)}
+
+.calls{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.call{border:2px solid var(--ink);padding:15px;background:var(--card)}
+.call.buy{border-left:9px solid var(--gain)}
+.call.wait{border-left:9px solid var(--gold)}
+.call.avoid{border-left:9px solid var(--loss)}
+.call .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.call h3{margin:4px 0 7px;font-size:17px}
+.call p{margin:0;font-size:13.5px}
+.trigs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:14px}
+.tg{border:2px solid var(--ink);padding:14px;background:var(--card)}
+.tg .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
+.tg.tg-up .k{color:var(--gain)} .tg.tg-dn .k{color:var(--loss)}
+.tg ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.tg li{margin-bottom:6px}
+
+.cav{background:var(--card2);border:2px solid var(--ink);padding:15px 15px 15px 30px;margin:0;font-size:13.5px;line-height:1.55}
+.cav li{margin-bottom:8px}
+.cav li:last-child{margin-bottom:0}
+.cav b{font-family:var(--mono);font-size:12px;font-weight:700}
+
+
+/* wide data tables */
+.tw{overflow-x:auto;border:2px solid var(--ink);background:var(--card)}
+.tw table{border:0;min-width:660px}
+.tw th{position:sticky;top:0}
+td.num{font-family:var(--mono);font-size:12px;font-weight:700;text-align:right;white-space:nowrap}
+td.num.up{color:var(--gain)} td.num.dn{color:var(--loss)} td.num.ns{color:var(--faint);font-weight:400}
+th.r{text-align:right}
+td.kpi{font-family:var(--mono);font-size:11.5px;text-align:right;white-space:nowrap}
+tr.sep td{border-top:2px solid var(--ink);background:var(--card2)}
+.asof{font-family:var(--mono);font-size:11px;color:var(--mute);margin-top:10px;line-height:1.6}
+.asof b{color:var(--ink)}
+
+footer{border-top:3px solid var(--ink);padding-top:15px;font-size:12.5px;color:var(--mute)}
+footer p{margin:0 0 8px;max-width:80ch}
+
+@media(max-width:620px){
+  .row{grid-template-columns:76px 1fr;gap:7px}
+  .row .co{font-size:10.5px}
+  .scale{padding-left:83px}
+  .lrow{grid-template-columns:84px 1fr 88px}
+  .lrow .co{font-size:11px}
+  .wrap{padding:20px 13px 60px}
+  td.hide,th.hide{display:none}
+}
+@media(prefers-reduced-motion:no-preference){
+  .b,.lbar,.sb i{animation:g .7s cubic-bezier(.2,.7,.3,1) both}
+  @keyframes g{from{transform:scaleX(.001);opacity:0}to{transform:scaleX(1);opacity:1}}
+  .b.neg{transform-origin:right} .b.v,.b.pos,.lbar,.sb i{transform-origin:left}
+}
+
+/* group tags */
+.grouptag{display:inline-block;font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;background:var(--ink);color:var(--card);padding:3px 8px;margin-bottom:10px}
+.grouptag.gt-erd{background:var(--gold)}
+.grouptag.gt-cpaas{background:var(--loss)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Sector earnings review · Quarter ended 30 June 2026</div>
+  <h1>IT Midcap<br>Q1 FY27</h1>
+  <p class="dek">Eight of eleven names are down over a year. The three that are not either bought their growth or left the core business. This is not a sector recovering — it is a sector separating.</p>
+  <div class="thesis">
+    <div class="t dn"><div class="n">8/11</div><div class="l">Negative one-year return</div></div>
+    <div class="t dn"><div class="n">1.1%</div><div class="l">Coforge organic cc growth QoQ</div></div>
+    <div class="t dn"><div class="n">−63%</div><div class="l">Zensar TCV decline</div></div>
+    <div class="t up"><div class="n">$1.15bn</div><div class="l">Persistent record TCV</div></div>
+  </div>
+</header>
+
+<section>
+  <div class="grouptag">Three business models, not one sector</div>
+  <h2>Why this is split</h2>
+  <div class="rule"></div>
+  <p class="note">The eleven names here run on different cycles and cannot share a league table. Ranking them together would produce a tidy chart that means nothing.</p>
+  <div class="themes">
+    <div class="th"><div class="k">IT services — 4 names</div><ul>
+      <li>Persistent, Coforge, Zensar, Happiest Minds.</li>
+      <li>Driven by <b>BFSI and enterprise discretionary spend</b>.</li>
+      <li>Judged on EBIT margin, constant-currency growth, TCV.</li>
+    </ul></div>
+    <div class="th"><div class="k">ER&amp;D — 5 names</div><ul>
+      <li>LTTS, KPIT, Tata Elxsi, Tata Technologies, Cyient.</li>
+      <li>Driven by <b>automotive and aerospace R&amp;D budgets</b>, not IT budgets.</li>
+      <li>European OEM spending cuts are this quarter's single cause.</li>
+    </ul></div>
+    <div class="th"><div class="k">CPaaS — 2 names</div><ul>
+      <li>Tanla, Route Mobile. Added at request; not in the standard universe.</li>
+      <li>Driven by <b>A2P messaging volume and telco termination rates</b>.</li>
+      <li>Core metric is gross margin, not EBIT margin. Framework derived, not standard.</li>
+    </ul></div>
+  </div>
+</section>
+
+<section>
+  <h2>The scissor</h2>
+  <div class="rule"></div>
+  <p class="note">Revenue growth against profit growth, same scale, same axis. The two widest positive gaps — Coforge and Cyient — are both acquisitions. The widest negative gaps are the ER&amp;D names absorbing an order cut they did not choose.</p>
+  <div class="scissor">
+    <div class="legend">
+      <span><i class="sw" style="background:var(--vol)"></i>Revenue growth YoY</span>
+      <span><i class="sw" style="background:var(--gain)"></i>PAT growth</span>
+      <span><i class="sw" style="background:var(--loss)"></i>PAT decline</span>
+    </div>
+    <div id="scissor"></div>
+    <div class="scale"><span>−40%</span><span>−20%</span><span>0</span><span>+25%</span><span>+50%</span><span>+75%</span><span>+110%</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>EBIT margin — the league table</h2>
+  <div class="rule"></div>
+  <p class="note">The core unit economic for services and ER&amp;D. CPaaS names are excluded — their margins are struck on a different base and are shown separately in the KPI table.</p>
+  <div class="league" id="league"></div>
+</section>
+
+<section>
+  <h2>The pressure point: growth bought versus growth earned</h2>
+  <div class="rule"></div>
+  <div class="fuel">
+    <h2>Headline revenue growth, and what survives when you strip the acquisition</h2>
+    <p class="note">Three companies posted revenue growth well above sector rates this quarter. In two cases almost all of it was bought. Gold is what the company earned; dark is what it acquired.</p>
+    <div class="fline" id="fuel"></div>
+    <div class="warn">
+      <div><strong>1.1%</strong>Coforge organic constant-currency growth QoQ, against a 49.2% headline. Encora added $100.7m in two months.</div>
+      <div><strong>−0.9%</strong>Cyient core DET revenue in constant currency, against a 21.3% headline. Kinetic Technologies contributed ₹98.4cr.</div>
+      <div><strong>₹12,089cr</strong>Goodwill created by the Encora deal, funded with $550m of dollar borrowings. The growth is real; so is the leverage.</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Company by company</h2>
+  <div class="rule"></div>
+  <p class="note">Grouped by business model. Badge scores Q1 against prior guidance and trajectory.</p>
+  <div class="grid" id="cards"></div>
+</section>
+
+<section>
+  <h2>KPI comparison</h2>
+  <div class="rule"></div>
+  <p class="note">Sector KPIs side by side. Constant-currency growth is the honest growth number in this sector — reported rupee growth carries both currency and acquisition.</p>
+  <div class="tw">
+  <table>
+    <thead><tr>
+      <th>Company</th><th class="r">Group</th><th class="r">EBIT margin</th><th class="r">Rev growth</th>
+      <th class="r">cc growth</th><th class="r">PAT growth</th><th class="r">Deal wins / TCV</th><th class="r">Balance sheet</th>
+    </tr></thead>
+    <tbody id="kpi"></tbody>
+  </table>
+  </div>
+  <p class="asof">CPaaS margins are gross or EBITDA margins, not EBIT, and are labelled in the row. Coforge's 16.0% is consolidated; its standalone organic figure was 16.7%. Cyient's 9.7% is group EBIT including semiconductors and design-led manufacturing.</p>
+</section>
+
+<section>
+  <h2>What management said</h2>
+  <div class="rule"></div>
+  <div class="themes">
+    <div class="th"><div class="k">Demand — services</div><ul>
+      <li>Persistent: <b>25th consecutive</b> quarter of growth, record TCV.</li>
+      <li>Coforge claims it will be <b>industry growth leader</b> for a third year.</li>
+      <li>Happiest Minds reaffirmed <b>12.5%</b> FY27 growth, pipeline up 20% QoQ.</li>
+      <li>Nobody in services described a demand problem.</li>
+    </ul></div>
+    <div class="th"><div class="k">Demand — ER&amp;D</div><ul>
+      <li>KPIT named the cause precisely: <b>two large customers</b>, one German, one Japanese, cutting engineering spend.</li>
+      <li>Its 23-quarter growth streak <b>ended</b>.</li>
+      <li>Cyient's mid-single-digit FY27 target now looks difficult after a soft Q1.</li>
+      <li>Tata Technologies is the dissenter, guiding <b>double-digit organic</b> growth for FY27.</li>
+    </ul></div>
+    <div class="th"><div class="k">Margin guidance</div><ul>
+      <li>Coforge FY27: <b>15.5%+</b> consolidated EBIT, 16.5–17% standalone. Q1 already at 16.0%.</li>
+      <li>KPIT FY27 EBITDA <b>20.5–21.2%</b>; Q1 came in at 16.2%.</li>
+      <li>Tata Elxsi targets EBITDA back to <b>27–28%</b> with utilisation toward 80%. Q1 was 21.2%.</li>
+      <li>Cyient pushed its 15% EBIT target from Q4 FY27 to <b>H1 FY28</b>.</li>
+    </ul></div>
+    <div class="th"><div class="k">The AI claim</div><ul>
+      <li>Coforge attributes margin expansion to <b>AI in delivery</b>; 86% of revenue is AI-led engineering, data and cloud.</li>
+      <li>KPIT expects <b>AI-led productivity</b> to lift margins each quarter from here.</li>
+      <li>Happiest Minds calls AI the largest value-creation opportunity in the industry's history.</li>
+      <li>Every company claims AI benefit. Only Coforge and LTTS show margin expansion to match.</li>
+    </ul></div>
+    <div class="th"><div class="k">M&amp;A — the sector's real story</div><ul>
+      <li>Coforge closed <b>Encora</b>, 23 April, consolidated from 1 May.</li>
+      <li>Persistent signed for <b>Nagarro</b>, expected to close Q4 CY26 or Q1 CY27.</li>
+      <li>Cyient closed <b>Kinetic</b>, with <b>TAO Digital</b> ($218m) pending August.</li>
+      <li>KPIT authorised <b>$60–120m</b> for Cymotive by mid-2029.</li>
+    </ul></div>
+    <div class="th"><div class="k">CPaaS</div><ul>
+      <li>Tanla: gross profit and EBITDA grew faster than revenue — the right shape.</li>
+      <li>Tanla holds roughly <b>30%</b> of the Indian CPaaS market; top 100 customers are over 50% of revenue.</li>
+      <li>Route Mobile processed <b>45.8bn</b> billable transactions but margin fell to 9.5% from 11.9%.</li>
+      <li>Route Mobile flagged a <b>security incident</b> at its Masivian unit.</li>
+    </ul></div>
+  </div>
+</section>
+
+<section>
+  <h2>Red flags</h2>
+  <div class="rule"></div>
+  <p class="note">Ranked by effect on position sizing, not by how alarming they sound.</p>
+  <div class="rf">
+    <div class="rfg">
+      <div class="rfh"><i class="sev hi"></i><span>Act on these</span></div>
+      <div class="rfr"><b>Tanla</b><div>The board resolved on 14 July 2026 to put all future quarterly earnings calls on hold indefinitely. A profitable company withdrawing from analyst scrutiny is a governance flag on its own terms, whatever the numbers say. Separately contesting a ₹46.9cr tax demand on the Karix Mobile acquisition, with ₹8.9cr paid under protest.</div></div>
+      <div class="rfr"><b>Zensar</b><div>TCV fell 63% while revenue held. New deal wins are the leading indicator; revenue is the lagging one. This is the sector's clearest forward warning and it is not yet in the reported numbers.</div></div>
+      <div class="rfr"><b>KPIT</b><div>Pre-announced a miss on 30 June, ending a 23-quarter growth streak. Constant-currency growth of 0.1% YoY. Down 50% over one year and 49% year-to-date. Concentration in two large customers is the cause and has not been fixed.</div></div>
+    </div>
+    <div class="rfg">
+      <div class="rfh"><i class="sev md"></i><span>Monitor next quarter</span></div>
+      <div class="rfr"><b>Coforge</b><div>₹12,089cr of goodwill from Encora, purchase price allocation still provisional, funded by $550m of dollar debt. Organic growth of 1.1% is what the business does without acquisitions.</div></div>
+      <div class="rfr"><b>Cyient</b><div>Core DET revenue fell 0.9% in constant currency while the headline showed 21.3%. Margin target slipped two quarters. TAO Digital adds integration risk on top of Kinetic.</div></div>
+      <div class="rfr"><b>Tata Elxsi</b><div>EBIT margin fell 346bps sequentially. Record revenue met a falling share price. Getting EBITDA from 21.2% back to the 27–28% target requires utilisation moving to 80%.</div></div>
+      <div class="rfr"><b>Route Mobile</b><div>Adjusted EBITDA margin fell to 9.5% from 11.9%. Security incident at Masivian. Down 39.9% over one year.</div></div>
+    </div>
+    <div class="rfg">
+      <div class="rfh"><i class="sev lo"></i><span>Note and move on</span></div>
+      <div class="rfr"><b>Persistent</b><div>PAT fell 8.7% sequentially on forex losses even as EBIT rose 4.2%. Operationally clean; the Nagarro close is the thing to track.</div></div>
+      <div class="rfr"><b>Happiest Minds</b><div>Rupee revenue grew 14.3% but constant-currency growth was 6.7%. Roughly half the headline is currency.</div></div>
+      <div class="rfr"><b>Tata Technologies</b><div>PAT margin fell to 10.9% from 13.7% despite 33.8% revenue growth. Attrition around 16%. Best return in the group, so the market is paying for the growth already.</div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Walk the talk</h2>
+  <div class="rule"></div>
+  <p class="note">What was guided previously, against Q1 FY27 delivery.</p>
+  <table>
+    <thead><tr><th>Company</th><th>Promised</th><th class="hide">Delivered</th><th>Verdict</th></tr></thead>
+    <tbody id="score"></tbody>
+  </table>
+</section>
+
+<section>
+  <h2>Sector synthesis</h2>
+  <div class="rule"></div>
+  <p class="note">The consensus entering FY27 was that Indian IT was recovering and AI would lift margins. Scored against the quarter.</p>
+  <div class="indra">
+    <div class="vs"><em class="p">Partly</em><div><b>That Indian IT is recovering.</b> True in services — Persistent, Coforge and Happiest Minds all grew. Not true in ER&amp;D, where KPIT went backwards and Cyient's core shrank. The recovery stopped at the enterprise door and did not reach engineering services.</div></div>
+    <div class="vs"><em class="n">Wrong</em><div><b>That AI is lifting margins broadly.</b> Every management claimed AI benefit. Only Coforge (+414bps EBIT YoY) and LTTS (+200bps) show it in the numbers. Tata Elxsi fell 346bps and KPIT's EBIT is 12.3%. The claim is universal; the evidence is not.</div></div>
+    <div class="vs"><em class="y">Right</em><div><b>That scale would separate winners from losers.</b> The two names buying scale — Coforge and Persistent — are two of the three positive one-year returns. The sub-scale names are the worst performers.</div></div>
+    <div class="vs"><em class="n">Wrong</em><div><b>That headline growth means anything this quarter.</b> Coforge grew 49% and Cyient 21%, and both were acquisitions. Organic figures were 1.1% and −0.9%. Reading reported growth without stripping M&amp;A produces the opposite conclusion to the correct one.</div></div>
+    <div class="vs"><em class="y">Right</em><div><b>That European automotive was the risk to watch.</b> KPIT named two OEMs, one German and one Japanese. Tata Elxsi's margin fell. Prabhudas Lilladher cut FY28 growth forecasts on a slower European auto recovery. The single largest driver of dispersion this quarter was not AI — it was German car companies cutting R&amp;D.</div></div>
+  </div>
+</section>
+
+<section>
+  <h2>The call</h2>
+  <div class="rule"></div>
+  <div class="calls">
+    <div class="call buy">
+      <div class="k">Own now</div>
+      <h3>Persistent Systems</h3>
+      <p>The only company growing organically at scale without buying it. Revenue up 16.1% to $452.4m, 25 consecutive growth quarters, record $1.15bn TCV including a single deal above $650m, EBIT margin 16.0%. The sequential PAT dip is forex, not operations — EBIT rose 4.2% in the same quarter. It is up only 4.6% over a year, which for this delivery is the most reasonable price in the group.</p>
+    </div>
+    <div class="call wait">
+      <div class="k">Wait for organic proof</div>
+      <h3>Coforge · LTTS</h3>
+      <p>Coforge has the best order book in the sector at $2.23bn and margin genuinely ahead of guidance, but 1.1% organic growth and ₹12,089cr of provisional goodwill mean the thesis rests on Encora synergies that cannot yet be verified. Wait for a quarter where organic and reported converge. LTTS is the only ER&amp;D name expanding margin, but it is still hostage to the same European auto cycle that broke KPIT.</p>
+    </div>
+    <div class="call avoid">
+      <div class="k">Stay out</div>
+      <h3>KPIT · Zensar · Tanla</h3>
+      <p>KPIT's problem is customer concentration in a cutting industry, and nothing in the quarter fixed it. Zensar's 63% TCV decline is a forward warning that has not yet reached revenue. Tanla's numbers are good and its board has stopped taking questions — that combination is not one to own through an information vacuum.</p>
+    </div>
+  </div>
+  <div class="trigs">
+    <div class="tg tg-up"><div class="k">What would make us more positive</div><ul>
+      <li>Coforge reporting a quarter where <b>organic cc growth exceeds 4%</b>, confirming Encora is additive rather than substitutive.</li>
+      <li>Any sign of <b>European OEM engineering budgets stabilising</b> — this unlocks five of the eleven names at once.</li>
+      <li>Zensar's <b>TCV recovering</b> toward prior-year levels in Q2.</li>
+      <li>Tata Elxsi utilisation moving toward <b>80%</b>, the condition management set for its own margin recovery.</li>
+    </ul></div>
+    <div class="tg tg-dn"><div class="k">What would make us cut</div><ul>
+      <li>A <b>second consecutive</b> quarter of falling TCV at any services name. One quarter is noise; two is a trend that reaches revenue in three.</li>
+      <li>Coforge's goodwill moving from provisional to a <b>write-down</b>, or dollar debt cost rising.</li>
+      <li>KPIT losing a <b>third</b> large customer, which would make the concentration structural rather than cyclical.</li>
+      <li>Persistent's TCV falling back toward the $600m range seen in earlier quarters.</li>
+    </ul></div>
+  </div>
+</section>
+
+<section>
+  <h2>Price and returns</h2>
+  <div class="rule"></div>
+  <p class="note">Results date against market performance, sorted by one-year return. Eight of eleven are negative. The three positives are Tata Technologies, Coforge and Persistent — two of which bought their growth.</p>
+  <div class="tw">
+  <table>
+    <thead><tr>
+      <th>Company</th><th>Ticker</th><th>Results date</th><th class="r">CMP (₹)</th>
+      <th class="r">1 year</th><th class="r">6 months</th><th class="r">3 months</th><th class="r">MTD</th>
+    </tr></thead>
+    <tbody id="ret"></tbody>
+  </table>
+  </div>
+  <p class="asof">
+    <b>Prices as on 12 August 2026 close. Source: Kite Connect.</b> CMP is the last traded price; every return is computed against the daily close on the anchor date, from the same feed.<br>
+    <b>Anchors:</b> 1Y = 12 Aug 2025 · 6M = 12 Feb 2026 · 3M = 12 May 2026 · MTD = 31 Jul 2026 close.<br>
+    <b>No P/E or market cap.</b> Kite Connect carries no fundamentals — it has neither an EPS nor a shares-outstanding field. Valuation multiples are not in this report and should not be inferred from it.
+  </p>
+</section>
+
+<section>
+  <h2>Caveats</h2>
+  <div class="rule"></div>
+  <ul class="cav">
+    <li><b>This is three sectors, not one.</b> IT services, ER&amp;D and CPaaS run on different demand cycles and are analysed on different metrics. No ranking spans all eleven names, and the EBIT league table deliberately excludes the CPaaS pair.</li>
+    <li><b>The CPaaS framework was derived, not standard.</b> The skill's metric map has no CPaaS entry. Gross margin and messaging volume were chosen as the core metrics because that is what the businesses earn on. Treat that framing as constructed for this report.</li>
+    <li><b>Tanla and Route Mobile were added at request and are not IT midcaps.</b> They are included because they were asked for, and separated because merging them would have been misleading.</li>
+    <li><b>Reported growth is not comparable across this set.</b> Coforge consolidates Encora from 1 May; Cyient consolidates Kinetic from 8 April; Tata Technologies' 33.8% includes acquisition. Constant-currency organic figures are the comparable ones and are shown wherever disclosed.</li>
+    <li><b>Some EBIT margins are on different bases.</b> Coforge 16.0% consolidated versus 16.7% standalone organic. Cyient 9.7% is group including semiconductors. KPIT's 12.3% EBIT sits against a 16.2% EBITDA. Do not rank on small differences.</li>
+    <li><b>Tata Elxsi's margin decline is reported two ways.</b> A 346bps sequential EBIT fall per broker commentary, and EBITDA at 21.2% against 22.27% a year earlier per the company. Both are shown; they measure different things.</li>
+    <li><b>Persistent, Coforge and KPIT are well covered here. Zensar, Route Mobile and Happiest Minds are thinner.</b> Zensar's EBIT margin and Route Mobile's segment detail were not located at the granularity used for the larger names.</li>
+    <li><b>Price data is exchange-sourced; earnings data is not.</b> Returns come from Kite on a single date. Earnings figures come from company releases and financial media via targeted search, not a full multi-source sweep.</li>
+    <li><b>Forward statements are projections.</b> FY27 margin targets, growth guidance, deal-close timing and recovery expectations are management views, not outcomes.</li>
+  </ul>
+</section>
+
+<footer>
+  <p><b>Universe:</b> 11 companies selected across IT services, ER&amp;D and CPaaS, quarter ended 30 June 2026. Sources: company releases and investor presentations, NSE/BSE filings, Business Standard, EquityBulls, Investing.com, Quartr, Prabhudas Lilladher and Kotak commentary as reported. Prices from Kite Connect.</p>
+</footer>
+
+</div>
+<script>
+/* SCISSOR: [company, revenue growth % YoY, PAT growth % YoY] */
+const SC=[
+ ["Coforge",49.2,109.8],["Tata Technologies",33.8,6.2],["Persistent",29.0,13.7],
+ ["Cyient",21.3,-30.9],["Tanla",17.8,20.1],["Tata Elxsi",14.5,18.2],
+ ["Happiest Minds",14.3,18.3],["LTTS",11.5,8.0],["Route Mobile",9.6,-15.0],
+ ["Zensar",8.9,-12.8],["KPIT",8.9,-32.3]
+];
+const MIN=-40,MAX=110,SPAN=MAX-MIN,Z=(0-MIN)/SPAN*100;
+document.getElementById("scissor").innerHTML=SC.map(([n,v,e],i)=>{
+ const bar=(val,cls)=>{const w=Math.abs(val)/SPAN*100;const l=val>=0?Z:Z-w;
+  return `<i class="b ${cls} ${val>=0?'pos':'neg'}" style="left:${l}%;width:${w}%;animation-delay:${i*45}ms"><span>${val>0?'+':''}${val}%</span></i>`;};
+ return `<div class="row"><div class="co">${n}</div><div class="track"><i class="axis" style="left:${Z}%"></i>${bar(v,'v')}${bar(e,'e')}</div></div>`;
+}).join("");
+
+/* LEAGUE: EBIT margin % */
+const LG=[["Persistent",16.0,"+50bps YoY"],["Coforge",16.0,"+414bps · consol"],
+ ["LTTS",15.7,"+200bps YoY"],["Tata Technologies",14.3,"−30bps YoY"],
+ ["KPIT",12.3,"EBITDA 16.2%"],["Cyient",9.7,"+19bps · group"],
+ ["Tata Elxsi",0,"EBITDA 21.2% · EBIT n/d"],["Zensar",0,"EBITDA 14.6% · EBIT n/d"],
+ ["Happiest Minds",0,"operating 17.5%"]];
+const LMAX=18;
+document.getElementById("league").innerHTML=LG.map(([n,v,d],i)=>{
+ const cls=v===0?"na":v>=15?"":v>=12?"mid":"low";
+ return `<div class="lrow"><div class="co">${n}</div>
+ <div><i class="lbar ${cls}" style="width:${v?v/LMAX*100:2}%;animation-delay:${i*40}ms"></i></div>
+ <div><div class="v">${v?v.toFixed(1)+'%':'n/d'}</div><div class="d">${d}</div></div></div>`;
+}).join("");
+
+/* PRESSURE POINT: [company, label, headline %, organic %] */
+const FU=[["Coforge","49.2% headline · 1.1% organic cc",49.2,1.1],
+ ["Cyient","21.3% headline · −0.9% core DET cc",21.3,0],
+ ["Persistent","16.1% headline · 4.1% cc QoQ, no M&A",16.1,16.1]];
+document.getElementById("fuel").innerHTML=FU.map(([n,d,head,org],i)=>{
+ const h=head/50*104, ho=org/50*104;
+ return `<div class="fp"><b>${head}%</b>`
+  +`<i style="height:${h}px;background:linear-gradient(to top, var(--gold) ${Math.max(ho/h*100,2)}%, #5A5348 ${Math.max(ho/h*100,2)}%);animation-delay:${i*120}ms"></i>`
+  +`<em>${n}<br>${d}</em></div>`;
+}).join("");
+
+/* CARDS */
+const CO=[
+ {n:"Persistent Systems",t:"PERSISTENT · Services",b:"del",bl:"Delivered",
+  k:[["16.0%","EBIT margin",1],["+16.1%","USD revenue",1],["$1.15bn","TCV, record",1],["+4.6%","1Y return",0]],
+  p:["The only name growing at scale organically rather than by acquisition.","25th consecutive quarter of revenue growth; TCV nearly doubled sequentially.","One deal alone carried $650m+ TCV over 6.5 years.","Sequential PAT fell 8.7% on forex while EBIT rose 4.2% — the operations are clean."],
+  f:[["Nagarro close pending",""],["Forex drag on reported PAT",""]]},
+
+ {n:"Coforge",t:"COFORGE · Services",b:"part",bl:"Partial",
+  k:[["16.0%","EBIT margin",1],["+49.2%","Revenue",1],["1.1%","Organic cc QoQ",-1],["$2.23bn","Order book",1]],
+  p:["Best order book in the sector, up 44% YoY, and margin ahead of its own guidance.","But 49% headline growth is Encora — organic constant currency was 1.1%.","₹12,089cr goodwill, provisional, funded by $550m of dollar debt.","Attrition eased to 10.4%. Integration described as operationally complete."],
+  f:[["Provisional goodwill ₹12,089cr",""],["Dollar debt $550m",""]]},
+
+ {n:"Zensar Technologies",t:"ZENSARTECH · Services",b:"miss",bl:"Missed",
+  k:[["−63%","TCV",-1],["+8.9%","Revenue",1],["−12.8%","PAT QoQ",-1],["−37.4%","1Y return",-1]],
+  p:["Revenue held up and profit fell — but the number that matters is TCV, down 63%.","New deal wins lead revenue by two to three quarters. This has not hit the P&L yet.","BFSI grew; TMT, HLS and MCS all declined.","Management attributed margin pressure to specific temporary costs. Q3 will test that."],
+  f:[["TCV down 63%",""],["Three of four verticals declining",""]]},
+
+ {n:"Happiest Minds",t:"HAPPSTMNDS · Services",b:"part",bl:"Partial",
+  k:[["17.5%","Operating margin",1],["+14.3%","Revenue INR",1],["+6.7%","cc growth YoY",0],["94.4%","Repeat business",1]],
+  p:["Rupee growth of 14.3% becomes 6.7% in constant currency — half the headline is currency.","Reaffirmed 12.5% FY27 growth guidance with pipeline up 20% sequentially.","Adjusted PAT up 14.7%; margins held.","Down 32.7% over a year despite consistent delivery — the market is repricing small-cap IT, not this company specifically."],
+  f:[["Half of growth is currency",""]]},
+
+ {n:"L&T Technology Services",t:"LTTS · ER&D",b:"del",bl:"Delivered",
+  k:[["15.7%","EBIT margin",1],["+200bps","Margin YoY",1],["+11.5%","Revenue INR",1],["+1.5%","cc QoQ",1]],
+  p:["The only ER&D name to expand margin this quarter.","Sustainability segment up 4.3%, mobility recovering at 2.3%.","Large deals: one above $30m, one above $20m, four above $10m.","Stock rose 6.7% on results — the sector's only positive reaction."],
+  f:[["Same European auto exposure as peers",""],["−14.6% over one year",""]]},
+
+ {n:"KPIT Technologies",t:"KPITTECH · ER&D",b:"miss",bl:"Missed",
+  k:[["12.3%","EBIT margin",-1],["+0.1%","cc growth YoY",-1],["−32.3%","PAT YoY",-1],["−50.0%","1Y return",-1]],
+  p:["Worst performer in the group on both earnings and price.","Pre-announced the miss on 30 June; a 23-quarter growth streak ended.","Cause named precisely: two large customers, one German, one Japanese, cutting engineering spend.","$257m of deal wins and ₹900cr net cash are the offsetting facts."],
+  f:[["Customer concentration unresolved",""],["Guidance 20.5–21.2% vs 16.2% actual",""],["Down 49% YTD",""]]},
+
+ {n:"Tata Elxsi",t:"TATAELXSI · ER&D",b:"miss",bl:"Missed",
+  k:[["21.2%","EBITDA margin",-1],["−346bps","EBIT QoQ",-1],["+14.5%","Revenue",1],["−33.9%","1Y return",-1]],
+  p:["Crossed ₹1,000cr revenue for the first time and the stock fell 3.3%.","EBITDA margin 21.2% against 22.27% a year earlier; EBIT down 346bps sequentially.","Target is 27–28% EBITDA with utilisation toward 80% — a long way from here.","Kotak reaffirmed Sell with a ₹3,000 target and cut FY27–29 earnings 10–14%."],
+  f:[["Margin far below own target",""],["Weak auto and medical devices",""]]},
+
+ {n:"Tata Technologies",t:"TATATECH · ER&D",b:"part",bl:"Partial",
+  k:[["14.3%","EBIT margin",0],["+33.8%","Revenue",1],["10.9%","PAT margin",-1],["+27.7%","1Y return",1]],
+  p:["Best one-year return in the group and the only ER&D name guiding double-digit organic growth.","Revenue up 33.8%; services up 34.6%; a $100m Tenneco engagement won.","But PAT margin fell to 10.9% from 13.7% — growth is not converting.","Diversification working: non-anchor automotive up 56.3% YoY, aerospace up 38.1%."],
+  f:[["PAT margin down 280bps",""],["Attrition ~16%",""]]},
+
+ {n:"Cyient",t:"CYIENT · ER&D",b:"miss",bl:"Missed",
+  k:[["9.7%","Group EBIT",-1],["+21.3%","Revenue",1],["−0.9%","Core DET cc",-1],["−30.9%","PAT",-1]],
+  p:["Headline growth of 21.3% is Kinetic Technologies; the core DET business shrank 0.9% in constant currency.","15% EBIT margin target pushed from Q4 FY27 to H1 FY28.","TAO Digital ($218m) pending, adding $40–50m annual revenue and more integration risk.","Completed a buyback at ₹1,125; promoters did not participate."],
+  f:[["Core business shrinking",""],["Margin target slipped two quarters",""]]},
+
+ {n:"Tanla Platforms",t:"TANLA · CPaaS",b:"part",bl:"Partial",
+  k:[["26.6%","Gross margin",1],["+17.8%","Revenue",1],["+25.1%","Gross profit",1],["89%","FCF / PAT",1]],
+  p:["Numbers are the right shape: gross profit and EBITDA both grew faster than revenue.","Roughly 30% of the Indian CPaaS market; top 100 customers are over half of revenue.","Board suspended all future quarterly earnings calls from 14 July, indefinitely.","Contesting a ₹46.9cr tax demand from the Karix Mobile acquisition."],
+  f:[["Earnings calls suspended",""],["Tax litigation ₹46.9cr",""],["Customer concentration",""]]},
+
+ {n:"Route Mobile",t:"ROUTE · CPaaS",b:"miss",bl:"Missed",
+  k:[["9.5%","Adj EBITDA margin",-1],["+9.6%","Revenue",1],["−240bps","Margin QoQ",-1],["−39.9%","1Y return",-1]],
+  p:["Returned to revenue growth but margin compressed from 11.9% to 9.5%.","Processed 45.8bn billable transactions; cash position ₹13,452m.","Security incident at Masivian subsidiary flagged as an operational risk.","Beat estimates on both revenue and earnings, and the stock still fell 6.1%."],
+  f:[["Margin compression",""],["Security incident",""]]}
+];
+document.getElementById("cards").innerHTML=CO.map(c=>`
+ <article class="c">
+  <div class="chead"><div><h3>${c.n}</h3><div class="tick">${c.t}</div></div><div class="badge ${c.b}">${c.bl}</div></div>
+  <div class="tiles">${c.k.map(([n,l,s])=>`<div class="tile"><div class="n ${s===1?'up':s===-1?'dn':''}">${n}</div><div class="l">${l}</div></div>`).join("")}</div>
+  <ul>${c.p.map(x=>`<li>${x}</li>`).join("")}</ul>
+  <div class="flags">${c.f.map(([t,k])=>`<span class="flag ${k}">${t}</span>`).join("")}</div>
+ </article>`).join("");
+
+/* KPI TABLE */
+const KPI=[
+ ["Persistent","Services","16.0%","+16.1%","+4.1% QoQ","+13.7%","$1,146m TCV","net cash"],
+ ["Coforge","Services","16.0%","+49.2%","+1.1% QoQ org","+109.8%","$691m intake","$550m debt"],
+ ["Zensar","Services","n/d","+8.9%","+1.1% QoQ","−12.8% QoQ","TCV −63%","net cash"],
+ ["Happiest Minds","Services","17.5% op","+14.3%","+6.7% YoY","+18.3%","6 new clients","net cash"],
+ ["LTTS","ER&D","15.7%","+11.5%","+1.5% QoQ","+8.0%","1x $30m+, 4x $10m+","net cash"],
+ ["KPIT","ER&D","12.3%","+8.9%","+0.1% YoY","−32.3%","$257m","₹900cr net cash"],
+ ["Tata Elxsi","ER&D","n/d","+14.5%","n/d","+18.2%","n/d","net cash"],
+ ["Tata Technologies","ER&D","14.3%","+33.8%","+4.3% QoQ","+6.2%","$100m Tenneco","₹880cr net cash"],
+ ["Cyient","ER&D","9.7% grp","+21.3%","−0.9% DET","−30.9%","record intake","buyback done"],
+ ["Tanla","CPaaS","26.6% GM","+17.8%","n/a","+20.1%","3,200+ customers","FCF 89% of PAT"],
+ ["Route Mobile","CPaaS","9.5% EBITDA","+9.6%","n/a","n/d","45.8bn txns","₹13,452m cash"]
+];
+document.getElementById("kpi").innerHTML=KPI.map(r=>
+ `<tr><td class="co">${r[0]}</td>`+r.slice(1).map(c=>`<td class="kpi">${c}</td>`).join("")+`</tr>`).join("");
+
+/* RETURNS — Kite Connect, 12 Aug 2026 close */
+const RET=[
+ ["Tata Technologies","TATATECH","17 Jul 2026","842.10","+27.7%","+37.0%","+36.7%","+12.6%"],
+ ["Coforge","COFORGE","28 Jul 2026","1,801.50","+10.8%","+26.7%","+36.4%","+4.7%"],
+ ["Persistent Systems","PERSISTENT","2 Aug 2026","5,474.00","+4.6%","+0.4%","+12.2%","−1.4%"],
+ ["Tanla Platforms","TANLA","24 Jul 2026","594.40","−2.7%","+23.7%","+13.7%","+1.3%"],
+ ["LTTS","LTTS","14 Jul 2026","3,578.90","−14.6%","−3.4%","−0.7%","+0.7%"],
+ ["Cyient","CYIENT","23 Jul 2026","840.50","−28.2%","−17.4%","−7.0%","−0.8%"],
+ ["Happiest Minds","HAPPSTMNDS","27 Jul 2026","390.00","−32.7%","+2.4%","+8.3%","+3.4%"],
+ ["Tata Elxsi","TATAELXSI","14 Jul 2026","3,711.90","−33.9%","−25.4%","−9.1%","+1.1%"],
+ ["Zensar Technologies","ZENSARTECH","24 Jul 2026","494.45","−37.4%","−12.2%","−0.4%","−2.7%"],
+ ["Route Mobile","ROUTE","24 Jul 2026","518.55","−39.9%","−8.7%","+1.7%","−4.0%"],
+ ["KPIT Technologies","KPITTECH","29 Jul 2026","609.20","−50.0%","−31.7%","−14.4%","+1.8%"]
+];
+document.getElementById("ret").innerHTML=RET.map(r=>{
+ const cell=v=>{const cls=v.startsWith("+")?"up":(v.startsWith("-")||v.startsWith("\u2212"))?"dn":"";
+  return `<td class="num ${cls}">${v}</td>`;};
+ return `<tr><td class="co">${r[0]}</td><td class="tick">${r[1]}</td><td>${r[2]}</td>`
+  +`<td class="num">${r[3]}</td>`+r.slice(4).map(cell).join("")+`</tr>`;
+}).join("");
+
+/* SCORECARD */
+const SCORE=[
+ ["Persistent","Sustained growth, margin around 16%, large-deal momentum","16.1% growth, EBIT 16.0%, record $1.15bn TCV","del","Delivered"],
+ ["LTTS","Lakshya 31 margin improvement","EBIT 15.7%, +200bps YoY. Only ER&D margin expansion","del","Delivered"],
+ ["Coforge","FY27 EBIT 15.5%+ consolidated; Encora integration","16.0% delivered, integration complete. Organic growth 1.1%","part","Split"],
+ ["Happiest Minds","12.5% FY27 revenue growth","14.3% in rupees, 6.7% constant currency","part","Split"],
+ ["Tata Technologies","Double-digit organic growth FY27","33.8% growth, but PAT margin down 280bps","part","Split"],
+ ["Tata Elxsi","EBITDA back to 27–28% on 80% utilisation","21.2%. EBIT down 346bps sequentially","miss","Missed"],
+ ["Cyient","15% EBIT margin by Q4 FY27; mid-single-digit growth","9.7%, target moved to H1 FY28. Core DET −0.9%","miss","Missed"],
+ ["KPIT","FY27 EBITDA 20.5–21.2%","16.2%. Growth streak ended, PAT −32%","miss","Missed"],
+ ["Zensar","Growth on the $210m framework deal","Revenue +8.9%, but TCV −63%","miss","Missed"],
+ ["Route Mobile","Margin recovery","Adjusted EBITDA margin fell to 9.5% from 11.9%","miss","Missed"],
+ ["Tanla","Profitable growth converting to cash","Delivered: GP +25.1%, FCF 89% of PAT. Then suspended earnings calls","part","Split"]
+];
+document.getElementById("score").innerHTML=SCORE.map(([c,p,d,k,v])=>
+ `<tr><td class="co">${c}</td><td>${p}</td><td class="hide">${d}</td><td class="vd ${k}">${v}</td></tr>`).join("");
+</script>
+</body>
+</html>
