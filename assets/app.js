@@ -356,11 +356,8 @@ function viewSectorDoc(id) {
 function viewArchive() {
   const a = state.archive;
   const kinds = [['all', 'All'], ['daily', 'Daily'], ['expiry', 'Expiry'], ['weekly', 'Weekly'], ['fo', 'F&O']];
-  const q = a.q.trim().toLowerCase();
-  const filtered = state.reports.filter((r) =>
-    (a.kind === 'all' || r.k === a.kind) &&
-    (!q || (r.headline + ' ' + r.date_long + ' ' + r.kind + ' ' + (r.tags || []).join(' ')).toLowerCase().includes(q))
-  );
+  const tokens = tokenize(a.q.trim());
+  const filtered = state.reports.filter((r) => (a.kind === 'all' || r.k === a.kind) && reportMatches(r, tokens));
 
   const controls = el('div', { class: 'archive-controls' }, [
     el('div', { class: 'filter-box' }, [
@@ -380,7 +377,7 @@ function viewArchive() {
   ]);
 
   const body = el('div', { id: 'arc-body' });
-  fillArchiveBody(body, filtered, a.layout);
+  fillArchiveBody(body, filtered, a.layout, tokens);
 
   return el('main', { class: 'main' }, [
     pageHead('Every report published', 'Archive', [
@@ -394,45 +391,64 @@ function segBtn(label, on, onclick) { return el('button', { class: on ? 'on' : '
 
 function rerenderArchiveBody() {
   const a = state.archive;
-  const q = a.q.trim().toLowerCase();
-  const filtered = state.reports.filter((r) =>
-    (a.kind === 'all' || r.k === a.kind) &&
-    (!q || (r.headline + ' ' + r.date_long + ' ' + r.kind + ' ' + (r.tags || []).join(' ')).toLowerCase().includes(q))
-  );
+  const tokens = tokenize(a.q.trim());
+  const filtered = state.reports.filter((r) => (a.kind === 'all' || r.k === a.kind) && reportMatches(r, tokens));
   const body = $('#arc-body');
-  if (body) { body.textContent = ''; fillArchiveBody(body, filtered, a.layout); }
+  if (body) { body.textContent = ''; fillArchiveBody(body, filtered, a.layout, tokens); }
 }
 
-function fillArchiveBody(body, list, layout) {
+function fillArchiveBody(body, list, layout, tokens) {
+  tokens = tokens || [];
+  // when a match came only from a mentioned stock (not headline/tags), say so
+  const mentionHit = (r) => {
+    if (!tokens.length) return null;
+    const hit = (r.mentions || []).filter((m) => tokens.some((t) => m.toLowerCase().includes(t)));
+    return hit.length ? hit.slice(0, 3).join(', ') : null;
+  };
   if (!list.length) { body.append(el('div', { class: 'state-msg', text: 'Nothing matches that filter.' })); return; }
   if (layout === 'cards') {
-    body.append(el('div', { class: 'arc-cards' }, list.map((r) =>
-      el('div', { class: 'arc-card', onclick: () => go('#/report/' + r.id) }, [
+    body.append(el('div', { class: 'arc-cards' }, list.map((r) => {
+      const mh = mentionHit(r);
+      return el('div', { class: 'arc-card', onclick: () => go('#/report/' + r.id) }, [
         el('div', { class: 'ac-head tint-' + r.k }, [
           el('span', { class: 'ac-kind k-' + r.k, text: r.kind }),
           el('span', { class: 'ac-date', text: r.date_short }),
         ]),
         el('div', { class: 'ac-body' }, [
-          el('div', { class: 'ac-hl', text: r.headline }),
-          el('div', { class: 'ac-tags' }, (r.tags || []).slice(0, 4).map((t) => el('span', { class: 'ac-tag', text: t }))),
+          el('div', { class: 'ac-hl' }, [markMatches(r.headline, tokens)]),
+          el('div', { class: 'ac-tags' }, (r.tags || []).slice(0, 4).map((t) => el('span', { class: 'ac-tag' }, [markMatches(t, tokens)]))),
+          mh ? el('div', { class: 'ac-mention' }, [markMatches('Mentions ' + mh, tokens)]) : null,
         ]),
-      ])
-    )));
+      ]);
+    })));
   } else {
-    body.append(el('div', { class: 'arc-list' }, list.map((r) =>
-      el('div', { class: 'arc-row', onclick: () => go('#/report/' + r.id) }, [
+    body.append(el('div', { class: 'arc-list' }, list.map((r) => {
+      const mh = mentionHit(r);
+      return el('div', { class: 'arc-row', onclick: () => go('#/report/' + r.id) }, [
         el('span', { class: 'rd', text: r.date_short }),
         el('span', { class: 'rk k-' + r.k, text: r.kind }),
-        el('span', { class: 'rt', text: r.headline }),
-        el('span', { class: 'rtag', text: (r.tags || [])[0] || '' }),
+        el('span', { class: 'rt' }, [markMatches(r.headline, tokens)]),
+        el('span', { class: 'rtag' }, [markMatches(mh ? 'Mentions ' + mh : ((r.tags || [])[0] || ''), tokens)]),
         el('span', { class: 'ra', text: '↗' }),
-      ])
-    )));
+      ]);
+    })));
   }
   body.append(el('div', { class: 'arc-count', text: list.length + ' of ' + state.reports.length + ' reports · GitHub Pages' }));
 }
 
 /* ---------- search ---------- */
+/* Single source of truth for what a report / sector is searchable by — used by
+ * BOTH the global ⌘K overlay and the Archive page's own filter box, so a stock
+ * ticker or a multi-word query behaves identically wherever you type it. */
+function reportHay(r) {
+  const ymd = r.id.slice(0, 10).replace(/-/g, '');
+  return [r.headline, r.date_long, r.date_short, r.id, ymd, r.kind, ...(r.tags || []), ...(r.mentions || [])]
+    .join(' ').toLowerCase();
+}
+function sectorHay(s) {
+  return [s.name, s.title, s.note, 'sector review earnings', ...(s.covers || [])].join(' ').toLowerCase();
+}
+
 function buildIndex() {
   const out = [];
   out.push(
@@ -443,24 +459,21 @@ function buildIndex() {
     { kind: 'Go', label: 'Archive', meta: 'All reports', hay: 'archive history all reports past editions', act: () => go('#/archive') },
   );
   for (const r of state.reports) {
-    const ymd = r.id.slice(0, 10).replace(/-/g, '');
-    const mentions = r.mentions || [];
     out.push({
       kind: r.k === 'fo' ? 'F&O' : r.kind.split(' ')[0],
       label: r.headline, meta: r.date_short + ' · ' + r.kind,
-      names: mentions,
-      hay: [r.headline, r.date_long, r.date_short, r.id, ymd, r.kind, ...(r.tags || []), ...mentions].join(' ').toLowerCase(),
+      names: r.mentions || [],
+      hay: reportHay(r),
       act: () => go('#/report/' + r.id),
     });
   }
   for (const s of state.sectors) {
     const live = s.status === 'published' && s.path;
-    const covers = s.covers || [];
     out.push({
       kind: 'Sector', label: s.name,
       meta: (s.quarter || state.quarter) + ' · ' + (live ? 'published' : 'pending'),
-      names: covers,
-      hay: [s.name, s.title, s.note, 'sector review earnings', ...covers].join(' ').toLowerCase(),
+      names: s.covers || [],
+      hay: sectorHay(s),
       act: () => go(live ? '#/sectors/' + s.id : '#/sectors'),
     });
   }
@@ -468,6 +481,14 @@ function buildIndex() {
 }
 
 function tokenize(s) { return s.toLowerCase().split(/[^a-z0-9&.:+₹%-]+/).filter(Boolean); }
+
+/* AND-match: every query token must appear somewhere in the report's haystack
+ * (headline, date, kind, tags, and the stocks it mentions). */
+function reportMatches(r, tokens) {
+  if (!tokens.length) return true;
+  const hay = reportHay(r);
+  return tokens.every((t) => hay.includes(t));
+}
 
 function scoreItem(item, tokens, phrase) {
   const label = item.label.toLowerCase();
