@@ -169,6 +169,24 @@ app. It's also in search.
 > If you have the repo cloned locally and Node installed, `scripts/sync-sectors.mjs`
 > does both files at once — see `DEPLOY.md`. The by-hand steps above need no tools.
 
+### Uploaded the HTML but forgot the `data/sectors.json` entry?
+
+Don't hand-write it — run the safety net instead:
+
+```bash
+node scripts/sync-sectors.mjs
+```
+
+A plain run never rewrites an already-published sector — it only **adds**
+anything genuinely new, including any file already sitting in `sectors/` with
+no manifest entry at all (exactly this situation). It also extracts `covers`
+(the companies/tickers the review names) so the sector is searchable. If a
+sector's `covers` look thin after that, its file may use a template the
+extractor doesn't fully recognise yet — `node scripts/refresh-covers.mjs`
+re-extracts every sector's covers from its own file without touching any file
+or already-good entry; tell Claude if a sector still comes up empty so the
+extractor can be taught its markup shape.
+
 ---
 
 ## Quick reference
@@ -176,6 +194,8 @@ app. It's also in search.
 | Symptom | Cause |
 |---|---|
 | New report published but not in the app | forgot to add the `data/reports.json` entry, or `path` doesn't match the file |
+| Sector HTML uploaded but not in Sector research | forgot the `data/sectors.json` entry — run `node scripts/sync-sectors.mjs` to adopt it automatically |
 | Card shows but clicking it 404s | filename in `path` ≠ actual file name (usually a dash that got stripped) |
 | App still shows the old version | browser cache — hard-refresh (Ctrl+Shift+R); or the ~2 min rebuild hasn't finished |
+| Searching a stock finds nothing, even though a report/review names it | its `covers`/`mentions` weren't extracted — run `node scripts/refresh-covers.mjs` (sectors) or `node scripts/index-reports.mjs` (daily briefs) |
 | JSON edit won't save / app breaks | a missing or extra comma — the last item in a list has no trailing comma; every earlier item does |
