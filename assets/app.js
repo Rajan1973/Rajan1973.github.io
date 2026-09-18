@@ -107,7 +107,7 @@ function sidebar() {
       el('a', { href: n.href, class: n.id === active ? 'active' : '' }, [
         el('span', { class: 'num', text: n.num }),
         el('span', { class: 'lbl', text: n.label }),
-        el('span', { class: 'cnt', text: n.count() }),
+        el('span', { class: 'cnt' }, n.id === 'rotation' ? [el('span', { class: 'live-dot' }), 'live'] : [n.count()]),
       ])
     )),
     el('div', { class: 'sidebar-foot' }, [
@@ -171,7 +171,7 @@ function viewHome() {
         el('section', { class: 'hero' }, [
           latest ? el('div', { class: 'hero-latest' }, [
             el('div', { class: 'eyebrow' }, [
-              el('span', { text: 'Latest edition' }),
+              el('span', {}, [el('span', { class: 'live-dot' }), 'Latest edition']),
               el('span', { class: 'badge ' + latest.k, text: latest.kind }),
             ]),
             el('h2', { class: 'hl', text: latest.headline }),
@@ -180,13 +180,13 @@ function viewHome() {
             el('span', { class: 'cta', text: 'Read the full report →', onclick: () => go('#/report/' + latest.id) }),
           ]) : null,
           el('div', { class: 'hero-side' }, [
-            jumpCard('Daily report', 'Every edition, read inside the shell — no tab-hopping.', '#/report'),
-            jumpCard('Rotation · RRG', 'Live weekly relative-rotation graph for Nifty indices and your own watchlists.', '#/rotation'),
+            jumpCard('Daily report', 'Every edition, read inside the shell — no tab-hopping.', '#/report', 0),
+            jumpCard('Rotation · RRG', 'Live weekly relative-rotation graph for Nifty indices and your own watchlists.', '#/rotation', 1),
             jumpCard('Sector research', (() => {
               const p = state.sectors.filter((s) => s.status === 'published' && s.path).length;
               return p ? p + ' of ' + state.sectors.length + ' ' + state.quarter + ' sector reviews are live.'
                        : state.sectors.length + ' ' + state.quarter + ' sector reviews — wired, awaiting publication.';
-            })(), '#/sectors'),
+            })(), '#/sectors', 2),
           ]),
         ]),
         el('section', {}, [
@@ -194,8 +194,8 @@ function viewHome() {
             el('h2', { class: 'sec', text: 'Recent editions' }),
             el('a', { href: '#/archive', class: 'hint', text: 'Full archive →' }),
           ]),
-          el('div', { class: 'recent' }, rest.map((r) =>
-            el('a', { href: '#/report/' + r.id }, [
+          el('div', { class: 'recent' }, rest.map((r, i) =>
+            el('a', { href: '#/report/' + r.id, class: 'stagger', style: '--i:' + i }, [
               el('span', { class: 'rd', text: r.date_short }),
               el('span', { class: 'rk k-' + r.k, text: r.kind }),
               el('span', { class: 'rt', text: r.headline }),
@@ -209,8 +209,8 @@ function viewHome() {
   return main;
 }
 
-function jumpCard(title, desc, href) {
-  return el('div', { class: 'jump', onclick: () => go(href) }, [
+function jumpCard(title, desc, href, i) {
+  return el('div', { class: 'jump stagger', style: '--i:' + (i || 0), onclick: () => go(href) }, [
     el('div', { class: 'jt', text: title }),
     el('div', { class: 'jd', text: desc }),
     el('div', { class: 'arr', text: '↗' }),
@@ -287,9 +287,9 @@ function viewSectors() {
   if (state.route.param) return viewSectorDoc(state.route.param);
 
   const pub = state.sectors.filter((s) => s.status === 'published' && s.path);
-  const grid = el('div', { class: 'sector-grid' }, state.sectors.map((s) => {
+  const grid = el('div', { class: 'sector-grid' }, state.sectors.map((s, i) => {
     const published = s.status === 'published' && s.path;
-    const card = el('div', { class: 'sector-card' + (published ? ' published' : '') }, [
+    const card = el('div', { class: 'sector-card stagger' + (published ? ' published' : ''), style: '--i:' + (i % 16) }, [
       el('div', { class: 'sc-top' }, [
         el('div', { class: 'sc-name', text: s.name }),
         el('div', { class: 'sc-q', text: s.quarter || state.quarter }),
@@ -407,9 +407,9 @@ function fillArchiveBody(body, list, layout, tokens) {
   };
   if (!list.length) { body.append(el('div', { class: 'state-msg', text: 'Nothing matches that filter.' })); return; }
   if (layout === 'cards') {
-    body.append(el('div', { class: 'arc-cards' }, list.map((r) => {
+    body.append(el('div', { class: 'arc-cards' }, list.map((r, i) => {
       const mh = mentionHit(r);
-      return el('div', { class: 'arc-card', onclick: () => go('#/report/' + r.id) }, [
+      return el('div', { class: 'arc-card stagger', style: '--i:' + (i % 16), onclick: () => go('#/report/' + r.id) }, [
         el('div', { class: 'ac-head tint-' + r.k }, [
           el('span', { class: 'ac-kind k-' + r.k, text: r.kind }),
           el('span', { class: 'ac-date', text: r.date_short }),
@@ -422,9 +422,9 @@ function fillArchiveBody(body, list, layout, tokens) {
       ]);
     })));
   } else {
-    body.append(el('div', { class: 'arc-list' }, list.map((r) => {
+    body.append(el('div', { class: 'arc-list' }, list.map((r, i) => {
       const mh = mentionHit(r);
-      return el('div', { class: 'arc-row', onclick: () => go('#/report/' + r.id) }, [
+      return el('div', { class: 'arc-row stagger', style: '--i:' + (i % 16), onclick: () => go('#/report/' + r.id) }, [
         el('span', { class: 'rd', text: r.date_short }),
         el('span', { class: 'rk k-' + r.k, text: r.kind }),
         el('span', { class: 'rt' }, [markMatches(r.headline, tokens)]),
