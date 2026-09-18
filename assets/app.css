@@ -45,6 +45,19 @@ img { max-width: 100%; }
 input::placeholder { color: rgba(8, 35, 66, .38); }
 
 @keyframes fadeUp { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@keyframes pulseDot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .35; transform: scale(.82); } }
+
+/* small "this is live" indicator — next to the Rotation·RRG nav badge and the
+   home hero's "Latest edition" label */
+.live-dot {
+  width: 6px; height: 6px; border-radius: 50%; background: var(--gain);
+  display: inline-block; margin-right: 6px; vertical-align: middle;
+  animation: pulseDot 1.8s ease-in-out infinite;
+}
+
+/* per-card entrance stagger — set the --i custom property per item (index,
+   capped) so a grid cascades in instead of popping as one flat block */
+.stagger { animation: fadeUp .32s ease both; animation-delay: calc(var(--i, 0) * 40ms); }
 
 /* ---------- shell ---------- */
 .shell { display: flex; flex-wrap: wrap; min-height: 100vh; }
