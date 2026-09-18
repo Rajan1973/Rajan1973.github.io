@@ -60,5 +60,18 @@ export function extractNames(html) {
     if (looksTicker(m[1])) set.add(m[1]);
   }
 
+  // 5. newer JS-object-driven sector templates that render company cards at
+  //    runtime instead of baking them into static HTML. Keys appear either
+  //    bare or quoted depending on the generator, and the "t" value is
+  //    sometimes just a ticker and sometimes "TICKER · category · size":
+  //      {n:"UltraTech Cement",t:"ULTRACEMCO", ...}
+  //      {"n": "Samvardhana Motherson", "t": "MOTHERSON", ...}
+  //      {n:"Tata Steel",t:"TATASTEEL · Steel · Large", ...}
+  for (const m of html.matchAll(/\{\s*"?n"?\s*:\s*["']([^"']{2,60})["']\s*,\s*"?t"?\s*:\s*["']([^"']{2,40})["']/g)) {
+    const n = cleanName(m[1]); if (looksName(n)) set.add(n);
+    const ticker = m[2].split(/[^A-Z0-9&.\-]/)[0];   // leading run before " · category · size"
+    if (looksTicker(ticker)) set.add(ticker);
+  }
+
   return [...set].sort((a, b) => a.localeCompare(b));
 }
