@@ -156,7 +156,7 @@ const p=new URLSearchParams({select:"instrument_id,benchmark_id,week_end,rs_rati
  rows.forEach(r=>(grouped[r.instrument_id]??=[]).push(r));
 weeks=[...new Set(rows.map(r=>r.week_end))].filter(w=>new Date(w).getDay()===5).sort().slice(-8);
 $("history").max=Math.max(0,weeks.length-1);$("history").value=Math.max(0,weeks.length-1);renderTicks();
- $("freshness").textContent=weeks[0]||"No data";
+ $("freshness").textContent=weeks[weeks.length-1]||"No data";
  selectedIds=new Set(currentRows().map(r=>Number(r.instrument_id)));
  renderIndexList();
  render();
