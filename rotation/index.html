@@ -46,7 +46,7 @@ main{padding:18px;min-width:0}.toolbar{display:flex;align-items:end;justify-cont
 <body>
 <header>
 <div class="brand">India RRG <span>Weekly Relative Rotation</span></div>
-<div class="status"><a class="manual-link" href="rrg-user-manual.html" target="_blank" rel="noopener">User manual ↗</a><span><i class="dot"></i> RRG-Data</span><span id="freshness">Loading…</span></div>
+<div class="status"><a class="manual-link" href="rrg-user-manual.html" target="_blank" rel="noopener">User manual ↗</a><span><i class="dot"></i> Nifty500data</span><span id="freshness">Loading…</span></div>
 </header>
 <div class="layout">
 <aside>
@@ -82,7 +82,7 @@ main{padding:18px;min-width:0}.toolbar{display:flex;align-items:end;justify-cont
 <div class="metric"><span>RS-Momentum</span><b id="dMomentum">—</b></div>
 <div class="metric"><span>Quadrant</span><b id="dQuad">—</b></div>
 </div>
-<div class="note">RRG-compatible implementation; not the proprietary JdK implementation. Market data is read-only from the separate RRG-Data Supabase project, derived from the Nifty500 data warehouse.</div>
+<div class="note">RRG-compatible implementation; not the proprietary JdK implementation. Market data is read-only from the Nifty500 data warehouse (nifty500data), the single canonical source for all quantitative market and RRG data.</div>
 <section class="card faq"><h2>Sector rotation (RRG) — FAQ</h2>
 <h3>What is a Relative Rotation Graph (RRG)?</h3><p>A Relative Rotation Graph plots each NSE sector against a benchmark (the Nifty 500) on two axes — RS-Ratio, which measures relative strength, and RS-Momentum, which measures whether that strength is rising or fading. It shows at a glance which sectors are leading, weakening, lagging or improving. It describes market structure for research and education only — not investment advice.</p>
 <h3>What do the four quadrants mean?</h3><p>Leading (top-right) = outperforming the market and still gaining momentum. Weakening (bottom-right) = still strong but momentum fading. Lagging (bottom-left) = underperforming and still falling. Improving (top-left) = still weak but momentum turning up. Sectors typically rotate clockwise: Improving to Leading to Weakening to Lagging.</p>
@@ -93,8 +93,8 @@ main{padding:18px;min-width:0}.toolbar{display:flex;align-items:end;justify-cont
 </div>
 <aside id="drawer" class="drawer" aria-label="Trading chart details" aria-hidden="true"><div class="drawer-head"><div><div class="drawer-kicker">TradingView Lite</div><div id="drawerTitle" class="drawer-title">Selected instrument</div></div><button id="drawerClose" class="drawer-close" type="button" aria-label="Close chart panel">×</button></div><div class="drawer-body"><iframe id="tvFrame" class="tv-frame" title="TradingView Lite chart" loading="lazy" src="about:blank"></iframe><div class="drawer-note">This TradingView chart is provided for visual reference. The RRG calculations remain powered by the read-only RRG V2 dataset.</div></div></aside>
 <script>
-const SUPA_URL="https://lwspbnufodlvvnrokaux.supabase.co";
-const SUPA_KEY="sb_publishable_5TQc0xNB3yeeHFr6pKM8-Q__pufSmZp";
+const SUPA_URL="https://wtbufledttydooazwiuw.supabase.co";
+const SUPA_KEY="sb_publishable__y6D6M1arQpM0ebcjlyj4A_KLwWYrkE";
 const VERSION="v2-ema10-jdk-public";
 let benchmarks=[], instruments=new Map(), rows=[], grouped={}, weeks=[], selected=null, activeUniverse=null, activeWatchlist=null, selectedIds=new Set(), zoomScale=1, watchlists=loadWatchlists();
 
