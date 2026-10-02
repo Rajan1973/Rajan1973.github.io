@@ -272,7 +272,7 @@ function viewRotation() {
   return el('main', { class: 'main' }, [
     pageHead('Relative rotation', 'Where the money is moving', [
       { lab: 'Timeframe', val: 'Weekly' },
-      { lab: 'Engine', val: 'v2 · JdK', gold: true },
+      { lab: 'Engine', val: 'v3 · JdK', gold: true },
     ]),
     el('div', { class: 'rrg-note', html:
       'Weekly Relative Rotation Graph — Nifty sectoral and broad-market indices, index constituents, and your own watchlists, measured against a benchmark. ' +
