@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Nifty & Beyond — Markets with Rajan — 05 Oct 2026</title>
+<style>
+  :root{
+    --bg:#f8f9fa; --card:#f1f5f9; --text:#0f172a; --accent:#1d4ed8; --accent-dark:#1e3a8a;
+    --green:#15803d; --red:#dc2626; --amber:#b45309; --border:#cbd5e1; --rowalt:#eff6ff; --rowhover:#dbeafe;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;line-height:1.5;}
+  .topbar{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--border);z-index:50;padding:10px 16px;}
+  .topbar .meta{font-size:12px;color:#475569;}
+  .expirywarn{background:#7f1d1d;color:#fff;font-size:13px;font-weight:800;padding:8px 12px;border-radius:6px;margin-top:8px;display:inline-block;letter-spacing:.02em;}
+  nav{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px;}
+  nav a{font-size:11.5px;padding:5px 9px;border-radius:6px;background:var(--card);color:var(--accent-dark);text-decoration:none;font-weight:600;border:1px solid var(--border);}
+  nav a.active{background:var(--accent);color:#fff;}
+  main{max-width:1080px;margin:0 auto;padding:16px;}
+  section{background:#fff;border:1px solid var(--border);border-radius:10px;margin-bottom:16px;overflow:hidden;}
+  section > .hdr{background:var(--card);padding:12px 16px;font-weight:700;font-size:15px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;}
+  section > .hdr .grp{font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:#64748b;font-weight:700;margin-right:8px;}
+  section > .body{padding:14px 16px;}
+  section > .body.collapsed{display:none;}
+  h3{font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:#334155;margin:18px 0 8px;}
+  h3:first-child{margin-top:0;}
+  p{margin:6px 0;font-size:14px;}
+  ul{margin:6px 0;padding-left:20px;font-size:14px;}
+  li{margin:4px 0;}
+  .note{font-size:12px;color:#64748b;font-style:italic;}
+  table{border-collapse:collapse;width:100%;font-size:12px;}
+  .tblwrap{border:1px solid var(--border);border-radius:8px;overflow:hidden;margin:8px 0;overflow-x:auto;}
+  th{background:var(--accent-dark);color:#fff;font-weight:700;text-transform:uppercase;font-size:10px;letter-spacing:.03em;padding:7px 6px;text-align:left;cursor:pointer;white-space:nowrap;}
+  th:hover{background:var(--accent);}
+  td{padding:5px 6px;border-bottom:1px solid #e2e8f0;white-space:nowrap;}
+  tr:nth-child(odd) td{background:#fff;}
+  tr:nth-child(even) td{background:var(--rowalt);}
+  tr:hover td{background:var(--rowhover) !important;}
+  .pos{color:var(--green);font-weight:700;}
+  .neg{color:var(--red);font-weight:700;}
+  .amb{color:var(--amber);font-weight:700;}
+  .scorecard{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin-bottom:10px;}
+  .kpi{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px 10px;}
+  .kpi .lbl{font-size:10px;color:#64748b;text-transform:uppercase;letter-spacing:.03em;}
+  .kpi .val{font-size:15px;font-weight:700;margin-top:2px;}
+  .badge{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px;}
+  .badge.bull{background:#dcfce7;color:var(--green);}
+  .badge.bear{background:#fee2e2;color:var(--red);}
+  .badge.neutral{background:#fef3c7;color:var(--amber);}
+  .datanote{background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:8px 10px;font-size:12px;color:#92400e;margin:8px 0;}
+  .thesis{background:#eff6ff;border-left:4px solid var(--accent);border-radius:6px;padding:12px 14px;font-size:14.5px;margin:8px 0;}
+  .rank-top1{background:rgba(21,128,61,.32);}
+  .rank-top2{background:rgba(21,128,61,.14);}
+  .rank-top3{background:rgba(21,128,61,.07);}
+  .rank-bot1{background:rgba(220,38,38,.32);}
+  .rank-bot2{background:rgba(220,38,38,.14);}
+  table.wrap th{white-space:normal;word-break:break-word;font-size:9.5px;line-height:1.25;padding:6px 4px;}
+  table.wrap td{white-space:normal;word-break:break-word;}
+  table.wrap th:last-child,table.wrap td:last-child{min-width:110px;}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="meta">5 October 2026 · Post-Market · Kite MCP (live F&amp;O) + Supabase report_packs (nifty500data) + web search · FII/DII: Tapetide automated pipeline · First session after the 2-Oct holiday and after the longest weekly losing streak (8 weeks) in 25 years · RBI MPC day 1 of 3 (decision Wed 7-Oct)</div>
+  <div class="expirywarn">⚠ Nifty weekly expiry TOMORROW (Tue 6-Oct) — gamma risk elevated; max pain 22,600 sits 44 pts above spot</div>
+  <nav id="navbar">
+    <a href="#s1">Scorecard</a><a href="#s2">Regime</a><a href="#s3">Unusual</a><a href="#s4">Macro</a><a href="#s5">Global</a>
+    <a href="#s6">Structure</a><a href="#s7">Breadth</a><a href="#s8">Rotation</a><a href="#s9">Scanners</a><a href="#s10">Momentum</a>
+    <a href="#s11">Flows</a><a href="#s12">Changed</a><a href="#s13">F&amp;O</a><a href="#s14">Tomorrow</a>
+  </nav>
+</div>
+
+<main>
+
+<!-- ================= A. THE READ ================= -->
+<section id="s1">
+  <div class="hdr"><span><span class="grp">A · The Read</span>§1 · Executive Scorecard</span></div>
+  <div class="body">
+    <div class="scorecard">
+      <div class="kpi"><div class="lbl">Nifty 50</div><div class="val pos">22,555.75<br><span style="font-size:11px">+133.80 (+0.60%)</span></div></div>
+      <div class="kpi"><div class="lbl">Sensex</div><div class="val pos">72,382.47<br><span style="font-size:11px">+472.77 (+0.66%)</span></div></div>
+      <div class="kpi"><div class="lbl">Bank Nifty</div><div class="val pos">54,714.10<br><span style="font-size:11px">+263.35 (+0.48%)</span></div></div>
+      <div class="kpi"><div class="lbl">India VIX</div><div class="val neg">14.78<br><span style="font-size:11px">+0.32 vs prev close · 12.16 a week ago</span></div></div>
+      <div class="kpi"><div class="lbl">FII Net (Cash)</div><div class="val neg">−₹4,699.14 Cr</div></div>
+      <div class="kpi"><div class="lbl">DII Net (Cash)</div><div class="val pos">+₹5,181.62 Cr</div></div>
+      <div class="kpi"><div class="lbl">Breadth (N500)</div><div class="val pos">271:228 <span style="font-size:11px">(1.19)</span></div></div>
+      <div class="kpi"><div class="lbl">Nifty Weekly PCR (6-Oct expiry)</div><div class="val amb">0.949<span style="font-size:11px"> · 21,000–24,000 chain</span></div></div>
+    </div>
+    <h3>Commodities &amp; Currency</h3>
+    <div class="scorecard">
+      <div class="kpi"><div class="lbl">Crude (MCX, Oct fut)</div><div class="val neg">₹8,684/bbl<br><span style="font-size:11px">−2.60% — gives back 1-Oct's +3.1%</span></div></div>
+      <div class="kpi"><div class="lbl">Gold (MCX, Dec fut)</div><div class="val neg">₹1,49,311/10g <span style="font-size:11px">(−0.72%)</span></div></div>
+      <div class="kpi"><div class="lbl">Silver (MCX, Dec fut)</div><div class="val pos">₹2,26,240/kg <span style="font-size:11px">(+0.16%)</span></div></div>
+      <div class="kpi"><div class="lbl">Aluminium (MCX, Oct fut)</div><div class="val pos">₹338.75/kg <span style="font-size:11px">(+0.64%)</span></div></div>
+      <div class="kpi"><div class="lbl">Copper (MCX, Oct fut)</div><div class="val pos">₹1,411.50/kg <span style="font-size:11px">(+0.85%)</span></div></div>
+      <div class="kpi"><div class="lbl">USD/INR (CDS Oct fut)</div><div class="val amb">96.535 <span style="font-size:11px">(+0.04%)</span></div></div>
+    </div>
+    <h3>Key Themes</h3>
+    <ul>
+      <li>🔁 <strong>Regime flipped back to Neutral (18.8 → 38.2, +19.4) — the third band change in four sessions.</strong> Neutral (30-Sep) → Bearish (1-Oct) → Neutral (5-Oct). A band that flips every session is measuring noise, not trend. Trend still scores only 13.4 (Nifty −7.33% vs 200D); the upgrade came almost entirely from one day's A/D (0.29 → 1.19). [Likely] fragile.</li>
+      <li>📉 <strong>It was a relief day, not a repair day.</strong> Nifty 500 advanced 271:228, yet only 16% of its stocks sit above the 20DMA (33% five sessions ago). Nifty 50's %&gt;20DMA is 12 — down from 26 on 25-Sep. PSU Bank went 12:0 and still has 0% above its 20DMA.</li>
+      <li>🛡️ <strong>Defensives broke while cyclicals bounced.</strong> Healthcare (2:18), Pharma (3:17) and Hospitals (1:12) were the only sectors to fall; Pharma's %&gt;20DMA collapsed 65 → 15 in five sessions. FMCG led (+1.80%) but on one stock — ITC +5.08% on 3.4× volume.</li>
+      <li>🏦 <strong>HDFC Bank futures: −2.41% with OI +6.78% — the heaviest single-stock short build in the top-7.</strong> Today's Q2 update showed deposits +18.8% YoY outpacing advances +16.3%, but CASA grew only 10.8% vs time deposits +22.8% — a NIM-pressure read. Bank Nifty still rose because PSU banks and ICICI carried it.</li>
+      <li>💰 <strong>FII sold ₹4,699 Cr (8th-worst of 58 sessions); DII bought ₹5,182 Cr — 110.3% absorption, third straight session above 100%.</strong> FII has now sold ₹14,183 Cr in two October sessions.</li>
+      <li>🛢️ <strong>MCX crude −2.60% unwound most of 1-Oct's +3.1% spike</strong> — mildly supportive for OMCs and paints, but Brent near $101 and the rupee at 96.5 keep the macro backdrop hostile into Wednesday's RBI decision.</li>
+    </ul>
+    <div class="datanote"><strong>Data-integrity note (1-Oct report, §13a/§13b):</strong> Kite's settled daily candles for 1-Oct differ from the published 1-Oct figures. Nifty Oct futures: close <strong>22,530.30</strong> (published 22,520.00), OI <strong>19,155,955</strong> (published 19,680,440; OI change +6.33%, not +9.24%). BankNifty Oct futures: close <strong>54,794.80</strong> (published 54,800.00), OI <strong>2,346,180</strong> (published 2,439,990) — i.e. OI <em>fell</em> 2.04%, so 1-Oct was <strong>long unwinding, not short buildup</strong>. [Likely] the 1-Oct pull captured a live intraday snapshot rather than the settled candle. The 1-Oct §13c single-stock figures re-verify exactly. This report uses settled historical candles throughout §13.</div>
+  </div>
+</section>
+
+<section id="s2">
+  <div class="hdr"><span><span class="grp">A · The Read</span>§2 · Market Regime</span></div>
+  <div class="body">
+    <div class="scorecard">
+      <div class="kpi"><div class="lbl">Regime Band</div><div class="val amb">Neutral <span style="font-size:11px">(from Bearish)</span></div></div>
+      <div class="kpi"><div class="lbl">Composite Score</div><div class="val amb">38.2 <span style="font-size:11px">/100 · +19.4 vs 1-Oct</span></div></div>
+      <div class="kpi"><div class="lbl">Score ex-Volatility</div><div class="val amb">37.4</div></div>
+      <div class="kpi"><div class="lbl">Component Spread</div><div class="val neg">51.7 pts <span style="font-size:11px">(Momentum 65.1 vs Trend 13.4)</span></div></div>
+    </div>
+    <div class="tblwrap"><table>
+      <tr><th>Component</th><th>Weight</th><th>Reading</th><th>Score</th><th>Percentile</th></tr>
+      <tr><td>Breadth</td><td>30%</td><td>18.2% &gt;50D · A/D 1.19</td><td class="neg">33.4</td><td>33rd (of 250d)</td></tr>
+      <tr><td>Trend</td><td>25%</td><td>−7.33% vs 200D (direct formula)</td><td class="neg">13.4</td><td>—</td></tr>
+      <tr><td>Momentum</td><td>20%</td><td>A/D ratio 1.19</td><td class="pos">65.1</td><td>65th (of 245d)</td></tr>
+      <tr><td>Institutional Flow</td><td>15%</td><td>FII 8/58 · DII 49/58 (rank)</td><td class="amb">48.3</td><td>—</td></tr>
+      <tr><td>Volatility</td><td>10%</td><td>ATR 0.99% of price (calmer scores higher)</td><td class="amb">45.8</td><td>54th (of 250d)</td></tr>
+    </table></div>
+    <ul>
+      <li>Momentum (65.1) is the only component above 50 — and it is a single-day A/D reading. Breadth's 33.4 is lifted by the same A/D; its %&gt;50D input (18.2%) is still near the bottom of its 250-day range.</li>
+      <li>Trend improved from 10.3 to 13.4 only because Nifty's gap to its 200D narrowed from −7.94% to −7.33%. That is mechanical, not structural.</li>
+      <li>The 51.7-point spread between strongest and weakest components is the tell: components disagree violently, which is what whipsaw regimes look like.</li>
+    </ul>
+    <div class="thesis"><strong>Durable or fragile? Fragile.</strong> [Likely] The band has changed on 3 of the last 4 sessions, each time driven by the Momentum/Breadth A/D inputs swinging between 0.29 and 1.19. A durable turn needs %&gt;20DMA on Nifty 500 back above ~30 (it was 33 on 25-Sep, 16 today) and Trend above 25. Neither is close. Treat today's Neutral as a bounce inside an 8-week downtrend until breadth composition — not just A/D — confirms.</div>
+  </div>
+</section>
+
+<section id="s3">
+  <div class="hdr"><span><span class="grp">A · The Read</span>§3 · What's Unusual Today</span></div>
+  <div class="body">
+    <div class="tblwrap"><table>
+      <tr><th>Kind</th><th>Subject</th><th>Reading</th><th>Unusualness</th></tr>
+      <tr><td>Stock</td><td>DCMSHRIRAM</td><td class="pos">+15.18% on 6.98× volume</td><td class="neg">100.0</td></tr>
+      <tr><td>Stock</td><td>SCI</td><td class="pos">+8.82% on 9.63× volume</td><td class="neg">91.4</td></tr>
+      <tr><td>Stock</td><td>NUVAMA</td><td class="pos">+7.02% on 8.90× volume</td><td class="neg">77.7</td></tr>
+      <tr><td>Flow</td><td>FII net vs DII net</td><td>FII −₹4,699 Cr · DII +₹5,182 Cr (8th/58)</td><td class="neg">74.2</td></tr>
+      <tr><td>Stock</td><td>PWL</td><td class="pos">+9.10% on 3.21× volume</td><td class="amb">67.4</td></tr>
+      <tr><td>Sector</td><td>NIFTY IT breadth swing</td><td class="pos">+30 pts %&gt;20DMA over 5 sessions (rank 1 of 24)</td><td class="amb">60.0</td></tr>
+      <tr><td>Stock</td><td>DMART</td><td class="neg">−6.45% on 4.65× volume</td><td class="amb">57.3</td></tr>
+      <tr><td>Stock</td><td>ITC</td><td class="pos">+5.08% on 3.44× volume</td><td class="amb">44.2</td></tr>
+      <tr><td>Breadth</td><td>NIFTY 500 A/D</td><td>1.19 (65th pctile)</td><td>30.2</td></tr>
+      <tr><td>Volatility</td><td>NIFTY 50 ATR</td><td>0.99% of price (54th pctile)</td><td>8.4</td></tr>
+    </table></div>
+    <ul>
+      <li><strong>Three of the top five are high-volume single-stock breakouts</strong> (DCM Shriram, SCI, Nuvama — all 7–10× volume, all with 3-week trend ✓ in §10). [Guessing] No company-specific trigger could be confirmed by web search for any of the three tonight; check exchange filings before acting on them.</li>
+      <li><strong>DMart −6.45% on 4.65× volume is a sell-the-news reaction</strong> to a Q2 FY27 update showing standalone revenue of ₹19,206 Cr (+18.4% YoY, +4.7% QoQ, 518 stores). Revenue growth was solid; the market is pricing margin risk ahead of full results.</li>
+      <li><strong>The IT breadth swing (+30) did not translate into index gains</strong> — NIFTY IT closed −0.01% because heavyweights Infosys (fut −1.42%) and HCLTech (−3.31%) fell while 8 of 10 constituents rose. Broad participation, narrow drag — see §13c where Infosys shows short buildup.</li>
+      <li>Volatility (8.4) is the least unusual reading: ATR is mid-range even as VIX rose to 14.78. Options are pricing more risk than realised moves show — expected ahead of an expiry plus an RBI decision.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= B. THE CONTEXT ================= -->
+<section id="s4">
+  <div class="hdr"><span><span class="grp">B · The Context</span>§4 · Macro &amp; Policy Dashboard</span></div>
+  <div class="body">
+    <h3>4a. Services PMI (HSBC/S&amp;P Global) — final September print NOT yet confirmed</h3>
+    <div class="datanote">Services PMI final is typically released on the 3rd working day of the month. With 2-Oct a holiday, [Likely] the final print lands 6-Oct, not today — no article dated 5-Oct 2026 carrying a final September services figure could be found. Several search results surfaced the <em>September 2025</em> final (60.9, down from 62.9) labelled ambiguously; those were rejected after checking the publish date inside the article. Flash figures below are dated 23-Sep-2026.</div>
+    <div class="tblwrap"><table>
+      <tr><th>Series (Sep-2026 flash, released 23-Sep)</th><th>Sep</th><th>Aug</th><th>Source agreement</th></tr>
+      <tr><td>Composite Output</td><td class="pos">56.5</td><td>54.3</td><td>2 sources agree</td></tr>
+      <tr><td>Services Business Activity</td><td class="pos">55.8</td><td>54.1</td><td>2 sources say 55.8; 1 source (Trading Economics) says 58.1 — 55.8 preferred</td></tr>
+      <tr><td>Manufacturing PMI (flash)</td><td class="pos">55.7</td><td>52.8</td><td>Final print on 1-Oct came in at 55.1</td></tr>
+      <tr><td>Manufacturing Output</td><td class="pos">58.2</td><td>54.8</td><td>1 source</td></tr>
+    </table></div>
+    <ul>
+      <li><strong>Sub-components (flash):</strong> new orders accelerated in both sectors; services demand cited in property, transport, travel and digital solutions; export orders rose at a softer pace; employment rose further; input-price inflation eased to its lowest since January; business confidence at a four-month high.</li>
+      <li><strong>Trader implication:</strong> manufacturing's final (55.1) came in below flash (55.7). If services final also undershoots 55.8 tomorrow, it adds to the 1-Oct pattern — strong macro prints that equities ignore.</li>
+    </ul>
+    <div class="thesis"><strong>Macro vs price:</strong> September PMIs are the strongest in months, yet Nifty has fallen eight straight weeks. The disconnect says the market is not trading domestic growth — it is trading the external balance: Brent ~$101, US 10Y ~5.25%, rupee near its 96.96 record low, and ₹35,000 Cr of weekly FII selling. Until those turn, good domestic data will keep getting sold, as auto did on 1-Oct.</div>
+
+    <h3>4b. 48-hour Policy Scan</h3>
+    <ul>
+      <li><strong>RBI MPC began its October meeting today (5–7 Oct); decision Wednesday morning.</strong> Repo has been held at 5.25% through four consecutive reviews [Likely — single source]. With the rupee near record lows and crude above $100, a cut is off the table; the risk is a hawkish tone or FX-defence measures. Expect range-bound trade until Wednesday.</li>
+      <li><strong>Q2 business-update season started:</strong> HDFC Bank (advances +16.3%, deposits +18.8%, CASA +10.8%, $11.5B FCNR(B) inflows) and DMart (revenue +18.4%) both reported today — and both stocks fell. The market is grading on margins, not volumes.</li>
+      <li><strong>HDFC Bank leadership transition</strong> to Anup Bagchi on 27-Oct is now an explicit overhang cited alongside NIM concerns.</li>
+      <li><strong>Geopolitical:</strong> reports cite Iran saying the Strait of Hormuz will stay blocked until its demands are met — the main reason crude remains above $100 despite today's pullback.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="s5">
+  <div class="hdr"><span><span class="grp">B · The Context</span>§5 · Global Cues, Currency &amp; Commodities</span></div>
+  <div class="body">
+    <div class="tblwrap"><table>
+      <tr><th>Instrument</th><th>Level</th><th>1D Chg</th><th>Note</th></tr>
+      <tr><td>GIFT Nifty (pre-open, 5-Oct)</td><td>22,631</td><td>—</td><td>Signalled the gap-up; Nifty opened 22,532 and closed 22,556</td></tr>
+      <tr><td>S&amp;P 500 (Fri 2-Oct close)</td><td>7,722.72</td><td class="pos">+0.7%</td><td>Within 1% of record; soft US jobs data cut rate-hike odds</td></tr>
+      <tr><td>Dow Jones (Fri 2-Oct)</td><td>51,176.96</td><td class="pos">+0.5%</td><td></td></tr>
+      <tr><td>NASDAQ Composite (Fri 2-Oct)</td><td>27,190.86</td><td class="pos">+1.2%</td><td></td></tr>
+      <tr><td>Nikkei 225 (5-Oct)</td><td>—</td><td class="pos">+2.5%</td><td>Led Asia on tech; level not confirmed</td></tr>
+      <tr><td>Hang Seng (5-Oct)</td><td>—</td><td class="amb">≈ flat</td><td>Level not confirmed</td></tr>
+      <tr><td>US 10Y Treasury</td><td>~5.25%</td><td class="pos">−2 bps</td><td>Still punitive for EM equity flows</td></tr>
+      <tr><td>Brent (Dec)</td><td>~$101.60</td><td class="pos">−0.6%</td><td>Hormuz risk keeps it above $100</td></tr>
+      <tr><td>India VIX</td><td>14.78</td><td class="neg">+0.32</td><td>Up from 12.16 a week ago</td></tr>
+      <tr><td>MCX Crude (Oct)</td><td>₹8,684</td><td class="pos">−2.60%</td><td>Reverses 1-Oct spike</td></tr>
+      <tr><td>MCX Gold (Dec)</td><td>₹1,49,311</td><td class="neg">−0.72%</td><td>Dec contract used (prior report used Oct)</td></tr>
+      <tr><td>MCX Silver (Dec)</td><td>₹2,26,240</td><td class="pos">+0.16%</td><td></td></tr>
+      <tr><td>MCX Aluminium (Oct)</td><td>₹338.75</td><td class="pos">+0.64%</td><td></td></tr>
+      <tr><td>MCX Copper (Oct)</td><td>₹1,411.50</td><td class="pos">+0.85%</td><td></td></tr>
+      <tr><td>USD/INR (CDS Oct fut)</td><td>96.535</td><td class="neg">+0.04%</td><td>Spot closed 96.32 on 1-Oct; record low 96.96</td></tr>
+    </table></div>
+    <div class="datanote">Index levels for Nikkei and Hang Seng could not be confirmed for 5-Oct; only direction is shown. One search result reporting "Nikkei +1.8%, Hang Seng −1.6%" was dated October <em>2025</em> and was rejected. MCX figures are 23:30 IST live prices vs the 1-Oct settle.</div>
+    <ul>
+      <li>Global risk appetite is supportive (US near records, Asia up, yields easing slightly) — India's underperformance is domestic/FX-specific, which is why FII selling continued even on a green global day.</li>
+      <li>Metals bounced on MCX (copper +0.85%, aluminium +0.64%) but NIFTY METAL's %&gt;20DMA is 0 — commodity support is not reaching equity breadth.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= C. THE STRUCTURE ================= -->
+<section id="s6">
+  <div class="hdr"><span><span class="grp">C · The Structure</span>§6 · Index Market Structure</span></div>
+  <div class="body">
+    <h3>6a. Index Board — Broad Benchmarks</h3>
+<div class="tblwrap"><table>
+<tr><th>Index</th><th>Close</th><th>1D%</th><th>1W%</th><th>1M%</th><th>3M%</th></tr>
+<tr><td>NIFTY 50</td><td>22,555.75</td><td class="pos rank-top2">+0.60%</td><td class="neg rank-top1">−2.53%</td><td class="neg ">−5.68%</td><td class="neg rank-bot1">−7.67%</td></tr>
+<tr><td>NIFTY 100</td><td>23,645.30</td><td class="pos ">+0.55%</td><td class="neg rank-top2">−2.72%</td><td class="neg ">−5.58%</td><td class="neg rank-bot2">−7.14%</td></tr>
+<tr><td>NIFTY 200</td><td>13,121.05</td><td class="pos ">+0.57%</td><td class="neg ">−2.77%</td><td class="neg ">−5.69%</td><td class="neg ">−6.79%</td></tr>
+<tr><td>NIFTY 500</td><td>21,971.60</td><td class="pos ">+0.52%</td><td class="neg ">−2.80%</td><td class="neg ">−5.39%</td><td class="neg ">−6.24%</td></tr>
+<tr><td>NIFTY NEXT 50</td><td>69,213.75</td><td class="pos rank-bot1">+0.34%</td><td class="neg rank-bot1">−3.57%</td><td class="neg rank-top2">−5.12%</td><td class="neg rank-top2">−4.78%</td></tr>
+<tr><td>NIFTY MIDCAP 100</td><td>59,123.65</td><td class="pos rank-top1">+0.67%</td><td class="neg ">−2.93%</td><td class="neg rank-bot1">−6.16%</td><td class="neg ">−5.36%</td></tr>
+<tr><td>NIFTY MIDCAP 150</td><td>21,755.30</td><td class="pos ">+0.51%</td><td class="neg rank-bot2">−3.04%</td><td class="neg rank-bot2">−5.88%</td><td class="neg ">−5.30%</td></tr>
+<tr><td>NIFTY SMLCAP 100</td><td>19,149.10</td><td class="pos rank-bot2">+0.47%</td><td class="neg ">−2.87%</td><td class="neg rank-top1">−3.35%</td><td class="neg rank-top1">−0.88%</td></tr>
+</table></div>
+
+    <ul>
+      <li>Every broad index rose 0.34–0.67% today, but every one is still −2.5% to −3.6% over the week and −3.4% to −6.2% over the month. Today recovered roughly a fifth of the last week's damage (Nifty +0.60% vs −3.1% over the prior four sessions).</li>
+      <li>Nifty 50 is the worst broad index on 3M (−7.67%); Smallcap 100 the best (−0.88%). Large caps have been the funding source for FII selling, not small caps.</li>
+      <li>Next 50 had the weakest bounce (+0.34%) after the worst week (−3.57%) — no bottom-fishing in quasi-large caps yet.</li>
+    </ul>
+    <h3>6b. Sector Performance (ranked by 1M%)</h3>
+<div class="tblwrap"><table>
+<tr><th>Rank</th><th>Sector</th><th>Close</th><th>1D%</th><th>1W%</th><th>1M%</th><th>3M%</th></tr>
+<tr><td>1</td><td>MEDIA</td><td>1,560.50</td><td class="pos ">+0.92%</td><td class="pos rank-top1">+0.64%</td><td class="pos rank-top1">+1.72%</td><td class="pos rank-top1">+4.18%</td></tr>
+<tr><td>2</td><td>PHARMA</td><td>26,117.10</td><td class="neg rank-bot2">−0.74%</td><td class="neg ">−3.28%</td><td class="neg rank-top2">−2.48%</td><td class="pos ">+0.97%</td></tr>
+<tr><td>3</td><td>PVT BANK</td><td>26,718.15</td><td class="pos ">+0.08%</td><td class="neg ">−0.61%</td><td class="neg ">−3.22%</td><td class="neg ">−5.75%</td></tr>
+<tr><td>4</td><td>FMCG</td><td>44,579.65</td><td class="pos rank-top1">+1.80%</td><td class="neg ">−2.96%</td><td class="neg ">−3.59%</td><td class="neg rank-bot1">−11.19%</td></tr>
+<tr><td>5</td><td>HEALTHCARE</td><td>15,934.65</td><td class="neg rank-bot1">−1.00%</td><td class="neg ">−4.46%</td><td class="neg ">−4.18%</td><td class="neg ">−3.32%</td></tr>
+<tr><td>6</td><td>BANK</td><td>54,714.10</td><td class="pos ">+0.48%</td><td class="neg ">−1.56%</td><td class="neg ">−4.30%</td><td class="neg ">−6.14%</td></tr>
+<tr><td>7</td><td>FIN SERVICE</td><td>24,656.40</td><td class="pos ">+0.41%</td><td class="neg ">−1.75%</td><td class="neg ">−4.48%</td><td class="neg rank-bot2">−8.66%</td></tr>
+<tr><td>8</td><td>METAL</td><td>12,498.00</td><td class="pos ">+0.30%</td><td class="neg ">−4.50%</td><td class="neg ">−5.01%</td><td class="neg ">−1.76%</td></tr>
+<tr><td>9</td><td>PSU BANK</td><td>8,014.85</td><td class="pos ">+0.97%</td><td class="neg ">−3.37%</td><td class="neg ">−5.84%</td><td class="neg ">−3.83%</td></tr>
+<tr><td>10</td><td>OIL AND GAS</td><td>10,510.75</td><td class="pos ">+0.34%</td><td class="neg ">−3.24%</td><td class="neg ">−5.98%</td><td class="neg ">−6.66%</td></tr>
+<tr><td>11</td><td>REALTY</td><td>839.70</td><td class="pos ">+0.56%</td><td class="neg ">−3.41%</td><td class="neg ">−5.98%</td><td class="neg ">−7.41%</td></tr>
+<tr><td>12</td><td>CONSR DURBL</td><td>36,477.35</td><td class="pos rank-top2">+1.53%</td><td class="neg rank-bot2">−4.71%</td><td class="neg ">−8.21%</td><td class="neg ">−2.41%</td></tr>
+<tr><td>13</td><td>IT</td><td>28,301.65</td><td class="neg ">−0.01%</td><td class="pos rank-top2">+0.50%</td><td class="neg rank-bot2">−9.01%</td><td class="pos rank-top2">+3.76%</td></tr>
+<tr><td>14</td><td>AUTO</td><td>25,421.90</td><td class="pos ">+0.15%</td><td class="neg rank-bot1">−5.73%</td><td class="neg rank-bot1">−9.15%</td><td class="neg ">−7.06%</td></tr>
+</table></div>
+
+    <div class="datanote">NIFTY CAPITAL GOODS and NIFTY HOSPITALS have breadth rows in <code>index_breadth</code> but no price series in <code>daily_prices</code>, so they are absent from 6b and §8 (14 sectors and 22 indices ranked respectively).</div>
+    <ul>
+      <li><strong>Media is the only sector positive on 1M (+1.72%)</strong> — led by Sun TV (+22% in 5 sessions, RSI 83). Narrow, overbought leadership.</li>
+      <li><strong>Auto (−9.15%) and IT (−9.01%) are the 1M laggards</strong> — but IT is the best on 3D (+2.28%) and 3M (+3.76%): a sector correcting within an uptrend, unlike Auto, which is breaking down on every horizon.</li>
+      <li><strong>Pharma and Healthcare were the only red sectors today</strong> (−0.74%, −1.00%) — and Pharma was 2nd-best on 1M. That is defensive money leaving.</li>
+    </ul>
+    <h3>6c. Today's Session Shape (Nifty 50)</h3>
+    <div class="tblwrap"><table>
+      <tr><th>Open</th><th>High</th><th>Low</th><th>Close</th><th>Range</th><th>Close in Range</th></tr>
+      <tr><td>22,532.40</td><td>22,621.80</td><td>22,397.10</td><td class="pos">22,555.75</td><td>224.70 (1.00%)</td><td class="amb">70%</td></tr>
+    </table></div>
+    <ul><li>Dipped below 1-Oct's close (22,397 low vs 22,422 prior close) before recovering — buyers defended the open, but the close at 70% of range stopped 66 pts short of the high and right at the 22,500–22,600 option battleground (§13e).</li></ul>
+  </div>
+</section>
+
+<section id="s7">
+  <div class="hdr"><span><span class="grp">C · The Structure</span>§7 · Breadth &amp; Participation</span></div>
+  <div class="body">
+    <h3>7A. Broader Index Board</h3>
+<div class="tblwrap"><table class="wrap">
+<tr><th>Index</th><th>Advances : Declines</th><th>Advances : Declines (3 Days Back)</th><th>%>20DMA</th><th>%>20DMA (3 Days Back)</th><th>%>20DMA (5 Days Back)</th><th>Reason Flagged</th></tr>
+<tr><td>NIFTY 50</td><td class="pos">31 : 18</td><td class="neg">17 : 32</td><td class="">12</td><td class="rank-top1">18</td><td class="rank-bot1">26</td><td>%>20DMA halved in 5 sessions (26→12) — up-day did not repair participation</td></tr>
+<tr><td>NIFTY 100</td><td class="pos">63 : 36</td><td class="neg">28 : 70</td><td class="rank-bot2">10</td><td class="rank-bot2">13</td><td class="">33</td><td></td></tr>
+<tr><td>NIFTY 200</td><td class="pos">125 : 74</td><td class="neg">54 : 144</td><td class="">13</td><td class="">14</td><td class="">33</td><td></td></tr>
+<tr><td>NIFTY 500</td><td class="pos">271 : 228</td><td class="neg">139 : 359</td><td class="rank-top1">16</td><td class="">17</td><td class="">33</td><td>A/D 1.19 vs 0.39 three days back — but %>20DMA still slipping (33→17→16)</td></tr>
+<tr><td>NIFTY NEXT 50</td><td class="pos">32 : 18</td><td class="neg">11 : 38</td><td class="rank-bot1">8</td><td class="rank-bot1">8</td><td class="rank-top1">40</td><td>Collapsed 40→8 in 5 sessions; flat today</td></tr>
+<tr><td>NIFTY MIDCAP 100</td><td class="pos">62 : 38</td><td class="neg">26 : 74</td><td class="rank-top2">15</td><td class="">14</td><td class="">32</td><td></td></tr>
+<tr><td>NIFTY MIDCAP 150</td><td class="pos">87 : 63</td><td class="neg">37 : 113</td><td class="">15</td><td class="">15</td><td class="rank-bot2">31</td><td></td></tr>
+<tr><td>NIFTY SMLCAP 100</td><td class="neg">46 : 54</td><td class="neg">27 : 73</td><td class="">15</td><td class="rank-top2">18</td><td class="rank-top2">34</td><td>A/D <1 on an up day — only broad index with more decliners</td></tr>
+</table></div>
+
+    <ul>
+      <li><strong>Every broad index has positive A/D today, yet %&gt;20DMA fell or was flat versus 5 days back on all eight.</strong> Nifty 500: 33 → 17 → 16. The A/D bounce is happening below the 20DMA — stocks are rising from oversold, not reclaiming trend.</li>
+      <li>Smallcap 100 is the exception that matters: it was the only broad index with more decliners (46:54) on an up day, and its %&gt;20DMA fell 18 → 15 vs 3 days back. Risk appetite is not reaching the small end.</li>
+      <li>Nifty 50 (26 → 18 → 12) and Next 50 (40 → 8 → 8) show decelerating breadth even as price bounced.</li>
+    </ul>
+    <h3>7B. Sector Index Board</h3>
+<div class="tblwrap"><table class="wrap">
+<tr><th>Index</th><th>Advances : Declines</th><th>Advances : Declines (3 Days Back)</th><th>%>20DMA</th><th>%>20DMA (3 Days Back)</th><th>%>20DMA (5 Days Back)</th><th>Reason Flagged</th></tr>
+<tr><td>NIFTY AUTO</td><td class="neg">5 : 10</td><td class="neg">1 : 14</td><td class="">0</td><td class="">7</td><td class="">47</td><td>0% >20DMA — complete washout (47→7→0)</td></tr>
+<tr><td>NIFTY BANK</td><td class="pos">11 : 3</td><td class="neg">6 : 8</td><td class="">7</td><td class="">7</td><td class="">21</td><td>11:3 A/D, yet %>20DMA stuck at 7</td></tr>
+<tr><td>NIFTY CAPITAL GOODS</td><td class="pos">33 : 17</td><td class="neg">18 : 32</td><td class="">24</td><td class="">22</td><td class="">26</td><td></td></tr>
+<tr><td>NIFTY CONSR DURBL</td><td class="pos">11 : 2</td><td class="neg">3 : 10</td><td class="">15</td><td class="">23</td><td class="">23</td><td>11:2 A/D, %>20DMA still below 3D-back</td></tr>
+<tr><td>NIFTY FIN SERVICE</td><td class="pos">13 : 7</td><td class="neg">6 : 14</td><td class="">10</td><td class="">15</td><td class="rank-bot2">20</td><td></td></tr>
+<tr><td>NIFTY FMCG</td><td class="pos">10 : 5</td><td class="neg">1 : 13</td><td class="">20</td><td class="">27</td><td class="rank-top1">67</td><td>67→27→20 despite +1.8% index day (ITC-led)</td></tr>
+<tr><td>NIFTY HEALTHCARE</td><td class="neg">2 : 18</td><td class="pos">11 : 9</td><td class="">15</td><td class="rank-top2">45</td><td class="">55</td><td>2:18 A/D; 55→45→15</td></tr>
+<tr><td>NIFTY HOSPITALS</td><td class="neg">1 : 12</td><td class="neg">3 : 10</td><td class="">0</td><td class="">15</td><td class="">38</td><td>1:12 A/D; 0% >20DMA</td></tr>
+<tr><td>NIFTY IT</td><td class="pos">8 : 2</td><td class="neg">1 : 9</td><td class="rank-top1">30</td><td class="rank-bot2">0</td><td class="rank-bot1">0</td><td>Only sector with breadth rising across all 3 snapshots (0→0→30)</td></tr>
+<tr><td>NIFTY MEDIA</td><td class="pos">7 : 3</td><td class="amb">5 : 5</td><td class="rank-top2">30</td><td class="">20</td><td class="">50</td><td></td></tr>
+<tr><td>NIFTY METAL</td><td class="pos">10 : 5</td><td class="neg">6 : 9</td><td class="rank-bot2">0</td><td class="">33</td><td class="">53</td><td>53→33→0: steepest 5-day breadth collapse on the board</td></tr>
+<tr><td>NIFTY OIL AND GAS</td><td class="pos">8 : 7</td><td class="neg">3 : 11</td><td class="">20</td><td class="">7</td><td class="">27</td><td>Recovered 7→20 vs 3D back</td></tr>
+<tr><td>NIFTY PHARMA</td><td class="neg">3 : 17</td><td class="pos">14 : 6</td><td class="">15</td><td class="rank-top1">60</td><td class="rank-top2">65</td><td>3:17 A/D; 65→60→15 — defensive cracking</td></tr>
+<tr><td>NIFTY PSU BANK</td><td class="pos">12 : 0</td><td class="neg">3 : 9</td><td class="rank-bot1">0</td><td class="rank-bot1">0</td><td class="">33</td><td>12:0 A/D — every constituent up, still 0% >20DMA</td></tr>
+<tr><td>NIFTY PVT BANK</td><td class="pos">6 : 4</td><td class="neg">4 : 6</td><td class="">20</td><td class="">20</td><td class="">30</td><td></td></tr>
+<tr><td>NIFTY REALTY</td><td class="pos">6 : 4</td><td class="neg">0 : 10</td><td class="">20</td><td class="">10</td><td class="">50</td><td>Bounced 10→20 vs 3D back; 6:4 A/D</td></tr>
+</table></div>
+
+    <ul>
+      <li><strong>Accelerating:</strong> IT is the only sector with breadth rising across all three snapshots (0 → 0 → 30). Realty (10 → 20) and Oil &amp; Gas (7 → 20) recovered vs 3 days back.</li>
+      <li><strong>Reversing hard:</strong> Pharma (65 → 60 → 15), Healthcare (55 → 45 → 15), Metal (53 → 33 → 0), FMCG (67 → 27 → 20). The groups that held up best in September are now losing participation fastest.</li>
+      <li><strong>Washed out:</strong> Auto, Metal, PSU Bank and Hospitals all at 0% above 20DMA. PSU Bank's 12:0 A/D at 0% &gt;20DMA is the clearest example of a reflex bounce with no structural repair.</li>
+    </ul>
+    <h3>7c. SMA Participation Ladder — all 24 indices</h3>
+<div class="tblwrap"><table class="wrap">
+<tr><th>Index</th><th>%>20D</th><th>%>50D</th><th>%>100D</th><th>%>200D</th></tr>
+<tr><td>NIFTY 50</td><td class="">12</td><td class="">8</td><td class="">8</td><td class="">16</td></tr>
+<tr><td>NIFTY 100</td><td class="">10</td><td class="">9</td><td class="">16</td><td class="">30</td></tr>
+<tr><td>NIFTY 200</td><td class="">13</td><td class="">13</td><td class="">17</td><td class="">31</td></tr>
+<tr><td>NIFTY 500</td><td class="">16</td><td class="">18</td><td class="">27</td><td class="">38</td></tr>
+<tr><td>NIFTY NEXT 50</td><td class="">8</td><td class="">10</td><td class="">24</td><td class="">44</td></tr>
+<tr><td>NIFTY MIDCAP 100</td><td class="">15</td><td class="">16</td><td class="">18</td><td class="">32</td></tr>
+<tr><td>NIFTY MIDCAP 150</td><td class="">15</td><td class="">15</td><td class="">19</td><td class="">32</td></tr>
+<tr><td>NIFTY SMLCAP 100</td><td class="">15</td><td class="">22</td><td class="">41</td><td class="">47</td></tr>
+<tr><td>NIFTY AUTO</td><td class="">0</td><td class="rank-bot2">0</td><td class="">27</td><td class="">33</td></tr>
+<tr><td>NIFTY BANK</td><td class="">7</td><td class="">7</td><td class="">21</td><td class="">36</td></tr>
+<tr><td>NIFTY CAPITAL GOODS</td><td class="">24</td><td class="">28</td><td class="">32</td><td class="">50</td></tr>
+<tr><td>NIFTY CONSR DURBL</td><td class="">15</td><td class="">15</td><td class="">31</td><td class="">46</td></tr>
+<tr><td>NIFTY FIN SERVICE</td><td class="">10</td><td class="">10</td><td class="rank-bot1">5</td><td class="rank-bot1">5</td></tr>
+<tr><td>NIFTY FMCG</td><td class="">20</td><td class="">7</td><td class="rank-bot2">7</td><td class="rank-bot2">13</td></tr>
+<tr><td>NIFTY HEALTHCARE</td><td class="">15</td><td class="">30</td><td class="">35</td><td class="">45</td></tr>
+<tr><td>NIFTY HOSPITALS</td><td class="">0</td><td class="">8</td><td class="">8</td><td class="">25</td></tr>
+<tr><td>NIFTY IT</td><td class="rank-top1">30</td><td class="">20</td><td class="">30</td><td class="">40</td></tr>
+<tr><td>NIFTY MEDIA</td><td class="rank-top2">30</td><td class="">30</td><td class="rank-top2">50</td><td class="rank-top2">60</td></tr>
+<tr><td>NIFTY METAL</td><td class="rank-bot2">0</td><td class="">13</td><td class="">20</td><td class="">40</td></tr>
+<tr><td>NIFTY OIL AND GAS</td><td class="">20</td><td class="rank-top2">33</td><td class="">33</td><td class="">40</td></tr>
+<tr><td>NIFTY PHARMA</td><td class="">15</td><td class="rank-top1">45</td><td class="rank-top1">55</td><td class="rank-top1">65</td></tr>
+<tr><td>NIFTY PSU BANK</td><td class="rank-bot1">0</td><td class="rank-bot1">0</td><td class="">8</td><td class="">17</td></tr>
+<tr><td>NIFTY PVT BANK</td><td class="">20</td><td class="">20</td><td class="">30</td><td class="">40</td></tr>
+<tr><td>NIFTY REALTY</td><td class="">20</td><td class="">20</td><td class="">50</td><td class="">60</td></tr>
+</table></div>
+
+    <ul>
+      <li><strong>Most complete breakdown:</strong> Fin Service (10/10/5/5) — under 10% above the 100D and 200D. Financials are the market's structural weak spot, not just a short-term casualty.</li>
+      <li><strong>Most intact structure:</strong> Pharma (65% &gt;200D) and Media/Realty (60%) still hold long-term trend despite short-term damage — Pharma's ladder (15/45/55/65) is a short-term pullback inside a long-term uptrend, the only one on the board.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="s8">
+  <div class="hdr"><span><span class="grp">C · The Structure</span>§8 · Sector Rotation</span></div>
+  <div class="body">
+<div class="tblwrap"><table class="wrap">
+<tr><th>Sector</th><th>1D Rank</th><th>3D Rank</th><th>5D Rank</th><th>1M Rank</th><th>Structure</th></tr>
+<tr><td>NIFTY FMCG</td><td class="rank-top1">1</td><td class="">12</td><td class="">12</td><td class="">5</td><td><span class="amb">Neutral/Stable</span> — no consistent rank drift; §7 %>20DMA 5D Δ −47</td></tr>
+<tr><td>NIFTY CONSR DURBL</td><td class="rank-top2">2</td><td class="">18</td><td class="rank-bot2">21</td><td class="">20</td><td><span class="pos">Rotating In</span> — rank 20→21→18→2 (1M→1D); NOT confirmed by §7 %>20DMA 5D Δ −8</td></tr>
+<tr><td>NIFTY PSU BANK</td><td class="rank-top3">3</td><td class="">6</td><td class="">16</td><td class="">15</td><td><span class="pos">Rotating In</span> — rank 15→16→6→3 (1M→1D); NOT confirmed by §7 %>20DMA 5D Δ −33</td></tr>
+<tr><td>NIFTY MEDIA</td><td class="">4</td><td class="rank-top2">2</td><td class="rank-top1">1</td><td class="rank-top1">1</td><td><span class="amb">Neutral/Stable</span> — no consistent rank drift; §7 %>20DMA 5D Δ −20</td></tr>
+<tr><td>NIFTY MIDCAP 100</td><td class="">5</td><td class="">9</td><td class="">11</td><td class="">19</td><td><span class="pos">Rotating In</span> — rank 19→11→9→5 (1M→1D); NOT confirmed by §7 %>20DMA 5D Δ −17</td></tr>
+<tr><td>NIFTY 50</td><td class="">6</td><td class="">17</td><td class="">6</td><td class="">13</td><td><span class="amb">Neutral/Stable</span> — no consistent rank drift; §7 %>20DMA 5D Δ −14</td></tr>
+<tr><td>NIFTY 200</td><td class="">7</td><td class="">14</td><td class="">8</td><td class="">14</td><td><span class="amb">Neutral/Stable</span> — no consistent rank drift; §7 %>20DMA 5D Δ −20</td></tr>
+<tr><td>NIFTY REALTY</td><td class="">8</td><td class="">5</td><td class="">17</td><td class="">18</td><td><span class="pos">Rotating In</span> — rank 18→17→5→8 (1M→1D); NOT confirmed by §7 %>20DMA 5D Δ −30</td></tr>
+<tr><td>NIFTY 100</td><td class="">9</td><td class="">16</td><td class="">7</td><td class="">12</td><td><span class="amb">Neutral/Stable</span> — no consistent rank drift; §7 %>20DMA 5D Δ −23</td></tr>
+<tr><td>NIFTY 500</td><td class="">10</td><td class="">15</td><td class="">9</td><td class="">11</td><td><span class="amb">Neutral/Stable</span> — no consistent rank drift; §7 %>20DMA 5D Δ −17</td></tr>
+<tr><td>NIFTY MIDCAP 150</td><td class="">11</td><td class="">11</td><td class="">13</td><td class="">16</td><td><span class="amb">Neutral/Stable</span> — no consistent rank drift; §7 %>20DMA 5D Δ −16</td></tr>
+<tr><td>NIFTY BANK</td><td class="">12</td><td class="">4</td><td class="">4</td><td class="">7</td><td><span class="amb">Neutral/Stable</span> — no consistent rank drift; §7 %>20DMA 5D Δ −14</td></tr>
+<tr><td>NIFTY SMLCAP 100</td><td class="">13</td><td class="">8</td><td class="">10</td><td class="">4</td><td><span class="amb">Neutral/Stable</span> — no consistent rank drift; §7 %>20DMA 5D Δ −19</td></tr>
+<tr><td>NIFTY FIN SERVICE</td><td class="">14</td><td class="">7</td><td class="">5</td><td class="">8</td><td><span class="amb">Neutral/Stable</span> — no consistent rank drift; §7 %>20DMA 5D Δ −10</td></tr>
+<tr><td>NIFTY OIL AND GAS</td><td class="">15</td><td class="">13</td><td class="">14</td><td class="">17</td><td><span class="amb">Neutral/Stable</span> — no consistent rank drift; §7 %>20DMA 5D Δ −7</td></tr>
+<tr><td>NIFTY NEXT 50</td><td class="">16</td><td class="">10</td><td class="">18</td><td class="">10</td><td><span class="amb">Neutral/Stable</span> — no consistent rank drift; §7 %>20DMA 5D Δ −32</td></tr>
+<tr><td>NIFTY METAL</td><td class="">17</td><td class="rank-bot2">21</td><td class="">20</td><td class="">9</td><td><span class="amb">Neutral/Stable</span> — no consistent rank drift; §7 %>20DMA 5D Δ −53</td></tr>
+<tr><td>NIFTY AUTO</td><td class="">18</td><td class="">19</td><td class="rank-bot1">22</td><td class="rank-bot1">22</td><td><span class="amb">Neutral/Stable</span> — no consistent rank drift; §7 %>20DMA 5D Δ −47</td></tr>
+<tr><td>NIFTY PVT BANK</td><td class="">19</td><td class="rank-top3">3</td><td class="rank-top3">3</td><td class="rank-top3">3</td><td><span class="neg">Rotating Out</span> — rank 3→3→3→19; confirmed by §7 %>20DMA 5D Δ −10</td></tr>
+<tr><td>NIFTY IT</td><td class="">20</td><td class="rank-top1">1</td><td class="rank-top2">2</td><td class="rank-bot2">21</td><td><span class="amb">Neutral/Stable</span> — no consistent rank drift; §7 %>20DMA 5D Δ +30</td></tr>
+<tr><td>NIFTY PHARMA</td><td class="rank-bot2">21</td><td class="">20</td><td class="">15</td><td class="rank-top2">2</td><td><span class="neg">Rotating Out</span> — rank 2→15→20→21; confirmed by §7 %>20DMA 5D Δ −50</td></tr>
+<tr><td>NIFTY HEALTHCARE</td><td class="rank-bot1">22</td><td class="rank-bot1">22</td><td class="">19</td><td class="">6</td><td><span class="neg">Rotating Out</span> — rank 6→19→22→22; confirmed by §7 %>20DMA 5D Δ −40</td></tr>
+</table></div>
+
+    <p class="note">Rank = position among 22 indices with a price series (1 = best return over that horizon). "Rotating In/Out" requires the average of 1D+3D ranks to differ from the average of 5D+1M ranks by ≥5 places.</p>
+    <ul>
+      <li><strong>Consumer Durables and PSU Bank are "Rotating In" on rank, but neither is confirmed by breadth</strong> (5-day %&gt;20DMA change −8 and −33). Rank improvement from the bottom is a bounce signature, not a rotation.</li>
+      <li><strong>Pharma and Healthcare are "Rotating Out" and confirmed by breadth</strong> (−50 and −40 in 5 days). This is the cleanest rotation on the board — out of defensives.</li>
+      <li><strong>Pvt Bank is "Rotating Out" from a top-3 position</strong> (3/3/3 → 19 today) on the HDFC Bank hit; IT went from rank 1 on 3D to 20 today. Both are single-heavyweight effects (HDFC Bank, Infosys/HCLTech) — check whether they persist before calling them trend changes.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="s9">
+  <div class="hdr"><span><span class="grp">C · The Structure</span>§9 · Stock Scanners</span></div>
+  <div class="body">
+    <h3>Top Gainers (Nifty 500)</h3>
+    <div class="tblwrap"><table>
+      <tr><th>Symbol</th><th>LTP</th><th>1D%</th><th>Vol×63D</th><th>RSI-14</th><th>ADX-14</th><th>Industry</th></tr>
+      <tr><td>DCMSHRIRAM</td><td>1,044.55</td><td class="pos">+15.18</td><td class="neg">6.98</td><td>61.7</td><td>26.3</td><td>Diversified</td></tr>
+      <tr><td>PWL</td><td>131.10</td><td class="pos">+9.10</td><td>2.15</td><td>53.2</td><td>14.7</td><td>Consumer Services</td></tr>
+      <tr><td>SCI</td><td>290.60</td><td class="pos">+8.82</td><td class="neg">9.63</td><td>58.6</td><td>22.5</td><td>Services</td></tr>
+      <tr><td>NUVAMA</td><td>1,820.80</td><td class="pos">+7.02</td><td class="neg">8.90</td><td>62.5</td><td>18.8</td><td>Financial Services</td></tr>
+      <tr><td>ESCORTS</td><td>2,820.90</td><td class="pos">+5.76</td><td>2.28</td><td>46.7</td><td>29.9</td><td>Capital Goods</td></tr>
+      <tr><td>NETWEB</td><td>4,765.10</td><td class="pos">+5.42</td><td>1.18</td><td>49.4</td><td>25.3</td><td>Information Technology</td></tr>
+      <tr><td>KALYANKJIL</td><td>556.85</td><td class="pos">+5.36</td><td>0.60</td><td>42.6</td><td>21.4</td><td>Consumer Durables</td></tr>
+      <tr><td>RRKABEL</td><td>2,648.00</td><td class="pos">+5.15</td><td>1.12</td><td>59.5</td><td>28.1</td><td>Capital Goods</td></tr>
+      <tr><td>ITC</td><td>268.90</td><td class="pos">+5.08</td><td>3.44</td><td>53.1</td><td>24.3</td><td>FMCG</td></tr>
+      <tr><td>CPPLUS</td><td>3,989.50</td><td class="pos">+5.00</td><td>1.07</td><td>62.6</td><td>15.8</td><td>Capital Goods</td></tr>
+    </table></div>
+    <h3>Top Losers (Nifty 500)</h3>
+    <div class="tblwrap"><table>
+      <tr><th>Symbol</th><th>LTP</th><th>1D%</th><th>Vol×63D</th><th>RSI-14</th><th>ADX-14</th><th>Industry</th></tr>
+      <tr><td>DMART</td><td>3,567.00</td><td class="neg">−6.45</td><td class="neg">4.65</td><td>33.2</td><td>21.4</td><td>Consumer Services</td></tr>
+      <tr><td>PFOCUS</td><td>285.65</td><td class="neg">−5.27</td><td>2.53</td><td>36.9</td><td>27.6</td><td>Media</td></tr>
+      <tr><td>BANDHANBNK</td><td>168.27</td><td class="neg">−4.39</td><td>1.33</td><td>41.9</td><td>16.6</td><td>Financial Services</td></tr>
+      <tr><td>KIMS</td><td>705.45</td><td class="neg">−4.18</td><td>1.48</td><td>28.0</td><td>22.9</td><td>Healthcare</td></tr>
+      <tr><td>WELCORP</td><td>2,497.50</td><td class="neg">−4.16</td><td>1.18</td><td>47.7</td><td>32.7</td><td>Capital Goods</td></tr>
+      <tr><td>THERMAX</td><td>3,228.20</td><td class="neg">−3.94</td><td>0.80</td><td>25.9</td><td>58.7</td><td>Capital Goods</td></tr>
+      <tr><td>WELSPUNLIV</td><td>230.27</td><td class="neg">−3.72</td><td>1.01</td><td>67.3</td><td>45.2</td><td>Textiles</td></tr>
+      <tr><td>SWANCORP</td><td>262.90</td><td class="neg">−3.63</td><td>0.61</td><td>25.5</td><td>25.9</td><td>Chemicals</td></tr>
+      <tr><td>BIKAJI</td><td>487.00</td><td class="neg">−3.38</td><td>1.74</td><td>27.2</td><td>24.2</td><td>FMCG</td></tr>
+      <tr><td>HCLTECH</td><td>1,201.90</td><td class="neg">−3.31</td><td>1.34</td><td>37.9</td><td>12.3</td><td>Information Technology</td></tr>
+    </table></div>
+    <ul>
+      <li><strong>Gainers cluster in Capital Goods (Escorts, RR Kabel, CP Plus)</strong> — consistent with Capital Goods' 33:17 A/D and its %&gt;20DMA (24) being among the higher sector readings.</li>
+      <li><strong>Losers cluster in Healthcare (KIMS, plus Apollo −1.83% / Yatharth −2.97% just outside the top 10)</strong> — the stock-level face of §7B's Hospitals 1:12 washout.</li>
+      <li>Thermax (ADX 58.7, RSI 25.9) is in a strong, persistent downtrend — oversold but not reversing. Avoid catching it until ADX rolls over.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="s10">
+  <div class="hdr"><span><span class="grp">C · The Structure</span>§10 · Momentum Composite</span></div>
+  <div class="body">
+    <h3>Table 1 — Fresh Entry (Stage 1+2 composite, top 10 of 20)</h3>
+    <div class="tblwrap"><table>
+      <tr><th>Rank</th><th>Symbol</th><th>LTP</th><th>1D%</th><th>5D%</th><th>Vol×63D</th><th>3W Trend</th><th>Score</th></tr>
+      <tr><td>1</td><td>NUVAMA</td><td>1,820.80</td><td class="pos">+7.02</td><td class="pos">+8.29</td><td>8.90</td><td class="pos">✓</td><td>93.7</td></tr>
+      <tr><td>2</td><td>DCMSHRIRAM</td><td>1,044.55</td><td class="pos">+15.18</td><td class="pos">+7.21</td><td>6.98</td><td class="pos">✓</td><td>93.0</td></tr>
+      <tr><td>3</td><td><strong>SUNTV</strong></td><td>626.85</td><td class="pos">+4.49</td><td class="pos">+22.15</td><td>3.64</td><td class="pos">✓</td><td>92.6</td></tr>
+      <tr><td>4</td><td>SCI</td><td>290.60</td><td class="pos">+8.82</td><td class="pos">+5.90</td><td>9.63</td><td class="pos">✓</td><td>91.5</td></tr>
+      <tr><td>5</td><td>PFOCUS</td><td>285.65</td><td class="neg">−5.27</td><td class="neg">−9.45</td><td>2.53</td><td class="neg">✗</td><td>78.6</td></tr>
+      <tr><td>6</td><td>DMART</td><td>3,567.00</td><td class="neg">−6.45</td><td class="neg">−6.97</td><td>4.65</td><td class="neg">✗</td><td>77.7</td></tr>
+      <tr><td>7</td><td>ITC</td><td>268.90</td><td class="pos">+5.08</td><td class="neg">−0.04</td><td>3.44</td><td class="pos">✓</td><td>71.3</td></tr>
+      <tr><td>8</td><td><strong>LGEINDIA</strong></td><td>1,770.90</td><td class="pos">+2.85</td><td class="pos">+2.64</td><td>4.74</td><td class="pos">✓</td><td>68.0</td></tr>
+      <tr><td>9</td><td>BIKAJI</td><td>487.00</td><td class="neg">−3.38</td><td class="neg">−15.15</td><td>1.74</td><td class="neg">✗</td><td>64.8</td></tr>
+      <tr><td>10</td><td>NYKAA</td><td>339.55</td><td class="pos">+4.49</td><td class="pos">+1.75</td><td>3.50</td><td class="neg">✗</td><td>64.7</td></tr>
+    </table></div>
+    <p class="note">Fresh Entry catches single-day shocks — PFOCUS, DMART and BIKAJI score high on volume/move magnitude but are moving <em>down</em> with no 3-week trend. Use only the ✓ rows as long candidates.</p>
+    <h3>Table 2 — Continued Momentum (weekly trend persistence)</h3>
+    <div class="tblwrap"><table>
+      <tr><th>Symbol</th><th>LTP</th><th>1D%</th><th>1W%</th><th>Weekly RSI</th><th>ADX-14</th><th>% from SMA20</th><th>% from SMA50</th></tr>
+      <tr><td>CASTROLIND</td><td>199.51</td><td class="pos">+0.24</td><td class="neg">−1.07</td><td>70.7</td><td>47.4</td><td>+2.9</td><td>+5.8</td></tr>
+      <tr><td>WELSPUNLIV</td><td>230.27</td><td class="neg">−3.72</td><td class="pos">+2.49</td><td>77.3</td><td>45.2</td><td>+6.0</td><td>+19.6</td></tr>
+      <tr><td>ENGINERSIN</td><td>307.85</td><td class="neg">−1.57</td><td class="neg">−2.47</td><td>68.8</td><td>39.9</td><td>+7.2</td><td>+17.6</td></tr>
+      <tr><td><strong>LGEINDIA</strong></td><td>1,770.90</td><td class="pos">+2.85</td><td class="pos">+2.64</td><td>60.9</td><td>35.2</td><td>+5.3</td><td>+8.0</td></tr>
+      <tr><td>CARBORUNIV</td><td>1,267.60</td><td class="pos">+2.25</td><td class="neg">−0.85</td><td>65.0</td><td>33.4</td><td>+8.7</td><td>+12.3</td></tr>
+      <tr><td>WHIRLPOOL</td><td>871.75</td><td class="pos">+1.17</td><td class="neg">−5.13</td><td>53.0</td><td>33.4</td><td>+7.8</td><td>+9.0</td></tr>
+      <tr><td>GESHIP</td><td>1,559.30</td><td class="pos">+1.88</td><td class="pos">+4.15</td><td>62.9</td><td>33.4</td><td>+7.0</td><td>+12.8</td></tr>
+      <tr><td><strong>SUNTV</strong></td><td>626.85</td><td class="pos">+4.49</td><td class="pos">+22.15</td><td>66.9</td><td>32.7</td><td>+25.6</td><td>+28.3</td></tr>
+      <tr><td>TEGA</td><td>2,064.10</td><td class="neg">−1.40</td><td class="neg">−1.31</td><td>63.6</td><td>31.2</td><td>+8.3</td><td>+19.1</td></tr>
+    </table></div>
+    <p class="note">Continued Momentum is the more reliable list in an established trend — but only 9 names qualified, a thin list that itself reflects how few stocks are trending in this tape.</p>
+    <ul>
+      <li><strong>Overlap — the strongest signal: LG Electronics India and Sun TV appear in both tables.</strong> LGEINDIA is the cleaner setup: +5.3% from SMA20, RSI 68, 4.7× volume, persistent weekly trend. Sun TV is extended (+25.6% from SMA20, daily RSI 83.3) — overlap confirmed, but entry risk is high.</li>
+      <li>Shipping shows up twice in different forms (SCI in Fresh Entry, GE Shipping in Continued) — [Guessing] a sector theme possibly linked to freight rates around the Hormuz disruption; unconfirmed.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="s11">
+  <div class="hdr"><span><span class="grp">C · The Structure</span>§11 · FII / DII Flows</span></div>
+  <div class="body">
+    <h3>11a. Daily Flows (₹ Cr)</h3>
+    <div class="tblwrap"><table>
+      <tr><th>Date</th><th>FII Buy</th><th>FII Sell</th><th>FII Net</th><th>DII Buy</th><th>DII Sell</th><th>DII Net</th></tr>
+      <tr><td>05-Oct</td><td>15,674.61</td><td>20,373.75</td><td class="neg">−4,699.14</td><td>20,492.93</td><td>15,311.31</td><td class="pos">+5,181.62</td></tr>
+      <tr><td>01-Oct</td><td>12,260.26</td><td>21,744.48</td><td class="neg">−9,484.22</td><td>25,420.04</td><td>15,378.20</td><td class="pos">+10,041.84</td></tr>
+      <tr><td>30-Sep</td><td>14,967.82</td><td>25,116.23</td><td class="neg">−10,148.41</td><td>24,413.76</td><td>13,142.03</td><td class="pos">+11,271.73</td></tr>
+      <tr><td>29-Sep</td><td>22,472.70</td><td>32,452.92</td><td class="neg">−9,980.22</td><td>46,261.11</td><td>39,308.40</td><td class="pos">+6,952.71</td></tr>
+      <tr><td>28-Sep</td><td>9,047.56</td><td>14,400.78</td><td class="neg">−5,353.22</td><td>15,918.32</td><td>10,729.30</td><td class="pos">+5,189.02</td></tr>
+      <tr><td>25-Sep</td><td>12,327.36</td><td>16,021.29</td><td class="neg">−3,693.93</td><td>14,035.77</td><td>11,197.60</td><td class="pos">+2,838.17</td></tr>
+      <tr><td>24-Sep</td><td>13,111.22</td><td>18,138.58</td><td class="neg">−5,027.36</td><td>18,196.90</td><td>13,895.72</td><td class="pos">+4,301.18</td></tr>
+    </table></div>
+    <h3>11b. Trend Comparison &amp; Scorecard</h3>
+    <div class="tblwrap"><table>
+      <tr><th>Window</th><th>FII Net</th><th>DII Net</th><th>DII Absorption</th></tr>
+      <tr><td>Today (5-Oct)</td><td class="neg">−4,699.14</td><td class="pos">+5,181.62</td><td class="pos">110.3%</td></tr>
+      <tr><td>Week to 1-Oct (28-Sep → 1-Oct)</td><td class="neg">−34,311.99</td><td class="pos">+33,447.90</td><td class="amb">97.5%</td></tr>
+      <tr><td>Week to 25-Sep</td><td class="neg">−16,267.05</td><td class="pos">+18,789.90</td><td class="pos">115.5%</td></tr>
+      <tr><td>October MTD (2 sessions)</td><td class="neg">−14,183.36</td><td class="pos">+15,223.46</td><td class="pos">107.3%</td></tr>
+      <tr><td>Percentile rank (58 sessions)</td><td class="neg">FII 8th of 58 (12.9 pctile)</td><td class="pos">DII 49th of 58 (83.6 pctile)</td><td></td></tr>
+    </table></div>
+    <p class="note">The pack labels the 28-Sep→1-Oct window "this_week"; it does not include today (sum of 28-Sep to 1-Oct daily nets = −₹34,965 Cr, matching the reported weekly figure). Flow table holds 58 sessions, so percentile ranks are over 58, not 60.</p>
+    <ul>
+      <li><strong>FII selling halved vs the prior three sessions (−₹4,699 Cr vs ~−₹9,900 Cr average)</strong> — still the 8th-worst of 58, so "less bad" is not "turning".</li>
+      <li><strong>DII absorbed more than 100% for the third straight session.</strong> DII is the only reason the index bounced; it is a floor, not a driver of trend.</li>
+      <li>FII has been a net seller on all 7 sessions shown (−₹48,387 Cr cumulative). One smaller outflow does not mark a turn; a net-buy session would.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= D. THE FORWARD VIEW ================= -->
+<section id="s12">
+  <div class="hdr"><span><span class="grp">D · The Forward View</span>§12 · What Changed Today</span></div>
+  <div class="body">
+    <ul>
+      <li><strong>Regime:</strong> Bearish 18.8 (1-Oct) → Neutral 38.2 today (+19.4). Third band change in four sessions.</li>
+      <li><strong>Breadth:</strong> Nifty 500 A/D 0.29 (111:388) → 1.19 (271:228). %&gt;20DMA 12 → 16 per the pack's comparison — but versus 25-Sep (33) it is still less than half.</li>
+      <li><strong>Flows:</strong> No FII direction flip — net selling for the 7th straight session shown, but magnitude halved (−₹9,484 Cr → −₹4,699 Cr). DII absorption 105.9% → 110.3%.</li>
+      <li><strong>VIX:</strong> 14.46 → 14.78 (+0.32) — rose on an up day, which is unusual and points to event hedging (expiry + RBI).</li>
+      <li><strong>Sectors:</strong> Best 1M = NIFTY MEDIA; worst 1M = NIFTY AUTO. Biggest 5-day breadth gain = NIFTY IT (+30); biggest 5-day breadth loss = NIFTY METAL (−53).</li>
+      <li><strong>Leadership flip:</strong> 1-Oct's only strong sector, IT (+2.17%), was flat today (−0.01%); 1-Oct's worst, Auto (−3.46%), stabilised (+0.15%). Pharma/Healthcare took over as the weakest groups.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="s13">
+  <div class="hdr"><span><span class="grp">D · The Forward View</span>§13 · Futures &amp; Options Intelligence</span></div>
+  <div class="body">
+    <div class="datanote">All futures prices and OI below are Kite settled daily candles (historical endpoint, oi=True), not live snapshots. Option-chain OI pulled post-close via get_quotes: Nifty weekly 21,000–24,000 in 100-pt steps; BankNifty monthly 50,000–60,000 in 500-pt steps. The 1-Oct report's PCRs (0.687 / 0.863) may have used a different strike range — treat the day-over-day PCR change as directional only.</div>
+
+    <h3>13a. Nifty50 &amp; BankNifty F&amp;O Snapshot</h3>
+    <div class="tblwrap"><table>
+      <tr><th>Metric</th><th>Value</th></tr>
+      <tr><td>Nifty Futures (Oct) Close</td><td class="pos">22,620.00 <span class="pos">(+0.40% vs 1-Oct's 22,530.30)</span></td></tr>
+      <tr><td>Futures Premium vs Spot</td><td class="pos">+64.25</td></tr>
+      <tr><td>Nifty Futures OI, Oct contract</td><td>19,159,660 <span class="amb">(+0.02% vs 1-Oct)</span></td></tr>
+      <tr><td>BankNifty Futures (Oct) Close</td><td class="pos">54,925.00 <span class="pos">(+0.24% vs 1-Oct's 54,794.80)</span></td></tr>
+      <tr><td>BankNifty Futures Premium vs Spot</td><td class="pos">+210.90</td></tr>
+      <tr><td>BankNifty Futures OI, Oct contract</td><td>2,327,910 <span class="neg">(−0.78% vs 1-Oct)</span></td></tr>
+      <tr><td>Nifty Weekly (6-Oct) PCR</td><td class="amb">0.949</td></tr>
+      <tr><td>Nifty Weekly Max Pain (6-Oct)</td><td><strong>22,600</strong> — 44 pts above today's close</td></tr>
+      <tr><td>BankNifty Monthly (27-Oct) PCR</td><td class="amb">0.948</td></tr>
+      <tr><td>BankNifty Monthly Max Pain (27-Oct)</td><td><strong>56,000</strong> — unchanged; 1,286 pts above spot</td></tr>
+      <tr><td>India VIX</td><td class="neg">14.78 (+0.32)</td></tr>
+    </table></div>
+
+    <h3>13b. Nifty &amp; BankNifty Futures — October Contract OI Trend (settled)</h3>
+    <div class="tblwrap"><table>
+      <tr><th>Date</th><th>Nifty Oct Close</th><th>Nifty Oct OI</th><th>OI Chg%</th><th>Pattern</th><th>BankNifty Oct Close</th><th>BankNifty Oct OI</th><th>OI Chg%</th><th>Pattern</th></tr>
+      <tr><td>29 Sep</td><td>22,865.70</td><td>17,135,235</td><td>—</td><td>—</td><td>54,897.40</td><td>2,260,320</td><td>—</td><td>—</td></tr>
+      <tr><td>30 Sep</td><td class="neg">22,707.30</td><td>18,015,075</td><td class="pos">+5.13</td><td class="neg">SB</td><td class="pos">55,006.00</td><td>2,394,960</td><td class="pos">+5.96</td><td class="pos">LB</td></tr>
+      <tr><td>1 Oct</td><td class="neg">22,530.30</td><td>19,155,955</td><td class="pos">+6.33</td><td class="neg">SB</td><td class="neg">54,794.80</td><td>2,346,180</td><td class="neg">−2.04</td><td class="neg">LU</td></tr>
+      <tr><td>5 Oct</td><td class="pos">22,620.00</td><td>19,159,660</td><td class="amb">+0.02</td><td class="amb">Flat</td><td class="pos">54,925.00</td><td>2,327,910</td><td class="neg">−0.78</td><td class="pos">SC</td></tr>
+    </table></div>
+    <ul>
+      <li><strong>Nifty: the +0.40% futures bounce came with zero OI change.</strong> No longs were added and the ~2.0M units of OI added during 30-Sep/1-Oct short buildup from 30-Sep/1-Oct were not covered. The shorts are still sitting there — today was cash-led (DII), not a derivatives repositioning.</li>
+      <li><strong>BankNifty: mild short covering</strong> (price +0.24%, OI −0.78%), following 1-Oct's long unwinding (corrected from the published "short buildup"). Positioning is being reduced on both sides — low conviction ahead of RBI.</li>
+    </ul>
+
+    <h3>13c. Top-7 Nifty Weight Stocks — October Futures, 1-Oct → 5-Oct (re-pulled fresh)</h3>
+    <div class="tblwrap"><table>
+      <tr><th>Stock</th><th>1-Oct Close</th><th>5-Oct Close</th><th>Chg%</th><th>1-Oct OI</th><th>5-Oct OI</th><th>OI Chg%</th><th>Pattern</th></tr>
+      <tr><td>Reliance</td><td>1,175.80</td><td>1,193.40</td><td class="pos">+1.50</td><td>146,855,000</td><td>148,081,000</td><td class="pos">+0.83</td><td class="pos">LB</td></tr>
+      <tr><td><strong>HDFC Bank</strong></td><td>723.00</td><td>705.60</td><td class="neg">−2.41</td><td>361,305,100</td><td>385,784,100</td><td class="pos">+6.78</td><td class="neg">SB</td></tr>
+      <tr><td>ICICI Bank</td><td>1,318.80</td><td>1,337.20</td><td class="pos">+1.40</td><td>123,312,000</td><td>124,533,500</td><td class="pos">+0.99</td><td class="pos">LB</td></tr>
+      <tr><td>Infosys</td><td>1,038.20</td><td>1,023.50</td><td class="neg">−1.42</td><td>76,149,600</td><td>76,990,800</td><td class="pos">+1.10</td><td class="neg">SB</td></tr>
+      <tr><td>TCS</td><td>2,076.40</td><td>2,107.70</td><td class="pos">+1.51</td><td>27,495,450</td><td>26,630,100</td><td class="neg">−3.15</td><td class="pos">SC</td></tr>
+      <tr><td>Bharti Airtel</td><td>1,749.70</td><td>1,783.20</td><td class="pos">+1.91</td><td>53,640,325</td><td>54,182,775</td><td class="pos">+1.01</td><td class="pos">LB</td></tr>
+      <tr><td>L&amp;T</td><td>3,714.50</td><td>3,758.40</td><td class="pos">+1.18</td><td>11,143,475</td><td>11,476,150</td><td class="pos">+2.99</td><td class="pos">LB</td></tr>
+    </table></div>
+    <p class="note">All seven re-pulled from Kite historical (tokens 12540674, 12509186, 12511746, 12514818, 12547330, 12482050, 12523522). 1-Oct values match the 1-Oct report exactly.</p>
+
+    <h3>13d. The Critical Observation</h3>
+    <div class="thesis">
+    <ul>
+      <li><strong>Five of seven heavyweights flipped bullish (4 LB, 1 SC) — yet Nifty futures OI did not move.</strong> Single-stock longs are being built while index shorts are held. That is a hedged book: institutions buying stocks and keeping index protection on. It caps upside into expiry and RBI, and means any disappointment hits a market already carrying shorts that have not been covered.</li>
+      <li><strong>HDFC Bank's +6.78% OI on −2.41% is the largest single positioning move in the top-7</strong> — about 24.5M shares of fresh short interest on the day of its Q2 update. HDFC Bank is the heaviest Nifty and Bank Nifty weight; Bank Nifty only rose because PSU banks (12:0) and ICICI offset it. If HDFC Bank does not stabilise, Bank Nifty's bounce has no anchor.</li>
+      <li><strong>Infosys flipped from long buildup (1-Oct) to short buildup today</strong> while TCS shows short covering — the IT bid is not unanimous, consistent with NIFTY IT closing flat on 8:2 breadth.</li>
+    </ul>
+    </div>
+
+    <h3>13e. Key Strikes — Nifty Weekly (6-Oct) &amp; BankNifty Monthly (27-Oct)</h3>
+    <div class="tblwrap"><table>
+      <tr><th>Instrument</th><th>Strike</th><th>CE OI</th><th>PE OI</th><th>Note</th></tr>
+      <tr><td>Nifty (6-Oct)</td><td>23,000</td><td class="neg">14,955,265</td><td>1,130,935</td><td>Largest CE wall — up from 14.0M on 1-Oct</td></tr>
+      <tr><td>Nifty (6-Oct)</td><td>22,800</td><td class="neg">14,510,145</td><td>1,309,945</td><td>2nd-largest CE wall — near-term ceiling</td></tr>
+      <tr><td>Nifty (6-Oct)</td><td>23,500</td><td class="neg">13,457,470</td><td>813,800</td><td>3rd CE wall</td></tr>
+      <tr><td>Nifty (6-Oct)</td><td>22,700</td><td class="neg">11,238,955</td><td>2,278,185</td><td>First CE wall above spot</td></tr>
+      <tr><td>Nifty (6-Oct)</td><td>22,600</td><td class="neg">10,766,470</td><td>5,228,470</td><td>Max pain — straddle-heavy</td></tr>
+      <tr><td>Nifty (6-Oct)</td><td>21,500</td><td>17,550</td><td class="pos">14,757,405</td><td>Largest PE wall — up from 9.6M on 1-Oct</td></tr>
+      <tr><td>Nifty (6-Oct)</td><td>22,000</td><td>415,675</td><td class="pos">13,104,910</td><td>2nd PE wall — up from 10.8M</td></tr>
+      <tr><td>Nifty (6-Oct)</td><td>22,500</td><td>7,968,740</td><td class="pos">12,445,745</td><td>Nearest heavy support — 56 pts below spot</td></tr>
+      <tr><td>Nifty (6-Oct)</td><td>22,400</td><td>2,334,995</td><td class="pos">11,730,550</td><td>Today's low (22,397) sat right on this</td></tr>
+      <tr><td>Nifty (6-Oct)</td><td>22,300</td><td>986,050</td><td class="pos">10,322,195</td><td></td></tr>
+      <tr><td>BankNifty (27-Oct)</td><td>58,000</td><td class="neg">1,359,540</td><td class="pos">1,095,780</td><td>Largest CE wall; PE OI fell from 1.23M</td></tr>
+      <tr><td>BankNifty (27-Oct)</td><td>56,000</td><td class="neg">1,264,740</td><td>773,730</td><td>Max pain; 2nd CE wall</td></tr>
+      <tr><td>BankNifty (27-Oct)</td><td>57,000</td><td class="neg">1,039,020</td><td>417,330</td><td>3rd CE wall</td></tr>
+      <tr><td>BankNifty (27-Oct)</td><td>55,000</td><td>782,460</td><td class="pos">882,990</td><td>Largest PE below spot — pivot strike</td></tr>
+      <tr><td>BankNifty (27-Oct)</td><td>54,000</td><td>241,170</td><td class="pos">642,510</td><td>Key support</td></tr>
+    </table></div>
+    <ul>
+      <li><strong>Puts were written aggressively at 22,000–22,500 today</strong> (22,500 PE 12.4M, 22,400 PE 11.7M) — writers are defending the 22,400–22,500 zone into expiry. The 21,500 PE wall also grew to 14.8M, so tail protection was added at the same time.</li>
+      <li><strong>Calls are stacked 22,600–23,000</strong> (10.8M–15.0M at every 100-pt strike). 22,700–22,800 is the realistic ceiling for tomorrow.</li>
+      <li><strong>24,000 CE OI halved (11.3M → 5.5M)</strong> — far-OTM call writers are closing; nobody is positioning for a move above 23,500 this week.</li>
+      <li>BankNifty 58,000 PE OI dropped 11% (1.23M → 1.10M) — deep-ITM put holders booking; 55,000 is now the two-sided pivot (CE 0.78M / PE 0.88M).</li>
+    </ul>
+
+    <h3>13f. Next Session Outlook — Expiry Day</h3>
+    <ul>
+      <li><strong>Key levels (Nifty, 6-Oct weekly expiry):</strong> Support 22,500 → 22,400 → 22,000. Resistance 22,600 (max pain) → 22,700 → 22,800. Most-probable pin zone: <strong>22,500–22,600</strong>, where both the largest near-ATM PE (22,500) and max pain (22,600) sit.</li>
+      <li><strong>BankNifty:</strong> Support 54,500 → 54,000; resistance 55,000 → 55,500. HDFC Bank is the swing factor.</li>
+      <li><strong>Bias:</strong> <span class="badge neutral">Neutral — range-bound into expiry and RBI</span></li>
+      <li><strong>⚠ Gamma risk:</strong> with ~11–12M OI on each of 22,400/22,500 PE and 22,600/22,700 CE, a break of either 22,400 or 22,700 tomorrow forces hedging flows that can extend the move 100–150 pts fast. A close below 22,400 would put the 22,000 PE wall (13.1M) in play; above 22,700, the 22,800/23,000 CE walls cap it. Do not hold short options naked through the last hour.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="s14">
+  <div class="hdr"><span><span class="grp">D · The Forward View</span>§14 · Tomorrow's Action Plan</span></div>
+  <div class="body">
+    <ul>
+      <li><strong>Do not treat today's Neutral regime as a buy signal.</strong> The test is breadth composition: if Nifty 500 %&gt;20DMA does not rise from 16 toward 20+ on Tuesday, today was a one-day reflex bounce (the same pattern as 30-Sep, which reversed within one session).</li>
+      <li><strong>Expiry plan (6-Oct):</strong> expect 22,500–22,600 to pin. Break below 22,400 → target 22,200–22,000; break above 22,700 → capped at 22,800. Range-sell setups only with defined risk; no naked shorts into the last hour.</li>
+      <li><strong>Watch HDFC Bank first thing.</strong> Fresh 24.5M-share short build on the Q2 update. A further slide below ₹700 (futures) keeps Bank Nifty capped below 55,000 regardless of PSU bank strength; a recovery above ₹715 would signal short covering and a Bank Nifty push toward 55,500.</li>
+      <li><strong>Avoid adding to Pharma/Healthcare on dips</strong> until their %&gt;20DMA stops falling — breadth fell 50 points in five sessions, and today's 2:18 / 3:17 A/D says distribution is ongoing. Their long-term ladder (65% &gt;200D for Pharma) is intact, so this is a timing wait, not an exit signal on quality holdings.</li>
+      <li><strong>Momentum watchlist:</strong> LGEINDIA (dual-list overlap, clean trend) is the highest-quality long setup. DCM Shriram, SCI, Nuvama need a confirmed trigger from exchange filings before chasing a 7–15% one-day volume spike.</li>
+      <li><strong>Macro calendar:</strong> HSBC Services PMI final [Likely 6-Oct] — confirm whether it holds the 55.8 flash; RBI MPC decision Wed 7-Oct (hawkish tone or FX measures = risk-off; status quo with neutral guidance = relief). Q2 business updates from other banks/NBFCs continue — grade them on CASA mix and margins, as the market did HDFC Bank.</li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<script>
+  document.querySelectorAll('section > .hdr').forEach(h => {
+    h.addEventListener('click', () => { h.nextElementSibling.classList.toggle('collapsed'); });
+  });
+  document.querySelectorAll('table').forEach(table => {
+    const headers = table.querySelectorAll('th');
+    headers.forEach((th, idx) => {
+      th.addEventListener('click', () => {
+        const rows = Array.from(table.querySelectorAll('tr')).slice(1);
+        const asc = th.dataset.asc !== 'true';
+        headers.forEach(h => h.dataset.asc = '');
+        th.dataset.asc = asc;
+        rows.sort((a, b) => {
+          let x = a.children[idx]?.innerText.replace(/[^0-9.\-]/g,'') || a.children[idx]?.innerText || '';
+          let y = b.children[idx]?.innerText.replace(/[^0-9.\-]/g,'') || b.children[idx]?.innerText || '';
+          const nx = parseFloat(x), ny = parseFloat(y);
+          if (!isNaN(nx) && !isNaN(ny)) return asc ? nx - ny : ny - nx;
+          return asc ? x.localeCompare(y) : y.localeCompare(x);
+        });
+        rows.forEach(r => table.appendChild(r));
+      });
+    });
+  });
+  const sections = ['s1','s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14'];
+  const navLinks = document.querySelectorAll('#navbar a');
+  window.addEventListener('scroll', () => {
+    let current = sections[0];
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && window.scrollY >= el.offsetTop - 120) current = id;
+    });
+    navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+  });
+</script>
+
+</body>
+</html>
