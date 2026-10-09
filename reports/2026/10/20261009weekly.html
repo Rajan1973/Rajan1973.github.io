@@ -1,0 +1,1201 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Weekly Nifty Roundup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f4f6f8; --surface:#ffffff; --surface-2:#eef1f4; --fg:#16202a; --muted:#5a6672; --faint:#8a95a0;
+  --line:#d8dee4; --line-strong:#b9c2cb; --accent:#1d5f8a; --accent-soft:#e3eef6; --focus:#1d5f8a;
+  --gain:#137a46; --loss:#b4282e; --flat:#5a6672;
+  --gain-bg-1:rgba(19,122,70,.07); --gain-bg-2:rgba(19,122,70,.14); --gain-bg-3:rgba(19,122,70,.22);
+  --loss-bg-1:rgba(180,40,46,.07); --loss-bg-2:rgba(180,40,46,.13); --loss-bg-3:rgba(180,40,46,.21);
+  --track:#e3e8ed; --warn-bg:#fbf1dc; --warn-fg:#7a5205; --chip-bg:#eef1f4;
+  --hi-bg:#dcefe4; --hi-fg:#0f5a34; --md-bg:#e3eef6; --md-fg:#1d4f72; --lo-bg:#eceef1; --lo-fg:#4c5660;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f1418; --surface:#161d23; --surface-2:#1c252c; --fg:#e4e9ee; --muted:#9aa6b1; --faint:#71808c;
+  --line:#2a343d; --line-strong:#3a4650; --accent:#6fb0dc; --accent-soft:#1a2c3a; --focus:#8cc4ea;
+  --gain:#4cc38a; --loss:#f07178; --flat:#9aa6b1;
+  --gain-bg-1:rgba(76,195,138,.08); --gain-bg-2:rgba(76,195,138,.15); --gain-bg-3:rgba(76,195,138,.24);
+  --loss-bg-1:rgba(240,113,120,.08); --loss-bg-2:rgba(240,113,120,.15); --loss-bg-3:rgba(240,113,120,.24);
+  --track:#26313a; --warn-bg:#3a2c10; --warn-fg:#f0c674; --chip-bg:#222c34;
+  --hi-bg:#163a28; --hi-fg:#8fe0b5; --md-bg:#1a3346; --md-fg:#a9d2ef; --lo-bg:#252d34; --lo-fg:#b3bdc6;
+  color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#0f1418; --surface:#161d23; --surface-2:#1c252c; --fg:#e4e9ee; --muted:#9aa6b1; --faint:#71808c;
+  --line:#2a343d; --line-strong:#3a4650; --accent:#6fb0dc; --accent-soft:#1a2c3a; --focus:#8cc4ea;
+  --gain:#4cc38a; --loss:#f07178; --flat:#9aa6b1;
+  --gain-bg-1:rgba(76,195,138,.08); --gain-bg-2:rgba(76,195,138,.15); --gain-bg-3:rgba(76,195,138,.24);
+  --loss-bg-1:rgba(240,113,120,.08); --loss-bg-2:rgba(240,113,120,.15); --loss-bg-3:rgba(240,113,120,.24);
+  --track:#26313a; --warn-bg:#3a2c10; --warn-fg:#f0c674; --chip-bg:#222c34;
+  --hi-bg:#163a28; --hi-fg:#8fe0b5; --md-bg:#1a3346; --md-fg:#a9d2ef; --lo-bg:#252d34; --lo-fg:#b3bdc6;
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-size:15px;line-height:1.5;-webkit-text-size-adjust:100%}
+.page{max-width:1240px;margin:0 auto;padding-inline:clamp(16px,4vw,40px);padding-block:28px 56px;overflow-wrap:break-word}
+.num,.chg,.mono{font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;font-variant-numeric:tabular-nums}
+a{color:var(--accent);text-underline-offset:2px}
+a:hover{text-decoration-thickness:2px}
+a:focus-visible,summary:focus-visible,.tbl-wrap:focus-visible{outline:2px solid var(--focus);outline-offset:2px;border-radius:3px}
+h1,h2,h3{line-height:1.25;margin:0}
+h1{font-size:clamp(1.45rem,1.1rem + 1.6vw,2.1rem);font-weight:600;letter-spacing:-.01em}
+h2{font-size:1.25rem;font-weight:600;margin-block:40px 6px;padding-top:14px;border-top:2px solid var(--line-strong)}
+h3{font-size:1rem;font-weight:600;margin-block:22px 8px;display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.eyebrow{font-size:.78rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 6px}
+.sub{color:var(--muted);margin:8px 0 0}
+.sub b{color:var(--fg);font-weight:600}
+.lede{color:var(--muted);margin:4px 0 12px;max-width:72ch}
+.takeaways{margin:20px 0 0;padding:16px 18px 16px 34px;background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:6px}
+.takeaways li{margin:4px 0;max-width:95ch}
+.muted{color:var(--muted)}
+.chg{white-space:nowrap}
+.chg.pos{color:var(--gain)} .chg.neg{color:var(--loss)} .chg.flat{color:var(--flat)}
+.arr{font-size:.7em;margin-right:3px;vertical-align:.08em}
+.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:6px;background:var(--surface);max-width:100%}
+table{border-collapse:collapse;width:100%}
+th,td{padding:8px 10px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+tbody tr:last-child>*{border-bottom:0}
+thead th{font-size:.74rem;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);background:var(--surface-2);white-space:nowrap;vertical-align:bottom}
+th.num,td.num{text-align:right}
+table.idx{min-width:820px}
+table.idx td{vertical-align:middle;white-space:nowrap}
+table.idx .iname{font-weight:500;white-space:nowrap}
+.heat-g1{background:var(--gain-bg-1)} .heat-g2{background:var(--gain-bg-2)} .heat-g3{background:var(--gain-bg-3)}
+.heat-l1{background:var(--loss-bg-1)} .heat-l2{background:var(--loss-bg-2)} .heat-l3{background:var(--loss-bg-3)}
+.cell-bar{min-width:128px}
+.bv{display:block}
+.bar-track{display:block;position:relative;height:6px;margin-top:4px;background:var(--track);border-radius:3px}
+.bar-track::after{content:"";position:absolute;left:50%;top:-2px;bottom:-2px;width:1px;background:var(--line-strong)}
+.bar{position:absolute;top:0;bottom:0;border-radius:2px}
+.bar.pos{background:var(--gain)} .bar.neg{background:var(--loss)} .bar.flat{background:var(--flat)}
+.scale-note{font-size:.75rem;font-weight:400;color:var(--faint)}
+.reading{color:var(--muted);font-size:.9rem;margin:8px 0 0}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:12px;margin-top:12px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:14px 16px;min-width:0}
+.card h3{margin-top:0}
+.kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,120px),1fr));gap:10px 16px;margin:0}
+.kv div{min-width:0}
+.kv dt{font-size:.74rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.kv dd{margin:2px 0 0;font-size:1.02rem}
+.vix .chg.pos,.vix .chg.neg{color:var(--fg)}
+.note{font-size:.85rem;color:var(--muted);margin:10px 0 0}
+.backdrop{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:12px}
+.backdrop p{margin:6px 0}
+.flag{display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:3px;background:var(--warn-bg);color:var(--warn-fg);vertical-align:.1em}
+.src-list{margin:6px 0 0;padding-left:18px;font-size:.88rem}
+.sess{margin:6px 0 0;padding:0;list-style:none;font-size:.9rem}
+.sess li{padding:4px 0;border-top:1px dashed var(--line)}
+.sess .d{font-weight:600;margin-right:6px}
+table.movers{min-width:1040px}
+table.movers td{font-size:.9rem}
+.c-rank{color:var(--muted);width:2.5em}
+.c-stock{min-width:170px;max-width:220px}
+.c-stock .sym{font-weight:700;letter-spacing:.01em}
+.c-stock .co,.c-stock .sec{display:block;min-width:0}
+.c-stock .co{color:var(--fg);font-size:.86rem}
+.c-stock .sec{color:var(--muted);font-size:.78rem}
+.c-ret{font-weight:600}
+.c-close{white-space:nowrap}
+.to{color:var(--faint)}
+.c-cat{min-width:340px;max-width:520px}
+.cat-head{font-weight:500}
+.nocat{color:var(--muted);font-style:italic;font-weight:400}
+.nocat-rest{color:var(--muted);font-weight:400}
+.chips{display:flex;flex-wrap:wrap;gap:4px;margin:5px 0}
+.chip{display:inline-block;font-size:.72rem;line-height:1.5;padding:1px 7px;border-radius:999px;background:var(--chip-bg);color:var(--muted);border:1px solid var(--line);white-space:nowrap}
+.chip.cat{background:var(--accent-soft);color:var(--accent);border-color:transparent}
+.conf-high{background:var(--hi-bg);color:var(--hi-fg);border-color:transparent}
+.conf-medium{background:var(--md-bg);color:var(--md-fg);border-color:transparent}
+.conf-low{background:var(--lo-bg);color:var(--lo-fg);border-style:dashed}
+.tag{display:inline-block;margin-left:6px;font-size:.66rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:1px 6px;border-radius:3px;background:var(--warn-bg);color:var(--warn-fg);vertical-align:.12em}
+.src{font-size:.8rem;color:var(--muted);overflow-wrap:anywhere}
+.src-k,.driver-k{font-weight:600;color:var(--muted)}
+.src-plain{color:var(--muted)}
+.driver{margin:5px 0 0;font-size:.82rem;color:var(--muted)}
+.more{margin-top:4px;font-size:.82rem;color:var(--muted)}
+.more summary{cursor:pointer;color:var(--accent);width:max-content}
+.more p{margin:4px 0 0}
+.spark{display:block;overflow:visible}
+.spark polyline{fill:none;stroke-width:1.6;stroke-linejoin:round;stroke-linecap:round}
+.spark.pos polyline{stroke:var(--gain)} .spark.neg polyline{stroke:var(--loss)}
+.spark.pos circle{fill:var(--gain)} .spark.neg circle{fill:var(--loss)}
+.spark-base{stroke:var(--line-strong);stroke-width:1;stroke-dasharray:2 2}
+.summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:12px;margin:12px 0 14px}
+.count-list{list-style:none;margin:0;padding:0;font-size:.86rem}
+.count-list li{display:grid;grid-template-columns:minmax(0,1fr) 70px 2.2em;gap:8px;align-items:center;padding:3px 0}
+.cl-k{min-width:0}
+.cl-bar{display:block;height:6px;background:var(--track);border-radius:3px;overflow:hidden}
+.cl-bar span{display:block;height:100%;background:var(--accent)}
+.cl-v{text-align:right}
+.method{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:6px 20px 6px 36px}
+.method li{margin:8px 0;max-width:100ch}
+.disclaimer{margin-top:18px;font-size:.85rem;color:var(--muted)}
+@media (max-width:760px){
+  table.movers{min-width:0}
+  table.movers thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  table.movers,table.movers tbody{display:block}
+  table.movers tr{display:grid;grid-template-columns:2.2em minmax(0,1fr) auto;grid-template-areas:"rank stock ret" "close close spark" "rv rv rv" "cat cat cat";gap:4px 10px;padding:12px;border-bottom:1px solid var(--line)}
+  table.movers tbody tr:last-child{border-bottom:0}
+  table.movers td{display:block;padding:0;border:0;min-width:0;max-width:none}
+  .c-rank{grid-area:rank} .c-stock{grid-area:stock} .c-ret{grid-area:ret} .c-close{grid-area:close;text-align:left!important;white-space:normal}
+  .c-spark{grid-area:spark;justify-self:end} .c-rv{grid-area:rv;text-align:left!important} .c-cat{grid-area:cat;padding-top:6px!important;border-top:1px dashed var(--line)!important}
+  .c-close::before,.c-rv::before{content:attr(data-k) ": ";color:var(--muted);font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:.78rem}
+}
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+<style>body{margin:0}</style>
+</head>
+<body>
+<div class="page">
+<header>
+<p class="eyebrow">Weekly roundup</p>
+<h1>Weekly Roundup: Key Nifty Indices and Nifty 500 Movers</h1>
+<p class="sub"><b>Week of 5 to 9 October 2026</b> (1 Oct close to 9 Oct close) &middot; 4-session week (2 Oct holiday) &middot; previous week 24 Sep to 1 Oct, 5 sessions</p>
+<ul class="takeaways"><li>Nifty 50 returned +0.44% this week (22,421.95 to 22,520.45) after &minus;2.78% the previous week, a +3.22 percentage-point swing; the Nifty 500 was flat at +0.04% after &minus;3.08%.</li><li>Breadth on the closing session flipped: advance/decline ratio 0.33 on 1 Oct (0.32 on 24 Sep) against 1.49 on 9 Oct (2,145 advances, 1,436 declines).</li><li>India VIX ended at 14.38, &minus;0.55% on the week after jumping +13.95% the week before; it sits at the 70th percentile of its one-year range.</li><li>Best sector index: Nifty FMCG +2.45% (thematic: Nifty Capital Markets +2.76%); worst: Nifty Realty &minus;3.72% and Nifty Metal &minus;3.69%.</li><li>RBI raised the repo rate 25 bp to 5.50% on 7 Oct (Nifty 50 &minus;0.76% to 22,603.05). 8 Oct brought a broad sell-off: Nifty 50 &minus;1.64% to 22,231.80, intraday low 22,179.90 (a new 52-week low), Nifty 500 &minus;2.01%; 9 Oct rebounded +1.30% (Nifty 500 +1.16%).</li></ul>
+</header>
+
+<section aria-labelledby="s-idx">
+<h2 id="s-idx">Key indices: this week vs previous week</h2>
+<p class="lede">Each group is sorted by this week's return. Bars share one scale within a group; the centre line is zero. Swing is this week % minus previous week %, in percentage points.</p>
+<section class="idx-group" aria-labelledby="g-broad">
+<h3 id="g-broad">Broad market <span class="scale-note">bar scale &plusmn;4%</span></h3>
+<div class="tbl-wrap"><table class="idx">
+<thead><tr><th scope="col">Index</th><th scope="col" class="num">Close 9 Oct</th><th scope="col" class="num">This week %</th>
+<th scope="col" class="num">Previous week %</th><th scope="col" class="num" title="This week % minus previous week %, in percentage points">Swing (pts)</th>
+<th scope="col" class="num">1M %</th><th scope="col" class="num">% below 52w high</th></tr></thead>
+<tbody><tr>
+<th scope="row" class="iname">NIFTY Smallcap 100</th>
+<td class="num">19,153.70</td>
+<td class="num cell-bar heat-g1"><span class="bv"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+0.50%</span></span><span class="bar-track" aria-hidden="true"><span class="bar pos" style="left:50%;width:6.2%"></span></span></td>
+<td class="num cell-bar heat-l3"><span class="bv"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;3.18%</span></span><span class="bar-track" aria-hidden="true"><span class="bar neg" style="right:50%;width:39.8%"></span></span></td>
+<td class="num heat-g3"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+3.68</span></td>
+<td class="num heat-l2"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;4.41%</span></td>
+<td class="num muted">&minus;5.12%</td>
+</tr><tr>
+<th scope="row" class="iname">Nifty 50</th>
+<td class="num">22,520.45</td>
+<td class="num cell-bar heat-g1"><span class="bv"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+0.44%</span></span><span class="bar-track" aria-hidden="true"><span class="bar pos" style="left:50%;width:5.5%"></span></span></td>
+<td class="num cell-bar heat-l3"><span class="bv"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;2.78%</span></span><span class="bar-track" aria-hidden="true"><span class="bar neg" style="right:50%;width:34.8%"></span></span></td>
+<td class="num heat-g2"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+3.22</span></td>
+<td class="num heat-l2"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;3.89%</span></td>
+<td class="num muted">&minus;14.61%</td>
+</tr><tr>
+<th scope="row" class="iname">Nifty 100</th>
+<td class="num">23,547.90</td>
+<td class="num cell-bar heat-g1"><span class="bv"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+0.13%</span></span><span class="bar-track" aria-hidden="true"><span class="bar pos" style="left:50%;width:1.6%"></span></span></td>
+<td class="num cell-bar heat-l3"><span class="bv"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;2.89%</span></span><span class="bar-track" aria-hidden="true"><span class="bar neg" style="right:50%;width:36.1%"></span></span></td>
+<td class="num heat-g2"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+3.02</span></td>
+<td class="num heat-l2"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;4.37%</span></td>
+<td class="num muted">&minus;12.71%</td>
+</tr><tr>
+<th scope="row" class="iname">Nifty 200</th>
+<td class="num">13,062.85</td>
+<td class="num cell-bar heat-g1"><span class="bv"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+0.13%</span></span><span class="bar-track" aria-hidden="true"><span class="bar pos" style="left:50%;width:1.6%"></span></span></td>
+<td class="num cell-bar heat-l3"><span class="bv"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;3.05%</span></span><span class="bar-track" aria-hidden="true"><span class="bar neg" style="right:50%;width:38.1%"></span></span></td>
+<td class="num heat-g2"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+3.18</span></td>
+<td class="num heat-l2"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;4.72%</span></td>
+<td class="num muted">&minus;11.14%</td>
+</tr><tr>
+<th scope="row" class="iname">NIFTY Midcap 100</th>
+<td class="num">58,787.30</td>
+<td class="num cell-bar heat-g1"><span class="bv"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+0.09%</span></span><span class="bar-track" aria-hidden="true"><span class="bar pos" style="left:50%;width:1.1%"></span></span></td>
+<td class="num cell-bar heat-l3"><span class="bv"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;3.70%</span></span><span class="bar-track" aria-hidden="true"><span class="bar neg" style="right:50%;width:46.2%"></span></span></td>
+<td class="num heat-g3"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+3.79</span></td>
+<td class="num heat-l3"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;6.08%</span></td>
+<td class="num muted">&minus;8.79%</td>
+</tr><tr>
+<th scope="row" class="iname">Nifty 500</th>
+<td class="num">21,866.65</td>
+<td class="num cell-bar heat-g1"><span class="bv"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+0.04%</span></span><span class="bar-track" aria-hidden="true"><span class="bar pos" style="left:50%;width:0.5%"></span></span></td>
+<td class="num cell-bar heat-l3"><span class="bv"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;3.08%</span></span><span class="bar-track" aria-hidden="true"><span class="bar neg" style="right:50%;width:38.5%"></span></span></td>
+<td class="num heat-g2"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+3.12</span></td>
+<td class="num heat-l2"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;4.76%</span></td>
+<td class="num muted">&minus;9.43%</td>
+</tr><tr>
+<th scope="row" class="iname">NIFTY LargeMidcap 250</th>
+<td class="num">15,600.55</td>
+<td class="num cell-bar heat-l1"><span class="bv"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;0.03%</span></span><span class="bar-track" aria-hidden="true"><span class="bar neg" style="right:50%;width:0.4%"></span></span></td>
+<td class="num cell-bar heat-l3"><span class="bv"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;3.29%</span></span><span class="bar-track" aria-hidden="true"><span class="bar neg" style="right:50%;width:41.1%"></span></span></td>
+<td class="num heat-g2"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+3.26</span></td>
+<td class="num heat-l2"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;5.22%</span></td>
+<td class="num muted">&minus;8.65%</td>
+</tr><tr>
+<th scope="row" class="iname">Nifty Smallcap 250</th>
+<td class="num">17,574.85</td>
+<td class="num cell-bar heat-l1"><span class="bv"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;0.08%</span></span><span class="bar-track" aria-hidden="true"><span class="bar neg" style="right:50%;width:1.0%"></span></span></td>
+<td class="num cell-bar heat-l3"><span class="bv"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;3.12%</span></span><span class="bar-track" aria-hidden="true"><span class="bar neg" style="right:50%;width:39.0%"></span></span></td>
+<td class="num heat-g2"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+3.04</span></td>
+<td class="num heat-l2"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;4.65%</span></td>
+<td class="num muted">&minus;5.26%</td>
+</tr><tr>
+<th scope="row" class="iname">Nifty Midcap 150</th>
+<td class="num">21,603.25</td>
+<td class="num cell-bar heat-l1"><span class="bv"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;0.19%</span></span><span class="bar-track" aria-hidden="true"><span class="bar neg" style="right:50%;width:2.4%"></span></span></td>
+<td class="num cell-bar heat-l3"><span class="bv"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;3.68%</span></span><span class="bar-track" aria-hidden="true"><span class="bar neg" style="right:50%;width:46.0%"></span></span></td>
+<td class="num heat-g2"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+3.49</span></td>
+<td class="num heat-l3"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;6.04%</span></td>
+<td class="num muted">&minus;8.64%</td>
+</tr><tr>
+<th scope="row" class="iname">Nifty Next 50</th>
+<td class="num">68,166.70</td>
+<td class="num cell-bar heat-l2"><span class="bv"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;1.18%</span></span><span class="bar-track" aria-hidden="true"><span class="bar neg" style="right:50%;width:14.8%"></span></span></td>
+<td class="num cell-bar heat-l3"><span class="bv"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;3.36%</span></span><span class="bar-track" aria-hidden="true"><span class="bar neg" style="right:50%;width:42.0%"></span></span></td>
+<td class="num heat-g2"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+2.18</span></td>
+<td class="num heat-l3"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;6.43%</span></td>
+<td class="num muted">&minus;9.11%</td>
+</tr><tr>
+<th scope="row" class="iname">Nifty Microcap 250</th>
+<td class="num">25,536.65</td>
+<td class="num cell-bar heat-l2"><span class="bv"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;1.45%</span></span><span class="bar-track" aria-hidden="true"><span class="bar neg" style="right:50%;width:18.1%"></span></span></td>
+<td class="num cell-bar heat-l2"><span class="bv"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;1.84%</span></span><span class="bar-track" aria-hidden="true"><span class="bar neg" style="right:50%;width:23.0%"></span></span></td>
+<td class="num heat-g1"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+0.39</span></td>
+<td class="num heat-l2"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;4.27%</span></td>
+<td class="num muted">&minus;4.71%</td>
+</tr></tbody></table></div>
+<p class="reading">Reading: 6 of 11 broad-market indices rose this week against 0 of 11 the previous week. NIFTY Smallcap 100 led (+0.50%), Nifty Microcap 250 lagged (&minus;1.45%); the biggest swing was NIFTY Midcap 100 (+3.79 pts).</p>
+</section>
+<section class="idx-group" aria-labelledby="g-sector">
+<h3 id="g-sector">Sectors <span class="scale-note">bar scale &plusmn;5.5%</span></h3>
+<div class="tbl-wrap"><table class="idx">
+<thead><tr><th scope="col">Index</th><th scope="col" class="num">Close 9 Oct</th><th scope="col" class="num">This week %</th>
+<th scope="col" class="num">Previous week %</th><th scope="col" class="num" title="This week % minus previous week %, in percentage points">Swing (pts)</th>
+<th scope="col" class="num">1M %</th><th scope="col" class="num">% below 52w high</th></tr></thead>
+<tbody><tr>
+<th scope="row" class="iname">Nifty FMCG</th>
+<td class="num">44,864.25</td>
+<td class="num cell-bar heat-g2"><span class="bv"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+2.45%</span></span><span class="bar-track" aria-hidden="true"><span class="bar pos" style="left:50%;width:22.3%"></span></span></td>
+<td class="num cell-bar heat-l3"><span class="bv"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;4.30%</span></span><span class="bar-track" aria-hidden="true"><span class="bar neg" style="right:50%;width:39.1%"></span></span></td>
+<td class="num heat-g3"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+6.75</span></td>
+<td class="num heat-l1"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;0.98%</span></td>
+<td class="num muted">&minus;21.90%</td>
+</tr><tr>
+<th scope="row" class="iname">Nifty PSU Bank</th>
+<td class="num">8,126.35</td>
+<td class="num cell-bar heat-g2"><span class="bv"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+2.38%</span></span><span class="bar-track" aria-hidden="true"><span class="bar pos" style="left:50%;width:21.6%"></span></span></td>
+<td class="num cell-bar heat-l3"><span class="bv"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;4.03%</span></span><span class="bar-track" aria-hidden="true"><span class="bar neg" style="right:50%;width:36.6%"></span></span></td>
+<td class="num heat-g3"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+6.41</span></td>
+<td class="num heat-l2"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;2.90%</span></td>
+<td class="num muted">&minus;18.07%</td>
+</tr><tr>
+<th scope="row" class="iname">Nifty Private Bank</th>
+<td class="num">27,222.55</td>
+<td class="num cell-bar heat-g2"><span class="bv"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+1.97%</span></span><span class="bar-track" aria-hidden="true"><span class="bar pos" style="left:50%;width:17.9%"></span></span></td>
+<td class="num cell-bar heat-l1"><span class="bv"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;0.25%</span></span><span class="bar-track" aria-hidden="true"><span class="bar neg" style="right:50%;width:2.3%"></span></span></td>
+<td class="num heat-g2"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+2.22</span></td>
+<td class="num heat-g1"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+0.03%</span></td>
+<td class="num muted">&minus;8.49%</td>
+</tr><tr>
+<th scope="row" class="iname">Nifty Financial Services</th>
+<td class="num">24,968.50</td>
+<td class="num cell-bar heat-g2"><span class="bv"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+1.68%</span></span><span class="bar-track" aria-hidden="true"><span class="bar pos" style="left:50%;width:15.3%"></span></span></td>
+<td class="num cell-bar heat-l2"><span class="bv"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;1.60%</span></span><span class="bar-track" aria-hidden="true"><span class="bar neg" style="right:50%;width:14.5%"></span></span></td>
+<td class="num heat-g2"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+3.28</span></td>
+<td class="num heat-l1"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;1.61%</span></td>
+<td class="num muted">&minus;12.58%</td>
+</tr><tr>
+<th scope="row" class="iname">Nifty Bank</th>
+<td class="num">55,256.65</td>
+<td class="num cell-bar heat-g2"><span class="bv"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+1.48%</span></span><span class="bar-track" aria-hidden="true"><span class="bar pos" style="left:50%;width:13.5%"></span></span></td>
+<td class="num cell-bar heat-l2"><span class="bv"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;1.78%</span></span><span class="bar-track" aria-hidden="true"><span class="bar neg" style="right:50%;width:16.2%"></span></span></td>
+<td class="num heat-g2"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+3.26</span></td>
+<td class="num heat-l1"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;1.85%</span></td>
+<td class="num muted">&minus;10.54%</td>
+</tr><tr>
+<th scope="row" class="iname">Nifty IT</th>
+<td class="num">28,574.90</td>
+<td class="num cell-bar heat-g1"><span class="bv"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+0.95%</span></span><span class="bar-track" aria-hidden="true"><span class="bar pos" style="left:50%;width:8.6%"></span></span></td>
+<td class="num cell-bar heat-g1"><span class="bv"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+0.34%</span></span><span class="bar-track" aria-hidden="true"><span class="bar pos" style="left:50%;width:3.1%"></span></span></td>
+<td class="num heat-g1"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+0.61</span></td>
+<td class="num heat-l1"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;1.17%</span></td>
+<td class="num muted">&minus;29.10%</td>
+</tr><tr>
+<th scope="row" class="iname">Nifty Media</th>
+<td class="num">1,553.30</td>
+<td class="num cell-bar heat-g1"><span class="bv"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+0.45%</span></span><span class="bar-track" aria-hidden="true"><span class="bar pos" style="left:50%;width:4.1%"></span></span></td>
+<td class="num cell-bar heat-l1"><span class="bv"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;0.51%</span></span><span class="bar-track" aria-hidden="true"><span class="bar neg" style="right:50%;width:4.6%"></span></span></td>
+<td class="num heat-g1"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+0.96</span></td>
+<td class="num heat-g1"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+1.76%</span></td>
+<td class="num muted">&minus;5.07%</td>
+</tr><tr>
+<th scope="row" class="iname">Nifty Consumer Durables</th>
+<td class="num">35,969.55</td>
+<td class="num cell-bar heat-g1"><span class="bv"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+0.12%</span></span><span class="bar-track" aria-hidden="true"><span class="bar pos" style="left:50%;width:1.1%"></span></span></td>
+<td class="num cell-bar heat-l3"><span class="bv"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;5.25%</span></span><span class="bar-track" aria-hidden="true"><span class="bar neg" style="right:50%;width:47.7%"></span></span></td>
+<td class="num heat-g3"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+5.37</span></td>
+<td class="num heat-l3"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;7.76%</span></td>
+<td class="num muted">&minus;12.19%</td>
+</tr><tr>
+<th scope="row" class="iname">Nifty Oil &amp; Gas</th>
+<td class="num">10,345.30</td>
+<td class="num cell-bar heat-l2"><span class="bv"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;1.24%</span></span><span class="bar-track" aria-hidden="true"><span class="bar neg" style="right:50%;width:11.3%"></span></span></td>
+<td class="num cell-bar heat-l3"><span class="bv"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;3.63%</span></span><span class="bar-track" aria-hidden="true"><span class="bar neg" style="right:50%;width:33.0%"></span></span></td>
+<td class="num heat-g2"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+2.39</span></td>
+<td class="num heat-l3"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;6.20%</span></td>
+<td class="num muted">&minus;16.88%</td>
+</tr><tr>
+<th scope="row" class="iname">Nifty Pharma</th>
+<td class="num">25,962.05</td>
+<td class="num cell-bar heat-l2"><span class="bv"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;1.33%</span></span><span class="bar-track" aria-hidden="true"><span class="bar neg" style="right:50%;width:12.1%"></span></span></td>
+<td class="num cell-bar heat-l3"><span class="bv"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;2.65%</span></span><span class="bar-track" aria-hidden="true"><span class="bar neg" style="right:50%;width:24.1%"></span></span></td>
+<td class="num heat-g1"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+1.32</span></td>
+<td class="num heat-l2"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;2.73%</span></td>
+<td class="num muted">&minus;4.74%</td>
+</tr><tr>
+<th scope="row" class="iname">Nifty Healthcare Index</th>
+<td class="num">15,855.55</td>
+<td class="num cell-bar heat-l2"><span class="bv"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;1.49%</span></span><span class="bar-track" aria-hidden="true"><span class="bar neg" style="right:50%;width:13.5%"></span></span></td>
+<td class="num cell-bar heat-l3"><span class="bv"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;3.95%</span></span><span class="bar-track" aria-hidden="true"><span class="bar neg" style="right:50%;width:35.9%"></span></span></td>
+<td class="num heat-g2"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+2.46</span></td>
+<td class="num heat-l2"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;4.38%</span></td>
+<td class="num muted">&minus;6.41%</td>
+</tr><tr>
+<th scope="row" class="iname">Nifty Energy</th>
+<td class="num">35,786.50</td>
+<td class="num cell-bar heat-l2"><span class="bv"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;1.65%</span></span><span class="bar-track" aria-hidden="true"><span class="bar neg" style="right:50%;width:15.0%"></span></span></td>
+<td class="num cell-bar heat-l3"><span class="bv"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;2.60%</span></span><span class="bar-track" aria-hidden="true"><span class="bar neg" style="right:50%;width:23.6%"></span></span></td>
+<td class="num heat-g1"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+0.95</span></td>
+<td class="num heat-l3"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;6.64%</span></td>
+<td class="num muted">&minus;14.44%</td>
+</tr><tr>
+<th scope="row" class="iname">Nifty Auto</th>
+<td class="num">24,859.90</td>
+<td class="num cell-bar heat-l2"><span class="bv"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;2.07%</span></span><span class="bar-track" aria-hidden="true"><span class="bar neg" style="right:50%;width:18.8%"></span></span></td>
+<td class="num cell-bar heat-l3"><span class="bv"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;5.03%</span></span><span class="bar-track" aria-hidden="true"><span class="bar neg" style="right:50%;width:45.7%"></span></span></td>
+<td class="num heat-g2"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+2.96</span></td>
+<td class="num heat-l3"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;10.10%</span></td>
+<td class="num muted">&minus;16.76%</td>
+</tr><tr>
+<th scope="row" class="iname">Nifty Metal</th>
+<td class="num">12,000.75</td>
+<td class="num cell-bar heat-l3"><span class="bv"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;3.69%</span></span><span class="bar-track" aria-hidden="true"><span class="bar neg" style="right:50%;width:33.5%"></span></span></td>
+<td class="num cell-bar heat-l3"><span class="bv"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;4.46%</span></span><span class="bar-track" aria-hidden="true"><span class="bar neg" style="right:50%;width:40.5%"></span></span></td>
+<td class="num heat-g1"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+0.77</span></td>
+<td class="num heat-l3"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;10.38%</span></td>
+<td class="num muted">&minus;13.86%</td>
+</tr><tr>
+<th scope="row" class="iname">Nifty Realty</th>
+<td class="num">803.95</td>
+<td class="num cell-bar heat-l3"><span class="bv"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;3.72%</span></span><span class="bar-track" aria-hidden="true"><span class="bar neg" style="right:50%;width:33.8%"></span></span></td>
+<td class="num cell-bar heat-l3"><span class="bv"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;3.06%</span></span><span class="bar-track" aria-hidden="true"><span class="bar neg" style="right:50%;width:27.8%"></span></span></td>
+<td class="num heat-l1"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;0.66</span></td>
+<td class="num heat-l3"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;7.83%</span></td>
+<td class="num muted">&minus;17.50%</td>
+</tr></tbody></table></div>
+<p class="reading">Reading: 8 of 15 sector indices rose this week against 1 of 15 the previous week. Nifty FMCG led (+2.45%), Nifty Realty lagged (&minus;3.72%); the biggest swing was Nifty FMCG (+6.75 pts).</p>
+</section>
+<section class="idx-group" aria-labelledby="g-thematic">
+<h3 id="g-thematic">Thematic <span class="scale-note">bar scale &plusmn;5%</span></h3>
+<div class="tbl-wrap"><table class="idx">
+<thead><tr><th scope="col">Index</th><th scope="col" class="num">Close 9 Oct</th><th scope="col" class="num">This week %</th>
+<th scope="col" class="num">Previous week %</th><th scope="col" class="num" title="This week % minus previous week %, in percentage points">Swing (pts)</th>
+<th scope="col" class="num">1M %</th><th scope="col" class="num">% below 52w high</th></tr></thead>
+<tbody><tr>
+<th scope="row" class="iname">Nifty Capital Markets</th>
+<td class="num">5,181.15</td>
+<td class="num cell-bar heat-g3"><span class="bv"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+2.76%</span></span><span class="bar-track" aria-hidden="true"><span class="bar pos" style="left:50%;width:27.6%"></span></span></td>
+<td class="num cell-bar heat-l3"><span class="bv"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;4.84%</span></span><span class="bar-track" aria-hidden="true"><span class="bar neg" style="right:50%;width:48.4%"></span></span></td>
+<td class="num heat-g3"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+7.60</span></td>
+<td class="num heat-l2"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;3.40%</span></td>
+<td class="num muted">&minus;9.06%</td>
+</tr><tr>
+<th scope="row" class="iname">Nifty Infrastructure</th>
+<td class="num">8,574.45</td>
+<td class="num cell-bar heat-l1"><span class="bv"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;0.36%</span></span><span class="bar-track" aria-hidden="true"><span class="bar neg" style="right:50%;width:3.6%"></span></span></td>
+<td class="num cell-bar heat-l3"><span class="bv"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;3.80%</span></span><span class="bar-track" aria-hidden="true"><span class="bar neg" style="right:50%;width:38.0%"></span></span></td>
+<td class="num heat-g2"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+3.44</span></td>
+<td class="num heat-l2"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;5.98%</span></td>
+<td class="num muted">&minus;12.44%</td>
+</tr><tr>
+<th scope="row" class="iname">Nifty PSE</th>
+<td class="num">9,077.75</td>
+<td class="num cell-bar heat-l2"><span class="bv"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;1.42%</span></span><span class="bar-track" aria-hidden="true"><span class="bar neg" style="right:50%;width:14.2%"></span></span></td>
+<td class="num cell-bar heat-l3"><span class="bv"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;3.63%</span></span><span class="bar-track" aria-hidden="true"><span class="bar neg" style="right:50%;width:36.3%"></span></span></td>
+<td class="num heat-g2"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+2.21</span></td>
+<td class="num heat-l3"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;6.77%</span></td>
+<td class="num muted">&minus;16.25%</td>
+</tr><tr>
+<th scope="row" class="iname">Nifty India Defence</th>
+<td class="num">9,006.65</td>
+<td class="num cell-bar heat-l2"><span class="bv"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;1.49%</span></span><span class="bar-track" aria-hidden="true"><span class="bar neg" style="right:50%;width:14.9%"></span></span></td>
+<td class="num cell-bar heat-l2"><span class="bv"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;2.34%</span></span><span class="bar-track" aria-hidden="true"><span class="bar neg" style="right:50%;width:23.4%"></span></span></td>
+<td class="num heat-g1"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+0.85</span></td>
+<td class="num heat-l3"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;8.95%</span></td>
+<td class="num muted">&minus;10.53%</td>
+</tr><tr>
+<th scope="row" class="iname">Nifty Commodities</th>
+<td class="num">8,923.40</td>
+<td class="num cell-bar heat-l2"><span class="bv"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;2.27%</span></span><span class="bar-track" aria-hidden="true"><span class="bar neg" style="right:50%;width:22.7%"></span></span></td>
+<td class="num cell-bar heat-l3"><span class="bv"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;4.05%</span></span><span class="bar-track" aria-hidden="true"><span class="bar neg" style="right:50%;width:40.5%"></span></span></td>
+<td class="num heat-g2"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+1.78</span></td>
+<td class="num heat-l3"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;8.37%</span></td>
+<td class="num muted">&minus;15.58%</td>
+</tr></tbody></table></div>
+<p class="reading">Reading: 1 of 5 thematic indices rose this week against 0 of 5 the previous week. Nifty Capital Markets led (+2.76%), Nifty Commodities lagged (&minus;2.27%); the biggest swing was Nifty Capital Markets (+7.60 pts).</p>
+</section>
+<div class="cards"><div class="card vix" aria-labelledby="vix-h">
+<h3 id="vix-h">India VIX <span class="scale-note">level change, not a price return</span></h3>
+<dl class="kv">
+<div><dt>Close 9 Oct</dt><dd class="num">14.38</dd></div>
+<div><dt>This week</dt><dd><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;0.55%</span></dd></div>
+<div><dt>Previous week</dt><dd><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+13.95%</span></dd></div>
+<div><dt>1M</dt><dd><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+20.64%</span></dd></div>
+<div><dt>Below 52w high</dt><dd class="num">&minus;50.26%</dd></div>
+<div><dt>1Y percentile</dt><dd class="num">70</dd></div>
+</dl>
+<p class="note">One-year range 9.15 to 27.89 (mean 14.05). Shown in neutral colour: a falling VIX is not a loss.</p>
+</div><div class="card" aria-labelledby="br-h">
+<h3 id="br-h">Breadth on each week's closing session</h3>
+<dl class="kv">
+<div><dt>24 Sep A/D</dt><dd class="num">0.32</dd></div>
+<div><dt>1 Oct A/D</dt><dd class="num">0.33</dd></div>
+<div><dt>9 Oct A/D</dt><dd class="num">1.49</dd></div>
+<div><dt>9 Oct adv / dec</dt><dd class="num">2,145 / 1,436</dd></div>
+</dl>
+<p class="note">All traded NSE securities (3,687 on 9 Oct). Equity indices up on 9 Oct: 143 of 144.</p>
+</div><div class="card" aria-labelledby="n50-h">
+<h3 id="n50-h">Nifty 50 through the week</h3>
+<dl class="kv">
+<div><dt>05 Oct close</dt><dd class="num">22,555.75</dd></div><div><dt>06 Oct close</dt><dd class="num">22,776.10</dd></div><div><dt>07 Oct close</dt><dd class="num">22,603.05</dd></div><div><dt>08 Oct close</dt><dd class="num">22,231.80</dd></div><div><dt>09 Oct close</dt><dd class="num">22,520.45</dd></div>
+<div><dt>Week high (06 Oct)</dt><dd class="num">22,776.10</dd></div>
+<div><dt>Week low (08 Oct)</dt><dd class="num">22,179.90</dd></div>
+</dl>
+<p class="note">high/low from daily intraday high/low, sessions 2026-10-05..09; 10-08 low (22179.9) is also the new 52-week low.</p>
+</div></div>
+</section>
+
+<section aria-labelledby="s-bd">
+<h2 id="s-bd">Market backdrop</h2>
+<p class="lede">2026-10-01 close -&gt; 2026-10-09 close.</p>
+<div class="backdrop">
+<div class="card">
+<h3>2026-10-07: RBI rate hike</h3>
+<p><strong>RBI hikes repo rate 25 bp to 5.50%, first hike in nearly four years; stance shifted to &#x27;calibrated tightening&#x27;.</strong></p>
+<p>Nifty 50 -0.76% to 22,603.05, Sensex -0.59% to 72,638.70 on 10-07; metal biggest drag, then realty, auto, IT, consumer; PSU banks up. Other drivers cited: Brent back above $101, continued FII outflows, weak rupee, elevated global bond yields.</p>
+<p class="note">Sources:</p><ul class="src-list"><li><a href="https://www.businesstoday.in/markets/stocks/story/sensex-nifty-recovery-attempt-falters-after-rbi-rate-hike-is-further-caution-warranted-560182-2026-10-07" rel="noopener" target="_blank">Business Today</a></li><li><a href="https://www.businesstoday.in/markets/stocks/story/sensex-nifty-trim-losses-as-rbi-hikes-rate-for-first-time-in-nearly-four-years-whats-ahead-560072-2026-10-07" rel="noopener" target="_blank">Business Today</a></li><li><a href="https://www.freepressjournal.in/business/rbi-rate-hike-rattles-dalal-street-sensex-sinks-429-points-as-nifty-slips-below-22650" rel="noopener" target="_blank">Free Press Journal</a></li></ul>
+</div>
+<div class="card">
+<h3>2026-10-08: broad sell-off <span class="flag">Unsourced cause, inference</span></h3>
+<p><strong>Broad sell-off: Nifty 500 -2.01%, Nifty Pharma -2.32% (NSE index data); no market wrap for this session found in search.</strong></p>
+<p>Not directly sourced. The session followed the 10-07 RBI hike and tightening-stance shift amid crude above $101, FII selling and a weak rupee (10-07 coverage). TCS Q2 FY27 board meeting was scheduled for 10-08 (multibagg.ai <a href="https://www.multibagg.ai/market-pulse/articles/tcs-q2-fy27-results-date-cmupohvys000z2smcst07da30" rel="noopener" target="_blank">multibagg.ai</a>). The causal link to the 10-08 fall is inference.</p>
+<p class="note">Confidence: low (index move is primary NSE data; cause is inference). 10 search queries found no market wrap for this session.</p>
+</div>
+<div class="card">
+<h3>Index moves and other sessions</h3>
+<dl class="kv">
+<div><dt>Nifty 500 week</dt><dd><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+0.04%</span></dd></div>
+<div><dt>Nifty 500, 7 Oct</dt><dd><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;0.64%</span></dd></div>
+<div><dt>Nifty 500, 8 Oct</dt><dd><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;2.01%</span></dd></div>
+<div><dt>Nifty 500, 9 Oct</dt><dd><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+1.16%</span></dd></div>
+<div><dt>Nifty Pharma week</dt><dd><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;1.33%</span></dd></div>
+<div><dt>Nifty Pharma, 8 Oct</dt><dd><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;2.32%</span></dd></div>
+</dl>
+<ul class="sess"><li><span class="d">2026-10-05</span>Nifty 500 +0.52%; no market-wide pressure (DMART, PFOCUS falls were stock-specific).</li><li><span class="d">2026-10-06</span>Nifty 500 +1.05%; Sensex +685 pts as oil fell (NewsBytes <a href="https://www.newsbytesapp.com/news/business/sensex-rises-68534-points-nifty-closes-2277610-as-oil-falls/tldr" rel="noopener" target="_blank">newsbytesapp.com</a>).</li></ul>
+<p class="note">Index data: NSE Bhavcopy MCP get_index_history (Nifty 500, Nifty Pharma).</p>
+</div>
+</div>
+</section>
+
+<section aria-labelledby="s-win">
+<h2 id="s-win">Top 15 weekly winners (Nifty 500)</h2>
+<p class="lede">Ranked by weekly return. Sparklines show daily closes from 1 Oct to 9 Oct, scaled per row; the dot marks the 9 Oct close and the dashed line the 1 Oct close.</p>
+<div class="tbl-wrap"><table class="movers ">
+<caption class="vh">Top 15 weekly winners</caption>
+<thead><tr><th scope="col" class="num">#</th><th scope="col">Stock</th><th scope="col" class="num">Week %</th>
+<th scope="col" class="num">Close 1 Oct &rarr; 9 Oct</th><th scope="col">Daily closes</th><th scope="col" class="num">Rel. vol</th><th scope="col">Catalyst</th></tr></thead>
+<tbody>
+<tr>
+<td class="c-rank num" data-k="Rank">1</td>
+<td class="c-stock"><span class="sym">PWL</span><span class="co">Physicswallah Ltd.</span><span class="sec">Consumer Services</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+19.57%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">120.17 <span class="to" aria-label="to">&rarr;</span> 143.69</td>
+<td class="c-spark"><svg class="spark pos" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 120.17, 131.10, 131.86, 139.57, 140.48, 143.69"><line class="spark-base" x1="3" x2="101" y1="27.0" y2="27.0"/><polyline points="3.0,27.0 22.6,15.8 42.2,15.1 61.8,7.2 81.4,6.3 101.0,3.0"/><circle cx="101.0" cy="3.0" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">2.37&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="headline">FinZ Finance to transfer Rs 95.79 cr loan book to Auxilo Finserve (agreed Oct 3), partly exiting lending; Rs 200 target buy call Oct 8</span></div>
+<div class="chips"><span class="chip cat">Corporate action / fundraise</span><span class="chip conf conf-medium">medium confidence</span><span class="chip ev">event 2026-10-03</span></div>
+<div class="src"><span class="src-k">Source:</span> <a href="https://www.angelone.in/news/stocks/physicswallah-share-price-surges-over-5-plans-partial-closure-of-lending-business" rel="noopener" target="_blank">Angel One news</a><span class="sep">; </span><a href="https://www.businesstoday.in/markets/stocks/story/physicswallah-lt-tata-consumer-shares-3-stocks-to-buy-target-price-up-to-rs-4400-560296-2026-10-08" rel="noopener" target="_blank">BusinessToday 2026-10-08</a></div><details class="more"><summary>Details</summary><p>Subsidiary FinZ Finance to transfer a Rs 95.79 crore loan portfolio to Auxilo Finserve within 60 days, cutting balance-sheet/credit risk; stock +9.1% on Oct 5 at ~2.9x prior-16-session avg volume. An Oct 8 BusinessToday buy list carried a Rs 200 target and noted reiterated FY27 guidance (30% revenue growth).</p></details></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">2</td>
+<td class="c-stock"><span class="sym">TRENT</span><span class="co">Trent Ltd.</span><span class="sec">Consumer Services</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+13.11%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">2,580.00 <span class="to" aria-label="to">&rarr;</span> 2,918.20</td>
+<td class="c-spark"><svg class="spark pos" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 2,580.00, 2,580.00, 2,906.00, 2,890.30, 2,876.30, 2,918.20"><line class="spark-base" x1="3" x2="101" y1="27.0" y2="27.0"/><polyline points="3.0,27.0 22.6,27.0 42.2,3.9 61.8,5.0 81.4,6.0 101.0,3.0"/><circle cx="101.0" cy="3.0" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">2.92&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="headline">Q2 FY27 business update: standalone revenue Rs 5,788 cr, +23% YoY; Zudio crosses 1,000 stores; HSBC Buy, TP Rs 3,390</span></div>
+<div class="chips"><span class="chip cat">Results / business update</span><span class="chip conf conf-high">high confidence</span><span class="chip ev">event 2026-10-06</span></div>
+<div class="src"><span class="src-k">Source:</span> <a href="https://www.businesstoday.in/markets/trending-stocks/story/trent-shares-hit-upper-circuit-post-q2-business-update-hsbc-sees-upside-559714-2026-10-06" rel="noopener" target="_blank">BusinessToday 2026-10-06</a><span class="sep">; </span><a href="https://www.indiainfoline.com/news/companies/trent-share-price-stock-jumps-11-as-q2-revenue-rises-23-goldman-sachs-raises-target" rel="noopener" target="_blank">IndiaInfoline</a></div><details class="more"><summary>Details</summary><p>Q2 standalone revenue Rs 5,788 cr vs Rs 4,724 cr (+23%), H1 Rs 11,454 cr (+21%); store count 1,342 vs 1,101. Stock +12.6% on Oct 6 on ~6.7M shares (~9x prior avg), Nifty 50 top gainer.</p></details></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">3</td>
+<td class="c-stock"><span class="sym">PTCIL</span><span class="co">PTC Industries Ltd.</span><span class="sec">Capital Goods</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+11.40%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">22,025.00 <span class="to" aria-label="to">&rarr;</span> 24,535.00</td>
+<td class="c-spark"><svg class="spark pos" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 22,025.00, 22,530.00, 23,125.00, 24,685.00, 24,470.00, 24,535.00"><line class="spark-base" x1="3" x2="101" y1="27.0" y2="27.0"/><polyline points="3.0,27.0 22.6,22.4 42.2,17.1 61.8,3.0 81.4,4.9 101.0,4.4"/><circle cx="101.0" cy="4.4" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">2.04&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="headline">PTC Industries launched a QIP on Oct 7; floor price Rs 22,150/share; stock rose ~6.7% that day</span></div>
+<div class="chips"><span class="chip cat">Corporate action / fundraise</span><span class="chip conf conf-medium">medium confidence</span><span class="chip ev">event 2026-10-07</span></div>
+<div class="src"><span class="src-k">Source:</span> <a href="https://www.jmfinancialservices.in/market-news-and-insights/1735590" rel="noopener" target="_blank">JM Financial market news</a></div><details class="more"><summary>Details</summary><p>QIP floor price Rs 22,150, a 4.21% discount to the previous BSE close of Rs 23,124.10; stock closed +6.75% on Oct 7 at ~5.5x prior avg volume. A morning Univest note found no catalyst before the QIP news.</p></details></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">4</td>
+<td class="c-stock"><span class="sym">BHARTIHEXA</span><span class="co">Bharti Hexacom Ltd.</span><span class="sec">Telecommunication</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+11.07%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">1,379.20 <span class="to" aria-label="to">&rarr;</span> 1,531.90</td>
+<td class="c-spark"><svg class="spark pos" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 1,379.20, 1,383.10, 1,386.80, 1,477.90, 1,500.70, 1,531.90"><line class="spark-base" x1="3" x2="101" y1="27.0" y2="27.0"/><polyline points="3.0,27.0 22.6,26.4 42.2,25.8 61.8,11.5 81.4,7.9 101.0,3.0"/><circle cx="101.0" cy="3.0" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">5.72&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="headline">Parent Bharti Airtel raised postpaid tariffs by Rs 50/month (3-11%) effective Oct 8; Hexacom +6.6% Oct 7 on ~15x volume</span></div>
+<div class="chips"><span class="chip cat">Sector or macro</span><span class="chip conf conf-medium">medium confidence</span><span class="chip ev">event 2026-10-07</span></div>
+<div class="src"><span class="src-k">Source:</span> <a href="https://www.business-standard.com/industry/news/airtel-free-international-roaming-postpaid-plans-tariff-hike-126100700422_1.html" rel="noopener" target="_blank">Business Standard 2026-10-07</a><span class="sep">; </span><a href="https://www.businesstoday.in/markets/stocks/story/bharti-airtel-shares-prepaid-tariff-hike-next-after-postpaid-buy-stock-says-mofsl-560280-2026-10-08" rel="noopener" target="_blank">BusinessToday 2026-10-08 MOFSL note</a></div><details class="more"><summary>Details</summary><p>Airtel raised postpaid plans by Rs 50/month (3-11%) from Oct 8, its biggest postpaid hike since 2024; MOFSL said postpaid rejigs preceded prepaid hikes by 6-9 months in past cycles. No Hexacom-specific report found; the link between the hike and Hexacom&#x27;s move is inferred.</p></details></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">5</td>
+<td class="c-stock"><span class="sym">CHENNPETRO</span><span class="co">Chennai Petroleum Corporation Ltd.</span><span class="sec">Oil Gas &amp; Consumable Fuels</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+10.49%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">1,346.40 <span class="to" aria-label="to">&rarr;</span> 1,487.70</td>
+<td class="c-spark"><svg class="spark pos" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 1,346.40, 1,401.00, 1,405.70, 1,612.30, 1,531.00, 1,487.70"><line class="spark-base" x1="3" x2="101" y1="27.0" y2="27.0"/><polyline points="3.0,27.0 22.6,22.1 42.2,21.6 61.8,3.0 81.4,10.3 101.0,14.2"/><circle cx="101.0" cy="14.2" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">2.70&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="headline">Standalone refiners CPCL and MRPL surged (CPCL +14.6% on Oct 7) on expected strong Q2 GRMs, firm product cracks and higher crude</span></div>
+<div class="chips"><span class="chip cat">Sector or macro</span><span class="chip conf conf-high">high confidence</span><span class="chip ev">event 2026-10-07</span></div>
+<div class="src"><span class="src-k">Source:</span> <a href="https://www.businesstoday.in/markets/stocks/story/cpcl-mrpl-shares-surge-up-to-13-why-are-these-refiners-gaining-560090-2026-10-07" rel="noopener" target="_blank">BusinessToday 2026-10-07</a><span class="sep">; </span><a href="https://www.business-standard.com/amp/markets/news/chennai-petroleum-mrpl-shares-defy-market-weakness-gain-up-to-6-126100700216_1.html" rel="noopener" target="_blank">Business Standard 2026-10-07</a></div><details class="more"><summary>Details</summary><p>Analysts expect standalone refiners to outperform in Q2 on strong transport-fuel cracks; CPCL closed about Rs 1,612 (+14.7%) on 20M shares (~9x prior avg), then gave back part of the gain on Oct 8-9.</p></details></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">6</td>
+<td class="c-stock"><span class="sym">CPPLUS</span><span class="co">Aditya Infotech Ltd.</span><span class="sec">Capital Goods</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+10.15%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">3,799.60 <span class="to" aria-label="to">&rarr;</span> 4,185.20</td>
+<td class="c-spark"><svg class="spark pos" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 3,799.60, 3,989.50, 3,976.00, 4,064.90, 3,972.20, 4,185.20"><line class="spark-base" x1="3" x2="101" y1="27.0" y2="27.0"/><polyline points="3.0,27.0 22.6,15.2 42.2,16.0 61.8,10.5 81.4,16.3 101.0,3.0"/><circle cx="101.0" cy="3.0" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">1.46&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="nocat">No stock-specific catalyst found</span></div>
+<div class="chips"><span class="chip cat">Technical / no specific catalyst</span><span class="chip conf conf-low">low confidence</span></div>
+<div class="src"><span class="src-k">Source:</span> <span class="src-plain">Checked Supabase research tables, BusinessToday/Business Standard/IndMoney/Angel One web search</span><span class="sep">; </span><a href="https://www.business-standard.com/markets/news/aditya-infotech-share-price-hits-5-upper-circuit-as-qip-opens-stock-up-151-ytd-126092300248_1.html" rel="noopener" target="_blank">latest company news is the QIP launched 2026-09-23</a></div><p class="driver"><span class="driver-k">Likely driver (from the data):</span> The QIP launched Sep 23 (floor Rs 3,648.43) is before the window; no Oct 1-9 announcement found. Gains came on Oct 5 (+5.0%) and Oct 9 (+5.4%, ~3.1x prior avg volume), likely momentum or post-QIP flows (inference).</p></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">7</td>
+<td class="c-stock"><span class="sym">HEXT</span><span class="co">Hexaware Technologies Ltd.</span><span class="sec">Information Technology</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+9.80%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">490.45 <span class="to" aria-label="to">&rarr;</span> 538.50</td>
+<td class="c-spark"><svg class="spark pos" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 490.45, 495.15, 500.30, 505.50, 511.40, 538.50"><line class="spark-base" x1="3" x2="101" y1="27.0" y2="27.0"/><polyline points="3.0,27.0 22.6,24.7 42.2,22.1 61.8,19.5 81.4,16.5 101.0,3.0"/><circle cx="101.0" cy="3.0" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">36.14&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="headline">Hexaware signed a multi-year deal to become a Preferred Partner in Anthropic&#x27;s Claude partner network; stock up as much as 12% on Oct 9</span></div>
+<div class="chips"><span class="chip cat">Order win / contract</span><span class="chip conf conf-high">high confidence</span><span class="chip ev">event 2026-10-09</span></div>
+<div class="src"><span class="src-k">Source:</span> <a href="https://www.business-standard.com/amp/markets/news/hexaware-technologies-share-price-zooms-12-on-anthropic-tie-up-126100900243_1.html" rel="noopener" target="_blank">Business Standard 2026-10-09</a><span class="sep">; </span><a href="https://www.businesstoday.in/markets/stocks/story/hexaware-technologies-shares-rise-over-in-early-deals-heres-why-560566-2026-10-09" rel="noopener" target="_blank">BusinessToday 2026-10-09</a></div><details class="more"><summary>Details</summary><p>Claude will be used in Hexaware&#x27;s Zerovity and AgentVerse platforms; intraday high Rs 574.50, closed Rs 538.50 (+5.3%) on 30.4M shares (~176x prior-16-session avg). It was a fifth straight gaining session.</p></details></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">8</td>
+<td class="c-stock"><span class="sym">HONASA</span><span class="co">Honasa Consumer Ltd.</span><span class="sec">Fast Moving Consumer Goods</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+9.53%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">427.90 <span class="to" aria-label="to">&rarr;</span> 468.70</td>
+<td class="c-spark"><svg class="spark pos" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 427.90, 442.10, 478.30, 477.05, 467.50, 468.70"><line class="spark-base" x1="3" x2="101" y1="27.0" y2="27.0"/><polyline points="3.0,27.0 22.6,20.2 42.2,3.0 61.8,3.6 81.4,8.1 101.0,7.6"/><circle cx="101.0" cy="7.6" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">2.65&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="headline">Q2 FY27 business update: Honasa guides low-30s% YoY NSV growth, Mamaearth high-teens, younger brands ~mid-40s; low double-digit margin</span></div>
+<div class="chips"><span class="chip cat">Results / business update</span><span class="chip conf conf-high">high confidence</span><span class="chip ev">event 2026-10-06</span></div>
+<div class="src"><span class="src-k">Source:</span> <a href="https://www.businesstoday.in/markets/trending-stocks/story/honasa-consumer-shares-rise-8-mamaearth-growth-seen-in-high-teens-in-q2-559733-2026-10-06" rel="noopener" target="_blank">BusinessToday 2026-10-06</a><span class="sep">; </span><a href="https://inc42.com/?p=574830" rel="noopener" target="_blank">Inc42</a><span class="sep">; </span><span class="src-plain">exchange filing per both</span></div><details class="more"><summary>Details</summary><p>Exchange filing guided low-thirties YoY NSV growth and a low double-digit operating margin for Q2; stock +8.2% on Oct 6 on 24.5M shares (~12x prior avg). The stock had fallen on a large-volume day on Sep 29, so the move is partly a rebound.</p></details></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">9</td>
+<td class="c-stock"><span class="sym">HFCL</span><span class="co">HFCL Ltd.</span><span class="sec">Telecommunication</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+9.25%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">238.36 <span class="to" aria-label="to">&rarr;</span> 260.40</td>
+<td class="c-spark"><svg class="spark pos" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 238.36, 250.27, 262.78, 271.90, 258.31, 260.40"><line class="spark-base" x1="3" x2="101" y1="27.0" y2="27.0"/><polyline points="3.0,27.0 22.6,18.5 42.2,9.5 61.8,3.0 81.4,12.7 101.0,11.2"/><circle cx="101.0" cy="11.2" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">1.29&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="nocat">No stock-specific catalyst found</span></div>
+<div class="chips"><span class="chip cat">Technical / no specific catalyst</span><span class="chip conf conf-low">low confidence</span></div>
+<div class="src"><span class="src-k">Source:</span> <span class="src-plain">Checked Supabase research tables, BusinessToday/Business Standard/IIFL/Angel One web search</span><span class="sep">; </span><a href="https://www.business-standard.com/markets/news/multibagger-stock-hfcl-shares-hit-5-upper-circuit-for-3rd-straight-day-126100100519_1.html" rel="noopener" target="_blank">Business Standard 2026-10-01 noted a 3rd straight 5% upper circuit without naming a trigger</a></div><p class="driver"><span class="driver-k">Likely driver (from the data):</span> Stock trades in the BE (trade-to-trade) series with a 5% band and hit +5% circuits on Oct 1, 5 and 6 before falling 5% on Oct 8; no new order found in the window. Likely momentum on the AI/defence order-book story (FY26 order book Rs 21,206 cr) (inference).</p></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">10</td>
+<td class="c-stock"><span class="sym">PVRINOX</span><span class="co">PVR INOX Ltd.</span><span class="sec">Media Entertainment &amp; Publication</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+9.21%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">1,215.30 <span class="to" aria-label="to">&rarr;</span> 1,327.20</td>
+<td class="c-spark"><svg class="spark pos" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 1,215.30, 1,231.40, 1,249.40, 1,343.80, 1,309.20, 1,327.20"><line class="spark-base" x1="3" x2="101" y1="27.0" y2="27.0"/><polyline points="3.0,27.0 22.6,24.0 42.2,20.6 61.8,3.0 81.4,9.5 101.0,6.1"/><circle cx="101.0" cy="6.1" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">2.46&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="headline">PVR INOX hit 52-week high (+~10% intraday Oct 7) as CLSA (Outperform, TP Rs 2,135) and Investec stayed positive on footfalls and box office</span></div>
+<div class="chips"><span class="chip cat">Rating / target change</span><span class="chip conf conf-medium">medium confidence</span><span class="chip ev">event 2026-10-07</span></div>
+<div class="src"><span class="src-k">Source:</span> <a href="https://www.businesstoday.in/markets/stocks/story/pvr-inox-shares-jump-10-to-hit-52-week-high-clsa-investec-see-further-upside-560133-2026-10-07" rel="noopener" target="_blank">BusinessToday 2026-10-07</a></div><details class="more"><summary>Details</summary><p>CLSA retained Outperform with a Rs 2,135 target, citing strong box-office (Dhurandhar 2) and rising footfalls; the stock touched Rs 1,374.80 and closed +7.6% on 5.1M shares (~9x prior avg).</p></details></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">11</td>
+<td class="c-stock"><span class="sym">DEEPAKNTR</span><span class="co">Deepak Nitrite Ltd.</span><span class="sec">Chemicals</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+8.65%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">1,492.80 <span class="to" aria-label="to">&rarr;</span> 1,621.90</td>
+<td class="c-spark"><svg class="spark pos" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 1,492.80, 1,497.00, 1,560.60, 1,553.90, 1,584.10, 1,621.90"><line class="spark-base" x1="3" x2="101" y1="27.0" y2="27.0"/><polyline points="3.0,27.0 22.6,26.2 42.2,14.4 61.8,15.6 81.4,10.0 101.0,3.0"/><circle cx="101.0" cy="3.0" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">1.43&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="headline">Chemical stocks (Balaji Amines, Alkyl Amines, Deepak Nitrite, Aarti) rallied Oct 6 on Q2 recovery hopes; Elara sees strong YoY recovery</span></div>
+<div class="chips"><span class="chip cat">Sector or macro</span><span class="chip conf conf-medium">medium confidence</span><span class="chip ev">event 2026-10-06</span></div>
+<div class="src"><span class="src-k">Source:</span> <a href="https://www.businesstoday.in/amp/markets/stocks/story/balaji-amines-alkyl-amines-deepak-nitrite-aarti-ind-why-chemical-stocks-rallied-up-to-20-today-targets-559757-2026-10-06" rel="noopener" target="_blank">BusinessToday 2026-10-06</a></div><details class="more"><summary>Details</summary><p>Chemical peers rose up to 20% on Oct 6 on hopes for September-quarter results, with Elara expecting a strong YoY recovery for Deepak; DEEPAKNTR +4.25% that day and +1.9% on Oct 8 on ~3x prior avg volume. IIFL&#x27;s news page also mentions a unit starting a nitric acid plant (undated in results, not verified).</p></details></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">12</td>
+<td class="c-stock"><span class="sym">LICHSGFIN</span><span class="co">LIC Housing Finance Ltd.</span><span class="sec">Financial Services</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+8.38%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">509.00 <span class="to" aria-label="to">&rarr;</span> 551.65</td>
+<td class="c-spark"><svg class="spark pos" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 509.00, 505.00, 502.00, 515.40, 537.00, 551.65"><line class="spark-base" x1="3" x2="101" y1="23.6" y2="23.6"/><polyline points="3.0,23.6 22.6,25.5 42.2,27.0 61.8,20.5 81.4,10.1 101.0,3.0"/><circle cx="101.0" cy="3.0" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">1.36&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="nocat">No stock-specific catalyst found</span></div>
+<div class="chips"><span class="chip cat">Technical / no specific catalyst</span><span class="chip conf conf-low">low confidence</span></div>
+<div class="src"><span class="src-k">Source:</span> <span class="src-plain">Checked Supabase research tables, Business Standard/BusinessToday/Angel One/IndMoney web search</span><span class="sep">; </span><a href="https://angelone.in/news/market-updates/sensex-weekly-expiry-ambuja-cements-bandhan-bank-and-others-under-f-o-ban-on-october-8-2026" rel="noopener" target="_blank">Angel One F&amp;O ban list for 2026-10-08</a></div><p class="driver"><span class="driver-k">Likely driver (from the data):</span> Stock entered the F&amp;O ban on Oct 8 (open interest above 95% of the market-wide limit), the same day it rose 4.2% on 14.6M shares (~3.9x prior avg). Likely a short-covering rebound after a -7% slide on Sep 29-Oct 1 (inference).</p></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">13</td>
+<td class="c-stock"><span class="sym">ICICIGI</span><span class="co">ICICI Lombard General Insurance Company Ltd.</span><span class="sec">Financial Services</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+8.14%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">1,563.00 <span class="to" aria-label="to">&rarr;</span> 1,690.20</td>
+<td class="c-spark"><svg class="spark pos" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 1,563.00, 1,600.00, 1,598.30, 1,590.00, 1,624.00, 1,690.20"><line class="spark-base" x1="3" x2="101" y1="27.0" y2="27.0"/><polyline points="3.0,27.0 22.6,20.0 42.2,20.3 61.8,21.9 81.4,15.5 101.0,3.0"/><circle cx="101.0" cy="3.0" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">0.98&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="nocat">No stock-specific catalyst found</span></div>
+<div class="chips"><span class="chip cat">Technical / no specific catalyst</span><span class="chip conf conf-low">low confidence</span></div>
+<div class="src"><span class="src-k">Source:</span> <span class="src-plain">Checked Supabase research tables, Business Standard/BusinessToday/IIFL/Angel One web search</span><span class="sep">; </span><a href="https://www.business-standard.com/markets/news/insurance-stocks-gain-on-expectations-of-lower-distributor-commissions-126091701302_1.html" rel="noopener" target="_blank">latest sector items are from Aug-Sep 2026</a></div><p class="driver"><span class="driver-k">Likely driver (from the data):</span> Steady climb with the largest gain on Oct 9 (+4.1%, 1.5M shares); no Oct 1-9 company or sector news found. Possibly a recovery after the July post-Q1 slump plus earlier sector tailwinds (lower distributor commissions, third-party motor cover) (inference).</p></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">14</td>
+<td class="c-stock"><span class="sym">BSE</span><span class="co">BSE Ltd.</span><span class="sec">Financial Services</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+7.92%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">3,046.00 <span class="to" aria-label="to">&rarr;</span> 3,287.20</td>
+<td class="c-spark"><svg class="spark pos" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 3,046.00, 3,179.60, 3,305.00, 3,356.00, 3,334.80, 3,287.20"><line class="spark-base" x1="3" x2="101" y1="27.0" y2="27.0"/><polyline points="3.0,27.0 22.6,16.7 42.2,6.9 61.8,3.0 81.4,4.6 101.0,8.3"/><circle cx="101.0" cy="8.3" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">0.97&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="headline">Capital-market stocks (BSE, Groww, Angel One, MOFSL, Nuvama) rallied Oct 6 on report SEBI may partly roll back closing auction</span></div>
+<div class="chips"><span class="chip cat">Regulatory / policy</span><span class="chip conf conf-medium">medium confidence</span><span class="chip ev">event 2026-10-06</span></div>
+<div class="src"><span class="src-k">Source:</span> <a href="https://www.businesstoday.in/markets/stocks/story/nse-groww-bse-angel-one-mofsl-nuvama-shares-rally-after-sebi-cas-rollback-report-559717-2026-10-06" rel="noopener" target="_blank">BusinessToday 2026-10-06</a></div><details class="more"><summary>Details</summary><p>Report that SEBI may partially reverse the closing auction session (CAS) for derivatives settlement lifted exchange and broker stocks; BSE +4.4% Oct 5, +3.9% Oct 6, +1.5% Oct 7, then eased. Nuvama: Hold, TP Rs 3,240.</p></details></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">15</td>
+<td class="c-stock"><span class="sym">BLUESTARCO</span><span class="co">Blue Star Ltd.</span><span class="sec">Consumer Durables</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg pos"><span class="arr" aria-hidden="true">&#9650;</span>+7.84%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">1,459.60 <span class="to" aria-label="to">&rarr;</span> 1,574.00</td>
+<td class="c-spark"><svg class="spark pos" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 1,459.60, 1,510.00, 1,571.50, 1,530.10, 1,519.00, 1,574.00"><line class="spark-base" x1="3" x2="101" y1="27.0" y2="27.0"/><polyline points="3.0,27.0 22.6,16.4 42.2,3.5 61.8,12.2 81.4,14.5 101.0,3.0"/><circle cx="101.0" cy="3.0" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">0.67&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="nocat">No stock-specific catalyst found</span></div>
+<div class="chips"><span class="chip cat">Technical / no specific catalyst</span><span class="chip conf conf-low">low confidence</span></div>
+<div class="src"><span class="src-k">Source:</span> <span class="src-plain">Checked Supabase research tables, Business Standard/BusinessToday/IndMoney/IIFL web search</span><span class="sep">; </span><a href="https://www.businesstoday.in/markets/stocks/story/ac-price-hike-bosch-home-comfort-blue-star-voltas-lg-electronics-shares-climb-details-here-558149-2026-09-28" rel="noopener" target="_blank">latest company item is the AC price hike reported 2026-09-28</a></div><p class="driver"><span class="driver-k">Likely driver (from the data):</span> Blue Star&#x27;s 8% AC price hike from Oct 1 was reported before the window; no Oct 1-9 news found. The weekly gain mostly reverses the -3.9% drop on Oct 1 (+3.5% Oct 5, +4.1% Oct 6, +3.6% Oct 9) on normal volume (inference).</p></td>
+</tr>
+</tbody></table></div>
+</section>
+
+<section aria-labelledby="s-los">
+<h2 id="s-los">Bottom 50 weekly losers (Nifty 500)</h2>
+<p class="lede">Ranked worst first. Industry is from the Nifty 500 seed list.</p>
+<div class="summary-grid">
+<div class="card"><h3>By catalyst category</h3><ul class="count-list"><li><span class="cl-k">Sector or macro</span><span class="cl-bar" aria-hidden="true"><span style="width:100%"></span></span><span class="cl-v num">25</span></li><li><span class="cl-k">Technical / no specific catalyst</span><span class="cl-bar" aria-hidden="true"><span style="width:80%"></span></span><span class="cl-v num">20</span></li><li><span class="cl-k">Results / business update</span><span class="cl-bar" aria-hidden="true"><span style="width:8%"></span></span><span class="cl-v num">2</span></li><li><span class="cl-k">Block deal / stake sale</span><span class="cl-bar" aria-hidden="true"><span style="width:4%"></span></span><span class="cl-v num">1</span></li><li><span class="cl-k">Management change</span><span class="cl-bar" aria-hidden="true"><span style="width:4%"></span></span><span class="cl-v num">1</span></li><li><span class="cl-k">Regulatory / policy</span><span class="cl-bar" aria-hidden="true"><span style="width:4%"></span></span><span class="cl-v num">1</span></li></ul></div>
+<div class="card"><h3>By confidence</h3><ul class="count-list"><li><span class="cl-k">low</span><span class="cl-bar" aria-hidden="true"><span style="width:100%"></span></span><span class="cl-v num">41</span></li><li><span class="cl-k">medium</span><span class="cl-bar" aria-hidden="true"><span style="width:17%"></span></span><span class="cl-v num">7</span></li><li><span class="cl-k">high</span><span class="cl-bar" aria-hidden="true"><span style="width:5%"></span></span><span class="cl-v num">2</span></li></ul>
+<p class="note">39 of 50 rows say &ldquo;No stock-specific catalyst found&rdquo;. Base-effect rows: SCHNEIDER, ENRIN, WELSPUNLIV.</p></div>
+<div class="card"><h3>By industry (top 6)</h3><ul class="count-list"><li><span class="cl-k">Healthcare</span><span class="cl-bar" aria-hidden="true"><span style="width:100%"></span></span><span class="cl-v num">8</span></li><li><span class="cl-k">Capital Goods</span><span class="cl-bar" aria-hidden="true"><span style="width:88%"></span></span><span class="cl-v num">7</span></li><li><span class="cl-k">Automobile and Auto Components</span><span class="cl-bar" aria-hidden="true"><span style="width:75%"></span></span><span class="cl-v num">6</span></li><li><span class="cl-k">Metals &amp; Mining</span><span class="cl-bar" aria-hidden="true"><span style="width:62%"></span></span><span class="cl-v num">5</span></li><li><span class="cl-k">Financial Services</span><span class="cl-bar" aria-hidden="true"><span style="width:50%"></span></span><span class="cl-v num">4</span></li><li><span class="cl-k">Chemicals, Construction, Realty (3 each)</span><span class="cl-bar" aria-hidden="true"><span style="width:38%"></span></span><span class="cl-v num">3</span></li></ul></div>
+</div>
+<div class="tbl-wrap"><table class="movers ">
+<caption class="vh">Bottom 50 weekly losers</caption>
+<thead><tr><th scope="col" class="num">#</th><th scope="col">Stock</th><th scope="col" class="num">Week %</th>
+<th scope="col" class="num">Close 1 Oct &rarr; 9 Oct</th><th scope="col">Daily closes</th><th scope="col" class="num">Rel. vol</th><th scope="col">Catalyst</th></tr></thead>
+<tbody>
+<tr>
+<td class="c-rank num" data-k="Rank">1</td>
+<td class="c-stock"><span class="sym">PFOCUS</span><span class="co">Prime Focus Ltd.</span><span class="sec">Media Entertainment &amp; Publication</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;13.41%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">301.55 <span class="to" aria-label="to">&rarr;</span> 261.10</td>
+<td class="c-spark"><svg class="spark neg" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 301.55, 285.65, 292.70, 284.00, 271.95, 261.10"><line class="spark-base" x1="3" x2="101" y1="3.0" y2="3.0"/><polyline points="3.0,3.0 22.6,12.4 42.2,8.3 61.8,13.4 81.4,20.6 101.0,27.0"/><circle cx="101.0" cy="27.0" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">1.28&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="headline">Income Tax Dept searches at Prime Focus Mumbai offices over foreign remittances; stock hit Rs 265 intraday on Oct 7</span></div>
+<div class="chips"><span class="chip cat">Regulatory / policy</span><span class="chip conf conf-high">high confidence</span><span class="chip ev">event 2026-10-07</span></div>
+<div class="src"><span class="src-k">Source:</span> <a href="https://www.businesstoday.in/markets/trending-stocks/story/prime-focus-shares-tank-nearly-on-i-t-raids-company-says-operations-unaffected-560175-2026-10-07" rel="noopener" target="_blank">Business Today</a><span class="sep">; </span><a href="https://www.angelone.in/news/stocks/prime-focus-share-price-falls-over-7-after-reports-on-income-tax-investigations-in-mumbai-office" rel="noopener" target="_blank">Angel One</a></div><details class="more"><summary>Details</summary><p>Stock fell as much as ~9.5% intraday on 10-07 (NSE low 265.0, 8.0M shares, 2.1x avg) on I-T search reports; company said it had received no communication and operations unaffected. Weakness had started earlier (10-05 -5.3%), and the stock kept sliding 10-08/10-09.</p></details></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">2</td>
+<td class="c-stock"><span class="sym">BANDHANBNK</span><span class="co">Bandhan Bank Ltd.</span><span class="sec">Financial Services</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;10.80%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">176.00 <span class="to" aria-label="to">&rarr;</span> 157.00</td>
+<td class="c-spark"><svg class="spark neg" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 176.00, 168.27, 164.15, 162.99, 155.54, 157.00"><line class="spark-base" x1="3" x2="101" y1="3.0" y2="3.0"/><polyline points="3.0,3.0 22.6,12.1 42.2,16.9 61.8,18.3 81.4,27.0 101.0,25.3"/><circle cx="101.0" cy="25.3" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">0.89&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="nocat">No stock-specific catalyst found</span><span class="nocat-rest">; fell with the 2026-10-08 market-wide sell-off (Nifty 500 -2.01%)</span></div>
+<div class="chips"><span class="chip cat">Sector or macro</span><span class="chip conf conf-low">low confidence</span><span class="chip ev">event 2026-10-08</span></div>
+<div class="src"><span class="src-k">Source:</span> <span class="src-plain">NSE Bhavcopy MCP get_index_history (Nifty 500, Nifty Pharma)</span><span class="sep">; </span><a href="https://www.businesstoday.in/markets/stocks/story/shriram-finance-housing-financiers-stocks-look-attractive-post-rbi-rate-hike-expert-560177-2026-10-07" rel="noopener" target="_blank">Business Today</a></div><p class="driver"><span class="driver-k">Likely driver (from the data):</span> Fell on 10-05 (-4.4%) and 10-08 (-4.6%); no Q2 FY27 business update, target cut or block deal found. Stock still de-rating after the 2026-07-22 RoA guidance cut (Business Today); RBI&#x27;s 10-07 hike was flagged &#x27;slightly negative&#x27; for NBFC/microfinance lenders (Business Today 10-07), but banks rose on 10-07.</p></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">3</td>
+<td class="c-stock"><span class="sym">BBTC</span><span class="co">Bombay Burmah Trading Corporation Ltd.</span><span class="sec">Fast Moving Consumer Goods</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;8.40%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">1,334.20 <span class="to" aria-label="to">&rarr;</span> 1,222.10</td>
+<td class="c-spark"><svg class="spark neg" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 1,334.20, 1,304.50, 1,298.20, 1,269.40, 1,224.60, 1,222.10"><line class="spark-base" x1="3" x2="101" y1="3.0" y2="3.0"/><polyline points="3.0,3.0 22.6,9.4 42.2,10.7 61.8,16.9 81.4,26.5 101.0,27.0"/><circle cx="101.0" cy="27.0" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">0.49&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="nocat">No stock-specific catalyst found</span><span class="nocat-rest">; repeated 52-week lows, largest drop on 10-08 market sell-off</span></div>
+<div class="chips"><span class="chip cat">Sector or macro</span><span class="chip conf conf-low">low confidence</span><span class="chip ev">event 2026-10-08</span></div>
+<div class="src"><span class="src-k">Source:</span> <span class="src-plain">NSE Bhavcopy MCP get_index_history (Nifty 500, Nifty Pharma)</span></div><p class="driver"><span class="driver-k">Likely driver (from the data):</span> Steady slide to repeated 52-week lows (Univest trackers 10-05/10-06 note no company-specific cause); largest drop 10-08 (-3.5%).</p></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">4</td>
+<td class="c-stock"><span class="sym">GLAXO</span><span class="co">Glaxosmithkline Pharmaceuticals Ltd.</span><span class="sec">Healthcare</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;8.33%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">2,771.10 <span class="to" aria-label="to">&rarr;</span> 2,540.30</td>
+<td class="c-spark"><svg class="spark neg" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 2,771.10, 2,732.80, 2,755.00, 2,634.00, 2,534.40, 2,540.30"><line class="spark-base" x1="3" x2="101" y1="3.0" y2="3.0"/><polyline points="3.0,3.0 22.6,6.9 42.2,4.6 61.8,16.9 81.4,27.0 101.0,26.4"/><circle cx="101.0" cy="26.4" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">0.79&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="nocat">No stock-specific catalyst found</span></div>
+<div class="chips"><span class="chip cat">Technical / no specific catalyst</span><span class="chip conf conf-low">low confidence</span></div>
+<div class="src"><span class="src-k">Source:</span> <span class="src-plain">NSE Bhavcopy MCP get_index_history (Nifty 500, Nifty Pharma)</span></div><p class="driver"><span class="driver-k">Likely driver (from the data):</span> Worst day was 10-07 (-4.4% on 125k shares, 1.7x) when Nifty Pharma fell only 0.43%, so that drop looks stock-specific but unexplained; followed by -3.8% on 10-08 with the pharma/market sell-off (Nifty Pharma -2.32%).</p></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">5</td>
+<td class="c-stock"><span class="sym">DMART</span><span class="co">Avenue Supermarts Ltd.</span><span class="sec">Consumer Services</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;7.77%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">3,813.00 <span class="to" aria-label="to">&rarr;</span> 3,516.80</td>
+<td class="c-spark"><svg class="spark neg" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 3,813.00, 3,567.00, 3,581.90, 3,636.00, 3,585.00, 3,516.80"><line class="spark-base" x1="3" x2="101" y1="3.0" y2="3.0"/><polyline points="3.0,3.0 22.6,22.9 42.2,21.7 61.8,17.3 81.4,21.5 101.0,27.0"/><circle cx="101.0" cy="27.0" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">1.55&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="headline">Q2 FY27 business update (Oct 3): standalone revenue Rs 19,206 cr, +18.4% YoY, 518 stores; no margin/LFL data, stock -6.5% on Oct 5</span></div>
+<div class="chips"><span class="chip cat">Results / business update</span><span class="chip conf conf-high">high confidence</span><span class="chip ev">event 2026-10-03</span></div>
+<div class="src"><span class="src-k">Source:</span> <a href="https://www.angelone.in/news/stocks/dmart-share-price-in-focus-as-q2-fy27-revenue-rises-to-19-206-crore" rel="noopener" target="_blank">Angel One</a><span class="sep">; </span><a href="https://www.goodreturns.in/news/dmart-q2-business-update-revenue-jumps-18-4-to-rs-19-206-crore-store-count-rises-to-518-1539023.html" rel="noopener" target="_blank">GoodReturns</a><span class="sep">; </span><a href="https://univest.in/blogs/avenue-supermarts-share-price-falls-despite-q2-update" rel="noopener" target="_blank">Univest</a></div><details class="more"><summary>Details</summary><p>Revenue Rs 19,206.18 cr (+18.4% YoY, +4.7% QoQ) failed to impress given rich valuation and modest store additions; NSE close 10-05 3567.0 (-6.45%) on 2.55M shares (4.3x avg). Full Q2 results due 2026-10-10.</p></details></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">6</td>
+<td class="c-stock"><span class="sym">HBLENGINE</span><span class="co">HBL Engineering Ltd.</span><span class="sec">Capital Goods</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;7.74%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">779.35 <span class="to" aria-label="to">&rarr;</span> 719.05</td>
+<td class="c-spark"><svg class="spark neg" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 779.35, 763.60, 764.30, 762.45, 725.15, 719.05"><line class="spark-base" x1="3" x2="101" y1="3.0" y2="3.0"/><polyline points="3.0,3.0 22.6,9.3 42.2,9.0 61.8,9.7 81.4,24.6 101.0,27.0"/><circle cx="101.0" cy="27.0" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">0.40&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="nocat">No stock-specific catalyst found</span><span class="nocat-rest">; fell with the 2026-10-08 market-wide sell-off (Nifty 500 -2.01%)</span></div>
+<div class="chips"><span class="chip cat">Sector or macro</span><span class="chip conf conf-low">low confidence</span><span class="chip ev">event 2026-10-08</span></div>
+<div class="src"><span class="src-k">Source:</span> <span class="src-plain">NSE Bhavcopy MCP get_index_history (Nifty 500, Nifty Pharma)</span></div><p class="driver"><span class="driver-k">Likely driver (from the data):</span> Worst day 2026-10-08, the market-wide sell-off (Nifty 500 -2.01%); see Market backdrop. -4.9% on 10-08; latest Kavach orders found are Jul/Aug 2026 (ICF), nothing in window.</p></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">7</td>
+<td class="c-stock"><span class="sym">SCHNEIDER</span> <span class="tag tag-base" title="The 1 Oct base close followed a spike day, so part of the weekly move reverses that spike">base effect</span><span class="co">Schneider Electric Infrastructure Ltd.</span><span class="sec">Capital Goods</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;7.72%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">1,275.40 <span class="to" aria-label="to">&rarr;</span> 1,176.90</td>
+<td class="c-spark"><svg class="spark neg" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 1,275.40, 1,268.10, 1,274.00, 1,256.20, 1,191.40, 1,176.90"><line class="spark-base" x1="3" x2="101" y1="3.0" y2="3.0"/><polyline points="3.0,3.0 22.6,4.8 42.2,3.3 61.8,7.7 81.4,23.5 101.0,27.0"/><circle cx="101.0" cy="27.0" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">0.84&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="nocat">No stock-specific catalyst found</span><span class="nocat-rest">; reversal of 10-01 +6% spike plus 10-08 market sell-off</span></div>
+<div class="chips"><span class="chip cat">Sector or macro</span><span class="chip conf conf-low">low confidence</span><span class="chip ev">event 2026-10-08</span></div>
+<div class="src"><span class="src-k">Source:</span> <span class="src-plain">NSE Bhavcopy MCP get_index_history (Nifty 500, Nifty Pharma)</span></div><p class="driver"><span class="driver-k">Likely driver (from the data):</span> Base effect: +6.0% spike on 10-01 (1.44M shares, 5.1x) set a high c0; vs 09-30 close the week is -2.2%. Worst day 2026-10-08, the market-wide sell-off (Nifty 500 -2.01%); see Market backdrop. -5.2% on 10-08. Cause of the 10-01 spike not found.</p></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">8</td>
+<td class="c-stock"><span class="sym">JINDALSTEL</span><span class="co">Jindal Steel Ltd.</span><span class="sec">Metals &amp; Mining</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;7.61%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">1,100.50 <span class="to" aria-label="to">&rarr;</span> 1,016.70</td>
+<td class="c-spark"><svg class="spark neg" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 1,100.50, 1,097.30, 1,085.90, 1,061.00, 1,010.00, 1,016.70"><line class="spark-base" x1="3" x2="101" y1="3.0" y2="3.0"/><polyline points="3.0,3.0 22.6,3.8 42.2,6.9 61.8,13.5 81.4,27.0 101.0,25.2"/><circle cx="101.0" cy="25.2" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">1.82&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="headline">Metals led the market fall after RBI&#x27;s 10-07 rate hike/tightening stance; stock -2.3% on 10-07 and -4.8% in the 10-08 sell-off</span></div>
+<div class="chips"><span class="chip cat">Sector or macro</span><span class="chip conf conf-medium">medium confidence</span><span class="chip ev">event 2026-10-07</span></div>
+<div class="src"><span class="src-k">Source:</span> <a href="https://www.businesstoday.in/markets/stocks/story/sensex-nifty-recovery-attempt-falters-after-rbi-rate-hike-is-further-caution-warranted-560182-2026-10-07" rel="noopener" target="_blank">Business Today</a><span class="sep">; </span><a href="https://www.niftytrader.in/markets/?p=31912" rel="noopener" target="_blank">NiftyTrader</a><span class="sep">; </span><span class="src-plain">NSE Bhavcopy MCP get_index_history (Nifty 500, Nifty Pharma)</span></div><details class="more"><summary>Details</summary><p>Metal was the biggest sector drag on 10-07 (Business Today; NiftyTrader: metal and realty slid up to 4%). No block deal, filing or brokerage action found; 10-06 volume spike (4.44M, 4.3x) unexplained.</p></details></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">9</td>
+<td class="c-stock"><span class="sym">TEGA</span><span class="co">Tega Industries Ltd.</span><span class="sec">Capital Goods</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;7.57%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">2,093.40 <span class="to" aria-label="to">&rarr;</span> 1,935.00</td>
+<td class="c-spark"><svg class="spark neg" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 2,093.40, 2,064.10, 2,092.50, 2,123.60, 1,958.10, 1,935.00"><line class="spark-base" x1="3" x2="101" y1="6.8" y2="6.8"/><polyline points="3.0,6.8 22.6,10.6 42.2,7.0 61.8,3.0 81.4,24.1 101.0,27.0"/><circle cx="101.0" cy="27.0" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">0.42&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="nocat">No stock-specific catalyst found</span><span class="nocat-rest">; fell with the 2026-10-08 market-wide sell-off (Nifty 500 -2.01%)</span></div>
+<div class="chips"><span class="chip cat">Sector or macro</span><span class="chip conf conf-low">low confidence</span><span class="chip ev">event 2026-10-08</span></div>
+<div class="src"><span class="src-k">Source:</span> <span class="src-plain">NSE Bhavcopy MCP get_index_history (Nifty 500, Nifty Pharma)</span></div><p class="driver"><span class="driver-k">Likely driver (from the data):</span> Worst day 2026-10-08, the market-wide sell-off (Nifty 500 -2.01%); see Market backdrop. Single-day -7.8% on 10-08 after a ~25% mid-September rally (profit-taking likely); no Molycop/fundraise/brokerage news in window.</p></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">10</td>
+<td class="c-stock"><span class="sym">ENDURANCE</span><span class="co">Endurance Technologies Ltd.</span><span class="sec">Automobile and Auto Components</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;7.45%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">2,601.40 <span class="to" aria-label="to">&rarr;</span> 2,407.50</td>
+<td class="c-spark"><svg class="spark neg" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 2,601.40, 2,526.50, 2,516.00, 2,513.40, 2,433.50, 2,407.50"><line class="spark-base" x1="3" x2="101" y1="3.0" y2="3.0"/><polyline points="3.0,3.0 22.6,12.3 42.2,13.6 61.8,13.9 81.4,23.8 101.0,27.0"/><circle cx="101.0" cy="27.0" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">0.84&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="nocat">No stock-specific catalyst found</span><span class="nocat-rest">; fell with the 2026-10-08 market-wide sell-off (Nifty 500 -2.01%)</span></div>
+<div class="chips"><span class="chip cat">Sector or macro</span><span class="chip conf conf-low">low confidence</span><span class="chip ev">event 2026-10-08</span></div>
+<div class="src"><span class="src-k">Source:</span> <span class="src-plain">NSE Bhavcopy MCP get_index_history (Nifty 500, Nifty Pharma)</span><span class="sep">; </span><a href="https://www.businesstoday.in/markets/stocks/story/sensex-nifty-recovery-attempt-falters-after-rbi-rate-hike-is-further-caution-warranted-560182-2026-10-07" rel="noopener" target="_blank">Business Today</a></div><p class="driver"><span class="driver-k">Likely driver (from the data):</span> Worst day 2026-10-08, the market-wide sell-off (Nifty 500 -2.01%); see Market backdrop. Gradual fall (10-05 -2.9%, 10-08 -3.2%) on below-average volume. Auto was among the drags on 10-07 (Business Today) and Nifty Auto fell 4.07% on 10-01 (multibagg.ai), but Endurance was not named.</p></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">11</td>
+<td class="c-stock"><span class="sym">ABREL</span><span class="co">Aditya Birla Real Estate Ltd.</span><span class="sec">Realty</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;7.11%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">1,100.50 <span class="to" aria-label="to">&rarr;</span> 1,022.30</td>
+<td class="c-spark"><svg class="spark neg" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 1,100.50, 1,082.60, 1,078.00, 1,049.40, 1,018.00, 1,022.30"><line class="spark-base" x1="3" x2="101" y1="3.0" y2="3.0"/><polyline points="3.0,3.0 22.6,8.2 42.2,9.5 61.8,17.9 81.4,27.0 101.0,25.7"/><circle cx="101.0" cy="25.7" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">1.08&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="headline">Realty hit by RBI&#x27;s shift to &#x27;calibrated tightening&#x27; on 10-07; stock -2.65% on 10-07 and -3.0% on 10-08, ninth straight lower close</span></div>
+<div class="chips"><span class="chip cat">Sector or macro</span><span class="chip conf conf-medium">medium confidence</span><span class="chip ev">event 2026-10-07</span></div>
+<div class="src"><span class="src-k">Source:</span> <a href="https://www.businesstoday.in/markets/stocks/story/sensex-nifty-recovery-attempt-falters-after-rbi-rate-hike-is-further-caution-warranted-560182-2026-10-07" rel="noopener" target="_blank">Business Today</a><span class="sep">; </span><a href="https://www.niftytrader.in/markets/?p=31912" rel="noopener" target="_blank">NiftyTrader</a><span class="sep">; </span><span class="src-plain">NSE Bhavcopy MCP get_index_history (Nifty 500, Nifty Pharma)</span></div><details class="more"><summary>Details</summary><p>Realty was the second-biggest drag on 10-07 as rate-cut hopes faded (Business Today; NiftyTrader: metal and realty slid up to 4%). Already in a steep downtrend (-23.6% in a month); no company filing in window.</p></details></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">12</td>
+<td class="c-stock"><span class="sym">ZFCVINDIA</span><span class="co">ZF Commercial Vehicle Control Systems India Ltd.</span><span class="sec">Automobile and Auto Components</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;7.09%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">2,241.00 <span class="to" aria-label="to">&rarr;</span> 2,082.20</td>
+<td class="c-spark"><svg class="spark neg" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 2,241.00, 2,201.30, 2,187.40, 2,172.20, 2,116.20, 2,082.20"><line class="spark-base" x1="3" x2="101" y1="3.0" y2="3.0"/><polyline points="3.0,3.0 22.6,9.0 42.2,11.1 61.8,13.4 81.4,21.9 101.0,27.0"/><circle cx="101.0" cy="27.0" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">0.69&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="nocat">No stock-specific catalyst found</span><span class="nocat-rest">; fell with the 2026-10-08 market-wide sell-off (Nifty 500 -2.01%)</span></div>
+<div class="chips"><span class="chip cat">Sector or macro</span><span class="chip conf conf-low">low confidence</span><span class="chip ev">event 2026-10-08</span></div>
+<div class="src"><span class="src-k">Source:</span> <span class="src-plain">NSE Bhavcopy MCP get_index_history (Nifty 500, Nifty Pharma)</span><span class="sep">; </span><a href="https://trucks.tractorjunction.com/en/news/fada-september-2026-cv-3w-retail-sales" rel="noopener" target="_blank">TractorJunction</a></div><p class="driver"><span class="driver-k">Likely driver (from the data):</span> Worst day 2026-10-08, the market-wide sell-off (Nifty 500 -2.01%); see Market backdrop. Grinding decline near 52-week low on low volume (0.69x); September 2026 CV retail sales were strong (+37.6% YoY, FADA via TractorJunction), so not a demand shock. New CFO from 2026-09-01.</p></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">13</td>
+<td class="c-stock"><span class="sym">ENRIN</span> <span class="tag tag-base" title="The 1 Oct base close followed a spike day, so part of the weekly move reverses that spike">base effect</span><span class="co">Siemens Energy India Ltd.</span><span class="sec">Capital Goods</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;6.99%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">3,334.00 <span class="to" aria-label="to">&rarr;</span> 3,101.00</td>
+<td class="c-spark"><svg class="spark neg" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 3,334.00, 3,316.40, 3,307.50, 3,344.00, 3,180.00, 3,101.00"><line class="spark-base" x1="3" x2="101" y1="4.0" y2="4.0"/><polyline points="3.0,4.0 22.6,5.7 42.2,6.6 61.8,3.0 81.4,19.2 101.0,27.0"/><circle cx="101.0" cy="27.0" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">1.10&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="nocat">No stock-specific catalyst found</span><span class="nocat-rest">; reversal of 10-01 +4% spike plus 10-08 market sell-off</span></div>
+<div class="chips"><span class="chip cat">Sector or macro</span><span class="chip conf conf-low">low confidence</span><span class="chip ev">event 2026-10-08</span></div>
+<div class="src"><span class="src-k">Source:</span> <span class="src-plain">NSE Bhavcopy MCP get_index_history (Nifty 500, Nifty Pharma)</span></div><p class="driver"><span class="driver-k">Likely driver (from the data):</span> Base effect: +4.2% on 10-01 (1.65M shares, 3.6x) set a high c0; vs 09-30 close the week is -3.1%. Worst day 2026-10-08, the market-wide sell-off (Nifty 500 -2.01%); see Market backdrop. -4.9% on 10-08, then -2.5% on 10-09 on 1.6x volume. Last company news found: 2026-09-09 Blue-portfolio clarification (outside window).</p></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">14</td>
+<td class="c-stock"><span class="sym">JUBLPHARMA</span><span class="co">Jubilant Pharmova Ltd.</span><span class="sec">Healthcare</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;6.74%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">999.30 <span class="to" aria-label="to">&rarr;</span> 931.90</td>
+<td class="c-spark"><svg class="spark neg" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 999.30, 981.60, 989.20, 974.60, 932.20, 931.90"><line class="spark-base" x1="3" x2="101" y1="3.0" y2="3.0"/><polyline points="3.0,3.0 22.6,9.3 42.2,6.6 61.8,11.8 81.4,26.9 101.0,27.0"/><circle cx="101.0" cy="27.0" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">0.76&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="nocat">No stock-specific catalyst found</span><span class="nocat-rest">; fell with 10-08 pharma/market sell-off (Nifty Pharma -2.32%)</span></div>
+<div class="chips"><span class="chip cat">Sector or macro</span><span class="chip conf conf-low">low confidence</span><span class="chip ev">event 2026-10-08</span></div>
+<div class="src"><span class="src-k">Source:</span> <span class="src-plain">NSE Bhavcopy MCP get_index_history (Nifty 500, Nifty Pharma)</span></div><p class="driver"><span class="driver-k">Likely driver (from the data):</span> Drop concentrated on 10-08 (-4.35%, 1.6x vol) with Nifty Pharma -2.32%; no FDA/radiopharma/CDMO news in window (last: GST notice 2026-09-01, Q1 FY27 results Aug). Next results 2026-10-30.</p></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">15</td>
+<td class="c-stock"><span class="sym">MANKIND</span><span class="co">Mankind Pharma Ltd.</span><span class="sec">Healthcare</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;6.57%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">2,535.00 <span class="to" aria-label="to">&rarr;</span> 2,368.50</td>
+<td class="c-spark"><svg class="spark neg" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 2,535.00, 2,479.00, 2,500.00, 2,500.00, 2,380.00, 2,368.50"><line class="spark-base" x1="3" x2="101" y1="3.0" y2="3.0"/><polyline points="3.0,3.0 22.6,11.1 42.2,8.0 61.8,8.0 81.4,25.3 101.0,27.0"/><circle cx="101.0" cy="27.0" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">0.73&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="nocat">No stock-specific catalyst found</span><span class="nocat-rest">; fell with 10-08 pharma/market sell-off (Nifty Pharma -2.32%)</span></div>
+<div class="chips"><span class="chip cat">Sector or macro</span><span class="chip conf conf-low">low confidence</span><span class="chip ev">event 2026-10-08</span></div>
+<div class="src"><span class="src-k">Source:</span> <span class="src-plain">NSE Bhavcopy MCP get_index_history (Nifty 500, Nifty Pharma)</span></div><p class="driver"><span class="driver-k">Likely driver (from the data):</span> Drop concentrated on 10-08 (-4.8%, 1.3x vol) with Nifty Pharma -2.32%, after a ~12% run 09-18..10-01; no company news in window.</p></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">16</td>
+<td class="c-stock"><span class="sym">CAPLIPOINT</span><span class="co">Caplin Point Laboratories Ltd.</span><span class="sec">Healthcare</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;6.50%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">2,631.90 <span class="to" aria-label="to">&rarr;</span> 2,460.80</td>
+<td class="c-spark"><svg class="spark neg" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 2,631.90, 2,604.00, 2,679.70, 2,649.10, 2,548.80, 2,460.80"><line class="spark-base" x1="3" x2="101" y1="8.2" y2="8.2"/><polyline points="3.0,8.2 22.6,11.3 42.2,3.0 61.8,6.4 81.4,17.4 101.0,27.0"/><circle cx="101.0" cy="27.0" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">0.63&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="nocat">No stock-specific catalyst found</span><span class="nocat-rest">; fell with 10-08 pharma/market sell-off (Nifty Pharma -2.32%)</span></div>
+<div class="chips"><span class="chip cat">Sector or macro</span><span class="chip conf conf-low">low confidence</span><span class="chip ev">event 2026-10-08</span></div>
+<div class="src"><span class="src-k">Source:</span> <span class="src-plain">NSE Bhavcopy MCP get_index_history (Nifty 500, Nifty Pharma)</span></div><p class="driver"><span class="driver-k">Likely driver (from the data):</span> Falls on 10-08 (-3.8%) and 10-09 (-3.5%) with the pharma sell-off; last regulatory news is the Aug 2026 Form 483 (10 procedural observations) at Gummidipoondi, outside window.</p></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">17</td>
+<td class="c-stock"><span class="sym">ADANIENT</span><span class="co">Adani Enterprises Ltd.</span><span class="sec">Metals &amp; Mining</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;6.48%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">2,816.80 <span class="to" aria-label="to">&rarr;</span> 2,634.40</td>
+<td class="c-spark"><svg class="spark neg" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 2,816.80, 2,864.00, 2,849.90, 2,743.00, 2,596.00, 2,634.40"><line class="spark-base" x1="3" x2="101" y1="7.2" y2="7.2"/><polyline points="3.0,7.2 22.6,3.0 42.2,4.3 61.8,13.8 81.4,27.0 101.0,23.6"/><circle cx="101.0" cy="23.6" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">1.20&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="headline">Metals &amp; mining sell-off after RBI&#x27;s 10-07 hike: stock -3.75% on 10-07 and -5.4% in the 10-08 sell-off (2.5x volume)</span></div>
+<div class="chips"><span class="chip cat">Sector or macro</span><span class="chip conf conf-medium">medium confidence</span><span class="chip ev">event 2026-10-07</span></div>
+<div class="src"><span class="src-k">Source:</span> <a href="https://www.businesstoday.in/markets/stocks/story/sensex-nifty-recovery-attempt-falters-after-rbi-rate-hike-is-further-caution-warranted-560182-2026-10-07" rel="noopener" target="_blank">Business Today</a><span class="sep">; </span><a href="https://www.5paisa.com/blog/adani-enterprises-stock-update-7-oct-26" rel="noopener" target="_blank">5paisa</a><span class="sep">; </span><span class="src-plain">NSE Bhavcopy MCP get_index_history (Nifty 500, Nifty Pharma)</span></div><details class="more"><summary>Details</summary><p>Metal was the biggest drag on 10-07 (Business Today); 5paisa recap confirms the 10-07 close of Rs 2,743 (-3.75%) without a stock cause. No Adani-specific news in window; next results 2026-10-28.</p></details></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">18</td>
+<td class="c-stock"><span class="sym">WELSPUNLIV</span> <span class="tag tag-base" title="The 1 Oct base close followed a spike day, so part of the weekly move reverses that spike">base effect</span><span class="co">Welspun Living Ltd.</span><span class="sec">Textiles</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;6.45%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">239.17 <span class="to" aria-label="to">&rarr;</span> 223.75</td>
+<td class="c-spark"><svg class="spark neg" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 239.17, 230.27, 237.86, 235.86, 225.07, 223.75"><line class="spark-base" x1="3" x2="101" y1="3.0" y2="3.0"/><polyline points="3.0,3.0 22.6,16.9 42.2,5.0 61.8,8.2 81.4,24.9 101.0,27.0"/><circle cx="101.0" cy="27.0" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">0.80&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="nocat">No stock-specific catalyst found</span><span class="nocat-rest">; fall retraces 10-01 Jefferies-driven spike to 52-week high</span></div>
+<div class="chips"><span class="chip cat">Technical / no specific catalyst</span><span class="chip conf conf-low">low confidence</span><span class="chip ev">event 2026-10-01</span></div>
+<div class="src"><span class="src-k">Source:</span> <a href="https://www.businesstoday.in/markets/stocks/story/welspun-living-shares-gain-5-jefferies-retains-buy-call-check-target-price-559101-2026-10-01" rel="noopener" target="_blank">Business Today</a></div><p class="driver"><span class="driver-k">Likely driver (from the data):</span> Stock rose ~5.2% on 10-01 (vol 22.5M, ~4.3x avg) after Jefferies retained Buy with Rs 260 target, so c0 is a spike; the week&#x27;s -6.45% is mostly a giveback of that move. No negative news found for 10-05..10-09. </p></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">19</td>
+<td class="c-stock"><span class="sym">SUNDARMFIN</span><span class="co">Sundaram Finance Ltd.</span><span class="sec">Financial Services</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;6.42%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">4,395.90 <span class="to" aria-label="to">&rarr;</span> 4,113.60</td>
+<td class="c-spark"><svg class="spark neg" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 4,395.90, 4,268.40, 4,347.80, 4,301.20, 4,110.60, 4,113.60"><line class="spark-base" x1="3" x2="101" y1="3.0" y2="3.0"/><polyline points="3.0,3.0 22.6,13.7 42.2,7.0 61.8,11.0 81.4,27.0 101.0,26.7"/><circle cx="101.0" cy="26.7" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">0.89&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="nocat">No stock-specific catalyst found</span><span class="nocat-rest">; extends slide from Rs 4,752 (09-22), sharpest drop -4.4% on 10-08</span></div>
+<div class="chips"><span class="chip cat">Technical / no specific catalyst</span><span class="chip conf conf-low">low confidence</span></div>
+<div class="src"><span class="src-k">Source:</span> <span class="src-plain">Checked: Supabase research/research_integration tables (no rows after 2026-09-07 for this stock), Tijori knowledge base, web search</span><span class="sep">; </span><span class="src-plain">Univest auto-generated pages for 09-28/09-29 also cite no trigger</span></div><p class="driver"><span class="driver-k">Likely driver (from the data):</span> Stock down ~13% over the month with no Sep-quarter business update or rating action found in the window. 10-08 drop came on 1.34x average volume, a broad down day across many Nifty 500 names.</p></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">20</td>
+<td class="c-stock"><span class="sym">BIKAJI</span><span class="co">Bikaji Foods International Ltd.</span><span class="sec">Fast Moving Consumer Goods</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;6.35%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">504.05 <span class="to" aria-label="to">&rarr;</span> 472.05</td>
+<td class="c-spark"><svg class="spark neg" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 504.05, 487.00, 481.10, 483.55, 468.65, 472.05"><line class="spark-base" x1="3" x2="101" y1="3.0" y2="3.0"/><polyline points="3.0,3.0 22.6,14.6 42.2,18.6 61.8,16.9 81.4,27.0 101.0,24.7"/><circle cx="101.0" cy="24.7" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">0.78&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="nocat">No stock-specific catalyst found</span><span class="nocat-rest">; continued slide from Rs 591 (09-23) to near Rs 470</span></div>
+<div class="chips"><span class="chip cat">Technical / no specific catalyst</span><span class="chip conf conf-low">low confidence</span></div>
+<div class="src"><span class="src-k">Source:</span> <span class="src-plain">Checked: Supabase research/research_integration tables (no rows after 2026-09-07 for this stock), Tijori knowledge base, web search</span></div><p class="driver"><span class="driver-k">Likely driver (from the data):</span> Stock fell ~20% from 09-23 high with volume spikes on 09-29 (904k) and 10-06 (976k, 2.2x avg) but no announcement found. No Q2 update or broker note located.</p></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">21</td>
+<td class="c-stock"><span class="sym">ENGINERSIN</span><span class="co">Engineers India Ltd.</span><span class="sec">Construction</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;6.28%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">312.75 <span class="to" aria-label="to">&rarr;</span> 293.10</td>
+<td class="c-spark"><svg class="spark neg" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 312.75, 307.85, 313.30, 308.30, 289.00, 293.10"><line class="spark-base" x1="3" x2="101" y1="3.5" y2="3.5"/><polyline points="3.0,3.5 22.6,8.4 42.2,3.0 61.8,7.9 81.4,27.0 101.0,23.0"/><circle cx="101.0" cy="23.0" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">0.98&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="nocat">No stock-specific catalyst found</span><span class="nocat-rest">; -6.3% on 10-08 on 2.1x volume after a sharp late-Sep rally</span></div>
+<div class="chips"><span class="chip cat">Technical / no specific catalyst</span><span class="chip conf conf-low">low confidence</span><span class="chip ev">event 2026-10-08</span></div>
+<div class="src"><span class="src-k">Source:</span> <span class="src-plain">Checked: Supabase research/research_integration tables (no rows after 2026-09-07 for this stock), Tijori knowledge base, web search</span></div><p class="driver"><span class="driver-k">Likely driver (from the data):</span> Stock rallied from Rs 266 (09-18) to Rs 316 (09-25) on heavy volume, then fell 6.26% on 10-08 (14.5M shares vs 6.8M avg); looks like profit-taking, no news found. Seed peers RITES and IRCON (PSU engineering) also fell ~5% this week.</p></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">22</td>
+<td class="c-stock"><span class="sym">CHAMBLFERT</span><span class="co">Chambal Fertilizers &amp; Chemicals Ltd.</span><span class="sec">Chemicals</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;6.26%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">399.30 <span class="to" aria-label="to">&rarr;</span> 374.30</td>
+<td class="c-spark"><svg class="spark neg" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 399.30, 397.60, 404.80, 396.35, 378.65, 374.30"><line class="spark-base" x1="3" x2="101" y1="7.3" y2="7.3"/><polyline points="3.0,7.3 22.6,8.7 42.2,3.0 61.8,9.6 81.4,23.6 101.0,27.0"/><circle cx="101.0" cy="27.0" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">1.07&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="nocat">No stock-specific catalyst found</span><span class="nocat-rest">; stock hit fresh 52-week low (~Rs 396) on 10-05 and kept sliding</span></div>
+<div class="chips"><span class="chip cat">Technical / no specific catalyst</span><span class="chip conf conf-low">low confidence</span><span class="chip ev">event 2026-10-05</span></div>
+<div class="src"><span class="src-k">Source:</span> <a href="https://univest.in/blogs/why-chambal-fertilisers-and-chemicals-ltd-share-price-52-week-low-today-2026" rel="noopener" target="_blank">Univest blog (52-week low, no catalyst cited</a><span class="sep">; </span><span class="src-plain">Checked: Supabase research/research_integration tables (no rows after 2026-09-07 for this stock), Tijori knowledge base, web search</span></div><p class="driver"><span class="driver-k">Likely driver (from the data):</span> Largest drop -4.47% on 10-08 (1.5x avg vol) and 10-09 volume 1.9x avg as the stock broke below its 52-week low. No company or fertiliser-policy news found.</p></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">23</td>
+<td class="c-stock"><span class="sym">MAXHEALTH</span><span class="co">Max Healthcare Institute Ltd.</span><span class="sec">Healthcare</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;6.07%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">940.95 <span class="to" aria-label="to">&rarr;</span> 883.80</td>
+<td class="c-spark"><svg class="spark neg" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 940.95, 917.00, 902.50, 908.00, 873.40, 883.80"><line class="spark-base" x1="3" x2="101" y1="3.0" y2="3.0"/><polyline points="3.0,3.0 22.6,11.5 42.2,16.7 61.8,14.7 81.4,27.0 101.0,23.3"/><circle cx="101.0" cy="23.3" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">0.98&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="nocat">No stock-specific catalyst found</span><span class="nocat-rest">; -5.4% on 09-30 on 4.5x volume near 52-week low, slide continued through 10-08</span></div>
+<div class="chips"><span class="chip cat">Technical / no specific catalyst</span><span class="chip conf conf-low">low confidence</span><span class="chip ev">event 2026-09-30</span></div>
+<div class="src"><span class="src-k">Source:</span> <a href="https://univest.in/blogs/why-max-healthcare-institute-ltd-share-price-near-52-week-low-today-2026" rel="noopener" target="_blank">Univest intraday pages for 09-30 (no catalyst cited</a><span class="sep">; </span><span class="src-plain">Checked: Supabase research/research_integration tables (no rows after 2026-09-07 for this stock), Tijori knowledge base, web search</span></div><p class="driver"><span class="driver-k">Likely driver (from the data):</span> 09-30 (before c0) saw 13.8M shares vs 3.1M avg with a -5.35% close; no block deal, downgrade or filing found to explain it. Weekly fall -6.07% with 10-08 the worst day (-3.8%).</p></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">24</td>
+<td class="c-stock"><span class="sym">PHOENIXLTD</span><span class="co">Phoenix Mills Ltd.</span><span class="sec">Realty</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;6.06%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">1,930.00 <span class="to" aria-label="to">&rarr;</span> 1,813.10</td>
+<td class="c-spark"><svg class="spark neg" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 1,930.00, 1,935.00, 1,883.50, 1,845.50, 1,771.20, 1,813.10"><line class="spark-base" x1="3" x2="101" y1="3.7" y2="3.7"/><polyline points="3.0,3.7 22.6,3.0 42.2,10.5 61.8,16.1 81.4,27.0 101.0,20.9"/><circle cx="101.0" cy="20.9" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">1.24&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="nocat">No stock-specific catalyst found</span><span class="nocat-rest">; four-day slide 10-06..10-08 (-8.5%) on 1.8x volume on 10-08</span></div>
+<div class="chips"><span class="chip cat">Technical / no specific catalyst</span><span class="chip conf conf-low">low confidence</span></div>
+<div class="src"><span class="src-k">Source:</span> <span class="src-plain">Checked: Supabase research/research_integration tables (no rows after 2026-09-07 for this stock), Tijori knowledge base, web search (Q2 FY27 business update not found)</span></div><p class="driver"><span class="driver-k">Likely driver (from the data):</span> Stock fell from Rs 1,935 (10-05) to Rs 1,771 (10-08), -4.0% on 10-08, before a partial bounce. Seed peers ABREL and PRESTIGE (realty) also in the losers list.</p></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">25</td>
+<td class="c-stock"><span class="sym">IREDA</span><span class="co">Indian Renewable Energy Development Agency Ltd.</span><span class="sec">Financial Services</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;5.95%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">111.00 <span class="to" aria-label="to">&rarr;</span> 104.40</td>
+<td class="c-spark"><svg class="spark neg" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 111.00, 109.00, 109.00, 107.33, 103.80, 104.40"><line class="spark-base" x1="3" x2="101" y1="3.0" y2="3.0"/><polyline points="3.0,3.0 22.6,9.7 42.2,9.7 61.8,15.2 81.4,27.0 101.0,25.0"/><circle cx="101.0" cy="25.0" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">0.83&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="headline">CMD&#x27;s term extended only 3 months by MNRE; Gensol declared fraudulent at 09-29 AGM; stock slid ahead of Q2 FY27 results</span></div>
+<div class="chips"><span class="chip cat">Management change</span><span class="chip conf conf-medium">medium confidence</span><span class="chip ev">event 2026-10-05</span></div>
+<div class="src"><span class="src-k">Source:</span> <a href="https://www.angelone.in/news/stocks/ireda-share-price-in-focus-ahead-of-q2-fy27-earnings-results" rel="noopener" target="_blank">Angel One</a></div><details class="more"><summary>Details</summary><p>Angel One (10-05) reported the stock down ~1.7% to Rs 109.10 alongside news that the CMD&#x27;s term was extended by three months and that IREDA declared borrower Gensol Engineering fraudulent. Largest drop was later, -3.3% on 10-08; the trading window closed 10-01 ahead of results.</p></details></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">26</td>
+<td class="c-stock"><span class="sym">MFSL</span><span class="co">Max Financial Services Ltd.</span><span class="sec">Financial Services</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;5.91%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">1,392.00 <span class="to" aria-label="to">&rarr;</span> 1,309.70</td>
+<td class="c-spark"><svg class="spark neg" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 1,392.00, 1,348.00, 1,361.00, 1,345.10, 1,322.40, 1,309.70"><line class="spark-base" x1="3" x2="101" y1="3.0" y2="3.0"/><polyline points="3.0,3.0 22.6,15.8 42.2,12.0 61.8,16.7 81.4,23.3 101.0,27.0"/><circle cx="101.0" cy="27.0" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">0.93&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="nocat">No stock-specific catalyst found</span><span class="nocat-rest">; in window; stock still weak after unexplained -9.8% crash on 09-24 (7.6x volume)</span></div>
+<div class="chips"><span class="chip cat">Technical / no specific catalyst</span><span class="chip conf conf-low">low confidence</span></div>
+<div class="src"><span class="src-k">Source:</span> <span class="src-plain">Checked: Supabase research/research_integration tables (no rows after 2026-09-07 for this stock), Tijori knowledge base, web search</span></div><p class="driver"><span class="driver-k">Likely driver (from the data):</span> 09-24 (outside window) saw 11.4M shares and a -9.8% close; cause not found. Within the week the stock fell further, with elevated volume on 10-05/10-06 (2.0M/2.9M vs 1.5M avg) and -3.2% on 10-05.</p></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">27</td>
+<td class="c-stock"><span class="sym">SONATSOFTW</span><span class="co">Sonata Software Ltd.</span><span class="sec">Information Technology</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;5.86%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">254.05 <span class="to" aria-label="to">&rarr;</span> 239.15</td>
+<td class="c-spark"><svg class="spark neg" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 254.05, 254.00, 252.05, 248.10, 240.90, 239.15"><line class="spark-base" x1="3" x2="101" y1="3.0" y2="3.0"/><polyline points="3.0,3.0 22.6,3.1 42.2,6.2 61.8,12.6 81.4,24.2 101.0,27.0"/><circle cx="101.0" cy="27.0" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">0.88&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="nocat">No stock-specific catalyst found</span><span class="nocat-rest">; steady slide to Rs 239, -2.9% on 10-08 and 1.8x volume on 10-09</span></div>
+<div class="chips"><span class="chip cat">Technical / no specific catalyst</span><span class="chip conf conf-low">low confidence</span></div>
+<div class="src"><span class="src-k">Source:</span> <span class="src-plain">Checked: Supabase research/research_integration tables (no rows after 2026-09-07 for this stock), Tijori knowledge base, web search</span></div><p class="driver"><span class="driver-k">Likely driver (from the data):</span> Stock down every day of the week from Rs 254 to Rs 239 with no news found; Q2 FY27 results not yet out. 10-09 volume 2.3M vs 1.27M average.</p></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">28</td>
+<td class="c-stock"><span class="sym">BIOCON</span><span class="co">Biocon Ltd.</span><span class="sec">Healthcare</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;5.75%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">370.70 <span class="to" aria-label="to">&rarr;</span> 349.40</td>
+<td class="c-spark"><svg class="spark neg" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 370.70, 369.80, 369.10, 360.00, 350.00, 349.40"><line class="spark-base" x1="3" x2="101" y1="3.0" y2="3.0"/><polyline points="3.0,3.0 22.6,4.0 42.2,4.8 61.8,15.1 81.4,26.3 101.0,27.0"/><circle cx="101.0" cy="27.0" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">0.89&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="nocat">No stock-specific catalyst found</span><span class="nocat-rest">; -2.5% on 10-07 and -2.8% on 10-08 with no trigger reported</span></div>
+<div class="chips"><span class="chip cat">Technical / no specific catalyst</span><span class="chip conf conf-low">low confidence</span></div>
+<div class="src"><span class="src-k">Source:</span> <a href="https://univest.in/blogs/why-biocon-share-price-fall-today-2026" rel="noopener" target="_blank">Univest (10-07, no trigger cited</a><span class="sep">; </span><span class="src-plain">Checked: Supabase research/research_integration tables (no rows after 2026-09-07 for this stock), Tijori knowledge base, web search</span></div><p class="driver"><span class="driver-k">Likely driver (from the data):</span> Volume rose on 10-06/10-07 (4.6M/4.4M vs 3.4M avg) as the stock fell from Rs 369 to Rs 349. Axis Direct cut its target to Rs 424 on 09-21 (outside window); several pharma names (GLAXO, MANKIND, CAPLIPOINT, EMCURE, JUBLPHARMA) are also in the losers list.</p></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">29</td>
+<td class="c-stock"><span class="sym">EMCURE</span><span class="co">Emcure Pharmaceuticals Ltd.</span><span class="sec">Healthcare</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;5.71%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">1,944.60 <span class="to" aria-label="to">&rarr;</span> 1,833.50</td>
+<td class="c-spark"><svg class="spark neg" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 1,944.60, 1,937.10, 1,922.40, 1,918.00, 1,851.50, 1,833.50"><line class="spark-base" x1="3" x2="101" y1="3.0" y2="3.0"/><polyline points="3.0,3.0 22.6,4.6 42.2,7.8 61.8,8.7 81.4,23.1 101.0,27.0"/><circle cx="101.0" cy="27.0" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">0.60&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="nocat">No stock-specific catalyst found</span><span class="nocat-rest">; -3.5% on 10-08 on thin volume</span></div>
+<div class="chips"><span class="chip cat">Technical / no specific catalyst</span><span class="chip conf conf-low">low confidence</span><span class="chip ev">event 2026-10-08</span></div>
+<div class="src"><span class="src-k">Source:</span> <span class="src-plain">Checked: Supabase research/research_integration tables (no rows after 2026-09-07 for this stock), Tijori knowledge base, web search</span></div><p class="driver"><span class="driver-k">Likely driver (from the data):</span> Weekly fall concentrated on 10-08 (-3.47%) and 10-09 (-1.0%) on below-average volume (66k/59k vs 203k avg). Other pharma names also weak this week.</p></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">30</td>
+<td class="c-stock"><span class="sym">NATIONALUM</span><span class="co">National Aluminium Co. Ltd.</span><span class="sec">Metals &amp; Mining</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;5.67%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">334.90 <span class="to" aria-label="to">&rarr;</span> 315.90</td>
+<td class="c-spark"><svg class="spark neg" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 334.90, 340.00, 337.25, 321.30, 313.10, 315.90"><line class="spark-base" x1="3" x2="101" y1="7.6" y2="7.6"/><polyline points="3.0,7.6 22.6,3.0 42.2,5.5 61.8,19.7 81.4,27.0 101.0,24.5"/><circle cx="101.0" cy="24.5" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">1.16&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="nocat">No stock-specific catalyst found</span><span class="nocat-rest">; -4.7% on 10-07 on 1.9x volume amid broad metals weakness</span></div>
+<div class="chips"><span class="chip cat">Sector or macro</span><span class="chip conf conf-low">low confidence</span><span class="chip ev">event 2026-10-07</span></div>
+<div class="src"><span class="src-k">Source:</span> <span class="src-plain">Checked: Supabase research/research_integration tables (no rows after 2026-09-07 for this stock), Tijori knowledge base, web search</span><span class="sep">; </span><span class="src-plain">peer moves from seed list</span></div><p class="driver"><span class="driver-k">Likely driver (from the data):</span> Largest drop -4.73% on 10-07 (9.5M shares vs 5.0M avg); stock down ~16% over the month. Metal peers JINDALSTEL (-7.6%), JSWSTEEL (-5.3%) and GMDCLTD (-5.2%) also in the weekly losers list.</p></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">31</td>
+<td class="c-stock"><span class="sym">SCHAEFFLER</span><span class="co">Schaeffler India Ltd.</span><span class="sec">Automobile and Auto Components</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;5.61%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">3,885.60 <span class="to" aria-label="to">&rarr;</span> 3,667.60</td>
+<td class="c-spark"><svg class="spark neg" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 3,885.60, 3,845.00, 3,818.10, 3,797.00, 3,736.70, 3,667.60"><line class="spark-base" x1="3" x2="101" y1="3.0" y2="3.0"/><polyline points="3.0,3.0 22.6,7.5 42.2,10.4 61.8,12.8 81.4,19.4 101.0,27.0"/><circle cx="101.0" cy="27.0" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">0.89&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="nocat">No stock-specific catalyst found</span><span class="nocat-rest">; grinding decline every session, -1.85% on 10-09</span></div>
+<div class="chips"><span class="chip cat">Technical / no specific catalyst</span><span class="chip conf conf-low">low confidence</span></div>
+<div class="src"><span class="src-k">Source:</span> <span class="src-plain">Checked: Supabase research/research_integration tables (no rows after 2026-09-07 for this stock), Tijori knowledge base, web search</span></div><p class="driver"><span class="driver-k">Likely driver (from the data):</span> Stock fell from Rs 4,218 (09-18) to Rs 3,668 with no news found; weekly volume near average. Auto-component peers ENDURANCE, ZFCVINDIA and TIINDIA also in the losers list.</p></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">32</td>
+<td class="c-stock"><span class="sym">TTML</span><span class="co">Tata Teleservices (Maharashtra) Ltd.</span><span class="sec">Telecommunication</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;5.54%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">34.82 <span class="to" aria-label="to">&rarr;</span> 32.89</td>
+<td class="c-spark"><svg class="spark neg" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 34.82, 34.33, 34.18, 34.01, 32.95, 32.89"><line class="spark-base" x1="3" x2="101" y1="3.0" y2="3.0"/><polyline points="3.0,3.0 22.6,9.1 42.2,11.0 61.8,13.1 81.4,26.3 101.0,27.0"/><circle cx="101.0" cy="27.0" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">0.27&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="nocat">No stock-specific catalyst found</span><span class="nocat-rest">; giveback after unexplained 09-28 spike (79M shares, ~13x avg)</span></div>
+<div class="chips"><span class="chip cat">Technical / no specific catalyst</span><span class="chip conf conf-low">low confidence</span></div>
+<div class="src"><span class="src-k">Source:</span> <span class="src-plain">Checked: Supabase research/research_integration tables (no rows after 2026-09-07 for this stock), Tijori knowledge base, web search</span></div><p class="driver"><span class="driver-k">Likely driver (from the data):</span> 09-28 saw a +5.1% close on 79.4M shares and 10-01 another 8.6M-share session; the stock then drifted lower, -3.1% on 10-08. No filing or news found.</p></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">33</td>
+<td class="c-stock"><span class="sym">HINDPETRO</span><span class="co">Hindustan Petroleum Corporation Ltd.</span><span class="sec">Oil Gas &amp; Consumable Fuels</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;5.51%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">345.00 <span class="to" aria-label="to">&rarr;</span> 326.00</td>
+<td class="c-spark"><svg class="spark neg" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 345.00, 342.35, 351.00, 343.15, 326.60, 326.00"><line class="spark-base" x1="3" x2="101" y1="8.8" y2="8.8"/><polyline points="3.0,8.8 22.6,11.3 42.2,3.0 61.8,10.5 81.4,26.4 101.0,27.0"/><circle cx="101.0" cy="27.0" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">1.34&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="nocat">No stock-specific catalyst found</span><span class="nocat-rest">; -4.8% on 10-08 on 2.7x volume as OMC peers BPCL/IOC also fell</span></div>
+<div class="chips"><span class="chip cat">Sector or macro</span><span class="chip conf conf-low">low confidence</span><span class="chip ev">event 2026-10-08</span></div>
+<div class="src"><span class="src-k">Source:</span> <span class="src-plain">NSE Bhavcopy MCP peer closes (BPCL 296.35-&gt;286.25, IOC 130.00-&gt;126.25 on 10-07-&gt;10-08)</span><span class="sep">; </span><span class="src-plain">Checked: Supabase research/research_integration tables (no rows after 2026-09-07 for this stock), Tijori knowledge base, web search</span></div><p class="driver"><span class="driver-k">Likely driver (from the data):</span> HPCL fell 4.82% on 10-08 (12.1M shares vs 4.4M avg) while BPCL fell 3.4% and IOC 2.9% the same day, so the move looks OMC-sector-wide; likely crude-price related but no dated report found.</p></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">34</td>
+<td class="c-stock"><span class="sym">SIEMENS</span><span class="co">Siemens Ltd.</span><span class="sec">Capital Goods</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;5.49%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">3,804.00 <span class="to" aria-label="to">&rarr;</span> 3,595.00</td>
+<td class="c-spark"><svg class="spark neg" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 3,804.00, 3,701.10, 3,854.00, 3,793.00, 3,639.00, 3,595.00"><line class="spark-base" x1="3" x2="101" y1="7.6" y2="7.6"/><polyline points="3.0,7.6 22.6,17.2 42.2,3.0 61.8,8.7 81.4,22.9 101.0,27.0"/><circle cx="101.0" cy="27.0" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">0.98&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="nocat">No stock-specific catalyst found</span><span class="nocat-rest">; -4.1% on 10-08 and -1.2% on 10-09 amid capital goods weakness</span></div>
+<div class="chips"><span class="chip cat">Sector or macro</span><span class="chip conf conf-low">low confidence</span><span class="chip ev">event 2026-10-08</span></div>
+<div class="src"><span class="src-k">Source:</span> <span class="src-plain">Checked: Supabase research/research_integration tables (no rows after 2026-09-07 for this stock), Tijori knowledge base, web search</span><span class="sep">; </span><span class="src-plain">peer moves from seed list</span></div><p class="driver"><span class="driver-k">Likely driver (from the data):</span> Stock swung from Rs 3,701 (10-05) to 3,854 (10-06), then fell to Rs 3,595. Capital goods peers ENRIN (-7.0%), SCHNEIDER (-7.7%) and HBLENGINE (-7.7%) are also in the losers list; ABB fell a milder 1.7%.</p></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">35</td>
+<td class="c-stock"><span class="sym">UPL</span><span class="co">UPL Ltd.</span><span class="sec">Chemicals</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;5.49%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">516.80 <span class="to" aria-label="to">&rarr;</span> 488.45</td>
+<td class="c-spark"><svg class="spark neg" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 516.80, 502.50, 509.55, 495.00, 481.05, 488.45"><line class="spark-base" x1="3" x2="101" y1="3.0" y2="3.0"/><polyline points="3.0,3.0 22.6,12.6 42.2,7.9 61.8,17.6 81.4,27.0 101.0,22.0"/><circle cx="101.0" cy="22.0" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">1.29&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="nocat">No stock-specific catalyst found</span></div>
+<div class="chips"><span class="chip cat">Sector or macro</span><span class="chip conf conf-low">low confidence</span></div>
+<div class="src"><span class="src-k">Source:</span> <span class="src-plain">WebSearch (no dated stock-specific item)</span><span class="sep">; </span><span class="src-plain">Supabase research tables (empty for window)</span></div><p class="driver"><span class="driver-k">Likely driver (from the data):</span> Three ~2.8% down days (10-05, 10-07, 10-08) with no news found; agrochem peer PIIND fell similarly (-5.3%). Likely sector/agrochem weakness plus the 10-08 broad sell-off. Nifty 50 fell 1.64% on 2026-10-08 to a 52-week low (NSE index history). Checked: Supabase research.* / research_integration.* (no rows dated 2026-09-25..10-09; tables last updated Aug-Sep 2026), Tijori knowledge base (periodic filings only), WebSearch.</p></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">36</td>
+<td class="c-stock"><span class="sym">TIINDIA</span><span class="co">Tube Investments of India Ltd.</span><span class="sec">Automobile and Auto Components</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;5.43%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">2,340.00 <span class="to" aria-label="to">&rarr;</span> 2,213.00</td>
+<td class="c-spark"><svg class="spark neg" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 2,340.00, 2,320.00, 2,472.70, 2,388.00, 2,241.00, 2,213.00"><line class="spark-base" x1="3" x2="101" y1="15.3" y2="15.3"/><polyline points="3.0,15.3 22.6,17.1 42.2,3.0 61.8,10.8 81.4,24.4 101.0,27.0"/><circle cx="101.0" cy="27.0" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">2.62&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="nocat">No stock-specific catalyst found</span></div>
+<div class="chips"><span class="chip cat">Sector or macro</span><span class="chip conf conf-low">low confidence</span></div>
+<div class="src"><span class="src-k">Source:</span> <span class="src-plain">WebSearch (no dated stock-specific item)</span><span class="sep">; </span><span class="src-plain">Supabase research tables (empty for window)</span></div><p class="driver"><span class="driver-k">Likely driver (from the data):</span> Fell 6.2% on 10-08 on ~2.2x avg volume after a 6.6% bounce on 10-06; no filing or news found. Nifty Auto -2.07% for the week. Nifty 50 fell 1.64% on 2026-10-08 to a 52-week low (NSE index history). Checked: Supabase research.* / research_integration.* (no rows dated 2026-09-25..10-09; tables last updated Aug-Sep 2026), Tijori knowledge base (periodic filings only), WebSearch.</p></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">37</td>
+<td class="c-stock"><span class="sym">ELECON</span><span class="co">Elecon Engineering Co. Ltd.</span><span class="sec">Capital Goods</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;5.36%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">440.00 <span class="to" aria-label="to">&rarr;</span> 416.40</td>
+<td class="c-spark"><svg class="spark neg" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 440.00, 446.35, 446.30, 441.25, 416.95, 416.40"><line class="spark-base" x1="3" x2="101" y1="8.1" y2="8.1"/><polyline points="3.0,8.1 22.6,3.0 42.2,3.0 61.8,7.1 81.4,26.6 101.0,27.0"/><circle cx="101.0" cy="27.0" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">0.23&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="headline">Gave back unexplained 23-Sep volume-spike rally (+10% on ~130x avg volume); no fresh news found</span></div>
+<div class="chips"><span class="chip cat">Technical / no specific catalyst</span><span class="chip conf conf-low">low confidence</span><span class="chip ev">event 2026-09-23</span></div>
+<div class="src"><span class="src-k">Source:</span> <a href="https://www.jmfinancialservices.in/market-news-and-insights/1733577" rel="noopener" target="_blank">JM Financial Services capital-market note</a></div><details class="more"><summary>Details</summary><p>Stock spiked ~10% on 2026-09-23 and peaked 480.75 on 09-28 without an identified trigger; it slid back to 416.4, incl. -5.5% on 10-08. Checked: Supabase research.* / research_integration.* (no rows dated 2026-09-25..10-09; tables last updated Aug-Sep 2026), Tijori knowledge base (periodic filings only), WebSearch.</p></details></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">38</td>
+<td class="c-stock"><span class="sym">PRESTIGE</span><span class="co">Prestige Estates Projects Ltd.</span><span class="sec">Realty</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;5.34%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">1,486.10 <span class="to" aria-label="to">&rarr;</span> 1,406.80</td>
+<td class="c-spark"><svg class="spark neg" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 1,486.10, 1,445.00, 1,467.70, 1,429.30, 1,411.00, 1,406.80"><line class="spark-base" x1="3" x2="101" y1="3.0" y2="3.0"/><polyline points="3.0,3.0 22.6,15.4 42.2,8.6 61.8,20.2 81.4,25.7 101.0,27.0"/><circle cx="101.0" cy="27.0" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">1.37&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="nocat">No stock-specific catalyst found</span></div>
+<div class="chips"><span class="chip cat">Sector or macro</span><span class="chip conf conf-low">low confidence</span></div>
+<div class="src"><span class="src-k">Source:</span> <span class="src-plain">WebSearch (no dated stock-specific item)</span><span class="sep">; </span><span class="src-plain">Supabase research tables (empty for window)</span></div><p class="driver"><span class="driver-k">Likely driver (from the data):</span> Nifty Realty fell 3.72% for the week; no Q2 FY27 business update found as of 10-09. Likely sector-wide realty weakness. Nifty 50 fell 1.64% on 2026-10-08 to a 52-week low (NSE index history). Checked: Supabase research.* / research_integration.* (no rows dated 2026-09-25..10-09; tables last updated Aug-Sep 2026), Tijori knowledge base (periodic filings only), WebSearch.</p></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">39</td>
+<td class="c-stock"><span class="sym">PIIND</span><span class="co">PI Industries Ltd.</span><span class="sec">Chemicals</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;5.27%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">2,236.00 <span class="to" aria-label="to">&rarr;</span> 2,118.20</td>
+<td class="c-spark"><svg class="spark neg" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 2,236.00, 2,220.00, 2,250.00, 2,210.00, 2,100.00, 2,118.20"><line class="spark-base" x1="3" x2="101" y1="5.2" y2="5.2"/><polyline points="3.0,5.2 22.6,7.8 42.2,3.0 61.8,9.4 81.4,27.0 101.0,24.1"/><circle cx="101.0" cy="24.1" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">1.16&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="nocat">No stock-specific catalyst found</span></div>
+<div class="chips"><span class="chip cat">Sector or macro</span><span class="chip conf conf-low">low confidence</span></div>
+<div class="src"><span class="src-k">Source:</span> <span class="src-plain">WebSearch (no dated stock-specific item)</span><span class="sep">; </span><span class="src-plain">Supabase research tables (empty for window)</span></div><p class="driver"><span class="driver-k">Likely driver (from the data):</span> Univest (2026-10-01) reported the slide near 52-week low with no company-specific reason; -5.0% on 10-08. Moved with UPL (agrochem). <a href="https://univest.in/blogs/why-pi-industries-share-price-fall-today-2026" rel="noopener" target="_blank">univest.in</a> Checked: Supabase research.* / research_integration.* (no rows dated 2026-09-25..10-09; tables last updated Aug-Sep 2026), Tijori knowledge base (periodic filings only), WebSearch.</p></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">40</td>
+<td class="c-stock"><span class="sym">HEROMOTOCO</span><span class="co">Hero MotoCorp Ltd.</span><span class="sec">Automobile and Auto Components</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;5.27%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">5,168.00 <span class="to" aria-label="to">&rarr;</span> 4,895.50</td>
+<td class="c-spark"><svg class="spark neg" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 5,168.00, 5,089.50, 5,075.00, 5,004.00, 4,856.50, 4,895.50"><line class="spark-base" x1="3" x2="101" y1="3.0" y2="3.0"/><polyline points="3.0,3.0 22.6,9.0 42.2,10.2 61.8,15.6 81.4,27.0 101.0,24.0"/><circle cx="101.0" cy="24.0" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">1.31&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="nocat">No stock-specific catalyst found</span></div>
+<div class="chips"><span class="chip cat">Sector or macro</span><span class="chip conf conf-low">low confidence</span></div>
+<div class="src"><span class="src-k">Source:</span> <span class="src-plain">WebSearch (no dated stock-specific item)</span><span class="sep">; </span><span class="src-plain">Supabase research tables (empty for window)</span></div><p class="driver"><span class="driver-k">Likely driver (from the data):</span> Sep-2026 dispatches rose 12% YoY to 7.66 lakh but exports fell ~31% (<a href="https://www.psuconnect.in/auto-news/hero-motocorp-september-2026-sales-dispatches-surge-12-to-7-66-lakh-units" rel="noopener" target="_blank">psuconnect.in</a>); no report links the fall to it. Nifty Auto -2.07% for the week. Nifty 50 fell 1.64% on 2026-10-08 to a 52-week low (NSE index history). Checked: Supabase research.* / research_integration.* (no rows dated 2026-09-25..10-09; tables last updated Aug-Sep 2026), Tijori knowledge base (periodic filings only), WebSearch.</p></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">41</td>
+<td class="c-stock"><span class="sym">JSWSTEEL</span><span class="co">JSW Steel Ltd.</span><span class="sec">Metals &amp; Mining</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;5.27%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">1,233.00 <span class="to" aria-label="to">&rarr;</span> 1,168.00</td>
+<td class="c-spark"><svg class="spark neg" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 1,233.00, 1,235.30, 1,259.60, 1,230.00, 1,175.20, 1,168.00"><line class="spark-base" x1="3" x2="101" y1="10.0" y2="10.0"/><polyline points="3.0,10.0 22.6,9.4 42.2,3.0 61.8,10.8 81.4,25.1 101.0,27.0"/><circle cx="101.0" cy="27.0" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">1.45&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="nocat">No stock-specific catalyst found</span></div>
+<div class="chips"><span class="chip cat">Sector or macro</span><span class="chip conf conf-low">low confidence</span></div>
+<div class="src"><span class="src-k">Source:</span> <span class="src-plain">WebSearch (no dated stock-specific item)</span><span class="sep">; </span><span class="src-plain">Supabase research tables (empty for window)</span></div><p class="driver"><span class="driver-k">Likely driver (from the data):</span> Fell 4.5% on 10-08 on ~2.4x avg volume with no company news found; Nifty Metal -3.69% for the week. Nifty 50 fell 1.64% on 2026-10-08 to a 52-week low (NSE index history). Checked: Supabase research.* / research_integration.* (no rows dated 2026-09-25..10-09; tables last updated Aug-Sep 2026), Tijori knowledge base (periodic filings only), WebSearch.</p></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">42</td>
+<td class="c-stock"><span class="sym">OLAELEC</span><span class="co">Ola Electric Mobility Ltd.</span><span class="sec">Automobile and Auto Components</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;5.26%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">37.08 <span class="to" aria-label="to">&rarr;</span> 35.13</td>
+<td class="c-spark"><svg class="spark neg" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 37.08, 36.68, 35.96, 36.32, 34.63, 35.13"><line class="spark-base" x1="3" x2="101" y1="3.0" y2="3.0"/><polyline points="3.0,3.0 22.6,6.9 42.2,14.0 61.8,10.4 81.4,27.0 101.0,22.1"/><circle cx="101.0" cy="22.1" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">0.92&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="headline">Sep-2026 Vahan data showed Ola&#x27;s e2W share slipping to ~6.5% as TVS/Bajaj/Hero gained; 10-08 drop itself unexplained</span></div>
+<div class="chips"><span class="chip cat">Results / business update</span><span class="chip conf conf-low">low confidence</span><span class="chip ev">event 2026-10-01</span></div>
+<div class="src"><span class="src-k">Source:</span> <a href="https://www.meraev.com/blog/september-2026-electric-scooter-sales-tvs-holds-no-1-bajaj-closes-in-ola-slips-to-65" rel="noopener" target="_blank">Mera EV</a></div><details class="more"><summary>Details</summary><p>Provisional Sep-26 data put Ola at ~6.5% of ~1.97 lakh e2W registrations; stock fell 4.7% on 10-08 on ~1.6x avg volume. Link between data and price move is inference.</p></details></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">43</td>
+<td class="c-stock"><span class="sym">JSWINFRA</span><span class="co">JSW Infrastructure Ltd.</span><span class="sec">Services</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;5.23%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">357.45 <span class="to" aria-label="to">&rarr;</span> 338.75</td>
+<td class="c-spark"><svg class="spark neg" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 357.45, 359.40, 363.05, 353.90, 333.75, 338.75"><line class="spark-base" x1="3" x2="101" y1="7.6" y2="7.6"/><polyline points="3.0,7.6 22.6,6.0 42.2,3.0 61.8,10.5 81.4,27.0 101.0,22.9"/><circle cx="101.0" cy="22.9" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">0.87&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="nocat">No stock-specific catalyst found</span></div>
+<div class="chips"><span class="chip cat">Technical / no specific catalyst</span><span class="chip conf conf-low">low confidence</span></div>
+<div class="src"><span class="src-k">Source:</span> <span class="src-plain">WebSearch (no dated stock-specific item)</span><span class="sep">; </span><span class="src-plain">Supabase research tables (empty for window)</span></div><p class="driver"><span class="driver-k">Likely driver (from the data):</span> Fell 5.7% on 10-08 after rallying on 09-18/09-22; no filing or news found. Nifty 50 fell 1.64% on 2026-10-08 to a 52-week low (NSE index history). Checked: Supabase research.* / research_integration.* (no rows dated 2026-09-25..10-09; tables last updated Aug-Sep 2026), Tijori knowledge base (periodic filings only), WebSearch.</p></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">44</td>
+<td class="c-stock"><span class="sym">GMDCLTD</span><span class="co">Gujarat Mineral Development Corporation Ltd.</span><span class="sec">Metals &amp; Mining</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;5.23%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">487.65 <span class="to" aria-label="to">&rarr;</span> 462.15</td>
+<td class="c-spark"><svg class="spark neg" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 487.65, 487.35, 491.55, 477.10, 463.35, 462.15"><line class="spark-base" x1="3" x2="101" y1="6.2" y2="6.2"/><polyline points="3.0,6.2 22.6,6.4 42.2,3.0 61.8,14.8 81.4,26.0 101.0,27.0"/><circle cx="101.0" cy="27.0" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">1.09&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="nocat">No stock-specific catalyst found</span></div>
+<div class="chips"><span class="chip cat">Sector or macro</span><span class="chip conf conf-low">low confidence</span></div>
+<div class="src"><span class="src-k">Source:</span> <span class="src-plain">WebSearch (no dated stock-specific item)</span><span class="sep">; </span><span class="src-plain">Supabase research tables (empty for window)</span></div><p class="driver"><span class="driver-k">Likely driver (from the data):</span> Extends a steady slide (-19.6% over 1M, no news found); Nifty Metal -3.69% for the week. Nifty 50 fell 1.64% on 2026-10-08 to a 52-week low (NSE index history). Checked: Supabase research.* / research_integration.* (no rows dated 2026-09-25..10-09; tables last updated Aug-Sep 2026), Tijori knowledge base (periodic filings only), WebSearch.</p></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">45</td>
+<td class="c-stock"><span class="sym">WHIRLPOOL</span><span class="co">Whirlpool of India Ltd.</span><span class="sec">Consumer Durables</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;5.21%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">861.65 <span class="to" aria-label="to">&rarr;</span> 816.75</td>
+<td class="c-spark"><svg class="spark neg" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 861.65, 871.75, 867.80, 845.50, 823.15, 816.75"><line class="spark-base" x1="3" x2="101" y1="7.4" y2="7.4"/><polyline points="3.0,7.4 22.6,3.0 42.2,4.7 61.8,14.5 81.4,24.2 101.0,27.0"/><circle cx="101.0" cy="27.0" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">0.20&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="headline">Unwinding of 23-25 Sep stake-sale-buzz rally after company said it was not involved in parent&#x27;s stake-sale talks</span></div>
+<div class="chips"><span class="chip cat">Block deal / stake sale</span><span class="chip conf conf-medium">medium confidence</span><span class="chip ev">event 2026-09-25</span></div>
+<div class="src"><span class="src-k">Source:</span> <a href="https://businesstoday.in/markets/trending-stocks/story/whirlpool-of-india-shares-jump-20-today-heres-what-analysts-say-557305-2026-09-23" rel="noopener" target="_blank">Business Today 2026-09-23</a><span class="sep">; </span><a href="https://upstox.com/news/market-news/stocks/whirlpool-shares-gain-30-in-five-sessions-here-s-what-the-firm-clarified-on-promoter-stake-sale-buzz/article-200897/" rel="noopener" target="_blank">Upstox</a></div><details class="more"><summary>Details</summary><p>Stock hit 20% upper circuit (865.25) on 09-23 on a CNBC-TV18 report that Whirlpool Mauritius may sell its 39.76% stake, and touched 960 on 09-25. With no deal announced it drifted to 816.75 by 10-09 on falling volume.</p></details></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">46</td>
+<td class="c-stock"><span class="sym">RITES</span><span class="co">RITES Ltd.</span><span class="sec">Construction</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;5.17%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">209.48 <span class="to" aria-label="to">&rarr;</span> 198.66</td>
+<td class="c-spark"><svg class="spark neg" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 209.48, 205.74, 203.51, 200.74, 195.85, 198.66"><line class="spark-base" x1="3" x2="101" y1="3.0" y2="3.0"/><polyline points="3.0,3.0 22.6,9.6 42.2,13.5 61.8,18.4 81.4,27.0 101.0,22.1"/><circle cx="101.0" cy="22.1" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">0.22&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="headline">Gave back 30-Sep railway-stock rally (+~9% on ~86x volume, no single trigger identified)</span></div>
+<div class="chips"><span class="chip cat">Technical / no specific catalyst</span><span class="chip conf conf-medium">medium confidence</span><span class="chip ev">event 2026-09-30</span></div>
+<div class="src"><span class="src-k">Source:</span> <a href="https://www.businesstoday.in/markets/stocks/story/ircon-rites-jupiter-wagons-texmaco-shares-surge-whats-happening-with-railway-stocks-558813-2026-09-30" rel="noopener" target="_blank">Business Today 2026-09-30</a></div><details class="more"><summary>Details</summary><p>RITES jumped from 192.31 to 209.05 on 09-30 in a sector-wide rail rally attributed to a breakout after consolidation; it faded every session to 198.66 by 10-09.</p></details></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">47</td>
+<td class="c-stock"><span class="sym">IRCON</span><span class="co">IRCON International Ltd.</span><span class="sec">Construction</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;5.16%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">110.25 <span class="to" aria-label="to">&rarr;</span> 104.56</td>
+<td class="c-spark"><svg class="spark neg" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 110.25, 106.88, 107.86, 106.66, 103.29, 104.56"><line class="spark-base" x1="3" x2="101" y1="3.0" y2="3.0"/><polyline points="3.0,3.0 22.6,14.6 42.2,11.2 61.8,15.4 81.4,27.0 101.0,22.6"/><circle cx="101.0" cy="22.6" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">0.50&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="headline">Gave back 30-Sep railway-stock rally (+~14% on ~30x volume, no single trigger identified)</span></div>
+<div class="chips"><span class="chip cat">Technical / no specific catalyst</span><span class="chip conf conf-medium">medium confidence</span><span class="chip ev">event 2026-09-30</span></div>
+<div class="src"><span class="src-k">Source:</span> <a href="https://www.businesstoday.in/markets/stocks/story/ircon-rites-jupiter-wagons-texmaco-shares-surge-whats-happening-with-railway-stocks-558813-2026-09-30" rel="noopener" target="_blank">Business Today 2026-09-30</a></div><details class="more"><summary>Details</summary><p>IRCON closed 117.09 on 09-30 (from 102.47) in a sector-wide rail rally, then fell to 110.25 on 10-01 and 104.56 by 10-09.</p></details></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">48</td>
+<td class="c-stock"><span class="sym">BLUEJET</span><span class="co">Blue Jet Healthcare Ltd.</span><span class="sec">Healthcare</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;5.02%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">541.80 <span class="to" aria-label="to">&rarr;</span> 514.60</td>
+<td class="c-spark"><svg class="spark neg" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 541.80, 531.50, 538.15, 541.35, 518.55, 514.60"><line class="spark-base" x1="3" x2="101" y1="3.0" y2="3.0"/><polyline points="3.0,3.0 22.6,12.1 42.2,6.2 61.8,3.4 81.4,23.5 101.0,27.0"/><circle cx="101.0" cy="27.0" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">0.80&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="nocat">No stock-specific catalyst found</span></div>
+<div class="chips"><span class="chip cat">Technical / no specific catalyst</span><span class="chip conf conf-low">low confidence</span></div>
+<div class="src"><span class="src-k">Source:</span> <span class="src-plain">WebSearch (no dated stock-specific item)</span><span class="sep">; </span><span class="src-plain">Supabase research tables (empty for window)</span></div><p class="driver"><span class="driver-k">Likely driver (from the data):</span> Fell 4.2% on 10-08 on below-average volume; no news found. Nifty Healthcare -1.49% for the week. Nifty 50 fell 1.64% on 2026-10-08 to a 52-week low (NSE index history). Checked: Supabase research.* / research_integration.* (no rows dated 2026-09-25..10-09; tables last updated Aug-Sep 2026), Tijori knowledge base (periodic filings only), WebSearch.</p></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">49</td>
+<td class="c-stock"><span class="sym">GALLANTT</span><span class="co">Gallantt Ispat Ltd.</span><span class="sec">Capital Goods</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;4.98%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">530.15 <span class="to" aria-label="to">&rarr;</span> 503.75</td>
+<td class="c-spark"><svg class="spark neg" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 530.15, 522.90, 530.05, 514.55, 503.15, 503.75"><line class="spark-base" x1="3" x2="101" y1="3.0" y2="3.0"/><polyline points="3.0,3.0 22.6,9.4 42.2,3.1 61.8,16.9 81.4,27.0 101.0,26.5"/><circle cx="101.0" cy="26.5" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">1.06&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="nocat">No stock-specific catalyst found</span></div>
+<div class="chips"><span class="chip cat">Sector or macro</span><span class="chip conf conf-low">low confidence</span></div>
+<div class="src"><span class="src-k">Source:</span> <span class="src-plain">WebSearch (no dated stock-specific item)</span><span class="sep">; </span><span class="src-plain">Supabase research tables (empty for window)</span></div><p class="driver"><span class="driver-k">Likely driver (from the data):</span> Steady drift lower in thin volumes (avg ~84k shares/day); no news found. Steel peers weak (Nifty Metal -3.69%). Nifty 50 fell 1.64% on 2026-10-08 to a 52-week low (NSE index history). Checked: Supabase research.* / research_integration.* (no rows dated 2026-09-25..10-09; tables last updated Aug-Sep 2026), Tijori knowledge base (periodic filings only), WebSearch.</p></td>
+</tr><tr>
+<td class="c-rank num" data-k="Rank">50</td>
+<td class="c-stock"><span class="sym">DALBHARAT</span><span class="co">Dalmia Bharat Ltd.</span><span class="sec">Construction Materials</span></td>
+<td class="c-ret num" data-k="Week"><span class="chg neg"><span class="arr" aria-hidden="true">&#9660;</span>&minus;4.96%</span></td>
+<td class="c-close num" data-k="Close 1 Oct &rarr; 9 Oct">1,682.10 <span class="to" aria-label="to">&rarr;</span> 1,598.60</td>
+<td class="c-spark"><svg class="spark neg" viewBox="0 0 104 30" width="104" height="30" role="img" aria-label="Daily closes 1 Oct to 9 Oct: 1,682.10, 1,673.70, 1,682.60, 1,640.10, 1,592.90, 1,598.60"><line class="spark-base" x1="3" x2="101" y1="3.1" y2="3.1"/><polyline points="3.0,3.1 22.6,5.4 42.2,3.0 61.8,14.4 81.4,27.0 101.0,25.5"/><circle cx="101.0" cy="25.5" r="2.6"/></svg></td>
+<td class="c-rv num" data-k="Rel. volume">0.60&times;</td>
+<td class="c-cat"><div class="cat-head"><span class="nocat">No stock-specific catalyst found</span></div>
+<div class="chips"><span class="chip cat">Technical / no specific catalyst</span><span class="chip conf conf-low">low confidence</span></div>
+<div class="src"><span class="src-k">Source:</span> <span class="src-plain">WebSearch (no dated stock-specific item)</span><span class="sep">; </span><span class="src-plain">Supabase research tables (empty for window)</span></div><p class="driver"><span class="driver-k">Likely driver (from the data):</span> Fell 2.5% on 10-07 and 2.9% on 10-08 on low volume; no news found. Nifty 50 fell 1.64% on 2026-10-08 to a 52-week low (NSE index history). Checked: Supabase research.* / research_integration.* (no rows dated 2026-09-25..10-09; tables last updated Aug-Sep 2026), Tijori knowledge base (periodic filings only), WebSearch.</p></td>
+</tr>
+</tbody></table></div>
+</section>
+
+<section aria-labelledby="s-m">
+<h2 id="s-m">Method and caveats</h2>
+<ul class="method">
+<li><strong>Universe.</strong> The 500 stocks in the Nifty 500 membership snapshot dated 2026-08-14 in the <span class="mono">index_membership</span> table of your Supabase project. Constituent changes after that date are not reflected.</li>
+<li><strong>Returns.</strong> Weekly returns are close-to-close, price only, from daily prices: 1 Oct close to 9 Oct close (4 sessions; 2 Oct was an exchange holiday). The previous week is 24 Sep close to 1 Oct close (5 sessions). Index returns are recomputed from closes; "% below 52w high" is measured against the 52-week intraday high.</li>
+<li><strong>Checks.</strong> Start and end closes for all 65 of the 65 listed stocks matched NSE Bhavcopy closes. Corporate-action lookups for 25 Sep to 9 Oct returned no split, bonus, rights or dividend ex-dates for 65 of 65, so no corporate-action artefacts were found and adjusted returns equal raw returns.</li>
+<li><strong>Catalysts.</strong> From web search, the research filings tables (no rows dated inside the window; latest entries are from August and early September 2026) and the Tijori knowledge base (periodic filings only). News coverage of 5 to 9 Oct 2026 was thin, and several large outlets could not be reached by the search tool. &ldquo;No stock-specific catalyst found&rdquo; means none was found, not that none exists. Tapetide was not used (daily quota).</li>
+<li><strong>Confidence.</strong> High: a dated report ties stock-specific news to the move. Medium: a dated source names the event or sector driver and the stock moved that day, but the link is partly inferred. Low: no dated stock-specific source; the stated driver is inference.</li>
+<li><strong>Relative volume.</strong> Average daily volume over 5 to 9 Oct divided by a baseline average. Winners: baseline is the 16 sessions before the week (9 Sep to 1 Oct). Losers: baseline is the 21-session NSE average (9 Sep to 9 Oct, which includes the week), so earlier spike days can inflate the baseline and understate activity (noted for BBTC, HBLENGINE, TEGA, ELECON, WHIRLPOOL, RITES, IRCON).</li>
+<li><strong>Base effect.</strong> Tagged where the catalyst notes say the 1 Oct base close followed a spike day, so part of the weekly fall reverses that spike: SCHNEIDER, ENRIN, WELSPUNLIV.</li>
+<li><strong>Other notes from the data.</strong> HFCL trades in the BE (trade-to-trade) series, so its daily moves are capped at 5%. India VIX change is a change in level, not a price return. Breadth counts cover all traded NSE securities, so they differ from mainboard-only counts.</li>
+</ul>
+<p class="disclaimer">Educational summary of market data, not investment advice.</p>
+</section>
+</div>
+</body>
+</html>
