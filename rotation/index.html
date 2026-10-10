@@ -194,10 +194,29 @@ function metricReturn(r){const n=Number(r.relative_return_4w);return Number.isFi
 function renderBoard(all){const buckets={Leading:[],Improving:[],Weakening:[],Lagging:[]};all.forEach(r=>buckets[r.quadrant]?.push(r));Object.values(buckets).forEach(a=>a.sort((x,y)=>Math.abs(metricReturn(y))-Math.abs(metricReturn(x))));$("summary").innerHTML=Object.entries(board).map(([q,c])=>{const a=buckets[q];return `<div class="card qcard"><div class="qhead"><span class="qicon ${c.cls}">${c.icon}</span><div class="qtitle">${c.title}</div><span class="qcount ${c.cls}">${a.length}</span></div><div class="qdesc">${c.desc}</div><div class="items">${a.map(r=>{const ret=metricReturn(r),txt=(ret>=0?"+":"")+ret.toFixed(1)+"%";return `<div class="item" role="button" tabindex="0" data-chart-id="${r.instrument_id}" aria-label="Open TradingView chart for ${esc(nameFor(r.instrument_id))}"><div><div class="item-name">${esc(nameFor(r.instrument_id))}</div><div class="item-meta">Score ${((Number(r.rs_ratio)-100)*10).toFixed(0)} · Mom ${((Number(r.rs_momentum)-100)*10).toFixed(0)}</div></div><span class="item-return ${ret>=0?"green":"red"}">${txt}</span></div>`}).join("")||'<div class="item-meta">No names in this bucket</div>'}</div></div>`}).join("");document.querySelectorAll("[data-chart-id]").forEach(x=>{x.onclick=()=>openDrawer(Number(x.dataset.chartId));x.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openDrawer(Number(x.dataset.chartId))}}})}
 function draw(points,tail,date){
  const el=$("chart"),W=el.clientWidth,H=el.clientHeight,pad=52;
- const vals=points.flatMap(p=>[+p.rs_ratio,+p.rs_momentum]);
- let min=Math.min(85,...vals)-4,max=Math.max(115,...vals)+4;
- if(max-min<35){min=82.5;max=117.5;}
- const span=(max-min)/(zoomScale||1);min=100-span/2;max=100+span/2;
+ // Fit the view to the data rather than a fixed 85-115 frame. Broad-index RRG
+ // values sit within a point or two of 100, so the old window spent most of the
+ // canvas on empty space and stacked every label onto its neighbours.
+ //
+ // The range must cover the TAILS, not just the heads: the old code measured
+ // only `points`, so a tail reaching past its head could be drawn outside the
+ // plotted area.
+ const vals=[];
+ points.forEach(p=>{
+  (grouped[p.instrument_id]||[]).filter(r=>r.week_end<=date).slice(-tail)
+   .forEach(r=>vals.push(+r.rs_ratio,+r.rs_momentum));
+  vals.push(+p.rs_ratio,+p.rs_momentum);
+ });
+ // Furthest any plotted value sits from the 100 centre, padded by 18%. The 2.5
+ // floor stops an unusually flat week from magnifying noise into what would
+ // look like real rotation.
+ const reach=vals.length?Math.max(...vals.map(v=>Math.abs(v-100))):4;
+ const span=Math.max(reach*1.18,2.5)*2/(zoomScale||1);
+ const min=100-span/2,max=100+span/2;
+ // Gridlines have to follow the span: fixed 5-point steps leave a single line
+ // on a 6-point window, and sub-1 steps need a decimal to stay distinguishable.
+ const step=span>60?10:span>24?5:span>12?2:span>6?1:span>2.4?.5:.2;
+ const fmt=v=>step<1?v.toFixed(1):String(Math.round(v));
  const sx=x=>pad+(x-min)/(max-min)*(W-2*pad);
  const sy=y=>H-pad-(y-min)/(max-min)*(H-2*pad);
  let svg=`<svg viewBox="0 0 ${W} ${H}" role="img">
@@ -205,8 +224,11 @@ function draw(points,tail,date){
  <rect width="50%" height="50%" x="50%" y="0" fill="#fff8e8"/>
  <rect width="50%" height="50%" x="0" y="50%" fill="#edf4ff"/>
  <rect width="50%" height="50%" x="50%" y="50%" fill="#fff0f0"/>`;
- for(let v=Math.ceil(min/5)*5;v<=max;v+=5)
-  svg+=`<line class="grid" x1="${sx(v)}" x2="${sx(v)}" y1="${pad}" y2="${H-pad}"/><line class="grid" x1="${pad}" x2="${W-pad}" y1="${sy(v)}" y2="${sy(v)}"/><text class="tickText" x="${sx(v)}" y="${H-pad+18}" text-anchor="middle">${v}</text><text class="tickText" x="${pad-8}" y="${sy(v)+3}" text-anchor="end">${v}</text>`;
+ const v0=Math.ceil(min/step)*step;
+ for(let i=0;v0+i*step<=max+1e-9;i++){
+  const v=+(v0+i*step).toFixed(6);
+  svg+=`<line class="grid" x1="${sx(v)}" x2="${sx(v)}" y1="${pad}" y2="${H-pad}"/><line class="grid" x1="${pad}" x2="${W-pad}" y1="${sy(v)}" y2="${sy(v)}"/><text class="tickText" x="${sx(v)}" y="${H-pad+18}" text-anchor="middle">${fmt(v)}</text><text class="tickText" x="${pad-8}" y="${sy(v)+3}" text-anchor="end">${fmt(v)}</text>`;
+ }
  svg+=`<line class="axis" x1="${sx(100)}" x2="${sx(100)}" y1="${pad}" y2="${H-pad}"/>
  <line class="axis" x1="${pad}" x2="${W-pad}" y1="${sy(100)}" y2="${sy(100)}"/>
  <text class="quad" x="${pad+10}" y="${pad+18}">IMPROVING</text>
