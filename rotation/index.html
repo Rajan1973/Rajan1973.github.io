@@ -250,7 +250,7 @@ function draw(points,tail,date){
   });
   const cx=sx(+p.rs_ratio),cy=sy(+p.rs_momentum);
   svg+=`<circle class="point ${selected===p.instrument_id?"selected":""}" cx="${cx}" cy="${cy}" r="6" fill="${instrumentColor(p.instrument_id)}" data-id="${p.instrument_id}" data-nm="${nm}" data-w="${p.week_end}" data-r="${(+p.rs_ratio).toFixed(2)}" data-m="${(+p.rs_momentum).toFixed(2)}"/>
-  <text class="labelText" x="${cx+8}" y="${cy+4}">${esc(nameFor(p.instrument_id))}</text>`;
+  <text class="labelText" x="${cx+8}" y="${cy+4}" data-ax="${cx}" data-ay="${cy}" data-c="${instrumentColor(p.instrument_id)}">${esc(nameFor(p.instrument_id))}</text>`;
  });
  svg+="</svg>";el.innerHTML=`<div class="zoom-tools" aria-label="Chart zoom controls"><button id="zoomIn" class="zoom-btn" type="button" aria-label="Zoom in" title="Zoom in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M11 8v6M8 11h6M16.5 16.5 21 21"/></svg></button><button id="zoomOut" class="zoom-btn" type="button" aria-label="Zoom out" title="Zoom out"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M8 11h6M16.5 16.5 21 21"/></svg></button><button id="zoomReset" class="zoom-btn" type="button" aria-label="Reset chart zoom" title="Reset zoom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12a8 8 0 1 0 2.3-5.7L4 8.6M4 4v4.6h4.6"/></svg></button></div>`+svg;
  $("zoomIn").onclick=()=>{zoomScale=Math.min(4,zoomScale*1.25);render()};$("zoomOut").onclick=()=>{zoomScale=Math.max(.5,zoomScale/1.25);render()};$("zoomReset").onclick=()=>{zoomScale=1;render()};
@@ -259,6 +259,60 @@ function draw(points,tail,date){
   const p=points.find(x=>Number(x.instrument_id)===selected);
   selectPoint(p);render();
  });
+
+ // ---- label de-collision -------------------------------------------------
+ // Fourteen indices routinely sit within a point of each other, so a label at
+ // a fixed offset from its marker lands on top of its neighbours. Measure each
+ // label's real box with getBBox -- estimating width from character count is
+ // wrong for proportional type -- then walk a ring of candidate positions
+ // outwards until one is clear of every label already placed.
+ // role="img" is load-bearing: the zoom-tool buttons each contain an <svg>
+ // icon and they are emitted BEFORE the chart, so a bare querySelector("svg")
+ // returns a button icon and the whole pass silently does nothing.
+ const svgEl=el.querySelector('svg[role="img"]');
+ if(svgEl){
+  const labels=[...svgEl.querySelectorAll(".labelText")];
+  const placed=[];
+  const leaders=document.createElementNS("http://www.w3.org/2000/svg","g");
+  const firstMarker=svgEl.querySelector(".node,.point");
+  // Leaders go under the markers and labels, so insert the group ahead of them.
+  if(firstMarker)svgEl.insertBefore(leaders,firstMarker);
+  // Top-down is a stable order: the same data lays out the same way every draw,
+  // so labels do not jump around as the slider moves.
+  labels.sort((a,b)=>(+a.dataset.ay)-(+b.dataset.ay));
+  labels.forEach(t=>{
+   const ax=+t.dataset.ax,ay=+t.dataset.ay;
+   let box;try{box=t.getBBox()}catch(e){return}
+   const w=box.width,h=box.height;
+   if(!w)return;
+   // Right of the marker first -- that is the established look -- then left,
+   // then progressively further above and below.
+   const cands=[];
+   for(let ring=0;ring<4;ring++){
+    const d=10+ring*11;
+    cands.push([d,4],[-d-w,4],[d,-d+2],[-d-w,-d+2],[d,d+6],[-d-w,d+6],[-w/2,-d-4],[-w/2,d+12]);
+   }
+   const hits=r=>r.x<2||r.x+r.w>W-2||r.y<2||r.y+r.h>H-2||
+     placed.some(q=>r.x<q.x+q.w+2&&r.x+r.w+2>q.x&&r.y<q.y+q.h+2&&r.y+r.h+2>q.y);
+   let dx=10,dy=4,rect={x:ax+10,y:ay+4-h*0.78,w:w,h:h};
+   for(const c of cands){
+    const r={x:ax+c[0],y:ay+c[1]-h*0.78,w:w,h:h};
+    if(!hits(r)){dx=c[0];dy=c[1];rect=r;break}
+   }
+   t.setAttribute("x",ax+dx);t.setAttribute("y",ay+dy);
+   placed.push(rect);
+   // A label pushed well away from its marker reads as belonging to whichever
+   // point it now sits beside, so give it a leader back to its own.
+   if(Math.abs(dx-10)>12||Math.abs(dy-4)>12){
+    const ln=document.createElementNS("http://www.w3.org/2000/svg","line");
+    ln.setAttribute("x1",ax);ln.setAttribute("y1",ay);
+    ln.setAttribute("x2",dx<0?rect.x+w:rect.x);ln.setAttribute("y2",ay+dy-h*0.28);
+    ln.setAttribute("stroke",t.dataset.c||"#98a2b3");
+    ln.setAttribute("stroke-width","1");ln.setAttribute("opacity",".45");
+    leaders.appendChild(ln);
+   }
+  });
+ }
 
  // Hover readout for any weekly marker, head or tail. Rebuilt on every draw
  // because innerHTML above discards the previous one. The tooltip is
