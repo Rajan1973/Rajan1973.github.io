@@ -12,9 +12,14 @@
  */
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { resolve, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { extractNames } from './lib/extract.mjs';
 
-const ROOT = resolve(new URL('..', import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1'));
+// fileURLToPath, not .pathname: a file URL percent-encodes its path, so a repo
+// checked out under a directory with a space (D:\Claude Projects\...) resolved to
+// 'D:\Claude%20Projects\...' and every read failed with ENOENT. The old
+// drive-letter regex handled the leading slash but never the decoding.
+const ROOT = resolve(fileURLToPath(new URL('..', import.meta.url)));
 const argv = process.argv.slice(2);
 const only = (() => { const i = argv.indexOf('--only'); return i >= 0 ? argv[i + 1] : null; })();
 const BASE = resolve(argv.find((a) => !a.startsWith('--') && a !== only) || ROOT);
