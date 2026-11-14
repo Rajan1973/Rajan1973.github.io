@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Weekly Sector Note: 9–13 Nov 2026 (NSE)</title>
+<style>
+
+:root{
+  --navy:#0b1f3a;--gold:#b8913a;--ink:#1c2430;--mut:#5b6573;--line:#dfe3ea;
+  --bg:#f4f1ea;--paper:#fff;--green:#1f7a4d;--red:#b3261e;
+  --teal:#1a6b7a;--rust:#c45c26;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Helvetica Neue",Arial,"Segoe UI",sans-serif;
+  font-size:16px;line-height:1.55;
+}
+h1,h2,h3{font-family:Georgia,"Times New Roman",serif;color:var(--navy);font-weight:normal;margin:0}
+.wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+.cover{
+  background:linear-gradient(135deg,#0b1f3a 0%,#14365f 58%,#1a4a6b 100%);
+  color:#fff;border-bottom:5px solid var(--gold);padding:40px 0 32px;
+}
+.kicker{color:var(--gold);text-transform:uppercase;letter-spacing:.18em;font-size:11px;font-weight:700}
+.cover h1{color:#fff;font-size:clamp(26px,4.4vw,40px);margin:8px 0 10px;line-height:1.2}
+.by{color:#d9cfb8;font-size:15px;border-top:1px solid rgba(184,145,58,.5);display:inline-block;padding-top:8px}
+.sub{color:#d9cfb8;margin:0 0 10px;font-size:15px}
+main{background:var(--paper);padding:28px 0 40px;box-shadow:0 0 24px rgba(0,0,0,.05)}
+
+/* KPIs */
+.kpis{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-bottom:16px}
+.kpi{
+  border:1px solid var(--line);border-top:3px solid var(--navy);
+  padding:12px 12px 10px;background:#fbfaf7;
+}
+.kpi .k{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut)}
+.kpi .v{font-family:Georgia,serif;font-size:22px;color:var(--navy);margin:4px 0 2px}
+.kpi .d{font-size:14px;font-weight:700}
+.kpi .s{font-size:11px;color:var(--mut);margin-top:2px}
+.up{color:var(--green)} .dn{color:var(--red)}
+.kpi.vix{border-top-color:var(--gold)}
+.kpi.bank{border-top-color:var(--teal)}
+.kpi.small{border-top-color:var(--gold)}
+
+.meta{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:8px;
+  margin:0 0 22px;
+}
+.chip{
+  background:#f8f3e7;border:1px solid #eadfc4;border-radius:4px;
+  padding:8px 10px;font-size:12.5px;color:#3d4450;
+}
+.chip b{color:var(--navy)}
+
+.take{border-left:5px solid var(--gold);background:#f8f3e7;padding:14px 22px;margin:0 0 26px}
+.take h3{margin:2px 0 6px;font-size:20px}
+.take ul{margin:0;padding-left:18px}
+.take li{margin:4px 0}
+
+section{margin:32px 0;border-top:1px solid var(--line);padding-top:10px}
+h2{font-size:24px;display:flex;align-items:baseline;gap:12px;margin-bottom:8px}
+.num{font-variant-numeric:tabular-nums}
+h2 .num{color:var(--gold);font-weight:bold;font-size:18px;font-family:"Helvetica Neue",Arial,sans-serif}
+h3{font-size:19px;margin:16px 0 8px}
+ul{padding-left:18px;margin:6px 0 10px}
+li{margin:4px 0}
+strong{color:var(--navy)}
+p{margin:6px 0 10px}
+
+.fig{margin:16px 0 22px;border:1px solid var(--line);padding:14px 14px 10px;background:#fff}
+figcaption{font-family:Georgia,serif;color:var(--navy);font-size:16px;margin-bottom:8px}
+.fn{color:var(--gold);font-weight:bold;margin-right:6px}
+.cw{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.chart{width:100%;height:auto;display:block;min-width:640px}
+.chart.tall{min-width:800px}
+.chart .lbl{font:12px "Helvetica Neue",Arial,sans-serif;fill:#1c2430}
+.chart .val{font:bold 11px "Helvetica Neue",Arial,sans-serif}
+.chart .val-sm{font:bold 10px "Helvetica Neue",Arial,sans-serif}
+.chart .axis{font:10px "Helvetica Neue",Arial,sans-serif;fill:#5b6573}
+.chart .muted{font:10px "Helvetica Neue",Arial,sans-serif;fill:#7a7468}
+.note{font-size:12.5px;color:var(--mut);margin:6px 0 0}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.pair .chart{min-width:420px}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.block{border:1px solid var(--line);padding:12px 16px 8px;background:#fbfaf7;margin:0 0 14px}
+.block h3{margin-top:4px}
+.block.best{border-top:3px solid var(--green)}
+.block.worst{border-top:3px solid var(--red)}
+.block.mid{border-top:3px solid var(--teal)}
+
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:12px 0}
+table{border-collapse:collapse;width:100%;font-size:13.5px;font-variant-numeric:tabular-nums}
+th,td{padding:6px 10px;text-align:left;vertical-align:middle}
+td.num,th.num{text-align:right}
+th{color:#fff;font-weight:650;letter-spacing:.02em}
+.sector-tbl thead th{background:var(--navy)}
+.sector-tbl td{border-bottom:1px solid #eceae3}
+.sector-tbl td.week{font-weight:700}
+.stock-tbl thead.th-green th{background:#1f7a4d}
+.stock-tbl thead.th-red th{background:#b3261e}
+.stock-tbl thead.th-teal th{background:#1a6b7a}
+.stock-tbl thead.th-gold th{background:#8a6a22}
+.stock-tbl td{border-bottom:1px solid #eceae3}
+.stock-tbl td.week{font-weight:700}
+.stock-tbl td.extra{color:var(--mut);font-size:12.5px}
+.flow-tbl thead th{background:#1a6b7a}
+.flow-tbl td{border-bottom:1px solid #eceae3}
+.flow-tbl tr.sum td{background:#0b1f3a;color:#fff;font-weight:700}
+.flow-tbl tr.hol td{background:#f3efe6;color:var(--mut);font-style:italic}
+.cal-tbl thead th{background:#0b1f3a}
+.cal-tbl td{border-bottom:1px solid #eceae3}
+.cal-tbl td:first-child,.cal-tbl th:first-child{white-space:nowrap;width:5.8em}
+
+.tag{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:700;letter-spacing:.04em;color:#fff;white-space:nowrap}
+.tag-results{background:#5b4b8a}
+.tag-india{background:#1a5f7a}
+.tag-global{background:#8a4b1f}
+.tag-expiry{background:#3d5a3d}
+.tag-policy{background:#6b3a5a}
+
+.analysts{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.card{border:1px solid var(--line);border-top:3px solid var(--gold);padding:12px 14px;background:#fbfaf7}
+.card h3{font-size:16px;margin:0 0 6px}
+.card ul{margin:0;padding-left:18px;font-size:14px}
+.caveats{background:#fbf8f1;border:1px solid #eadfc4;padding:12px 18px}
+.caveats ul{margin:0}
+.foot{margin-top:28px;padding-top:12px;border-top:3px double var(--gold);color:var(--mut);font-size:12.5px}
+
+@media screen and (max-width:980px){
+  .kpis{grid-template-columns:repeat(3,1fr)}
+  .meta{grid-template-columns:1fr 1fr}
+  .grid-2,.pair,.analysts{grid-template-columns:1fr}
+}
+@media screen and (max-width:620px){
+  body{font-size:15px}
+  .wrap{padding:0 14px}
+  h2{font-size:20px}
+  .kpis{grid-template-columns:1fr 1fr}
+  .kpi .v{font-size:18px}
+  .meta{grid-template-columns:1fr}
+  .take{padding:10px 14px}
+}
+@media print{
+  @page{size:A4;margin:12mm}
+  body{background:#fff;font-size:10pt}
+  main{box-shadow:none;padding:16px 0 12px}
+  .wrap{padding:0;max-width:none}
+  .cover,.kpi,.take,.chip,.block,.card,.tag,th,td.week,.chart rect,.chart line{
+    -webkit-print-color-adjust:exact;print-color-adjust:exact;
+  }
+  .kpis{grid-template-columns:repeat(3,1fr);gap:8px}
+  .meta{grid-template-columns:1fr 1fr}
+  .grid-2,.pair,.analysts{grid-template-columns:1fr 1fr;gap:10px}
+  .kpi .v{font-size:18px}
+  .kpi,.take,.block,.card,.fig:not(.tall){break-inside:avoid}
+  h2,figcaption{break-after:avoid}
+  .start-print-page{break-before:page}
+  .fig.tall{break-inside:auto}
+  .pair{grid-template-columns:1fr}
+  .tw,.cw{overflow:visible}
+  .chart,.chart.tall,.pair .chart{min-width:0;max-width:100%}
+  a{text-decoration:none}
+  .cover{padding:20px 22px 16px}
+  thead{display:table-header-group}
+  tr,td,th{break-inside:avoid}
+}
+
+</style>
+</head>
+<body>
+<header class="cover">
+  <div class="wrap">
+    <div class="kicker">India Equities · Sector Research</div>
+    <h1>Weekly Sector Note: 9–13 November 2026 (NSE)</h1>
+    <p class="sub">Four sessions. Tuesday 10 November was shut for Diwali Balipratipada.</p>
+    <div class="by">Market Desk · 14 Nov 2026</div>
+  </div>
+</header>
+
+<main class="wrap">
+
+<div class="kpis">
+  <div class="kpi">
+    <div class="k">Nifty 50</div>
+    <div class="v">25,144.30</div>
+    <div class="d up">+0.46%</div>
+    <div class="s">from 25,030.35 · +113.95 pts</div>
+  </div>
+  <div class="kpi">
+    <div class="k">Sensex</div>
+    <div class="v">81,592.45</div>
+    <div class="d up">+0.70%</div>
+    <div class="s">+564.43 pts</div>
+  </div>
+  <div class="kpi bank">
+    <div class="k">Bank Nifty</div>
+    <div class="v">61,034.10</div>
+    <div class="d up">+3.30%</div>
+    <div class="s">from 59,086.00</div>
+  </div>
+  <div class="kpi">
+    <div class="k">Midcap 100</div>
+    <div class="v">61,889.50</div>
+    <div class="d up">+2.12%</div>
+    <div class="s">from 60,606.65</div>
+  </div>
+  <div class="kpi small">
+    <div class="k">Smallcap 100</div>
+    <div class="v">19,656.45</div>
+    <div class="d up">+3.59%</div>
+    <div class="s">from 18,975.05</div>
+  </div>
+  <div class="kpi vix">
+    <div class="k">India VIX</div>
+    <div class="v">15.50</div>
+    <div class="d dn">−11.28%</div>
+    <div class="s">from 17.47</div>
+  </div>
+</div>
+
+<div class="meta">
+  <div class="chip"><b>Nifty range.</b> Intraday 24,838.75–25,424.35. It closed about 280 pts below the week’s high.</div>
+  <div class="chip"><b>Valuation.</b> PE 20.49, PB 3.08 at Friday’s close.</div>
+  <div class="chip"><b>Bank Nifty.</b> Thursday’s close of 61,518 was its second-highest ever, near the 61,762 lifetime high.</div>
+  <div class="chip"><b>VIX.</b> It fell on three of the four sessions.</div>
+</div>
+
+<aside class="take">
+  <h3>Key takeaways</h3>
+  <ul>
+    <li>Third straight weekly gain for the benchmark. Mid and small caps beat it.</li>
+    <li>PSU Bank led by a wide margin. Media and Capital Markets followed.</li>
+    <li>IT was the worst, snapping a six-week winning run. Cement and Commodities also fell.</li>
+    <li>October CPI rose to 6.09% from 5.54%, above the RBI’s 6% upper band.</li>
+    <li>Moody’s raised India’s FY27 GDP forecast to 7% from 6.5%. Iran de-escalation hopes and softer crude helped Wednesday. A weaker rupee weighed on Friday.</li>
+  </ul>
+</aside>
+
+<section class="start-print-page">
+  <h2><span class="num">01</span> Infographics</h2>
+
+  <figure class="fig tall">
+    <figcaption><span class="fn">Exhibit 1</span> All 40 sectoral indices, weekly change (%)</figcaption>
+    <div class="cw"><svg viewBox="0 0 980 944" role="img" aria-label="Weekly change of 40 NSE sectoral indices" class="chart"><rect width="980" height="944" fill="#fff"/>
+<line x1="220.6" y1="22" x2="220.6" y2="908" stroke="#eceae3" stroke-width="1"/>
+<text x="220.6" y="16" text-anchor="middle" class="axis">-4%</text>
+<text x="220.6" y="926" text-anchor="middle" class="axis">-4%</text>
+<line x1="327.1" y1="22" x2="327.1" y2="908" stroke="#eceae3" stroke-width="1"/>
+<text x="327.1" y="16" text-anchor="middle" class="axis">-2%</text>
+<text x="327.1" y="926" text-anchor="middle" class="axis">-2%</text>
+<line x1="433.6" y1="22" x2="433.6" y2="908" stroke="#c5a35a" stroke-width="1.4"/>
+<text x="433.6" y="16" text-anchor="middle" class="axis">0%</text>
+<text x="433.6" y="926" text-anchor="middle" class="axis">0%</text>
+<line x1="540.0" y1="22" x2="540.0" y2="908" stroke="#eceae3" stroke-width="1"/>
+<text x="540.0" y="16" text-anchor="middle" class="axis">2%</text>
+<text x="540.0" y="926" text-anchor="middle" class="axis">2%</text>
+<line x1="646.5" y1="22" x2="646.5" y2="908" stroke="#eceae3" stroke-width="1"/>
+<text x="646.5" y="16" text-anchor="middle" class="axis">4%</text>
+<text x="646.5" y="926" text-anchor="middle" class="axis">4%</text>
+<line x1="753.0" y1="22" x2="753.0" y2="908" stroke="#eceae3" stroke-width="1"/>
+<text x="753.0" y="16" text-anchor="middle" class="axis">6%</text>
+<text x="753.0" y="926" text-anchor="middle" class="axis">6%</text>
+<line x1="859.4" y1="22" x2="859.4" y2="908" stroke="#eceae3" stroke-width="1"/>
+<text x="859.4" y="16" text-anchor="middle" class="axis">8%</text>
+<text x="859.4" y="926" text-anchor="middle" class="axis">8%</text>
+<rect x="433.6" y="32.0" width="399.2" height="14" rx="2" fill="#0b5a30"/>
+<text x="200" y="43.0" text-anchor="end" class="lbl">PSU Bank</text>
+<text x="968" y="43.0" text-anchor="end" class="val" fill="#0b5a30">+7.50%</text>
+<rect x="433.6" y="54.0" width="277.9" height="14" rx="2" fill="#196c40"/>
+<text x="200" y="65.0" text-anchor="end" class="lbl">Media</text>
+<text x="968" y="65.0" text-anchor="end" class="val" fill="#196c40">+5.22%</text>
+<rect x="433.6" y="76.0" width="246.5" height="14" rx="2" fill="#1c7144"/>
+<text x="200" y="87.0" text-anchor="end" class="lbl">India Defence (Equal Wt)</text>
+<text x="968" y="87.0" text-anchor="end" class="val" fill="#1c7144">+4.63%</text>
+<rect x="433.6" y="98.0" width="204.9" height="14" rx="2" fill="#217749"/>
+<text x="200" y="109.0" text-anchor="end" class="lbl">Capital Markets</text>
+<text x="968" y="109.0" text-anchor="end" class="val" fill="#217749">+3.85%</text>
+<rect x="433.6" y="120.0" width="175.7" height="14" rx="2" fill="#247c4d"/>
+<text x="200" y="131.0" text-anchor="end" class="lbl">Bank</text>
+<text x="968" y="131.0" text-anchor="end" class="val" fill="#247c4d">+3.30%</text>
+<rect x="433.6" y="142.0" width="150.6" height="14" rx="2" fill="#277f50"/>
+<text x="200" y="153.0" text-anchor="end" class="lbl">Fin Services Ex-Bank</text>
+<text x="968" y="153.0" text-anchor="end" class="val" fill="#277f50">+2.83%</text>
+<rect x="433.6" y="164.0" width="145.9" height="14" rx="2" fill="#288051"/>
+<text x="200" y="175.0" text-anchor="end" class="lbl">Realty</text>
+<text x="968" y="175.0" text-anchor="end" class="val" fill="#288051">+2.74%</text>
+<rect x="433.6" y="186.0" width="136.8" height="14" rx="2" fill="#298152"/>
+<text x="200" y="197.0" text-anchor="end" class="lbl">Chemicals</text>
+<text x="968" y="197.0" text-anchor="end" class="val" fill="#298152">+2.57%</text>
+<rect x="433.6" y="208.0" width="113.4" height="14" rx="2" fill="#2b8555"/>
+<text x="200" y="219.0" text-anchor="end" class="lbl">Pharma</text>
+<text x="968" y="219.0" text-anchor="end" class="val" fill="#2b8555">+2.13%</text>
+<rect x="433.6" y="230.0" width="111.3" height="14" rx="2" fill="#2b8556"/>
+<text x="200" y="241.0" text-anchor="end" class="lbl">Financial Services</text>
+<text x="968" y="241.0" text-anchor="end" class="val" fill="#2b8556">+2.09%</text>
+<rect x="433.6" y="252.0" width="108.1" height="14" rx="2" fill="#2c8656"/>
+<text x="200" y="263.0" text-anchor="end" class="lbl">Fin Services 25/50</text>
+<text x="968" y="263.0" text-anchor="end" class="val" fill="#2c8656">+2.03%</text>
+<rect x="433.6" y="274.0" width="105.4" height="14" rx="2" fill="#2c8656"/>
+<text x="200" y="285.0" text-anchor="end" class="lbl">MidSmall Healthcare</text>
+<text x="968" y="285.0" text-anchor="end" class="val" fill="#2c8656">+1.98%</text>
+<rect x="433.6" y="296.0" width="95.3" height="14" rx="2" fill="#2d8858"/>
+<text x="200" y="307.0" text-anchor="end" class="lbl">India Defence</text>
+<text x="968" y="307.0" text-anchor="end" class="val" fill="#2d8858">+1.79%</text>
+<rect x="433.6" y="318.0" width="94.8" height="14" rx="2" fill="#2d8858"/>
+<text x="200" y="329.0" text-anchor="end" class="lbl">Healthcare</text>
+<text x="968" y="329.0" text-anchor="end" class="val" fill="#2d8858">+1.78%</text>
+<rect x="433.6" y="340.0" width="85.7" height="14" rx="2" fill="#2e8959"/>
+<text x="200" y="351.0" text-anchor="end" class="lbl">Private Bank</text>
+<text x="968" y="351.0" text-anchor="end" class="val" fill="#2e8959">+1.61%</text>
+<rect x="433.6" y="362.0" width="82.5" height="14" rx="2" fill="#2f8a59"/>
+<text x="200" y="373.0" text-anchor="end" class="lbl">EV &amp; New Age Auto</text>
+<text x="968" y="373.0" text-anchor="end" class="val" fill="#2f8a59">+1.55%</text>
+<rect x="433.6" y="384.0" width="77.7" height="14" rx="2" fill="#2f8a5a"/>
+<text x="200" y="395.0" text-anchor="end" class="lbl">NBFC</text>
+<text x="968" y="395.0" text-anchor="end" class="val" fill="#2f8a5a">+1.46%</text>
+<rect x="433.6" y="406.0" width="76.7" height="14" rx="2" fill="#2f8a5a"/>
+<text x="200" y="417.0" text-anchor="end" class="lbl">Energy</text>
+<text x="968" y="417.0" text-anchor="end" class="val" fill="#2f8a5a">+1.44%</text>
+<rect x="433.6" y="428.0" width="64.4" height="14" rx="2" fill="#318c5c"/>
+<text x="200" y="439.0" text-anchor="end" class="lbl">Manufacturing</text>
+<text x="968" y="439.0" text-anchor="end" class="val" fill="#318c5c">+1.21%</text>
+<rect x="433.6" y="450.0" width="60.7" height="14" rx="2" fill="#318d5c"/>
+<text x="200" y="461.0" text-anchor="end" class="lbl">Consumer Durables</text>
+<text x="968" y="461.0" text-anchor="end" class="val" fill="#318d5c">+1.14%</text>
+<rect x="433.6" y="472.0" width="47.4" height="14" rx="2" fill="#338f5e"/>
+<text x="200" y="483.0" text-anchor="end" class="lbl">Rural</text>
+<text x="968" y="483.0" text-anchor="end" class="val" fill="#338f5e">+0.89%</text>
+<rect x="433.6" y="494.0" width="31.4" height="14" rx="2" fill="#349160"/>
+<text x="200" y="505.0" text-anchor="end" class="lbl">Telecom</text>
+<text x="968" y="505.0" text-anchor="end" class="val" fill="#349160">+0.59%</text>
+<rect x="433.6" y="516.0" width="22.4" height="14" rx="2" fill="#359361"/>
+<text x="200" y="527.0" text-anchor="end" class="lbl">Auto</text>
+<text x="968" y="527.0" text-anchor="end" class="val" fill="#359361">+0.42%</text>
+<rect x="433.6" y="538.0" width="21.3" height="14" rx="2" fill="#369361"/>
+<text x="200" y="549.0" text-anchor="end" class="lbl">Tourism</text>
+<text x="968" y="549.0" text-anchor="end" class="val" fill="#369361">+0.40%</text>
+<rect x="433.6" y="560.0" width="20.8" height="14" rx="2" fill="#369361"/>
+<text x="200" y="571.0" text-anchor="end" class="lbl">Transport &amp; Logistics</text>
+<text x="968" y="571.0" text-anchor="end" class="val" fill="#369361">+0.39%</text>
+<rect x="433.6" y="582.0" width="18.6" height="14" rx="2" fill="#369362"/>
+<text x="200" y="593.0" text-anchor="end" class="lbl">Infrastructure</text>
+<text x="968" y="593.0" text-anchor="end" class="val" fill="#369362">+0.35%</text>
+<rect x="433.6" y="604.0" width="13.8" height="14" rx="2" fill="#369462"/>
+<text x="200" y="615.0" text-anchor="end" class="lbl">Housing</text>
+<text x="968" y="615.0" text-anchor="end" class="val" fill="#369462">+0.26%</text>
+<rect x="433.6" y="626.0" width="11.7" height="14" rx="2" fill="#379462"/>
+<text x="200" y="637.0" text-anchor="end" class="lbl">Oil &amp; Gas</text>
+<text x="968" y="637.0" text-anchor="end" class="val" fill="#379462">+0.22%</text>
+<rect x="433.6" y="648.0" width="9.0" height="14" rx="2" fill="#379563"/>
+<text x="200" y="659.0" text-anchor="end" class="lbl">Mobility</text>
+<text x="968" y="659.0" text-anchor="end" class="val" fill="#379563">+0.17%</text>
+<rect x="433.6" y="670.0" width="5.3" height="14" rx="2" fill="#379563"/>
+<text x="200" y="681.0" text-anchor="end" class="lbl">FMCG</text>
+<text x="968" y="681.0" text-anchor="end" class="val" fill="#379563">+0.10%</text>
+<rect x="433.6" y="692.0" width="3.7" height="14" rx="2" fill="#389564"/>
+<text x="200" y="703.0" text-anchor="end" class="lbl">India Consumption</text>
+<text x="968" y="703.0" text-anchor="end" class="val" fill="#389564">+0.07%</text>
+<rect x="423.5" y="714.0" width="10.1" height="14" rx="2" fill="#bc4d43"/>
+<text x="200" y="725.0" text-anchor="end" class="lbl">Digital</text>
+<text x="968" y="725.0" text-anchor="end" class="val" fill="#bc4d43">−0.19%</text>
+<rect x="420.8" y="736.0" width="12.8" height="14" rx="2" fill="#bb4c42"/>
+<text x="200" y="747.0" text-anchor="end" class="lbl">Metal</text>
+<text x="968" y="747.0" text-anchor="end" class="val" fill="#bb4c42">−0.24%</text>
+<rect x="420.3" y="758.0" width="13.3" height="14" rx="2" fill="#ba4c42"/>
+<text x="200" y="769.0" text-anchor="end" class="lbl">MidSmall IT &amp; Telecom</text>
+<text x="968" y="769.0" text-anchor="end" class="val" fill="#ba4c42">−0.25%</text>
+<rect x="412.8" y="780.0" width="20.8" height="14" rx="2" fill="#b74a40"/>
+<text x="200" y="791.0" text-anchor="end" class="lbl">PSE</text>
+<text x="968" y="791.0" text-anchor="end" class="val" fill="#b74a40">−0.39%</text>
+<rect x="412.8" y="802.0" width="20.8" height="14" rx="2" fill="#b74a40"/>
+<text x="200" y="813.0" text-anchor="end" class="lbl">Services Sector</text>
+<text x="968" y="813.0" text-anchor="end" class="val" fill="#b74a40">−0.39%</text>
+<rect x="411.7" y="824.0" width="21.8" height="14" rx="2" fill="#b74940"/>
+<text x="200" y="835.0" text-anchor="end" class="lbl">CPSE</text>
+<text x="968" y="835.0" text-anchor="end" class="val" fill="#b74940">−0.41%</text>
+<rect x="378.7" y="846.0" width="54.8" height="14" rx="2" fill="#a93f36"/>
+<text x="200" y="857.0" text-anchor="end" class="lbl">Commodities</text>
+<text x="968" y="857.0" text-anchor="end" class="val" fill="#a93f36">−1.03%</text>
+<rect x="322.8" y="868.0" width="110.7" height="14" rx="2" fill="#922e27"/>
+<text x="200" y="879.0" text-anchor="end" class="lbl">Cement</text>
+<text x="968" y="879.0" text-anchor="end" class="val" fill="#922e27">−2.08%</text>
+<rect x="264.8" y="890.0" width="168.7" height="14" rx="2" fill="#7a1c16"/>
+<text x="200" y="901.0" text-anchor="end" class="lbl">IT</text>
+<text x="968" y="901.0" text-anchor="end" class="val" fill="#7a1c16">−3.17%</text>
+</svg></div>
+    <p class="note">6 Nov close to 13 Nov close. Green is a gain, red a loss. Values sit in a fixed column on the right.</p>
+  </figure>
+
+  <div class="pair">
+    <figure class="fig">
+      <figcaption><span class="fn">Exhibit 2</span> Daily Nifty move (%)</figcaption>
+      <div class="cw"><svg viewBox="0 0 720 320" role="img" aria-label="Daily Nifty moves, four sessions plus Tuesday holiday" class="chart"><rect width="720" height="320" fill="#fff"/>
+<line x1="48" y1="59.1" x2="696" y2="59.1" stroke="#eceae3" stroke-width="1"/>
+<text x="40" y="63.1" text-anchor="end" class="axis">1%</text>
+<line x1="48" y1="109.6" x2="696" y2="109.6" stroke="#eceae3" stroke-width="1"/>
+<text x="40" y="113.6" text-anchor="end" class="axis">0.5%</text>
+<line x1="48" y1="160.1" x2="696" y2="160.1" stroke="#c5a35a" stroke-width="1.4"/>
+<text x="40" y="164.1" text-anchor="end" class="axis">0%</text>
+<line x1="48" y1="210.6" x2="696" y2="210.6" stroke="#eceae3" stroke-width="1"/>
+<text x="40" y="214.6" text-anchor="end" class="axis">-0.5%</text>
+<text x="112.8" y="126.9" text-anchor="middle" class="val" fill="#1f7a4d">+0.23%</text>
+<rect x="85.8" y="136.9" width="54" height="23.2" rx="3" fill="#1f7a4d"/>
+<text x="112.8" y="286" text-anchor="middle" class="lbl">Mon 9</text>
+<text x="112.8" y="302" text-anchor="middle" class="axis">Session</text>
+<rect x="215.4" y="152.1" width="54" height="16" rx="3" fill="#eeeae2" stroke="#d2cdc2" stroke-dasharray="3 3"/>
+<text x="242.4" y="144.1" text-anchor="middle" class="muted">Shut</text>
+<text x="242.4" y="286" text-anchor="middle" class="lbl">Tue 10</text>
+<text x="242.4" y="302" text-anchor="middle" class="axis">Holiday</text>
+<text x="372.0" y="65.3" text-anchor="middle" class="val" fill="#1f7a4d">+0.84%</text>
+<rect x="345.0" y="75.3" width="54" height="84.8" rx="3" fill="#1f7a4d"/>
+<text x="372.0" y="286" text-anchor="middle" class="lbl">Wed 11</text>
+<text x="372.0" y="302" text-anchor="middle" class="axis">Session</text>
+<text x="501.6" y="131.9" text-anchor="middle" class="val" fill="#1f7a4d">+0.18%</text>
+<rect x="474.6" y="141.9" width="54" height="18.2" rx="3" fill="#1f7a4d"/>
+<text x="501.6" y="286" text-anchor="middle" class="lbl">Thu 12</text>
+<text x="501.6" y="302" text-anchor="middle" class="axis">Session</text>
+<text x="631.2" y="239.7" text-anchor="middle" class="val" fill="#b3261e">−0.61%</text>
+<rect x="604.2" y="160.1" width="54" height="61.6" rx="3" fill="#b3261e"/>
+<text x="631.2" y="286" text-anchor="middle" class="lbl">Fri 13</text>
+<text x="631.2" y="302" text-anchor="middle" class="axis">Session</text>
+</svg></div>
+      <p class="note">Tuesday 10 Nov was shut for Diwali Balipratipada.</p>
+    </figure>
+    <figure class="fig">
+      <figcaption><span class="fn">Exhibit 3</span> Broad-market weekly change (%)</figcaption>
+      <div class="cw"><svg viewBox="0 0 720 284" role="img" aria-label="Broad-market weekly change comparison" class="chart"><rect width="720" height="284" fill="#fff"/>
+<line x1="130.0" y1="16" x2="130.0" y2="268" stroke="#c5a35a"/>
+<text x="130.0" y="282" text-anchor="middle" class="axis">0%</text>
+<line x1="245.9" y1="16" x2="245.9" y2="268" stroke="#eceae3"/>
+<text x="245.9" y="282" text-anchor="middle" class="axis">1%</text>
+<line x1="361.8" y1="16" x2="361.8" y2="268" stroke="#eceae3"/>
+<text x="361.8" y="282" text-anchor="middle" class="axis">2%</text>
+<line x1="477.7" y1="16" x2="477.7" y2="268" stroke="#eceae3"/>
+<text x="477.7" y="282" text-anchor="middle" class="axis">3%</text>
+<line x1="593.6" y1="16" x2="593.6" y2="268" stroke="#eceae3"/>
+<text x="593.6" y="282" text-anchor="middle" class="axis">4%</text>
+<rect x="130.0" y="26.0" width="53.3" height="22" rx="3" fill="#0b1f3a"/>
+<text x="120" y="41.0" text-anchor="end" class="lbl">Nifty 50</text>
+<text x="191.3" y="41.0" text-anchor="start" class="val" fill="#0b1f3a">+0.46%</text>
+<rect x="130.0" y="68.0" width="197.0" height="22" rx="3" fill="#237a4b"/>
+<text x="120" y="83.0" text-anchor="end" class="lbl">Next 50</text>
+<text x="335.0" y="83.0" text-anchor="start" class="val" fill="#237a4b">+1.70%</text>
+<rect x="130.0" y="110.0" width="136.8" height="22" rx="3" fill="#298253"/>
+<text x="120" y="125.0" text-anchor="end" class="lbl">Nifty 500</text>
+<text x="274.8" y="125.0" text-anchor="start" class="val" fill="#298253">+1.18%</text>
+<rect x="130.0" y="152.0" width="245.7" height="22" rx="3" fill="#1d7345"/>
+<text x="120" y="167.0" text-anchor="end" class="lbl">Midcap 100</text>
+<text x="383.7" y="167.0" text-anchor="start" class="val" fill="#1d7345">+2.12%</text>
+<rect x="130.0" y="194.0" width="416.1" height="22" rx="3" fill="#0b5a30"/>
+<text x="120" y="209.0" text-anchor="end" class="lbl">Smallcap 100</text>
+<text x="554.1" y="209.0" text-anchor="start" class="val" fill="#0b5a30">+3.59%</text>
+<rect x="130.0" y="236.0" width="369.8" height="22" rx="3" fill="#106136"/>
+<text x="120" y="251.0" text-anchor="end" class="lbl">Smallcap 250</text>
+<text x="507.8" y="251.0" text-anchor="start" class="val" fill="#106136">+3.19%</text>
+</svg></div>
+      <p class="note">Nifty 50 is in navy as the benchmark. The others are mid and broader indices.</p>
+    </figure>
+  </div>
+
+  <figure class="fig">
+    <figcaption><span class="fn">Exhibit 4</span> Daily provisional FII vs DII cash flows (₹ cr)</figcaption>
+    <div class="cw"><svg viewBox="0 0 780 360" role="img" aria-label="Daily provisional FII and DII cash flows in crore rupees" class="chart"><rect width="780" height="360" fill="#fff"/>
+<rect x="300.0" y="10" width="12" height="12" rx="2" fill="#1a6b7a"/>
+<text x="316.0" y="21" class="lbl">FII</text>
+<rect x="406.0" y="10" width="12" height="12" rx="2" fill="#c45c26"/>
+<text x="422.0" y="21" class="lbl">DII</text>
+<line x1="56" y1="86.0" x2="756" y2="86.0" stroke="#eceae3" stroke-width="1"/>
+<text x="48" y="90.0" text-anchor="end" class="axis">+12,000</text>
+<line x1="56" y1="137.0" x2="756" y2="137.0" stroke="#eceae3" stroke-width="1"/>
+<text x="48" y="141.0" text-anchor="end" class="axis">+6,000</text>
+<line x1="56" y1="188.0" x2="756" y2="188.0" stroke="#c5a35a" stroke-width="1.4"/>
+<text x="48" y="192.0" text-anchor="end" class="axis">0</text>
+<line x1="56" y1="239.0" x2="756" y2="239.0" stroke="#eceae3" stroke-width="1"/>
+<text x="48" y="243.0" text-anchor="end" class="axis">−6,000</text>
+<rect x="95.0" y="126.7" width="28" height="61.3" rx="2" fill="#1a6b7a"/>
+<text x="109.0" y="118.7" text-anchor="middle" class="val-sm" fill="#1a6b7a">+7,212</text>
+<rect x="129.0" y="188.0" width="28" height="61.0" rx="2" fill="#c45c26"/>
+<text x="143.0" y="265.0" text-anchor="middle" class="val-sm" fill="#c45c26">−7,173</text>
+<text x="126.0" y="322" text-anchor="middle" class="lbl">Mon 9</text>
+<text x="126.0" y="338" text-anchor="middle" class="axis">Session</text>
+<rect x="226.0" y="180.0" width="80" height="16" rx="3" fill="#eeeae2" stroke="#d2cdc2" stroke-dasharray="3 3"/>
+<text x="266.0" y="172.0" text-anchor="middle" class="muted">Shut</text>
+<text x="266.0" y="322" text-anchor="middle" class="lbl">Tue 10</text>
+<text x="266.0" y="338" text-anchor="middle" class="axis">Holiday</text>
+<rect x="375.0" y="81.2" width="28" height="106.8" rx="2" fill="#1a6b7a"/>
+<text x="389.0" y="73.2" text-anchor="middle" class="val-sm" fill="#1a6b7a">+12,563</text>
+<rect x="409.0" y="188.0" width="28" height="71.7" rx="2" fill="#c45c26"/>
+<text x="423.0" y="275.7" text-anchor="middle" class="val-sm" fill="#c45c26">−8,435</text>
+<text x="406.0" y="322" text-anchor="middle" class="lbl">Wed 11</text>
+<text x="406.0" y="338" text-anchor="middle" class="axis">Session</text>
+<rect x="515.0" y="121.4" width="28" height="66.6" rx="2" fill="#1a6b7a"/>
+<text x="529.0" y="113.4" text-anchor="middle" class="val-sm" fill="#1a6b7a">+7,830.60</text>
+<rect x="549.0" y="188.0" width="28" height="53.8" rx="2" fill="#c45c26"/>
+<text x="563.0" y="257.8" text-anchor="middle" class="val-sm" fill="#c45c26">−6,331.17</text>
+<text x="546.0" y="322" text-anchor="middle" class="lbl">Thu 12</text>
+<text x="546.0" y="338" text-anchor="middle" class="axis">Session</text>
+<rect x="655.0" y="139.2" width="28" height="48.8" rx="2" fill="#1a6b7a"/>
+<text x="669.0" y="131.2" text-anchor="middle" class="val-sm" fill="#1a6b7a">+5,736.55</text>
+<rect x="689.0" y="188.0" width="28" height="19.2" rx="2" fill="#c45c26"/>
+<text x="703.0" y="223.2" text-anchor="middle" class="val-sm" fill="#c45c26">−2,253.58</text>
+<text x="686.0" y="322" text-anchor="middle" class="lbl">Fri 13</text>
+<text x="686.0" y="338" text-anchor="middle" class="axis">Session</text>
+</svg></div>
+    <p class="note">FII bought on all four sessions. DII sold on all four. Tuesday was shut.</p>
+  </figure>
+
+  <div class="pair">
+    <figure class="fig">
+      <figcaption><span class="fn">Exhibit 5</span> Named gainers in this note</figcaption>
+      <div class="cw"><svg viewBox="0 0 470 296" role="img" aria-label="Named stock gainers" class="chart"><rect width="470" height="296" fill="#fff"/>
+<rect x="168.0" y="14.0" width="216.7" height="16" rx="2" fill="#0b5a30"/>
+<text x="160" y="26.0" text-anchor="end" class="lbl">Kalyan Jewellers</text>
+<text x="390.7" y="26.0" text-anchor="start" class="val" fill="#0b5a30">+17.99%</text>
+<rect x="168.0" y="42.0" width="154.8" height="16" rx="2" fill="#186b3f"/>
+<text x="160" y="54.0" text-anchor="end" class="lbl">PNB</text>
+<text x="328.8" y="54.0" text-anchor="start" class="val" fill="#186b3f">+12.85%</text>
+<rect x="168.0" y="70.0" width="154.0" height="16" rx="2" fill="#186b3f"/>
+<text x="160" y="82.0" text-anchor="end" class="lbl">Zee Entertainment</text>
+<text x="328.0" y="82.0" text-anchor="start" class="val" fill="#186b3f">+12.79%</text>
+<rect x="168.0" y="98.0" width="151.8" height="16" rx="2" fill="#186c40"/>
+<text x="160" y="110.0" text-anchor="end" class="lbl">Aditya Birla Real Estate</text>
+<text x="325.8" y="110.0" text-anchor="start" class="val" fill="#186c40">+12.60%</text>
+<rect x="168.0" y="126.0" width="135.0" height="16" rx="2" fill="#1c7144"/>
+<text x="160" y="138.0" text-anchor="end" class="lbl">Bank of India</text>
+<text x="309.0" y="138.0" text-anchor="start" class="val" fill="#1c7144">+11.21%</text>
+<rect x="168.0" y="154.0" width="129.0" height="16" rx="2" fill="#1d7245"/>
+<text x="160" y="166.0" text-anchor="end" class="lbl">Motilal Oswal</text>
+<text x="303.0" y="166.0" text-anchor="start" class="val" fill="#1d7245">+10.71%</text>
+<rect x="168.0" y="182.0" width="113.2" height="16" rx="2" fill="#207749"/>
+<text x="160" y="194.0" text-anchor="end" class="lbl">Bank of Baroda</text>
+<text x="287.2" y="194.0" text-anchor="start" class="val" fill="#207749">+9.40%</text>
+<rect x="168.0" y="210.0" width="104.5" height="16" rx="2" fill="#22794b"/>
+<text x="160" y="222.0" text-anchor="end" class="lbl">CDSL</text>
+<text x="278.5" y="222.0" text-anchor="start" class="val" fill="#22794b">+8.68%</text>
+<rect x="168.0" y="238.0" width="103.7" height="16" rx="2" fill="#22794b"/>
+<text x="160" y="250.0" text-anchor="end" class="lbl">Sun TV</text>
+<text x="277.7" y="250.0" text-anchor="start" class="val" fill="#22794b">+8.61%</text>
+<rect x="168.0" y="266.0" width="103.1" height="16" rx="2" fill="#23794b"/>
+<text x="160" y="278.0" text-anchor="end" class="lbl">Union Bank</text>
+<text x="277.1" y="278.0" text-anchor="start" class="val" fill="#23794b">+8.56%</text>
+</svg></div>
+    </figure>
+    <figure class="fig">
+      <figcaption><span class="fn">Exhibit 6</span> Named losers in this note</figcaption>
+      <div class="cw"><svg viewBox="0 0 470 296" role="img" aria-label="Named stock losers" class="chart"><rect width="470" height="296" fill="#fff"/>
+<rect x="168.0" y="14.0" width="216.7" height="16" rx="2" fill="#7a1c16"/>
+<text x="160" y="26.0" text-anchor="end" class="lbl">Grasim</text>
+<text x="390.7" y="26.0" text-anchor="start" class="val" fill="#7a1c16">−5.98%</text>
+<rect x="168.0" y="42.0" width="156.2" height="16" rx="2" fill="#8e2b23"/>
+<text x="160" y="54.0" text-anchor="end" class="lbl">HCLTech</text>
+<text x="330.2" y="54.0" text-anchor="start" class="val" fill="#8e2b23">−4.31%</text>
+<rect x="168.0" y="70.0" width="132.6" height="16" rx="2" fill="#953029"/>
+<text x="160" y="82.0" text-anchor="end" class="lbl">Tech Mahindra</text>
+<text x="306.6" y="82.0" text-anchor="start" class="val" fill="#953029">−3.66%</text>
+<rect x="168.0" y="98.0" width="131.9" height="16" rx="2" fill="#953029"/>
+<text x="160" y="110.0" text-anchor="end" class="lbl">TCS</text>
+<text x="305.9" y="110.0" text-anchor="start" class="val" fill="#953029">−3.64%</text>
+<rect x="168.0" y="126.0" width="122.5" height="16" rx="2" fill="#98332b"/>
+<text x="160" y="138.0" text-anchor="end" class="lbl">Infosys</text>
+<text x="296.5" y="138.0" text-anchor="start" class="val" fill="#98332b">−3.38%</text>
+<rect x="168.0" y="154.0" width="112.3" height="16" rx="2" fill="#9c352d"/>
+<text x="160" y="166.0" text-anchor="end" class="lbl">Titan</text>
+<text x="286.3" y="166.0" text-anchor="start" class="val" fill="#9c352d">−3.10%</text>
+<rect x="168.0" y="182.0" width="105.8" height="16" rx="2" fill="#9e372f"/>
+<text x="160" y="194.0" text-anchor="end" class="lbl">ONGC</text>
+<text x="279.8" y="194.0" text-anchor="start" class="val" fill="#9e372f">−2.92%</text>
+<rect x="168.0" y="210.0" width="101.8" height="16" rx="2" fill="#9f382f"/>
+<text x="160" y="222.0" text-anchor="end" class="lbl">UltraTech</text>
+<text x="275.8" y="222.0" text-anchor="start" class="val" fill="#9f382f">−2.81%</text>
+<rect x="168.0" y="238.0" width="93.5" height="16" rx="2" fill="#a23a31"/>
+<text x="160" y="250.0" text-anchor="end" class="lbl">Mphasis</text>
+<text x="267.5" y="250.0" text-anchor="start" class="val" fill="#a23a31">−2.58%</text>
+<rect x="168.0" y="266.0" width="84.8" height="16" rx="2" fill="#a53c33"/>
+<text x="160" y="278.0" text-anchor="end" class="lbl">Ambuja</text>
+<text x="258.8" y="278.0" text-anchor="start" class="val" fill="#a53c33">−2.34%</text>
+</svg></div>
+    </figure>
+  </div>
+  <p class="note">Exhibits 5 and 6 cover only stocks named in this note, not a market-wide ranking.</p>
+</section>
+
+<section>
+  <h2><span class="num">02</span> Sectoral indices</h2>
+  <p>Weekly change from the 6 Nov close to the 13 Nov close.</p>
+  
+<div class="tw">
+<table class="sector-tbl">
+<thead><tr>
+  <th>Index</th>
+  <th class="num">6 Nov</th>
+  <th class="num">13 Nov</th>
+  <th class="num">Week</th>
+</tr></thead>
+<tbody>
+<tr style="background:#e7f4ec"><td>PSU Bank</td><td class="num">8,612.90</td><td class="num">9,258.60</td><td class="num week" style="background:#0b5a30;color:#ffffff">+7.50%</td></tr><tr style="background:#e7f4ec"><td>Media</td><td class="num">1,670.50</td><td class="num">1,757.70</td><td class="num week" style="background:#639c73;color:#1c2430">+5.22%</td></tr><tr style="background:#e7f4ec"><td>India Defence (Equal Wt)</td><td class="num">8,303.48</td><td class="num">8,687.61</td><td class="num week" style="background:#7aad85;color:#1c2430">+4.63%</td></tr><tr style="background:#e7f4ec"><td>Capital Markets</td><td class="num">5,678.20</td><td class="num">5,897.05</td><td class="num week" style="background:#98c49c;color:#1c2430">+3.85%</td></tr><tr style="background:#e7f4ec"><td>Bank</td><td class="num">59,086.00</td><td class="num">61,034.10</td><td class="num week" style="background:#acd3ab;color:#1c2430">+3.30%</td></tr><tr style="background:#f3f8f4"><td>Fin Services Ex-Bank</td><td class="num">31,550.50</td><td class="num">32,444.10</td><td class="num week" style="background:#b7d8b5;color:#1c2430">+2.83%</td></tr><tr style="background:#f3f8f4"><td>Realty</td><td class="num">896.70</td><td class="num">921.25</td><td class="num week" style="background:#b9d9b6;color:#1c2430">+2.74%</td></tr><tr style="background:#f3f8f4"><td>Chemicals</td><td class="num">27,731.50</td><td class="num">28,443.00</td><td class="num week" style="background:#bddbba;color:#1c2430">+2.57%</td></tr><tr style="background:#f3f8f4"><td>Pharma</td><td class="num">27,940.40</td><td class="num">28,535.75</td><td class="num week" style="background:#c7dfc2;color:#1c2430">+2.13%</td></tr><tr style="background:#f3f8f4"><td>Financial Services</td><td class="num">27,283.95</td><td class="num">27,855.50</td><td class="num week" style="background:#c8e0c3;color:#1c2430">+2.09%</td></tr><tr style="background:#f3f8f4"><td>Fin Services 25/50</td><td class="num">29,269.10</td><td class="num">29,863.60</td><td class="num week" style="background:#c9e0c4;color:#1c2430">+2.03%</td></tr><tr style="background:#f3f8f4"><td>MidSmall Healthcare</td><td class="num">53,140.80</td><td class="num">54,190.90</td><td class="num week" style="background:#cae1c5;color:#1c2430">+1.98%</td></tr><tr style="background:#f3f8f4"><td>India Defence</td><td class="num">8,929.40</td><td class="num">9,089.10</td><td class="num week" style="background:#cfe3c9;color:#1c2430">+1.79%</td></tr><tr style="background:#f3f8f4"><td>Healthcare</td><td class="num">16,931.20</td><td class="num">17,233.05</td><td class="num week" style="background:#cfe3c9;color:#1c2430">+1.78%</td></tr><tr style="background:#f3f8f4"><td>Private Bank</td><td class="num">29,503.40</td><td class="num">29,977.95</td><td class="num week" style="background:#d3e5cd;color:#1c2430">+1.61%</td></tr><tr style="background:#f3f8f4"><td>EV &amp; New Age Auto</td><td class="num">3,127.20</td><td class="num">3,175.80</td><td class="num week" style="background:#d4e5ce;color:#1c2430">+1.55%</td></tr><tr style="background:#f3f8f4"><td>NBFC</td><td class="num">55,818.93</td><td class="num">56,636.01</td><td class="num week" style="background:#d6e6cf;color:#1c2430">+1.46%</td></tr><tr style="background:#f3f8f4"><td>Energy</td><td class="num">36,867.30</td><td class="num">37,399.05</td><td class="num week" style="background:#d7e7d0;color:#1c2430">+1.44%</td></tr><tr style="background:#f3f8f4"><td>Manufacturing</td><td class="num">15,856.80</td><td class="num">16,049.45</td><td class="num week" style="background:#dce9d4;color:#1c2430">+1.21%</td></tr><tr style="background:#f3f8f4"><td>Consumer Durables</td><td class="num">38,003.60</td><td class="num">38,438.50</td><td class="num week" style="background:#deead6;color:#1c2430">+1.14%</td></tr><tr style="background:#fafaf6"><td>Rural</td><td class="num">15,198.70</td><td class="num">15,334.60</td><td class="num week" style="background:#e3eddb;color:#1c2430">+0.89%</td></tr><tr style="background:#fafaf6"><td>Telecom</td><td class="num">3,769.85</td><td class="num">3,791.94</td><td class="num week" style="background:#eaf0e0;color:#1c2430">+0.59%</td></tr><tr style="background:#fafaf6"><td>Auto</td><td class="num">27,811.80</td><td class="num">27,929.85</td><td class="num week" style="background:#eef2e4;color:#1c2430">+0.42%</td></tr><tr style="background:#fafaf6"><td>Tourism</td><td class="num">8,324.55</td><td class="num">8,358.05</td><td class="num week" style="background:#eff2e4;color:#1c2430">+0.40%</td></tr><tr style="background:#fafaf6"><td>Transport &amp; Logistics</td><td class="num">26,023.90</td><td class="num">26,125.80</td><td class="num week" style="background:#eff2e4;color:#1c2430">+0.39%</td></tr><tr style="background:#fafaf6"><td>Infrastructure</td><td class="num">9,446.80</td><td class="num">9,479.65</td><td class="num week" style="background:#f0f2e5;color:#1c2430">+0.35%</td></tr><tr style="background:#fafaf6"><td>Housing</td><td class="num">12,031.45</td><td class="num">12,062.85</td><td class="num week" style="background:#f2f3e7;color:#1c2430">+0.26%</td></tr><tr style="background:#fafaf6"><td>Oil &amp; Gas</td><td class="num">11,288.10</td><td class="num">11,312.45</td><td class="num week" style="background:#f3f4e8;color:#1c2430">+0.22%</td></tr><tr style="background:#fafaf6"><td>Mobility</td><td class="num">23,449.70</td><td class="num">23,489.65</td><td class="num week" style="background:#f4f4e9;color:#1c2430">+0.17%</td></tr><tr style="background:#fafaf6"><td>FMCG</td><td class="num">46,785.60</td><td class="num">46,833.55</td><td class="num week" style="background:#f6f5ea;color:#1c2430">+0.10%</td></tr><tr style="background:#fafaf6"><td>India Consumption</td><td class="num">11,957.25</td><td class="num">11,965.90</td><td class="num week" style="background:#f6f5eb;color:#1c2430">+0.07%</td></tr><tr style="background:#fbf7f6"><td>Digital</td><td class="num">8,832.30</td><td class="num">8,815.20</td><td class="num week" style="background:#f6efe5;color:#1c2430">−0.19%</td></tr><tr style="background:#fbf7f6"><td>Metal</td><td class="num">12,678.15</td><td class="num">12,647.90</td><td class="num week" style="background:#f5ede3;color:#1c2430">−0.24%</td></tr><tr style="background:#fbf7f6"><td>MidSmall IT &amp; Telecom</td><td class="num">10,168.85</td><td class="num">10,142.95</td><td class="num week" style="background:#f5ece2;color:#1c2430">−0.25%</td></tr><tr style="background:#fbf7f6"><td>PSE</td><td class="num">9,531.30</td><td class="num">9,494.40</td><td class="num week" style="background:#f4e7dd;color:#1c2430">−0.39%</td></tr><tr style="background:#fbf7f6"><td>Services Sector</td><td class="num">32,612.75</td><td class="num">32,484.85</td><td class="num week" style="background:#f4e7dd;color:#1c2430">−0.39%</td></tr><tr style="background:#fbf7f6"><td>CPSE</td><td class="num">6,254.30</td><td class="num">6,228.50</td><td class="num week" style="background:#f3e6dc;color:#1c2430">−0.41%</td></tr><tr style="background:#f8eeee"><td>Commodities</td><td class="num">9,697.85</td><td class="num">9,597.65</td><td class="num week" style="background:#eccec4;color:#1c2430">−1.03%</td></tr><tr style="background:#f8eeee"><td>Cement</td><td class="num">14,573.75</td><td class="num">14,270.35</td><td class="num week" style="background:#bf8179;color:#1c2430">−2.08%</td></tr><tr style="background:#f8eeee"><td>IT</td><td class="num">32,977.90</td><td class="num">31,931.15</td><td class="num week" style="background:#7a1c16;color:#ffffff">−3.17%</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<section>
+  <h2><span class="num">03</span> Best sectors</h2>
+  <p>Drivers and stocks only. Index changes are in the table above.</p>
+
+  <div class="block best">
+    <h3>PSU Bank</h3>
+    <ul>
+      <li>Biggest weekly gain in seven months. Third straight up week. About 15% over three weeks.</li>
+      <li>Rose Monday (+3.73%), Wednesday (+2.94%) and Thursday (+1.51%). Slipped 0.51% Friday.</li>
+      <li>Strong Q2 results, faster credit growth and better asset quality.</li>
+      <li>PSU banks’ aggregate Q2 FY27 profit was ₹59,367 cr, up 20% YoY. That was slightly above private banks’ ₹57,095 cr.</li>
+    </ul>
+    
+<div class="tw">
+<table class="stock-tbl">
+<thead class="th-green"><tr>
+  <th>Stock</th>
+  <th class="num">Week</th>
+  <th>Note</th>
+</tr></thead>
+<tbody>
+<tr><td>PNB</td><td class="num week" style="background:#5e986f;color:#ffffff">+12.85%</td><td class='extra'>₹126.55 to ₹142.81</td></tr><tr><td>Bank of India</td><td class="num week" style="background:#78ac84;color:#1c2430">+11.21%</td><td class='extra'></td></tr><tr><td>Bank of Baroda</td><td class="num week" style="background:#95c29a;color:#1c2430">+9.40%</td><td class='extra'></td></tr><tr><td>Union Bank</td><td class="num week" style="background:#a3cca4;color:#1c2430">+8.56%</td><td class='extra'></td></tr><tr><td>Punjab &amp; Sind</td><td class="num week" style="background:#acd3ac;color:#1c2430">+7.87%</td><td class='extra'></td></tr><tr><td>Canara</td><td class="num week" style="background:#b9d9b7;color:#1c2430">+6.49%</td><td class='extra'></td></tr><tr><td>SBI</td><td class="num week" style="background:#bedbbb;color:#1c2430">+6.04%</td><td class='extra'>₹1,018.50 to ₹1,080.00. Top Nifty 50 gainer.</td></tr>
+</tbody>
+</table>
+</div>
+  </div>
+
+  <div class="grid-2">
+    <div class="block best">
+      <h3>Media</h3>
+      <ul>
+        <li>Biggest day was Thursday (+2.46%). Zee rose 6.4% intraday that day.</li>
+        <li>Zee’s board approved a ₹600 cr buyback at ₹91 a share, a 24% premium.</li>
+        <li>Media is a small index of 10 stocks, so one stock can swing it.</li>
+      </ul>
+      
+<div class="tw">
+<table class="stock-tbl">
+<thead class="th-green"><tr>
+  <th>Stock</th>
+  <th class="num">Week</th>
+  <th>Note</th>
+</tr></thead>
+<tbody>
+<tr><td>Zee Entertainment</td><td class="num week" style="background:#5f9970;color:#ffffff">+12.79%</td><td class='extra'>₹63.97 to ₹72.15</td></tr><tr><td>Sun TV</td><td class="num week" style="background:#a2cca4;color:#1c2430">+8.61%</td><td class='extra'></td></tr><tr><td>Tips Music</td><td class="num week" style="background:#bddbba;color:#1c2430">+6.14%</td><td class='extra'></td></tr><tr><td>Saregama</td><td class="num week" style="background:#c3dec0;color:#1c2430">+5.45%</td><td class='extra'></td></tr><tr><td>PVR Inox</td><td class="num week" style="background:#c9e1c5;color:#1c2430">+4.83%</td><td class='extra'></td></tr>
+</tbody>
+</table>
+</div>
+    </div>
+
+    <div class="block best">
+      <h3>Capital Markets</h3>
+      <ul>
+        <li>It hit a record high of 5,914.60 on 12 Nov.</li>
+        <li>Strong FII inflows and the broad rally.</li>
+      </ul>
+      
+<div class="tw">
+<table class="stock-tbl">
+<thead class="th-green"><tr>
+  <th>Stock</th>
+  <th class="num">Week</th>
+  <th>Note</th>
+</tr></thead>
+<tbody>
+<tr><td>Motilal Oswal</td><td class="num week" style="background:#80b28a;color:#1c2430">+10.71%</td><td class='extra'></td></tr><tr><td>CDSL</td><td class="num week" style="background:#a1cba3;color:#1c2430">+8.68%</td><td class='extra'></td></tr><tr><td>Angel One</td><td class="num week" style="background:#c4dec0;color:#1c2430">+5.44%</td><td class='extra'></td></tr><tr><td>BSE</td><td class="num week" style="background:#d5e6ce;color:#1c2430">+3.62%</td><td class='extra'></td></tr><tr><td>CAMS</td><td class="num week" style="background:#e5eddc;color:#1c2430">+1.97%</td><td class='extra'></td></tr>
+</tbody>
+</table>
+</div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="block mid">
+      <h3>Bank / Financials</h3>
+      <ul>
+        <li>PSU lenders did most of the work. Private banks lagged.</li>
+      </ul>
+      
+<div class="tw">
+<table class="stock-tbl">
+<thead class="th-teal"><tr>
+  <th>Stock</th>
+  <th class="num">Week</th>
+  <th>Note</th>
+</tr></thead>
+<tbody>
+<tr><td>HDFC Life</td><td class="num week" style="background:#cae1c5;color:#1c2430">+4.77%</td><td class='extra'>Other financials</td></tr><tr><td>Bajaj Finance</td><td class="num week" style="background:#deead6;color:#1c2430">+2.69%</td><td class='extra'>Other financials</td></tr><tr><td>HDFC Bank</td><td class="num week" style="background:#e5eddc;color:#1c2430">+2.00%</td><td class='extra'>Private bank</td></tr><tr><td>Kotak</td><td class="num week" style="background:#e7eedd;color:#1c2430">+1.78%</td><td class='extra'>Private bank</td></tr><tr><td>ICICI Bank</td><td class="num week" style="background:#f0f2e6;color:#1c2430">+0.79%</td><td class='extra'>Private bank</td></tr><tr><td>Axis</td><td class="num week" style="background:#f2f3e7;color:#1c2430">+0.61%</td><td class='extra'>Private bank</td></tr>
+</tbody>
+</table>
+</div>
+    </div>
+
+    <div class="block mid">
+      <h3>Realty</h3>
+      <ul>
+        <li>Almost all of it came on Thursday (+4.51%). It fell 1.39% Friday.</li>
+        <li>Hopes of strong H2 FY27 sales, after healthy Q2 presales and a big launch pipeline.</li>
+      </ul>
+      
+<div class="tw">
+<table class="stock-tbl">
+<thead class="th-teal"><tr>
+  <th>Stock</th>
+  <th class="num">Week</th>
+  <th>Note</th>
+</tr></thead>
+<tbody>
+<tr><td>Aditya Birla Real Estate</td><td class="num week" style="background:#629b72;color:#ffffff">+12.60%</td><td class='extra'></td></tr><tr><td>Anant Raj</td><td class="num week" style="background:#b0d5af;color:#1c2430">+7.43%</td><td class='extra'></td></tr><tr><td>Phoenix Mills</td><td class="num week" style="background:#cbe1c6;color:#1c2430">+4.65%</td><td class='extra'></td></tr><tr><td>Oberoi</td><td class="num week" style="background:#d8e7d1;color:#1c2430">+3.37%</td><td class='extra'></td></tr><tr><td>Godrej Properties</td><td class="num week" style="background:#e0ebd7;color:#1c2430">+2.52%</td><td class='extra'></td></tr><tr><td>DLF</td><td class="num week" style="background:#f0f3e6;color:#1c2430">+0.78%</td><td class='extra'></td></tr>
+</tbody>
+</table>
+</div>
+    </div>
+  </div>
+
+  <div class="block mid">
+    <h3>Pharma / Healthcare</h3>
+    <ul>
+      <li>All of the Pharma gain came Monday (+1.65%). It slipped on each of the next three days.</li>
+      <li>Strong Q2 results from CDMO names. Divi’s, Laurus, Sai Life and Gland led.</li>
+      <li>Large caps were quiet.</li>
+    </ul>
+    
+<div class="tw">
+<table class="stock-tbl">
+<thead class="th-teal"><tr>
+  <th>Stock</th>
+  <th class="num">Week</th>
+  <th>Note</th>
+</tr></thead>
+<tbody>
+<tr><td>Sun Pharma</td><td class="num week" style="background:#eef1e3;color:#1c2430">+1.08%</td><td class='extra'></td></tr><tr><td>Dr Reddy’s</td><td class="num week" style="background:#f3f4e8;color:#1c2430">+0.51%</td><td class='extra'></td></tr><tr><td>Cipla</td><td class="num week" style="background:#f0dad0;color:#1c2430">−1.36%</td><td class='extra'></td></tr>
+</tbody>
+</table>
+</div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="num">04</span> Worst sectors</h2>
+
+  <div class="block worst">
+    <h3>IT</h3>
+    <ul>
+      <li>It fell on all four days. It snapped a six-week winning run.</li>
+      <li>Global AI and chip stocks were in turmoil.</li>
+      <li>On Monday, 10 big IT names lost about ₹50,200 cr in market value.</li>
+      <li>Anand Rathi says investors will separate firms that earn from enterprise AI from those spending heavily to build it.</li>
+      <li>Nvidia named CFO Colette Kress interim CEO after Jensen Huang resigned. Its shares fell 4.3% on Thursday.</li>
+      <li>Choice Institutional Equities: tier-2 IT grew about 5.4% QoQ in Q2 vs about 1.1% for tier-1.</li>
+    </ul>
+    
+<div class="tw">
+<table class="stock-tbl">
+<thead class="th-red"><tr>
+  <th>Stock</th>
+  <th class="num">Week</th>
+  <th>Note</th>
+</tr></thead>
+<tbody>
+<tr><td>HCLTech</td><td class="num week" style="background:#b26e66;color:#ffffff">−4.31%</td><td class='extra'></td></tr><tr><td>Tech Mahindra</td><td class="num week" style="background:#c88e85;color:#1c2430">−3.66%</td><td class='extra'></td></tr><tr><td>TCS</td><td class="num week" style="background:#c88f86;color:#1c2430">−3.64%</td><td class='extra'></td></tr><tr><td>Infosys</td><td class="num week" style="background:#d19c93;color:#1c2430">−3.38%</td><td class='extra'></td></tr><tr><td>Mphasis</td><td class="num week" style="background:#e9c0b6;color:#1c2430">−2.58%</td><td class='extra'></td></tr><tr><td>Coforge</td><td class="num week" style="background:#eac6bc;color:#1c2430">−2.31%</td><td class='extra'></td></tr><tr><td>Wipro</td><td class="num week" style="background:#eed2c8;color:#1c2430">−1.72%</td><td class='extra'></td></tr><tr><td>Persistent</td><td class="num week" style="background:#f3e5db;color:#1c2430">−0.83%</td><td class='extra'></td></tr>
+</tbody>
+</table>
+</div>
+  </div>
+
+  <div class="grid-2">
+    <div class="block worst">
+      <h3>Cement</h3>
+      <ul>
+        <li>Grasim posted a ₹234 cr Q2 loss after a ₹767 cr impairment at its Canadian pulp JV. Revenue rose 26% to ₹50,105 cr.</li>
+      </ul>
+      
+<div class="tw">
+<table class="stock-tbl">
+<thead class="th-red"><tr>
+  <th>Stock</th>
+  <th class="num">Week</th>
+  <th>Note</th>
+</tr></thead>
+<tbody>
+<tr><td>Grasim</td><td class="num week" style="background:#7a1c16;color:#ffffff">−5.98%</td><td class='extra'>₹3,227 to ₹3,034. Worst Nifty 50 stock.</td></tr><tr><td>UltraTech</td><td class="num week" style="background:#e4b8ae;color:#1c2430">−2.81%</td><td class='extra'></td></tr><tr><td>Ambuja</td><td class="num week" style="background:#eac5bb;color:#1c2430">−2.34%</td><td class='extra'></td></tr><tr><td>Shree Cement</td><td class="num week" style="background:#edd1c7;color:#1c2430">−1.77%</td><td class='extra'></td></tr>
+</tbody>
+</table>
+</div>
+    </div>
+
+    <div class="block worst">
+      <h3>Commodities / Metal</h3>
+      <ul>
+        <li>Tata Steel’s Q2 profit rose 16.2% YoY to ₹3,700 cr.</li>
+      </ul>
+      
+<div class="tw">
+<table class="stock-tbl">
+<thead class="th-red"><tr>
+  <th>Stock</th>
+  <th class="num">Week</th>
+  <th>Note</th>
+</tr></thead>
+<tbody>
+<tr><td>ONGC</td><td class="num week" style="background:#e0b3a9;color:#1c2430">−2.92%</td><td class='extra'></td></tr><tr><td>Hindalco</td><td class="num week" style="background:#efd6cc;color:#1c2430">−1.54%</td><td class='extra'></td></tr><tr><td>Vedanta</td><td class="num week" style="background:#f3e6dc;color:#1c2430">−0.79%</td><td class='extra'></td></tr><tr><td>JSW Steel</td><td class="num week" style="background:#f4e8de;color:#1c2430">−0.67%</td><td class='extra'></td></tr><tr><td>Tata Steel</td><td class="num week" style="background:#f6f5ea;color:#1c2430">+0.20%</td><td class='extra'></td></tr>
+</tbody>
+</table>
+</div>
+    </div>
+  </div>
+
+  <div class="block mid">
+    <h3>Other notable stock moves</h3>
+    
+<div class="tw">
+<table class="stock-tbl">
+<thead class="th-gold"><tr>
+  <th>Stock</th>
+  <th class="num">Week</th>
+  <th>Note</th>
+</tr></thead>
+<tbody>
+<tr><td>Kalyan Jewellers</td><td class="num week" style="background:#0b5a30;color:#ffffff">+17.99%</td><td class='extra'>After strong Q2 results.</td></tr><tr><td>Titan</td><td class="num week" style="background:#daaaa0;color:#1c2430">−3.10%</td><td class='extra'></td></tr>
+</tbody>
+</table>
+</div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="num">05</span> FII / DII flows</h2>
+  <p>Daily provisional cash figures, in ₹ crore.</p>
+  
+<div class="tw">
+<table class="flow-tbl">
+<thead><tr>
+  <th>Session</th>
+  <th class="num">FII (₹ cr)</th>
+  <th class="num">DII (₹ cr)</th>
+  <th class="num">Net (₹ cr)</th>
+</tr></thead>
+<tbody>
+<tr><td>Mon 9</td><td class="num" style="background:#d9efe6;color:#0d5c38">+7,212</td><td class="num" style="background:#f8e4e1;color:#8b1a14">−7,173</td><td class="num" style="background:#d9efe6;color:#0d5c38">+39</td></tr><tr class="hol"><td>Tue 10</td><td colspan="3" class="hol-cell">Market shut — Diwali Balipratipada</td></tr><tr><td>Wed 11</td><td class="num" style="background:#d9efe6;color:#0d5c38">+12,563</td><td class="num" style="background:#f8e4e1;color:#8b1a14">−8,435</td><td class="num" style="background:#d9efe6;color:#0d5c38">+4,128</td></tr><tr><td>Thu 12</td><td class="num" style="background:#d9efe6;color:#0d5c38">+7,830.60</td><td class="num" style="background:#f8e4e1;color:#8b1a14">−6,331.17</td><td class="num" style="background:#d9efe6;color:#0d5c38">+1,499.43</td></tr><tr><td>Fri 13</td><td class="num" style="background:#d9efe6;color:#0d5c38">+5,736.55</td><td class="num" style="background:#f8e4e1;color:#8b1a14">−2,253.58</td><td class="num" style="background:#d9efe6;color:#0d5c38">+3,482.97</td></tr><tr class="sum"><td>Four-day sum</td><td class="num">+33,342</td><td class="num">−24,193</td><td class="num">+9,149</td></tr>
+</tbody>
+</table>
+</div>
+  <ul>
+    <li>The four-day sum is my addition of the daily figures above, not a published weekly total.</li>
+    <li>Published weekly totals do not agree. One tally shows FII +25,512 / DII −17,861, but it counts only three sessions and misses Thursday.</li>
+    <li>Another report says FPIs bought ₹21,653 cr and DIIs sold ₹21,938 cr. It does not say which data series it used.</li>
+    <li>November so far: FPI inflows passed ₹84,000 cr by 12 Nov, the most in a month since Dec 2020.</li>
+    <li>The 1–15 Nov fortnightly sector-wise FPI report is not out yet. The 16–31 Oct page timed out, so those sector numbers could not be checked.</li>
+    <li>FPIs were net buyers of about ₹13,000 cr in the second half of October.</li>
+  </ul>
+</section>
+
+<section>
+  <h2><span class="num">06</span> Next week (16–20 Nov)</h2>
+  <p>The Q2 season is largely over. No Nifty 50 company reports.</p>
+  
+<div class="tw">
+<table class="cal-tbl">
+<thead><tr>
+  <th>Day</th>
+  <th>Category</th>
+  <th>Item</th>
+  <th>Detail</th>
+</tr></thead>
+<tbody>
+<tr><td>Mon 16</td><td><span class="tag tag-results">Results</span></td><td>Sandhar Technologies</td><td>Q2 result</td></tr><tr><td>Mon 16</td><td><span class="tag tag-india">India data</span></td><td>October WPI</td><td>September was 11.39%</td></tr><tr><td>Mon 16</td><td><span class="tag tag-india">India data</span></td><td>Trade data</td><td>September deficit $30.21 bn</td></tr><tr><td>Tue 17</td><td><span class="tag tag-global">Global</span></td><td>Nvidia fiscal Q3</td><td>First results under the interim CEO. Matters for IT sentiment.</td></tr><tr><td>Tue 17</td><td><span class="tag tag-expiry">Expiry</span></td><td>Nifty weekly expiry</td><td></td></tr><tr><td>Wed 18</td><td><span class="tag tag-results">Results</span></td><td>BLS Polymers</td><td>Q2 result</td></tr><tr><td>Wed 18</td><td><span class="tag tag-india">India data</span></td><td>M3 money supply</td><td></td></tr><tr><td>Wed 18</td><td><span class="tag tag-global">Global</span></td><td>Fed October FOMC minutes</td><td></td></tr><tr><td>Thu 19</td><td><span class="tag tag-results">Results</span></td><td>Muthoot Microfin</td><td>Q2 result</td></tr><tr><td>Thu 19</td><td><span class="tag tag-expiry">Expiry</span></td><td>Sensex expiry</td><td></td></tr><tr><td>Fri 20</td><td><span class="tag tag-india">India data</span></td><td>October IIP</td><td>September was 6.7%</td></tr>
+</tbody>
+</table>
+</div>
+  <ul>
+    <li>The US 10-year yield is above 5%. That could hit EM flows.</li>
+    <li>The RBI decides on 4 Dec. October CPI was the last print before it.</li>
+  </ul>
+
+  <h3>Analyst views</h3>
+  <div class="analysts">
+    <div class="card">
+      <h3>Anil Singhvi (Zee Business)</h3>
+      <ul>
+        <li>Crude is the key Monday factor. Watch whether it moves to $98–100 or falls back to $92–93.</li>
+        <li>Nifty support 24,850–25,000, resistance 25,300–25,400.</li>
+        <li>Bank Nifty support 60,375–60,550, resistance 61,400–61,750.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Motilal Oswal</h3>
+      <ul>
+        <li>Expects 16.5% system credit growth in FY27.</li>
+        <li>Sees bank earnings growing about 17% a year over FY26–28.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Kotak Institutional Equities</h3>
+      <ul>
+        <li>Banks should gain from the rate cycle, depending on funding costs.</li>
+        <li>Sees little near-term asset-quality risk in gold loans.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Nikunj Saraf (Choice Wealth)</h3>
+      <ul>
+        <li>Prefers banks and financials, autos, capital goods and industrials.</li>
+        <li>Says to stay selective.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Kranthi Bathini (WealthMills)</h3>
+      <ul>
+        <li>Sees IT weakness as consolidation after it led the rally.</li>
+        <li>Plays down DII selling.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="num">07</span> Data caveats</h2>
+  <div class="caveats">
+    <ul>
+      <li>Index and stock % changes are from NSE closing files for 6 Nov and 13 Nov.</li>
+      <li>Some weekly reviews do not match those closes. A VIX of 16.30 was quoted against the NSE close of 15.50.</li>
+      <li>A Nifty range of 25,054–25,299 looks like closing levels rather than the week’s intraday range.</li>
+      <li>Some outlets reported PSU Bank “over 3%”. NSE closes show +7.50%.</li>
+      <li>Some outlets put the cement index up 0.27%. NSE closes show −2.08%.</li>
+      <li>Some outlets list ONGC as a +2.9% gainer. The NSE bhavcopy shows a 2.92% fall.</li>
+      <li>Figures that clash with NSE closes were not used for index or stock changes.</li>
+    </ul>
+  </div>
+</section>
+
+<div class="foot">Market Desk · Weekly Sector Note · 9–13 November 2026 · NSE</div>
+</main>
+</body>
+</html>
