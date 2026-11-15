@@ -301,6 +301,13 @@ function snapshotTable(rows) {
   const head = el('tr', {}, ['Sector', 'Stocks', 'POS · NEG · PND (3M)', '1M', '3M', '6M', '1Y', 'Delivered · partial · missed']
     .map((t, i) => el('th', { class: i > 0 ? 'r' : '', text: t })));
   const body = rows.map(({ s, sm }) => {
+    if (!sm) {
+      return el('tr', { class: 'snap-row none', onclick: () => go('#/sectors/' + s.id) }, [
+        el('td', { class: 'snap-name', text: s.name }),
+        el('td', { class: 'r', text: '—' }),
+        el('td', { colspan: '6', class: 'dim', text: 'No stock-return table in this review yet' }),
+      ]);
+    }
     const n = sm.covered || 1;
     const bar = el('div', { class: 'bar' }, [
       el('span', { class: 'b-pos', style: 'width:' + (100 * sm.pos3m / n) + '%' }),
@@ -387,7 +394,7 @@ function viewSectors() {
   const quarterWithRet = inQ.filter((s) => s.hasReturns).length; // whole quarter, not the filtered view
   const coverage = inQ.length - quarterWithRet;
   const lede = q + ': ' + quarterWithRet + ' of ' + inQ.length + ' reviews carry stock-return data' +
-    (coverage ? ' — the other ' + coverage + ' use an older template without a returns table and are not in the snapshot.' : '.');
+    (coverage ? ' — the other ' + coverage + ' have no usable stock-return figures yet; they are listed greyed out below.' : '.');
 
   const cards = state.sectors.filter((s) => s.quarter === q && (desk.sector === 'all' || s.id === desk.sector)
     && (!desk.stock || shown.some((x) => x.id === s.id)));
@@ -411,12 +418,11 @@ function viewSectors() {
     body.push(el('div', { class: 'sec-row' }, [el('h2', { class: 'sec', text: name + ' — across reviews, ' + q }),
       el('span', { class: 'hint', text: hits.length + ' review' + (hits.length === 1 ? '' : 's') })]));
     body.push(hits.length ? stockTable(hits) : el('p', { class: 'lede', text: 'Not covered by any review in this quarter.' }));
-  } else if (ranked.length) {
+  } else if (shown.length) {
     body.push(el('div', { class: 'sec-row' }, [el('h2', { class: 'sec', text: 'Sector snapshot · ' + q }),
-      el('span', { class: 'hint', text: 'Ranked by median 3M return' })]));
-    body.push(snapshotTable(ranked));
+      el('span', { class: 'hint', text: 'Ranked by median 3M return · ' + withRet.length + ' of ' + shown.length + ' with data' })]));
+    body.push(snapshotTable(ranked.concat(noRet.map((s) => ({ s, sm: null })))));
   }
-  if (noRet.length) body.push(el('p', { class: 'lede dim', text: 'No return data in this review yet: ' + noRet.map((s) => s.name).join(', ') + '.' }));
   body.push(el('div', { class: 'sec-row' }, [el('h2', { class: 'sec', text: 'Reviews' }), el('span', { class: 'hint', text: cards.length + ' shown' })]));
   body.push(grid);
 
