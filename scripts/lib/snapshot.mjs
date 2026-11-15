@@ -97,10 +97,6 @@ export function buildSnapshot(manifest, readHtml, notes = {}) {
     const html = readHtml(s.path);
     const { returns, verdicts } = html ? readReview(html) : { returns: null, verdicts: null };
     const real = (returns || []).filter((r) => !isPlaceholder(r));
-    const flags = (returns || []).filter(isPlaceholder).map((r) => ({
-      ticker: '—', // the template ticker is a literal "TICKER", not a real symbol
-      note: 'Template placeholder row "' + r.name + '" left in the review; excluded from the figures.',
-    }));
     sectors.push({
       id: s.id,
       name: s.name,
@@ -110,7 +106,7 @@ export function buildSnapshot(manifest, readHtml, notes = {}) {
       hasReturns: real.some((r) => [r.mtd, r.r3m, r.r6m, r.r1y].some((v) => v != null)),
       summary: summarise(real, verdicts),
       stocks: real,
-      notes: [...(notes[s.id] || []), ...flags],
+      notes: notes[s.id] || [],
     });
   }
   const quarters = [...new Set(sectors.map((s) => s.quarter))].sort((a, b) => quarterKey(b) - quarterKey(a));

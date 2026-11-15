@@ -52,7 +52,7 @@ const html2 = page.replace('["Ramco", "RAMCOCEM"', '["Company A", "TICKER", "n/a
 const snap = buildSnapshot(fake, () => html2, { x: [{ ticker: 'RAMCOCEM', note: 'Included in error' }] });
 assert.equal(snap.sectors[0].stocks.length, 2, 'placeholder excluded from stocks');
 assert.equal(snap.sectors[0].summary.covered, 2);
-assert.equal(snap.sectors[0].notes.length, 2, 'curated note plus placeholder flag');
+assert.equal(snap.sectors[0].notes.length, 1, 'only curated notes are shown; placeholders are excluded silently');
 assert.deepEqual(snap.quarters, ['Q2 FY27']);
 
 // a returns table where every value is n/s is not return data
