@@ -9,6 +9,8 @@
 const state = {
   reports: [],
   sectors: [],
+  snapshot: null,                                   // data/sector-snapshot.json (stock returns per review)
+  desk: { quarter: null, sector: 'all', stock: '' }, // Sector research filters; quarter null = newest
   siteBase: 'https://rajan1973.github.io/',   // canonical public home of the reports (external links)
   embedBase: 'https://rajan1973.github.io/',  // where the report iframe pulls from (see resolveEmbedBase)
   bloggerUrl: 'https://nifty-vanakkam.blogspot.com',
@@ -71,6 +73,8 @@ async function boot() {
     ]);
     state.reports = r.reports || [];
     state.sectors = s.sectors || [];
+    // optional: the desk still works without the snapshot, just without returns and notes
+    state.snapshot = await fetch('data/sector-snapshot.json').then((x) => (x.ok ? x.json() : null)).catch(() => null);
     state.siteBase = r.site_base || state.siteBase;
     state.embedBase = resolveEmbedBase(r.embed_base);
     state.bloggerUrl = r.blogger || state.bloggerUrl;
@@ -283,9 +287,150 @@ function viewRotation() {
   ]);
 }
 
+/* ---------- sector research desk: quarter / sector / stock filters + snapshot ---------- */
+const pct = (v) => (v == null ? '—' : (v > 0 ? '+' : v < 0 ? '−' : '') + Math.abs(v).toFixed(1) + '%');
+const tone = (v) => (v == null || v === 0 ? '' : v > 0 ? ' up' : ' down');
+
+// newest quarter with data is the default; the selector only offers quarters that have reviews
+function deskQuarter(quarters) {
+  const q = state.desk.quarter;
+  return q && quarters.includes(q) ? q : (quarters[0] || state.quarter);
+}
+
+function snapshotTable(rows) {
+  const head = el('tr', {}, ['Sector', 'Stocks', 'POS · NEG · PND (3M)', '1M', '3M', '6M', '1Y', 'Delivered · partial · missed']
+    .map((t, i) => el('th', { class: i > 0 ? 'r' : '', text: t })));
+  const body = rows.map(({ s, sm }) => {
+    const n = sm.covered || 1;
+    const bar = el('div', { class: 'bar' }, [
+      el('span', { class: 'b-pos', style: 'width:' + (100 * sm.pos3m / n) + '%' }),
+      el('span', { class: 'b-neg', style: 'width:' + (100 * sm.neg3m / n) + '%' }),
+    ]);
+    const counts = el('div', { class: 'bar-counts' }, [
+      el('span', { class: 'up', text: sm.pos3m }), ' · ',
+      el('span', { class: 'down', text: sm.neg3m }), ' · ',
+      el('span', { class: 'dim', text: sm.pnd3m }),
+    ]);
+    const m = sm.median;
+    const v = sm.verdicts;
+    return el('tr', { class: 'snap-row', onclick: () => go('#/sectors/' + s.id) }, [
+      el('td', { class: 'snap-name', text: s.name }),
+      el('td', { class: 'r', text: sm.covered }),
+      el('td', {}, [bar, counts]),
+      el('td', { class: 'r' + tone(m.mtd), text: pct(m.mtd) }),
+      el('td', { class: 'r' + tone(m.r3m), text: pct(m.r3m) }),
+      el('td', { class: 'r' + tone(m.r6m), text: pct(m.r6m) }),
+      el('td', { class: 'r' + tone(m.r1y), text: pct(m.r1y) }),
+      el('td', { class: 'r dim', text: v.del + ' · ' + v.part + ' · ' + v.miss }),
+    ]);
+  });
+  return el('div', { class: 'snap-wrap' }, [el('table', { class: 'snap-table' }, [el('thead', {}, [head]), el('tbody', {}, body)])]);
+}
+
+function stockTable(hits) {
+  const head = el('tr', {}, ['Sector', 'Results', 'CMP', '1M', '3M', '6M', '1Y'].map((t, i) => el('th', { class: i > 1 ? 'r' : '', text: t })));
+  const body = hits.map(({ s, r }) => el('tr', { class: 'snap-row', onclick: () => go('#/sectors/' + s.id) }, [
+    el('td', { class: 'snap-name', text: s.name + ' · ' + s.quarter }),
+    el('td', { text: r.resultsDate || '—' }),
+    el('td', { class: 'r', text: r.cmp == null ? '—' : r.cmp.toLocaleString('en-IN') }),
+    el('td', { class: 'r' + tone(r.mtd), text: pct(r.mtd) }),
+    el('td', { class: 'r' + tone(r.r3m), text: pct(r.r3m) }),
+    el('td', { class: 'r' + tone(r.r6m), text: pct(r.r6m) }),
+    el('td', { class: 'r' + tone(r.r1y), text: pct(r.r1y) }),
+  ]));
+  return el('div', { class: 'snap-wrap' }, [el('table', { class: 'snap-table' }, [el('thead', {}, [head]), el('tbody', {}, body)])]);
+}
+
 function viewSectors() {
   if (state.route.param) return viewSectorDoc(state.route.param);
+  if (!state.snapshot) return viewSectorsCardsOnly();
 
+  const snap = state.snapshot;
+  const q = deskQuarter(snap.quarters);
+  const desk = state.desk;
+  const inQ = snap.sectors.filter((s) => s.quarter === q);
+  const tickers = new Map();
+  for (const s of inQ) for (const r of s.stocks) if (r.ticker && !tickers.has(r.ticker)) tickers.set(r.ticker, r.name);
+
+  // filters: sector narrows the table and grid; stock keeps only sectors whose review covers it
+  const shown = inQ.filter((s) => (desk.sector === 'all' || s.id === desk.sector) && (!desk.stock || s.stocks.some((r) => r.ticker === desk.stock)));
+  const withRet = shown.filter((s) => s.hasReturns);
+  const noRet = shown.filter((s) => !s.hasReturns);
+  const ranked = withRet.map((s) => ({ s, sm: s.summary }))
+    .sort((a, b) => (b.sm.median.r3m ?? -Infinity) - (a.sm.median.r3m ?? -Infinity));
+  const hits = desk.stock
+    ? shown.map((s) => ({ s, r: s.stocks.find((r) => r.ticker === desk.stock) })).filter((x) => x.r)
+    : [];
+
+  const reset = () => { desk.sector = 'all'; desk.stock = ''; };
+  const qSeg = el('div', { class: 'seg' }, snap.quarters.map((x, i) => el('button', {
+    class: x === q ? 'on' : '',
+    onclick: () => { desk.quarter = x; reset(); render(); },
+  }, [x + (i === 0 ? ' · latest' : '')])));
+  const sectorSel = el('select', { class: 'desk-select', 'aria-label': 'Sector', onchange: (e) => { desk.sector = e.target.value; desk.stock = ''; render(); } },
+    [el('option', { value: 'all', text: 'All sectors' })].concat(inQ.map((s) => el('option', { value: s.id, text: s.name, selected: desk.sector === s.id ? 'selected' : null }))));
+  const stockSel = el('select', { class: 'desk-select', 'aria-label': 'Stock', onchange: (e) => { desk.stock = e.target.value; render(); } },
+    [el('option', { value: '', text: 'All stocks' })].concat([...tickers].sort((a, b) => a[1].localeCompare(b[1]))
+      .map(([t, n]) => el('option', { value: t, text: n + ' · ' + t, selected: desk.stock === t ? 'selected' : null }))));
+  const filters = el('div', { class: 'desk-bar' }, [qSeg, sectorSel, stockSel,
+    el('button', { class: 'desk-reset', onclick: () => { reset(); render(); }, text: 'Reset' })]);
+
+  // notes: curated "included in error" flags and auto-detected template rows
+  const notes = shown.flatMap((s) => (s.notes || []).map((n) => ({ s, n })));
+  const notesBox = notes.length ? el('div', { class: 'desk-notes' }, [
+    el('div', { class: 'dn-head', text: 'Notes on coverage · ' + notes.length }),
+    ...notes.map(({ s, n }) => el('div', { class: 'dn-row' }, [
+      el('span', { class: 'dn-sector', text: s.name + ' · ' + n.ticker }), el('span', { text: n.note }),
+    ])),
+  ]) : null;
+
+  const quarterWithRet = inQ.filter((s) => s.hasReturns).length; // whole quarter, not the filtered view
+  const coverage = inQ.length - quarterWithRet;
+  const lede = q + ': ' + quarterWithRet + ' of ' + inQ.length + ' reviews carry stock-return data' +
+    (coverage ? ' — the other ' + coverage + ' use an older template without a returns table and are not in the snapshot.' : '.');
+
+  const cards = state.sectors.filter((s) => s.quarter === q && (desk.sector === 'all' || s.id === desk.sector)
+    && (!desk.stock || shown.some((x) => x.id === s.id)));
+  const grid = el('div', { class: 'sector-grid' }, cards.map((s, i) => {
+    const published = s.status === 'published' && s.path;
+    const card = el('div', { class: 'sector-card stagger' + (published ? ' published' : ''), style: '--i:' + (i % 16) }, [
+      el('div', { class: 'sc-top' }, [el('div', { class: 'sc-name', text: s.name }), el('div', { class: 'sc-q', text: s.quarter || state.quarter })]),
+      el('div', { class: 'sc-note', text: s.note || '' }),
+      el('div', { class: 'sc-foot' }, [
+        el('span', { text: published ? 'Published' : 'Review pending' }),
+        el('span', { class: 'go', text: published ? 'Open review →' : 'Wired' }),
+      ]),
+    ]);
+    if (published) card.addEventListener('click', () => go('#/sectors/' + s.id));
+    return card;
+  }));
+
+  const body = [filters, el('p', { class: 'lede', text: lede }), notesBox];
+  if (desk.stock) {
+    const name = tickers.get(desk.stock) || desk.stock;
+    body.push(el('div', { class: 'sec-row' }, [el('h2', { class: 'sec', text: name + ' — across reviews, ' + q }),
+      el('span', { class: 'hint', text: hits.length + ' review' + (hits.length === 1 ? '' : 's') })]));
+    body.push(hits.length ? stockTable(hits) : el('p', { class: 'lede', text: 'Not covered by any review in this quarter.' }));
+  } else if (ranked.length) {
+    body.push(el('div', { class: 'sec-row' }, [el('h2', { class: 'sec', text: 'Sector snapshot · ' + q }),
+      el('span', { class: 'hint', text: 'Ranked by median 3M return' })]));
+    body.push(snapshotTable(ranked));
+  }
+  if (noRet.length) body.push(el('p', { class: 'lede dim', text: 'No return data in this review yet: ' + noRet.map((s) => s.name).join(', ') + '.' }));
+  body.push(el('div', { class: 'sec-row' }, [el('h2', { class: 'sec', text: 'Reviews' }), el('span', { class: 'hint', text: cards.length + ' shown' })]));
+  body.push(grid);
+
+  return el('main', { class: 'main' }, [
+    pageHead('Sector earnings reviews', 'Sector research desk', [
+      { lab: 'Quarter', val: q },
+      { lab: 'Live', val: inQ.length + ' / ' + state.sectors.filter((s) => s.quarter === q).length, gold: true },
+    ]),
+    el('div', { class: 'view' }, body),
+  ]);
+}
+
+// fallback when the snapshot file is missing: the plain card ladder, as before
+function viewSectorsCardsOnly() {
   const pub = state.sectors.filter((s) => s.status === 'published' && s.path);
   const grid = el('div', { class: 'sector-grid' }, state.sectors.map((s, i) => {
     const published = s.status === 'published' && s.path;
