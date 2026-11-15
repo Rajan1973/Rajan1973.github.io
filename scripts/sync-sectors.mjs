@@ -45,7 +45,12 @@ if (!SRCS.length) SRCS.push(process.env.SECTOR_SRC || 'D:/Anti Gravity/stock-rep
                             'D:/Anti Gravity/equity-os/data/sectors');
 const OUT_DIR = join(ROOT, 'sectors');
 const MANIFEST = join(ROOT, 'data', 'sectors.json');
-const QUARTER = 'Q1 FY27';
+const QUARTER = 'Q1–Q2 FY27';   // manifest-level label; each entry carries its own quarter
+/* Quarter tag from a filename: q1fy27 -> 'Q1 FY27'. Q1 keeps its legacy un-suffixed id
+ * (e.g. 'cement'); later quarters get a suffixed id ('cement-q2fy27') so both coexist. */
+const qTag = (name) => { const m = String(name).match(/q([1-4])fy(\d\d)/i); return m ? { q: m[1], fy: m[2] } : { q: '1', fy: '27' }; };
+const quarterOf = (name) => { const t = qTag(name); return 'Q' + t.q + ' FY' + t.fy; };
+const baseOf = (id) => id.replace(/-q[1-4]fy\d\d$/i, '');
 
 /* Ladder order + curated blurbs, keyed by normalised slug. An unlisted slug still
  * syncs (appended alphabetically, blank note) — add it here for a fixed
@@ -82,13 +87,16 @@ const ORDER = new Map(LADDER.map(([s], i) => [s, i]));
 
 const ALIAS = { autoancillaries: 'auto-ancillaries', 'epc-infrastructure': 'epc', 'recycling-waste': 'recycling' };
 const normSlug = (name) => {
-  const s = basename(name, '.html').replace(/-sector-review$/, '').replace(/-q1fy27$/, '');
-  return ALIAS[s] || s;
+  const raw = basename(name, '.html').replace(/-sector-review$/, '');
+  const t = qTag(raw);
+  const s = raw.replace(/-q[1-4]fy\d\d$/i, '');
+  const base = ALIAS[s] || s;
+  return (t.q === '1' && t.fy === '27') ? base : base + '-q' + t.q + 'fy' + t.fy;
 };
 
 const titleOf = (html) => {
   const m = html.match(/<title>([^<]*)<\/title>/i);
-  return m ? m[1].replace(/\s+/g, ' ').trim() : null;
+  return m ? m[1].replace(/\s+/g, ' ').replace(/&amp;/g, '&').trim() : null;
 };
 const clean = (title) => (title || '')
   .replace(/\bQ1\s*FY27\b/gi, '')
@@ -107,17 +115,18 @@ const displayName = (slug, title) => {
     'power-ancillaries': 'Power Ancillaries', 'small-finance-banks': 'Small Finance Banks',
     'vehicle-finance-gold-loans': 'Vehicle Finance & Gold Loans',
   };
-  return nice[slug] || clean(title) || slug.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
+  const b = baseOf(slug);
+  return nice[b] || clean(title).replace(/\bQ[1-4]\s*FY\d\d\b/gi, '').replace(/\s{2,}/g, ' ').trim() || b.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
 };
 
 const entryFrom = (slug, outName, html, keepNote) => ({
   id: slug,
   name: displayName(slug, titleOf(html)),
-  quarter: QUARTER,
+  quarter: quarterOf(outName),
   status: 'published',
   path: 'sectors/' + outName,
   title: titleOf(html) || displayName(slug),
-  note: keepNote || NOTE.get(slug) || '',
+  note: keepNote || NOTE.get(baseOf(slug)) || '',
   covers: extractNames(html),
 });
 
@@ -134,7 +143,7 @@ const claimedThisRun = new Set();
 for (const SRC of SRCS) {
   if (!existsSync(SRC)) { console.warn('skip (not found): ' + SRC); continue; }
   const files = readdirSync(SRC).filter((f) =>
-    /q1fy27/i.test(f) && /\.html?$/i.test(f) && !/deepdive|deep-dive/i.test(f));
+    /q[1-4]fy27/i.test(f) && /\.html?$/i.test(f) && !/deepdive|deep-dive/i.test(f));
   for (const f of files) {
     const slug = normSlug(f);
     if (claimedThisRun.has(slug)) continue;              // first source dir wins for this run
@@ -142,7 +151,7 @@ for (const SRC of SRCS) {
     if (!isNew && !REFRESH.has(slug)) continue;           // already published — skip unless --refresh
     claimedThisRun.add(slug);
     const html = readFileSync(join(SRC, f), 'utf8');
-    const outName = slug + '-q1fy27.html';
+    const t = qTag(f); const outName = baseOf(slug) + '-q' + t.q + 'fy' + t.fy + '.html';
     copyFileSync(join(SRC, f), join(OUT_DIR, outName));
     const prev = bySlug.get(slug);
     bySlug.set(slug, entryFrom(slug, outName, html, prev && prev.note));
@@ -166,7 +175,10 @@ for (const f of onDisk) {
 if (!bySlug.size) { console.error('nothing to write — no existing manifest and no *-q1fy27*.html found in: ' + SRCS.join(', ')); process.exit(1); }
 
 const sectors = [...bySlug.values()]
-  .sort((a, b) => (ORDER.has(a.id) ? ORDER.get(a.id) : 999) - (ORDER.has(b.id) ? ORDER.get(b.id) : 999) || a.name.localeCompare(b.name));
+  .sort((a, b) => {
+    const oa = ORDER.has(baseOf(a.id)) ? ORDER.get(baseOf(a.id)) : 999, ob = ORDER.has(baseOf(b.id)) ? ORDER.get(baseOf(b.id)) : 999;
+    return oa - ob || baseOf(a.id).localeCompare(baseOf(b.id)) || String(b.quarter).localeCompare(String(a.quarter)); // newest quarter first within a sector
+  });
 
 writeFileSync(MANIFEST, JSON.stringify({
   $comment: 'Maintained by scripts/sync-sectors.mjs. A plain run only ADDS sectors — it never rewrites an ' +

@@ -330,7 +330,7 @@ function viewSectorDoc(id) {
   }
   const published = state.sectors.filter((x) => x.status === 'published' && x.path);
   const select = el('select', { onchange: (e) => go('#/sectors/' + e.target.value) },
-    published.map((x) => el('option', { value: x.id, selected: x.id === s.id ? 'selected' : null }, x.name)));
+    published.map((x) => el('option', { value: x.id, selected: x.id === s.id ? 'selected' : null }, x.name + ' · ' + (x.quarter || state.quarter))));
 
   // sectors/ ships inside this app (deployed with it), so it is same-origin everywhere
   // incl. localhost — reference it relative and let the frame auto-size.
