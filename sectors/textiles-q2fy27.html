@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Textiles Q2 FY27 — Sector Earnings Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Roboto+Mono:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --stone:#E3E0D9; --card:#F3F1EC; --card2:#EAE7E0;
+  --ink:#1F1D1A; --mute:#6E6A62; --faint:#9A958B; --rule:#C9C4B9;
+  --gain:#1D5C7A; --loss:#A8382C; 
+  --vol:#8E8879; --gold:#B4842A;
+  --disp:'Archivo',system-ui,sans-serif;
+  --serif:'Source Serif 4',Georgia,serif;
+  --mono:'Roboto Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--stone);color:var(--ink);font-family:var(--serif);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:28px 20px 90px}
+section{margin-bottom:40px}
+
+/* type */
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
+h1{font-family:var(--disp);font-weight:800;font-size:clamp(34px,7vw,62px);line-height:.94;letter-spacing:-.03em;margin:.18em 0 .22em;text-transform:uppercase}
+h2{font-family:var(--disp);font-weight:700;font-size:clamp(19px,3.2vw,25px);letter-spacing:-.015em;margin:0 0 4px;text-transform:uppercase}
+h3{font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:-.005em;margin:0}
+.dek{font-size:17px;color:var(--mute);max-width:56ch;margin:0}
+.note{font-size:13px;color:var(--mute);margin:4px 0 20px;max-width:70ch}
+.rule{height:3px;background:var(--ink);margin:0 0 16px}
+
+/* thesis stats */
+.thesis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:2px;background:var(--rule);border:2px solid var(--ink);margin-top:26px}
+.t{background:var(--card);padding:13px 15px}
+.t .n{font-family:var(--disp);font-weight:800;font-size:26px;line-height:1.05;letter-spacing:-.02em}
+.t .l{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:5px;line-height:1.35}
+.t.up .n{color:var(--gain)} .t.dn .n{color:var(--loss)}
+
+/* SIGNATURE: the scissor */
+.scissor{background:var(--card);border:2px solid var(--ink);padding:18px 16px 12px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin-bottom:14px}
+.legend span{display:flex;align-items:center;gap:6px}
+.sw{width:13px;height:11px;display:inline-block}
+.row{display:grid;grid-template-columns:104px 1fr;gap:10px;align-items:center;margin-bottom:3px}
+.row .co{font-family:var(--disp);font-weight:600;font-size:12px;text-align:right;line-height:1.15}
+.track{position:relative;height:26px;border-left:2px solid var(--ink);border-right:0}
+.axis{position:absolute;top:0;bottom:0;width:2px;background:var(--ink);opacity:.85}
+.b{position:absolute;height:10px}
+.b.v{top:1px;background:var(--vol)}
+.b.e{top:14px}
+.b.e.pos{background:var(--gain)} .b.e.neg{background:var(--loss)}
+.b span{position:absolute;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:9.5px;font-weight:500;white-space:nowrap;color:var(--ink)}
+.b.pos span,.b.v span{left:calc(100% + 5px)}
+.b.neg span{right:calc(100% + 5px)}
+.scale{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9.5px;color:var(--faint);margin-top:6px;padding-left:114px}
+
+/* league bars */
+.league{background:var(--card);border:2px solid var(--ink);padding:16px}
+.lrow{display:grid;grid-template-columns:112px 1fr 96px;gap:10px;align-items:center;padding:4px 0;border-bottom:1px solid var(--rule)}
+.lrow:last-child{border-bottom:0}
+.lrow .co{font-family:var(--disp);font-weight:600;font-size:12.5px;text-align:right}
+.lbar{height:16px;background:var(--gain);position:relative}
+.lbar.mid{background:#4A7F91} .lbar.low{background:var(--loss)}
+.lrow .v{font-family:var(--mono);font-size:12px;font-weight:700;text-align:right}
+.lrow .d{font-family:var(--mono);font-size:10px;color:var(--mute);text-align:right}
+
+/* fuel strip */
+.fuel{background:var(--ink);color:var(--card);border:2px solid var(--ink);padding:18px}
+.fuel h2{color:var(--card)}
+.fline{display:flex;align-items:flex-end;gap:0;height:110px;margin:20px 0 6px}
+.fp{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:6px}
+.fp i{display:block;width:100%;max-width:52px;background:var(--gold)}
+.fp b{font-family:var(--mono);font-size:12px;font-weight:700}
+.fp em{font-family:var(--mono);font-size:9.5px;font-style:normal;letter-spacing:.09em;text-transform:uppercase;color:#A9A296}
+.warn{border-top:1px solid #4A453C;margin-top:14px;padding-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
+.warn div{font-size:13.5px;color:#D6D1C6}
+.warn strong{display:block;font-family:var(--mono);font-size:17px;font-weight:700;color:var(--gold);margin-bottom:2px}
+
+/* company cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
+.c{background:var(--card);border:2px solid var(--ink);padding:14px;display:flex;flex-direction:column}
+.chead{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:2px}
+.tick{font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacing:.06em}
+.badge{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 6px;border:1.5px solid;white-space:nowrap;flex-shrink:0}
+.badge.del{color:var(--gain);border-color:var(--gain)}
+.badge.part{color:var(--gold);border-color:var(--gold)}
+.badge.miss{color:var(--loss);border-color:var(--loss)}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);margin:11px 0}
+.tile{background:var(--card2);padding:7px 9px}
+.tile .n{font-family:var(--mono);font-size:15px;font-weight:700;line-height:1.15}
+.tile .l{font-family:var(--mono);font-size:8.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:3px}
+.tile .n.up{color:var(--gain)} .tile .n.dn{color:var(--loss)}
+.c ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.c li{margin-bottom:5px}
+.c li::marker{color:var(--faint)}
+.flags{margin-top:auto;padding-top:10px;display:flex;flex-wrap:wrap;gap:5px}
+.flag{font-family:var(--mono);font-size:9px;letter-spacing:.05em;text-transform:uppercase;background:var(--loss);color:var(--card);padding:3px 6px}
+.flag.ok{background:var(--gain)}
+
+
+table{width:100%;border-collapse:collapse;background:var(--card);border:2px solid var(--ink)}
+th{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;text-align:left;padding:9px 10px;background:var(--ink);color:var(--card)}
+td{padding:9px 10px;border-bottom:1px solid var(--rule);font-size:13.5px;vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.co{font-family:var(--disp);font-weight:700;font-size:13px;white-space:nowrap}
+td.vd{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;white-space:nowrap}
+.vd.del{color:var(--gain)} .vd.part{color:var(--gold)} .vd.miss{color:var(--loss)}
+
+/* call */
+.calls{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.call{border:2px solid var(--ink);padding:15px;background:var(--card)}
+.call.buy{border-left:9px solid var(--gain)}
+.call.wait{border-left:9px solid var(--gold)}
+.call.avoid{border-left:9px solid var(--loss)}
+.call .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.call h3{margin:4px 0 7px;font-size:17px}
+.call p{margin:0;font-size:13.5px}
+
+
+/* commentary */
+.themes{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.th{background:var(--card);border:2px solid var(--ink);padding:14px}
+.th .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--mute);border-bottom:2px solid var(--ink);padding-bottom:6px;margin-bottom:9px}
+.th ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.th li{margin-bottom:6px}
+.th li::marker{color:var(--faint)}
+.th b{font-family:var(--mono);font-size:12.5px;font-weight:700}
+
+/* red flags */
+.rf{background:var(--card);border:2px solid var(--ink)}
+.rfg{border-bottom:2px solid var(--ink)}
+.rfg:last-child{border-bottom:0}
+.rfh{display:flex;align-items:center;gap:9px;padding:8px 13px;background:var(--card2)}
+.sev{width:11px;height:11px;flex-shrink:0}
+.sev.hi{background:var(--loss)} .sev.md{background:var(--gold)} .sev.lo{background:var(--faint)}
+.rfh span{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase}
+.rfr{display:grid;grid-template-columns:118px 1fr;gap:12px;padding:9px 13px;border-top:1px solid var(--rule);font-size:13.5px}
+.rfr b{font-family:var(--disp);font-weight:700;font-size:12.5px}
+
+/* ind-ra verdict */
+.indra{background:var(--card);border:2px solid var(--ink);padding:16px}
+.split{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:2px;background:var(--rule);border:1px solid var(--rule);margin-bottom:16px}
+.sp{background:var(--card2);padding:13px 14px}
+.sp .n{font-family:var(--disp);font-weight:800;font-size:34px;line-height:1;letter-spacing:-.03em;color:var(--loss)}
+.sp.ok .n{color:var(--gain)}
+.sp .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-top:6px}
+.sp .w{font-size:12.5px;color:var(--mute);margin-top:7px}
+.vs{display:grid;grid-template-columns:82px 1fr;gap:11px;padding:7px 0;border-bottom:1px solid var(--rule);font-size:13.5px;align-items:start}
+.vs:last-child{border-bottom:0}
+.vs em{font-family:var(--mono);font-size:9.5px;font-style:normal;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding-top:2px}
+.vs em.y{color:var(--gain)} .vs em.n{color:var(--loss)} .vs em.p{color:var(--gold)}
+
+/* regional strip */
+.reg{display:grid;grid-template-columns:repeat(auto-fit,minmax(112px,1fr));gap:2px;background:var(--rule);border:2px solid var(--ink);margin-top:16px}
+.rg{background:var(--card2);padding:11px 12px;text-align:center}
+.rg .n{font-family:var(--mono);font-size:15px;font-weight:700}
+.rg .n.up{color:var(--gain)} .rg .n.dn{color:var(--loss)}
+.rg .l{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-top:4px}
+
+/* triggers */
+.trigs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:14px}
+.tg{border:2px solid var(--ink);padding:14px;background:var(--card)}
+.tg .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
+.tg.tg-up .k{color:var(--gain)} .tg.tg-dn .k{color:var(--loss)}
+.tg ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.tg li{margin-bottom:6px}
+
+/* caveats */
+.cav{background:var(--card2);border:2px solid var(--ink);padding:15px 15px 15px 30px;margin:0;font-size:13.5px;line-height:1.55}
+.cav li{margin-bottom:8px}
+.cav li:last-child{margin-bottom:0}
+.cav b{font-family:var(--mono);font-size:12px;font-weight:700}
+
+
+/* wide data tables */
+.tw{overflow-x:auto;border:2px solid var(--ink);background:var(--card)}
+.tw table{border:0;min-width:660px}
+.tw th{position:sticky;top:0}
+td.num{font-family:var(--mono);font-size:12px;font-weight:700;text-align:right;white-space:nowrap}
+td.num.up{color:var(--gain)} td.num.dn{color:var(--loss)} td.num.ns{color:var(--faint);font-weight:400}
+th.r{text-align:right}
+td.kpi{font-family:var(--mono);font-size:11.5px;text-align:right;white-space:nowrap}
+.asof{font-family:var(--mono);font-size:11px;color:var(--mute);margin-top:10px;line-height:1.6}
+.asof b{color:var(--ink)}
+
+footer{border-top:3px solid var(--ink);padding-top:15px;font-size:12.5px;color:var(--mute)}
+footer p{margin:0 0 8px;max-width:80ch}
+
+@media(max-width:620px){
+  .row{grid-template-columns:74px 1fr;gap:7px}
+  .row .co{font-size:10.5px}
+  .scale{padding-left:81px}
+  .lrow{grid-template-columns:80px 1fr 74px}
+  .lrow .co{font-size:11px}
+  .wrap{padding:20px 13px 60px}
+  td.hide,th.hide{display:none}
+}
+@media(prefers-reduced-motion:no-preference){
+  .b,.lbar,.fp i{animation:g .7s cubic-bezier(.2,.7,.3,1) both}
+  @keyframes g{from{transform:scaleX(.001);opacity:0}to{transform:scaleX(1);opacity:1}}
+  .b.neg{transform-origin:right} .b.v,.b.pos,.lbar{transform-origin:left}
+  .fp i{animation-name:gy;transform-origin:bottom}
+  @keyframes gy{from{transform:scaleY(.001)}to{transform:scaleY(1)}}
+}
+
+.badge.nsc{color:var(--mute);border-color:var(--mute)}
+.lsub{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin:14px 0 6px}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Sector earnings review · Quarter ended 30 September 2026</div>
+  <h1>Textiles<br>Q2 FY27</h1>
+  <p class="dek">Margins rose YoY at 10 of 12 comparable names, but much of that is a base effect: a year ago US tariffs hit 50%. Spinners also widened margins QoQ; domestic brands did not.</p>
+  <div class="thesis">
+    <div class="t up"><div class="n">10 of 12</div><div class="l">Op. margin up YoY</div></div>
+    <div class="t up"><div class="n">13x</div><div class="l">Welspun Living PAT YoY</div></div>
+    <div class="t up"><div class="n">25.7%</div><div class="l">KPR Mill op. margin</div></div>
+    <div class="t dn"><div class="n">−51%</div><div class="l">Raymond Lifestyle, 1 year</div></div>
+  </div>
+</header>
+
+<section>
+  <h2>The scissor</h2>
+  <div class="rule"></div>
+  <p class="note">The sector map calls for volume growth against margin change. Volume is disclosed by too few companies, so revenue growth and operating-profit growth (before other income) stand in, on one shared axis. Alok (operating profit off near zero) and Ambika (a data issue) are left out.</p>
+  <div class="scissor">
+    <div class="legend">
+      <span><i class="sw" style="background:var(--vol)"></i>Revenue growth YoY</span>
+      <span><i class="sw" style="background:var(--gain)"></i>Operating profit growth YoY</span>
+    </div>
+    <div id="scissor"></div>
+    <div class="scale"><span>−30</span><span>+30</span><span>+90</span><span>+150</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>Operating margin — the league table</h2>
+  <div class="rule"></div>
+  <p class="note">Consolidated operating margin before other income, from Tijori's filed quarterlies. Company EBITDA figures that include other income are quoted on the cards with their basis.</p>
+  <div class="league">
+    <div class="lsub">Operating margin, Q2 FY27 (change)</div>
+    <div id="league"></div>
+  </div>
+</section>
+
+<section>
+  <h2>The pressure point: the US tariff base</h2>
+  <div class="rule"></div>
+  <div class="fuel">
+    <h2>Op. margin change YoY, pts</h2>
+    <div class="fline" id="fuel"></div>
+    <div class="warn">
+      <div><strong>The base</strong>In the September 2025 quarter US tariffs on Indian goods reached 50%. Exporters discounted to keep orders, and Welspun's profit nearly vanished.</div>
+      <div><strong>The relief</strong>A February 2026 India–US framework cut the tariff to about 18%. Welspun (+5.6 pts), Indo Count (+4.1) and Gokaldas (+2.9) recovered.</div>
+      <div><strong>The other story</strong>Spinners KPR, Trident and Vardhman also widened margins QoQ, which a tariff base cannot explain. The driver was not verified.</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Company by company</h2>
+  <div class="rule"></div>
+  <p class="note">Scored where a prior commitment was found: Indo Count, Page and Gokaldas. No call transcripts were read for this sector. Himatsingka's September quarter is not yet in Tijori.</p>
+  <div class="grid" id="cards"></div>
+</section>
+
+<section>
+  <h2>KPI comparison</h2>
+  <div class="rule"></div>
+  <p class="note">Margin changes are in percentage points. Leverage is interest / operating profit. Volume and realisation per kg were not available on a comparable basis. n/c: not comparable. n/m: not meaningful.</p>
+  <div class="tw">
+  <table>
+    <thead><tr>
+      <th>Company</th><th class="r">Revenue YoY</th><th class="r">Op. margin</th><th class="r">OM chg YoY</th><th class="r">OM chg QoQ</th>
+      <th class="r">Op. profit YoY</th><th class="r">PAT YoY</th><th class="r">Interest / OP</th><th class="r">Other inc. / PBT</th>
+    </tr></thead>
+    <tbody id="kpi"></tbody>
+  </table>
+  </div>
+</section>
+
+<section>
+  <h2>What management said</h2>
+  <div class="rule"></div>
+  <p class="note">From results releases and results coverage. No Q2 call transcripts were read.</p>
+  <div class="themes">
+    <div class="th"><div class="k">Tariffs</div><ul>
+      <li>Gokaldas: the year-ago quarter was hit by US tariffs; higher wages and oil-linked costs capped this quarter's gain.</li>
+    </ul></div>
+    <div class="th"><div class="k">Growth</div><ul>
+      <li>Indo Count: utility bedding and Wamsutta contributed over ₹500 cr, 30% of income.</li>
+      <li>Welspun: aims for double-digit growth with low-teens margins.</li>
+    </ul></div>
+    <div class="th"><div class="k">Balance sheet</div><ul>
+      <li>Welspun: net cash, from ₹775 cr net debt in March; cash cycle 44 days.</li>
+    </ul></div>
+    <div class="th"><div class="k">Operations</div><ul>
+      <li>Welspun: Vapi operations disrupted by floods from 23 July; restoring them is the near-term priority.</li>
+      <li>Page: Q1 volume +5.7%, against a double-digit full-year target.</li>
+    </ul></div>
+  </div>
+</section>
+
+<section>
+  <h2>Red flags</h2>
+  <div class="rule"></div>
+  <p class="note">Ranked by how much they should change position sizing.</p>
+  <div class="rf">
+    <div class="rfg">
+      <div class="rfh"><i class="sev hi"></i><span>Act on these</span></div>
+      <div class="rfr"><b>Alok Industries</b><div>Interest 3.7x operating profit; ₹208 cr loss.</div></div>
+      <div class="rfr"><b>Raymond Lifestyle</b><div>Other income over half of PBT; operating profit down YoY.</div></div>
+    </div>
+    <div class="rfg">
+      <div class="rfh"><i class="sev md"></i><span>Monitor next quarter</span></div>
+      <div class="rfr"><b>Arvind</b><div>Interest +72%; PBT flattered by a ₹28 cr exceptional gain.</div></div>
+      <div class="rfr"><b>Gokaldas</b><div>Other income 45% of PBT; shares −10% on results.</div></div>
+      <div class="rfr"><b>Himatsingka</b><div>September quarter not in Tijori yet; −51% in a year.</div></div>
+    </div>
+    <div class="rfg">
+      <div class="rfh"><i class="sev lo"></i><span>Note and move on</span></div>
+      <div class="rfr"><b>Welspun Living</b><div>Vapi flood; ₹7 cr exceptional, ₹125 cr insurance received.</div></div>
+      <div class="rfr"><b>Ambika Cotton</b><div>Tijori's year-ago quarter duplicates June 2025.</div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Walk the talk</h2>
+  <div class="rule"></div>
+  <p class="note">Only stated targets found in results coverage are scored.</p>
+  <table>
+    <thead><tr><th>Company</th><th>Promised</th><th class="hide">Delivered</th><th>Verdict</th></tr></thead>
+    <tbody id="score"></tbody>
+  </table>
+</section>
+
+<section>
+  <h2>Was the consensus right?</h2>
+  <div class="rule"></div>
+  <p class="note">The narrative after the February 2026 trade framework: lower US tariffs restore exporters' margins from Q2 FY27.</p>
+  <div class="indra">
+    <div class="split">
+      <div class="sp ok"><div class="n">10 of 12</div><div class="l">Op. margin up YoY</div><div class="w">Base helped.</div></div>
+      <div class="sp ok"><div class="n">3 of 3</div><div class="l">Exporters up YoY</div><div class="w">Relief real.</div></div>
+      <div class="sp"><div class="n">2</div><div class="l">Domestic brands down</div><div class="w">No relief.</div></div>
+    </div>
+    <div class="vs"><em class="y">Right</em><div><b>Exporters' margins recover.</b> Welspun, Indo Count and Gokaldas all improved 3–6 pts YoY.</div></div>
+    <div class="vs"><em class="y">Partly</em><div><b>The recovery is complete.</b> Gokaldas's costs capped the gain; Welspun and Gokaldas were flat QoQ.</div></div>
+  </div>
+</section>
+
+<section>
+  <h2>The call</h2>
+  <div class="rule"></div>
+  <div class="calls">
+    <div class="call buy">
+      <div class="k">Own now</div>
+      <h3>Indo Count · KPR Mill</h3>
+      <p>Indo Count is ahead of its own margin guide with new revenue lines. KPR has the best margin in the set and widened it QoQ, with a net-cash balance sheet; the stock is only +7% in a year.</p>
+    </div>
+    <div class="call wait">
+      <div class="k">Accumulate on evidence</div>
+      <h3>Welspun · Vardhman · Page</h3>
+      <p>Welspun must rebuild Vapi and lift margin into the low teens. Vardhman's spread must hold. Page must show double-digit volume.</p>
+    </div>
+    <div class="call avoid">
+      <div class="k">Stay out</div>
+      <h3>Raymond Lifestyle · Alok · Arvind</h3>
+      <p>Other-income-dependent, loss-making and debt-funded respectively.</p>
+    </div>
+  </div>
+  <div class="trigs">
+    <div class="tg tg-up"><div class="k">What would make us more positive</div><ul>
+      <li>EU and UK trade deals taking effect.</li>
+      <li>Q3 QoQ margin gains at the exporters, not just YoY base effects.</li>
+    </ul></div>
+    <div class="tg tg-dn"><div class="k">What would make us cut</div><ul>
+      <li>Any reversal of the US tariff cut.</li>
+      <li>Cotton prices rising faster than yarn realisations.</li>
+    </ul></div>
+  </div>
+</section>
+
+<section>
+  <h2>Analyst coverage after results</h2>
+  <div class="rule"></div>
+  <p class="note">Dated post-result broker reports were not verified for this build. No targets are shown, rather than undated ones.</p>
+  <div class="tw">
+  <table>
+    <thead><tr><th>Company</th><th>Broker</th><th>Report date</th><th>Rating</th><th class="r">Target (₹)</th><th class="r">Prior (₹)</th><th class="r">Price at report (₹)</th></tr></thead>
+    <tbody id="brk"></tbody>
+  </table>
+  </div>
+</section>
+
+<section>
+  <h2>Price and returns</h2>
+  <div class="rule"></div>
+  <p class="note">Exporters and spinners led: Nitin +101%, Welspun +81%, Indo Count +77%. The leveraged names lag: Alok −53%, Raymond Lifestyle −51%.</p>
+  <div class="tw">
+  <table>
+    <thead><tr>
+      <th>Company</th><th>Ticker</th><th>Results date</th><th class="r">CMP (₹)</th>
+      <th class="r">1 year</th><th class="r">6 months</th><th class="r">3 months</th><th class="r">MTD</th>
+    </tr></thead>
+    <tbody id="ret"></tbody>
+  </table>
+  </div>
+  <p class="asof">Prices as on 13 Nov 2026 close (Zerodha Kite last price). Anchors: 1Y = 14 Nov 2025, 6M = 15 May 2026, 3M = 14 Aug 2026, MTD = 30 Oct 2026 closes, Kite daily candles (corporate-action adjusted). CMP matches NSE bhavcopy. Sorted by 1-year return.</p>
+</section>
+
+<section>
+  <h2>Caveats</h2>
+  <div class="rule"></div>
+  <ul class="cav">
+    <li><b>Sources.</b> Financials are consolidated filed quarterlies from Tijori, with operating profit before other income. Commentary comes from BW Retail World, DSIJ, Angel One and Fibre2Fashion. No call transcripts were read; this is the weakest part of the report. AI digests were used only as leads.</li>
+    <li><b>Tijori against management.</b> Welspun EBITDA ₹338 cr = Tijori OP. Gokaldas EBITDA ₹127 cr = OP + OI, at 11.2% of total income. Indo Count's 15.3% = (OP + OI) / total income; Tijori's margin before other income is 13.9%.</li>
+    <li><b>Tariff history.</b> The 50% US tariff level in the base quarter and the February 2026 cut to about 18% are from press coverage; the effective date of the cut was not verified.</li>
+    <li><b>Data issues.</b> Ambika's year-ago quarter in Tijori duplicates June 2025. Himatsingka's September quarter is not in Tijori. Alok's operating profit is off a near-zero base.</li>
+    <li><b>Exceptionals.</b> Arvind's PBT includes a ₹28 cr gain; Alok's a ₹36 cr charge; Welspun's a ₹7 cr flood charge.</li>
+    <li><b>Dates.</b> Results dates marked n/s were not verified.</li>
+  </ul>
+</section>
+
+<footer>
+  <p><b>Universe:</b> 14 listed Indian textile companies (13 reported in Tijori), quarter ended 30 September 2026. Sources: filed quarterlies via Tijori; results coverage in the press. Prices from Zerodha Kite, cross-checked with NSE bhavcopy. Built 16 November 2026.</p>
+</footer>
+
+</div>
+<script>
+const C=(n,t,b,bl,k,p,f)=>({n,t,b,bl,k,p,f});
+const SC=[["Indo Count",57.5,124.0],["Welspun Living",16.3,120.9],["Nitin Spinners",29.6,75.7],["Vardhman",15.6,68.0],["Garware Tech.",33.0,65.3],["Gokaldas",13.1,62.5],["KPR Mill",18.9,58.6],["Trident",-3.8,46.7],["Arvind",23.1,25.5],["Page",11.5,7.1],["Raymond Lifestyle",13.3,-2.7]];
+const MIN=-30,MAX=150,SCU1="%",SCU2="%";
+const LEAGUES=[["league",[["KPR Mill",25.7,"+6.4 pts YoY; +6.3 QoQ"],["Page Industries",20.8,"−0.9 pts YoY; +0.5 QoQ"],["Vardhman Textiles",19.6,"+6.1 pts YoY; +2.0 QoQ"],["Trident",18.3,"+6.3 pts YoY; +1.5 QoQ"],["Nitin Spinners",17.8,"+4.7 pts YoY; flat QoQ"],["Garware Technical",17.3,"+3.4 pts YoY; −1.4 QoQ"],["Ambika Cotton",15.4,"YoY n/c; flat QoQ"],["Indo Count",13.9,"+4.1 pts YoY; +2.1 QoQ"],["Welspun Living",11.9,"+5.6 pts YoY; +0.4 QoQ"],["Arvind",10.6,"+0.2 pts YoY; +1.0 QoQ"],["Raymond Lifestyle",10.6,"−1.7 pts YoY; +4.7 QoQ"],["Gokaldas Exports",9.4,"+2.9 pts YoY; −0.3 QoQ"],["Alok Industries",3.8,"+3.3 pts YoY; −1.9 QoQ"]],30,15,10,v=>`${v.toFixed(1)}%`]];
+const FU=[["RAYMOND",-1.7],["PAGE",-0.9],["GOKEX",2.9],["ICIL",4.1],["NITIN",4.7],["WELSPUN",5.6],["VTL",6.1],["TRIDENT",6.3],["KPR",6.4]];
+const FUMAX=7,FUFMT=v=>`${v>0?'+':v<0?'−':''}${Math.abs(v).toFixed(1)}`;
+const CO=[
+ C("KPR Mill","KPRMILL · Mid","nsc","Best margin",[["+19%","Revenue (₹1,940 cr)",1],["25.7%","Op. margin (19.3% YoY)",1],["₹345 cr","PAT (+58%)",1],["+6.3 pts","Op. margin QoQ",1]],
+  ["The only large name whose margin jumped QoQ as well as YoY.","Revenue flat QoQ; the gain is spread, not volume.","Interest only 2% of operating profit.","No Q2 commentary was verified, so the driver is unconfirmed.","Verdict: the best margin in textiles, but the stock is only +7% in a year."],
+  [["Driver unverified",""],["Margin","ok"],["Net cash","ok"]]),
+ C("Vardhman Textiles","VTL · Small","nsc","Not scored",[["+16%","Revenue (₹2,866 cr)",1],["19.6%","Op. margin (13.5% YoY)",1],["₹357 cr","Net profit (+91%)",1],["+68%","Operating profit YoY",1]],
+  ["Margin +6.1 pts YoY and +2.0 QoQ: the spinning spread widened.","Other income 12% of PBT.","No Q2 commentary was verified.","Verdict: a cyclical upturn in yarn. −13% over six months despite it."],
+  [["Spread","ok"],["Cyclical",""]]),
+ C("Welspun Living","WELSPUNLIV · Small","nsc","Recovery",[["+16%","Revenue (₹2,838 cr)",1],["11.9%","EBITDA margin (6.3% YoY)",1],["₹170 cr","PAT (13x)",1],["Net cash","From ₹775 cr net debt",1]],
+  ["Profit 13x off a base crushed by US tariffs a year ago.","Domestic +28%, home-textile exports +18%, flooring +19%.","Net cash from ₹775 cr net debt in March; cash cycle 44 days from 82.","Vapi plant flooded from 23 July; ₹125 cr insurance received on account.","Verdict: the cleanest tariff-recovery story. +81% in a year has priced much of it."],
+  [["Vapi flood",""],["Balance sheet","ok"],["Tariff relief","ok"]]),
+ C("Indo Count","ICIL · Small","del","Ahead",[["+58%","Revenue (₹1,673 cr)",1],["15.3%","EBITDA margin (company)",1],["₹132 cr","PAT (3.4x)",1],["~13%","FY27 margin guide",0]],
+  ["New businesses (utility bedding and the Wamsutta brand) contributed over ₹500 cr, 30% of income.","H1 margin 14.4% against a full-year guide of about 13%.","Volume 28 mn metres.","Interest is 16% of operating profit.","Verdict: ahead of its own guide. +77% in a year."],
+  [["Acquired growth",""],["Guide beat","ok"]]),
+ C("Nitin Spinners","NITINSPIN · Micro","nsc","Not scored",[["+30%","Revenue (₹985 cr)",1],["17.8%","Op. margin (13.1% YoY)",1],["₹89 cr","PAT (2.5x)",1],["+101%","1-year return",1]],
+  ["Yarn spread widened, as at Vardhman and KPR.","Margin held QoQ at 17.8%.","Verdict: the best stock in the set; spreads are cyclical."],
+  [["Cyclical",""],["Margin","ok"]]),
+ C("Page Industries","PAGEIND · Mid","part","In band",[["+12%","Revenue (₹1,440 cr)",1],["20.8%","Op. margin (19–21% guide)",0],["₹203 cr","PAT (+4%)",0],["−21%","1-year return",-1]],
+  ["Margin within the 19–21% guide.","Revenue +11.5%; Q2 volume not verified. Q1 volume was +5.7% against a double-digit full-year target.","Domestic innerwear: no tariff effect either way.","Verdict: steady, but not growing fast enough for its multiple. −21% in a year."],
+  [["Volume target",""],["Margin","ok"]]),
+ C("Trident","TRIDENT · Small","nsc","Not scored",[["−4%","Revenue (₹1,719 cr)",-1],["18.3%","Op. margin (12.0% YoY)",1],["₹176 cr","Net profit (+94%)",1],["−14%","Depreciation YoY",0]],
+  ["The only name with lower revenue YoY, yet operating profit +47%.","Depreciation fell to ₹72 cr from ₹83 cr, adding to PBT growth.","Verdict: margin without growth. −15% in a year."],
+  [["Revenue down",""],["Margin","ok"]]),
+ C("Garware Technical Fibres","GARFIBRES · Small","nsc","Not scored",[["+33%","Revenue (₹463 cr)",1],["17.3%","Op. margin (13.9% YoY)",1],["₹59 cr","PAT (+84%)",1],["−1.4 pts","Op. margin QoQ",-1]],
+  ["Recovery off a weak September 2025 quarter.","Margin still below the 18–23% it ran in FY25.","Verdict: recovering, not recovered."],
+  [["Below history",""]]),
+ C("Gokaldas Exports","GOKEX · Small","part","Partial",[["+13%","Revenue (₹1,113 cr)",1],["11.2%","EBITDA margin (8.3% YoY)",1],["₹41 cr","PAT (5x)",1],["45%","Other income / PBT",-1]],
+  ["The base quarter was hit by US tariffs; the margin lift followed the cut to about 18%.","Wages and oil-linked costs capped the improvement.","Shares fell 10% on results day.","Other income is 45% of PBT; interest 28% of operating profit.","Verdict: the tariff relief arrived, but less than hoped. −26% in a year."],
+  [["Other income",""],["Costs",""]]),
+ C("Arvind","ARVIND · Small","nsc","Not scored",[["+23%","Revenue (₹2,919 cr)",1],["10.6%","Op. margin (flat YoY)",0],["₹148 cr","Net profit (+44%)",1],["₹71 cr","Interest (₹41 cr YoY)",-1]],
+  ["Revenue +23% with a flat margin.","Interest up 72% and depreciation up 49%: new capacity is not yet paying.","PBT includes a ₹28 cr exceptional gain; pre-exceptional PBT about ₹154 cr.","Verdict: growth funded by debt. −11% over three months."],
+  [["Interest +72%",""],["Exceptional gain",""]]),
+ C("Raymond Lifestyle","RAYMONDLSL · Small","miss","Weak",[["+13%","Revenue (₹2,075 cr)",1],["10.6%","Op. margin (12.3% YoY)",-1],["₹68 cr","PAT (−10%)",-1],["54%","Other income / PBT",-1]],
+  ["The only name with lower operating profit YoY (−3%).","Other income is over half of PBT; interest 34% of operating profit.","Seasonal: Q2 carries the wedding season; Q1 was a loss.","Verdict: the weakest quality of earnings in the set. −51% in a year."],
+  [["Other income",""],["Leverage",""]]),
+ C("Alok Industries","ALOKINDS · Micro","miss","Loss",[["−₹208 cr","Net loss",-1],["3.8%","Op. margin",-1],["₹152 cr","Interest (3.7x OP)",-1],["−53%","1-year return",-1]],
+  ["Interest is 3.7x operating profit.","A ₹36 cr exceptional charge widened the loss.","Verdict: not investable on earnings."],
+  [["Loss",""],["Leverage",""]]),
+ C("Ambika Cotton","AMBIKCO · Micro","nsc","Not scored",[["₹265 cr","Revenue",0],["15.4%","Op. margin (flat QoQ)",0],["₹27 cr","PAT",0],["n/c","YoY (data issue)",0]],
+  ["Tijori's September 2025 quarter is identical to June 2025, so YoY growth is not computed.","QoQ: revenue +3%, margin flat.","Verdict: steady small spinner; check the filing before using YoY."],
+  [["Data issue",""]])
+];
+const KPI=[
+ ["KPR Mill","+18.9%","25.7%","+6.4","+6.3","+58.6%","+58.3%","2%","10%"],
+ ["Page Industries","+11.5%","20.8%","−0.9","+0.5","+7.1%","+4.1%","5%","5%"],
+ ["Vardhman Textiles","+15.6%","19.6%","+6.1","+2.0","+68.0%","+90.9%","5%","12%"],
+ ["Trident","−3.8%","18.3%","+6.3","+1.5","+46.7%","+93.6%","10%","8%"],
+ ["Nitin Spinners","+29.6%","17.8%","+4.7","−0.1","+75.7%","2.5x","11%","1%"],
+ ["Garware Technical","+33.0%","17.3%","+3.4","−1.4","+65.3%","+83.7%","4%","12%"],
+ ["Ambika Cotton","n/c","15.4%","n/c","+0.1","n/c","n/c","6%","8%"],
+ ["Indo Count","+57.5%","13.9%","+4.1","+2.1","+124%","3.4x","16%","15%"],
+ ["Welspun Living","+16.3%","11.9%","+5.6","+0.4","+121%","13x","10%","14%"],
+ ["Arvind","+23.1%","10.6%","+0.2","+1.0","+25.5%","+43.7%","23%","12%"],
+ ["Raymond Lifestyle","+13.3%","10.6%","−1.7","+4.7","−2.7%","−10.2%","34%","54%"],
+ ["Gokaldas Exports","+13.1%","9.4%","+2.9","−0.3","+62.5%","5x","28%","45%"],
+ ["Alok Industries","+14.6%","3.8%","+3.3","−1.9","n/m","Loss","368%","n/m"],
+ ["Himatsingka Seide","Not filed","—","—","—","—","—","—","—"]
+];
+const BRK=[["All","Not verified this build","—","—","—","—","—"]];
+const SCORE=[
+ ["Indo Count","FY27 EBITDA margin about 13%","Q2 15.3%; H1 14.4%.","del","Ahead"],
+ ["Page Industries","FY27 EBITDA margin 19–21%; double-digit volume","Margin 20.8%; Q2 volume not verified.","part","Partial"],
+ ["Gokaldas Exports","Margin lift after US tariff cut (March 2026)","EBITDA margin 11.2% from 8.3%; costs capped it.","part","Partial"]
+];
+const SPAN=MAX-MIN,Z=(0-MIN)/SPAN*100;
+document.getElementById("scissor").innerHTML=SC.map(([n,v,e],i)=>{
+ const bar=(val,cls,u)=>{const w=Math.max(Math.abs(val),0.3)/SPAN*100;
+  const l=val>=0?Z:Z-w;
+  return `<i class="b ${cls} ${val>=0?'pos':'neg'}" style="left:${l}%;width:${w}%;animation-delay:${i*45}ms"><span>${val>0?'+':''}${val}${u}</span></i>`;};
+ return `<div class="row"><div class="co">${n}</div><div class="track"><i class="axis" style="left:${Z}%"></i>${bar(v,'v',SCU1)}${bar(e,'e',SCU2)}</div></div>`;
+}).join("");
+const league=(id,rows,max,hi,mid,fmt)=>{document.getElementById(id).innerHTML=rows.map(([n,v,d],i)=>{
+ const cls=v>=hi?"":v>=mid?"mid":"low";
+ return `<div class="lrow"><div class="co">${n}</div>
+ <div><i class="lbar ${cls}" style="display:block;width:${Math.max(v,0)/max*100}%;animation-delay:${i*40}ms"></i></div>
+ <div><div class="v">${fmt(v)}</div><div class="d">${d}</div></div></div>`;}).join("");};
+LEAGUES.forEach(([id,rows,max,hi,mid,fmt])=>league(id,rows,max,hi,mid,fmt));
+document.getElementById("fuel").innerHTML=FU.map(([l,v],i)=>
+ `<div class="fp"><b>${FUFMT(v)}</b><i style="height:${Math.abs(v)/FUMAX*88}px;animation-delay:${i*120}ms"></i><em>${l}</em></div>`).join("");
+document.getElementById("cards").innerHTML=CO.map(c=>`
+ <article class="c">
+  <div class="chead"><div><h3>${c.n}</h3><div class="tick">${c.t}</div></div><div class="badge ${c.b}">${c.bl}</div></div>
+  <div class="tiles">${c.k.map(([n,l,s])=>`<div class="tile"><div class="n ${s===1?'up':s===-1?'dn':''}">${n}</div><div class="l">${l}</div></div>`).join("")}</div>
+  <ul>${c.p.map(x=>`<li>${x}</li>`).join("")}</ul>
+  <div class="flags">${c.f.map(([t,k])=>`<span class="flag ${k}">${t}</span>`).join("")}</div>
+ </article>`).join("");
+document.getElementById("kpi").innerHTML=KPI.map(r=>
+ `<tr><td class="co">${r[0]}</td>`+r.slice(1).map(c=>`<td class="kpi">${c}</td>`).join("")+`</tr>`).join("");
+document.getElementById("brk").innerHTML=BRK.map(r=>
+ `<tr><td class="co">${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td class="num">${r[4]}</td><td class="num ${r[5].includes('↓')?'dn':r[5].includes('↑')?'up':''}">${r[5]}</td><td class="num">${r[6]}</td></tr>`).join("");
+const RET=[["Nitin Spinners", "NITINSPIN", "n/s", "670.75", "+100.8%", "+34.3%", "+21.3%", "+3.0%"], ["Welspun Living", "WELSPUNLIV", "n/s", "250.14", "+80.8%", "+77.4%", "+52.5%", "+14.2%"], ["Indo Count", "ICIL", "n/s", "547.40", "+77.1%", "+88.6%", "+44.1%", "+23.8%"], ["Arvind", "ARVIND", "n/s", "507.90", "+51.0%", "+12.6%", "-11.2%", "+3.5%"], ["Ambika Cotton", "AMBIKCO", "n/s", "1,538.80", "+20.3%", "-0.2%", "-1.5%", "+7.1%"], ["Vardhman Textiles", "VTL", "6 Nov", "528.60", "+16.7%", "-12.9%", "-10.5%", "+8.7%"], ["KPR Mill", "KPRMILL", "n/s", "1,158.40", "+7.4%", "+25.4%", "+4.4%", "+3.9%"], ["Garware Technical", "GARFIBRES", "n/s", "721.35", "-1.3%", "+14.8%", "-4.5%", "-3.2%"], ["Trident", "TRIDENT", "n/s", "23.54", "-14.8%", "-2.7%", "-3.3%", "+11.2%"], ["Page Industries", "PAGEIND", "12 Nov", "31,325.00", "-21.2%", "-14.9%", "-14.8%", "-9.2%"], ["Gokaldas Exports", "GOKEX", "6 Nov", "676.30", "-26.3%", "-1.7%", "-13.7%", "+7.5%"], ["Raymond Lifestyle", "RAYMONDLSL", "n/s", "552.95", "-50.8%", "-29.1%", "-25.4%", "+15.4%"], ["Himatsingka Seide", "HIMATSEIDE", "Not filed", "59.58", "-51.4%", "-24.0%", "-18.3%", "+9.6%"], ["Alok Industries", "ALOKINDS", "n/s", "8.13", "-53.0%", "-41.1%", "-30.0%", "+0.6%"]];
+document.getElementById("ret").innerHTML=RET.map(r=>{
+ const cell=v=>{ if(v==="n/s") return `<td class="num ns">n/s</td>`;
+   const cls=v.startsWith("+")?"up":v.startsWith("-")?"dn":""; return `<td class="num ${cls}">${v}</td>`;};
+ return `<tr><td class="co">${r[0]}</td><td class="tick">${r[1]}</td><td>${r[2]}</td>`
+  +`<td class="num">${r[3]==="n/s"?'<span class="ns">n/s</span>':r[3]}</td>`+r.slice(4).map(cell).join("")+`</tr>`;
+}).join("");
+document.getElementById("score").innerHTML=SCORE.map(([c,p,d,k,v])=>
+ `<tr><td class="co">${c}</td><td>${p}</td><td class="hide">${d}</td><td class="vd ${k}">${v}</td></tr>`).join("");
+</script></body></html>

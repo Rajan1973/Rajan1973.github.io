@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BESS Q2 FY27 — Sector Earnings Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Roboto+Mono:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --stone:#E3E0D9; --card:#F3F1EC; --card2:#EAE7E0;
+  --ink:#1F1D1A; --mute:#6E6A62; --faint:#9A958B; --rule:#C9C4B9;
+  --gain:#1D5C7A; --loss:#A8382C; 
+  --vol:#8E8879; --gold:#B4842A;
+  --disp:'Archivo',system-ui,sans-serif;
+  --serif:'Source Serif 4',Georgia,serif;
+  --mono:'Roboto Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--stone);color:var(--ink);font-family:var(--serif);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:28px 20px 90px}
+section{margin-bottom:40px}
+
+/* type */
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
+h1{font-family:var(--disp);font-weight:800;font-size:clamp(34px,7vw,62px);line-height:.94;letter-spacing:-.03em;margin:.18em 0 .22em;text-transform:uppercase}
+h2{font-family:var(--disp);font-weight:700;font-size:clamp(19px,3.2vw,25px);letter-spacing:-.015em;margin:0 0 4px;text-transform:uppercase}
+h3{font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:-.005em;margin:0}
+.dek{font-size:17px;color:var(--mute);max-width:56ch;margin:0}
+.note{font-size:13px;color:var(--mute);margin:4px 0 20px;max-width:70ch}
+.rule{height:3px;background:var(--ink);margin:0 0 16px}
+
+/* thesis stats */
+.thesis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:2px;background:var(--rule);border:2px solid var(--ink);margin-top:26px}
+.t{background:var(--card);padding:13px 15px}
+.t .n{font-family:var(--disp);font-weight:800;font-size:26px;line-height:1.05;letter-spacing:-.02em}
+.t .l{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:5px;line-height:1.35}
+.t.up .n{color:var(--gain)} .t.dn .n{color:var(--loss)}
+
+/* SIGNATURE: the scissor */
+.scissor{background:var(--card);border:2px solid var(--ink);padding:18px 16px 12px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin-bottom:14px}
+.legend span{display:flex;align-items:center;gap:6px}
+.sw{width:13px;height:11px;display:inline-block}
+.row{display:grid;grid-template-columns:104px 1fr;gap:10px;align-items:center;margin-bottom:3px}
+.row .co{font-family:var(--disp);font-weight:600;font-size:12px;text-align:right;line-height:1.15}
+.track{position:relative;height:26px;border-left:2px solid var(--ink);border-right:0}
+.axis{position:absolute;top:0;bottom:0;width:2px;background:var(--ink);opacity:.85}
+.b{position:absolute;height:10px}
+.b.v{top:1px;background:var(--vol)}
+.b.e{top:14px}
+.b.e.pos{background:var(--gain)} .b.e.neg{background:var(--loss)}
+.b span{position:absolute;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:9.5px;font-weight:500;white-space:nowrap;color:var(--ink)}
+.b.pos span,.b.v span{left:calc(100% + 5px)}
+.b.neg span{right:calc(100% + 5px)}
+.scale{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9.5px;color:var(--faint);margin-top:6px;padding-left:114px}
+
+/* league bars */
+.league{background:var(--card);border:2px solid var(--ink);padding:16px}
+.lrow{display:grid;grid-template-columns:112px 1fr 96px;gap:10px;align-items:center;padding:4px 0;border-bottom:1px solid var(--rule)}
+.lrow:last-child{border-bottom:0}
+.lrow .co{font-family:var(--disp);font-weight:600;font-size:12.5px;text-align:right}
+.lbar{height:16px;background:var(--gain);position:relative}
+.lbar.mid{background:#4A7F91} .lbar.low{background:var(--loss)}
+.lrow .v{font-family:var(--mono);font-size:12px;font-weight:700;text-align:right}
+.lrow .d{font-family:var(--mono);font-size:10px;color:var(--mute);text-align:right}
+
+/* fuel strip */
+.fuel{background:var(--ink);color:var(--card);border:2px solid var(--ink);padding:18px}
+.fuel h2{color:var(--card)}
+.fline{display:flex;align-items:flex-end;gap:0;height:110px;margin:20px 0 6px}
+.fp{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:6px}
+.fp i{display:block;width:100%;max-width:52px;background:var(--gold)}
+.fp b{font-family:var(--mono);font-size:12px;font-weight:700}
+.fp em{font-family:var(--mono);font-size:9.5px;font-style:normal;letter-spacing:.09em;text-transform:uppercase;color:#A9A296}
+.warn{border-top:1px solid #4A453C;margin-top:14px;padding-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
+.warn div{font-size:13.5px;color:#D6D1C6}
+.warn strong{display:block;font-family:var(--mono);font-size:17px;font-weight:700;color:var(--gold);margin-bottom:2px}
+
+/* company cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
+.c{background:var(--card);border:2px solid var(--ink);padding:14px;display:flex;flex-direction:column}
+.chead{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:2px}
+.tick{font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacing:.06em}
+.badge{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 6px;border:1.5px solid;white-space:nowrap;flex-shrink:0}
+.badge.del{color:var(--gain);border-color:var(--gain)}
+.badge.part{color:var(--gold);border-color:var(--gold)}
+.badge.miss{color:var(--loss);border-color:var(--loss)}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);margin:11px 0}
+.tile{background:var(--card2);padding:7px 9px}
+.tile .n{font-family:var(--mono);font-size:15px;font-weight:700;line-height:1.15}
+.tile .l{font-family:var(--mono);font-size:8.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:3px}
+.tile .n.up{color:var(--gain)} .tile .n.dn{color:var(--loss)}
+.c ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.c li{margin-bottom:5px}
+.c li::marker{color:var(--faint)}
+.flags{margin-top:auto;padding-top:10px;display:flex;flex-wrap:wrap;gap:5px}
+.flag{font-family:var(--mono);font-size:9px;letter-spacing:.05em;text-transform:uppercase;background:var(--loss);color:var(--card);padding:3px 6px}
+.flag.ok{background:var(--gain)}
+
+
+table{width:100%;border-collapse:collapse;background:var(--card);border:2px solid var(--ink)}
+th{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;text-align:left;padding:9px 10px;background:var(--ink);color:var(--card)}
+td{padding:9px 10px;border-bottom:1px solid var(--rule);font-size:13.5px;vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.co{font-family:var(--disp);font-weight:700;font-size:13px;white-space:nowrap}
+td.vd{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;white-space:nowrap}
+.vd.del{color:var(--gain)} .vd.part{color:var(--gold)} .vd.miss{color:var(--loss)}
+
+/* call */
+.calls{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.call{border:2px solid var(--ink);padding:15px;background:var(--card)}
+.call.buy{border-left:9px solid var(--gain)}
+.call.wait{border-left:9px solid var(--gold)}
+.call.avoid{border-left:9px solid var(--loss)}
+.call .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.call h3{margin:4px 0 7px;font-size:17px}
+.call p{margin:0;font-size:13.5px}
+
+
+/* commentary */
+.themes{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.th{background:var(--card);border:2px solid var(--ink);padding:14px}
+.th .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--mute);border-bottom:2px solid var(--ink);padding-bottom:6px;margin-bottom:9px}
+.th ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.th li{margin-bottom:6px}
+.th li::marker{color:var(--faint)}
+.th b{font-family:var(--mono);font-size:12.5px;font-weight:700}
+
+/* red flags */
+.rf{background:var(--card);border:2px solid var(--ink)}
+.rfg{border-bottom:2px solid var(--ink)}
+.rfg:last-child{border-bottom:0}
+.rfh{display:flex;align-items:center;gap:9px;padding:8px 13px;background:var(--card2)}
+.sev{width:11px;height:11px;flex-shrink:0}
+.sev.hi{background:var(--loss)} .sev.md{background:var(--gold)} .sev.lo{background:var(--faint)}
+.rfh span{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase}
+.rfr{display:grid;grid-template-columns:118px 1fr;gap:12px;padding:9px 13px;border-top:1px solid var(--rule);font-size:13.5px}
+.rfr b{font-family:var(--disp);font-weight:700;font-size:12.5px}
+
+/* ind-ra verdict */
+.indra{background:var(--card);border:2px solid var(--ink);padding:16px}
+.split{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:2px;background:var(--rule);border:1px solid var(--rule);margin-bottom:16px}
+.sp{background:var(--card2);padding:13px 14px}
+.sp .n{font-family:var(--disp);font-weight:800;font-size:34px;line-height:1;letter-spacing:-.03em;color:var(--loss)}
+.sp.ok .n{color:var(--gain)}
+.sp .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-top:6px}
+.sp .w{font-size:12.5px;color:var(--mute);margin-top:7px}
+.vs{display:grid;grid-template-columns:82px 1fr;gap:11px;padding:7px 0;border-bottom:1px solid var(--rule);font-size:13.5px;align-items:start}
+.vs:last-child{border-bottom:0}
+.vs em{font-family:var(--mono);font-size:9.5px;font-style:normal;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding-top:2px}
+.vs em.y{color:var(--gain)} .vs em.n{color:var(--loss)} .vs em.p{color:var(--gold)}
+
+/* regional strip */
+.reg{display:grid;grid-template-columns:repeat(auto-fit,minmax(112px,1fr));gap:2px;background:var(--rule);border:2px solid var(--ink);margin-top:16px}
+.rg{background:var(--card2);padding:11px 12px;text-align:center}
+.rg .n{font-family:var(--mono);font-size:15px;font-weight:700}
+.rg .n.up{color:var(--gain)} .rg .n.dn{color:var(--loss)}
+.rg .l{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-top:4px}
+
+/* triggers */
+.trigs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:14px}
+.tg{border:2px solid var(--ink);padding:14px;background:var(--card)}
+.tg .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
+.tg.tg-up .k{color:var(--gain)} .tg.tg-dn .k{color:var(--loss)}
+.tg ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.tg li{margin-bottom:6px}
+
+/* caveats */
+.cav{background:var(--card2);border:2px solid var(--ink);padding:15px 15px 15px 30px;margin:0;font-size:13.5px;line-height:1.55}
+.cav li{margin-bottom:8px}
+.cav li:last-child{margin-bottom:0}
+.cav b{font-family:var(--mono);font-size:12px;font-weight:700}
+
+
+/* wide data tables */
+.tw{overflow-x:auto;border:2px solid var(--ink);background:var(--card)}
+.tw table{border:0;min-width:660px}
+.tw th{position:sticky;top:0}
+td.num{font-family:var(--mono);font-size:12px;font-weight:700;text-align:right;white-space:nowrap}
+td.num.up{color:var(--gain)} td.num.dn{color:var(--loss)} td.num.ns{color:var(--faint);font-weight:400}
+th.r{text-align:right}
+td.kpi{font-family:var(--mono);font-size:11.5px;text-align:right;white-space:nowrap}
+.asof{font-family:var(--mono);font-size:11px;color:var(--mute);margin-top:10px;line-height:1.6}
+.asof b{color:var(--ink)}
+
+footer{border-top:3px solid var(--ink);padding-top:15px;font-size:12.5px;color:var(--mute)}
+footer p{margin:0 0 8px;max-width:80ch}
+
+@media(max-width:620px){
+  .row{grid-template-columns:74px 1fr;gap:7px}
+  .row .co{font-size:10.5px}
+  .scale{padding-left:81px}
+  .lrow{grid-template-columns:80px 1fr 74px}
+  .lrow .co{font-size:11px}
+  .wrap{padding:20px 13px 60px}
+  td.hide,th.hide{display:none}
+}
+@media(prefers-reduced-motion:no-preference){
+  .b,.lbar,.fp i{animation:g .7s cubic-bezier(.2,.7,.3,1) both}
+  @keyframes g{from{transform:scaleX(.001);opacity:0}to{transform:scaleX(1);opacity:1}}
+  .b.neg{transform-origin:right} .b.v,.b.pos,.lbar{transform-origin:left}
+  .fp i{animation-name:gy;transform-origin:bottom}
+  @keyframes gy{from{transform:scaleY(.001)}to{transform:scaleY(1)}}
+}
+
+.badge.nsc{color:var(--mute);border-color:var(--mute)}
+.lsub{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin:14px 0 6px}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Sector earnings review · Quarter ended 30 September 2026</div>
+  <h1>Battery Energy<br>Storage · Q2 FY27</h1>
+  <p class="dek">Storage is paying the companies that own it, not yet the companies that build it.</p>
+  <div class="thesis">
+    <div class="t up"><div class="n">5.2 GWh</div><div class="l">ACME Solar BESS commissioned, earning a 78% EBITDA margin</div></div>
+    <div class="t up"><div class="n">6 GWh</div><div class="l">Exide lithium cell plant commissioned in Bengaluru</div></div>
+    <div class="t dn"><div class="n">9 of 14</div><div class="l">Companies with an operating margin lower YoY (before other income)</div></div>
+    <div class="t dn"><div class="n">−5.4 pts</div><div class="l">Waaree Energies operating margin YoY, on revenue +24%</div></div>
+  </div>
+</header>
+
+<section>
+  <h2>The scissor</h2>
+  <div class="rule"></div>
+  <p class="note">Revenue growth YoY against operating-profit growth YoY (before other income), on one axis, from filed consolidated quarterlies. The sector map calls for order inflow against margin. Order inflow is disclosed by too few names, so revenue stands in. Three names are left out because a tiny or loss-making base makes the growth figure meaningless: Sterling &amp; Wilson, Servotech and High Energy Batteries.</p>
+  <div class="scissor">
+    <div class="legend">
+      <span><i class="sw" style="background:var(--vol)"></i>Revenue growth YoY</span>
+      <span><i class="sw" style="background:var(--gain)"></i>Operating profit growth YoY</span>
+    </div>
+    <div id="scissor"></div>
+    <div class="scale"><span>−60</span><span>−5</span><span>+50</span><span>+105</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>Operating margin — the league table</h2>
+  <div class="rule"></div>
+  <p class="note">BESS is a theme, not a sector. No listed company reports a storage segment margin, except ACME, which gives one on its call. So the ranking uses group operating margin before other income, split into two leagues. Asset owners earn margins that equipment makers cannot, so one combined league would mislead.</p>
+  <div class="league">
+    <div class="lsub">Asset owners (IPPs and utilities), operating margin Q2 FY27</div>
+    <div id="league"></div>
+  </div>
+  <div class="league" style="margin-top:18px">
+    <div class="lsub">Equipment, cells, batteries and EPC, operating margin Q2 FY27</div>
+    <div id="league2"></div>
+  </div>
+</section>
+
+<section>
+  <h2>The pressure point: the squeeze moved to the hardware makers</h2>
+  <div class="rule"></div>
+  <div class="fuel">
+    <h2>Op. margin change YoY, pts (HBL −18.1 off-scale)</h2>
+    <div class="fline" id="fuel"></div>
+    <div class="warn">
+      <div><strong>The cost shock</strong>The Middle East war pushed up input costs across the chain. Cells and modules (Premier), lead, sulphuric acid and poly (Amara Raja), and copper, aluminium and freight (EPC) all rose. Sterling &amp; Wilson says battery prices rose in 2026 after years of decline.</div>
+      <div><strong>Who absorbed it</strong>The manufacturers. Waaree Energies lost 5.4 pts and Premier 2.6 pts. Amara Raja missed its own promise to recover cost inflation by Q2. Hitachi's reported margin fell 2.8 pts, mostly an FX timing loss.</div>
+      <div><strong>Who did not</strong>Owners with contracted storage. ACME's BESS earns 78.3% and it has ₹3,100 cr of short-term revenue locked in for FY27–28. Exide was the exception among makers: price increases took its margin up 1.6 pts.</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Company by company</h2>
+  <div class="rule"></div>
+  <p class="note">The badge scores Q2 delivery against commitments made on the Q1 call or standing FY27 guidance. Grey means no commitment could be verified. Numbers are consolidated filed quarterlies (Tijori), with operating margin before other income.</p>
+  <div class="grid" id="cards"></div>
+</section>
+
+<section>
+  <h2>KPI comparison</h2>
+  <div class="rule"></div>
+  <p class="note">The storage column holds what each company disclosed about BESS: MWh, capacity or orders. Most disclose nothing quantitative. n/d means not disclosed. * means derived or company-defined.</p>
+  <div class="tw">
+  <table>
+    <thead><tr>
+      <th>Company</th><th class="r">Revenue YoY</th><th class="r">Op. margin</th><th class="r">Margin chg YoY</th><th class="r">Op. profit YoY</th>
+      <th class="r">PAT YoY</th><th class="r">Storage disclosure</th><th class="r">Leverage / cash</th><th class="r">Business</th>
+    </tr></thead>
+    <tbody id="kpi"></tbody>
+  </table>
+  </div>
+  <p class="asof">Group margins throughout. No company except ACME discloses a storage segment margin. JSW's net debt/EBITDA excludes debt on capital work in progress, as the company defines it.</p>
+</section>
+
+<section>
+  <h2>What management said</h2>
+  <div class="rule"></div>
+  <p class="note">From Q2 call transcripts where Tijori had them by 15 November (JSW, Waaree Energies, Premier, Exide, ACME, Sterling &amp; Wilson, Waaree Renewable). Hitachi Energy, Amara Raja and Tata Power are from their Q2 presentations and Q1 calls.</p>
+  <div class="themes">
+
+    <div class="th"><div class="k">Storage demand</div><ul>
+      <li>Sterling &amp; Wilson: storage becomes mandatory at new solar and wind projects from July 2027. "Most large solar tenders" will include it.</li>
+      <li>Waaree Renewable: CEA estimates <b>~208 GWh</b> of storage needed by 2030. About 144 GWh of projects over 1 MWh are in the pipeline; 7.5 GWh is commissioned.</li>
+      <li>Green Energy Corridor Phase III (₹1.86 lakh cr) includes 50 GWh of BESS by FY32–33 (cited by Hitachi and Waaree Renewable).</li>
+    </ul></div>
+
+    <div class="th"><div class="k">Who is building what</div><ul>
+      <li>Exide: 6 GWh lithium cell plant <b>commissioned</b>.</li>
+      <li>Waaree Energies: 5 GWh pack and container plant in Q3 FY27; 3.5 GWh cells this year.</li>
+      <li>Amara Raja: 10 GWh BESS plant; board approved a 5 GWh LFP cell plant and 9 GWh of pack capacity.</li>
+      <li>Premier: BESS unit in "Q2 2027", aiming for 40% domestic content.</li>
+      <li>JSW Energy: ~1 GWh of storage to commission in FY27.</li>
+    </ul></div>
+
+    <div class="th"><div class="k">Storage margins</div><ul>
+      <li>ACME: BESS EBITDA margin <b>78.3%</b> as an asset owner.</li>
+      <li>Amara Raja: BESS manufacturing margin guided at <b>5–8%</b>, close to the pack business.</li>
+      <li>Hitachi: BESS margins to "gradually reach the desired levels" as it localises.</li>
+    </ul></div>
+
+    <div class="th"><div class="k">Costs and pricing</div><ul>
+      <li>Premier: Middle East war inflation raised raw-material prices and delayed deliveries.</li>
+      <li>Sterling &amp; Wilson: battery prices rose in 2026; it is selective on BESS bids.</li>
+      <li>Amara Raja (Q1): ~3% price hikes in June, 2–3% more in August. Not enough: margin fell again.</li>
+    </ul></div>
+
+    <div class="th"><div class="k">Guidance</div><ul>
+      <li>Waaree Energies: FY27 operating EBITDA ₹7,000–7,700 cr reaffirmed; 55–60% expected in H2.</li>
+      <li>JSW Energy: 3 GW in FY27, "confident"; 30 GW by 2030.</li>
+      <li>Genus: FY27 revenue ₹6,000–6,500 cr maintained (trade press).</li>
+      <li>Waaree Renewable: FY27 margin "more than 15%".</li>
+    </ul></div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Red flags</h2>
+  <div class="rule"></div>
+  <p class="note">Ranked by how much they should change position sizing.</p>
+  <div class="rf">
+
+    <div class="rfg">
+      <div class="rfh"><i class="sev hi"></i><span>Act on these</span></div>
+      <div class="rfr"><b>Waaree Energies</b><div>Operating profit −5% YoY on revenue +24%, and the margin fell 5.4 pts. H1 is 36–40% of a reaffirmed full-year EBITDA guide. Hitting the low end needs a much stronger H2, while new cell lines are still stabilising.</div></div>
+      <div class="rfr"><b>Amara Raja</b><div>It missed the Q1-call promise to recover costs by Q2/Q3, and exports fell 18%. Current borrowings doubled to ₹547 cr as lithium capex runs. Its own BESS margin guide is 5–8%.</div></div>
+      <div class="rfr"><b>Waaree Renewable</b><div>Growth is acquired (APSPL), funded ~75% with debt. Interest rose 3.8x QoQ and PAT fell 30%. Solar EPC execution halved on land delays at the developer's end.</div></div>
+    </div>
+
+    <div class="rfg">
+      <div class="rfh"><i class="sev md"></i><span>Monitor next quarter</span></div>
+      <div class="rfr"><b>Genus Power</b><div>The ₹6,000–6,500 cr FY27 guide needs ₹3,500–4,000 cr in H2, against H1 of ₹2,498 cr. Q2 revenue fell 17% QoQ.</div></div>
+      <div class="rfr"><b>Tata Power</b><div>Net profit +48.6% includes a ₹119 cr exceptional gain. Before it, PAT grew 4.4% and the margin fell 2.7 pts.</div></div>
+      <div class="rfr"><b>HBL Engineering</b><div>It missed a major Kavach tender, and the stock fell ~13%. Revenue −29% and margin −18 pts YoY on a Kavach-spiked base.</div></div>
+      <div class="rfr"><b>KPI Green · ACME Solar</b><div>Interest and depreciation are front-loaded as assets are capitalised. KPI's interest doubled; ACME's rose 30%.</div></div>
+    </div>
+
+    <div class="rfg">
+      <div class="rfh"><i class="sev lo"></i><span>Note and move on</span></div>
+      <div class="rfr"><b>Hitachi Energy</b><div>A ₹56 cr FX and commodity timing loss sits in operating costs. It is a reporting artefact, not a demand problem.</div></div>
+      <div class="rfr"><b>Disclosure</b><div>Only ACME gives a storage margin. Everyone else's "BESS story" is capacity plans and order mentions.</div></div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Walk the talk</h2>
+  <div class="rule"></div>
+  <p class="note">Commitments from Q1 FY27 call transcripts (Hitachi, Amara Raja), Q2 transcripts that restate the prior target (ACME, JSW, Waaree Energies, Waaree Renewable), and company-reported milestones (Exide, Premier). Genus's guide is from trade press. Six names have no verifiable Q1 commitment and are not scored.</p>
+  <table>
+    <thead><tr><th>Company</th><th>Promised</th><th class="hide">Delivered</th><th>Verdict</th></tr></thead>
+    <tbody id="score"></tbody>
+  </table>
+</section>
+
+<section>
+  <h2>Was the consensus right?</h2>
+  <div class="rule"></div>
+  <p class="note">No published Q2 poll was found for this theme. We score the pre-result narrative: BESS orders and capacity accelerate, manufacturers capture the value, and policy carries demand.</p>
+  <div class="indra">
+    <div class="split">
+      <div class="sp ok"><div class="n">5.2 GWh</div><div class="l">ACME BESS commissioned</div><div class="w">Storage capacity is arriving.</div></div>
+      <div class="sp ok"><div class="n">6 GWh</div><div class="l">Exide cell plant</div><div class="w">Cell localisation has started.</div></div>
+      <div class="sp"><div class="n">9 of 14</div><div class="l">Lower operating margin YoY</div><div class="w">Value did not reach the makers.</div></div>
+    </div>
+    <div class="vs"><em class="y">Right</em><div><b>Policy carries demand.</b> The storage mandate from July 2027, GEC Phase III's 50 GWh and the CEA's 208 GWh estimate are cited across calls.</div></div>
+    <div class="vs"><em class="p">Partly</em><div><b>Capacity accelerates.</b> Exide and Premier commissioned plants. Waaree and Amara Raja's BESS plants are still quarters away. Premier's BESS slipped to "Q2 2027".</div></div>
+    <div class="vs"><em class="n">Wrong</em><div><b>Manufacturers capture the value.</b> Margins fell at Waaree, Premier, Amara Raja and Waaree Renewable. The best storage economics sit with the asset owner, ACME.</div></div>
+  </div>
+</section>
+
+<section>
+  <h2>The call</h2>
+  <div class="rule"></div>
+  <div class="calls">
+    <div class="call buy">
+      <div class="k">Own now</div>
+      <h3>Exide Industries · ACME Solar</h3>
+      <p>Exide has a commissioned 6 GWh cell plant, a margin that rose while its peers' fell, and a debt-free core. The stock is −22% over three months. ACME is the only listed name earning storage revenue at scale: 5.2 GWh, a 78% BESS margin and ₹3,100 cr of contracted short-term revenue. It is +65% in a year, so size it for execution risk, not upside.</p>
+    </div>
+    <div class="call wait">
+      <div class="k">Accumulate on evidence</div>
+      <h3>Hitachi Energy · JSW Energy · Premier Energies</h3>
+      <p>Hitachi's backlog is a record. Its first BESS order is a test, and Q3 must show the FX noise reversing. JSW's capacity delivery is on time, but leverage (~4.9x) caps upside until storage scales. Premier has the best margins among manufacturers and its 7 GW cell line is live. Wait for commercial production and for the margin to stop falling.</p>
+    </div>
+    <div class="call avoid">
+      <div class="k">Stay out</div>
+      <h3>Waaree Energies · Amara Raja · Waaree Renewable · HBL</h3>
+      <p>Waaree Energies needs a heroic H2 to hit its guide. Amara Raja missed its recovery promise and guides BESS at 5–8%. Waaree Renewable's growth is acquired with debt. HBL's Kavach pipeline, not batteries, drives it. Sterling &amp; Wilson, KPI Green, Servotech and High Energy are too small or too unclear to carry a storage thesis.</p>
+    </div>
+  </div>
+  <div class="trigs">
+    <div class="tg tg-up"><div class="k">What would make us more positive</div><ul>
+      <li>A second listed company disclosing a storage segment margin.</li>
+      <li>Waaree Energies posting a Q3 operating margin above 20%.</li>
+      <li>Exide naming cell customers and utilisation.</li>
+    </ul></div>
+    <div class="tg tg-dn"><div class="k">What would make us cut</div><ul>
+      <li>Battery and cell prices rising further, squeezing manufacturer margins again.</li>
+      <li>The July 2027 storage mandate being diluted or deferred.</li>
+      <li>ACME's short-term BESS tariffs resetting lower on new supply.</li>
+    </ul></div>
+  </div>
+</section>
+
+<section>
+  <h2>Analyst coverage after results</h2>
+  <div class="rule"></div>
+  <p class="note">Dated post-result broker reports were not verified for this build. No targets are shown, rather than undated ones.</p>
+  <div class="tw">
+  <table>
+    <thead><tr><th>Company</th><th>Broker</th><th>Report date</th><th>Rating</th><th class="r">Target (₹)</th><th class="r">Prior (₹)</th><th class="r">Price at report (₹)</th></tr></thead>
+    <tbody id="brk"></tbody>
+  </table>
+  </div>
+</section>
+
+<section>
+  <h2>Price and returns</h2>
+  <div class="rule"></div>
+  <p class="note">Only two of 14 priced names are up over a year: ACME (+65%) and Hitachi (+47%). The battery-and-module makers have de-rated 10–36%.</p>
+  <div class="tw">
+  <table>
+    <thead><tr>
+      <th>Company</th><th>Ticker</th><th>Results date</th><th class="r">CMP (₹)</th>
+      <th class="r">1 year</th><th class="r">6 months</th><th class="r">3 months</th><th class="r">MTD</th>
+    </tr></thead>
+    <tbody id="ret"></tbody>
+  </table>
+  </div>
+  <p class="asof">Prices as on 13 Nov 2026 close (Zerodha Kite; CMP is Kite last price). Anchors: 1Y = 14 Nov 2025, 6M = 15 May 2026, 3M = 14 Aug 2026, MTD = 30 Oct 2026 closes, Kite daily candles (corporate-action adjusted). High Energy Batteries is BSE-only: n/s. Sorted by 1-year return.</p>
+</section>
+
+<section>
+  <h2>Caveats</h2>
+  <div class="rule"></div>
+  <ul class="cav">
+    <li><b>BESS is a theme, not a sector.</b> No listed Indian pure play exists at scale. Every name is a battery, IPP, solar or grid-equipment business with storage attached. All margins here are group margins.</li>
+    <li><b>Sources.</b> All financials are consolidated filed quarterlies from Tijori; operating profit excludes other income. Commentary comes from call transcripts and presentations via Tijori, read directly. Genus's guidance and HBL's Kavach tender miss come from trade press (Construction World; Angel One), because no transcript was available.</li>
+    <li><b>Tijori against management.</b> Each gap below was reconciled before writing:
+      <ul>
+        <li>ACME: management's ₹874 cr EBITDA = ₹753 cr operating profit + ₹120 cr other income.</li>
+        <li>Exide: 12.1% = 10.6% operating margin + other income.</li>
+        <li>Premier: ₹760 cr = ₹736 cr + ₹24 cr.</li>
+        <li>Hitachi: 16.5% excludes a ₹56 cr FX timing loss; Tijori's 13.6% includes it.</li>
+        <li>Amara Raja (8.8%) and Waaree Energies (₹1,335 cr) match exactly.</li>
+      </ul></li>
+    <li><b>Data gaps.</b>
+      <ul>
+        <li>Tijori shows Genus's September net profit as zero, a data gap; PAT is used instead.</li>
+        <li>Amara Raja's YoY PAT comparison is distorted by a ₹122 cr insurance gain a year ago, so PBT before exceptional items is shown.</li>
+        <li>Q2 transcripts were not yet on Tijori for Tata Power, Hitachi, Amara Raja, HBL, Genus, KPI, Servotech or High Energy.</li>
+      </ul></li>
+    <li><b>Walk the talk.</b> Q1 commitments were read from transcripts for Hitachi and Amara Raja only. The rest rely on Q2 transcripts that restate the earlier target. Six companies are unscored.</li>
+    <li><b>Returns.</b> High Energy Batteries trades only on BSE, so it is not on Kite's NSE feed (n/s). Results dates for HBL, Genus, KPI and Servotech were not verified (n/s).</li>
+    <li><b>Analyst coverage.</b> Not verified this build. This is the weakest section.</li>
+  </ul>
+</section>
+
+<footer>
+  <p><b>Universe:</b> 15 listed Indian companies with storage exposure, quarter ended 30 September 2026. Sources: filed quarterlies, call transcripts and presentations via Tijori; Construction World; Angel One. Prices from Zerodha Kite. Built 15 November 2026.</p>
+</footer>
+
+</div>
+<script>
+const C=(n,t,b,bl,k,p,f)=>({n,t,b,bl,k,p,f});
+const SC=[["ACME Solar",89.5,88.0],["Hitachi Energy",63.5,35.8],["Premier Energies",43.3,31.2],["Waaree Renewable",36.5,1.3],["Tata Power",26.3,11.1],["Waaree Energies",23.9,-5.0],["JSW Energy",23.0,20.8],["Exide",21.2,43.7],["Amara Raja",18.5,-3.2],["KPI Green",14.7,19.0],["Genus Power",-1.4,2.5],["HBL Engineering",-28.7,-57.7]];
+const MIN=-60,MAX=105,SCU1="%",SCU2="%";
+const LEAGUES=[
+ ["league",[["ACME Solar",84.9,"−0.6 pts YoY; −0.7 QoQ"],["JSW Energy",56.8,"−1.1 pts YoY; +1.6 QoQ"],["KPI Green",37.0,"+1.4 pts YoY; +1.6 QoQ"],["Tata Power",20.0,"−2.7 pts YoY; −0.3 QoQ"]],90,50,25,v=>`${v.toFixed(1)}%`],
+ ["league2",[["High Energy Batteries",28.1,"lumpy; −2.1% a year ago"],["Premier Energies",28.0,"−2.6 pts YoY; −1.1 QoQ"],["HBL Engineering",26.4,"−18.1 pts YoY; +3.4 QoQ"],["Genus Power",21.6,"+0.9 pts YoY; +2.5 QoQ"],["Waaree Energies",17.8,"−5.4 pts YoY; −0.4 QoQ"],["Waaree Renewable",15.1,"−5.3 pts YoY; −3.7 QoQ"],["Hitachi Energy",13.6,"−2.8 pts YoY (16.5% ex-FX timing)"],["Servotech",13.1,"+7.2 pts YoY; +3.7 QoQ"],["Exide",10.6,"+1.6 pts YoY; −0.6 QoQ"],["Amara Raja",8.8,"−2.0 pts YoY; −0.8 QoQ"],["Sterling & Wilson",3.7,"+3.5 pts YoY; −1.3 QoQ"]],30,20,12,v=>`${v.toFixed(1)}%`]
+];
+const FU=[["Waaree",-5.4],["WRTL",-5.3],["Hitachi",-2.8],["Tata",-2.7],["Premier",-2.6],["Amara",-2.0],["JSW",-1.1],["Exide",1.6]];
+const FUMAX=6,FUFMT=v=>`${v>0?'+':v<0?'−':''}${Math.abs(v).toFixed(1)}`;
+const CO=[
+ C("ACME Solar Holdings","ACMESOLAR · Small","del","Delivered",[["5.2 GWh","BESS commissioned to date",1],["₹887 cr","Revenue (+89.5%)",1],["84.9%","Op. margin (85.6% YoY)",0],["₹269 cr","PAT (+134%)",1]],
+  ["It set a 5 GWh first-half BESS target on the Q1 call and commissioned 5.2 GWh. That is the second-largest fleet in India.","BESS earns a 78.3% EBITDA margin against 90.8% on renewables. The cost of charging power sits in operating expenses.","More than ₹1,600 cr of FY27 and ₹1,500 cr of FY28 short-term peak-power revenue is locked in. 92% of its 8,370 MW portfolio has a signed PPA.","Interest rose to ₹345 cr from ₹265 cr and depreciation to ₹172 cr from ₹117 cr. The asset base grew ₹11,466 cr in a year.","Verdict: the only listed name earning storage revenue at scale. The stock is +65% in a year, so execution is priced in."],
+  [["Leverage rising",""],["Storage revenue","ok"]]),
+ C("Exide Industries","EXIDEIND · Mid","del","Delivered",[["6 GWh","Lithium cell plant commissioned",1],["₹5,292 cr","Revenue (+21.2%)",1],["10.6%","Op. margin (9.0% YoY)",1],["₹287 cr","PAT (+65%)",1]],
+  ["Its 6 GWh lithium cell giga factory in Bengaluru is commissioned. That is the largest BESS-relevant hardware milestone in the set this quarter.","Operating profit rose 44% on revenue +21%. Calibrated price increases absorbed lead and rupee costs.","Management's 12.1% \"EBITDA\" includes ₹42 cr of other income. Before it, the margin is 10.6%.","The standalone business is debt-free. The stock is −22% over three months.","Verdict: a cell plant in hand and margins rising, at a de-rated price. Watch cell utilisation and customer approvals next."],
+  [["Cell ramp risk",""],["Margin up","ok"]]),
+ C("Hitachi Energy India","POWERINDIA · Large","part","FX noise",[["₹4,121 cr","Orders (+86%)",1],["₹33,335 cr","Order backlog (+13%)",1],["13.6%","Op. margin (16.3% YoY)",-1],["₹318 cr","PAT (+20.5%)",1]],
+  ["Revenue +63.5%. Its first BESS order (165 MW / 330 MWh, Andhra Pradesh) was won in Q1. It supplies everything except the cells.","Management's 16.5% operational EBITDA excludes a ₹56 cr FX and commodity timing loss. Tijori's 13.6% includes it. The two reconcile exactly.","Material costs rose to 61.7% of revenue from 57.5%. Mix is the cause, per the Q1 call.","Management says BESS margins will \"gradually reach the desired levels\" as it localises. Capex mostly completes by 2028.","Verdict: grid demand is real and the backlog keeps growing. BESS is still a sliver. PAT growth (+20.5%) lagged revenue (+63.5%)."],
+  [["FX timing loss",""],["Backlog","ok"]]),
+ C("JSW Energy","JSWENERGY · Mid","del","On track",[["1.4 GW","Added in H1 (FY27 target 3 GW)",1],["₹6,368 cr","Revenue (+23.0%)",1],["56.8%","Op. margin (57.9% YoY)",0],["₹1,056 cr","PAT to owners (+50%)",1]],
+  ["It plans to commission about 1 GWh of energy storage in FY27, with a 26.4 GWh pumped-storage pipeline behind that.","Merchant realisation was ₹6.9/unit against a ₹5.7 exchange average. Imported coal is up 28%; job-work contracts shield it from that.","Net debt is about 4.9x TTM EBITDA (excluding debt on capital work in progress), down from 5.2x. It holds about ₹15,700 cr of cash.","Verdict: capacity delivery is on schedule. The storage commitment is small next to its leverage."],
+  [["Leverage",""],["On schedule","ok"]]),
+ C("Premier Energies","PREMIERENE · Mid","del","On track",[["7 GW","TOPCon cell line commissioned",1],["₹2,632 cr","Revenue (+43.3%)",1],["28.0%","Op. margin (30.5% YoY)",-1],["₹462 cr","PAT (+30.9%)",1]],
+  ["The 7 GW TOPCon cell line is commissioned, with commercial production due later in November. Its order book is ₹16,260 cr.","Management's ₹760 cr EBITDA includes ₹24 cr of other income. Before it, the margin is 28.0%, down 2.6 pts YoY.","Its BESS unit is to start in \"Q2 2027\", aiming for 40% domestic content (fire suppression, Indian EMS).","Raw-material inflation from the Middle East war raised input prices and delayed deliveries.","Verdict: the best margins among manufacturers, and delivery is on track. BESS is still a plan."],
+  [["Margin drift",""],["Cell ramp","ok"]]),
+ C("Tata Power","TATAPOWER · Large","nsc","No Q2 call yet",[["₹19,636 cr","Revenue (+26.3%)",1],["20.0%","Op. margin (22.7% YoY)",-1],["+4.4%","PAT before exceptional",0],["0.2 GW","BESS under construction",0]],
+  ["Reported net profit +48.6% includes a ₹119 cr exceptional gain. Before it, PAT grew 4.4%.","Operating profit +11% on revenue +26%. Fuel and power costs rose faster than tariffs.","~4.9 GW integrated cell and module plant at full utilisation. Rooftop solar plus battery storage is now being sold.","No Q2 transcript was on Tijori by 15 Nov.","Verdict: storage is a rounding error at this scale. Treat the PAT headline with care."],
+  [["Exceptional gain",""],["Margin down",""]]),
+ C("Waaree Energies","WAAREEENER · Mid","part","Back-ended",[["₹7,518 cr","Revenue (+23.9%)",1],["17.8%","Op. margin (23.2% YoY)",-1],["−5.0%","Operating profit YoY",-1],["₹754 cr","PAT (−14.1%)",-1]],
+  ["It reaffirmed FY27 operating EBITDA of ₹7,000–7,700 cr. H1 delivered ~₹2,775 cr, 36–40% of the guide.","The CFO puts 55–60% of the guide in H2, which still leaves the low end needing a strong Q4.","BESS: a 5 GWh pack and container plant in Q3 FY27 and 3.5 GWh of battery cells this year. Capex totals ~₹30,000 cr, 35% deployed.","Depreciation rose to ₹347 cr from ₹240 cr. The order book is ₹59,500 cr.","Verdict: the guide stands but the run-rate does not support it yet. Margin fell 5.4 pts."],
+  [["H2 dependence",""],["Margin down",""]]),
+ C("Amara Raja Energy","ARE&M · Small","miss","Missed",[["₹4,109 cr","Revenue (+18.5%)",1],["8.8%","Op. margin (10.8% YoY)",-1],["−14%","PBT before exceptional",-1],["10 GWh","BESS plant (planned)",0]],
+  ["Q1 call: cost pressure would be recovered \"if not fully in Q2, in the next quarter\". The margin fell further, to 8.8% from 9.6%.","Exports were promised to recover. They fell 18% YoY on the geopolitical disruption.","New-energy revenue grew 37%, down from +70% in Q1. The board approved a 5 GWh LFP cell plant and 9 GWh of pack capacity.","The 2 GWh NMC giga plant is now due in Q2 FY28. BESS margins are guided at only 5–8%.","Verdict: missed both near-term promises. The lithium build is real, but low-margin for years."],
+  [["Margin miss",""],["Exports down",""]]),
+ C("Waaree Renewable Tech","WAAREERTL · Small","part","Execution slip",[["₹1,058 cr","Revenue (+36.5%)",1],["15.1%","Op. margin (20.4% YoY)",-1],["₹81 cr","PAT (−30%)",-1],["₹5,500 cr","Order book",1]],
+  ["Revenue growth came from acquiring the T&D business (APSPL). Solar EPC execution fell to 456 MWp from 889 MWp in Q1, blamed on land handover delays.","The acquisition was ~75% debt funded. Interest rose to ₹37 cr from ₹10 cr, and depreciation to ₹27 cr from ₹6 cr.","Management guides FY27 margin \"more than 15%\". Q2 printed 15.1%. T&D margin is 9–10%.","BESS EPC enquiries are rising, for both retrofits and new solar-plus-storage.","Verdict: growth is acquired, and leverage arrived with it. Down 36% in a year."],
+  [["Acquisition debt",""],["EPC slowdown",""]]),
+ C("Sterling & Wilson","SWSOLAR · Small","nsc","No guide verified",[["₹1,528 cr","Revenue (−12.6%)",-1],["3.7%","Op. margin (0.2% YoY)",1],["₹12,481 cr","Order book (+34%)",1],["₹19 cr","PAT (loss a year ago)",0]],
+  ["It is avoiding aggressive domestic bids: ~90% of H1 wins were international.","It is \"selective\" on BESS. Battery prices rose in 2026, and the domestic supply chain is immature.","8 projects (4 India, 4 overseas) have not started. Contracts run from notice to proceed, so there are no penalties.","Verdict: the order book is up, revenue is down. No scorable Q1 guide was verified."],
+  [["Revenue decline",""],["Order book","ok"]]),
+ C("Genus Power","GENUSPOWER · Small","part","Guide at risk",[["₹1,133 cr","Revenue (−1.4%)",-1],["21.6%","Op. margin (20.7% YoY)",1],["₹159 cr","PAT (+11%)",0],["₹25,173 cr","Order book",1]],
+  ["It maintains FY27 revenue guidance of ₹6,000–6,500 cr. H1 was ₹2,498 cr, so H2 must deliver ₹3,500–4,000 cr.","Revenue fell 17% QoQ. Interest rose to ₹50 cr from ₹41 cr.","No Q2 transcript on Tijori. Guidance is from trade press (Construction World).","Verdict: a smart-meter story, not storage. The H2 ask is steep."],
+  [["Guide at risk",""]]),
+ C("KPI Green Energy","KPIGREEN · Small","nsc","Not scored",[["₹727 cr","Revenue (+14.7%)",1],["37.0%","Op. margin (35.6% YoY)",1],["₹92 cr","PAT (−21%)",-1],["₹92 cr","Interest (₹43 cr YoY)",-1]],
+  ["Operating profit +19%. But interest doubled and depreciation rose to ₹60 cr from ₹32 cr as IPP assets were capitalised.","No Q2 transcript was on Tijori by 15 Nov.","Verdict: operations fine, below-the-line costs front-loaded. Down 32% in a year."],
+  [["Interest doubled",""]]),
+ C("HBL Engineering","HBLENGINE · Small","nsc","Not scored",[["₹872 cr","Revenue (−28.7%)",-1],["26.4%","Op. margin (44.5% YoY)",-1],["₹186 cr","PAT (−52%)",-1],["+36.7%","Revenue QoQ",1]],
+  ["A year-ago Kavach (rail safety) spike makes the base hard. Revenue recovered 37% QoQ.","The stock fell ~13% after it missed a major Kavach tender (Angel One).","No Q2 transcript was on Tijori by 15 Nov.","Verdict: a rail and defence electronics story with batteries attached. The Kavach pipeline decides the stock."],
+  [["Tender miss",""],["Base effect",""]]),
+ C("Servotech Renewable","SERVOTECH · Micro","nsc","Not scored",[["₹167 cr","Revenue (+57.5%)",1],["13.1%","Op. margin (5.9% YoY)",1],["₹9.5 cr","PAT (₹0.4 cr YoY)",1],["−34%","1-year return",-1]],
+  ["A tiny base inflates every growth figure.","No Q2 transcript was on Tijori by 15 Nov.","Verdict: too small to carry a BESS thesis on one quarter."],[["Micro cap",""]]),
+ C("High Energy Batteries","HIGHENERGY · Micro","nsc","Not scored",[["₹29 cr","Revenue (+68%)",1],["28.1%","Op. margin (loss YoY)",1],["₹5.7 cr","PAT (+185%)",1],["n/s","Price (BSE only)",0]],
+  ["Defence and space batteries. Quarterly revenue swings with orders: ₹8 cr in Q1, ₹29 cr in Q2.","BSE-only, so it is not on Kite's NSE feed. Returns are n/s.","Verdict: a niche defence supplier, not a BESS proxy."],[["Lumpy orders",""]])
+];
+const KPI=[
+ ["ACME Solar","+89.5%","84.9%","−0.6 pts","+88%","+134%","5.2 GWh operating; BESS margin 78.3%","Interest ₹345 cr","IPP · cons."],
+ ["JSW Energy","+23.0%","56.8%","−1.1 pts","+20.8%","+50% (owners)","~1 GWh to commission FY27","ND/EBITDA ~4.9x*","IPP · cons."],
+ ["KPI Green","+14.7%","37.0%","+1.4 pts","+19.0%","−21%","n/d","Interest 2.1x YoY","IPP + EPC"],
+ ["Tata Power","+26.3%","20.0%","−2.7 pts","+11.1%","+4.4% (pre-exc.)","0.2 GW under construction","n/d","Utility · cons."],
+ ["Premier Energies","+43.3%","28.0%","−2.6 pts","+31.2%","+30.9%","BESS unit \"Q2 2027\"","n/d","Cells/modules"],
+ ["Waaree Energies","+23.9%","17.8%","−5.4 pts","−5.0%","−14.1%","5 GWh pack Q3 FY27; 3.5 GWh cells FY27","Capex ₹30k cr (35% done)","Cells/modules"],
+ ["Hitachi Energy","+63.5%","13.6%","−2.8 pts","+35.8%","+20.5%","330 MWh first order (Q1)","Net cash","Grid equipment"],
+ ["Exide","+21.2%","10.6%","+1.6 pts","+43.7%","+65%","6 GWh cell plant commissioned","Debt-free (s/a)","Batteries"],
+ ["Amara Raja","+18.5%","8.8%","−2.0 pts","−3.2%","−14% (PBT pre-exc.)","10 GWh BESS plant planned","Borrowings ₹547 cr","Batteries"],
+ ["Waaree Renewable","+36.5%","15.1%","−5.3 pts","+1.3%","−30%","BESS inside ₹3,300 cr EPC book","Acquisition debt","EPC"],
+ ["Sterling & Wilson","−12.6%","3.7%","+3.5 pts","n/m","n/m (loss YoY)","Selective BESS bidding","n/d","EPC"],
+ ["Genus Power","−1.4%","21.6%","+0.9 pts","+2.5%","+11%","n/d","Interest ₹50 cr","Smart meters"],
+ ["HBL Engineering","−28.7%","26.4%","−18.1 pts","−57.7%","−52%","n/d","n/d","Rail/defence + batteries"],
+ ["Servotech","+57.5%","13.1%","+7.2 pts","n/m","n/m","n/d","n/d","Micro"],
+ ["High Energy Batt.","+68%","28.1%","n/m","n/m","+185%","n/d","n/d","Micro · BSE only"]
+];
+const BRK=[["All 15","Not verified this build","—","—","—","—","—"]];
+const SCORE=[
+ ["ACME Solar","Q1 call: 5 GWh of BESS commissioned in H1","5.2 GWh commissioned; ₹3,100 cr of short-term storage revenue locked for FY27–28.","del","Delivered"],
+ ["Exide","Lithium cell giga factory to start in FY27","6 GWh Bengaluru plant commissioned in Q2.","del","Delivered"],
+ ["JSW Energy","FY27: 3 GW commissioning; ~₹20,000 cr capex","1.4 GW in H1; \"confident\" of 3 GW; ~1 GWh storage due FY27.","del","On track"],
+ ["Premier Energies","7 GW TOPCon cell ramp","Line commissioned; commercial production due late November.","del","On track"],
+ ["Hitachi Energy","Orders and backlog growth; BESS margins to mature","Orders +86%, record backlog; reported margin −2.8 pts on FX timing.","part","Partial"],
+ ["Waaree Energies","FY27 operating EBITDA ₹7,000–7,700 cr","Reaffirmed; H1 ~₹2,775 cr (36–40%); Q2 op. profit −5% YoY.","part","Back-ended"],
+ ["Waaree Renewable","FY27 margin ~15%; execute order book in 12–18 months","15.1% margin; solar EPC execution halved QoQ on land delays.","part","Slipping"],
+ ["Genus Power","FY27 revenue ₹6,000–6,500 cr","H1 ₹2,498 cr; needs ₹3,500–4,000 cr in H2.","part","At risk"],
+ ["Amara Raja","Recover cost inflation by Q2/Q3; exports to recover","Margin 8.8% from 9.6%; exports −18%.","miss","Missed"]
+];
+const SPAN=MAX-MIN,Z=(0-MIN)/SPAN*100;
+document.getElementById("scissor").innerHTML=SC.map(([n,v,e],i)=>{
+ const bar=(val,cls,u)=>{const w=Math.max(Math.abs(val),0.3)/SPAN*100;
+  const l=val>=0?Z:Z-w;
+  return `<i class="b ${cls} ${val>=0?'pos':'neg'}" style="left:${l}%;width:${w}%;animation-delay:${i*45}ms"><span>${val>0?'+':''}${val}${u}</span></i>`;};
+ return `<div class="row"><div class="co">${n}</div><div class="track"><i class="axis" style="left:${Z}%"></i>${bar(v,'v',SCU1)}${bar(e,'e',SCU2)}</div></div>`;
+}).join("");
+const league=(id,rows,max,hi,mid,fmt)=>{document.getElementById(id).innerHTML=rows.map(([n,v,d],i)=>{
+ const cls=v>=hi?"":v>=mid?"mid":"low";
+ return `<div class="lrow"><div class="co">${n}</div>
+ <div><i class="lbar ${cls}" style="display:block;width:${Math.max(v,0)/max*100}%;animation-delay:${i*40}ms"></i></div>
+ <div><div class="v">${fmt(v)}</div><div class="d">${d}</div></div></div>`;}).join("");};
+LEAGUES.forEach(([id,rows,max,hi,mid,fmt])=>league(id,rows,max,hi,mid,fmt));
+document.getElementById("fuel").innerHTML=FU.map(([l,v],i)=>
+ `<div class="fp"><b>${FUFMT(v)}</b><i style="height:${Math.abs(v)/FUMAX*88}px;animation-delay:${i*120}ms"></i><em>${l}</em></div>`).join("");
+document.getElementById("cards").innerHTML=CO.map(c=>`
+ <article class="c">
+  <div class="chead"><div><h3>${c.n}</h3><div class="tick">${c.t}</div></div><div class="badge ${c.b}">${c.bl}</div></div>
+  <div class="tiles">${c.k.map(([n,l,s])=>`<div class="tile"><div class="n ${s===1?'up':s===-1?'dn':''}">${n}</div><div class="l">${l}</div></div>`).join("")}</div>
+  <ul>${c.p.map(x=>`<li>${x}</li>`).join("")}</ul>
+  <div class="flags">${c.f.map(([t,k])=>`<span class="flag ${k}">${t}</span>`).join("")}</div>
+ </article>`).join("");
+document.getElementById("kpi").innerHTML=KPI.map(r=>
+ `<tr><td class="co">${r[0]}</td>`+r.slice(1).map(c=>`<td class="kpi">${c}</td>`).join("")+`</tr>`).join("");
+document.getElementById("brk").innerHTML=BRK.map(r=>
+ `<tr><td class="co">${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td class="num">${r[4]}</td><td class="num ${r[5].includes('↓')?'dn':r[5].includes('↑')?'up':''}">${r[5]}</td><td class="num">${r[6]}</td></tr>`).join("");
+const RET=[["ACME Solar", "ACMESOLAR", "29 Oct", "414.35", "+65.3%", "+50.1%", "+10.8%", "+2.4%"], ["Hitachi Energy India", "POWERINDIA", "12 Nov", "31,595.00", "+47.2%", "-2.9%", "-11.5%", "+16.1%"], ["Exide Industries", "EXIDEIND", "5 Nov", "373.00", "-2.1%", "+6.9%", "-21.7%", "+11.2%"], ["JSW Energy", "JSWENERGY", "28 Oct", "514.55", "-2.7%", "-0.1%", "-8.1%", "+2.8%"], ["Premier Energies", "PREMIERENE", "5 Nov", "895.90", "-10.2%", "-8.7%", "-11.9%", "+2.3%"], ["Genus Power", "GENUSPOWER", "n/s", "297.25", "-10.3%", "-5.3%", "-3.8%", "+8.7%"], ["Tata Power", "TATAPOWER", "Nov", "348.00", "-10.4%", "-14.5%", "-8.9%", "+0.9%"], ["Amara Raja", "ARE&M", "2 Nov", "751.80", "-22.2%", "-8.8%", "-20.5%", "+9.5%"], ["HBL Engineering", "HBLENGINE", "n/s", "799.55", "-23.2%", "+3.6%", "+17.8%", "+0.0%"], ["Waaree Energies", "WAAREEENER", "28 Oct", "2,546.00", "-24.0%", "-15.8%", "-5.1%", "+10.5%"], ["KPI Green", "KPIGREEN", "n/s", "321.00", "-31.6%", "-23.7%", "+0.6%", "+15.8%"], ["Sterling & Wilson", "SWSOLAR", "16 Oct", "154.99", "-32.5%", "-22.4%", "-23.3%", "+14.0%"], ["Servotech", "SERVOTECH", "n/s", "67.36", "-33.9%", "-27.7%", "-18.6%", "+8.5%"], ["Waaree Renewable", "WAAREERTL", "21 Oct", "743.65", "-36.1%", "-21.1%", "-16.6%", "+7.1%"], ["High Energy Batteries", "HIGHENERGY", "n/s", "n/s", "n/s", "n/s", "n/s", "n/s"]];
+document.getElementById("ret").innerHTML=RET.map(r=>{
+ const cell=v=>{ if(v==="n/s") return `<td class="num ns">n/s</td>`;
+   const cls=v.startsWith("+")?"up":v.startsWith("-")?"dn":""; return `<td class="num ${cls}">${v}</td>`;};
+ return `<tr><td class="co">${r[0]}</td><td class="tick">${r[1]}</td><td>${r[2]}</td>`
+  +`<td class="num">${r[3]==="n/s"?'<span class="ns">n/s</span>':r[3]}</td>`+r.slice(4).map(cell).join("")+`</tr>`;
+}).join("");
+document.getElementById("score").innerHTML=SCORE.map(([c,p,d,k,v])=>
+ `<tr><td class="co">${c}</td><td>${p}</td><td class="hide">${d}</td><td class="vd ${k}">${v}</td></tr>`).join("");
+</script></body></html>

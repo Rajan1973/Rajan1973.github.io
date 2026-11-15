@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Small Finance Banks Q2 FY27 — Sector Earnings Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Roboto+Mono:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --stone:#E3E0D9; --card:#F3F1EC; --card2:#EAE7E0;
+  --ink:#1F1D1A; --mute:#6E6A62; --faint:#9A958B; --rule:#C9C4B9;
+  --gain:#1D5C7A; --loss:#A8382C; 
+  --vol:#8E8879; --gold:#B4842A;
+  --disp:'Archivo',system-ui,sans-serif;
+  --serif:'Source Serif 4',Georgia,serif;
+  --mono:'Roboto Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--stone);color:var(--ink);font-family:var(--serif);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:28px 20px 90px}
+section{margin-bottom:40px}
+
+/* type */
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
+h1{font-family:var(--disp);font-weight:800;font-size:clamp(34px,7vw,62px);line-height:.94;letter-spacing:-.03em;margin:.18em 0 .22em;text-transform:uppercase}
+h2{font-family:var(--disp);font-weight:700;font-size:clamp(19px,3.2vw,25px);letter-spacing:-.015em;margin:0 0 4px;text-transform:uppercase}
+h3{font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:-.005em;margin:0}
+.dek{font-size:17px;color:var(--mute);max-width:56ch;margin:0}
+.note{font-size:13px;color:var(--mute);margin:4px 0 20px;max-width:70ch}
+.rule{height:3px;background:var(--ink);margin:0 0 16px}
+
+/* thesis stats */
+.thesis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:2px;background:var(--rule);border:2px solid var(--ink);margin-top:26px}
+.t{background:var(--card);padding:13px 15px}
+.t .n{font-family:var(--disp);font-weight:800;font-size:26px;line-height:1.05;letter-spacing:-.02em}
+.t .l{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:5px;line-height:1.35}
+.t.up .n{color:var(--gain)} .t.dn .n{color:var(--loss)}
+
+/* SIGNATURE: the scissor */
+.scissor{background:var(--card);border:2px solid var(--ink);padding:18px 16px 12px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin-bottom:14px}
+.legend span{display:flex;align-items:center;gap:6px}
+.sw{width:13px;height:11px;display:inline-block}
+.row{display:grid;grid-template-columns:104px 1fr;gap:10px;align-items:center;margin-bottom:3px}
+.row .co{font-family:var(--disp);font-weight:600;font-size:12px;text-align:right;line-height:1.15}
+.track{position:relative;height:26px;border-left:2px solid var(--ink);border-right:0}
+.axis{position:absolute;top:0;bottom:0;width:2px;background:var(--ink);opacity:.85}
+.b{position:absolute;height:10px}
+.b.v{top:1px;background:var(--vol)}
+.b.e{top:14px}
+.b.e.pos{background:var(--gain)} .b.e.neg{background:var(--loss)}
+.b span{position:absolute;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:9.5px;font-weight:500;white-space:nowrap;color:var(--ink)}
+.b.pos span,.b.v span{left:calc(100% + 5px)}
+.b.neg span{right:calc(100% + 5px)}
+.scale{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9.5px;color:var(--faint);margin-top:6px;padding-left:114px}
+
+/* league bars */
+.league{background:var(--card);border:2px solid var(--ink);padding:16px}
+.lrow{display:grid;grid-template-columns:112px 1fr 96px;gap:10px;align-items:center;padding:4px 0;border-bottom:1px solid var(--rule)}
+.lrow:last-child{border-bottom:0}
+.lrow .co{font-family:var(--disp);font-weight:600;font-size:12.5px;text-align:right}
+.lbar{height:16px;background:var(--gain);position:relative}
+.lbar.mid{background:#4A7F91} .lbar.low{background:var(--loss)}
+.lrow .v{font-family:var(--mono);font-size:12px;font-weight:700;text-align:right}
+.lrow .d{font-family:var(--mono);font-size:10px;color:var(--mute);text-align:right}
+
+/* fuel strip */
+.fuel{background:var(--ink);color:var(--card);border:2px solid var(--ink);padding:18px}
+.fuel h2{color:var(--card)}
+.fline{display:flex;align-items:flex-end;gap:0;height:110px;margin:20px 0 6px}
+.fp{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:6px}
+.fp i{display:block;width:100%;max-width:52px;background:var(--gold)}
+.fp b{font-family:var(--mono);font-size:12px;font-weight:700}
+.fp em{font-family:var(--mono);font-size:9.5px;font-style:normal;letter-spacing:.09em;text-transform:uppercase;color:#A9A296}
+.warn{border-top:1px solid #4A453C;margin-top:14px;padding-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
+.warn div{font-size:13.5px;color:#D6D1C6}
+.warn strong{display:block;font-family:var(--mono);font-size:17px;font-weight:700;color:var(--gold);margin-bottom:2px}
+
+/* company cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
+.c{background:var(--card);border:2px solid var(--ink);padding:14px;display:flex;flex-direction:column}
+.chead{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:2px}
+.tick{font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacing:.06em}
+.badge{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 6px;border:1.5px solid;white-space:nowrap;flex-shrink:0}
+.badge.del{color:var(--gain);border-color:var(--gain)}
+.badge.part{color:var(--gold);border-color:var(--gold)}
+.badge.miss{color:var(--loss);border-color:var(--loss)}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);margin:11px 0}
+.tile{background:var(--card2);padding:7px 9px}
+.tile .n{font-family:var(--mono);font-size:15px;font-weight:700;line-height:1.15}
+.tile .l{font-family:var(--mono);font-size:8.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:3px}
+.tile .n.up{color:var(--gain)} .tile .n.dn{color:var(--loss)}
+.c ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.c li{margin-bottom:5px}
+.c li::marker{color:var(--faint)}
+.flags{margin-top:auto;padding-top:10px;display:flex;flex-wrap:wrap;gap:5px}
+.flag{font-family:var(--mono);font-size:9px;letter-spacing:.05em;text-transform:uppercase;background:var(--loss);color:var(--card);padding:3px 6px}
+.flag.ok{background:var(--gain)}
+
+
+table{width:100%;border-collapse:collapse;background:var(--card);border:2px solid var(--ink)}
+th{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;text-align:left;padding:9px 10px;background:var(--ink);color:var(--card)}
+td{padding:9px 10px;border-bottom:1px solid var(--rule);font-size:13.5px;vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.co{font-family:var(--disp);font-weight:700;font-size:13px;white-space:nowrap}
+td.vd{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;white-space:nowrap}
+.vd.del{color:var(--gain)} .vd.part{color:var(--gold)} .vd.miss{color:var(--loss)}
+
+/* call */
+.calls{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.call{border:2px solid var(--ink);padding:15px;background:var(--card)}
+.call.buy{border-left:9px solid var(--gain)}
+.call.wait{border-left:9px solid var(--gold)}
+.call.avoid{border-left:9px solid var(--loss)}
+.call .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.call h3{margin:4px 0 7px;font-size:17px}
+.call p{margin:0;font-size:13.5px}
+
+
+/* commentary */
+.themes{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.th{background:var(--card);border:2px solid var(--ink);padding:14px}
+.th .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--mute);border-bottom:2px solid var(--ink);padding-bottom:6px;margin-bottom:9px}
+.th ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.th li{margin-bottom:6px}
+.th li::marker{color:var(--faint)}
+.th b{font-family:var(--mono);font-size:12.5px;font-weight:700}
+
+/* red flags */
+.rf{background:var(--card);border:2px solid var(--ink)}
+.rfg{border-bottom:2px solid var(--ink)}
+.rfg:last-child{border-bottom:0}
+.rfh{display:flex;align-items:center;gap:9px;padding:8px 13px;background:var(--card2)}
+.sev{width:11px;height:11px;flex-shrink:0}
+.sev.hi{background:var(--loss)} .sev.md{background:var(--gold)} .sev.lo{background:var(--faint)}
+.rfh span{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase}
+.rfr{display:grid;grid-template-columns:118px 1fr;gap:12px;padding:9px 13px;border-top:1px solid var(--rule);font-size:13.5px}
+.rfr b{font-family:var(--disp);font-weight:700;font-size:12.5px}
+
+/* ind-ra verdict */
+.indra{background:var(--card);border:2px solid var(--ink);padding:16px}
+.split{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:2px;background:var(--rule);border:1px solid var(--rule);margin-bottom:16px}
+.sp{background:var(--card2);padding:13px 14px}
+.sp .n{font-family:var(--disp);font-weight:800;font-size:34px;line-height:1;letter-spacing:-.03em;color:var(--loss)}
+.sp.ok .n{color:var(--gain)}
+.sp .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-top:6px}
+.sp .w{font-size:12.5px;color:var(--mute);margin-top:7px}
+.vs{display:grid;grid-template-columns:82px 1fr;gap:11px;padding:7px 0;border-bottom:1px solid var(--rule);font-size:13.5px;align-items:start}
+.vs:last-child{border-bottom:0}
+.vs em{font-family:var(--mono);font-size:9.5px;font-style:normal;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding-top:2px}
+.vs em.y{color:var(--gain)} .vs em.n{color:var(--loss)} .vs em.p{color:var(--gold)}
+
+/* regional strip */
+.reg{display:grid;grid-template-columns:repeat(auto-fit,minmax(112px,1fr));gap:2px;background:var(--rule);border:2px solid var(--ink);margin-top:16px}
+.rg{background:var(--card2);padding:11px 12px;text-align:center}
+.rg .n{font-family:var(--mono);font-size:15px;font-weight:700}
+.rg .n.up{color:var(--gain)} .rg .n.dn{color:var(--loss)}
+.rg .l{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-top:4px}
+
+/* triggers */
+.trigs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:14px}
+.tg{border:2px solid var(--ink);padding:14px;background:var(--card)}
+.tg .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
+.tg.tg-up .k{color:var(--gain)} .tg.tg-dn .k{color:var(--loss)}
+.tg ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.tg li{margin-bottom:6px}
+
+/* caveats */
+.cav{background:var(--card2);border:2px solid var(--ink);padding:15px 15px 15px 30px;margin:0;font-size:13.5px;line-height:1.55}
+.cav li{margin-bottom:8px}
+.cav li:last-child{margin-bottom:0}
+.cav b{font-family:var(--mono);font-size:12px;font-weight:700}
+
+
+/* wide data tables */
+.tw{overflow-x:auto;border:2px solid var(--ink);background:var(--card)}
+.tw table{border:0;min-width:660px}
+.tw th{position:sticky;top:0}
+td.num{font-family:var(--mono);font-size:12px;font-weight:700;text-align:right;white-space:nowrap}
+td.num.up{color:var(--gain)} td.num.dn{color:var(--loss)} td.num.ns{color:var(--faint);font-weight:400}
+th.r{text-align:right}
+td.kpi{font-family:var(--mono);font-size:11.5px;text-align:right;white-space:nowrap}
+.asof{font-family:var(--mono);font-size:11px;color:var(--mute);margin-top:10px;line-height:1.6}
+.asof b{color:var(--ink)}
+
+footer{border-top:3px solid var(--ink);padding-top:15px;font-size:12.5px;color:var(--mute)}
+footer p{margin:0 0 8px;max-width:80ch}
+
+@media(max-width:620px){
+  .row{grid-template-columns:74px 1fr;gap:7px}
+  .row .co{font-size:10.5px}
+  .scale{padding-left:81px}
+  .lrow{grid-template-columns:80px 1fr 74px}
+  .lrow .co{font-size:11px}
+  .wrap{padding:20px 13px 60px}
+  td.hide,th.hide{display:none}
+}
+@media(prefers-reduced-motion:no-preference){
+  .b,.lbar,.fp i{animation:g .7s cubic-bezier(.2,.7,.3,1) both}
+  @keyframes g{from{transform:scaleX(.001);opacity:0}to{transform:scaleX(1);opacity:1}}
+  .b.neg{transform-origin:right} .b.v,.b.pos,.lbar{transform-origin:left}
+  .fp i{animation-name:gy;transform-origin:bottom}
+  @keyframes gy{from{transform:scaleY(.001)}to{transform:scaleY(1)}}
+}
+
+.badge.nsc{color:var(--mute);border-color:var(--mute)}
+.lsub{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin:14px 0 6px}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Sector earnings review · Quarter ended 30 September 2026</div>
+  <h1>Small Finance Banks<br>Q2 FY27</h1>
+  <p class="dek">Record profits came mostly from falling provisions. Funding costs are now rising and margins are slipping, so the tailwind that made this quarter cannot be repeated.</p>
+  <div class="thesis">
+    <div class="t up"><div class="n">5 of 7</div><div class="l">Provisions down YoY</div></div>
+    <div class="t dn"><div class="n">−55 bps</div><div class="l">Equitas NIM QoQ</div></div>
+    <div class="t up"><div class="n">3.0x</div><div class="l">Ujjivan PAT YoY</div></div>
+    <div class="t dn"><div class="n">−28%</div><div class="l">Jana share price, 3 months</div></div>
+  </div>
+</header>
+
+<section>
+  <h2>The scissor</h2>
+  <div class="rule"></div>
+  <p class="note">NII growth against the change in provisions, one shared axis, from Tijori's filed quarterlies. NII grew 24–73% everywhere. The profit jump came from the right-hand bar falling. Suryoday's NII is derived; its provisions are from the PTI report.</p>
+  <div class="scissor">
+    <div class="legend">
+      <span><i class="sw" style="background:var(--vol)"></i>NII growth YoY</span>
+      <span><i class="sw" style="background:var(--gain)"></i>Provisions change YoY</span>
+    </div>
+    <div id="scissor"></div>
+    <div class="scale"><span>−90</span><span>−30</span><span>+30</span><span>+90</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>Net interest margin — the league table</h2>
+  <div class="rule"></div>
+  <p class="note">Company-reported NIM as carried by Tijori. Utkarsh and Suryoday are not shown: Tijori carries no NIM for them. Three of five fell QoQ; Jana was flat.</p>
+  <div class="league">
+    <div class="lsub">NIM, Q2 FY27 (change)</div>
+    <div id="league"></div>
+  </div>
+</section>
+
+<section>
+  <h2>The pressure point: cost of funds</h2>
+  <div class="rule"></div>
+  <div class="fuel">
+    <h2>NII growth QoQ, %</h2>
+    <div class="fline" id="fuel"></div>
+    <div class="warn">
+      <div><strong>The squeeze</strong>Interest expended grew faster than interest earned QoQ at AU (+7.1% vs +5.8%), Ujjivan (+8.0% vs +6.3%) and Equitas (+11.7% vs +5.4%).</div>
+      <div><strong>Why</strong>Deposit rate hikes and excess FCNR liquidity at Equitas (Elara). A higher cost of funds at AU (Nuvama). JM flagged a "rising-rate environment".</div>
+      <div><strong>Who escaped</strong>ESAF and Suryoday, where loan yields are still repricing up off a low base.</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Company by company</h2>
+  <div class="rule"></div>
+  <p class="note">The badge scores Q2 delivery against what management committed to. No call transcripts were read for this build, so scoring rests on stated targets in results coverage. Capital SFB is outside the 7-bank universe.</p>
+  <div class="grid" id="cards"></div>
+</section>
+
+<section>
+  <h2>KPI comparison</h2>
+  <div class="rule"></div>
+  <p class="note">Cost-to-income for AU, Jana and Utkarsh is derived: opex / (NII + other income). Others are as carried by Tijori. n/d: not disclosed in Tijori. n/v: disclosed but not verified from a primary source.</p>
+  <div class="tw">
+  <table>
+    <thead><tr>
+      <th>Bank</th><th class="r">NII YoY</th><th class="r">NIM</th><th class="r">Provisions YoY</th><th class="r">Gross NPA</th>
+      <th class="r">CASA</th><th class="r">Cost / income</th><th class="r">PAT YoY</th><th class="r">Basis</th>
+    </tr></thead>
+    <tbody id="kpi"></tbody>
+  </table>
+  </div>
+</section>
+
+<section>
+  <h2>What management said</h2>
+  <div class="rule"></div>
+  <p class="note">From results releases and broker notes as reported in the press. No Q2 call transcript was read.</p>
+  <div class="themes">
+    <div class="th"><div class="k">Funding</div><ul>
+      <li>Jana: aims to improve its CASA ratio in H2 FY27.</li>
+      <li>Equitas: focus on granular deposits; deposits crossed ₹50,000 cr (+19%).</li>
+    </ul></div>
+    <div class="th"><div class="k">Mix</div><ul>
+      <li>Jana: raise the secured share from 73.7% to 80%.</li>
+      <li>Ujjivan: secured loans 52% of the book, up 47% YoY.</li>
+      <li>Equitas: non-MFI advances +24%, led by gold loans (+193%).</li>
+    </ul></div>
+    <div class="th"><div class="k">Capital</div><ul>
+      <li>Ujjivan: ₹409 cr preferential issue to IFC and three life insurers.</li>
+      <li>AU: final universal-bank application submitted.</li>
+    </ul></div>
+    <div class="th"><div class="k">Leadership</div><ul>
+      <li>Equitas: CEO resigned over a perceived conflict of interest; a successor is expected within three months.</li>
+      <li>Ujjivan: Acting MD and CEO since September.</li>
+    </ul></div>
+  </div>
+</section>
+
+<section>
+  <h2>Red flags</h2>
+  <div class="rule"></div>
+  <p class="note">Ranked by how much they should change position sizing.</p>
+  <div class="rf">
+    <div class="rfg">
+      <div class="rfh"><i class="sev hi"></i><span>Act on these</span></div>
+      <div class="rfr"><b>Equitas</b><div>CEO exit plus NII down QoQ in the same quarter.</div></div>
+      <div class="rfr"><b>Utkarsh</b><div>Sixth straight loss; provisions up 52% QoQ.</div></div>
+    </div>
+    <div class="rfg">
+      <div class="rfh"><i class="sev md"></i><span>Monitor next quarter</span></div>
+      <div class="rfr"><b>ESAF</b><div>GNPA halved in one quarter with no stated cause.</div></div>
+      <div class="rfr"><b>AU</b><div>Slippages 3.3%; specific PCR cut to about 60%.</div></div>
+      <div class="rfr"><b>Suryoday</b><div>CRAR down 4 pts in a year.</div></div>
+    </div>
+    <div class="rfg">
+      <div class="rfh"><i class="sev lo"></i><span>Note and move on</span></div>
+      <div class="rfr"><b>Jana</b><div>No tax charge flatters PAT; PBT grew just as fast.</div></div>
+      <div class="rfr"><b>Ujjivan</b><div>Interim CEO; the business has not missed a beat.</div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Walk the talk</h2>
+  <div class="rule"></div>
+  <p class="note">Without call transcripts, only explicit stated targets are scored.</p>
+  <table>
+    <thead><tr><th>Bank</th><th>Promised</th><th class="hide">Delivered</th><th>Verdict</th></tr></thead>
+    <tbody id="score"></tbody>
+  </table>
+</section>
+
+<section>
+  <h2>Was the consensus right?</h2>
+  <div class="rule"></div>
+  <p class="note">No published Q2 poll was found. We score the narrative: the microfinance credit cycle has turned and SFB profits normalise.</p>
+  <div class="indra">
+    <div class="split">
+      <div class="sp ok"><div class="n">7 of 7</div><div class="l">Profit up or loss narrowed</div><div class="w">Cycle turned.</div></div>
+      <div class="sp ok"><div class="n">5 of 7</div><div class="l">Provisions down YoY</div><div class="w">Credit cost fell.</div></div>
+      <div class="sp"><div class="n">4 of 5</div><div class="l">NIM down or flat QoQ</div><div class="w">Funding bites.</div></div>
+    </div>
+    <div class="vs"><em class="n">Right</em><div><b>Credit costs normalise.</b> Provisions fell 25–64% at five of seven banks.</div></div>
+    <div class="vs"><em class="y">Partly</em><div><b>Profits normalise.</b> The level, yes. The growth rate will not survive once provisions stop falling and funding costs keep rising.</div></div>
+  </div>
+</section>
+
+<section>
+  <h2>The call</h2>
+  <div class="rule"></div>
+  <div class="calls">
+    <div class="call buy">
+      <div class="k">Own now</div>
+      <h3>Ujjivan</h3>
+      <p>The only bank where PPOP grew as fast as the provision benefit (+50%). Highest NIM, falling NPAs, fresh capital priced above book. The interim CEO is the one gap.</p>
+    </div>
+    <div class="call wait">
+      <div class="k">Accumulate on evidence</div>
+      <h3>AU · Jana · ESAF</h3>
+      <p>AU needs its NIM to stop falling. Jana needs CASA above 20%. ESAF needs a source for its GNPA collapse before the +72% run is trusted.</p>
+    </div>
+    <div class="call avoid">
+      <div class="k">Stay out</div>
+      <h3>Equitas · Utkarsh</h3>
+      <p>Equitas has margin compression and a leadership vacuum at once. Utkarsh is still loss-making.</p>
+    </div>
+  </div>
+  <div class="trigs">
+    <div class="tg tg-up"><div class="k">What would make us more positive</div><ul>
+      <li>Q3 NIM stable QoQ at AU and Equitas.</li>
+      <li>A named external CEO at Equitas.</li>
+    </ul></div>
+    <div class="tg tg-dn"><div class="k">What would make us cut</div><ul>
+      <li>Provisions rising QoQ at two or more banks, as already at Utkarsh.</li>
+      <li>Further deposit rate hikes, or new state microfinance laws.</li>
+    </ul></div>
+  </div>
+</section>
+
+<section>
+  <h2>Analyst coverage after results</h2>
+  <div class="rule"></div>
+  <p class="note">Targets as reported by Business Today and TradingView on 26 October (AU) and in late October (Equitas). The press reports did not give the notes' own dates.</p>
+  <div class="tw">
+  <table>
+    <thead><tr><th>Bank</th><th>Broker</th><th>Report date</th><th>Rating</th><th class="r">Target (₹)</th><th class="r">Prior (₹)</th><th class="r">Price at report (₹)</th></tr></thead>
+    <tbody id="brk"></tbody>
+  </table>
+  </div>
+</section>
+
+<section>
+  <h2>Price and returns</h2>
+  <div class="rule"></div>
+  <p class="note">Five of seven fell 10–28% over three months, mostly before results. ESAF is the outlier at +72% in a year.</p>
+  <div class="tw">
+  <table>
+    <thead><tr>
+      <th>Bank</th><th>Ticker</th><th>Results date</th><th class="r">CMP (₹)</th>
+      <th class="r">1 year</th><th class="r">6 months</th><th class="r">3 months</th><th class="r">MTD</th>
+    </tr></thead>
+    <tbody id="ret"></tbody>
+  </table>
+  </div>
+  <p class="asof">Prices as on 13 Nov 2026 close (Zerodha Kite last price). Anchors: 1Y = 14 Nov 2025, 6M = 15 May 2026, 3M = 14 Aug 2026, MTD = 30 Oct 2026 closes, Kite daily candles (corporate-action adjusted). CMP matches NSE bhavcopy. Sorted by 1-year return.</p>
+</section>
+
+<section>
+  <h2>Caveats</h2>
+  <div class="rule"></div>
+  <ul class="cav">
+    <li><b>Sources.</b> Financials are filed quarterlies from Tijori. NII = interest earned − interest expended; PPOP and provisions as filed. GNPA, credit cost, targets and broker views come from press coverage of results: PSU Connect, Kotak Neo, IndiaIPO, Angel One, HDFC Sky (PTI), Business Today and TradingView. AI digests were used only as leads.</li>
+    <li><b>Tijori against management.</b> Ujjivan NII ₹1,248 cr (Tijori) vs ₹1,244 cr (company); a rounding-level gap. AU PAT ₹858 cr (Tijori) vs ₹860 cr (Nuvama). ESAF NII ₹644 cr matches ₹643 cr.</li>
+    <li><b>Suryoday.</b> Tijori files it in a corporate format. NII is derived; NIM, CASA and cost-to-income are not available. Provisions of ₹41 cr and GNPA come from PTI.</li>
+    <li><b>Utkarsh GNPA.</b> Only a digest figure (5.9%) was found. It is marked n/v.</li>
+    <li><b>ESAF GNPA.</b> The fall from 5.40% to 2.84% QoQ is unexplained in what we read. The December 2025 ARC sale explains only the earlier fall.</li>
+    <li><b>Dates.</b> Jana's results date is not verified. Price at report is not shown for broker targets.</li>
+    <li><b>Price drawdown.</b> The 3-month fall at Jana (−28%) began before results; its cause was not verified.</li>
+  </ul>
+</section>
+
+<footer>
+  <p><b>Universe:</b> 7 listed small finance banks, quarter ended 30 September 2026. Sources: filed quarterlies via Tijori; results coverage in the press. Prices from Zerodha Kite, cross-checked with NSE bhavcopy. Built 16 November 2026.</p>
+</footer>
+
+</div>
+<script>
+const C=(n,t,b,bl,k,p,f)=>({n,t,b,bl,k,p,f});
+const SC=[["ESAF",73.1,-40.6],["Suryoday",42.5,2.5],["Ujjivan",35.5,-56.2],["Jana",34.7,6.3],["Equitas",32.7,-44.4],["AU",31.5,-25.4],["Utkarsh",23.9,-64.1]];
+const MIN=-90,MAX=90,SCU1="%",SCU2="%";
+const LEAGUES=[["league",[["Ujjivan",8.4,"+0.5 pts YoY; −0.1 QoQ"],["ESAF",8.2,"+2.3 pts YoY; +0.3 QoQ"],["Jana",7.5,"+1.0 pt YoY; flat QoQ"],["Equitas",6.69,"+0.40 pts YoY; −0.55 QoQ"],["AU",5.8,"+0.3 pts YoY; −0.1 QoQ"]],10,7.5,6,v=>`${v.toFixed(1)}%`]];
+const FU=[["EQUITAS",-0.3],["UTKARSH",2.8],["AU",4.6],["JANA",4.6],["UJJIVAN",5.1],["ESAF",10.3],["SURYODAY",17.1]];
+const FUMAX=18,FUFMT=v=>`${v>0?'+':v<0?'−':''}${Math.abs(v).toFixed(1)}`;
+const CO=[
+ C("AU Small Finance Bank","AUBANK · Large","part","In line",[["+31.5%","NII YoY (₹2,820 cr)",1],["5.8%","NIM (−10 bps QoQ)",-1],["₹858 cr","PAT (+53%)",1],["1.99%","Gross NPA",0]],
+  ["PAT +53%: provisions fell 25% while PPOP grew 25%.","NIM slipped 10 bps QoQ to 5.8% on a higher cost of funds (Nuvama).","Slippages rose to 3.3% of loans on tractor-finance stress; specific PCR cut to about 60%.","Universal bank licence: final application submitted.","Verdict: quality franchise, but the margin is moving the wrong way. −10% over 3 months."],
+  [["NIM −10 bps",""],["PCR ~60%",""],["Universal licence","ok"]]),
+ C("Ujjivan SFB","UJJIVANSFB · Mid","del","Record",[["+35.5%","NII YoY (₹1,248 cr)",1],["8.4%","NIM (top of set)",1],["₹365 cr","PAT (3.0x)",1],["2.10%","Gross NPA (2.45% YoY)",1]],
+  ["Best-quality earnings in the set: PPOP +50% as well as provisions −56%.","Loan book +32%; secured share 52%, up from below half a year ago.","₹409 cr preferential issue to IFC and three life insurers, above book value.","Acting MD and CEO since September after the previous CEO's early retirement.","Verdict: the strongest operator here. +17% in a year."],
+  [["Interim CEO",""],["Capital raise","ok"],["Margin","ok"]]),
+ C("Equitas SFB","EQUITASBNK · Mid","part","Profit up, CEO out",[["+32.7%","NII YoY (₹1,026 cr)",1],["6.69%","NIM (−55 bps QoQ)",-1],["₹218 cr","PAT (9x)",1],["−0.3%","NII QoQ",-1]],
+  ["PAT 9x off a near-zero base, driven by provisions −44%.","NII fell QoQ: NIM −55 bps on deposit rate hikes and excess FCNR liquidity (Elara).","MD and CEO P N Vasudevan resigned on 29 October; shares fell over 27% in two days.","Credit cost 0.94%; GNPA 2.29%.","Verdict: profit recovery is real; margin and leadership are not settled."],
+  [["CEO exit",""],["NIM −55 bps",""],["Credit cost","ok"]]),
+ C("Jana SFB","JSFB · Mid","part","Provisions up",[["+34.7%","NII YoY (₹819 cr)",1],["7.5%","NIM (6.5% YoY)",1],["₹170 cr","PAT (2.3x)",1],["17.6%","CASA (lowest)",-1]],
+  ["The only large SFB whose provisions rose YoY (+6%). Profit came from NII, not credit cost.","PAT carries no tax charge in Tijori; the jump is pre-tax as well as post.","CASA 17.6% is the weakest liability franchise here; deposits +17% vs loans +22%.","Secured share 73.7%; management targets 80%.","Verdict: margin is strong, funding is the weak link. −28% over 3 months."],
+  [["CASA 17.6%",""],["Zero tax",""],["Secured mix","ok"]]),
+ C("ESAF SFB","ESAFSFB · Small","del","Turnaround",[["+73%","NII YoY (₹644 cr)",1],["8.2%","NIM (5.9% YoY)",1],["₹160 cr","PAT (loss YoY)",1],["2.84%","Gross NPA (8.50% YoY)",1]],
+  ["Back from a ₹116 cr loss to a ₹160 cr profit; PPOP 3.9x.","Gross NPA fell from 5.40% to 2.84% in one quarter. No filing we read explains it.","A ₹1,700 cr NPA pool was approved for ARC sale in December 2025, which explains the earlier fall.","Secured share 64%.","Verdict: the turnaround is in the numbers, but the NPA drop needs a source. +72% in a year."],
+  [["NPA drop unexplained",""],["Turnaround","ok"]]),
+ C("Suryoday SFB","SURYODAY · Small","nsc","Not scored",[["+42%","NII YoY (derived)",1],["₹77 cr","PAT (2.5x)",1],["2.97%","Gross NPA (5.93% YoY)",1],["19.4%","CRAR (23.4% YoY)",-1]],
+  ["Tijori files Suryoday in a corporate format; NII is derived as interest earned less interest paid.","Provisions roughly flat at ₹41 cr; profit came from income, not credit cost.","Capital adequacy down 4 pts in a year as advances grew 35%.","Verdict: growing fast on falling capital. Watch for a raise."],
+  [["CRAR −4 pts",""],["Derived NII",""]]),
+ C("Utkarsh SFB","UTKARSHBNK · Small","miss","Loss",[["−₹70 cr","Net loss (−₹348 cr YoY)",-1],["₹85 cr","PPOP (−₹3 cr YoY)",1],["₹166 cr","Provisions (₹109 cr QoQ)",-1],["+23.9%","NII YoY",1]],
+  ["Sixth straight quarterly loss, and wider than Q1 (−₹34 cr).","Provisions rose 52% QoQ even as they fell 64% YoY.","Micro-banking (JLG) is still shrinking as a share; non-JLG disbursements grew.","Verdict: not yet through the cycle. −26% in a year."],
+  [["Loss",""],["Provisions up QoQ",""]])
+];
+const KPI=[
+ ["AU Small Finance Bank","+31.5%","5.8%","−25%","1.99%","29.5%","57.9%","+53%","Tijori; co. GNPA"],
+ ["Ujjivan SFB","+35.5%","8.4%","−56%","2.10%","26.0%","61.6%","3.0x","Tijori"],
+ ["Equitas SFB","+32.7%","6.69%","−44%","2.29%","26%","69.4%","9x","Tijori"],
+ ["Jana SFB","+34.7%","7.5%","+6%","2.34%","17.6%","64.3%","2.3x","Tijori"],
+ ["ESAF SFB","+73.1%","8.2%","−41%","2.84%","23.3%","57.7%","Profit (loss YoY)","Tijori"],
+ ["Suryoday SFB","+42.5% (derived)","n/d","+2.5%","2.97%","n/d","n/d","2.5x","Tijori + PTI"],
+ ["Utkarsh SFB","+23.9%","n/d","−64%","n/v","n/d","83.9%","Loss","Tijori"]
+];
+const BRK=[
+ ["AU Small Finance Bank","Nuvama","26 Oct 2026 (press)","Reduce","925","950 ↓","n/s"],
+ ["AU Small Finance Bank","JM Financial","26 Oct 2026 (press)","Buy","1,110","1,165 ↓","n/s"],
+ ["AU Small Finance Bank","Motilal Oswal","26 Oct 2026 (press)","Buy","1,275","—","n/s"],
+ ["AU Small Finance Bank","Jefferies","26 Oct 2026 (press)","Buy","1,250","—","n/s"],
+ ["Equitas SFB","Nirmal Bang","Late Oct 2026 (press)","Positive","75","85 ↓","n/s"]
+];
+const SCORE=[
+ ["AU Small Finance Bank","Universal bank transition","Final application submitted; licence pending.","part","Pending"],
+ ["Jana SFB","Raise secured share to 80%","73.7% at September.","part","In progress"],
+ ["Utkarsh SFB","Return to profit after the FY26 clean-up","Loss of ₹70 cr; wider than Q1.","miss","Missed"]
+];
+const SPAN=MAX-MIN,Z=(0-MIN)/SPAN*100;
+document.getElementById("scissor").innerHTML=SC.map(([n,v,e],i)=>{
+ const bar=(val,cls,u)=>{const w=Math.max(Math.abs(val),0.3)/SPAN*100;
+  const l=val>=0?Z:Z-w;
+  return `<i class="b ${cls} ${val>=0?'pos':'neg'}" style="left:${l}%;width:${w}%;animation-delay:${i*45}ms"><span>${val>0?'+':''}${val}${u}</span></i>`;};
+ return `<div class="row"><div class="co">${n}</div><div class="track"><i class="axis" style="left:${Z}%"></i>${bar(v,'v',SCU1)}${bar(e,'e',SCU2)}</div></div>`;
+}).join("");
+const league=(id,rows,max,hi,mid,fmt)=>{document.getElementById(id).innerHTML=rows.map(([n,v,d],i)=>{
+ const cls=v>=hi?"":v>=mid?"mid":"low";
+ return `<div class="lrow"><div class="co">${n}</div>
+ <div><i class="lbar ${cls}" style="display:block;width:${Math.max(v,0)/max*100}%;animation-delay:${i*40}ms"></i></div>
+ <div><div class="v">${fmt(v)}</div><div class="d">${d}</div></div></div>`;}).join("");};
+LEAGUES.forEach(([id,rows,max,hi,mid,fmt])=>league(id,rows,max,hi,mid,fmt));
+document.getElementById("fuel").innerHTML=FU.map(([l,v],i)=>
+ `<div class="fp"><b>${FUFMT(v)}</b><i style="height:${Math.abs(v)/FUMAX*88}px;animation-delay:${i*120}ms"></i><em>${l}</em></div>`).join("");
+document.getElementById("cards").innerHTML=CO.map(c=>`
+ <article class="c">
+  <div class="chead"><div><h3>${c.n}</h3><div class="tick">${c.t}</div></div><div class="badge ${c.b}">${c.bl}</div></div>
+  <div class="tiles">${c.k.map(([n,l,s])=>`<div class="tile"><div class="n ${s===1?'up':s===-1?'dn':''}">${n}</div><div class="l">${l}</div></div>`).join("")}</div>
+  <ul>${c.p.map(x=>`<li>${x}</li>`).join("")}</ul>
+  <div class="flags">${c.f.map(([t,k])=>`<span class="flag ${k}">${t}</span>`).join("")}</div>
+ </article>`).join("");
+document.getElementById("kpi").innerHTML=KPI.map(r=>
+ `<tr><td class="co">${r[0]}</td>`+r.slice(1).map(c=>`<td class="kpi">${c}</td>`).join("")+`</tr>`).join("");
+document.getElementById("brk").innerHTML=BRK.map(r=>
+ `<tr><td class="co">${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td class="num">${r[4]}</td><td class="num ${r[5].includes('↓')?'dn':r[5].includes('↑')?'up':''}">${r[5]}</td><td class="num">${r[6]}</td></tr>`).join("");
+const RET=[["ESAF SFB", "ESAFSFB", "29 Oct", "46.44", "+72.4%", "+59.0%", "+20.2%", "+9.4%"], ["Ujjivan SFB", "UJJIVANSFB", "16 Oct", "60.60", "+17.0%", "+8.5%", "-16.4%", "+14.1%"], ["Suryoday SFB", "SURYODAY", "29 Oct", "156.25", "+13.6%", "-6.6%", "+2.8%", "+16.0%"], ["AU Small Finance Bank", "AUBANK", "24 Oct", "967.00", "+8.6%", "-2.4%", "-10.6%", "+11.9%"], ["Equitas SFB", "EQUITASBNK", "29 Oct", "57.37", "-4.5%", "-15.6%", "-23.0%", "+7.1%"], ["Jana SFB", "JSFB", "n/s", "415.95", "-10.5%", "-15.3%", "-28.0%", "+11.4%"], ["Utkarsh SFB", "UTKARSHBNK", "3 Nov", "11.99", "-26.4%", "-11.1%", "-14.6%", "+4.6%"]];
+document.getElementById("ret").innerHTML=RET.map(r=>{
+ const cell=v=>{ if(v==="n/s") return `<td class="num ns">n/s</td>`;
+   const cls=v.startsWith("+")?"up":v.startsWith("-")?"dn":""; return `<td class="num ${cls}">${v}</td>`;};
+ return `<tr><td class="co">${r[0]}</td><td class="tick">${r[1]}</td><td>${r[2]}</td>`
+  +`<td class="num">${r[3]==="n/s"?'<span class="ns">n/s</span>':r[3]}</td>`+r.slice(4).map(cell).join("")+`</tr>`;
+}).join("");
+document.getElementById("score").innerHTML=SCORE.map(([c,p,d,k,v])=>
+ `<tr><td class="co">${c}</td><td>${p}</td><td class="hide">${d}</td><td class="vd ${k}">${v}</td></tr>`).join("");
+</script></body></html>

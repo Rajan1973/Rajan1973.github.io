@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Power Generation Q2 FY27 — Sector Earnings Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Roboto+Mono:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --stone:#E3E0D9; --card:#F3F1EC; --card2:#EAE7E0;
+  --ink:#1F1D1A; --mute:#6E6A62; --faint:#9A958B; --rule:#C9C4B9;
+  --gain:#1D5C7A; --loss:#A8382C; 
+  --vol:#8E8879; --gold:#B4842A;
+  --disp:'Archivo',system-ui,sans-serif;
+  --serif:'Source Serif 4',Georgia,serif;
+  --mono:'Roboto Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--stone);color:var(--ink);font-family:var(--serif);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:28px 20px 90px}
+section{margin-bottom:40px}
+
+/* type */
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
+h1{font-family:var(--disp);font-weight:800;font-size:clamp(34px,7vw,62px);line-height:.94;letter-spacing:-.03em;margin:.18em 0 .22em;text-transform:uppercase}
+h2{font-family:var(--disp);font-weight:700;font-size:clamp(19px,3.2vw,25px);letter-spacing:-.015em;margin:0 0 4px;text-transform:uppercase}
+h3{font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:-.005em;margin:0}
+.dek{font-size:17px;color:var(--mute);max-width:56ch;margin:0}
+.note{font-size:13px;color:var(--mute);margin:4px 0 20px;max-width:70ch}
+.rule{height:3px;background:var(--ink);margin:0 0 16px}
+
+/* thesis stats */
+.thesis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:2px;background:var(--rule);border:2px solid var(--ink);margin-top:26px}
+.t{background:var(--card);padding:13px 15px}
+.t .n{font-family:var(--disp);font-weight:800;font-size:26px;line-height:1.05;letter-spacing:-.02em}
+.t .l{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:5px;line-height:1.35}
+.t.up .n{color:var(--gain)} .t.dn .n{color:var(--loss)}
+
+/* SIGNATURE: the scissor */
+.scissor{background:var(--card);border:2px solid var(--ink);padding:18px 16px 12px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin-bottom:14px}
+.legend span{display:flex;align-items:center;gap:6px}
+.sw{width:13px;height:11px;display:inline-block}
+.row{display:grid;grid-template-columns:104px 1fr;gap:10px;align-items:center;margin-bottom:3px}
+.row .co{font-family:var(--disp);font-weight:600;font-size:12px;text-align:right;line-height:1.15}
+.track{position:relative;height:26px;border-left:2px solid var(--ink);border-right:0}
+.axis{position:absolute;top:0;bottom:0;width:2px;background:var(--ink);opacity:.85}
+.b{position:absolute;height:10px}
+.b.v{top:1px;background:var(--vol)}
+.b.e{top:14px}
+.b.e.pos{background:var(--gain)} .b.e.neg{background:var(--loss)}
+.b span{position:absolute;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:9.5px;font-weight:500;white-space:nowrap;color:var(--ink)}
+.b.pos span,.b.v span{left:calc(100% + 5px)}
+.b.neg span{right:calc(100% + 5px)}
+.scale{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9.5px;color:var(--faint);margin-top:6px;padding-left:114px}
+
+/* league bars */
+.league{background:var(--card);border:2px solid var(--ink);padding:16px}
+.lrow{display:grid;grid-template-columns:112px 1fr 96px;gap:10px;align-items:center;padding:4px 0;border-bottom:1px solid var(--rule)}
+.lrow:last-child{border-bottom:0}
+.lrow .co{font-family:var(--disp);font-weight:600;font-size:12.5px;text-align:right}
+.lbar{height:16px;background:var(--gain);position:relative}
+.lbar.mid{background:#4A7F91} .lbar.low{background:var(--loss)}
+.lrow .v{font-family:var(--mono);font-size:12px;font-weight:700;text-align:right}
+.lrow .d{font-family:var(--mono);font-size:10px;color:var(--mute);text-align:right}
+
+/* fuel strip */
+.fuel{background:var(--ink);color:var(--card);border:2px solid var(--ink);padding:18px}
+.fuel h2{color:var(--card)}
+.fline{display:flex;align-items:flex-end;gap:0;height:110px;margin:20px 0 6px}
+.fp{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:6px}
+.fp i{display:block;width:100%;max-width:52px;background:var(--gold)}
+.fp b{font-family:var(--mono);font-size:12px;font-weight:700}
+.fp em{font-family:var(--mono);font-size:9.5px;font-style:normal;letter-spacing:.09em;text-transform:uppercase;color:#A9A296}
+.warn{border-top:1px solid #4A453C;margin-top:14px;padding-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
+.warn div{font-size:13.5px;color:#D6D1C6}
+.warn strong{display:block;font-family:var(--mono);font-size:17px;font-weight:700;color:var(--gold);margin-bottom:2px}
+
+/* company cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
+.c{background:var(--card);border:2px solid var(--ink);padding:14px;display:flex;flex-direction:column}
+.chead{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:2px}
+.tick{font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacing:.06em}
+.badge{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 6px;border:1.5px solid;white-space:nowrap;flex-shrink:0}
+.badge.del{color:var(--gain);border-color:var(--gain)}
+.badge.part{color:var(--gold);border-color:var(--gold)}
+.badge.miss{color:var(--loss);border-color:var(--loss)}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);margin:11px 0}
+.tile{background:var(--card2);padding:7px 9px}
+.tile .n{font-family:var(--mono);font-size:15px;font-weight:700;line-height:1.15}
+.tile .l{font-family:var(--mono);font-size:8.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:3px}
+.tile .n.up{color:var(--gain)} .tile .n.dn{color:var(--loss)}
+.c ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.c li{margin-bottom:5px}
+.c li::marker{color:var(--faint)}
+.flags{margin-top:auto;padding-top:10px;display:flex;flex-wrap:wrap;gap:5px}
+.flag{font-family:var(--mono);font-size:9px;letter-spacing:.05em;text-transform:uppercase;background:var(--loss);color:var(--card);padding:3px 6px}
+.flag.ok{background:var(--gain)}
+
+
+table{width:100%;border-collapse:collapse;background:var(--card);border:2px solid var(--ink)}
+th{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;text-align:left;padding:9px 10px;background:var(--ink);color:var(--card)}
+td{padding:9px 10px;border-bottom:1px solid var(--rule);font-size:13.5px;vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.co{font-family:var(--disp);font-weight:700;font-size:13px;white-space:nowrap}
+td.vd{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;white-space:nowrap}
+.vd.del{color:var(--gain)} .vd.part{color:var(--gold)} .vd.miss{color:var(--loss)}
+
+/* call */
+.calls{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.call{border:2px solid var(--ink);padding:15px;background:var(--card)}
+.call.buy{border-left:9px solid var(--gain)}
+.call.wait{border-left:9px solid var(--gold)}
+.call.avoid{border-left:9px solid var(--loss)}
+.call .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.call h3{margin:4px 0 7px;font-size:17px}
+.call p{margin:0;font-size:13.5px}
+
+
+/* commentary */
+.themes{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.th{background:var(--card);border:2px solid var(--ink);padding:14px}
+.th .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--mute);border-bottom:2px solid var(--ink);padding-bottom:6px;margin-bottom:9px}
+.th ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.th li{margin-bottom:6px}
+.th li::marker{color:var(--faint)}
+.th b{font-family:var(--mono);font-size:12.5px;font-weight:700}
+
+/* red flags */
+.rf{background:var(--card);border:2px solid var(--ink)}
+.rfg{border-bottom:2px solid var(--ink)}
+.rfg:last-child{border-bottom:0}
+.rfh{display:flex;align-items:center;gap:9px;padding:8px 13px;background:var(--card2)}
+.sev{width:11px;height:11px;flex-shrink:0}
+.sev.hi{background:var(--loss)} .sev.md{background:var(--gold)} .sev.lo{background:var(--faint)}
+.rfh span{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase}
+.rfr{display:grid;grid-template-columns:118px 1fr;gap:12px;padding:9px 13px;border-top:1px solid var(--rule);font-size:13.5px}
+.rfr b{font-family:var(--disp);font-weight:700;font-size:12.5px}
+
+/* ind-ra verdict */
+.indra{background:var(--card);border:2px solid var(--ink);padding:16px}
+.split{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:2px;background:var(--rule);border:1px solid var(--rule);margin-bottom:16px}
+.sp{background:var(--card2);padding:13px 14px}
+.sp .n{font-family:var(--disp);font-weight:800;font-size:34px;line-height:1;letter-spacing:-.03em;color:var(--loss)}
+.sp.ok .n{color:var(--gain)}
+.sp .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-top:6px}
+.sp .w{font-size:12.5px;color:var(--mute);margin-top:7px}
+.vs{display:grid;grid-template-columns:82px 1fr;gap:11px;padding:7px 0;border-bottom:1px solid var(--rule);font-size:13.5px;align-items:start}
+.vs:last-child{border-bottom:0}
+.vs em{font-family:var(--mono);font-size:9.5px;font-style:normal;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding-top:2px}
+.vs em.y{color:var(--gain)} .vs em.n{color:var(--loss)} .vs em.p{color:var(--gold)}
+
+/* regional strip */
+.reg{display:grid;grid-template-columns:repeat(auto-fit,minmax(112px,1fr));gap:2px;background:var(--rule);border:2px solid var(--ink);margin-top:16px}
+.rg{background:var(--card2);padding:11px 12px;text-align:center}
+.rg .n{font-family:var(--mono);font-size:15px;font-weight:700}
+.rg .n.up{color:var(--gain)} .rg .n.dn{color:var(--loss)}
+.rg .l{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-top:4px}
+
+/* triggers */
+.trigs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:14px}
+.tg{border:2px solid var(--ink);padding:14px;background:var(--card)}
+.tg .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
+.tg.tg-up .k{color:var(--gain)} .tg.tg-dn .k{color:var(--loss)}
+.tg ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.tg li{margin-bottom:6px}
+
+/* caveats */
+.cav{background:var(--card2);border:2px solid var(--ink);padding:15px 15px 15px 30px;margin:0;font-size:13.5px;line-height:1.55}
+.cav li{margin-bottom:8px}
+.cav li:last-child{margin-bottom:0}
+.cav b{font-family:var(--mono);font-size:12px;font-weight:700}
+
+
+/* wide data tables */
+.tw{overflow-x:auto;border:2px solid var(--ink);background:var(--card)}
+.tw table{border:0;min-width:660px}
+.tw th{position:sticky;top:0}
+td.num{font-family:var(--mono);font-size:12px;font-weight:700;text-align:right;white-space:nowrap}
+td.num.up{color:var(--gain)} td.num.dn{color:var(--loss)} td.num.ns{color:var(--faint);font-weight:400}
+th.r{text-align:right}
+td.kpi{font-family:var(--mono);font-size:11.5px;text-align:right;white-space:nowrap}
+.asof{font-family:var(--mono);font-size:11px;color:var(--mute);margin-top:10px;line-height:1.6}
+.asof b{color:var(--ink)}
+
+footer{border-top:3px solid var(--ink);padding-top:15px;font-size:12.5px;color:var(--mute)}
+footer p{margin:0 0 8px;max-width:80ch}
+
+@media(max-width:620px){
+  .row{grid-template-columns:74px 1fr;gap:7px}
+  .row .co{font-size:10.5px}
+  .scale{padding-left:81px}
+  .lrow{grid-template-columns:80px 1fr 74px}
+  .lrow .co{font-size:11px}
+  .wrap{padding:20px 13px 60px}
+  td.hide,th.hide{display:none}
+}
+@media(prefers-reduced-motion:no-preference){
+  .b,.lbar,.fp i{animation:g .7s cubic-bezier(.2,.7,.3,1) both}
+  @keyframes g{from{transform:scaleX(.001);opacity:0}to{transform:scaleX(1);opacity:1}}
+  .b.neg{transform-origin:right} .b.v,.b.pos,.lbar{transform-origin:left}
+  .fp i{animation-name:gy;transform-origin:bottom}
+  @keyframes gy{from{transform:scaleY(.001)}to{transform:scaleY(1)}}
+}
+
+.badge.nsc{color:var(--mute);border-color:var(--mute)}
+.lsub{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin:14px 0 6px}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Sector earnings review · Quarter ended 30 September 2026</div>
+  <h1>Power Generation<br>Q2 FY27</h1>
+  <p class="dek">Demand and capacity both grew, but headline profits mislead: one-offs and tax credits flattered Adani Power and NLC, while new capacity doubled interest bills at NHPC and Torrent.</p>
+  <div class="thesis">
+    <div class="t up"><div class="n">+13%</div><div class="l">NTPC generation YoY</div></div>
+    <div class="t dn"><div class="n">₹2,422 cr</div><div class="l">Adani Power prior-period revenue in Q2</div></div>
+    <div class="t dn"><div class="n">+100%</div><div class="l">NHPC interest cost YoY</div></div>
+    <div class="t dn"><div class="n">−50%</div><div class="l">NLC India PBT YoY</div></div>
+  </div>
+</header>
+
+<section>
+  <h2>The scissor</h2>
+  <div class="rule"></div>
+  <p class="note">The sector map calls for generation growth against realisation per kWh. Generation was verified only for NTPC, so revenue growth stands in. Bars show revenue growth YoY against operating-profit growth YoY (before other income), on one axis, from filed consolidated quarterlies. Adani Power is shown excluding ₹2,422 cr of prior-period revenue.</p>
+  <div class="scissor">
+    <div class="legend">
+      <span><i class="sw" style="background:var(--vol)"></i>Revenue growth YoY</span>
+      <span><i class="sw" style="background:var(--gain)"></i>Operating profit growth YoY</span>
+    </div>
+    <div id="scissor"></div>
+    <div class="scale"><span>−20</span><span>+30</span><span>+80</span><span>+130</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>Operating margin — the league table</h2>
+  <div class="rule"></div>
+  <p class="note">Consolidated operating margin before other income. Renewables and hydro carry no fuel cost and run 64–89% margins. Thermal and integrated utilities with distribution run 18–43%. Compare within each group, not across.</p>
+  <div class="league">
+    <div class="lsub">Operating margin, Q2 FY27 (change)</div>
+    <div id="league"></div>
+  </div>
+</section>
+
+<section>
+  <h2>The pressure point: the interest bill on new capacity</h2>
+  <div class="rule"></div>
+  <div class="fuel">
+    <h2>Interest cost change YoY, %</h2>
+    <div class="fline" id="fuel"></div>
+    <div class="warn">
+      <div><strong>What changed</strong>Projects moving out of construction stop capitalising interest. At NHPC and Torrent interest doubled; at NTPC Green it rose 83%.</div>
+      <div><strong>Who absorbed it</strong>NHPC's operating profit rose 42%, enough to lift PBT 21%. NLC's fell 3%, so PBT halved.</div>
+      <div><strong>The one-off layer</strong>Adani Power booked ₹2,422 cr of prior-period revenue and a ₹231 cr tax credit. NLC booked an ₹863 cr tax credit. JP Power took a ₹511 cr exceptional charge.</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Company by company</h2>
+  <div class="rule"></div>
+  <p class="note">The badge scores Q2 delivery against verified commitments. "Flattered" marks quarters where one-offs drive the headline. Reliance Power and Vedanta Power are not covered in this build.</p>
+  <div class="grid" id="cards"></div>
+</section>
+
+<section>
+  <h2>KPI comparison</h2>
+  <div class="rule"></div>
+  <p class="note">n/v means disclosed but not verified for this build. Realisation per kWh was not verified for any company.</p>
+  <div class="tw">
+  <table>
+    <thead><tr>
+      <th>Company</th><th class="r">Revenue YoY</th><th class="r">Generation YoY</th><th class="r">PLF</th><th class="r">Op. margin</th>
+      <th class="r">Interest YoY</th><th class="r">Basis</th>
+    </tr></thead>
+    <tbody id="kpi"></tbody>
+  </table>
+  </div>
+</section>
+
+<section>
+  <h2>What management said</h2>
+  <div class="rule"></div>
+  <p class="note">From NTPC's and Adani Power's results releases, and NTPC's operational update as reported by HDFC Sky. Tijori had no Q2 transcripts for this set by 15 November.</p>
+  <div class="themes">
+    <div class="th"><div class="k">Demand</div><ul>
+      <li>NTPC: generation +13% to ~118 BU; coal dispatch +28%.</li>
+      <li>NTPC: H1 coal PLF 75.1% against 68.4% for the rest of India.</li>
+    </ul></div>
+    <div class="th"><div class="k">Capacity</div><ul>
+      <li>Adani Power: 18,150 MW operating; Korba II unit 2 in Q4 FY27; Mahan II early FY28.</li>
+      <li>Adani Power: 1,320 MW Uttarakhand supply award.</li>
+    </ul></div>
+    <div class="th"><div class="k">One-offs</div><ul>
+      <li>Adani Power: ₹2,422 cr prior-period revenue from revised historic energy charges.</li>
+    </ul></div>
+    <div class="th"><div class="k">Long term</div><ul>
+      <li>NTPC: 60 GW renewable target by 2032.</li>
+    </ul></div>
+  </div>
+</section>
+
+<section>
+  <h2>Red flags</h2>
+  <div class="rule"></div>
+  <p class="note">Ranked by how much they should change position sizing.</p>
+  <div class="rf">
+    <div class="rfg">
+      <div class="rfh"><i class="sev hi"></i><span>Act on these</span></div>
+      <div class="rfr"><b>NLC India</b><div>PBT halved; net profit rests on an ₹863 cr tax credit.</div></div>
+      <div class="rfr"><b>JP Power</b><div>₹705 cr of exceptional charges in two quarters, nature not verified.</div></div>
+    </div>
+    <div class="rfg">
+      <div class="rfh"><i class="sev md"></i><span>Monitor next quarter</span></div>
+      <div class="rfr"><b>Adani Power</b><div>The headline +141% PAT is mostly a one-off; underlying operating profit +13%.</div></div>
+      <div class="rfr"><b>Torrent · NHPC · NTPC Green</b><div>Interest up 83–103% as capitalisation ends.</div></div>
+    </div>
+    <div class="rfg">
+      <div class="rfh"><i class="sev lo"></i><span>Note and move on</span></div>
+      <div class="rfr"><b>Tata Power</b><div>Exceptional gain in net profit; core PAT +4%.</div></div>
+      <div class="rfr"><b>NTPC</b><div>₹321 cr gap between management and Tijori consolidated profit.</div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Walk the talk</h2>
+  <div class="rule"></div>
+  <p class="note">Only Adani Power's commissioning milestone could be checked from public reports.</p>
+  <table>
+    <thead><tr><th>Company</th><th>Promised</th><th class="hide">Delivered</th><th>Verdict</th></tr></thead>
+    <tbody id="score"></tbody>
+  </table>
+</section>
+
+<section>
+  <h2>Was the consensus right?</h2>
+  <div class="rule"></div>
+  <p class="note">No published Q2 poll was found. We score the narrative: capacity additions drive earnings growth across the sector.</p>
+  <div class="indra">
+    <div class="split">
+      <div class="sp ok"><div class="n">12 of 12</div><div class="l">Revenue up YoY</div><div class="w">Demand is there.</div></div>
+      <div class="sp"><div class="n">3 of 12</div><div class="l">Headline flattered</div><div class="w">One-offs matter.</div></div>
+      <div class="sp"><div class="n">5 of 12</div><div class="l">Interest +50% or more</div><div class="w">Funding bites.</div></div>
+    </div>
+    <div class="vs"><em class="y">Right</em><div><b>Capacity drives revenue.</b> SJVN, NTPC Green, Adani Green and NHPC grew revenue 33–117%.</div></div>
+    <div class="vs"><em class="n">Partly</em><div><b>It drives earnings.</b> Interest and depreciation took most of the gain at NTPC Green and Torrent; Adani Power's and NLC's headlines were one-offs.</div></div>
+  </div>
+</section>
+
+<section>
+  <h2>The call</h2>
+  <div class="rule"></div>
+  <div class="calls">
+    <div class="call buy">
+      <div class="k">Own now</div>
+      <h3>NTPC · NHPC · JSW Energy</h3>
+      <p>NTPC grew generation 13% at a fleet PLF well above peers and is −19% over six months. NHPC's new capacity lifted operating profit 42% even after interest doubled. JSW grew operating profit faster than interest.</p>
+    </div>
+    <div class="call wait">
+      <div class="k">Accumulate on evidence</div>
+      <h3>SJVN · Adani Green · NTPC Green · Adani Power</h3>
+      <p>SJVN's step-change needs a second quarter. The renewables need interest growth to slow. Adani Power's underlying growth is 13%, not the headline.</p>
+    </div>
+    <div class="call avoid">
+      <div class="k">Stay out</div>
+      <h3>NLC India · JP Power · CESC · Torrent</h3>
+      <p>NLC and JP Power rest on tax credits or carry large exceptional charges. CESC has no growth. Torrent's interest doubled and other income propped up PBT.</p>
+    </div>
+  </div>
+  <div class="trigs">
+    <div class="tg tg-up"><div class="k">What would make us more positive</div><ul>
+      <li>NLC's PBT recovering without tax credits.</li>
+      <li>Interest growth at the renewables falling below EBITDA growth.</li>
+    </ul></div>
+    <div class="tg tg-dn"><div class="k">What would make us cut</div><ul>
+      <li>A weak monsoon-to-winter demand turn in Q3 generation data.</li>
+      <li>Discom receivables stretching at the PSUs.</li>
+    </ul></div>
+  </div>
+</section>
+
+<section>
+  <h2>Analyst coverage after results</h2>
+  <div class="rule"></div>
+  <p class="note">Dated post-result broker reports were not verified for this build. No targets are shown, rather than undated ones.</p>
+  <div class="tw">
+  <table>
+    <thead><tr><th>Company</th><th>Broker</th><th>Report date</th><th>Rating</th><th class="r">Target (₹)</th><th class="r">Prior (₹)</th><th class="r">Price at report (₹)</th></tr></thead>
+    <tbody id="brk"></tbody>
+  </table>
+  </div>
+</section>
+
+<section>
+  <h2>Price and returns</h2>
+  <div class="rule"></div>
+  <p class="note">Only the two Adani names are up over a year (+31–34%). The PSUs are −1% to −33% over six months despite double-digit revenue growth.</p>
+  <div class="tw">
+  <table>
+    <thead><tr>
+      <th>Company</th><th>Ticker</th><th>Results date</th><th class="r">CMP (₹)</th>
+      <th class="r">1 year</th><th class="r">6 months</th><th class="r">3 months</th><th class="r">MTD</th>
+    </tr></thead>
+    <tbody id="ret"></tbody>
+  </table>
+  </div>
+  <p class="asof">Prices as on 13 Nov 2026 close (Zerodha Kite last price). Anchors: 1Y = 14 Nov 2025, 6M = 15 May 2026, 3M = 14 Aug 2026, MTD = 30 Oct 2026 closes, Kite daily candles (corporate-action adjusted).  Sorted by 1-year return.</p>
+</section>
+
+<section>
+  <h2>Caveats</h2>
+  <div class="rule"></div>
+  <ul class="cav">
+    <li><b>Sources.</b> All financials are consolidated filed quarterlies from Tijori, with operating profit before other income. Commentary comes from the NTPC and Adani Power releases and press reports of NTPC's operational update.</li>
+    <li><b>Tijori against management.</b>
+      <ul>
+        <li>Adani Power: reported EBITDA ₹8,743 cr = Tijori operating profit ₹8,231 cr + other income ₹512 cr. It reconciles. The underlying figure removes ₹2,422 cr of prior-period revenue; this is our adjustment.</li>
+        <li>NTPC: management's consolidated PAT ₹7,351 cr against Tijori's net profit ₹7,030 cr. We could not reconcile the ₹321 cr gap; both are shown.</li>
+      </ul></li>
+    <li><b>Core metric.</b> Realisation per kWh, PLF and generation were verified only for NTPC and Adani Power. This is the weakest part of the report.</li>
+    <li><b>Reuse.</b> Tata Power and JSW Energy figures and prices come from the BESS build on the same date.</li>
+    <li><b>Coverage.</b> 12 of 14 names are covered. Results dates marked n/s were not verified.</li>
+  </ul>
+</section>
+
+<footer>
+  <p><b>Universe:</b> 12 listed Indian power generators, quarter ended 30 September 2026. Sources: filed quarterlies via Tijori; company releases; HDFC Sky; PV Magazine. Prices from Zerodha Kite. Built 16 November 2026.</p>
+</footer>
+
+</div>
+<script>
+const C=(n,t,b,bl,k,p,f)=>({n,t,b,bl,k,p,f});
+const SC=[["SJVN",117.4,84.3],["NTPC Green",53.3,56.6],["Adani Green",41.6,45.9],["NHPC",33.2,41.9],["Adani Power (ex one-off)",26.5,12.8],["Tata Power",26.3,11.1],["Torrent Power",24.5,15.4],["JSW Energy",23.0,20.8],["NTPC",21.2,22.0],["NLC India",13.3,-3.4],["CESC",6.5,0.4],["JP Power",5.1,39.5]];
+const MIN=-20,MAX=130,SCU1="%",SCU2="%";
+const LEAGUES=[["league",[["Adani Green",89.2,"+2.6 pts YoY; −0.8 QoQ"],["NTPC Green",88.4,"+2.0 pts YoY; −0.9 QoQ"],["SJVN",70.6,"−12.7 pts YoY (thermal mix); +7.2 QoQ"],["NHPC",64.2,"+3.9 pts YoY; +2.4 QoQ"],["JSW Energy",56.8,"−1.1 pts YoY; +1.6 QoQ"],["JP Power",43.4,"+10.7 pts YoY; +0.7 QoQ"],["Adani Power (ex one-off)",34.1,"−4.2 pts YoY; reported 42.3%"],["NLC India",32.5,"−5.6 pts YoY; −0.4 QoQ"],["NTPC",28.8,"+0.2 pts YoY; −3.2 QoQ"],["CESC",20.3,"−1.2 pts YoY; +0.7 QoQ"],["Tata Power",20.0,"−2.7 pts YoY; −0.3 QoQ"],["Torrent Power",17.7,"−1.4 pts YoY; −1.2 QoQ"]],90,40,22,v=>`${v.toFixed(1)}%`]];
+const FU=[["TORRENT",103],["NHPC",100],["NTPCG",83],["SJVN",55],["NLC",52],["AGEL",30],["NTPC",19],["JSW",14],["ADANIP",-10]];
+const FUMAX=105,FUFMT=v=>`${v>0?'+':v<0?'−':''}${Math.abs(v).toFixed(0)}%`;
+const CO=[
+ C("NTPC","NTPC · Large","nsc","Not scored",[["+13%","Generation (~118 BU)",1],["₹54,270 cr","Revenue (+21%)",1],["75.1%","H1 coal PLF (rest of India 68.4%)",1],["₹7,351 cr","Cons. PAT, mgmt (+41%)",1]],
+  ["Operating profit +22% on generation +13%. Coal dispatch +28%.","Interest rose 19% to ₹4,086 cr with capex.","Management's ₹7,351 cr consolidated PAT is ₹321 cr above Tijori's ₹7,030 cr; not reconciled.","Verdict: the steadiest compounder in the set. −19% over six months."],
+  [["Capex debt",""],["PLF","ok"]]),
+ C("Adani Power","ADANIPOWER · Large","nsc","Flattered",[["₹2,422 cr","Prior-period revenue",-1],["+13%","Underlying op. profit YoY",0],["70.1%","PLF",1],["₹7,019 cr","PAT (+141%)",1]],
+  ["Revenue included ₹2,422 cr of prior-period revenue from revised historic energy charges. A ₹231 cr tax credit also helped.","Excluding it, operating profit rose 13% and the margin fell to 34% from 38%.","18,150 MW operating; 26.4 BU sold. Korba Phase-II unit 1 synchronised; unit 2 due Q4 FY27.","Verdict: the headline is a one-off. The underlying business grew modestly. +34% in a year."],
+  [["One-off revenue",""],["Tax credit",""],["Capacity","ok"]]),
+ C("Adani Green","ADANIGREEN · Large","nsc","Not scored",[["₹4,258 cr","Revenue (+41.6%)",1],["89.2%","Op. margin (86.5% YoY)",1],["₹2,119 cr","Interest (+30%)",-1],["₹673 cr","Net profit (+15%)",0]],
+  ["Operating profit +46% on new capacity.","Interest and depreciation rose 30%; PBT ₹856 cr.","Last year's profit had a ₹237 cr tax credit.","Verdict: capacity is converting to EBITDA; leverage takes most of it. +31% in a year."],
+  [["Leverage",""],["Growth","ok"]]),
+ C("NTPC Green","NTPCGREEN · Large","nsc","Not scored",[["₹938 cr","Revenue (+53%)",1],["88.4%","Op. margin (86.5% YoY)",1],["₹378 cr","Interest (+83%)",-1],["₹137 cr","Net profit (+56%)",1]],
+  ["Revenue +53% on capacity additions.","Interest +83% and depreciation +49% absorb most of the operating gain.","Verdict: growth with a heavy funding bill. −16% in a year."],
+  [["Interest +83%",""],["Growth","ok"]]),
+ C("JSW Energy","JSWENERGY · Mid","nsc","Not scored",[["₹6,368 cr","Revenue (+23%)",1],["56.8%","Op. margin (57.9% YoY)",0],["₹1,056 cr","Net profit (+50%)",1],["₹1,615 cr","Interest (+14%)",-1]],
+  ["Operating profit +21%; PBT +41%.","Interest grew slower than operating profit.","Covered in more detail in the BESS review.","Verdict: clean growth. Flat over a year."],
+  [["Leverage",""],["Growth","ok"]]),
+ C("Tata Power","TATAPOWER · Large","nsc","Not scored",[["₹19,636 cr","Revenue (+26%)",1],["20.0%","Op. margin (22.7% YoY)",-1],["+4.4%","PAT before exceptional",0],["₹1,366 cr","Net profit (+49%)",1]],
+  ["Operating profit +11% on revenue +26%; margin −2.7 pts.","Net profit +49% includes a ₹119 cr exceptional gain and associate income.","Covered in more detail in the BESS review.","Verdict: revenue grows, core profit does not. −10% in a year."],
+  [["Margin −2.7 pts",""],["Exceptional",""]]),
+ C("NHPC","NHPC · Mid","nsc","Not scored",[["₹4,483 cr","Revenue (+33%)",1],["64.2%","Op. margin (60.2% YoY)",1],["₹556 cr","Interest (+100%)",-1],["₹1,549 cr","Net profit (+52%)",1]],
+  ["Operating profit +42% as new hydro capacity commissioned.","Interest doubled and depreciation rose 38% as projects moved out of construction.","PBT +21%; net profit +52% on a lower tax charge.","Verdict: capacity is finally earning, but financing costs now hit the P&amp;L. −6% in a year."],
+  [["Interest doubled",""],["Capacity","ok"]]),
+ C("SJVN","SJVN · Small","nsc","Not scored",[["₹2,244 cr","Revenue (+117%)",1],["70.6%","Op. margin (83.3% YoY)",0],["₹657 cr","Net profit (2.1x)",1],["₹331 cr","Fuel cost (nil YoY)",0]],
+  ["Revenue doubled as thermal capacity came on: fuel cost appeared for the first time.","Lower margin is a mix effect from thermal power, not a fall in hydro margins.","Interest +55% to ₹488 cr.","Verdict: a step-change quarter; the market has not reacted. −31% in a year."],
+  [["Mix change",""],["Growth","ok"]]),
+ C("Torrent Power","TORNTPOWER · Mid","nsc","Not scored",[["₹9,802 cr","Revenue (+24.5%)",1],["17.7%","Op. margin (19.1% YoY)",-1],["₹439 cr","Interest (2x)",-1],["₹820 cr","Net profit (+13%)",0]],
+  ["Operating profit +15%; margin −1.4 pts.","Interest doubled. Other income jumped to ₹249 cr from ₹78 cr and supported PBT.","Verdict: growth, but the funding bill and other income do the work. −6% in a year."],
+  [["Interest doubled",""],["OI-supported",""]]),
+ C("NLC India","NLCINDIA · Small","miss","Flattered",[["₹4,732 cr","Revenue (+13%)",0],["32.5%","Op. margin (38.1% YoY)",-1],["−50%","PBT YoY",-1],["−₹863 cr","Tax (credit)",-1]],
+  ["Operating profit fell 3%; interest +52%; depreciation +33%.","PBT halved. Net profit doubled only because of an ₹863 cr tax credit.","Verdict: the weakest underlying print among the PSUs. −33% over six months."],
+  [["Tax credit",""],["PBT −50%",""]]),
+ C("CESC","CESC · Small","nsc","Not scored",[["₹5,607 cr","Revenue (+6.5%)",0],["20.3%","Op. margin (21.5% YoY)",-1],["₹423 cr","Net profit (−1%)",0],["+0.4%","Operating profit YoY",0]],
+  ["Flat quarter: revenue +6.5%, operating profit flat.","Verdict: a regulated utility with no growth this quarter. −24% in a year."],
+  [["No growth",""]]),
+ C("JP Power","JPPOWER · Micro","miss","Exceptional hit",[["₹1,512 cr","Revenue (+5%)",0],["43.4%","Op. margin (32.7% YoY)",1],["−₹511 cr","Exceptional charge",-1],["₹33 cr","Net profit (−82%)",-1]],
+  ["Operating profit +39%, but a ₹511 cr exceptional charge (₹194 cr in Q1) wiped out PBT.","The nature of the charge was not verified.","Verdict: operations improved; the balance sheet clean-up is not done. −21% in a year."],
+  [["Exceptional",""],["Op. margin","ok"]])
+];
+const KPI=[
+ ["NTPC","+21.2%","+13%","75.1% (H1 coal)","28.8%","+19%","Cons.; Tijori + release"],
+ ["Adani Power","+44.5% (+26.5% ex)","n/v","70.1%","34.1% ex one-off","−10%","Cons.; Tijori + release"],
+ ["Adani Green","+41.6%","n/v","n/v","89.2%","+30%","Cons.; Tijori"],
+ ["NTPC Green","+53.3%","n/v","n/v","88.4%","+83%","Cons.; Tijori"],
+ ["JSW Energy","+23.0%","n/v","n/v","56.8%","+14%","Cons.; Tijori"],
+ ["Tata Power","+26.3%","n/v","n/v","20.0%","n/v","Cons.; Tijori"],
+ ["NHPC","+33.2%","n/v","n/v","64.2%","+100%","Cons.; Tijori"],
+ ["SJVN","+117%","n/v","n/v","70.6%","+55%","Cons.; Tijori"],
+ ["Torrent Power","+24.5%","n/v","n/v","17.7%","+103%","Cons.; Tijori"],
+ ["NLC India","+13.3%","n/v","n/v","32.5%","+52%","Cons.; Tijori"],
+ ["CESC","+6.5%","n/v","n/v","20.3%","−1%","Cons.; Tijori"],
+ ["JP Power","+5.1%","n/v","n/v","43.4%","−16%","Cons.; Tijori"]
+];
+const BRK=[["All","Not verified this build","—","—","—","—","—"]];
+const SCORE=[
+ ["Adani Power","Korba Phase-II unit 1 synchronisation","Synchronised; unit 2 now guided for Q4 FY27.","del","On track"]
+];
+const SPAN=MAX-MIN,Z=(0-MIN)/SPAN*100;
+document.getElementById("scissor").innerHTML=SC.map(([n,v,e],i)=>{
+ const bar=(val,cls,u)=>{const w=Math.max(Math.abs(val),0.3)/SPAN*100;
+  const l=val>=0?Z:Z-w;
+  return `<i class="b ${cls} ${val>=0?'pos':'neg'}" style="left:${l}%;width:${w}%;animation-delay:${i*45}ms"><span>${val>0?'+':''}${val}${u}</span></i>`;};
+ return `<div class="row"><div class="co">${n}</div><div class="track"><i class="axis" style="left:${Z}%"></i>${bar(v,'v',SCU1)}${bar(e,'e',SCU2)}</div></div>`;
+}).join("");
+const league=(id,rows,max,hi,mid,fmt)=>{document.getElementById(id).innerHTML=rows.map(([n,v,d],i)=>{
+ const cls=v>=hi?"":v>=mid?"mid":"low";
+ return `<div class="lrow"><div class="co">${n}</div>
+ <div><i class="lbar ${cls}" style="display:block;width:${Math.max(v,0)/max*100}%;animation-delay:${i*40}ms"></i></div>
+ <div><div class="v">${fmt(v)}</div><div class="d">${d}</div></div></div>`;}).join("");};
+LEAGUES.forEach(([id,rows,max,hi,mid,fmt])=>league(id,rows,max,hi,mid,fmt));
+document.getElementById("fuel").innerHTML=FU.map(([l,v],i)=>
+ `<div class="fp"><b>${FUFMT(v)}</b><i style="height:${Math.abs(v)/FUMAX*88}px;animation-delay:${i*120}ms"></i><em>${l}</em></div>`).join("");
+document.getElementById("cards").innerHTML=CO.map(c=>`
+ <article class="c">
+  <div class="chead"><div><h3>${c.n}</h3><div class="tick">${c.t}</div></div><div class="badge ${c.b}">${c.bl}</div></div>
+  <div class="tiles">${c.k.map(([n,l,s])=>`<div class="tile"><div class="n ${s===1?'up':s===-1?'dn':''}">${n}</div><div class="l">${l}</div></div>`).join("")}</div>
+  <ul>${c.p.map(x=>`<li>${x}</li>`).join("")}</ul>
+  <div class="flags">${c.f.map(([t,k])=>`<span class="flag ${k}">${t}</span>`).join("")}</div>
+ </article>`).join("");
+document.getElementById("kpi").innerHTML=KPI.map(r=>
+ `<tr><td class="co">${r[0]}</td>`+r.slice(1).map(c=>`<td class="kpi">${c}</td>`).join("")+`</tr>`).join("");
+document.getElementById("brk").innerHTML=BRK.map(r=>
+ `<tr><td class="co">${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td class="num">${r[4]}</td><td class="num ${r[5].includes('↓')?'dn':r[5].includes('↑')?'up':''}">${r[5]}</td><td class="num">${r[6]}</td></tr>`).join("");
+const RET=[["Adani Power", "ADANIPOWER", "23 Oct", "205.67", "+33.6%", "-7.1%", "+0.2%", "+8.8%"], ["Adani Green", "ADANIGREEN", "n/s", "1,403.00", "+31.3%", "+1.7%", "+4.1%", "+8.0%"], ["JSW Energy", "JSWENERGY", "n/s", "514.55", "-2.7%", "-0.1%", "-8.1%", "+2.8%"], ["NTPC", "NTPC", "31 Oct", "319.10", "-2.8%", "-19.3%", "-6.1%", "+0.9%"], ["NHPC", "NHPC", "n/s", "75.83", "-5.6%", "-1.3%", "-1.4%", "-2.5%"], ["Torrent Power", "TORNTPOWER", "n/s", "1,221.00", "-6.1%", "-16.7%", "-6.7%", "+4.1%"], ["NLC India", "NLCINDIA", "n/s", "237.91", "-6.7%", "-32.6%", "-13.6%", "+4.4%"], ["Tata Power", "TATAPOWER", "n/s", "348.00", "-10.4%", "-14.5%", "-8.9%", "+0.9%"], ["NTPC Green", "NTPCGREEN", "n/s", "82.97", "-15.7%", "-23.2%", "-9.7%", "+0.6%"], ["JP Power", "JPPOWER", "n/s", "14.07", "-20.8%", "-28.0%", "-19.1%", "+10.6%"], ["CESC", "CESC", "n/s", "128.48", "-23.6%", "-26.0%", "-20.6%", "+3.1%"], ["SJVN", "SJVN", "n/s", "57.41", "-31.2%", "-25.8%", "-14.6%", "+7.5%"]];
+document.getElementById("ret").innerHTML=RET.map(r=>{
+ const cell=v=>{ if(v==="n/s") return `<td class="num ns">n/s</td>`;
+   const cls=v.startsWith("+")?"up":v.startsWith("-")?"dn":""; return `<td class="num ${cls}">${v}</td>`;};
+ return `<tr><td class="co">${r[0]}</td><td class="tick">${r[1]}</td><td>${r[2]}</td>`
+  +`<td class="num">${r[3]==="n/s"?'<span class="ns">n/s</span>':r[3]}</td>`+r.slice(4).map(cell).join("")+`</tr>`;
+}).join("");
+document.getElementById("score").innerHTML=SCORE.map(([c,p,d,k,v])=>
+ `<tr><td class="co">${c}</td><td>${p}</td><td class="hide">${d}</td><td class="vd ${k}">${v}</td></tr>`).join("");
+</script></body></html>

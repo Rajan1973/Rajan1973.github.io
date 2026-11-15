@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Platform Fintech Q2 FY27 — Sector Earnings Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Roboto+Mono:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --stone:#E3E0D9; --card:#F3F1EC; --card2:#EAE7E0;
+  --ink:#1F1D1A; --mute:#6E6A62; --faint:#9A958B; --rule:#C9C4B9;
+  --gain:#1D5C7A; --loss:#A8382C; 
+  --vol:#8E8879; --gold:#B4842A;
+  --disp:'Archivo',system-ui,sans-serif;
+  --serif:'Source Serif 4',Georgia,serif;
+  --mono:'Roboto Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--stone);color:var(--ink);font-family:var(--serif);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:28px 20px 90px}
+section{margin-bottom:40px}
+
+/* type */
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
+h1{font-family:var(--disp);font-weight:800;font-size:clamp(34px,7vw,62px);line-height:.94;letter-spacing:-.03em;margin:.18em 0 .22em;text-transform:uppercase}
+h2{font-family:var(--disp);font-weight:700;font-size:clamp(19px,3.2vw,25px);letter-spacing:-.015em;margin:0 0 4px;text-transform:uppercase}
+h3{font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:-.005em;margin:0}
+.dek{font-size:17px;color:var(--mute);max-width:56ch;margin:0}
+.note{font-size:13px;color:var(--mute);margin:4px 0 20px;max-width:70ch}
+.rule{height:3px;background:var(--ink);margin:0 0 16px}
+
+/* thesis stats */
+.thesis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:2px;background:var(--rule);border:2px solid var(--ink);margin-top:26px}
+.t{background:var(--card);padding:13px 15px}
+.t .n{font-family:var(--disp);font-weight:800;font-size:26px;line-height:1.05;letter-spacing:-.02em}
+.t .l{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:5px;line-height:1.35}
+.t.up .n{color:var(--gain)} .t.dn .n{color:var(--loss)}
+
+/* SIGNATURE: the scissor */
+.scissor{background:var(--card);border:2px solid var(--ink);padding:18px 16px 12px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin-bottom:14px}
+.legend span{display:flex;align-items:center;gap:6px}
+.sw{width:13px;height:11px;display:inline-block}
+.row{display:grid;grid-template-columns:104px 1fr;gap:10px;align-items:center;margin-bottom:3px}
+.row .co{font-family:var(--disp);font-weight:600;font-size:12px;text-align:right;line-height:1.15}
+.track{position:relative;height:26px;border-left:2px solid var(--ink);border-right:0}
+.axis{position:absolute;top:0;bottom:0;width:2px;background:var(--ink);opacity:.85}
+.b{position:absolute;height:10px}
+.b.v{top:1px;background:var(--vol)}
+.b.e{top:14px}
+.b.e.pos{background:var(--gain)} .b.e.neg{background:var(--loss)}
+.b span{position:absolute;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:9.5px;font-weight:500;white-space:nowrap;color:var(--ink)}
+.b.pos span,.b.v span{left:calc(100% + 5px)}
+.b.neg span{right:calc(100% + 5px)}
+.scale{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9.5px;color:var(--faint);margin-top:6px;padding-left:114px}
+
+/* league bars */
+.league{background:var(--card);border:2px solid var(--ink);padding:16px}
+.lrow{display:grid;grid-template-columns:112px 1fr 96px;gap:10px;align-items:center;padding:4px 0;border-bottom:1px solid var(--rule)}
+.lrow:last-child{border-bottom:0}
+.lrow .co{font-family:var(--disp);font-weight:600;font-size:12.5px;text-align:right}
+.lbar{height:16px;background:var(--gain);position:relative}
+.lbar.mid{background:#4A7F91} .lbar.low{background:var(--loss)}
+.lrow .v{font-family:var(--mono);font-size:12px;font-weight:700;text-align:right}
+.lrow .d{font-family:var(--mono);font-size:10px;color:var(--mute);text-align:right}
+
+/* fuel strip */
+.fuel{background:var(--ink);color:var(--card);border:2px solid var(--ink);padding:18px}
+.fuel h2{color:var(--card)}
+.fline{display:flex;align-items:flex-end;gap:0;height:110px;margin:20px 0 6px}
+.fp{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:6px}
+.fp i{display:block;width:100%;max-width:52px;background:var(--gold)}
+.fp b{font-family:var(--mono);font-size:12px;font-weight:700}
+.fp em{font-family:var(--mono);font-size:9.5px;font-style:normal;letter-spacing:.09em;text-transform:uppercase;color:#A9A296}
+.warn{border-top:1px solid #4A453C;margin-top:14px;padding-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
+.warn div{font-size:13.5px;color:#D6D1C6}
+.warn strong{display:block;font-family:var(--mono);font-size:17px;font-weight:700;color:var(--gold);margin-bottom:2px}
+
+/* company cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
+.c{background:var(--card);border:2px solid var(--ink);padding:14px;display:flex;flex-direction:column}
+.chead{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:2px}
+.tick{font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacing:.06em}
+.badge{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 6px;border:1.5px solid;white-space:nowrap;flex-shrink:0}
+.badge.del{color:var(--gain);border-color:var(--gain)}
+.badge.part{color:var(--gold);border-color:var(--gold)}
+.badge.miss{color:var(--loss);border-color:var(--loss)}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);margin:11px 0}
+.tile{background:var(--card2);padding:7px 9px}
+.tile .n{font-family:var(--mono);font-size:15px;font-weight:700;line-height:1.15}
+.tile .l{font-family:var(--mono);font-size:8.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:3px}
+.tile .n.up{color:var(--gain)} .tile .n.dn{color:var(--loss)}
+.c ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.c li{margin-bottom:5px}
+.c li::marker{color:var(--faint)}
+.flags{margin-top:auto;padding-top:10px;display:flex;flex-wrap:wrap;gap:5px}
+.flag{font-family:var(--mono);font-size:9px;letter-spacing:.05em;text-transform:uppercase;background:var(--loss);color:var(--card);padding:3px 6px}
+.flag.ok{background:var(--gain)}
+
+
+table{width:100%;border-collapse:collapse;background:var(--card);border:2px solid var(--ink)}
+th{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;text-align:left;padding:9px 10px;background:var(--ink);color:var(--card)}
+td{padding:9px 10px;border-bottom:1px solid var(--rule);font-size:13.5px;vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.co{font-family:var(--disp);font-weight:700;font-size:13px;white-space:nowrap}
+td.vd{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;white-space:nowrap}
+.vd.del{color:var(--gain)} .vd.part{color:var(--gold)} .vd.miss{color:var(--loss)}
+
+/* call */
+.calls{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.call{border:2px solid var(--ink);padding:15px;background:var(--card)}
+.call.buy{border-left:9px solid var(--gain)}
+.call.wait{border-left:9px solid var(--gold)}
+.call.avoid{border-left:9px solid var(--loss)}
+.call .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.call h3{margin:4px 0 7px;font-size:17px}
+.call p{margin:0;font-size:13.5px}
+
+
+/* commentary */
+.themes{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.th{background:var(--card);border:2px solid var(--ink);padding:14px}
+.th .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--mute);border-bottom:2px solid var(--ink);padding-bottom:6px;margin-bottom:9px}
+.th ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.th li{margin-bottom:6px}
+.th li::marker{color:var(--faint)}
+.th b{font-family:var(--mono);font-size:12.5px;font-weight:700}
+
+/* red flags */
+.rf{background:var(--card);border:2px solid var(--ink)}
+.rfg{border-bottom:2px solid var(--ink)}
+.rfg:last-child{border-bottom:0}
+.rfh{display:flex;align-items:center;gap:9px;padding:8px 13px;background:var(--card2)}
+.sev{width:11px;height:11px;flex-shrink:0}
+.sev.hi{background:var(--loss)} .sev.md{background:var(--gold)} .sev.lo{background:var(--faint)}
+.rfh span{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase}
+.rfr{display:grid;grid-template-columns:118px 1fr;gap:12px;padding:9px 13px;border-top:1px solid var(--rule);font-size:13.5px}
+.rfr b{font-family:var(--disp);font-weight:700;font-size:12.5px}
+
+/* ind-ra verdict */
+.indra{background:var(--card);border:2px solid var(--ink);padding:16px}
+.split{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:2px;background:var(--rule);border:1px solid var(--rule);margin-bottom:16px}
+.sp{background:var(--card2);padding:13px 14px}
+.sp .n{font-family:var(--disp);font-weight:800;font-size:34px;line-height:1;letter-spacing:-.03em;color:var(--loss)}
+.sp.ok .n{color:var(--gain)}
+.sp .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-top:6px}
+.sp .w{font-size:12.5px;color:var(--mute);margin-top:7px}
+.vs{display:grid;grid-template-columns:82px 1fr;gap:11px;padding:7px 0;border-bottom:1px solid var(--rule);font-size:13.5px;align-items:start}
+.vs:last-child{border-bottom:0}
+.vs em{font-family:var(--mono);font-size:9.5px;font-style:normal;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding-top:2px}
+.vs em.y{color:var(--gain)} .vs em.n{color:var(--loss)} .vs em.p{color:var(--gold)}
+
+/* regional strip */
+.reg{display:grid;grid-template-columns:repeat(auto-fit,minmax(112px,1fr));gap:2px;background:var(--rule);border:2px solid var(--ink);margin-top:16px}
+.rg{background:var(--card2);padding:11px 12px;text-align:center}
+.rg .n{font-family:var(--mono);font-size:15px;font-weight:700}
+.rg .n.up{color:var(--gain)} .rg .n.dn{color:var(--loss)}
+.rg .l{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-top:4px}
+
+/* triggers */
+.trigs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:14px}
+.tg{border:2px solid var(--ink);padding:14px;background:var(--card)}
+.tg .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
+.tg.tg-up .k{color:var(--gain)} .tg.tg-dn .k{color:var(--loss)}
+.tg ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.tg li{margin-bottom:6px}
+
+/* caveats */
+.cav{background:var(--card2);border:2px solid var(--ink);padding:15px 15px 15px 30px;margin:0;font-size:13.5px;line-height:1.55}
+.cav li{margin-bottom:8px}
+.cav li:last-child{margin-bottom:0}
+.cav b{font-family:var(--mono);font-size:12px;font-weight:700}
+
+
+/* wide data tables */
+.tw{overflow-x:auto;border:2px solid var(--ink);background:var(--card)}
+.tw table{border:0;min-width:660px}
+.tw th{position:sticky;top:0}
+td.num{font-family:var(--mono);font-size:12px;font-weight:700;text-align:right;white-space:nowrap}
+td.num.up{color:var(--gain)} td.num.dn{color:var(--loss)} td.num.ns{color:var(--faint);font-weight:400}
+th.r{text-align:right}
+td.kpi{font-family:var(--mono);font-size:11.5px;text-align:right;white-space:nowrap}
+.asof{font-family:var(--mono);font-size:11px;color:var(--mute);margin-top:10px;line-height:1.6}
+.asof b{color:var(--ink)}
+
+footer{border-top:3px solid var(--ink);padding-top:15px;font-size:12.5px;color:var(--mute)}
+footer p{margin:0 0 8px;max-width:80ch}
+
+@media(max-width:620px){
+  .row{grid-template-columns:74px 1fr;gap:7px}
+  .row .co{font-size:10.5px}
+  .scale{padding-left:81px}
+  .lrow{grid-template-columns:80px 1fr 74px}
+  .lrow .co{font-size:11px}
+  .wrap{padding:20px 13px 60px}
+  td.hide,th.hide{display:none}
+}
+@media(prefers-reduced-motion:no-preference){
+  .b,.lbar,.fp i{animation:g .7s cubic-bezier(.2,.7,.3,1) both}
+  @keyframes g{from{transform:scaleX(.001);opacity:0}to{transform:scaleX(1);opacity:1}}
+  .b.neg{transform-origin:right} .b.v,.b.pos,.lbar{transform-origin:left}
+  .fp i{animation-name:gy;transform-origin:bottom}
+  @keyframes gy{from{transform:scaleY(.001)}to{transform:scaleY(1)}}
+}
+
+.badge.nsc{color:var(--mute);border-color:var(--mute)}
+.lsub{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin:14px 0 6px}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Sector earnings review · Quarter ended 30 September 2026</div>
+  <h1>Platform Fintech<br>Q2 FY27</h1>
+  <p class="dek">Profits rose almost everywhere, but two rule changes split the sector: the August closing auction stalled derivative brokers, and IRDAI's commission proposal broke PB Fintech's stock.</p>
+  <div class="thesis">
+    <div class="t dn"><div class="n">−24%</div><div class="l">BSE options premium ADTV QoQ</div></div>
+    <div class="t up"><div class="n">+60%</div><div class="l">Groww operating profit YoY</div></div>
+    <div class="t up"><div class="n">+34.5%</div><div class="l">CDSL revenue QoQ</div></div>
+    <div class="t dn"><div class="n">−36%</div><div class="l">PB Fintech share price, 3 months</div></div>
+  </div>
+</header>
+
+<section>
+  <h2>The scissor</h2>
+  <div class="rule"></div>
+  <p class="note">The sector map calls for revenue growth against contribution-margin change. Contribution margins were not verified for this build, so operating profit (before other income) stands in. Every company grew operating profit faster than revenue except KFin. Jio Financial is a lender and is excluded.</p>
+  <div class="scissor">
+    <div class="legend">
+      <span><i class="sw" style="background:var(--vol)"></i>Revenue growth YoY</span>
+      <span><i class="sw" style="background:var(--gain)"></i>Operating profit growth YoY</span>
+    </div>
+    <div id="scissor"></div>
+    <div class="scale"><span>0</span><span>+32</span><span>+64</span><span>+96</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>Operating margin — the league table</h2>
+  <div class="rule"></div>
+  <p class="note">Consolidated operating margin before other income. Market infrastructure (BSE, CDSL) and Groww run 58–68% margins. Payments and insurance distribution run under 16%.</p>
+  <div class="league">
+    <div class="lsub">Operating margin, Q2 FY27 (change)</div>
+    <div id="league"></div>
+  </div>
+</section>
+
+<section>
+  <h2>The pressure point: the closing auction</h2>
+  <div class="rule"></div>
+  <div class="fuel">
+    <h2>Revenue change QoQ, %</h2>
+    <div class="fline" id="fuel"></div>
+    <div class="warn">
+      <div><strong>The change</strong>A closing auction session from August raised late-day volatility. Groww said it cut premium turnover 21%. BSE's options premium ADTV fell 24% QoQ.</div>
+      <div><strong>Who stalled</strong>BSE (−8.5% QoQ), Angel (flat) and Groww (flat). BSE partly rolled the auction back; its CEO reported a recovery in September.</div>
+      <div><strong>Who did not</strong>CDSL (+34.5% QoQ), KFin, PB Fintech and Paytm earn from accounts, flows and payments, not option premium.</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Company by company</h2>
+  <div class="rule"></div>
+  <p class="note">The badge scores Q2 delivery against verified commitments. None could be scored this quarter. PB Fintech is marked on the regulatory event. Infibeam, MobiKwik and Zaggle are not covered in this build.</p>
+  <div class="grid" id="cards"></div>
+</section>
+
+<section>
+  <h2>KPI comparison</h2>
+  <div class="rule"></div>
+  <p class="note">n/v means disclosed but not verified for this build. n/c means not comparable. Other income / PBT is derived from Tijori.</p>
+  <div class="tw">
+  <table>
+    <thead><tr>
+      <th>Company</th><th class="r">Revenue YoY</th><th class="r">Revenue QoQ</th><th class="r">Op. margin</th><th class="r">Margin chg</th>
+      <th class="r">OI / PBT</th><th class="r">Scale metric</th><th class="r">Balance sheet</th><th class="r">Basis</th>
+    </tr></thead>
+    <tbody id="kpi"></tbody>
+  </table>
+  </div>
+</section>
+
+<section>
+  <h2>What management said</h2>
+  <div class="rule"></div>
+  <p class="note">From results reports by Edgex (Groww), Finimize (BSE), Free Press Journal (Paytm) and Kotak Neo (PB Fintech). Tijori had no Q2 transcripts for this set by 15 November.</p>
+  <div class="themes">
+    <div class="th"><div class="k">Market structure</div><ul>
+      <li>Groww: the closing auction system cut premium turnover 21%.</li>
+      <li>BSE CEO: a "decisive recovery" in September after a partial rollback.</li>
+    </ul></div>
+    <div class="th"><div class="k">Diversification</div><ul>
+      <li>Groww: MTF book ₹4,351 cr; AMC AUM ₹7,179 cr; wealth assets above ₹10,000 cr.</li>
+    </ul></div>
+    <div class="th"><div class="k">Pricing</div><ul>
+      <li>Paytm: MDR could add about 2.5 bps to processing margin within 2–3 quarters.</li>
+    </ul></div>
+    <div class="th"><div class="k">Regulation</div><ul>
+      <li>IRDAI: consultation paper on commission caps and "dark patterns" (late September).</li>
+      <li>Paytm: auditors flagged a ~₹611 cr FEMA show-cause notice.</li>
+    </ul></div>
+  </div>
+</section>
+
+<section>
+  <h2>Red flags</h2>
+  <div class="rule"></div>
+  <p class="note">Ranked by how much they should change position sizing.</p>
+  <div class="rf">
+    <div class="rfg">
+      <div class="rfh"><i class="sev hi"></i><span>Act on these</span></div>
+      <div class="rfr"><b>PB Fintech</b><div>IRDAI's proposed commission caps go to the core of its revenue. The final rules are not out.</div></div>
+      <div class="rfr"><b>Jio Financial</b><div>Net profit −51% as interest cost quadrupled.</div></div>
+    </div>
+    <div class="rfg">
+      <div class="rfh"><i class="sev md"></i><span>Monitor next quarter</span></div>
+      <div class="rfr"><b>BSE · Angel · Groww</b><div>One market-structure change took 8–24% off derivative activity in a quarter.</div></div>
+      <div class="rfr"><b>Paytm</b><div>62% of PBT is other income; a ₹611 cr FEMA notice is pending.</div></div>
+    </div>
+    <div class="rfg">
+      <div class="rfh"><i class="sev lo"></i><span>Note and move on</span></div>
+      <div class="rfr"><b>KFin</b><div>Margin −3.8 pts on cost and depreciation growth.</div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Walk the talk</h2>
+  <div class="rule"></div>
+  <p class="note">No prior-quarter commitments could be verified from public reports. Paytm's new commitment is logged to score next quarter.</p>
+  <table>
+    <thead><tr><th>Company</th><th>Promised</th><th class="hide">Delivered</th><th>Verdict</th></tr></thead>
+    <tbody id="score"></tbody>
+  </table>
+</section>
+
+<section>
+  <h2>Was the consensus right?</h2>
+  <div class="rule"></div>
+  <p class="note">No published Q2 poll was found. We score the narrative: capital-market platforms keep compounding.</p>
+  <div class="indra">
+    <div class="split">
+      <div class="sp ok"><div class="n">9 of 9</div><div class="l">Operating profit up YoY</div><div class="w">Profitability broadened.</div></div>
+      <div class="sp"><div class="n">3 of 9</div><div class="l">Flat or down QoQ</div><div class="w">Derivatives stalled.</div></div>
+      <div class="sp"><div class="n">−41%</div><div class="l">PB Fintech, 4 sessions</div><div class="w">Regulatory risk.</div></div>
+    </div>
+    <div class="vs"><em class="y">Right</em><div><b>Profitability broadens.</b> Every platform grew operating profit; Paytm, Pine Labs and PB Fintech expanded margins from low bases.</div></div>
+    <div class="vs"><em class="n">Partly</em><div><b>Market platforms compound smoothly.</b> One auction change stalled BSE, Groww and Angel for a quarter.</div></div>
+  </div>
+</section>
+
+<section>
+  <h2>The call</h2>
+  <div class="rule"></div>
+  <div class="calls">
+    <div class="call buy">
+      <div class="k">Own now</div>
+      <h3>Groww · CDSL</h3>
+      <p>Groww's non-derivative lines grew fast enough to hold revenue flat through the auction shock, at a 64.5% margin. CDSL earns from market activity without option-premium risk and is −11% in a year.</p>
+    </div>
+    <div class="call wait">
+      <div class="k">Accumulate on evidence</div>
+      <h3>BSE · Paytm · Pine Labs · Angel One</h3>
+      <p>BSE needs September's recovery to show in Q3. Paytm's operating turnaround is real but its PBT still leans on other income. Pine Labs and Angel are improving from cost control and lower interest.</p>
+    </div>
+    <div class="call avoid">
+      <div class="k">Stay out</div>
+      <h3>PB Fintech · Jio Financial · KFin</h3>
+      <p>PB Fintech's revenue model is under IRDAI review. Jio Financial's profit halved as it builds a lending book. KFin is buying growth at a margin cost.</p>
+    </div>
+  </div>
+  <div class="trigs">
+    <div class="tg tg-up"><div class="k">What would make us more positive</div><ul>
+      <li>IRDAI's final rules softer than the consultation paper.</li>
+      <li>BSE's Q3 options premium back above Q1 levels.</li>
+    </ul></div>
+    <div class="tg tg-dn"><div class="k">What would make us cut</div><ul>
+      <li>Further SEBI curbs on F&amp;O participation.</li>
+      <li>An adverse order on Paytm's FEMA notice.</li>
+    </ul></div>
+  </div>
+</section>
+
+<section>
+  <h2>Analyst coverage after results</h2>
+  <div class="rule"></div>
+  <p class="note">Dated post-result broker reports were not verified for this build. No targets are shown, rather than undated ones.</p>
+  <div class="tw">
+  <table>
+    <thead><tr><th>Company</th><th>Broker</th><th>Report date</th><th>Rating</th><th class="r">Target (₹)</th><th class="r">Prior (₹)</th><th class="r">Price at report (₹)</th></tr></thead>
+    <tbody id="brk"></tbody>
+  </table>
+  </div>
+</section>
+
+<section>
+  <h2>Price and returns</h2>
+  <div class="rule"></div>
+  <p class="note">The market already split the sector: Groww, Paytm and BSE are +39% to +52% in a year; PB Fintech, Pine Labs and Jio Financial are −28% to −36%.</p>
+  <div class="tw">
+  <table>
+    <thead><tr>
+      <th>Company</th><th>Ticker</th><th>Results date</th><th class="r">CMP (₹)</th>
+      <th class="r">1 year</th><th class="r">6 months</th><th class="r">3 months</th><th class="r">MTD</th>
+    </tr></thead>
+    <tbody id="ret"></tbody>
+  </table>
+  </div>
+  <p class="asof">Prices as on 13 Nov 2026 close (Zerodha Kite last price). Anchors: 1Y = 14 Nov 2025, 6M = 15 May 2026, 3M = 14 Aug 2026, MTD = 30 Oct 2026 closes, Kite daily candles (corporate-action adjusted).  Sorted by 1-year return.</p>
+</section>
+
+<section>
+  <h2>Caveats</h2>
+  <div class="rule"></div>
+  <ul class="cav">
+    <li><b>Sources.</b> All financials are consolidated filed quarterlies from Tijori, with operating profit before other income. Commentary comes from Edgex, Finimize, Free Press Journal and Kotak Neo. Tijori had no Q2 transcripts for this set by 15 November.</li>
+    <li><b>Core metric.</b> Contribution margin, take rate and GMV were not verified for any company. Operating margin stands in. This is the weakest part of the report.</li>
+    <li><b>Reconciliation.</b> Paytm's ₹2,648 cr revenue and ₹225 cr net profit match Tijori. Groww's ₹1,501.5 cr and ₹725.7 cr match. BSE's ₹809 cr net profit matches.</li>
+    <li><b>Prices.</b> Groww's and Pine Labs' one-year anchors are on or near their November 2025 listing days. Several stocks have split; Kite returns are adjusted.</li>
+    <li><b>Coverage.</b> 10 of 13 names in the reference universe are covered. Results dates marked n/s were not verified.</li>
+  </ul>
+</section>
+
+<footer>
+  <p><b>Universe:</b> 10 listed Indian platform-fintech companies, quarter ended 30 September 2026. Sources: filed quarterlies via Tijori; Edgex; Finimize; Free Press Journal; Kotak Neo. Prices from Zerodha Kite. Built 16 November 2026.</p>
+</footer>
+
+</div>
+<script>
+const C=(n,t,b,bl,k,p,f)=>({n,t,b,bl,k,p,f});
+const SC=[["Groww",47.4,60.4],["PB Fintech",35.0,69.7],["BSE",34.2,43.1],["KFin",30.1,18.4],["Paytm",28.5,91.5],["Pine Labs",24.0,67.1],["CDSL",23.5,28.1],["Angel One",18.7,53.3],["CAMS",9.8,13.1]];
+const MIN=0,MAX=96,SCU1="%",SCU2="%";
+const LEAGUES=[["league",[["BSE",67.9,"+4.3 pts YoY; +1.1 QoQ"],["Groww",64.5,"+5.2 pts YoY; −0.2 QoQ"],["CDSL",57.9,"+2.2 pts YoY; +10.8 QoQ"],["CAMS",45.9,"+1.4 pts YoY; −0.3 QoQ"],["Angel One",44.6,"+10.0 pts YoY; +10.7 QoQ"],["KFin",40.1,"−3.8 pts YoY; +5.9 QoQ"],["Pine Labs",15.6,"+4.0 pts YoY; +2.7 QoQ"],["Paytm",10.2,"+3.4 pts YoY; +1.9 QoQ"],["PB Fintech",7.6,"+1.5 pts YoY; +0.2 QoQ"]],70,40,15,v=>`${v.toFixed(1)}%`]];
+const FU=[["BSE",-8.5],["ANGEL",-0.2],["GROWW",0.1],["CAMS",4.8],["PAYTM",8.2],["PINE",9.4],["KFIN",12.6],["PB",15.4],["CDSL",34.5]];
+const FUMAX=35,FUFMT=v=>`${v>0?'+':v<0?'−':''}${Math.abs(v).toFixed(1)}`;
+const CO=[
+ C("BSE","BSE · Large","nsc","Not scored",[["₹1,433 cr","Revenue (+34%)",1],["67.9%","Op. margin (63.7% YoY)",1],["₹809 cr","Net profit (+45%)",1],["−8.5%","Revenue QoQ",-1]],
+  ["Options premium ADTV +50% YoY but −24% QoQ.","The closing auction session introduced in August raised late-day volatility; some traders cut back. BSE partly rolled it back.","The CEO described a \"decisive recovery\" in September.","Verdict: the highest margin in the set, but the quarter showed how exposed it is to one market-structure change. +39% in a year."],
+  [["Derivative concentration",""],["Margin","ok"]]),
+ C("Groww","GROWW · Large","nsc","Not scored",[["₹1,502 cr","Revenue (+47%)",1],["64.5%","Op. margin (59.3% YoY)",1],["₹726 cr","Net profit (+54%)",1],["−14.3%","Derivatives revenue QoQ",-1]],
+  ["Revenue flat QoQ. Management blamed the closing auction system, which cut premium turnover 21%.","Diversification is working: MTF book ₹4,351 cr (+15% QoQ), AMC AUM ₹7,179 cr (+31% QoQ), wealth assets above ₹10,000 cr.","2.4 cr transacting users, +27% YoY.","Verdict: the best-quality broker print. Non-derivative lines are now growing fast enough to cushion F&O shocks. +51% in a year."],
+  [["F&O exposure",""],["Diversifying","ok"]]),
+ C("Angel One","ANGELONE · Mid","nsc","Not scored",[["₹1,427 cr","Revenue (+18.7%)",1],["44.6%","Op. margin (34.6% YoY)",1],["₹335 cr","Net profit (+58%)",1],["₹147 cr","Interest (₹93 cr YoY)",-1]],
+  ["Operating profit +53% on revenue +19%: a 10-pt margin gain on lower costs.","Revenue flat QoQ, the same closing-auction drag as peers.","Interest rose 58% with the margin-funding book.","Verdict: cost discipline, not growth. +27% in a year."],
+  [["Flat QoQ",""],["Cost control","ok"]]),
+ C("CDSL","CDSL · Mid","nsc","Not scored",[["₹394 cr","Revenue (+23.5%)",1],["57.9%","Op. margin (55.7% YoY)",1],["₹174 cr","Net profit (+24%)",1],["+34.5%","Revenue QoQ",1]],
+  ["The biggest QoQ jump in the set. Depository revenue tracks accounts, IPOs and settlement volumes, not F&O premium.","No Q2 commentary was verified.","Verdict: the cleanest way to own market activity without derivative risk. −11% in a year."],
+  [["IPO-linked",""],["Growth","ok"]]),
+ C("CAMS","CAMS · Mid","nsc","Not scored",[["₹414 cr","Revenue (+9.8%)",0],["45.9%","Op. margin (44.5% YoY)",0],["₹131 cr","Net profit (+14%)",1],["+13%","Operating profit YoY",1]],
+  ["Steady: revenue +10%, operating profit +13%.","Mutual-fund yields are under pressure from fee compression; growth lags AUM growth.","Verdict: dependable but slowing. −8% in a year."],
+  [["Slow growth",""]]),
+ C("KFin Technologies","KFINTECH · Small","nsc","Not scored",[["₹402 cr","Revenue (+30%)",1],["40.1%","Op. margin (43.9% YoY)",-1],["₹100 cr","Net profit (+7%)",0],["₹28 cr","Depreciation (₹18 cr YoY)",-1]],
+  ["Revenue +30%, but operating profit only +18% and net profit +7%.","Employee cost +43% and depreciation +54%, likely from acquisitions; not verified.","Verdict: growth bought at a margin cost. −12% in a year."],
+  [["Margin −3.8 pts",""],["Revenue","ok"]]),
+ C("Paytm","PAYTM · Mid","nsc","Not scored",[["₹2,648 cr","Revenue (+28.5%)",1],["10.2%","Op. margin (6.8% YoY)",1],["₹225 cr","Net profit (₹21 cr YoY)",1],["62%","Other income / PBT",-1]],
+  ["Operating profit nearly doubled to ₹270 cr. Margin +3.4 pts.","Other income (₹182 cr) is still 62% of PBT.","Auditors flagged a pending FEMA show-cause notice of about ₹611 cr; their conclusion was unmodified.","Management: MDR could add about 2.5 bps to processing margin within 2–3 quarters.","Verdict: the turnaround is real at the operating line. +49% in a year."],
+  [["OI 62% of PBT",""],["FEMA notice",""],["Turnaround","ok"]]),
+ C("PB Fintech","POLICYBZR · Mid","miss","Regulatory hit",[["₹2,178 cr","Revenue (+35%)",1],["7.6%","Op. margin (6.1% YoY)",1],["₹192 cr","Net profit (+42%)",1],["−36%","Share price, 3 months",-1]],
+  ["Operating profit +70%, but other income is 48% of PBT.","In late September IRDAI proposed caps on commissions across health, motor and life, and curbs on \"dark patterns\". The stock fell about 41% in four sessions.","No management response was verified.","Verdict: the quarter is good, but the business model is under regulatory review. The numbers no longer drive the stock."],
+  [["IRDAI caps",""],["OI 48% of PBT",""]]),
+ C("Pine Labs","PINELABS · Small","nsc","Not scored",[["₹806 cr","Revenue (+24%)",1],["15.6%","Op. margin (11.6% YoY)",1],["₹39 cr","Net profit (₹6 cr YoY)",1],["₹76 cr","Depreciation",-1]],
+  ["Operating profit +67%. Interest fell to ₹14 cr after IPO proceeds repaid debt.","Depreciation (₹76 cr) still takes 60% of operating profit.","Listed 14 Nov 2025; −30% from its first-day close.","Verdict: profitability is improving fast from a low base."],
+  [["Low base",""],["Margin","ok"]]),
+ C("Jio Financial","JIOFIN · Large","nsc","Not comparable",[["₹1,699 cr","Income (+73%)",1],["₹578 cr","Interest (₹136 cr YoY)",-1],["₹340 cr","Net profit (−51%)",-1],["n/c","Op. margin (lender)",0]],
+  ["A lender, not a platform: operating margin before interest is not comparable with the rest of the set.","Interest cost quadrupled as the loan book scaled. Net profit halved.","Verdict: the lending build is costing profit now. −28% in a year."],
+  [["Profit halved",""],["Lender metrics",""]])
+];
+const KPI=[
+ ["BSE","+34.2%","−8.5%","67.9%","+4.3 pts","11%","Options ADTV −24% QoQ","Net cash","Cons.; Tijori"],
+ ["Groww","+47.4%","+0.1%","64.5%","+5.2 pts","4%","2.4 cr users (+27%)","Net cash","Cons.; Tijori"],
+ ["Angel One","+18.7%","−0.2%","44.6%","+10.0 pts","1%","n/v","Interest ₹147 cr","Cons.; Tijori"],
+ ["CDSL","+23.5%","+34.5%","57.9%","+2.2 pts","10%","n/v","Net cash","Cons.; Tijori"],
+ ["CAMS","+9.8%","+4.8%","45.9%","+1.4 pts","8%","n/v","Net cash","Cons.; Tijori"],
+ ["KFin Technologies","+30.1%","+12.6%","40.1%","−3.8 pts","6%","n/v","Net cash","Cons.; Tijori"],
+ ["Paytm","+28.5%","+8.2%","10.2%","+3.4 pts","62%","n/v","Net cash","Cons.; Tijori"],
+ ["PB Fintech","+35.0%","+15.4%","7.6%","+1.5 pts","48%","n/v","Net cash","Cons.; Tijori"],
+ ["Pine Labs","+24.0%","+9.4%","15.6%","+4.0 pts","42%","n/v","Interest ₹14 cr","Cons.; Tijori"],
+ ["Jio Financial","+73%","−15%","n/c","n/c","0%","n/v","Lender","Cons.; Tijori"]
+];
+const BRK=[["All","Not verified this build","—","—","—","—","—"]];
+const SCORE=[
+ ["Paytm","MDR: ~2.5 bps processing-margin uplift, stabilising in 2–3 quarters","New commitment this quarter; scored next quarter.","part","Pending"]
+];
+const SPAN=MAX-MIN,Z=(0-MIN)/SPAN*100;
+document.getElementById("scissor").innerHTML=SC.map(([n,v,e],i)=>{
+ const bar=(val,cls,u)=>{const w=Math.max(Math.abs(val),0.3)/SPAN*100;
+  const l=val>=0?Z:Z-w;
+  return `<i class="b ${cls} ${val>=0?'pos':'neg'}" style="left:${l}%;width:${w}%;animation-delay:${i*45}ms"><span>${val>0?'+':''}${val}${u}</span></i>`;};
+ return `<div class="row"><div class="co">${n}</div><div class="track"><i class="axis" style="left:${Z}%"></i>${bar(v,'v',SCU1)}${bar(e,'e',SCU2)}</div></div>`;
+}).join("");
+const league=(id,rows,max,hi,mid,fmt)=>{document.getElementById(id).innerHTML=rows.map(([n,v,d],i)=>{
+ const cls=v>=hi?"":v>=mid?"mid":"low";
+ return `<div class="lrow"><div class="co">${n}</div>
+ <div><i class="lbar ${cls}" style="display:block;width:${Math.max(v,0)/max*100}%;animation-delay:${i*40}ms"></i></div>
+ <div><div class="v">${fmt(v)}</div><div class="d">${d}</div></div></div>`;}).join("");};
+LEAGUES.forEach(([id,rows,max,hi,mid,fmt])=>league(id,rows,max,hi,mid,fmt));
+document.getElementById("fuel").innerHTML=FU.map(([l,v],i)=>
+ `<div class="fp"><b>${FUFMT(v)}</b><i style="height:${Math.abs(v)/FUMAX*88}px;animation-delay:${i*120}ms"></i><em>${l}</em></div>`).join("");
+document.getElementById("cards").innerHTML=CO.map(c=>`
+ <article class="c">
+  <div class="chead"><div><h3>${c.n}</h3><div class="tick">${c.t}</div></div><div class="badge ${c.b}">${c.bl}</div></div>
+  <div class="tiles">${c.k.map(([n,l,s])=>`<div class="tile"><div class="n ${s===1?'up':s===-1?'dn':''}">${n}</div><div class="l">${l}</div></div>`).join("")}</div>
+  <ul>${c.p.map(x=>`<li>${x}</li>`).join("")}</ul>
+  <div class="flags">${c.f.map(([t,k])=>`<span class="flag ${k}">${t}</span>`).join("")}</div>
+ </article>`).join("");
+document.getElementById("kpi").innerHTML=KPI.map(r=>
+ `<tr><td class="co">${r[0]}</td>`+r.slice(1).map(c=>`<td class="kpi">${c}</td>`).join("")+`</tr>`).join("");
+document.getElementById("brk").innerHTML=BRK.map(r=>
+ `<tr><td class="co">${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td class="num">${r[4]}</td><td class="num ${r[5].includes('↓')?'dn':r[5].includes('↑')?'up':''}">${r[5]}</td><td class="num">${r[6]}</td></tr>`).join("");
+const RET=[["Groww", "GROWW", "14 Oct", "224.95", "+51.5%", "+19.9%", "+14.7%", "+17.5%"], ["Paytm", "PAYTM", "26 Oct", "1,939.90", "+49.3%", "+71.5%", "+21.0%", "+18.7%"], ["BSE", "BSE", "n/s", "3,937.70", "+39.3%", "-1.6%", "+14.2%", "+12.2%"], ["Angel One", "ANGELONE", "n/s", "349.00", "+27.1%", "+13.7%", "+21.5%", "+23.6%"], ["CAMS", "CAMS", "n/s", "726.05", "-7.8%", "-7.4%", "-4.7%", "+11.1%"], ["CDSL", "CDSL", "n/s", "1,447.00", "-11.0%", "+21.9%", "+7.6%", "+14.6%"], ["KFin Technologies", "KFINTECH", "n/s", "950.90", "-12.3%", "+17.7%", "+1.2%", "+11.8%"], ["Jio Financial", "JIOFIN", "n/s", "227.50", "-27.8%", "-2.4%", "-8.7%", "+11.2%"], ["Pine Labs", "PINELABS", "n/s", "176.44", "-29.7%", "+15.7%", "+7.0%", "+15.1%"], ["PB Fintech", "POLICYBZR", "n/s", "1,105.00", "-36.4%", "-34.5%", "-36.5%", "+10.5%"]];
+document.getElementById("ret").innerHTML=RET.map(r=>{
+ const cell=v=>{ if(v==="n/s") return `<td class="num ns">n/s</td>`;
+   const cls=v.startsWith("+")?"up":v.startsWith("-")?"dn":""; return `<td class="num ${cls}">${v}</td>`;};
+ return `<tr><td class="co">${r[0]}</td><td class="tick">${r[1]}</td><td>${r[2]}</td>`
+  +`<td class="num">${r[3]==="n/s"?'<span class="ns">n/s</span>':r[3]}</td>`+r.slice(4).map(cell).join("")+`</tr>`;
+}).join("");
+document.getElementById("score").innerHTML=SCORE.map(([c,p,d,k,v])=>
+ `<tr><td class="co">${c}</td><td>${p}</td><td class="hide">${d}</td><td class="vd ${k}">${v}</td></tr>`).join("");
+</script></body></html>

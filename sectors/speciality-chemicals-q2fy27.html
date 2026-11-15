@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Speciality Chemicals Q2 FY27 — Sector Earnings Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Roboto+Mono:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --stone:#E3E0D9; --card:#F3F1EC; --card2:#EAE7E0;
+  --ink:#1F1D1A; --mute:#6E6A62; --faint:#9A958B; --rule:#C9C4B9;
+  --gain:#1D5C7A; --loss:#A8382C; 
+  --vol:#8E8879; --gold:#B4842A;
+  --disp:'Archivo',system-ui,sans-serif;
+  --serif:'Source Serif 4',Georgia,serif;
+  --mono:'Roboto Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--stone);color:var(--ink);font-family:var(--serif);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:28px 20px 90px}
+section{margin-bottom:40px}
+
+/* type */
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
+h1{font-family:var(--disp);font-weight:800;font-size:clamp(34px,7vw,62px);line-height:.94;letter-spacing:-.03em;margin:.18em 0 .22em;text-transform:uppercase}
+h2{font-family:var(--disp);font-weight:700;font-size:clamp(19px,3.2vw,25px);letter-spacing:-.015em;margin:0 0 4px;text-transform:uppercase}
+h3{font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:-.005em;margin:0}
+.dek{font-size:17px;color:var(--mute);max-width:56ch;margin:0}
+.note{font-size:13px;color:var(--mute);margin:4px 0 20px;max-width:70ch}
+.rule{height:3px;background:var(--ink);margin:0 0 16px}
+
+/* thesis stats */
+.thesis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:2px;background:var(--rule);border:2px solid var(--ink);margin-top:26px}
+.t{background:var(--card);padding:13px 15px}
+.t .n{font-family:var(--disp);font-weight:800;font-size:26px;line-height:1.05;letter-spacing:-.02em}
+.t .l{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:5px;line-height:1.35}
+.t.up .n{color:var(--gain)} .t.dn .n{color:var(--loss)}
+
+/* SIGNATURE: the scissor */
+.scissor{background:var(--card);border:2px solid var(--ink);padding:18px 16px 12px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin-bottom:14px}
+.legend span{display:flex;align-items:center;gap:6px}
+.sw{width:13px;height:11px;display:inline-block}
+.row{display:grid;grid-template-columns:104px 1fr;gap:10px;align-items:center;margin-bottom:3px}
+.row .co{font-family:var(--disp);font-weight:600;font-size:12px;text-align:right;line-height:1.15}
+.track{position:relative;height:26px;border-left:2px solid var(--ink);border-right:0}
+.axis{position:absolute;top:0;bottom:0;width:2px;background:var(--ink);opacity:.85}
+.b{position:absolute;height:10px}
+.b.v{top:1px;background:var(--vol)}
+.b.e{top:14px}
+.b.e.pos{background:var(--gain)} .b.e.neg{background:var(--loss)}
+.b span{position:absolute;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:9.5px;font-weight:500;white-space:nowrap;color:var(--ink)}
+.b.pos span,.b.v span{left:calc(100% + 5px)}
+.b.neg span{right:calc(100% + 5px)}
+.scale{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9.5px;color:var(--faint);margin-top:6px;padding-left:114px}
+
+/* league bars */
+.league{background:var(--card);border:2px solid var(--ink);padding:16px}
+.lrow{display:grid;grid-template-columns:112px 1fr 96px;gap:10px;align-items:center;padding:4px 0;border-bottom:1px solid var(--rule)}
+.lrow:last-child{border-bottom:0}
+.lrow .co{font-family:var(--disp);font-weight:600;font-size:12.5px;text-align:right}
+.lbar{height:16px;background:var(--gain);position:relative}
+.lbar.mid{background:#4A7F91} .lbar.low{background:var(--loss)}
+.lrow .v{font-family:var(--mono);font-size:12px;font-weight:700;text-align:right}
+.lrow .d{font-family:var(--mono);font-size:10px;color:var(--mute);text-align:right}
+
+/* fuel strip */
+.fuel{background:var(--ink);color:var(--card);border:2px solid var(--ink);padding:18px}
+.fuel h2{color:var(--card)}
+.fline{display:flex;align-items:flex-end;gap:0;height:110px;margin:20px 0 6px}
+.fp{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:6px}
+.fp i{display:block;width:100%;max-width:52px;background:var(--gold)}
+.fp b{font-family:var(--mono);font-size:12px;font-weight:700}
+.fp em{font-family:var(--mono);font-size:9.5px;font-style:normal;letter-spacing:.09em;text-transform:uppercase;color:#A9A296}
+.warn{border-top:1px solid #4A453C;margin-top:14px;padding-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
+.warn div{font-size:13.5px;color:#D6D1C6}
+.warn strong{display:block;font-family:var(--mono);font-size:17px;font-weight:700;color:var(--gold);margin-bottom:2px}
+
+/* company cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
+.c{background:var(--card);border:2px solid var(--ink);padding:14px;display:flex;flex-direction:column}
+.chead{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:2px}
+.tick{font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacing:.06em}
+.badge{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 6px;border:1.5px solid;white-space:nowrap;flex-shrink:0}
+.badge.del{color:var(--gain);border-color:var(--gain)}
+.badge.part{color:var(--gold);border-color:var(--gold)}
+.badge.miss{color:var(--loss);border-color:var(--loss)}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);margin:11px 0}
+.tile{background:var(--card2);padding:7px 9px}
+.tile .n{font-family:var(--mono);font-size:15px;font-weight:700;line-height:1.15}
+.tile .l{font-family:var(--mono);font-size:8.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:3px}
+.tile .n.up{color:var(--gain)} .tile .n.dn{color:var(--loss)}
+.c ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.c li{margin-bottom:5px}
+.c li::marker{color:var(--faint)}
+.flags{margin-top:auto;padding-top:10px;display:flex;flex-wrap:wrap;gap:5px}
+.flag{font-family:var(--mono);font-size:9px;letter-spacing:.05em;text-transform:uppercase;background:var(--loss);color:var(--card);padding:3px 6px}
+.flag.ok{background:var(--gain)}
+
+
+table{width:100%;border-collapse:collapse;background:var(--card);border:2px solid var(--ink)}
+th{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;text-align:left;padding:9px 10px;background:var(--ink);color:var(--card)}
+td{padding:9px 10px;border-bottom:1px solid var(--rule);font-size:13.5px;vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.co{font-family:var(--disp);font-weight:700;font-size:13px;white-space:nowrap}
+td.vd{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;white-space:nowrap}
+.vd.del{color:var(--gain)} .vd.part{color:var(--gold)} .vd.miss{color:var(--loss)}
+
+/* call */
+.calls{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.call{border:2px solid var(--ink);padding:15px;background:var(--card)}
+.call.buy{border-left:9px solid var(--gain)}
+.call.wait{border-left:9px solid var(--gold)}
+.call.avoid{border-left:9px solid var(--loss)}
+.call .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.call h3{margin:4px 0 7px;font-size:17px}
+.call p{margin:0;font-size:13.5px}
+
+
+/* commentary */
+.themes{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.th{background:var(--card);border:2px solid var(--ink);padding:14px}
+.th .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--mute);border-bottom:2px solid var(--ink);padding-bottom:6px;margin-bottom:9px}
+.th ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.th li{margin-bottom:6px}
+.th li::marker{color:var(--faint)}
+.th b{font-family:var(--mono);font-size:12.5px;font-weight:700}
+
+/* red flags */
+.rf{background:var(--card);border:2px solid var(--ink)}
+.rfg{border-bottom:2px solid var(--ink)}
+.rfg:last-child{border-bottom:0}
+.rfh{display:flex;align-items:center;gap:9px;padding:8px 13px;background:var(--card2)}
+.sev{width:11px;height:11px;flex-shrink:0}
+.sev.hi{background:var(--loss)} .sev.md{background:var(--gold)} .sev.lo{background:var(--faint)}
+.rfh span{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase}
+.rfr{display:grid;grid-template-columns:118px 1fr;gap:12px;padding:9px 13px;border-top:1px solid var(--rule);font-size:13.5px}
+.rfr b{font-family:var(--disp);font-weight:700;font-size:12.5px}
+
+/* ind-ra verdict */
+.indra{background:var(--card);border:2px solid var(--ink);padding:16px}
+.split{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:2px;background:var(--rule);border:1px solid var(--rule);margin-bottom:16px}
+.sp{background:var(--card2);padding:13px 14px}
+.sp .n{font-family:var(--disp);font-weight:800;font-size:34px;line-height:1;letter-spacing:-.03em;color:var(--loss)}
+.sp.ok .n{color:var(--gain)}
+.sp .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-top:6px}
+.sp .w{font-size:12.5px;color:var(--mute);margin-top:7px}
+.vs{display:grid;grid-template-columns:82px 1fr;gap:11px;padding:7px 0;border-bottom:1px solid var(--rule);font-size:13.5px;align-items:start}
+.vs:last-child{border-bottom:0}
+.vs em{font-family:var(--mono);font-size:9.5px;font-style:normal;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding-top:2px}
+.vs em.y{color:var(--gain)} .vs em.n{color:var(--loss)} .vs em.p{color:var(--gold)}
+
+/* regional strip */
+.reg{display:grid;grid-template-columns:repeat(auto-fit,minmax(112px,1fr));gap:2px;background:var(--rule);border:2px solid var(--ink);margin-top:16px}
+.rg{background:var(--card2);padding:11px 12px;text-align:center}
+.rg .n{font-family:var(--mono);font-size:15px;font-weight:700}
+.rg .n.up{color:var(--gain)} .rg .n.dn{color:var(--loss)}
+.rg .l{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-top:4px}
+
+/* triggers */
+.trigs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:14px}
+.tg{border:2px solid var(--ink);padding:14px;background:var(--card)}
+.tg .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
+.tg.tg-up .k{color:var(--gain)} .tg.tg-dn .k{color:var(--loss)}
+.tg ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.tg li{margin-bottom:6px}
+
+/* caveats */
+.cav{background:var(--card2);border:2px solid var(--ink);padding:15px 15px 15px 30px;margin:0;font-size:13.5px;line-height:1.55}
+.cav li{margin-bottom:8px}
+.cav li:last-child{margin-bottom:0}
+.cav b{font-family:var(--mono);font-size:12px;font-weight:700}
+
+
+/* wide data tables */
+.tw{overflow-x:auto;border:2px solid var(--ink);background:var(--card)}
+.tw table{border:0;min-width:660px}
+.tw th{position:sticky;top:0}
+td.num{font-family:var(--mono);font-size:12px;font-weight:700;text-align:right;white-space:nowrap}
+td.num.up{color:var(--gain)} td.num.dn{color:var(--loss)} td.num.ns{color:var(--faint);font-weight:400}
+th.r{text-align:right}
+td.kpi{font-family:var(--mono);font-size:11.5px;text-align:right;white-space:nowrap}
+.asof{font-family:var(--mono);font-size:11px;color:var(--mute);margin-top:10px;line-height:1.6}
+.asof b{color:var(--ink)}
+
+footer{border-top:3px solid var(--ink);padding-top:15px;font-size:12.5px;color:var(--mute)}
+footer p{margin:0 0 8px;max-width:80ch}
+
+@media(max-width:620px){
+  .row{grid-template-columns:74px 1fr;gap:7px}
+  .row .co{font-size:10.5px}
+  .scale{padding-left:81px}
+  .lrow{grid-template-columns:80px 1fr 74px}
+  .lrow .co{font-size:11px}
+  .wrap{padding:20px 13px 60px}
+  td.hide,th.hide{display:none}
+}
+@media(prefers-reduced-motion:no-preference){
+  .b,.lbar,.fp i{animation:g .7s cubic-bezier(.2,.7,.3,1) both}
+  @keyframes g{from{transform:scaleX(.001);opacity:0}to{transform:scaleX(1);opacity:1}}
+  .b.neg{transform-origin:right} .b.v,.b.pos,.lbar{transform-origin:left}
+  .fp i{animation-name:gy;transform-origin:bottom}
+  @keyframes gy{from{transform:scaleY(.001)}to{transform:scaleY(1)}}
+}
+
+.badge.nsc{color:var(--mute);border-color:var(--mute)}
+.lsub{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin:14px 0 6px}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Sector earnings review · Quarter ended 30 September 2026</div>
+  <h1>Speciality Chemicals<br>Q2 FY27</h1>
+  <p class="dek">War-driven input costs lifted revenue at 13 of 14 companies but cut gross margin QoQ at 13. Fluorine and phenol spreads won; agrochem exporters and intermediates absorbed the bill.</p>
+  <div class="thesis">
+    <div class="t dn"><div class="n">13 of 14</div><div class="l">Gross margin down QoQ</div></div>
+    <div class="t dn"><div class="n">−71%</div><div class="l">PI Industries PAT YoY</div></div>
+    <div class="t up"><div class="n">34.2%</div><div class="l">Navin Fluorine op. margin</div></div>
+    <div class="t up"><div class="n">3.3x</div><div class="l">Deepak Nitrite PAT YoY</div></div>
+  </div>
+</header>
+
+<section>
+  <h2>The scissor</h2>
+  <div class="rule"></div>
+  <p class="note">The sector map calls for volume growth against gross-margin change. Volume is disclosed by too few companies, so revenue growth and operating-profit growth (before other income) stand in, on one shared axis. Where the bars diverge, revenue grew on pass-through, not on profit.</p>
+  <div class="scissor">
+    <div class="legend">
+      <span><i class="sw" style="background:var(--vol)"></i>Revenue growth YoY</span>
+      <span><i class="sw" style="background:var(--gain)"></i>Operating profit growth YoY</span>
+    </div>
+    <div id="scissor"></div>
+    <div class="scale"><span>−60</span><span>+40</span><span>+140</span><span>+240</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>Operating margin — the league table</h2>
+  <div class="rule"></div>
+  <p class="note">Consolidated operating margin before other income, from Tijori's filed quarterlies. 12 of 14 margins fell QoQ; Navin and Fine Organic were flat.</p>
+  <div class="league">
+    <div class="lsub">Operating margin, Q2 FY27 (change)</div>
+    <div id="league"></div>
+  </div>
+</section>
+
+<section>
+  <h2>The pressure point: input-cost pass-through</h2>
+  <div class="rule"></div>
+  <div class="fuel">
+    <h2>Gross margin change QoQ, pts</h2>
+    <div class="fline" id="fuel"></div>
+    <div class="warn">
+      <div><strong>The shock</strong>Vinati: the war in the Middle East raised raw material, energy and logistics costs. Raw materials were passed on; energy and logistics were not.</div>
+      <div><strong>Who paid</strong>Atul (−8.8 pts), Anupam (−6.9), Aarti (−6.5) and PI (−5.4). PI could not pass costs through into a generic agchem market.</div>
+      <div><strong>Who held</strong>Navin (flat): pricing and forex offset sulphur, gas and fluorspar. Deepak and SRF's refrigerants were helped by spreads.</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Company by company</h2>
+  <div class="rule"></div>
+  <p class="note">Scored against prior commitments where a call transcript was read: PI, Vinati and Navin. Others are not scored. Gross margin = (revenue − materials − stock change) / revenue, derived from Tijori.</p>
+  <div class="grid" id="cards"></div>
+</section>
+
+<section>
+  <h2>KPI comparison</h2>
+  <div class="rule"></div>
+  <p class="note">Gross margin and its changes are derived; changes are in percentage points. Leverage is interest / operating profit. Volume and capacity utilisation were not disclosed consistently and are left out. Alkyl Amines is listed but has no current data in Tijori.</p>
+  <div class="tw">
+  <table>
+    <thead><tr>
+      <th>Company</th><th class="r">Revenue YoY</th><th class="r">Gross margin</th><th class="r">GM chg YoY</th><th class="r">GM chg QoQ</th>
+      <th class="r">Op. margin</th><th class="r">OM chg YoY</th><th class="r">Interest / OP</th><th class="r">Other inc. / PBT</th>
+    </tr></thead>
+    <tbody id="kpi"></tbody>
+  </table>
+  </div>
+</section>
+
+<section>
+  <h2>What management said</h2>
+  <div class="rule"></div>
+  <p class="note">From Q2 call transcripts (PI, Vinati, Navin) and results releases (SRF, Aarti, Clean Science).</p>
+  <div class="themes">
+    <div class="th"><div class="k">Input costs</div><ul>
+      <li>Vinati: raw materials passed on; energy and logistics not. Logistics rates cooling in Q3.</li>
+      <li>Navin: sulphur, gas and fluorspar up; offset by pricing and forex.</li>
+      <li>Aarti: pass-through protected absolute EBITDA but suppressed margins.</li>
+    </ul></div>
+    <div class="th"><div class="k">Demand</div><ul>
+      <li>PI: genericisation arriving faster than expected; agchem exports −18%.</li>
+      <li>Vinati: ATBS destocking; Q3 volumes looking strong.</li>
+      <li>SRF: specialty chemicals hit by Chinese overcapacity.</li>
+    </ul></div>
+    <div class="th"><div class="k">Guidance</div><ul>
+      <li>Vinati: FY27 margin 24–25% (was 25–30%); FY28 25–26%.</li>
+      <li>PI: FY27 growth "flattish" (was low single digit).</li>
+      <li>Navin: FY27 margin near H1's 34%; long-term 30% unchanged.</li>
+    </ul></div>
+    <div class="th"><div class="k">Capex</div><ul>
+      <li>Navin: ₹700 cr in FY27, the low end of its ₹700–1,000 cr range.</li>
+      <li>Vinati: ₹500 cr approved, a further ₹500 cr under study.</li>
+      <li>SRF: ₹600 cr battery-grade aluminium foil plant.</li>
+    </ul></div>
+  </div>
+</section>
+
+<section>
+  <h2>Red flags</h2>
+  <div class="rule"></div>
+  <p class="note">Ranked by how much they should change position sizing.</p>
+  <div class="rf">
+    <div class="rfg">
+      <div class="rfh"><i class="sev hi"></i><span>Act on these</span></div>
+      <div class="rfr"><b>PI Industries</b><div>Revenue −9%, PAT −71%, and a guide cut. Other income is 34% of PBT.</div></div>
+      <div class="rfr"><b>Vinati Organics</b><div>Margin guide cut; Veeral ramp-up slips again to April.</div></div>
+    </div>
+    <div class="rfg">
+      <div class="rfh"><i class="sev md"></i><span>Monitor next quarter</span></div>
+      <div class="rfr"><b>Anupam Rasayan</b><div>Interest 30% of operating profit.</div></div>
+      <div class="rfr"><b>Atul</b><div>Gross margin −8.8 pts QoQ; other income 23% of PBT.</div></div>
+      <div class="rfr"><b>Sudarshan</b><div>₹83 cr exceptional charge.</div></div>
+    </div>
+    <div class="rfg">
+      <div class="rfh"><i class="sev lo"></i><span>Note and move on</span></div>
+      <div class="rfr"><b>Deepak Nitrite</b><div>Profit rests on phenol spreads; Advanced Intermediates earn 6%.</div></div>
+      <div class="rfr"><b>Aarti</b><div>Company revenue ₹3,887 cr vs Tijori ₹3,669 cr; basis not explained.</div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Walk the talk</h2>
+  <div class="rule"></div>
+  <p class="note">Scored only where both quarters' commitments were read in call transcripts.</p>
+  <table>
+    <thead><tr><th>Company</th><th>Promised</th><th class="hide">Delivered</th><th>Verdict</th></tr></thead>
+    <tbody id="score"></tbody>
+  </table>
+</section>
+
+<section>
+  <h2>Was the consensus right?</h2>
+  <div class="rule"></div>
+  <p class="note">Systematix's July preview: operating margins expand YoY; conventional intermediates absorb input costs with a lag, compressing margins sequentially.</p>
+  <div class="indra">
+    <div class="split">
+      <div class="sp ok"><div class="n">13 of 14</div><div class="l">Revenue up YoY</div><div class="w">Prices passed on.</div></div>
+      <div class="sp"><div class="n">7 of 14</div><div class="l">Op. margin up YoY</div><div class="w">Half the set.</div></div>
+      <div class="sp"><div class="n">12 of 14</div><div class="l">Op. margin down QoQ</div><div class="w">Lag bit.</div></div>
+    </div>
+    <div class="vs"><em class="y">Partly</em><div><b>Margins expand YoY.</b> Only for 7 of 14, led by fluorine and phenol spread plays.</div></div>
+    <div class="vs"><em class="n">Right</em><div><b>Sequential compression.</b> 12 of 14 lost operating margin QoQ.</div></div>
+  </div>
+</section>
+
+<section>
+  <h2>The call</h2>
+  <div class="rule"></div>
+  <div class="calls">
+    <div class="call buy">
+      <div class="k">Own now</div>
+      <h3>Navin Fluorine · Fine Organic</h3>
+      <p>The only two whose margins held QoQ. Navin delivered above its own guide with CDMO visibility; Fine is net cash with margin up 2.8 pts YoY.</p>
+    </div>
+    <div class="call wait">
+      <div class="k">Accumulate on evidence</div>
+      <h3>SRF · Aarti · Gujarat Fluoro</h3>
+      <p>Each grew strongly but at a lower margin. Buy when Q3 gross margin stops falling as input costs ease.</p>
+    </div>
+    <div class="call avoid">
+      <div class="k">Stay out</div>
+      <h3>PI Industries · Vinati · Atul</h3>
+      <p>PI and Vinati cut guidance. Atul took the steepest gross-margin hit.</p>
+    </div>
+  </div>
+  <div class="trigs">
+    <div class="tg tg-up"><div class="k">What would make us more positive</div><ul>
+      <li>Q3 gross margin recovering QoQ as crude and logistics costs ease.</li>
+      <li>Vinati's ATBS volume recovery showing up in Q3.</li>
+    </ul></div>
+    <div class="tg tg-dn"><div class="k">What would make us cut</div><ul>
+      <li>Phenol spreads normalising, which would hit Deepak.</li>
+      <li>A further PI guide cut, or Chinese supply restraint ending.</li>
+    </ul></div>
+  </div>
+</section>
+
+<section>
+  <h2>Analyst coverage after results</h2>
+  <div class="rule"></div>
+  <p class="note">Dated post-result broker reports were not verified for this build. No targets are shown, rather than undated ones.</p>
+  <div class="tw">
+  <table>
+    <thead><tr><th>Company</th><th>Broker</th><th>Report date</th><th>Rating</th><th class="r">Target (₹)</th><th class="r">Prior (₹)</th><th class="r">Price at report (₹)</th></tr></thead>
+    <tbody id="brk"></tbody>
+  </table>
+  </div>
+</section>
+
+<section>
+  <h2>Price and returns</h2>
+  <div class="rule"></div>
+  <p class="note">Navin (+66%) and PI (−52%) bracket the year. Deepak is −8% despite tripling profit: the market is not paying for spreads.</p>
+  <div class="tw">
+  <table>
+    <thead><tr>
+      <th>Company</th><th>Ticker</th><th>Results date</th><th class="r">CMP (₹)</th>
+      <th class="r">1 year</th><th class="r">6 months</th><th class="r">3 months</th><th class="r">MTD</th>
+    </tr></thead>
+    <tbody id="ret"></tbody>
+  </table>
+  </div>
+  <p class="asof">Prices as on 13 Nov 2026 close (Zerodha Kite last price). Anchors: 1Y = 14 Nov 2025, 6M = 15 May 2026, 3M = 14 Aug 2026, MTD = 30 Oct 2026 closes, Kite daily candles (corporate-action adjusted). CMP matches NSE bhavcopy. Sorted by 1-year return.</p>
+</section>
+
+<section>
+  <h2>Caveats</h2>
+  <div class="rule"></div>
+  <ul class="cav">
+    <li><b>Sources.</b> Financials are consolidated filed quarterlies from Tijori, with operating profit before other income. Commentary comes from the PI and Vinati transcripts (Tijori), Navin's transcript (NSE), and results coverage in Indian Chemical News, Free Press Journal, Angel One, ThePrint and Open (Systematix). AI digests were used only as leads.</li>
+    <li><b>Tijori against management.</b> Navin EBITDA ₹407 cr = Tijori OP. Vinati consolidated EBITDA ₹138 cr = OP + OI. Aarti EBITDA ₹418 cr = OP + OI, but its revenue of ₹3,887 cr exceeds Tijori's ₹3,669 cr; unreconciled, both shown. PI's 49% gross margin is the company's own figure; the Tijori-derived figure is 53.9%.</li>
+    <li><b>Core metric.</b> Volume was not available on a comparable basis. The scissor uses revenue and operating-profit growth instead. This is the weakest part of the report.</li>
+    <li><b>Exclusions.</b> Alkyl Amines: Tijori's quarterly data stops in March 2020. Sudarshan includes Heubach from March 2025, so its YoY is not like-for-like before that.</li>
+    <li><b>Dates.</b> Results dates marked n/s were not verified.</li>
+  </ul>
+</section>
+
+<footer>
+  <p><b>Universe:</b> 14 of 15 listed Indian speciality chemical companies, quarter ended 30 September 2026. Sources: filed quarterlies and call transcripts via Tijori and NSE; results coverage in the press. Prices from Zerodha Kite, cross-checked with NSE bhavcopy. Built 16 November 2026.</p>
+</footer>
+
+</div>
+<script>
+const C=(n,t,b,bl,k,p,f)=>({n,t,b,bl,k,p,f});
+const SC=[["Deepak Nitrite",61.7,207.4],["Sudarshan",14.9,102.3],["Galaxy",36.5,71.2],["Navin Fluorine",57.1,65.4],["NOCIL",33.0,61.4],["Aarti",74.6,40.8],["Anupam",10.3,37.5],["Fine Organic",22.1,37.0],["Guj. Fluoro",45.5,32.1],["SRF",34.7,22.2],["Clean Science",22.0,5.7],["Atul",20.9,-7.5],["Vinati",23.6,-24.6],["PI Industries",-9.1,-56.9]];
+const MIN=-60,MAX=240,SCU1="%",SCU2="%";
+const LEAGUES=[["league",[["Navin Fluorine",34.2,"+1.7 pts YoY; flat QoQ"],["Clean Science",30.8,"−4.7 pts YoY; −5.2 QoQ"],["Guj. Fluorochemicals",26.9,"−2.7 pts YoY; −0.1 QoQ"],["Fine Organic",25.4,"+2.8 pts YoY; flat QoQ"],["Anupam Rasayan",23.2,"+4.6 pts YoY; −1.5 QoQ"],["Deepak Nitrite",20.4,"+9.7 pts YoY; −0.6 QoQ"],["SRF",19.3,"−2.0 pts YoY; −5.3 QoQ"],["Vinati Organics",18.5,"−11.8 pts YoY; −5.9 QoQ"],["PI Industries",13.7,"−15.2 pts YoY; −7.9 QoQ"],["Atul",13.2,"−4.0 pts YoY; −8.2 QoQ"],["Aarti Industries",11.2,"−2.7 pts YoY; −4.8 QoQ"],["Galaxy Surfactants",10.5,"+2.1 pts YoY; −3.5 QoQ"],["Sudarshan Chemical",9.7,"+4.2 pts YoY; −0.1 QoQ"],["NOCIL",8.4,"+1.5 pts YoY; −2.8 QoQ"]],40,20,12,v=>`${v.toFixed(1)}%`]];
+const FU=[["ATUL",-8.8],["ANUPAM",-6.9],["AARTI",-6.5],["PI",-5.4],["NOCIL",-4.8],["VINATI",-3.8],["CLEAN",-3.5],["SRF",-2.9],["NAVIN",0.0]];
+const FUMAX=9,FUFMT=v=>`${v>0?'+':v<0?'−':''}${Math.abs(v).toFixed(1)}`;
+const CO=[
+ C("Navin Fluorine","NAVINFLUOR · Mid","del","Delivered",[["+57%","Revenue (₹1,191 cr)",1],["34.2%","Op. margin (+1.7 pts)",1],["₹269 cr","PAT (+82%)",1],["+66%","1-year return",1]],
+  ["H1 margin 34.2% against a long-term guide of 30%, which is unchanged.","Raw material costs rose (sulphur, gas, fluorspar). Pricing and forex offset them.","CDMO order book close to the $100 mn target; HFO contract with Solstice extended to 2032.","The Chemours project slipped to Q3 FY27, described as the partner's choice.","Verdict: the best-run name here. The price already reflects it."],
+  [["Chemours delay",""],["Margin","ok"],["CDMO","ok"]]),
+ C("Deepak Nitrite","DEEPAKNTR · Mid","nsc","Spread-led",[["+62%","Revenue (₹3,076 cr)",1],["20.4%","Op. margin (10.7% YoY)",1],["₹398 cr","PAT (3.3x)",1],["₹29 cr","Interest (₹8 cr YoY)",-1]],
+  ["Phenolics: ₹2,291 cr revenue and ₹515 cr segment result. Advanced Intermediates earned only ₹49 cr on ₹811 cr.","The jump is phenol-acetone spreads, not volume.","Government incentive income rose to ₹49 cr from ₹16 cr.","Interest costs nearly 4x as new capacity is financed.","Verdict: a commodity spread windfall. The market agrees: −8% in a year."],
+  [["Spread-dependent",""],["Interest 4x",""]]),
+ C("Gujarat Fluorochemicals","FLUOROCHEM · Mid","nsc","Not scored",[["+46%","Revenue (₹1,760 cr)",1],["26.9%","Op. margin (29.6% YoY)",-1],["₹240 cr","PAT (+42%)",1],["−6.8 pts","Gross margin YoY",-1]],
+  ["Revenue +46% with operating profit +32%; growth came at a lower margin.","Gross margin fell 6.8 pts YoY as material costs rose about 80%.","No Q2 commentary was verified.","Verdict: volume is there; spread is not keeping pace. +33% in a year."],
+  [["Gross margin",""],["Growth","ok"]]),
+ C("SRF","SRF · Large","part","Mixed",[["+35%","Revenue (₹4,904 cr)",1],["19.3%","Op. margin (24.6% QoQ)",-1],["₹509 cr","PAT (+31%)",1],["+10%","Chemicals segment profit",0]],
+  ["Chemicals revenue +25% but segment profit only +10%. Refrigerants strong; specialty hit by Chinese overcapacity.","Films profit +73% after customers over-bought in Q1; demand then moderated.","Margin fell 5.3 pts QoQ.","₹600 cr battery-grade aluminium foil plant approved.","Verdict: films carried the quarter, not chemicals. −13% in a year."],
+  [["Specialty pricing",""],["Films","ok"]]),
+ C("Aarti Industries","AARTIIND · Small","part","Volume, not margin",[["+75%","Revenue (Tijori basis)",1],["11.2%","Op. margin (13.9% YoY)",-1],["₹171 cr","PAT (+61%)",1],["21%","Interest / op. profit",-1]],
+  ["Volumes rose over 30%; the rest of the revenue jump is pass-through of higher input prices.","Management: absolute EBITDA protected, margins suppressed by pass-through.","Company revenue is ₹3,887 cr vs Tijori net sales of ₹3,669 cr; EBITDA ₹418 cr = Tijori OP + OI.","Verdict: real volume, but the most leveraged balance sheet in the large names."],
+  [["Leverage",""],["Volume","ok"]]),
+ C("Vinati Organics","VINATIORGA · Small","miss","Guide cut",[["+24%","Revenue (₹680 cr)",1],["18.5%","Op. margin (30.4% YoY)",-1],["₹78 cr","PAT (−32%)",-1],["24–25%","FY27 margin guide (25–30%)",-1]],
+  ["The war in the Middle East raised raw material, energy and logistics costs. Raw materials were passed through; logistics and energy were not.","ATBS volumes missed the H1 target on customer destocking.","FY27 EBITDA margin guidance cut to 24–25% from 25–30%.","Veeral Organics ramp-up slips to April; ₹500 cr new capex, a further ₹500 cr under study.","Verdict: a guide cut and a slipped ramp-up. −33% in a year."],
+  [["Guide cut",""],["VOPL delay",""],["ATBS destock",""]]),
+ C("PI Industries","PIIND · Mid","miss","Missed",[["−9%","Revenue (₹1,702 cr)",-1],["13.7%","Op. margin (28.9% YoY)",-1],["₹119 cr","PAT (−71%)",-1],["−52%","1-year return",-1]],
+  ["Agchem exports −18%. Genericisation came faster than expected; cost escalation could not be passed through.","Gross margin 49% (company) against a 52–53% guide.","FY27 growth guide moved from low single digit to \"flattish\".","Order book $1.25 bn. Pharma, biologicals and electronics are still in build-out.","Verdict: the worst print in the sector. The guide is still drifting lower."],
+  [["Genericisation",""],["Guide cut",""],["Order book","ok"]]),
+ C("Atul","ATUL · Small","nsc","Margin hit",[["+21%","Revenue (₹1,877 cr)",1],["13.2%","Op. margin (21.3% QoQ)",-1],["₹157 cr","PAT (−13%)",-1],["23%","Other income / PBT",-1]],
+  ["The largest QoQ gross margin fall in the set: −8.8 pts.","Operating profit −37% QoQ.","Other income is nearly a quarter of PBT.","No Q2 commentary was verified.","Verdict: absorbed the input-cost spike. −27% over six months."],
+  [["GM −8.8 pts QoQ",""],["Other income",""]]),
+ C("Clean Science","CLEAN · Small","nsc","Not scored",[["+22%","Revenue (₹299 cr)",1],["30.8%","Op. margin (35.6% YoY)",-1],["₹56 cr","PAT (flat)",0],["−3.5 pts","Gross margin QoQ",-1]],
+  ["HALS revenue roughly doubled; exports 73% of the standalone business.","Phenol, acetone and methanol costs stayed high.","Performance Chemical 2 targeted for Q3–Q4 FY27.","Verdict: growth without profit growth. −21% in a year."],
+  [["Input costs",""],["HALS","ok"]]),
+ C("Fine Organic","FINEORG · Small","nsc","Not scored",[["+22%","Revenue (₹729 cr)",1],["25.4%","Op. margin (22.6% YoY)",1],["₹155 cr","PAT (+41%)",1],["15%","Other income / PBT",0]],
+  ["One of two names with no QoQ margin fall.","Net cash; interest is negligible.","No Q2 commentary was verified.","Verdict: quietly the most resilient after Navin. +17% in a year."],
+  [["Margin","ok"],["Net cash","ok"]]),
+ C("Galaxy Surfactants","GALAXYSURF · Small","nsc","Not scored",[["+37%","Revenue (₹1,810 cr)",1],["10.5%","Op. margin (8.4% YoY)",1],["₹120 cr","PAT (+81%)",1],["−3.5 pts","Op. margin QoQ",-1]],
+  ["Operating profit +71% off a weak base.","Margin fell from 14.0% in Q1.","Verdict: recovery off a low base; Q1 was the peak. −12% over three months."],
+  [["QoQ margin",""],["Recovery","ok"]]),
+ C("Sudarshan Chemical","SUDARSCHEM · Small","nsc","Not scored",[["+15%","Revenue (₹2,743 cr)",1],["9.7%","Op. margin (5.5% YoY)",1],["−₹83 cr","Exceptional charge",-1],["₹23 cr","PAT (₹10 cr YoY)",0]],
+  ["Consolidates Heubach since March 2025. Operating profit 2x as the integration matures.","A ₹83 cr exceptional charge cut PAT to ₹23 cr; pre-exceptional PBT was about ₹146 cr.","Interest ₹42 cr: 16% of operating profit.","Verdict: integration working, but charges keep coming."],
+  [["Exceptional",""],["Integration","ok"]]),
+ C("NOCIL","NOCIL · Micro","nsc","Not scored",[["+33%","Revenue (₹427 cr)",1],["8.4%","Op. margin (7.0% YoY)",1],["₹24 cr","PAT (2.0x)",1],["−4.8 pts","Gross margin QoQ",-1]],
+  ["Rubber chemicals; profit doubles off a very weak base.","Margin still in single digits; Chinese competition persists.","Verdict: cyclical bounce, not a recovery. −20% in a year."],
+  [["Single-digit margin",""]]),
+ C("Anupam Rasayan","ANURAS · Micro","nsc","Not scored",[["+10%","Revenue (₹806 cr)",1],["23.2%","Op. margin (18.6% YoY)",1],["₹50 cr","PAT after minority (+13%)",0],["30%","Interest / op. profit",-1]],
+  ["Revenue +23% QoQ; gross margin −6.9 pts QoQ.","Interest ₹56 cr and depreciation ₹57 cr absorb most of operating profit growth.","Employee cost 4x YoY after consolidation.","Verdict: leverage eats the growth. +21% in a year."],
+  [["Leverage",""],["GM −6.9 pts QoQ",""]])
+];
+const KPI=[
+ ["Navin Fluorine","+57.1%","57.2%","−1.8","0.0","34.2%","+1.7","7%","4%"],
+ ["Deepak Nitrite","+61.7%","38.5%","+7.0","−0.7","20.4%","+9.7","5%","3%"],
+ ["Gujarat Fluorochemicals","+45.5%","64.4%","−6.8","−1.9","26.9%","−2.7","8%","3%"],
+ ["SRF","+34.7%","49.0%","−5.0","−2.9","19.3%","−2.0","7%","4%"],
+ ["Aarti Industries","+74.6%","37.2%","−1.0","−6.5","11.2%","−2.7","21%","3%"],
+ ["Vinati Organics","+23.6%","42.2%","−12.3","−3.8","18.5%","−11.8","0%","12%"],
+ ["PI Industries","−9.1%","53.9%","−7.7","−5.4","13.7%","−15.2","4%","34%"],
+ ["Atul","+20.9%","41.7%","−6.4","−8.8","13.2%","−4.0","2%","23%"],
+ ["Clean Science","+22.0%","57.3%","−3.5","−3.5","30.8%","−4.7","2%","8%"],
+ ["Fine Organic","+22.1%","43.6%","+1.5","−1.9","25.4%","+2.8","1%","15%"],
+ ["Galaxy Surfactants","+36.5%","28.4%","+2.1","−2.4","10.5%","+2.1","5%","4%"],
+ ["Sudarshan Chemical","+14.9%","54.8%","+4.7","−1.6","9.7%","+4.2","16%","23%"],
+ ["NOCIL","+33.0%","38.7%","−2.9","−4.8","8.4%","+1.5","1%","23%"],
+ ["Anupam Rasayan","+10.3%","49.7%","+14.8","−6.9","23.2%","+4.6","30%","17%"],
+ ["Alkyl Amines","n/a","n/a","n/a","n/a","n/a","n/a","n/a","Not in Tijori"]
+];
+const BRK=[["All","Not verified this build","—","—","—","—","—"]];
+const SCORE=[
+ ["PI Industries","Q1 call: low single-digit FY27 growth; gross margin 52–53%","Revenue −9%; guide now \"flattish\"; gross margin 49%.","miss","Missed"],
+ ["Vinati Organics","FY27 EBITDA margin 25–30%; ATBS H1 volume target","Guide cut to 24–25%; ATBS missed on destocking.","miss","Missed"],
+ ["Navin Fluorine","Long-term margin ≥30%; CDMO $100 mn by FY27","H1 margin 34.2%; CDMO order book near target.","del","Delivered"],
+ ["Navin Fluorine","Chemours project commissioning","Slipped to Q3 FY27.","part","Late"]
+];
+const SPAN=MAX-MIN,Z=(0-MIN)/SPAN*100;
+document.getElementById("scissor").innerHTML=SC.map(([n,v,e],i)=>{
+ const bar=(val,cls,u)=>{const w=Math.max(Math.abs(val),0.3)/SPAN*100;
+  const l=val>=0?Z:Z-w;
+  return `<i class="b ${cls} ${val>=0?'pos':'neg'}" style="left:${l}%;width:${w}%;animation-delay:${i*45}ms"><span>${val>0?'+':''}${val}${u}</span></i>`;};
+ return `<div class="row"><div class="co">${n}</div><div class="track"><i class="axis" style="left:${Z}%"></i>${bar(v,'v',SCU1)}${bar(e,'e',SCU2)}</div></div>`;
+}).join("");
+const league=(id,rows,max,hi,mid,fmt)=>{document.getElementById(id).innerHTML=rows.map(([n,v,d],i)=>{
+ const cls=v>=hi?"":v>=mid?"mid":"low";
+ return `<div class="lrow"><div class="co">${n}</div>
+ <div><i class="lbar ${cls}" style="display:block;width:${Math.max(v,0)/max*100}%;animation-delay:${i*40}ms"></i></div>
+ <div><div class="v">${fmt(v)}</div><div class="d">${d}</div></div></div>`;}).join("");};
+LEAGUES.forEach(([id,rows,max,hi,mid,fmt])=>league(id,rows,max,hi,mid,fmt));
+document.getElementById("fuel").innerHTML=FU.map(([l,v],i)=>
+ `<div class="fp"><b>${FUFMT(v)}</b><i style="height:${Math.abs(v)/FUMAX*88}px;animation-delay:${i*120}ms"></i><em>${l}</em></div>`).join("");
+document.getElementById("cards").innerHTML=CO.map(c=>`
+ <article class="c">
+  <div class="chead"><div><h3>${c.n}</h3><div class="tick">${c.t}</div></div><div class="badge ${c.b}">${c.bl}</div></div>
+  <div class="tiles">${c.k.map(([n,l,s])=>`<div class="tile"><div class="n ${s===1?'up':s===-1?'dn':''}">${n}</div><div class="l">${l}</div></div>`).join("")}</div>
+  <ul>${c.p.map(x=>`<li>${x}</li>`).join("")}</ul>
+  <div class="flags">${c.f.map(([t,k])=>`<span class="flag ${k}">${t}</span>`).join("")}</div>
+ </article>`).join("");
+document.getElementById("kpi").innerHTML=KPI.map(r=>
+ `<tr><td class="co">${r[0]}</td>`+r.slice(1).map(c=>`<td class="kpi">${c}</td>`).join("")+`</tr>`).join("");
+document.getElementById("brk").innerHTML=BRK.map(r=>
+ `<tr><td class="co">${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td class="num">${r[4]}</td><td class="num ${r[5].includes('↓')?'dn':r[5].includes('↑')?'up':''}">${r[5]}</td><td class="num">${r[6]}</td></tr>`).join("");
+const RET=[["Navin Fluorine", "NAVINFLUOR", "n/s", "10,002.00", "+66.1%", "+42.9%", "+21.5%", "+15.2%"], ["Gujarat Fluorochemicals", "FLUOROCHEM", "n/s", "4,712.10", "+32.5%", "+26.9%", "-0.5%", "+10.9%"], ["Aarti Industries", "AARTIIND", "n/s", "481.95", "+22.6%", "+3.4%", "-9.8%", "+10.6%"], ["Anupam Rasayan", "ANURAS", "n/s", "1,300.60", "+21.2%", "-5.5%", "+7.5%", "+13.7%"], ["Fine Organic", "FINEORG", "n/s", "5,299.50", "+17.4%", "+14.4%", "+3.0%", "+5.0%"], ["Sudarshan Chemical", "SUDARSCHEM", "n/s", "1,157.65", "+11.8%", "+33.3%", "+3.5%", "+16.2%"], ["Galaxy Surfactants", "GALAXYSURF", "n/s", "2,214.00", "+3.2%", "+21.3%", "-11.7%", "+4.6%"], ["Deepak Nitrite", "DEEPAKNTR", "29 Oct", "1,594.40", "-8.4%", "-12.7%", "-7.5%", "+4.9%"], ["Atul", "ATUL", "n/s", "5,166.00", "-12.7%", "-27.2%", "-23.2%", "+2.7%"], ["SRF", "SRF", "n/s", "2,475.00", "-12.8%", "-8.0%", "-5.0%", "+6.0%"], ["NOCIL", "NOCIL", "n/s", "140.57", "-20.1%", "-14.5%", "-12.9%", "+2.5%"], ["Clean Science", "CLEAN", "n/s", "724.00", "-21.4%", "-5.6%", "-11.9%", "+1.2%"], ["Vinati Organics", "VINATIORGA", "n/s", "1,119.65", "-32.7%", "-15.4%", "-16.3%", "+12.8%"], ["PI Industries", "PIIND", "4 Nov", "1,714.80", "-51.8%", "-44.9%", "-31.1%", "-18.3%"]];
+document.getElementById("ret").innerHTML=RET.map(r=>{
+ const cell=v=>{ if(v==="n/s") return `<td class="num ns">n/s</td>`;
+   const cls=v.startsWith("+")?"up":v.startsWith("-")?"dn":""; return `<td class="num ${cls}">${v}</td>`;};
+ return `<tr><td class="co">${r[0]}</td><td class="tick">${r[1]}</td><td>${r[2]}</td>`
+  +`<td class="num">${r[3]==="n/s"?'<span class="ns">n/s</span>':r[3]}</td>`+r.slice(4).map(cell).join("")+`</tr>`;
+}).join("");
+document.getElementById("score").innerHTML=SCORE.map(([c,p,d,k,v])=>
+ `<tr><td class="co">${c}</td><td>${p}</td><td class="hide">${d}</td><td class="vd ${k}">${v}</td></tr>`).join("");
+</script></body></html>

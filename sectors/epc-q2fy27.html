@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EPC <title>Bearings Q2 FY27 — Sector Earnings Review</title>amp; Infrastructure Q2 FY27 — Sector Earnings Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Roboto+Mono:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --stone:#E3E0D9; --card:#F3F1EC; --card2:#EAE7E0;
+  --ink:#1F1D1A; --mute:#6E6A62; --faint:#9A958B; --rule:#C9C4B9;
+  --gain:#1D5C7A; --loss:#A8382C; 
+  --vol:#8E8879; --gold:#B4842A;
+  --disp:'Archivo',system-ui,sans-serif;
+  --serif:'Source Serif 4',Georgia,serif;
+  --mono:'Roboto Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--stone);color:var(--ink);font-family:var(--serif);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:28px 20px 90px}
+section{margin-bottom:40px}
+
+/* type */
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
+h1{font-family:var(--disp);font-weight:800;font-size:clamp(34px,7vw,62px);line-height:.94;letter-spacing:-.03em;margin:.18em 0 .22em;text-transform:uppercase}
+h2{font-family:var(--disp);font-weight:700;font-size:clamp(19px,3.2vw,25px);letter-spacing:-.015em;margin:0 0 4px;text-transform:uppercase}
+h3{font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:-.005em;margin:0}
+.dek{font-size:17px;color:var(--mute);max-width:56ch;margin:0}
+.note{font-size:13px;color:var(--mute);margin:4px 0 20px;max-width:70ch}
+.rule{height:3px;background:var(--ink);margin:0 0 16px}
+
+/* thesis stats */
+.thesis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:2px;background:var(--rule);border:2px solid var(--ink);margin-top:26px}
+.t{background:var(--card);padding:13px 15px}
+.t .n{font-family:var(--disp);font-weight:800;font-size:26px;line-height:1.05;letter-spacing:-.02em}
+.t .l{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:5px;line-height:1.35}
+.t.up .n{color:var(--gain)} .t.dn .n{color:var(--loss)}
+
+/* SIGNATURE: the scissor */
+.scissor{background:var(--card);border:2px solid var(--ink);padding:18px 16px 12px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin-bottom:14px}
+.legend span{display:flex;align-items:center;gap:6px}
+.sw{width:13px;height:11px;display:inline-block}
+.row{display:grid;grid-template-columns:104px 1fr;gap:10px;align-items:center;margin-bottom:3px}
+.row .co{font-family:var(--disp);font-weight:600;font-size:12px;text-align:right;line-height:1.15}
+.track{position:relative;height:26px;border-left:2px solid var(--ink);border-right:0}
+.axis{position:absolute;top:0;bottom:0;width:2px;background:var(--ink);opacity:.85}
+.b{position:absolute;height:10px}
+.b.v{top:1px;background:var(--vol)}
+.b.e{top:14px}
+.b.e.pos{background:var(--gain)} .b.e.neg{background:var(--loss)}
+.b span{position:absolute;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:9.5px;font-weight:500;white-space:nowrap;color:var(--ink)}
+.b.pos span,.b.v span{left:calc(100% + 5px)}
+.b.neg span{right:calc(100% + 5px)}
+.scale{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9.5px;color:var(--faint);margin-top:6px;padding-left:114px}
+
+/* league bars */
+.league{background:var(--card);border:2px solid var(--ink);padding:16px}
+.lrow{display:grid;grid-template-columns:112px 1fr 96px;gap:10px;align-items:center;padding:4px 0;border-bottom:1px solid var(--rule)}
+.lrow:last-child{border-bottom:0}
+.lrow .co{font-family:var(--disp);font-weight:600;font-size:12.5px;text-align:right}
+.lbar{height:16px;background:var(--gain);position:relative}
+.lbar.mid{background:#4A7F91} .lbar.low{background:var(--loss)}
+.lrow .v{font-family:var(--mono);font-size:12px;font-weight:700;text-align:right}
+.lrow .d{font-family:var(--mono);font-size:10px;color:var(--mute);text-align:right}
+
+/* fuel strip */
+.fuel{background:var(--ink);color:var(--card);border:2px solid var(--ink);padding:18px}
+.fuel h2{color:var(--card)}
+.fline{display:flex;align-items:flex-end;gap:0;height:110px;margin:20px 0 6px}
+.fp{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:6px}
+.fp i{display:block;width:100%;max-width:52px;background:var(--gold)}
+.fp b{font-family:var(--mono);font-size:12px;font-weight:700}
+.fp em{font-family:var(--mono);font-size:9.5px;font-style:normal;letter-spacing:.09em;text-transform:uppercase;color:#A9A296}
+.warn{border-top:1px solid #4A453C;margin-top:14px;padding-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
+.warn div{font-size:13.5px;color:#D6D1C6}
+.warn strong{display:block;font-family:var(--mono);font-size:17px;font-weight:700;color:var(--gold);margin-bottom:2px}
+
+/* company cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
+.c{background:var(--card);border:2px solid var(--ink);padding:14px;display:flex;flex-direction:column}
+.chead{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:2px}
+.tick{font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacing:.06em}
+.badge{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 6px;border:1.5px solid;white-space:nowrap;flex-shrink:0}
+.badge.del{color:var(--gain);border-color:var(--gain)}
+.badge.part{color:var(--gold);border-color:var(--gold)}
+.badge.miss{color:var(--loss);border-color:var(--loss)}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);margin:11px 0}
+.tile{background:var(--card2);padding:7px 9px}
+.tile .n{font-family:var(--mono);font-size:15px;font-weight:700;line-height:1.15}
+.tile .l{font-family:var(--mono);font-size:8.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:3px}
+.tile .n.up{color:var(--gain)} .tile .n.dn{color:var(--loss)}
+.c ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.c li{margin-bottom:5px}
+.c li::marker{color:var(--faint)}
+.flags{margin-top:auto;padding-top:10px;display:flex;flex-wrap:wrap;gap:5px}
+.flag{font-family:var(--mono);font-size:9px;letter-spacing:.05em;text-transform:uppercase;background:var(--loss);color:var(--card);padding:3px 6px}
+.flag.ok{background:var(--gain)}
+
+
+table{width:100%;border-collapse:collapse;background:var(--card);border:2px solid var(--ink)}
+th{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;text-align:left;padding:9px 10px;background:var(--ink);color:var(--card)}
+td{padding:9px 10px;border-bottom:1px solid var(--rule);font-size:13.5px;vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.co{font-family:var(--disp);font-weight:700;font-size:13px;white-space:nowrap}
+td.vd{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;white-space:nowrap}
+.vd.del{color:var(--gain)} .vd.part{color:var(--gold)} .vd.miss{color:var(--loss)}
+
+/* call */
+.calls{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.call{border:2px solid var(--ink);padding:15px;background:var(--card)}
+.call.buy{border-left:9px solid var(--gain)}
+.call.wait{border-left:9px solid var(--gold)}
+.call.avoid{border-left:9px solid var(--loss)}
+.call .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.call h3{margin:4px 0 7px;font-size:17px}
+.call p{margin:0;font-size:13.5px}
+
+
+/* commentary */
+.themes{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.th{background:var(--card);border:2px solid var(--ink);padding:14px}
+.th .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--mute);border-bottom:2px solid var(--ink);padding-bottom:6px;margin-bottom:9px}
+.th ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.th li{margin-bottom:6px}
+.th li::marker{color:var(--faint)}
+.th b{font-family:var(--mono);font-size:12.5px;font-weight:700}
+
+/* red flags */
+.rf{background:var(--card);border:2px solid var(--ink)}
+.rfg{border-bottom:2px solid var(--ink)}
+.rfg:last-child{border-bottom:0}
+.rfh{display:flex;align-items:center;gap:9px;padding:8px 13px;background:var(--card2)}
+.sev{width:11px;height:11px;flex-shrink:0}
+.sev.hi{background:var(--loss)} .sev.md{background:var(--gold)} .sev.lo{background:var(--faint)}
+.rfh span{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase}
+.rfr{display:grid;grid-template-columns:118px 1fr;gap:12px;padding:9px 13px;border-top:1px solid var(--rule);font-size:13.5px}
+.rfr b{font-family:var(--disp);font-weight:700;font-size:12.5px}
+
+/* ind-ra verdict */
+.indra{background:var(--card);border:2px solid var(--ink);padding:16px}
+.split{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:2px;background:var(--rule);border:1px solid var(--rule);margin-bottom:16px}
+.sp{background:var(--card2);padding:13px 14px}
+.sp .n{font-family:var(--disp);font-weight:800;font-size:34px;line-height:1;letter-spacing:-.03em;color:var(--loss)}
+.sp.ok .n{color:var(--gain)}
+.sp .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-top:6px}
+.sp .w{font-size:12.5px;color:var(--mute);margin-top:7px}
+.vs{display:grid;grid-template-columns:82px 1fr;gap:11px;padding:7px 0;border-bottom:1px solid var(--rule);font-size:13.5px;align-items:start}
+.vs:last-child{border-bottom:0}
+.vs em{font-family:var(--mono);font-size:9.5px;font-style:normal;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding-top:2px}
+.vs em.y{color:var(--gain)} .vs em.n{color:var(--loss)} .vs em.p{color:var(--gold)}
+
+/* regional strip */
+.reg{display:grid;grid-template-columns:repeat(auto-fit,minmax(112px,1fr));gap:2px;background:var(--rule);border:2px solid var(--ink);margin-top:16px}
+.rg{background:var(--card2);padding:11px 12px;text-align:center}
+.rg .n{font-family:var(--mono);font-size:15px;font-weight:700}
+.rg .n.up{color:var(--gain)} .rg .n.dn{color:var(--loss)}
+.rg .l{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-top:4px}
+
+/* triggers */
+.trigs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:14px}
+.tg{border:2px solid var(--ink);padding:14px;background:var(--card)}
+.tg .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
+.tg.tg-up .k{color:var(--gain)} .tg.tg-dn .k{color:var(--loss)}
+.tg ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.tg li{margin-bottom:6px}
+
+/* caveats */
+.cav{background:var(--card2);border:2px solid var(--ink);padding:15px 15px 15px 30px;margin:0;font-size:13.5px;line-height:1.55}
+.cav li{margin-bottom:8px}
+.cav li:last-child{margin-bottom:0}
+.cav b{font-family:var(--mono);font-size:12px;font-weight:700}
+
+
+/* wide data tables */
+.tw{overflow-x:auto;border:2px solid var(--ink);background:var(--card)}
+.tw table{border:0;min-width:660px}
+.tw th{position:sticky;top:0}
+td.num{font-family:var(--mono);font-size:12px;font-weight:700;text-align:right;white-space:nowrap}
+td.num.up{color:var(--gain)} td.num.dn{color:var(--loss)} td.num.ns{color:var(--faint);font-weight:400}
+th.r{text-align:right}
+td.kpi{font-family:var(--mono);font-size:11.5px;text-align:right;white-space:nowrap}
+.asof{font-family:var(--mono);font-size:11px;color:var(--mute);margin-top:10px;line-height:1.6}
+.asof b{color:var(--ink)}
+
+footer{border-top:3px solid var(--ink);padding-top:15px;font-size:12.5px;color:var(--mute)}
+footer p{margin:0 0 8px;max-width:80ch}
+
+@media(max-width:620px){
+  .row{grid-template-columns:74px 1fr;gap:7px}
+  .row .co{font-size:10.5px}
+  .scale{padding-left:81px}
+  .lrow{grid-template-columns:80px 1fr 74px}
+  .lrow .co{font-size:11px}
+  .wrap{padding:20px 13px 60px}
+  td.hide,th.hide{display:none}
+}
+@media(prefers-reduced-motion:no-preference){
+  .b,.lbar,.fp i{animation:g .7s cubic-bezier(.2,.7,.3,1) both}
+  @keyframes g{from{transform:scaleX(.001);opacity:0}to{transform:scaleX(1);opacity:1}}
+  .b.neg{transform-origin:right} .b.v,.b.pos,.lbar{transform-origin:left}
+  .fp i{animation-name:gy;transform-origin:bottom}
+  @keyframes gy{from{transform:scaleY(.001)}to{transform:scaleY(1)}}
+}
+
+.badge.nsc{color:var(--mute);border-color:var(--mute)}
+.lsub{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin:14px 0 6px}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Sector earnings review · Quarter ended 30 September 2026</div>
+  <h1>EPC &amp; Infrastructure<br>Q2 FY27</h1>
+  <p class="dek">Order books are at records, but execution is the bottleneck: KEC and Afcons lost most of their operating profit, and only NCC turned backlog into profitable growth.</p>
+  <div class="thesis">
+    <div class="t up"><div class="n">₹1.48 lakh cr</div><div class="l">L&amp;T Q2 order inflow, +28%</div></div>
+    <div class="t dn"><div class="n">−72%</div><div class="l">Afcons operating profit YoY</div></div>
+    <div class="t dn"><div class="n">−37%</div><div class="l">KEC operating profit YoY</div></div>
+    <div class="t up"><div class="n">+32%</div><div class="l">NCC revenue YoY</div></div>
+  </div>
+</header>
+
+<section>
+  <h2>The scissor</h2>
+  <div class="rule"></div>
+  <p class="note">Revenue growth YoY against operating-profit growth YoY (before other income), on one axis, from filed consolidated quarterlies. The sector map calls for order inflow against margin; most companies did not disclose quarterly inflow in sources we could verify, so revenue stands in. Ashoka is excluded because it deconsolidated road assets in December 2025.</p>
+  <div class="scissor">
+    <div class="legend">
+      <span><i class="sw" style="background:var(--vol)"></i>Revenue growth YoY</span>
+      <span><i class="sw" style="background:var(--gain)"></i>Operating profit growth YoY</span>
+    </div>
+    <div id="scissor"></div>
+    <div class="scale"><span>−90</span><span>−30</span><span>+30</span><span>+90</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>Operating margin — the league table</h2>
+  <div class="rule"></div>
+  <p class="note">Consolidated operating margin before other income. IRB owns toll roads and is not comparable to contractors. L&amp;T's 11.2% is Tijori's basis; management reports 8.7%, because L&amp;T Finance's interest cost sits below operating profit in Tijori.</p>
+  <div class="league">
+    <div class="lsub">Operating margin, Q2 FY27 (change)</div>
+    <div id="league"></div>
+  </div>
+</section>
+
+<section>
+  <h2>The pressure point: execution, not orders</h2>
+  <div class="rule"></div>
+  <div class="fuel">
+    <h2>Op. margin change YoY, pts</h2>
+    <div class="fline" id="fuel"></div>
+    <div class="warn">
+      <div><strong>The friction</strong>KEC: Middle East disruption, right-of-way and land acquisition in Indian T&amp;D, and slowed supplies on some projects. Afcons' revenue has fallen four quarters running against a ~4x order book.</div>
+      <div><strong>The policy hit</strong>PNC was barred from NHAI and MoRTH bidding for three years in September. Toll collection on its Kanpur–Lucknow expressway was suspended in August.</div>
+      <div><strong>Who converted</strong>NCC (+32% revenue, margin held), IRCON (+3.4 pts) and Engineers India (+8.0 pts on consultancy mix).</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Company by company</h2>
+  <div class="rule"></div>
+  <p class="note">The badge scores Q2 delivery against verified commitments. KEC is scored against its Q1 call. Afcons, PNC and Ashoka are marked on the size of the miss or the regulatory event. Numbers are consolidated filed quarterlies (Tijori).</p>
+  <div class="grid" id="cards"></div>
+</section>
+
+<section>
+  <h2>KPI comparison</h2>
+  <div class="rule"></div>
+  <p class="note">n/v means disclosed but not verified for this build. n/c means not comparable.</p>
+  <div class="tw">
+  <table>
+    <thead><tr>
+      <th>Company</th><th class="r">Revenue YoY</th><th class="r">Op. margin</th><th class="r">Margin chg YoY</th><th class="r">Order inflow</th>
+      <th class="r">Order book</th><th class="r">Book / TTM revenue</th><th class="r">Basis</th>
+    </tr></thead>
+    <tbody id="kpi"></tbody>
+  </table>
+  </div>
+  <p class="asof">Book-to-revenue is derived: order book over the sum of the last four quarters' revenue from Tijori.</p>
+</section>
+
+<section>
+  <h2>What management said</h2>
+  <div class="rule"></div>
+  <p class="note">From results statements reported by Kotak Neo (L&amp;T, KEC), Afcons' BSE press release, and Business Today (PNC). Tijori had no Q2 transcripts for this set by 15 November.</p>
+  <div class="themes">
+    <div class="th"><div class="k">Orders</div><ul>
+      <li>L&amp;T: record ₹1,47,665 cr inflow; ₹92,375 cr (63%) international.</li>
+      <li>KEC: record ₹39,946 cr order book, ~₹43,500 cr with L1 positions.</li>
+      <li>Afcons: H1 inflow ₹15,968 cr; order book ₹43,837 cr.</li>
+    </ul></div>
+    <div class="th"><div class="k">Execution</div><ul>
+      <li>KEC: right-of-way and land-acquisition problems in T&amp;D; "calibrated supplies" on select projects.</li>
+    </ul></div>
+    <div class="th"><div class="k">Geopolitics</div><ul>
+      <li>KEC: Middle East disruption to supply chains.</li>
+    </ul></div>
+    <div class="th"><div class="k">Outlook</div><ul>
+      <li>KEC: "confidence in improved performance in the coming quarters."</li>
+    </ul></div>
+  </div>
+</section>
+
+<section>
+  <h2>Red flags</h2>
+  <div class="rule"></div>
+  <p class="note">Ranked by how much they should change position sizing.</p>
+  <div class="rf">
+    <div class="rfg">
+      <div class="rfh"><i class="sev hi"></i><span>Act on these</span></div>
+      <div class="rfr"><b>PNC Infratech</b><div>A three-year bidding ban from its main client. The order book cannot be replenished from NHAI.</div></div>
+      <div class="rfr"><b>Afcons</b><div>Operating profit −72%; other income is 3.3x PBT; revenue has fallen four quarters running.</div></div>
+      <div class="rfr"><b>KEC</b><div>Missed both Q1 commitments. PBT −81% with interest rising.</div></div>
+    </div>
+    <div class="rfg">
+      <div class="rfh"><i class="sev md"></i><span>Monitor next quarter</span></div>
+      <div class="rfr"><b>L&amp;T</b><div>Margin −1.3 pts with 63% of new orders international. Profit growth leaned on other income.</div></div>
+      <div class="rfr"><b>HG Infra</b><div>−54% in a year with no verified reason; interest is 12% of revenue.</div></div>
+      <div class="rfr"><b>Ashoka Buildcon</b><div>₹319 cr exceptional charge and a net loss.</div></div>
+    </div>
+    <div class="rfg">
+      <div class="rfh"><i class="sev lo"></i><span>Note and move on</span></div>
+      <div class="rfr"><b>IRCON</b><div>Interest +35% eats the operating gain.</div></div>
+      <div class="rfr"><b>RITES · Patel</b><div>No revenue growth.</div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Walk the talk</h2>
+  <div class="rule"></div>
+  <p class="note">Only KEC's Q1 commitments could be verified from public news reports. Nothing else is scored, rather than scoring against digest summaries.</p>
+  <table>
+    <thead><tr><th>Company</th><th>Promised</th><th class="hide">Delivered</th><th>Verdict</th></tr></thead>
+    <tbody id="score"></tbody>
+  </table>
+</section>
+
+<section>
+  <h2>Was the consensus right?</h2>
+  <div class="rule"></div>
+  <p class="note">No published Q2 poll was found. We score the narrative: record order books drive revenue and margin.</p>
+  <div class="indra">
+    <div class="split">
+      <div class="sp ok"><div class="n">+28%</div><div class="l">L&amp;T inflow</div><div class="w">Orders came through.</div></div>
+      <div class="sp"><div class="n">4 of 14</div><div class="l">Revenue down YoY</div><div class="w">Execution did not.</div></div>
+      <div class="sp"><div class="n">9 of 14</div><div class="l">Lower margin YoY</div><div class="w">Margin did not.</div></div>
+    </div>
+    <div class="vs"><em class="y">Right</em><div><b>Order books keep growing.</b> L&amp;T, KEC and Afcons all reported record or near-record books.</div></div>
+    <div class="vs"><em class="n">Wrong</em><div><b>Books turn into revenue and margin.</b> KEC, Afcons, Engineers India and Ashoka shrank revenue; Afcons, GR, KEC and L&amp;T lost margin.</div></div>
+  </div>
+</section>
+
+<section>
+  <h2>The call</h2>
+  <div class="rule"></div>
+  <div class="calls">
+    <div class="call buy">
+      <div class="k">Own now</div>
+      <h3>NCC · Engineers India</h3>
+      <p>NCC grew revenue and operating profit by a third with the margin intact, and is −27% in a year. Engineers India added 8 pts of margin with no debt; it is the one stock the market already rewards (+56%).</p>
+    </div>
+    <div class="call wait">
+      <div class="k">Accumulate on evidence</div>
+      <h3>L&amp;T · IRB · Kalpataru · HG Infra</h3>
+      <p>L&amp;T's orders are unmatched, but the margin must stop slipping. IRB and Kalpataru are deleveraging. HG Infra's numbers are good, but the −54% price fall needs an explanation first.</p>
+    </div>
+    <div class="call avoid">
+      <div class="k">Stay out</div>
+      <h3>KEC · Afcons · PNC · Ashoka</h3>
+      <p>KEC missed both Q1 commitments. Afcons' operating profit collapsed. PNC is barred from its main client for three years. Ashoka is loss-making after an exceptional charge.</p>
+    </div>
+  </div>
+  <div class="trigs">
+    <div class="tg tg-up"><div class="k">What would make us more positive</div><ul>
+      <li>KEC's Q3 margin back above 7% as the Middle East eases.</li>
+      <li>L&amp;T's core margin stabilising above 9% on management's basis.</li>
+      <li>Afcons' revenue growing again.</li>
+    </ul></div>
+    <div class="tg tg-dn"><div class="k">What would make us cut</div><ul>
+      <li>NCC's interest cost rising faster than operating profit.</li>
+      <li>Further NHAI debarments across the road contractors.</li>
+    </ul></div>
+  </div>
+</section>
+
+<section>
+  <h2>Analyst coverage after results</h2>
+  <div class="rule"></div>
+  <p class="note">Dated post-result broker reports were not verified for this build. No targets are shown, rather than undated ones.</p>
+  <div class="tw">
+  <table>
+    <thead><tr><th>Company</th><th>Broker</th><th>Report date</th><th>Rating</th><th class="r">Target (₹)</th><th class="r">Prior (₹)</th><th class="r">Price at report (₹)</th></tr></thead>
+    <tbody id="brk"></tbody>
+  </table>
+  </div>
+</section>
+
+<section>
+  <h2>Price and returns</h2>
+  <div class="rule"></div>
+  <p class="note">Eleven of fourteen are down over a year. KEC, HG Infra, PNC and Afcons are −45% to −58%. Only Engineers India (+56%), Kalpataru and L&amp;T are up.</p>
+  <div class="tw">
+  <table>
+    <thead><tr>
+      <th>Company</th><th>Ticker</th><th>Results date</th><th class="r">CMP (₹)</th>
+      <th class="r">1 year</th><th class="r">6 months</th><th class="r">3 months</th><th class="r">MTD</th>
+    </tr></thead>
+    <tbody id="ret"></tbody>
+  </table>
+  </div>
+  <p class="asof">Prices as on 13 Nov 2026 close (Zerodha Kite last price). Anchors: 1Y = 14 Nov 2025, 6M = 15 May 2026, 3M = 14 Aug 2026, MTD = 30 Oct 2026 closes, Kite daily candles (corporate-action adjusted).  Sorted by 1-year return.</p>
+</section>
+
+<section>
+  <h2>Caveats</h2>
+  <div class="rule"></div>
+  <ul class="cav">
+    <li><b>Sources.</b> All financials are consolidated filed quarterlies from Tijori, with operating profit before other income. Commentary comes from Kotak Neo, Afcons' BSE press release and Business Today, because Tijori had no Q2 transcripts for this set by 15 November.</li>
+    <li><b>Tijori against management.</b>
+      <ul>
+        <li>L&amp;T: management EBITDA ₹6,845 cr (8.7%) against Tijori operating profit ₹8,814 cr (11.2%). The ~₹1,970 cr gap matches L&amp;T Finance's interest cost, which Tijori places below operating profit. Both bases show a 1.3-pt fall YoY. Revenue and net profit match exactly.</li>
+        <li>KEC: EBITDA ₹271 cr and 5.0% match exactly.</li>
+        <li>Afcons: management's H1 EBITDA is ₹578 cr (10.3%). Tijori's H1 operating profit is ₹343 cr before other income and ₹670 cr after it. We could not reconcile this, so both are shown.</li>
+      </ul></li>
+    <li><b>Comparability.</b> IRB is a toll-road owner. Ashoka deconsolidated road assets in December 2025. PNC's PAT fall is a base effect from a ₹163 cr exceptional gain last year.</li>
+    <li><b>Prices.</b> Kite returns are corporate-action adjusted. An NSE corporate-action cross-check for KEC and HG Infra failed to load; the price falls are consistent with their results and news.</li>
+    <li><b>Walk the talk and analyst coverage</b> are thin. Results dates marked n/s were not verified.</li>
+  </ul>
+</section>
+
+<footer>
+  <p><b>Universe:</b> 14 listed Indian EPC and infrastructure companies, quarter ended 30 September 2026. Sources: filed quarterlies via Tijori; Kotak Neo; BSE filings; Business Today. Prices from Zerodha Kite. Built 15 November 2026.</p>
+</footer>
+
+</div>
+<script>
+const C=(n,t,b,bl,k,p,f)=>({n,t,b,bl,k,p,f});
+const SC=[["GR Infraprojects",45.1,11.9],["NCC",32.4,34.4],["PNC Infratech",17.2,10.3],["L&T",15.8,3.5],["IRCON",14.9,69.5],["IRB Infra",8.3,14.1],["HG Infra",7.6,21.4],["Kalpataru",7.3,3.6],["RITES",1.5,-6.2],["Patel Engg",0.2,-5.7],["KEC",-10.2,-37.0],["Engineers India",-10.5,44.2],["Afcons",-11.8,-72.1]];
+const MIN=-90,MAX=90,SCU1="%",SCU2="%";
+const LEAGUES=[["league",[["IRB Infra (toll)",55.6,"+2.8 pts YoY; +1.7 QoQ"],["HG Infra",25.6,"+2.8 pts YoY; −2.0 QoQ"],["RITES",21.9,"−1.7 pts YoY; +0.4 QoQ"],["PNC Infratech",21.1,"−1.4 pts YoY; −9.9 QoQ"],["Engineers India",21.0,"+8.0 pts YoY; +5.6 QoQ"],["GR Infraprojects",18.6,"−5.5 pts YoY; +1.8 QoQ"],["Ashoka (deconsol.)",14.0,"−17.6 pts YoY; −3.2 QoQ"],["Patel Engineering",12.4,"−0.7 pts YoY; −1.6 QoQ"],["L&T",11.2,"−1.3 pts YoY; −0.8 QoQ"],["IRCON",10.5,"+3.4 pts YoY; flat QoQ"],["NCC",8.8,"+0.1 pts YoY; −0.6 QoQ"],["Kalpataru",8.3,"−0.3 pts YoY; −0.5 QoQ"],["KEC",5.0,"−2.1 pts YoY; −0.8 QoQ"],["Afcons",3.5,"−7.5 pts YoY; −5.9 QoQ"]],56,15,8,v=>`${v.toFixed(1)}%`]];
+const FU=[["AFC",-7.5],["GRIL",-5.5],["KEC",-2.1],["RITES",-1.7],["PNC",-1.4],["L&T",-1.3],["NCC",0.1],["IRCON",3.4],["EIL",8.0]];
+const FUMAX=9,FUFMT=v=>`${v>0?'+':v<0?'−':''}${Math.abs(v).toFixed(1)}`;
+const CO=[
+ C("Larsen & Toubro","LT · Large","nsc","Orders up, margin down",[["₹1.48 lakh cr","Order inflow (+28%)",1],["₹78,750 cr","Revenue (+15.8%)",1],["8.7%","EBITDA margin, mgmt (10.0% YoY)",-1],["₹5,202 cr","Net profit (+33%)",1]],
+  ["Record inflow; 63% international. Order book ₹8.54 lakh cr, about 2.8x trailing revenue.","Operating profit grew only 3.5% on revenue +16%. Margin −1.3 pts YoY on both management's and Tijori's basis.","Net profit +33% leaned on other income: ₹2,306 cr against ₹1,384 cr a year ago.","Manufacturing and products margin 15.7%. Shares rose about 5% on 28 Oct.","Verdict: demand is not the issue; margin is. The orders are international and low-margin at the start."],
+  [["Margin −1.3 pts",""],["OI-driven PAT",""],["Inflow","ok"]]),
+ C("NCC","NCC · Small","nsc","Not scored",[["₹6,015 cr","Revenue (+32%)",1],["8.8%","Op. margin (8.7% YoY)",0],["₹184 cr","Net profit (+19%)",1],["+34%","Operating profit YoY",1]],
+  ["Revenue recovered from a weak base (₹4,543 cr). Operating profit grew in line.","Interest rose to ₹211 cr from ₹172 cr; depreciation +32%. That caps PAT growth at 19%.","No Q2 commentary was verified.","Verdict: the cleanest growth print among contractors. Down 27% in a year."],
+  [["Interest rising",""],["Growth","ok"]]),
+ C("Engineers India","ENGINERSIN · Small","nsc","Not scored",[["₹824 cr","Revenue (−10.5%)",-1],["21.0%","Op. margin (13.0% YoY)",1],["₹197 cr","Net profit (+136%)",1],["+44%","Operating profit YoY",1]],
+  ["Revenue fell but operating profit rose 44%: higher-margin consultancy mix.","Net profit more than doubled, helped by JV share and other income of ₹66 cr.","Asset-light and net cash: interest is ₹0.25 cr.","Verdict: best margin gain in the set. The stock is +56% in a year, the only big winner."],
+  [["Revenue down",""],["Margin","ok"]]),
+ C("Kalpataru Projects","KPIL · Mid","nsc","Not scored",[["₹7,004 cr","Revenue (+7.3%)",0],["8.3%","Op. margin (8.6% YoY)",0],["₹289 cr","Net profit (+20%)",1],["₹91 cr","Interest (₹137 cr YoY)",1]],
+  ["Slow quarter: revenue +7%, operating profit +4%.","Profit growth came from lower interest (−34%) and other income.","No Q2 commentary was verified.","Verdict: steady, unspectacular. The balance sheet is improving."],
+  [["Slow growth",""],["Deleveraging","ok"]]),
+ C("KEC International","KEC · Small","miss","Missed",[["₹5,468 cr","Revenue (−10%)",-1],["5.0%","EBITDA margin (7.1% YoY)",-1],["₹30 cr","PAT (−81%)",-1],["₹39,946 cr","Record order book",1]],
+  ["Management blamed Middle East disruption, right-of-way and land problems in Indian T&amp;D, and slowed supplies on some projects.","Interest rose to ₹191 cr. PBT fell 81% to ₹41 cr.","Q1 call: FY27 growth of 12–15% retained and an 8% margin targeted. H1 revenue is −6% and the margin is 5.0%.","Shares fell over 7% after results; −58% in a year.","Verdict: the record order book is not converting. Two guide misses in a row."],
+  [["Guide miss",""],["Interest",""],["Middle East",""]]),
+ C("Afcons","AFCONS · Mid","miss","Margin collapse",[["₹2,635 cr","Revenue (−11.8%)",-1],["3.5%","Op. margin (11.0% YoY)",-1],["₹41 cr","PAT (−61%)",-1],["₹43,837 cr","Order book",1]],
+  ["Operating profit fell 72% to ₹92 cr. Other income of ₹271 cr was 3.3x PBT.","Revenue has fallen for four straight quarters. The March quarter was a loss.","H1 inflow ₹15,968 cr; order book about 4x trailing revenue. Execution, not demand, is the problem.","Verdict: the weakest operating print in the set. Down 46% in a year."],
+  [["OI 3.3x PBT",""],["Revenue falling",""]]),
+ C("IRCON","IRCON · Small","nsc","Not scored",[["₹2,272 cr","Revenue (+14.9%)",1],["10.5%","Op. margin (7.1% YoY)",1],["₹103 cr","Net profit (−26%)",-1],["₹114 cr","Interest (₹85 cr YoY)",-1]],
+  ["Operating profit +69% on a better margin.","But interest (+35%) and depreciation rose, and other income fell, so net profit dropped 26%.","Verdict: better operations, worse funding. Down 32% in a year."],
+  [["Interest rising",""],["Margin","ok"]]),
+ C("RITES","RITES · Small","nsc","Not scored",[["₹557 cr","Revenue (+1.5%)",0],["21.9%","Op. margin (23.6% YoY)",-1],["₹86 cr","Net profit (−12%)",-1],["−6%","Operating profit YoY",-1]],
+  ["Flat revenue; margin −1.7 pts.","Net cash; no leverage risk.","Verdict: no growth. Down 21% in a year."],
+  [["No growth",""]]),
+ C("IRB Infrastructure","IRB · Mid","nsc","Not scored",[["₹1,897 cr","Revenue (+8.3%)",1],["55.6%","Op. margin (52.8% YoY)",1],["₹260 cr","PAT (+84%)",1],["₹388 cr","Interest (₹451 cr YoY)",1]],
+  ["A toll-road owner, so its margin is not comparable to contractors.","Interest fell 14%; PAT +84%.","Verdict: deleveraging is working. Down 13% in a year."],
+  [["Toll model",""],["Deleveraging","ok"]]),
+ C("GR Infraprojects","GRINFRA · Small","nsc","Not scored",[["₹2,325 cr","Revenue (+45%)",1],["18.6%","Op. margin (24.2% YoY)",-1],["₹293 cr","Net profit (+52%)",1],["+12%","Operating profit YoY",0]],
+  ["Revenue recovered sharply, but at a 5.5-pt lower margin.","Net profit includes associates and higher other income.","Verdict: volume back, margin not. Down 27% in a year."],
+  [["Margin −5.5 pts",""],["Revenue","ok"]]),
+ C("PNC Infratech","PNCINFRA · Small","miss","Debarred",[["₹1,322 cr","Revenue (+17%)",1],["21.1%","Op. margin (22.4% YoY)",0],["₹115 cr","PAT (−47%)",-1],["3 years","NHAI/MoRTH bidding ban",-1]],
+  ["In September PNC was barred from NHAI and MoRTH bidding for three years. The stock fell about 28% in two days.","Toll collection on the Kanpur–Lucknow expressway was suspended in August.","The PAT fall is a base effect: last year had a ₹163 cr exceptional gain.","Verdict: the numbers are fine; the pipeline is not. −53% in a year."],
+  [["Bidding ban",""],["Toll suspension",""]]),
+ C("HG Infra","HGINFRA · Small","nsc","Not scored",[["₹974 cr","Revenue (+7.6%)",0],["25.6%","Op. margin (22.8% YoY)",1],["₹80 cr","PAT (+53%)",1],["₹116 cr","Interest",-1]],
+  ["Margin +2.8 pts YoY; PAT +53%.","Interest is now 12% of revenue (₹116 cr). The June quarter took a ₹147 cr exceptional charge.","The stock is −54% in a year. The reason for the fall was not verified for this build.","Verdict: the quarter looks fine, but the market is pricing a risk that is not in these numbers."],
+  [["Price −54%",""],["Interest",""]]),
+ C("Ashoka Buildcon","ASHOKA · Micro","miss","Loss",[["₹1,505 cr","Revenue (−18.7%)",-1],["14.0%","Op. margin (31.6% YoY)",-1],["−₹119 cr","Net loss",-1],["−₹319 cr","Exceptional charge",-1]],
+  ["Road assets were sold in December 2025, so revenue and margin are not comparable YoY. Interest fell to ₹82 cr from ₹318 cr.","The quarter took a ₹319 cr exceptional charge, details not verified.","Verdict: a shrinking contractor with a loss. −44% in a year."],
+  [["Loss",""],["Not comparable",""]]),
+ C("Patel Engineering","PATELENG · Micro","nsc","Not scored",[["₹1,211 cr","Revenue (flat)",0],["12.4%","Op. margin (13.1% YoY)",0],["₹87 cr","Net profit (+19%)",1],["₹66 cr","Interest (₹76 cr YoY)",1]],
+  ["Flat revenue; profit up on lower interest and no exceptional charge this year.","Verdict: no growth. −26% in a year."],
+  [["No growth",""]])
+];
+const KPI=[
+ ["L&T","+15.8%","11.2% (mgmt 8.7%)","−1.3 pts","₹1,47,665 cr (+28%)","₹8,53,514 cr","~2.8x","Cons.; Tijori + Kotak Neo"],
+ ["Kalpataru","+7.3%","8.3%","−0.3 pts","n/v","n/v","n/v","Cons.; Tijori"],
+ ["Afcons","−11.8%","3.5%","−7.5 pts","₹15,968 cr (H1)","₹43,837 cr","~4.0x","Cons.; Tijori + filing"],
+ ["KEC","−10.2%","5.0%","−2.1 pts",">₹13,500 cr (H1)","₹39,946 cr","~1.7x","Cons.; Tijori + Kotak Neo"],
+ ["NCC","+32.4%","8.8%","+0.1 pts","n/v","n/v","n/v","Cons.; Tijori"],
+ ["RITES","+1.5%","21.9%","−1.7 pts","n/v","n/v","n/v","Cons.; Tijori"],
+ ["Engineers India","−10.5%","21.0%","+8.0 pts","n/v","n/v","n/v","Cons.; Tijori"],
+ ["IRCON","+14.9%","10.5%","+3.4 pts","n/v","n/v","n/v","Cons.; Tijori"],
+ ["IRB Infra","+8.3%","55.6%","+2.8 pts","n/a (toll)","n/v","n/v","Cons.; toll model"],
+ ["GR Infraprojects","+45.1%","18.6%","−5.5 pts","n/v","n/v","n/v","Cons.; Tijori"],
+ ["PNC Infratech","+17.2%","21.1%","−1.4 pts","Barred 3 yrs","n/v","n/v","Cons.; Tijori"],
+ ["HG Infra","+7.6%","25.6%","+2.8 pts","n/v","n/v","n/v","Cons.; Tijori"],
+ ["Ashoka Buildcon","−18.7%","14.0%","n/c","n/v","n/v","n/v","Deconsolidated Dec 2025"],
+ ["Patel Engineering","+0.2%","12.4%","−0.7 pts","n/v","n/v","n/v","Cons.; Tijori"]
+];
+const BRK=[["All","Not verified this build","—","—","—","—","—"]];
+const SCORE=[
+ ["KEC","Q1 call: FY27 revenue growth 12–15% retained","H1 revenue −6% YoY (₹10,492 cr vs ₹11,115 cr).","miss","Missed"],
+ ["KEC","Q1 call: EBITDA margin to recover toward 8%","Q2 margin 5.0%, down from 5.8% in Q1.","miss","Missed"]
+];
+const SPAN=MAX-MIN,Z=(0-MIN)/SPAN*100;
+document.getElementById("scissor").innerHTML=SC.map(([n,v,e],i)=>{
+ const bar=(val,cls,u)=>{const w=Math.max(Math.abs(val),0.3)/SPAN*100;
+  const l=val>=0?Z:Z-w;
+  return `<i class="b ${cls} ${val>=0?'pos':'neg'}" style="left:${l}%;width:${w}%;animation-delay:${i*45}ms"><span>${val>0?'+':''}${val}${u}</span></i>`;};
+ return `<div class="row"><div class="co">${n}</div><div class="track"><i class="axis" style="left:${Z}%"></i>${bar(v,'v',SCU1)}${bar(e,'e',SCU2)}</div></div>`;
+}).join("");
+const league=(id,rows,max,hi,mid,fmt)=>{document.getElementById(id).innerHTML=rows.map(([n,v,d],i)=>{
+ const cls=v>=hi?"":v>=mid?"mid":"low";
+ return `<div class="lrow"><div class="co">${n}</div>
+ <div><i class="lbar ${cls}" style="display:block;width:${Math.max(v,0)/max*100}%;animation-delay:${i*40}ms"></i></div>
+ <div><div class="v">${fmt(v)}</div><div class="d">${d}</div></div></div>`;}).join("");};
+LEAGUES.forEach(([id,rows,max,hi,mid,fmt])=>league(id,rows,max,hi,mid,fmt));
+document.getElementById("fuel").innerHTML=FU.map(([l,v],i)=>
+ `<div class="fp"><b>${FUFMT(v)}</b><i style="height:${Math.abs(v)/FUMAX*88}px;animation-delay:${i*120}ms"></i><em>${l}</em></div>`).join("");
+document.getElementById("cards").innerHTML=CO.map(c=>`
+ <article class="c">
+  <div class="chead"><div><h3>${c.n}</h3><div class="tick">${c.t}</div></div><div class="badge ${c.b}">${c.bl}</div></div>
+  <div class="tiles">${c.k.map(([n,l,s])=>`<div class="tile"><div class="n ${s===1?'up':s===-1?'dn':''}">${n}</div><div class="l">${l}</div></div>`).join("")}</div>
+  <ul>${c.p.map(x=>`<li>${x}</li>`).join("")}</ul>
+  <div class="flags">${c.f.map(([t,k])=>`<span class="flag ${k}">${t}</span>`).join("")}</div>
+ </article>`).join("");
+document.getElementById("kpi").innerHTML=KPI.map(r=>
+ `<tr><td class="co">${r[0]}</td>`+r.slice(1).map(c=>`<td class="kpi">${c}</td>`).join("")+`</tr>`).join("");
+document.getElementById("brk").innerHTML=BRK.map(r=>
+ `<tr><td class="co">${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td class="num">${r[4]}</td><td class="num ${r[5].includes('↓')?'dn':r[5].includes('↑')?'up':''}">${r[5]}</td><td class="num">${r[6]}</td></tr>`).join("");
+const RET=[["Engineers India", "ENGINERSIN", "n/s", "312.45", "+56.0%", "+26.6%", "+28.2%", "+24.1%"], ["Kalpataru Projects", "KPIL", "n/s", "1,349.50", "+7.7%", "+7.3%", "-0.2%", "+0.9%"], ["L&T", "LT", "27 Oct", "4,143.80", "+3.5%", "+6.0%", "+2.1%", "+7.0%"], ["IRB Infra", "IRB", "n/s", "18.78", "-12.6%", "-7.5%", "-2.5%", "+19.4%"], ["RITES", "RITES", "n/s", "195.52", "-20.6%", "-7.4%", "-11.6%", "+3.8%"], ["Patel Engineering", "PATELENG", "n/s", "25.79", "-25.6%", "-1.8%", "-9.3%", "+11.9%"], ["GR Infraprojects", "GRINFRA", "n/s", "806.10", "-26.6%", "-13.8%", "-7.6%", "+6.8%"], ["NCC", "NCC", "n/s", "134.58", "-26.9%", "-16.2%", "-4.3%", "+17.5%"], ["IRCON", "IRCON", "n/s", "111.22", "-31.9%", "-22.0%", "-10.9%", "+15.1%"], ["Ashoka Buildcon", "ASHOKA", "n/s", "111.82", "-43.8%", "-12.7%", "-0.5%", "+16.0%"], ["Afcons", "AFCONS", "4 Nov", "222.14", "-45.5%", "-34.0%", "-17.4%", "+7.8%"], ["PNC Infratech", "PNCINFRA", "n/s", "127.94", "-53.3%", "-41.2%", "-41.3%", "+3.2%"], ["HG Infra", "HGINFRA", "n/s", "410.80", "-54.2%", "-32.0%", "-21.6%", "+8.2%"], ["KEC International", "KEC", "2 Nov", "333.65", "-57.8%", "-39.2%", "-24.2%", "+1.2%"]];
+document.getElementById("ret").innerHTML=RET.map(r=>{
+ const cell=v=>{ if(v==="n/s") return `<td class="num ns">n/s</td>`;
+   const cls=v.startsWith("+")?"up":v.startsWith("-")?"dn":""; return `<td class="num ${cls}">${v}</td>`;};
+ return `<tr><td class="co">${r[0]}</td><td class="tick">${r[1]}</td><td>${r[2]}</td>`
+  +`<td class="num">${r[3]==="n/s"?'<span class="ns">n/s</span>':r[3]}</td>`+r.slice(4).map(cell).join("")+`</tr>`;
+}).join("");
+document.getElementById("score").innerHTML=SCORE.map(([c,p,d,k,v])=>
+ `<tr><td class="co">${c}</td><td>${p}</td><td class="hide">${d}</td><td class="vd ${k}">${v}</td></tr>`).join("");
+</script></body></html>

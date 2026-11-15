@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bearings Q2 FY27 — Sector Earnings Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Roboto+Mono:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --stone:#E3E0D9; --card:#F3F1EC; --card2:#EAE7E0;
+  --ink:#1F1D1A; --mute:#6E6A62; --faint:#9A958B; --rule:#C9C4B9;
+  --gain:#1D5C7A; --loss:#A8382C; 
+  --vol:#8E8879; --gold:#B4842A;
+  --disp:'Archivo',system-ui,sans-serif;
+  --serif:'Source Serif 4',Georgia,serif;
+  --mono:'Roboto Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--stone);color:var(--ink);font-family:var(--serif);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:28px 20px 90px}
+section{margin-bottom:40px}
+
+/* type */
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
+h1{font-family:var(--disp);font-weight:800;font-size:clamp(34px,7vw,62px);line-height:.94;letter-spacing:-.03em;margin:.18em 0 .22em;text-transform:uppercase}
+h2{font-family:var(--disp);font-weight:700;font-size:clamp(19px,3.2vw,25px);letter-spacing:-.015em;margin:0 0 4px;text-transform:uppercase}
+h3{font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:-.005em;margin:0}
+.dek{font-size:17px;color:var(--mute);max-width:56ch;margin:0}
+.note{font-size:13px;color:var(--mute);margin:4px 0 20px;max-width:70ch}
+.rule{height:3px;background:var(--ink);margin:0 0 16px}
+
+/* thesis stats */
+.thesis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:2px;background:var(--rule);border:2px solid var(--ink);margin-top:26px}
+.t{background:var(--card);padding:13px 15px}
+.t .n{font-family:var(--disp);font-weight:800;font-size:26px;line-height:1.05;letter-spacing:-.02em}
+.t .l{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:5px;line-height:1.35}
+.t.up .n{color:var(--gain)} .t.dn .n{color:var(--loss)}
+
+/* SIGNATURE: the scissor */
+.scissor{background:var(--card);border:2px solid var(--ink);padding:18px 16px 12px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin-bottom:14px}
+.legend span{display:flex;align-items:center;gap:6px}
+.sw{width:13px;height:11px;display:inline-block}
+.row{display:grid;grid-template-columns:104px 1fr;gap:10px;align-items:center;margin-bottom:3px}
+.row .co{font-family:var(--disp);font-weight:600;font-size:12px;text-align:right;line-height:1.15}
+.track{position:relative;height:26px;border-left:2px solid var(--ink);border-right:0}
+.axis{position:absolute;top:0;bottom:0;width:2px;background:var(--ink);opacity:.85}
+.b{position:absolute;height:10px}
+.b.v{top:1px;background:var(--vol)}
+.b.e{top:14px}
+.b.e.pos{background:var(--gain)} .b.e.neg{background:var(--loss)}
+.b span{position:absolute;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:9.5px;font-weight:500;white-space:nowrap;color:var(--ink)}
+.b.pos span,.b.v span{left:calc(100% + 5px)}
+.b.neg span{right:calc(100% + 5px)}
+.scale{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9.5px;color:var(--faint);margin-top:6px;padding-left:114px}
+
+/* league bars */
+.league{background:var(--card);border:2px solid var(--ink);padding:16px}
+.lrow{display:grid;grid-template-columns:112px 1fr 96px;gap:10px;align-items:center;padding:4px 0;border-bottom:1px solid var(--rule)}
+.lrow:last-child{border-bottom:0}
+.lrow .co{font-family:var(--disp);font-weight:600;font-size:12.5px;text-align:right}
+.lbar{height:16px;background:var(--gain);position:relative}
+.lbar.mid{background:#4A7F91} .lbar.low{background:var(--loss)}
+.lrow .v{font-family:var(--mono);font-size:12px;font-weight:700;text-align:right}
+.lrow .d{font-family:var(--mono);font-size:10px;color:var(--mute);text-align:right}
+
+/* fuel strip */
+.fuel{background:var(--ink);color:var(--card);border:2px solid var(--ink);padding:18px}
+.fuel h2{color:var(--card)}
+.fline{display:flex;align-items:flex-end;gap:0;height:110px;margin:20px 0 6px}
+.fp{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:6px}
+.fp i{display:block;width:100%;max-width:52px;background:var(--gold)}
+.fp b{font-family:var(--mono);font-size:12px;font-weight:700}
+.fp em{font-family:var(--mono);font-size:9.5px;font-style:normal;letter-spacing:.09em;text-transform:uppercase;color:#A9A296}
+.warn{border-top:1px solid #4A453C;margin-top:14px;padding-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
+.warn div{font-size:13.5px;color:#D6D1C6}
+.warn strong{display:block;font-family:var(--mono);font-size:17px;font-weight:700;color:var(--gold);margin-bottom:2px}
+
+/* company cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
+.c{background:var(--card);border:2px solid var(--ink);padding:14px;display:flex;flex-direction:column}
+.chead{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:2px}
+.tick{font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacing:.06em}
+.badge{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 6px;border:1.5px solid;white-space:nowrap;flex-shrink:0}
+.badge.del{color:var(--gain);border-color:var(--gain)}
+.badge.part{color:var(--gold);border-color:var(--gold)}
+.badge.miss{color:var(--loss);border-color:var(--loss)}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);margin:11px 0}
+.tile{background:var(--card2);padding:7px 9px}
+.tile .n{font-family:var(--mono);font-size:15px;font-weight:700;line-height:1.15}
+.tile .l{font-family:var(--mono);font-size:8.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:3px}
+.tile .n.up{color:var(--gain)} .tile .n.dn{color:var(--loss)}
+.c ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.c li{margin-bottom:5px}
+.c li::marker{color:var(--faint)}
+.flags{margin-top:auto;padding-top:10px;display:flex;flex-wrap:wrap;gap:5px}
+.flag{font-family:var(--mono);font-size:9px;letter-spacing:.05em;text-transform:uppercase;background:var(--loss);color:var(--card);padding:3px 6px}
+.flag.ok{background:var(--gain)}
+
+
+table{width:100%;border-collapse:collapse;background:var(--card);border:2px solid var(--ink)}
+th{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;text-align:left;padding:9px 10px;background:var(--ink);color:var(--card)}
+td{padding:9px 10px;border-bottom:1px solid var(--rule);font-size:13.5px;vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.co{font-family:var(--disp);font-weight:700;font-size:13px;white-space:nowrap}
+td.vd{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;white-space:nowrap}
+.vd.del{color:var(--gain)} .vd.part{color:var(--gold)} .vd.miss{color:var(--loss)}
+
+/* call */
+.calls{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.call{border:2px solid var(--ink);padding:15px;background:var(--card)}
+.call.buy{border-left:9px solid var(--gain)}
+.call.wait{border-left:9px solid var(--gold)}
+.call.avoid{border-left:9px solid var(--loss)}
+.call .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.call h3{margin:4px 0 7px;font-size:17px}
+.call p{margin:0;font-size:13.5px}
+
+
+/* commentary */
+.themes{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.th{background:var(--card);border:2px solid var(--ink);padding:14px}
+.th .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--mute);border-bottom:2px solid var(--ink);padding-bottom:6px;margin-bottom:9px}
+.th ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.th li{margin-bottom:6px}
+.th li::marker{color:var(--faint)}
+.th b{font-family:var(--mono);font-size:12.5px;font-weight:700}
+
+/* red flags */
+.rf{background:var(--card);border:2px solid var(--ink)}
+.rfg{border-bottom:2px solid var(--ink)}
+.rfg:last-child{border-bottom:0}
+.rfh{display:flex;align-items:center;gap:9px;padding:8px 13px;background:var(--card2)}
+.sev{width:11px;height:11px;flex-shrink:0}
+.sev.hi{background:var(--loss)} .sev.md{background:var(--gold)} .sev.lo{background:var(--faint)}
+.rfh span{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase}
+.rfr{display:grid;grid-template-columns:118px 1fr;gap:12px;padding:9px 13px;border-top:1px solid var(--rule);font-size:13.5px}
+.rfr b{font-family:var(--disp);font-weight:700;font-size:12.5px}
+
+/* ind-ra verdict */
+.indra{background:var(--card);border:2px solid var(--ink);padding:16px}
+.split{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:2px;background:var(--rule);border:1px solid var(--rule);margin-bottom:16px}
+.sp{background:var(--card2);padding:13px 14px}
+.sp .n{font-family:var(--disp);font-weight:800;font-size:34px;line-height:1;letter-spacing:-.03em;color:var(--loss)}
+.sp.ok .n{color:var(--gain)}
+.sp .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-top:6px}
+.sp .w{font-size:12.5px;color:var(--mute);margin-top:7px}
+.vs{display:grid;grid-template-columns:82px 1fr;gap:11px;padding:7px 0;border-bottom:1px solid var(--rule);font-size:13.5px;align-items:start}
+.vs:last-child{border-bottom:0}
+.vs em{font-family:var(--mono);font-size:9.5px;font-style:normal;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding-top:2px}
+.vs em.y{color:var(--gain)} .vs em.n{color:var(--loss)} .vs em.p{color:var(--gold)}
+
+/* regional strip */
+.reg{display:grid;grid-template-columns:repeat(auto-fit,minmax(112px,1fr));gap:2px;background:var(--rule);border:2px solid var(--ink);margin-top:16px}
+.rg{background:var(--card2);padding:11px 12px;text-align:center}
+.rg .n{font-family:var(--mono);font-size:15px;font-weight:700}
+.rg .n.up{color:var(--gain)} .rg .n.dn{color:var(--loss)}
+.rg .l{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-top:4px}
+
+/* triggers */
+.trigs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:14px}
+.tg{border:2px solid var(--ink);padding:14px;background:var(--card)}
+.tg .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
+.tg.tg-up .k{color:var(--gain)} .tg.tg-dn .k{color:var(--loss)}
+.tg ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.tg li{margin-bottom:6px}
+
+/* caveats */
+.cav{background:var(--card2);border:2px solid var(--ink);padding:15px 15px 15px 30px;margin:0;font-size:13.5px;line-height:1.55}
+.cav li{margin-bottom:8px}
+.cav li:last-child{margin-bottom:0}
+.cav b{font-family:var(--mono);font-size:12px;font-weight:700}
+
+
+/* wide data tables */
+.tw{overflow-x:auto;border:2px solid var(--ink);background:var(--card)}
+.tw table{border:0;min-width:660px}
+.tw th{position:sticky;top:0}
+td.num{font-family:var(--mono);font-size:12px;font-weight:700;text-align:right;white-space:nowrap}
+td.num.up{color:var(--gain)} td.num.dn{color:var(--loss)} td.num.ns{color:var(--faint);font-weight:400}
+th.r{text-align:right}
+td.kpi{font-family:var(--mono);font-size:11.5px;text-align:right;white-space:nowrap}
+.asof{font-family:var(--mono);font-size:11px;color:var(--mute);margin-top:10px;line-height:1.6}
+.asof b{color:var(--ink)}
+
+footer{border-top:3px solid var(--ink);padding-top:15px;font-size:12.5px;color:var(--mute)}
+footer p{margin:0 0 8px;max-width:80ch}
+
+@media(max-width:620px){
+  .row{grid-template-columns:74px 1fr;gap:7px}
+  .row .co{font-size:10.5px}
+  .scale{padding-left:81px}
+  .lrow{grid-template-columns:80px 1fr 74px}
+  .lrow .co{font-size:11px}
+  .wrap{padding:20px 13px 60px}
+  td.hide,th.hide{display:none}
+}
+@media(prefers-reduced-motion:no-preference){
+  .b,.lbar,.fp i{animation:g .7s cubic-bezier(.2,.7,.3,1) both}
+  @keyframes g{from{transform:scaleX(.001);opacity:0}to{transform:scaleX(1);opacity:1}}
+  .b.neg{transform-origin:right} .b.v,.b.pos,.lbar{transform-origin:left}
+  .fp i{animation-name:gy;transform-origin:bottom}
+  @keyframes gy{from{transform:scaleY(.001)}to{transform:scaleY(1)}}
+}
+
+.badge.nsc{color:var(--mute);border-color:var(--mute)}
+.lsub{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin:14px 0 6px}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Sector earnings review · Quarter ended 30 September 2026</div>
+  <h1>Bearings<br>Q2 FY27</h1>
+  <p class="dek">Bearing demand is strong, but input costs are outrunning price pass-through. Only Timken grew operating profit faster than revenue while holding its margin.</p>
+  <div class="thesis">
+    <div class="t up"><div class="n">+26.9%</div><div class="l">Median revenue growth YoY across five comparable companies (Menon +57.3%)</div></div>
+    <div class="t up"><div class="n">+60%</div><div class="l">Timken exports YoY, now 27% of revenue; Schaeffler exports +46%</div></div>
+    <div class="t dn"><div class="n">−5.3 pts</div><div class="l">SKF India (auto) operating margin QoQ, to 9.6% from 15.0%, before other income</div></div>
+    <div class="t dn"><div class="n">−6.5%</div><div class="l">SKF Industrial operating profit YoY on revenue +28%; PBT grew only on other income</div></div>
+  </div>
+</header>
+
+<section>
+  <h2>The scissor</h2>
+  <div class="rule"></div>
+  <p class="note">Revenue growth YoY against operating-profit growth YoY (before other income), on one axis, from filed consolidated quarterlies. Schaeffler and SKF Industrial lost margin YoY; SKF Industrial's operating profit actually fell. Menon Bearings, the smallest, grew fastest on both bars. SKF India (auto) is left out because the 2025 demerger leaves no comparable YoY base.</p>
+  <div class="scissor">
+    <div class="legend">
+      <span><i class="sw" style="background:var(--vol)"></i>Revenue growth YoY</span>
+      <span><i class="sw" style="background:var(--gain)"></i>Operating profit growth YoY</span>
+    </div>
+    <div id="scissor"></div>
+    <div class="scale"><span>−25</span><span>+20</span><span>+65</span><span>+110</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>Operating margin — the league table</h2>
+  <div class="rule"></div>
+  <p class="note">Operating margin before other income, consolidated, from filed quarterlies (Tijori), for all six. This basis matters. Three presentations quote "EBITDA" including other income: SKF India 14.5% (9.6% without it), Menon 22% (20.0%) and NRB 18.2% adjusted (17.3%). That other income is what made SKF Industrial's PBT look higher than its EBITDA. The two SKF entities sit at the bottom.</p>
+  <div class="league">
+    <div class="lsub">Operating margin, Q2 FY27 (change)</div>
+    <div id="league"></div>
+  </div>
+</section>
+
+<section>
+  <h2>The pass-through lag</h2>
+  <div class="rule"></div>
+  <div class="fuel">
+    <h2>Operating margin change QoQ, percentage points (before other income)</h2>
+    <div class="fline" id="fuel"></div>
+    <div class="warn">
+      <div><strong>The cost shock</strong>Timken said carbides are up ~200%, with steel, gases and labour also higher. Its raw-material ratio rose 130 bps QoQ, about half from mix and half from inflation. SKF India blamed steel and supplier value-addition costs. Menon faced tin +72% and copper +50%. Schaeffler's inflation equals ~1.1% of sales.</div>
+      <div><strong>The recovery gap</strong>Schaeffler has recovered ~50% and historically recovers 80–85%, over 4–6 months. SKF India promises the recovery "largely" in the December quarter, and above 15% (including other income) within FY27. Timken warned that auto customers may delay pass-through. Industrial customers re-price faster than auto OEMs.</div>
+      <div><strong>The offset</strong>Exports carry a higher margin and are growing fastest: Timken ₹263 cr (+60% YoY, +30% QoQ) and Schaeffler +46% to group companies. Both warned that the October–December quarter softens seasonally, so Q3 loses some of this cushion.</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Company by company</h2>
+  <div class="rule"></div>
+  <p class="note">The badge scores Q2 delivery against promises from the Q1 call or standing FY27 guidance. Grey means we found no commitment to score. Red chips are flags for Q3. Broker targets carry their report dates.</p>
+  <div class="grid" id="cards"></div>
+</section>
+
+<section>
+  <h2>KPI comparison</h2>
+  <div class="rule"></div>
+  <p class="note">Every listed bearing maker against the sector's KPIs. n/d means not disclosed in any source we found. * means derived.</p>
+  <div class="tw">
+  <table>
+    <thead><tr>
+      <th>Company</th><th class="r">Revenue YoY</th><th class="r">Revenue QoQ</th><th class="r">Op. margin</th><th class="r">Margin chg</th>
+      <th class="r">PAT YoY</th><th class="r">Exports</th><th class="r">Cash / WC</th><th class="r">Basis</th>
+    </tr></thead>
+    <tbody id="kpi"></tbody>
+  </table>
+  </div>
+  <p class="asof">Schaeffler follows a calendar year, so its row is the September 2026 quarter (Q3 CY26). SKF India's auto and industrial businesses demerged in 2025; all six rows are consolidated filed quarterlies (Tijori). Revenue YoY for SKF India is the company's net-sales figure. Capacity utilisation was disclosed only by Timken (Bharuch).</p>
+</section>
+
+<section>
+  <h2>What management said</h2>
+  <div class="rule"></div>
+  <p class="note">From the Q2 calls and presentations. SKF India (Industrial) did not hold a call.</p>
+  <div class="themes">
+
+    <div class="th"><div class="k">Input costs</div><ul>
+      <li>Timken: carbides <b>~+200%</b>; steel, gases and labour higher. "The industry must pass costs on."</li>
+      <li>SKF India: steel inflation and supplier value-addition costs. Customer price talks are not concluded.</li>
+      <li>Menon: tin +72%, copper +50%, steel +12%. Gross margin down over 7 pts YoY; price revisions are being passed through.</li>
+      <li>Schaeffler: inflation ~1.1% of sales, ~50% recovered. Price recoveries take 4–6 months and are mostly retrospective.</li>
+    </ul></div>
+
+    <div class="th"><div class="k">Demand</div><ul>
+      <li>Schaeffler: automotive demand is "strong for at least some quarters of 2027". The GST 2.0 base kicks in from October.</li>
+      <li>Timken: the Q3 setup is "fairly positive". Rail is slightly delayed, with the tender committee due in 2–3 weeks.</li>
+      <li>NRB: growth guide moved to <b>19%+</b> from 15%. Industrial +48%, CV +47%.</li>
+      <li>Menon: growth above 30% guided for FY27 and FY28; H1 +47%.</li>
+      <li>SKF Industrial: positioned to outgrow wind, heavy industries, aftermarket and exports (no numbers).</li>
+    </ul></div>
+
+    <div class="th"><div class="k">Exports</div><ul>
+      <li>Timken: exports ₹263 cr, <b>+60% YoY</b>, 27% of revenue. October–December exports usually soften.</li>
+      <li>Schaeffler: exports +46%, now 17% of revenue. Q3 is a seasonal spike; the &gt;₹500 cr run rate "is not a baseline".</li>
+      <li>SKF India: exports are 10% of sales.</li>
+      <li>Menon: exports 34–35% of sales, short of the ~37% guided on the Q1 call.</li>
+    </ul></div>
+
+    <div class="th"><div class="k">Capacity</div><ul>
+      <li>Timken Bharuch: SRB lines reached <b>70%</b>, the August–September target set on the Q1 call. CRB lines are at 58–60%, with their ramp guided for Q2-end and Q3. Bharuch revenue rose to ~₹75 cr from ~₹50 cr in Q1.</li>
+      <li>Timken: ₹120 cr rail expansion with Jamshedpur trials in November–December. ₹70 cr GGB lines installed but not capitalised.</li>
+      <li>SKF India: ₹500 cr+ expansion plan, ~₹200 cr this fiscal; new capacity live around July 2027.</li>
+      <li>SKF Industrial: ₹900–950 cr Pune plant, production from 2028 (Q1 call). A new Ahmedabad CRB line adds 0.22 mn units.</li>
+    </ul></div>
+
+    <div class="th"><div class="k">EV and new products</div><ul>
+      <li>SKF India: hybrid-transmission driveline win (ceramic bearings, conductive bushes), contributing from FY28.</li>
+      <li>Schaeffler: unplanned e-mobility inventory. The Mobility margin was hurt by e-mobility development costs.</li>
+      <li>NRB: Unitec JV commissions by April 2027, targeting ~₹130 cr of revenue at scale.</li>
+    </ul></div>
+
+    <div class="th"><div class="k">Margin outlook</div><ul>
+      <li>Schaeffler: a Q4 margin correction as recoveries land.</li>
+      <li>SKF India: above 15% (including other income) within FY27. Its Q1 call had called ~17% "normalised" for two years.</li>
+      <li>NRB: 18–20% over a year, "not quarter by quarter" (Q1 call).</li>
+      <li>Timken: no numeric guidance. It declined to quantify the industrial vs auto margin gap.</li>
+    </ul></div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Red flags</h2>
+  <div class="rule"></div>
+  <p class="note">Ranked by how much they should change position sizing, not by how alarming they sound.</p>
+  <div class="rf">
+
+    <div class="rfg">
+      <div class="rfh"><i class="sev hi"></i><span>Act on these</span></div>
+      <div class="rfr"><b>SKF India (auto)</b><div>Operating margin fell 5.3 pts QoQ to 9.6% on revenue +1.4%. Operating profit fell 35% and PBT 17% QoQ. Without ₹29 cr of other income, mostly from SKF Industrial, the 14.5% headline would be 9.6%. Aftermarket is down ~7%. Capex is stepping up to ₹500 cr+.</div></div>
+      <div class="rfr"><b>SKF India (Industrial)</b><div>Operating profit −6.5% YoY on revenue +28%. PBT +33% came from other income of ₹45 cr (₹17 cr a year ago). Operating cash flow was −₹6 cr against +₹218 cr a year ago. No earnings call. Dec-25 quarter had a ₹180 cr exceptional charge.</div></div>
+    </div>
+
+    <div class="rfg">
+      <div class="rfh"><i class="sev md"></i><span>Monitor next quarter</span></div>
+      <div class="rfr"><b>Schaeffler</b><div>Q3 free cash flow ₹41 cr. Working capital ~19% of sales. The KRSV subsidiary runs at −17.6% EBITDA. Only half its inflation is recovered.</div></div>
+      <div class="rfr"><b>Timken</b><div>Rail revenue fell to ₹157 cr from ₹200 cr QoQ on slow government buying; the Q1 call had already flagged it. CRB lines at Bharuch lag the SRB lines. A depreciation dip came from a reclassification, not operations. ₹70 cr of GGB machines are installed but idle.</div></div>
+      <div class="rfr"><b>NRB Bearings</b><div>PAT fell 13% YoY on revenue +19%. The filing explains it: other income −₹10 cr, depreciation +₹6 cr. The operating margin of 17.3% is below its own 18–20% band.</div></div>
+      <div class="rfr"><b>Menon Bearings</b><div>Operating margin −2.0 pts QoQ on metal inflation. Price is +214% in a year.</div></div>
+    </div>
+
+    <div class="rfg">
+      <div class="rfh"><i class="sev lo"></i><span>Note and move on</span></div>
+      <div class="rfr"><b>Export seasonality</b><div>Both Timken and Schaeffler flagged softer exports in October–December.</div></div>
+      <div class="rfr"><b>Wind</b><div>Schaeffler is keeping only value-accretive wind business. Timken relies on sister companies for wind.</div></div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Walk the talk</h2>
+  <div class="rule"></div>
+  <p class="note">Commitments from the Q1 FY27 call transcripts (Schaeffler: its July Q2 CY26 call), read via Tijori, against Q2 delivery on filed numbers.</p>
+  <table>
+    <thead><tr><th>Company</th><th>Promised</th><th class="hide">Delivered</th><th>Verdict</th></tr></thead>
+    <tbody id="score"></tbody>
+  </table>
+</section>
+
+<section>
+  <h2>Was the consensus right?</h2>
+  <div class="rule"></div>
+  <p class="note">No published Q2 poll was found. We score the pre-result narrative: industrial and rail capex drives growth, export localisation accelerates, and margins hold on pricing power.</p>
+  <div class="indra">
+    <div class="split">
+      <div class="sp ok"><div class="n">19–59%</div><div class="l">Revenue growth range</div><div class="w">Demand came through.</div></div>
+      <div class="sp ok"><div class="n">+60% / +46%</div><div class="l">Exports: Timken / Schaeffler</div><div class="w">Export localisation is real.</div></div>
+      <div class="sp"><div class="n">−5.3 pts</div><div class="l">SKF India op. margin QoQ</div><div class="w">Pricing power was weaker than assumed.</div></div>
+    </div>
+    <div class="vs"><em class="y">Right</em><div><b>Industrial capex drives growth.</b> SKF Industrial +28%, Schaeffler B&amp;IS +15% and Timken process ₹191 cr. Metals, cement and distribution were strong.</div></div>
+    <div class="vs"><em class="p">Partly</em><div><b>Rail is a moat.</b> Rail is 16–17% of revenue at Timken and SKF Industrial, but Timken's rail orders slipped on tender timing.</div></div>
+    <div class="vs"><em class="n">Wrong</em><div><b>Pricing power protects margins.</b> Four of six lost operating margin QoQ; the two that did not (NRB, SKF Industrial) are at or below their own targets. Auto OEMs re-price slowest.</div></div>
+    <div class="reg">
+      <div class="rg"><div class="n up">₹3,570</div><div class="l">Timken · ICICI Direct Buy, 2 Nov 2026</div></div>
+      <div class="rg"><div class="n">₹3,845</div><div class="l">Timken · Trendlyne consensus, 15 Nov</div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>The call</h2>
+  <div class="rule"></div>
+  <div class="calls">
+    <div class="call buy">
+      <div class="k">Own now</div>
+      <h3>Timken India</h3>
+      <p>Timken grew operating profit 28.7% on revenue +25% and held its margin at 18.7% through the cost shock. Exports are now 27% of revenue. The stock is flat over a year and −12% over six months, and it has kept its Q1-call promises: SRB lines hit 70% on schedule and Bharuch revenue rose by half. Two triggers are near-term: rail tenders, and the CRB lines ramping in Q3.</p>
+    </div>
+    <div class="call wait">
+      <div class="k">Accumulate on evidence</div>
+      <h3>Schaeffler · NRB Bearings · Menon Bearings</h3>
+      <p>Schaeffler needs to show its Q4 margin correction and a free-cash-flow rebound. NRB beat on growth, but its margin is at the floor of its band and depreciation will keep PAT behind; the stock is up 48% in a year. Menon has the best fundamentals in the sector: operating margin +4.3 pts YoY, PAT +117%, and it is ahead of its own guide. But the stock is +214% in a year and +33% this month, at ~35x annualised H1 earnings (derived). Own the business on a pullback, not at this price.</p>
+    </div>
+    <div class="call avoid">
+      <div class="k">Stay out</div>
+      <h3>SKF India (automotive) · SKF India (Industrial)</h3>
+      <p>SKF India is the most auto-OEM-exposed business, with the slowest price recovery and the sharpest QoQ margin fall. It missed both scorable Q1 promises, and capex is stepping up. Its hybrid win pays from FY28. The stock is −11% over six months. SKF Industrial moves here from "accumulate". Its 34% PAT growth came from other income while operating profit fell, and it held no call. Revisit when the operating margin is back above 12%.</p>
+    </div>
+  </div>
+  <div class="trigs">
+    <div class="tg tg-up"><div class="k">What would make us more positive</div><ul>
+      <li>Steel, carbide and metal prices rolling over, with Q3 operating margins up <b>QoQ</b>.</li>
+      <li>Indian Railways tender awards landing in Q3 for Timken and SKF Industrial.</li>
+      <li>Timken CRB lines at Bharuch reaching SRB-level utilisation (~70%) by December.</li>
+    </ul></div>
+    <div class="tg tg-dn"><div class="k">What would make us cut</div><ul>
+      <li>Q3 operating margins down again QoQ, which would mean the pass-through is failing, not lagging.</li>
+      <li>Exports falling more than seasonally on European demand or tariffs.</li>
+      <li>Another negative-cash quarter at SKF Industrial or Schaeffler.</li>
+    </ul></div>
+  </div>
+</section>
+
+<section>
+  <h2>Analyst coverage after results</h2>
+  <div class="rule"></div>
+  <p class="note">Broker calls published after Q2 results. Only one dated post-result report was found, for Timken.</p>
+  <div class="tw">
+  <table>
+    <thead><tr><th>Company</th><th>Broker</th><th>Report date</th><th>Rating</th><th class="r">Target (₹)</th><th class="r">Prior (₹)</th><th class="r">Price at report (₹)</th></tr></thead>
+    <tbody id="brk"></tbody>
+  </table>
+  </div>
+  <p class="asof">Source: Trendlyne research-report listing, accessed 15 Nov 2026. The consensus row is an aggregate, not a broker report.</p>
+</section>
+
+<section>
+  <h2>Price and returns</h2>
+  <div class="rule"></div>
+  <p class="note">Results date against market performance. Menon has tripled (+214% in a year, +151% in six months). NRB and SKF Industrial re-rated over six months (+22–23%). Schaeffler, Timken and SKF India de-rated (−11–12%).</p>
+  <div class="tw">
+  <table>
+    <thead><tr>
+      <th>Company</th><th>Ticker</th><th>Results date</th><th class="r">CMP (₹)</th>
+      <th class="r">1 year</th><th class="r">6 months</th><th class="r">3 months</th><th class="r">MTD</th>
+    </tr></thead>
+    <tbody id="ret"></tbody>
+  </table>
+  </div>
+  <p class="asof">Prices as on 13 Nov 2026 close (Zerodha Kite; cross-checked with NSE bhavcopy). Anchors: 1Y = 14 Nov 2025, 6M = 15 May 2026, 3M = 14 Aug 2026, MTD = 30 Oct 2026 closes, Kite daily candles. SKF India 1Y n/s (2025 demerger); SKF India (Industrial) 1Y n/s (listed 5 Dec 2025). Sorted by 1-year return.</p>
+</section>
+
+<section>
+  <h2>Caveats</h2>
+  <div class="rule"></div>
+  <ul class="cav">
+    <li><b>The published Q1 Bearings report is not a usable baseline.</b>
+      <ul>
+        <li>It showed Schaeffler "Q1 FY27" revenue of ₹2,120 cr. Schaeffler reports on a calendar year, and its actual quarters were far larger.</li>
+        <li>It treated SKF India as one entity after the 2025 demerger.</li>
+        <li>It omitted SKF Industrial from the cards.</li>
+      </ul>
+      Walk-the-talk here scores management's own Q1-call commitments, not that report.</li>
+    <li><b>Sources.</b> All financials come from consolidated filed quarterlies via Tijori (operating profit before other income). Commitments and commentary come from the Q1 and Q2 call transcripts read in full via Tijori: Timken, SKF India, NRB, Menon and Schaeffler (Jul and Oct calls), plus the SKF Industrial Q1 call (it held no Q2 call). An earlier build relied on third-party digests. It overstated SKF India's margin (14.5% including other income), Menon's (22%) and Schaeffler's (standalone 18.7%). It also misread SKF Industrial's PBT growth as operating.</li>
+    <li><b>Bases.</b>
+      <ul>
+        <li>Operating margins exclude other income. Management "EBITDA" figures quoted in the text are labelled as such.</li>
+        <li>SKF India: Tijori carries no comparable YoY after the demerger. The +16% YoY is the company's net-sales figure from the Q2 call.</li>
+        <li>Schaeffler: calendar year; consolidated (with KRSV). Standalone figures (revenue ₹3,005 cr, EBITDA 18.7%) are management's.</li>
+        <li>Tijori vs management, cross-checked. SKF India (14.5% vs 9.6%), Menon (22% vs 20.0%) and NRB (₹71 cr adjusted EBITDA = ₹66.9 cr operating profit + ₹4.1 cr other income) reconcile exactly through other income. Schaeffler's consolidated revenue (₹3,089 cr) and PAT (₹349 cr) match the exchange filing as reported by Autocar Pro. Management's 17.7% consolidated EBITDA differs from the 17.4% operating margin by ~₹10 cr. That gap is not other income (₹33 cr), so it is a definitional difference we could not trace.</li>
+        <li>Timken exports (₹263 cr, +60%) and Bharuch utilisation come from company commentary, not filings.</li>
+      </ul></li>
+    <li><b>Returns.</b> The demerger breaks SKF India's 1-year comparison. SKF India (Industrial) listed on 5 Dec 2025, so it has no 1-year history. Both are marked n/s.</li>
+    <li><b>Menon Bearings</b> was added at the user's request. The ~35x P/E (₹366 against annualised H1 EPS of ~₹10.3) is derived.</li>
+    <li><b>Universe.</b> Six listed bearing makers. NRB Industrial Bearings (a separate, small listed company) and unlisted players are excluded.</li>
+  </ul>
+</section>
+
+<footer>
+  <p><b>Universe:</b> 6 listed Indian bearing manufacturers, quarter ended 30 September 2026. Sources: filed quarterlies and call transcripts via Tijori; broker targets via Trendlyne. Prices from Zerodha Kite. Built 15 November 2026.</p>
+</footer>
+
+</div>
+<script>
+const C=(n,t,b,bl,k,p,f)=>({n,t,b,bl,k,p,f});
+const SC=[["Menon Bearings",57.3,100.9],["Timken",25.4,28.7],["NRB Bearings",18.8,24.9],["Schaeffler",26.9,17.8],["SKF Industrial",28.3,-6.5]];
+const MIN=-25,MAX=110,SCU1="%",SCU2="%";
+const LEAGUES=[["league",[["Menon Bearings",20.0,"+4.3 pts YoY; −2.0 pts QoQ"],["Timken",18.7,"+0.5 pts YoY; −0.2 pts QoQ"],["Schaeffler",17.4,"−1.4 pts YoY; −0.7 pts QoQ"],["NRB Bearings",17.3,"+0.9 pts YoY; +0.1 pts QoQ"],["SKF Industrial",9.6,"−3.7 pts YoY; +0.6 pts QoQ"],["SKF India (auto)",9.6,"YoY n/c (demerger); −5.3 pts QoQ"]],22,17,12,v=>`${v.toFixed(1)}%`]];
+const FU=[["SKF India (auto)",-5.3],["Menon Bearings",-2.0],["Schaeffler",-0.7],["Timken",-0.2],["NRB Bearings",0.1],["SKF Industrial",0.6]];
+const FUMAX=6,FUFMT=v=>`${v>0?'+':v<0?'−':''}${Math.abs(v).toFixed(1)}`;
+const CO=[
+ C("Timken India","TIMKEN · Mid","del","On track",[["₹986 cr","Revenue (+25.4%)",1],["18.7%","Op. margin (+0.5 pts YoY)",1],["₹121 cr","PAT (+29%)",1],["+28.7%","Operating profit YoY",1]],
+  ["Operating profit grew faster than revenue. Margin held within 0.2 pts QoQ through the cost shock, the only large name to do so.","Raw materials rose 130 bps as a share of sales QoQ. Half came from lower rail mix, half from carbides (~+200%), steel and gas. Exports were ₹263 cr, +60%, 27% of revenue.","Bharuch: SRB lines reached 70%, the target set on the Q1 call. CRB lines are at 58–60%. Rail revenue fell to ₹157 cr from ₹200 cr QoQ on slow government buying.","ICICI Direct (2 Nov): Buy, target ₹3,570, at ₹3,017. Trendlyne consensus ₹3,845.","Verdict: the best earnings quality in the set, and it did what it said on the Q1 call, at a de-rated price."],
+  [["CRB ramp pending",""],["Rail slowdown",""],["Exports","ok"]]),
+ C("Menon Bearings","MENONBE · Small","del","Ahead of guide",[["₹98 cr","Revenue (+57.3%)",1],["20.0%","Op. margin (15.7% YoY)",1],["₹14.7 cr","PAT (+117%)",1],["₹190 cr","H1 sales (53% of ₹360 cr FY guide)",1]],
+  ["Operating profit doubled. The margin fell 2.0 pts QoQ from 21.9%. Tin is up 72% and copper 50%, so gross margin is down more than 7 pts YoY. Overhead absorption and productivity covered it.","The 22% \"EBITDA\" in the presentation includes ₹3.7 cr of other income. Ex other income it is 20.0%.","Exports are 34–35% of sales against the 37% promised on the Q1 call. Guidance moved from ₹360 cr to growth above 30% in both FY27 and FY28.","No dated broker coverage found.","Verdict: the best numbers in the sector, and ahead of its own guide. But the stock is +214% in a year and +33% this month, so the price already assumes it continues."],
+  [["Price run",""],["Metal costs",""],["Growth","ok"]]),
+ C("Schaeffler India","SCHAEFFLER · Large","part","Recovery lag",[["₹3,089 cr","Cons. revenue (+26.9%)",1],["17.4%","Op. margin (18.7% YoY)",-1],["₹349 cr","PAT (+20.8%)",1],["₹41 cr","Q3 free cash flow",-1]],
+  ["Calendar-year company; this is Q3 CY26. Standalone: Automotive +35%, B&amp;IS +14.7%, exports +46%, aftermarket +22%.","Operating profit +17.8% against revenue +26.9%. Margin −1.4 pts YoY and −0.7 pts QoQ on a consolidated basis, before other income.","Inflation is ~1.1% of sales, 50% recovered. The CFO says 80–85% is usually recovered, retrospectively, over 4–6 months. Mobility EBIT margin 12.2% from 13.1%.","Working capital ~19% of sales after an unplanned e-mobility inventory build. KRSV subsidiary at −17.6% EBITDA. CY26 capex ₹500 cr on track (₹357 cr in 9M).","Verdict: a quality franchise. But the H2 price recovery promised in July has not reached the margin yet, and cash was weak."],
+  [["Weak FCF",""],["Partial recovery",""],["Exports","ok"]]),
+ C("NRB Bearings","NRBBEARING · Small","part","Growth beat",[["₹386 cr","Revenue (+18.8%)",1],["17.3%","Op. margin (+0.9 pts YoY)",1],["₹35 cr","PAT (−12.8%)",-1],["+24.9%","Operating profit YoY",1]],
+  ["Operating profit +25% on revenue +19%. Margin flat QoQ, so it is not seeing the squeeze its peers report. Industrial +48% (vs 34% last year); CV +47%.","The PAT fall is explained in the filing. Other income fell to ₹4 cr from ₹14 cr, and depreciation rose to ₹20 cr from ₹13 cr as new capacity was capitalised.","Q1 call: margins \"between 18% to 20%\" over a year. It came in at 17.3% before other income, 18.2% as management adjusts it. It now guides growth of 19%+. The Unitec JV is on track for April 2027.","Verdict: operating delivery is clean and growth beat. The margin sits at the floor of its own band, and PAT will lag while depreciation builds."],
+  [["PAT down",""],["Margin at floor",""],["Growth","ok"]]),
+ C("SKF India (Industrial)","SKFINDUS · Mid","miss","Underlying miss",[["₹1,043 cr","Revenue (+28.3%)",1],["9.6%","Op. margin (13.3% YoY)",-1],["₹103 cr","PAT (+34%)",0],["₹45 cr","Other income (₹17 cr YoY)",-1]],
+  ["Operating profit fell 6.5% YoY on revenue +28%. Margin −3.7 pts YoY, +0.6 pts QoQ.","PBT +33% came from other income (₹45 cr, from ₹10 cr in Q1), not operations. Before other income, PBT margin is 8.5%, against 8.0% in Q1.","Q1 call: the 9% PBT margin was depressed by ~₹15 cr of FX losses and ~₹15 cr of demerger IT costs. \"12% is a fair number.\" Reported PBT hit 12.8%, but only through other income.","No Q2 call. Operating cash flow −₹6 cr. Pune plant capex ₹900–950 cr, production from 2028.","Verdict: the headline profit growth flatters it. The operating margin has not recovered."],
+  [["Op. profit down",""],["OI-driven PBT",""],["No call",""]]),
+ C("SKF India (automotive)","SKFINDIA · Mid","miss","Margin miss",[["₹596 cr","Revenue (+1.4% QoQ)",0],["9.6%","Op. margin (15.0% Q1)",-1],["₹52 cr","PAT (₹62 cr Q1)",-1],["−34.8%","Operating profit QoQ",-1]],
+  ["Net sales +16% YoY (company figure; Tijori has no comparable YoY after the demerger), +2% QoQ, volume-led.","Margin −5.3 pts QoQ before other income. The 14.5% \"EBITDA\" in the presentation includes ₹29 cr of other income, mostly rent and contract manufacturing from SKF Industrial.","Q1 call: ~17% was \"largely normalised\" for two years. Q2: steel and supplier price increases, with customer pricing still under negotiation. Recovery promised \"largely\" in the December quarter.","Aftermarket ~−7% despite a promised volume recovery. Capex ~₹200 cr this year; new capacity from July 2027.","Verdict: missed both scorable Q1 promises. The most exposed to slow auto-OEM re-pricing."],
+  [["QoQ margin fall",""],["OI dependence",""],["Aftermarket down",""]])
+];
+const KPI=[
+ ["Menon Bearings","+57.3%","+7.1%","20.0%","+4.3 pts YoY; −2.0 QoQ","+117%","34–35% of sales","Cash ₹25.7 cr","Cons.; Tijori filed"],
+ ["Timken","+25.4%","+4.6%","18.7%","+0.5 pts YoY; −0.2 QoQ","+29%","27% (+60%)","n/d","Cons.; Tijori filed"],
+ ["Schaeffler","+26.9%","+11.9%","17.4%","−1.4 pts YoY; −0.7 QoQ","+20.8%","17% (+46%)","FCF ₹41 cr; WC ~19%","Cons., Q3 CY26; Tijori filed"],
+ ["NRB Bearings","+18.8%","+4.3%","17.3%","+0.9 pts YoY; +0.1 QoQ","−12.8%","+16% YoY","DSO flat","Cons.; Tijori filed"],
+ ["SKF Industrial","+28.3%","+7.4%","9.6%","−3.7 pts YoY; +0.6 QoQ","+34%","n/d","OCF −₹6 cr; NWC 18.9%","Cons.; Tijori filed; no call"],
+ ["SKF India (auto)","+16% (co.)","+1.4%","9.6%","−5.3 pts QoQ","n/c","10%","NWC 18.8%","Cons.; Tijori filed"]
+];
+const BRK=[["Timken","ICICI Direct","2 Nov 2026","Buy","3,570","—","3,016.70"],["Timken","Trendlyne consensus","15 Nov 2026","Buy (avg)","3,845","—","3,120.30"],["Others","None found post-result","—","—","—","—","—"]];
+const SCORE=[
+ ["Timken","Q1 call: SRB lines at Bharuch to 70% by Aug–Sep; CRB ramp toward Q2-end/Q3; capex 8–10% of sales","SRB 70% (delivered); CRB 58–60%; Bharuch revenue ~₹75 cr from ~₹50 cr; capex on track.","del","Delivered"],
+ ["Menon Bearings","Q1 call: FY27 revenue ~₹360 cr; margin 20–21% sustained; exports to ~37% of sales","H1 sales ₹190 cr (53%); op. margin 20.0%; exports 34–35%. Guide raised to >30% growth.","del","Ahead"],
+ ["NRB Bearings","Q1 call: margins 18–20% over the year; growth above 14% trailing; Unitec JV Apr 2027","Growth +18.8% (beat); op. margin 17.3% (18.2% adjusted, at the floor); JV on track.","part","Margin at floor"],
+ ["Schaeffler","Q2 call (Jul): price recovery via FX and steel indexation in H2; CY26 capex ₹400–500 cr; FCF recovers in H2","Margin −0.7 pts QoQ; 50% of inflation recovered; capex ₹357 cr in 9M; Q3 FCF ₹41 cr.","part","Partial"],
+ ["SKF Industrial","Q1 call: underlying margin ~12% once FX and demerger costs pass","Op. margin 9.6%; PBT 12.8% only via ₹45 cr other income (8.5% without it).","miss","Underlying miss"],
+ ["SKF India (auto)","Q1 call: ~17% margin \"normalised\" for two years; growth ~20%; aftermarket volume recovery","Margin 14.5% incl. other income, 9.6% without; sales +16%; aftermarket ~−7%.","miss","Missed"]
+];
+const SPAN=MAX-MIN,Z=(0-MIN)/SPAN*100;
+document.getElementById("scissor").innerHTML=SC.map(([n,v,e],i)=>{
+ const bar=(val,cls,u)=>{const w=Math.max(Math.abs(val),0.3)/SPAN*100;
+  const l=val>=0?Z:Z-w;
+  return `<i class="b ${cls} ${val>=0?'pos':'neg'}" style="left:${l}%;width:${w}%;animation-delay:${i*45}ms"><span>${val>0?'+':''}${val}${u}</span></i>`;};
+ return `<div class="row"><div class="co">${n}</div><div class="track"><i class="axis" style="left:${Z}%"></i>${bar(v,'v',SCU1)}${bar(e,'e',SCU2)}</div></div>`;
+}).join("");
+const league=(id,rows,max,hi,mid,fmt)=>{document.getElementById(id).innerHTML=rows.map(([n,v,d],i)=>{
+ const cls=v>=hi?"":v>=mid?"mid":"low";
+ return `<div class="lrow"><div class="co">${n}</div>
+ <div><i class="lbar ${cls}" style="display:block;width:${Math.max(v,0)/max*100}%;animation-delay:${i*40}ms"></i></div>
+ <div><div class="v">${fmt(v)}</div><div class="d">${d}</div></div></div>`;}).join("");};
+LEAGUES.forEach(([id,rows,max,hi,mid,fmt])=>league(id,rows,max,hi,mid,fmt));
+document.getElementById("fuel").innerHTML=FU.map(([l,v],i)=>
+ `<div class="fp"><b>${FUFMT(v)}</b><i style="height:${Math.abs(v)/FUMAX*88}px;animation-delay:${i*120}ms"></i><em>${l}</em></div>`).join("");
+document.getElementById("cards").innerHTML=CO.map(c=>`
+ <article class="c">
+  <div class="chead"><div><h3>${c.n}</h3><div class="tick">${c.t}</div></div><div class="badge ${c.b}">${c.bl}</div></div>
+  <div class="tiles">${c.k.map(([n,l,s])=>`<div class="tile"><div class="n ${s===1?'up':s===-1?'dn':''}">${n}</div><div class="l">${l}</div></div>`).join("")}</div>
+  <ul>${c.p.map(x=>`<li>${x}</li>`).join("")}</ul>
+  <div class="flags">${c.f.map(([t,k])=>`<span class="flag ${k}">${t}</span>`).join("")}</div>
+ </article>`).join("");
+document.getElementById("kpi").innerHTML=KPI.map(r=>
+ `<tr><td class="co">${r[0]}</td>`+r.slice(1).map(c=>`<td class="kpi">${c}</td>`).join("")+`</tr>`).join("");
+document.getElementById("brk").innerHTML=BRK.map(r=>
+ `<tr><td class="co">${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td class="num">${r[4]}</td><td class="num ${r[5].includes('↓')?'dn':r[5].includes('↑')?'up':''}">${r[5]}</td><td class="num">${r[6]}</td></tr>`).join("");
+const RET=[["Menon Bearings", "MENONBE", "~29 Oct", "366.30", "+214.1%", "+150.7%", "+59.5%", "+32.6%"], ["NRB Bearings", "NRBBEARING", "4 Nov", "426.05", "+48.4%", "+22.8%", "-7.2%", "-4.8%"], ["Timken India", "TIMKEN", "~29 Oct", "3,120.30", "+1.8%", "-11.6%", "-4.7%", "+9.4%"], ["Schaeffler India", "SCHAEFFLER", "~28 Oct", "3,585.60", "-12.2%", "-11.0%", "-11.3%", "+0.3%"], ["SKF India (Industrial)", "SKFINDUS", "4 Nov", "2,511.30", "n/s", "+21.7%", "-6.5%", "+6.0%"], ["SKF India (auto)", "SKFINDIA", "3 Nov", "1,465.70", "n/s", "-11.2%", "-6.8%", "+5.1%"]];
+document.getElementById("ret").innerHTML=RET.map(r=>{
+ const cell=v=>{ if(v==="n/s") return `<td class="num ns">n/s</td>`;
+   const cls=v.startsWith("+")?"up":v.startsWith("-")?"dn":""; return `<td class="num ${cls}">${v}</td>`;};
+ return `<tr><td class="co">${r[0]}</td><td class="tick">${r[1]}</td><td>${r[2]}</td>`
+  +`<td class="num">${r[3]==="n/s"?'<span class="ns">n/s</span>':r[3]}</td>`+r.slice(4).map(cell).join("")+`</tr>`;
+}).join("");
+document.getElementById("score").innerHTML=SCORE.map(([c,p,d,k,v])=>
+ `<tr><td class="co">${c}</td><td>${p}</td><td class="hide">${d}</td><td class="vd ${k}">${v}</td></tr>`).join("");
+</script></body></html>
