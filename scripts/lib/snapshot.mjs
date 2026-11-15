@@ -106,7 +106,8 @@ export function buildSnapshot(manifest, readHtml, notes = {}) {
       name: s.name,
       quarter: s.quarter,
       path: s.path,
-      hasReturns: real.length > 0,
+      // a table of "n/s" rows is not return data: count only rows with at least one number
+      hasReturns: real.some((r) => [r.mtd, r.r3m, r.r6m, r.r1y].some((v) => v != null)),
       summary: summarise(real, verdicts),
       stocks: real,
       notes: [...(notes[s.id] || []), ...flags],
