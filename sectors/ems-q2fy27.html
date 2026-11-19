@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EMS Q2 FY27 — Sector Earnings Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Roboto+Mono:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --stone:#E3E0D9; --card:#F3F1EC; --card2:#EAE7E0;
+  --ink:#1F1D1A; --mute:#6E6A62; --faint:#9A958B; --rule:#C9C4B9;
+  --gain:#1D5C7A; --loss:#A8382C; 
+  --vol:#8E8879; --gold:#B4842A;
+  --disp:'Archivo',system-ui,sans-serif;
+  --serif:'Source Serif 4',Georgia,serif;
+  --mono:'Roboto Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--stone);color:var(--ink);font-family:var(--serif);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:28px 20px 90px}
+section{margin-bottom:40px}
+
+/* type */
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
+h1{font-family:var(--disp);font-weight:800;font-size:clamp(34px,7vw,62px);line-height:.94;letter-spacing:-.03em;margin:.18em 0 .22em;text-transform:uppercase}
+h2{font-family:var(--disp);font-weight:700;font-size:clamp(19px,3.2vw,25px);letter-spacing:-.015em;margin:0 0 4px;text-transform:uppercase}
+h3{font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:-.005em;margin:0}
+.dek{font-size:17px;color:var(--mute);max-width:56ch;margin:0}
+.note{font-size:13px;color:var(--mute);margin:4px 0 20px;max-width:70ch}
+.rule{height:3px;background:var(--ink);margin:0 0 16px}
+
+/* thesis stats */
+.thesis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:2px;background:var(--rule);border:2px solid var(--ink);margin-top:26px}
+.t{background:var(--card);padding:13px 15px}
+.t .n{font-family:var(--disp);font-weight:800;font-size:26px;line-height:1.05;letter-spacing:-.02em}
+.t .l{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:5px;line-height:1.35}
+.t.up .n{color:var(--gain)} .t.dn .n{color:var(--loss)}
+
+/* SIGNATURE: the scissor */
+.scissor{background:var(--card);border:2px solid var(--ink);padding:18px 16px 12px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin-bottom:14px}
+.legend span{display:flex;align-items:center;gap:6px}
+.sw{width:13px;height:11px;display:inline-block}
+.row{display:grid;grid-template-columns:104px 1fr;gap:10px;align-items:center;margin-bottom:3px}
+.row .co{font-family:var(--disp);font-weight:600;font-size:12px;text-align:right;line-height:1.15}
+.track{position:relative;height:26px;border-left:2px solid var(--ink);border-right:0}
+.axis{position:absolute;top:0;bottom:0;width:2px;background:var(--ink);opacity:.85}
+.b{position:absolute;height:10px}
+.b.v{top:1px;background:var(--vol)}
+.b.e{top:14px}
+.b.e.pos{background:var(--gain)} .b.e.neg{background:var(--loss)}
+.b span{position:absolute;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:9.5px;font-weight:500;white-space:nowrap;color:var(--ink)}
+.b.pos span,.b.v span{left:calc(100% + 5px)}
+.b.neg span{right:calc(100% + 5px)}
+.scale{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9.5px;color:var(--faint);margin-top:6px;padding-left:114px}
+
+/* league bars */
+.league{background:var(--card);border:2px solid var(--ink);padding:16px}
+.lrow{display:grid;grid-template-columns:112px 1fr 96px;gap:10px;align-items:center;padding:4px 0;border-bottom:1px solid var(--rule)}
+.lrow:last-child{border-bottom:0}
+.lrow .co{font-family:var(--disp);font-weight:600;font-size:12.5px;text-align:right}
+.lbar{height:16px;background:var(--gain);position:relative}
+.lbar.mid{background:#4A7F91} .lbar.low{background:var(--loss)}
+.lrow .v{font-family:var(--mono);font-size:12px;font-weight:700;text-align:right}
+.lrow .d{font-family:var(--mono);font-size:10px;color:var(--mute);text-align:right}
+
+/* fuel strip */
+.fuel{background:var(--ink);color:var(--card);border:2px solid var(--ink);padding:18px}
+.fuel h2{color:var(--card)}
+.fline{display:flex;align-items:flex-end;gap:0;height:110px;margin:20px 0 6px}
+.fp{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:6px}
+.fp i{display:block;width:100%;max-width:52px;background:var(--gold)}
+.fp b{font-family:var(--mono);font-size:12px;font-weight:700}
+.fp em{font-family:var(--mono);font-size:9.5px;font-style:normal;letter-spacing:.09em;text-transform:uppercase;color:#A9A296}
+.warn{border-top:1px solid #4A453C;margin-top:14px;padding-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
+.warn div{font-size:13.5px;color:#D6D1C6}
+.warn strong{display:block;font-family:var(--mono);font-size:17px;font-weight:700;color:var(--gold);margin-bottom:2px}
+
+/* company cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
+.c{background:var(--card);border:2px solid var(--ink);padding:14px;display:flex;flex-direction:column}
+.chead{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:2px}
+.tick{font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacing:.06em}
+.badge{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 6px;border:1.5px solid;white-space:nowrap;flex-shrink:0}
+.badge.del{color:var(--gain);border-color:var(--gain)}
+.badge.part{color:var(--gold);border-color:var(--gold)}
+.badge.miss{color:var(--loss);border-color:var(--loss)}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);margin:11px 0}
+.tile{background:var(--card2);padding:7px 9px}
+.tile .n{font-family:var(--mono);font-size:15px;font-weight:700;line-height:1.15}
+.tile .l{font-family:var(--mono);font-size:8.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:3px}
+.tile .n.up{color:var(--gain)} .tile .n.dn{color:var(--loss)}
+.c ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.c li{margin-bottom:5px}
+.c li::marker{color:var(--faint)}
+.flags{margin-top:auto;padding-top:10px;display:flex;flex-wrap:wrap;gap:5px}
+.flag{font-family:var(--mono);font-size:9px;letter-spacing:.05em;text-transform:uppercase;background:var(--loss);color:var(--card);padding:3px 6px}
+.flag.ok{background:var(--gain)}
+
+
+table{width:100%;border-collapse:collapse;background:var(--card);border:2px solid var(--ink)}
+th{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;text-align:left;padding:9px 10px;background:var(--ink);color:var(--card)}
+td{padding:9px 10px;border-bottom:1px solid var(--rule);font-size:13.5px;vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.co{font-family:var(--disp);font-weight:700;font-size:13px;white-space:nowrap}
+td.vd{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;white-space:nowrap}
+.vd.del{color:var(--gain)} .vd.part{color:var(--gold)} .vd.miss{color:var(--loss)}
+
+/* call */
+.calls{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.call{border:2px solid var(--ink);padding:15px;background:var(--card)}
+.call.buy{border-left:9px solid var(--gain)}
+.call.wait{border-left:9px solid var(--gold)}
+.call.avoid{border-left:9px solid var(--loss)}
+.call .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.call h3{margin:4px 0 7px;font-size:17px}
+.call p{margin:0;font-size:13.5px}
+
+
+/* commentary */
+.themes{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.th{background:var(--card);border:2px solid var(--ink);padding:14px}
+.th .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--mute);border-bottom:2px solid var(--ink);padding-bottom:6px;margin-bottom:9px}
+.th ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.th li{margin-bottom:6px}
+.th li::marker{color:var(--faint)}
+.th b{font-family:var(--mono);font-size:12.5px;font-weight:700}
+
+/* red flags */
+.rf{background:var(--card);border:2px solid var(--ink)}
+.rfg{border-bottom:2px solid var(--ink)}
+.rfg:last-child{border-bottom:0}
+.rfh{display:flex;align-items:center;gap:9px;padding:8px 13px;background:var(--card2)}
+.sev{width:11px;height:11px;flex-shrink:0}
+.sev.hi{background:var(--loss)} .sev.md{background:var(--gold)} .sev.lo{background:var(--faint)}
+.rfh span{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase}
+.rfr{display:grid;grid-template-columns:118px 1fr;gap:12px;padding:9px 13px;border-top:1px solid var(--rule);font-size:13.5px}
+.rfr b{font-family:var(--disp);font-weight:700;font-size:12.5px}
+
+/* ind-ra verdict */
+.indra{background:var(--card);border:2px solid var(--ink);padding:16px}
+.split{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:2px;background:var(--rule);border:1px solid var(--rule);margin-bottom:16px}
+.sp{background:var(--card2);padding:13px 14px}
+.sp .n{font-family:var(--disp);font-weight:800;font-size:34px;line-height:1;letter-spacing:-.03em;color:var(--loss)}
+.sp.ok .n{color:var(--gain)}
+.sp .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-top:6px}
+.sp .w{font-size:12.5px;color:var(--mute);margin-top:7px}
+.vs{display:grid;grid-template-columns:82px 1fr;gap:11px;padding:7px 0;border-bottom:1px solid var(--rule);font-size:13.5px;align-items:start}
+.vs:last-child{border-bottom:0}
+.vs em{font-family:var(--mono);font-size:9.5px;font-style:normal;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding-top:2px}
+.vs em.y{color:var(--gain)} .vs em.n{color:var(--loss)} .vs em.p{color:var(--gold)}
+
+/* regional strip */
+.reg{display:grid;grid-template-columns:repeat(auto-fit,minmax(112px,1fr));gap:2px;background:var(--rule);border:2px solid var(--ink);margin-top:16px}
+.rg{background:var(--card2);padding:11px 12px;text-align:center}
+.rg .n{font-family:var(--mono);font-size:15px;font-weight:700}
+.rg .n.up{color:var(--gain)} .rg .n.dn{color:var(--loss)}
+.rg .l{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-top:4px}
+
+/* triggers */
+.trigs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:14px}
+.tg{border:2px solid var(--ink);padding:14px;background:var(--card)}
+.tg .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
+.tg.tg-up .k{color:var(--gain)} .tg.tg-dn .k{color:var(--loss)}
+.tg ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.tg li{margin-bottom:6px}
+
+/* caveats */
+.cav{background:var(--card2);border:2px solid var(--ink);padding:15px 15px 15px 30px;margin:0;font-size:13.5px;line-height:1.55}
+.cav li{margin-bottom:8px}
+.cav li:last-child{margin-bottom:0}
+.cav b{font-family:var(--mono);font-size:12px;font-weight:700}
+
+
+/* wide data tables */
+.tw{overflow-x:auto;border:2px solid var(--ink);background:var(--card)}
+.tw table{border:0;min-width:660px}
+.tw th{position:sticky;top:0}
+td.num{font-family:var(--mono);font-size:12px;font-weight:700;text-align:right;white-space:nowrap}
+td.num.up{color:var(--gain)} td.num.dn{color:var(--loss)} td.num.ns{color:var(--faint);font-weight:400}
+th.r{text-align:right}
+td.kpi{font-family:var(--mono);font-size:11.5px;text-align:right;white-space:nowrap}
+.asof{font-family:var(--mono);font-size:11px;color:var(--mute);margin-top:10px;line-height:1.6}
+.asof b{color:var(--ink)}
+
+footer{border-top:3px solid var(--ink);padding-top:15px;font-size:12.5px;color:var(--mute)}
+footer p{margin:0 0 8px;max-width:80ch}
+
+@media(max-width:620px){
+  .row{grid-template-columns:74px 1fr;gap:7px}
+  .row .co{font-size:10.5px}
+  .scale{padding-left:81px}
+  .lrow{grid-template-columns:80px 1fr 74px}
+  .lrow .co{font-size:11px}
+  .wrap{padding:20px 13px 60px}
+  td.hide,th.hide{display:none}
+}
+@media(prefers-reduced-motion:no-preference){
+  .b,.lbar,.fp i{animation:g .7s cubic-bezier(.2,.7,.3,1) both}
+  @keyframes g{from{transform:scaleX(.001);opacity:0}to{transform:scaleX(1);opacity:1}}
+  .b.neg{transform-origin:right} .b.v,.b.pos,.lbar{transform-origin:left}
+  .fp i{animation-name:gy;transform-origin:bottom}
+  @keyframes gy{from{transform:scaleY(.001)}to{transform:scaleY(1)}}
+}
+
+.badge.nsc{color:var(--mute);border-color:var(--mute)}
+.lsub{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin:14px 0 6px}
+.pubdates{font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--mute);margin:-2px 0 12px}
+.fp{min-width:0}@media(max-width:560px){.fp b{font-size:9.5px}.fp em{font-size:8px;letter-spacing:0;text-align:center;overflow-wrap:anywhere}}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Sector earnings review · Quarter ended 30 September 2026</div>
+  <h1>Electronics Manufacturing Services<br>Q2 FY27</h1>
+  <div class="pubdates">First edition 15 Nov 2026 · Revised 19 Nov 2026</div>
+  <p class="dek">EMS revenue is growing on borrowed money: six companies added ₹3,360 cr of debt in six months. Kaynes added an audit qualification and a restatement to a weak quarter.</p>
+  <div class="thesis">
+    <div class="t up"><div class="n">7 of 10</div><div class="l">Grew revenue more than 35% YoY</div></div>
+    <div class="t dn"><div class="n">+₹3,360 cr</div><div class="l">Gross borrowings added since March at six companies (filed)</div></div>
+    <div class="t dn"><div class="n">7 of 10</div><div class="l">Lower EBITDA margin YoY, before other income</div></div>
+    <div class="t dn"><div class="n">−16%</div><div class="l">Kaynes since its results and call (13 to 18 Nov)</div></div>
+  </div>
+</header>
+
+<section>
+  <h2>The scissor</h2>
+  <div class="rule"></div>
+  <p class="note">Revenue growth YoY against EBITDA growth YoY on one axis. EBITDA is before other income, from filed consolidated quarterlies. Only Avalon and PG Electroplast grew EBITDA faster than revenue among the large movers. Amber and Dixon grew revenue 47–60% but EBITDA only 6–8%. EPACK is excluded: its EBITDA is from a ~₹1 cr base.</p>
+  <div class="scissor">
+    <div class="legend">
+      <span><i class="sw" style="background:var(--vol)"></i>Revenue growth YoY</span>
+      <span><i class="sw" style="background:var(--gain)"></i>EBITDA growth YoY</span>
+      <span><i class="sw" style="background:var(--loss)"></i>EBITDA decline YoY</span>
+    </div>
+    <div id="scissor"></div>
+    <div class="scale"><span>−40</span><span>+10</span><span>+60</span><span>+110</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>EBITDA margin — the league table</h2>
+  <div class="rule"></div>
+  <p class="note">Operating profit before other income, consolidated, as filed. Mix explains more of the ranking than execution: high-mix industrial, defence and aerospace (Kaynes, Centum, Avalon) earn 12–13%, while mobile and appliance assembly (Dixon, Amber, Elin, EPACK) earns 2–4%. Read the change column first. Amber and Syrma quote higher margins that include other income.</p>
+  <div class="league">
+    <div class="lsub">EBITDA margin before other income, Q2 FY27 (change YoY)</div>
+    <div id="league"></div>
+  </div>
+</section>
+
+<section>
+  <h2>Growth paid for with debt</h2>
+  <div class="rule"></div>
+  <div class="fuel">
+    <h2>Debt added, Mar–Sep 2026, ₹ cr</h2>
+    <div class="fline" id="fuel"></div>
+    <div class="warn">
+      <div><strong>Every company checked borrowed more</strong>Amber's debt rose to ₹4,288 cr from ₹2,702 cr. Kaynes' doubled to ₹1,810 cr with cash at ₹68 cr. Syrma's doubled to ₹746 cr. Avalon's rose 70%. Dixon's rose to ₹669 cr, still small against its scale.</div>
+      <div><strong>Inventory by design</strong>Dixon and Syrma are holding "strategic" memory stock. Dixon expects 80–85% of the blocked working capital back by March. PG Electroplast's inventory is ₹1,353 cr against a target below ₹900 cr (call digests). Kaynes' working capital reached 169 days.</div>
+      <div><strong>Margins under input cost</strong>Syrma's material and traded-goods cost rose to 78.9% of revenue from 75.5% in Q1. Dixon's EBITDA grew 6% on revenue +47%. Elin could not pass through polymer and metal costs, and its margin fell 2.0 pts.</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Company by company</h2>
+  <div class="rule"></div>
+  <p class="note">The badge scores Q2 delivery against promises from the Q1 call or standing FY27 guidance. Grey means we found no commitment to score. Red chips are flags for Q3. Broker targets carry their report dates. Figures are filed consolidated unless marked "company" or "call digest".</p>
+  <div class="grid" id="cards"></div>
+</section>
+
+<section>
+  <h2>KPI comparison</h2>
+  <div class="rule"></div>
+  <p class="note">Every tracked company against the sector's KPIs. EBITDA is before other income. Debt is gross borrowings from the filed half-year balance sheet. n/c means not checked in this build; n/m means not meaningful.</p>
+  <div class="tw">
+  <table>
+    <thead><tr>
+      <th>Company</th><th class="r">Revenue YoY</th><th class="r">EBITDA margin</th><th class="r">Margin chg YoY</th><th class="r">EBITDA YoY</th>
+      <th class="r">PAT YoY</th><th class="r">Gross debt Sep</th><th class="r">Debt chg since Mar</th><th class="r">Note</th>
+    </tr></thead>
+    <tbody id="kpi"></tbody>
+  </table>
+  </div>
+  <p class="asof">PLI incentive recognition and customer concentration were not disclosed consistently. Avalon's ~62% US mix is the only concentration figure found.</p>
+</section>
+
+<section>
+  <h2>What management said</h2>
+  <div class="rule"></div>
+  <p class="note">From the Q2 FY27 calls and results. Kaynes items come from its 15–16 Nov call coverage and press release; the other companies' items come from call digests and were not re-read against transcripts.</p>
+  <div class="themes">
+
+    <div class="th"><div class="k">Memory and input costs</div><ul>
+      <li>Dixon: memory inflation compresses margins, and ODM pass-through lags. It does not expect revenue to fall even if memory normalises.</li>
+      <li>Syrma: material and traded-goods cost <b>78.9%</b> of revenue (75.5% in Q1) on memory, laminate and copper.</li>
+      <li>Elin: polymer and metal inflation plus the rupee; it cut low-priced batten orders to protect margin.</li>
+      <li>PG Electroplast: October 1 price increases must hold.</li>
+    </ul></div>
+
+    <div class="th"><div class="k">Volumes and demand</div><ul>
+      <li>Dixon: 9.7 mn phones in Q2. Q3 guided at <b>7–7.5 mn</b>, FY27 33–34 mn and FY28 55–60 mn including Vivo.</li>
+      <li>Kaynes: core EMS <b>+34%</b> to ~₹799 cr; smart-meter revenue −80% to ~₹54 cr, held back deliberately.</li>
+      <li>Cyient DLM: record order book ₹2,814 cr, book-to-bill 1.6x. Aerospace revenue +62%.</li>
+      <li>Avalon: FY27 growth guide raised to 26–30% (from 24–27%).</li>
+    </ul></div>
+
+    <div class="th"><div class="k">Guidance</div><ul>
+      <li>Syrma: FY27 growth above 35% (raised). EBITDA ₹700 cr and a 10.5–11% margin.</li>
+      <li>Kaynes: electronics growth above 30% in FY27. Product share of EMS to rise from ~8% toward 32%. No QIP in the next 12 months.</li>
+      <li>PG Electroplast: 25–30% growth and ~8% EBITDA ex-PLI. It promised to beat FY25 PAT (₹291 cr).</li>
+      <li>Amber: electronics growth ~40%, mobility margin 15–16%, and FY27 capex ₹1,800–2,000 cr.</li>
+    </ul></div>
+
+    <div class="th"><div class="k">New capacity</div><ul>
+      <li>Dixon: HKC notebook line by Q4 FY27, mobile line early FY28. Display fab mass production from FY28. Vivo JV from Q4 FY27.</li>
+      <li>Kaynes: OSAT and PCB unit 2 operational and in customer validation. PCB unit 1 revenue from Q3; both at full run-rate by Q4. Q2 capex ~₹221 cr before subsidy.</li>
+      <li>Kaynes: Vishay to take <b>49%</b> of Kaynes Semicon and 75–90% of its capacity; definitive agreement expected in 2–3 months.</li>
+      <li>PG Electroplast: compressor and refrigerator capacity from December or January.</li>
+    </ul></div>
+
+    <div class="th"><div class="k">Working capital promises</div><ul>
+      <li>Dixon: 80–85% of the blocked working capital released by March 2027.</li>
+      <li>Kaynes: <b>169 days</b> (rolling 12 months), up from 123 at Q1, against 70–85 days promised. It aims to flatten, then reduce, and will review ₹200–250 cr of strategic inventory by end-December.</li>
+      <li>Kaynes: smart-meter receivables ₹1,091 cr (₹1,402 cr at Q1); production resumes only below ₹750 cr.</li>
+      <li>PG Electroplast: inventory below ₹900 cr was promised on the Q4 call. It is ₹1,353 cr.</li>
+    </ul></div>
+
+    <div class="th"><div class="k">One-offs and accounting</div><ul>
+      <li>Kaynes: prior periods restated under Ind AS 8 (revenue timing, capitalised overheads in inventory, receivable provisions, bill discounting moved into borrowings). FY26 standalone PAT fell to ~₹182 cr from ~₹254 cr.</li>
+      <li>Kaynes: qualified review conclusion on the consolidated results, because associate Mixx Technologies' figures were not reviewed. Share of associate loss ₹6.0 cr.</li>
+      <li>Cyient DLM: reported PAT ₹34 cr includes an ~₹18 cr earnout reversal. Normalised PAT ~₹16 cr.</li>
+      <li>Dixon: the YoY PAT fall is mostly a ~₹490 cr other-income gain in the base quarter.</li>
+    </ul></div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Red flags</h2>
+  <div class="rule"></div>
+  <p class="note">Ranked by how much they should change position sizing, not by how alarming they sound.</p>
+  <div class="rf">
+
+    <div class="rfg">
+      <div class="rfh"><i class="sev hi"></i><span>Act on these</span></div>
+      <div class="rfr"><b>Kaynes</b><div>Qualified review conclusion and a restatement of prior periods, on top of revenue +4.5%, margin −324 bps and group PAT −67%. Gross debt doubled to ₹1,810 cr with ₹68 cr cash. Working capital is 169 days against a 70–85 day promise. The stock fell 16% from 13 to 18 Nov.</div></div>
+      <div class="rfr"><b>Amber</b><div>A loss of ₹80 cr to owners (₹33 cr a year ago). Gross debt rose ₹1,586 cr in six months to ₹4,288 cr. Operating profit before other income was −₹14 cr after depreciation, against interest of ₹95 cr. The railway margin is 4.8% against a 15–16% guide.</div></div>
+      <div class="rfr"><b>Elin</b><div>EBITDA −31% on revenue +10%. Margin 3.4%. It cannot pass through costs. The stock is −61% over a year.</div></div>
+    </div>
+
+    <div class="rfg">
+      <div class="rfh"><i class="sev md"></i><span>Monitor next quarter</span></div>
+      <div class="rfr"><b>PG Electroplast</b><div>H1 margin 7.0% against its ~8% goal. Inventory ₹1,353 cr against a sub-₹900 cr promise. A third of Q2 PAT came from associates.</div></div>
+      <div class="rfr"><b>Syrma</b><div>Margin 9.7% before other income, below its 10.5–11% band. Gross debt doubled to ₹746 cr against ₹145 cr of filed cash.</div></div>
+      <div class="rfr"><b>Avalon</b><div>Borrowings +70% since March. The stock fell 12% after a clean print, with no new negative disclosure found.</div></div>
+      <div class="rfr"><b>Dixon</b><div>Q3 phones guided down to 7–7.5 mn. A 2.7% margin leaves no room for memory pass-through slippage.</div></div>
+    </div>
+
+    <div class="rfg">
+      <div class="rfh"><i class="sev lo"></i><span>Note and move on</span></div>
+      <div class="rfr"><b>EPACK Durable</b><div>Revenue doubled, but the loss to owners widened to ₹25 cr. A seasonal room-AC quarter.</div></div>
+      <div class="rfr"><b>Cyient DLM</b><div>EBITDA +9.6% on revenue +26%. Reported PAT is lifted by an earnout reversal.</div></div>
+      <div class="rfr"><b>Centum</b><div>Revenue +58% and EBITDA +50%, but no order-book update was disclosed.</div></div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Walk the talk</h2>
+  <div class="rule"></div>
+  <p class="note">Standing FY27 guidance or Q1 FY27 commitments, against what Q2 delivered.</p>
+  <table>
+    <thead><tr><th>Company</th><th>Promised</th><th class="hide">Delivered</th><th>Verdict</th></tr></thead>
+    <tbody id="score"></tbody>
+  </table>
+</section>
+
+<section>
+  <h2>Was the consensus right?</h2>
+  <div class="rule"></div>
+  <p class="note">No published Q2 poll was found. We score the narrative in pre-result coverage: strong revenue growth on PLI and new programmes, margins steady, and working capital normalising.</p>
+  <div class="indra">
+    <div class="split">
+      <div class="sp ok"><div class="n">7 of 10</div><div class="l">Grew revenue more than 35%</div><div class="w">Growth came through.</div></div>
+      <div class="sp"><div class="n">7 of 10</div><div class="l">Lower EBITDA margin YoY, before other income</div><div class="w">Margins did not hold.</div></div>
+      <div class="sp"><div class="n">6 of 6</div><div class="l">Higher gross debt than in March, among those checked</div><div class="w">Working capital was funded with debt.</div></div>
+    </div>
+
+    <div class="vs"><em class="y">Right</em><div><b>Revenue growth.</b> EPACK +106%, Syrma +74%, Amber +60%, Centum +58%, Dixon +47%, PG Electroplast +43% and Avalon +37%.</div></div>
+    <div class="vs"><em class="n">Wrong</em><div><b>Margins steady.</b> Only Avalon, PG Electroplast and EPACK (from a ~0% base) expanded. Memory, laminate and copper inflation hit the rest.</div></div>
+    <div class="vs"><em class="n">Wrong</em><div><b>Working capital normalising.</b> Debt rose at all six companies checked, and Kaynes' working-capital days lengthened to 169.</div></div>
+
+    <div class="reg">
+      <div class="rg"><div class="n up">₹15,900</div><div class="l">Dixon · Motilal Oswal Buy (from ₹15,400), 31 Oct</div></div>
+      <div class="rg"><div class="n dn">−19%</div><div class="l">Kaynes · Jefferies target cut, Buy kept, 17 Nov</div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>The call</h2>
+  <div class="rule"></div>
+  <div class="calls">
+    <div class="call buy">
+      <div class="k">Own, sized for the cash risk</div>
+      <h3>Syrma SGS · Avalon</h3>
+      <p>Both raised growth guidance and delivered above it. Syrma grew 74% with PAT +87%. Avalon expanded its margin 247 bps with gross margin inside its band. Both borrowed to fund inventory, and Syrma's margin sits below its band before other income. Avalon's 12% post-result fall improves the entry price. Cut either if Q3 debt keeps rising without margin recovery.</p>
+    </div>
+    <div class="call wait">
+      <div class="k">Accumulate on evidence</div>
+      <h3>Dixon · Cyient DLM · PG Electroplast · Centum</h3>
+      <p>Dixon needs Q3 phone volumes of 7–7.5 mn without further margin loss, and its working capital back by March. Cyient DLM needs to convert its record ₹2,814 cr order book at better than an 8.7% margin. PG Electroplast needs the October price increases to hold and inventory back toward ₹900 cr. Centum needs to update its order book.</p>
+    </div>
+    <div class="call avoid">
+      <div class="k">Stay out</div>
+      <h3>Kaynes · Amber · Elin · EPACK</h3>
+      <p>Kaynes' call explained the smart-meter drag, but the results added a qualified review and a restatement, and working capital is at 169 days. A cheaper price does not fix an accounting question. Amber is loss-making, with debt up ₹1,586 cr in six months. Elin cannot pass through costs. EPACK's losses widened. Over a year: Kaynes −55%, Elin −61%, EPACK −48%, Amber −15%.</p>
+    </div>
+  </div>
+
+  <div class="trigs">
+    <div class="tg tg-up"><div class="k">What would make us more positive</div><ul>
+      <li>Memory prices peaking, so Dixon and Syrma's material ratios fall back toward <b>75%</b>.</li>
+      <li>Gross debt flat or lower at the December quarter for Syrma, Avalon and PG Electroplast as inventory unwinds.</li>
+      <li>Kaynes: an unqualified review, the Vishay definitive agreement signed, and working capital falling below 150 days.</li>
+    </ul></div>
+    <div class="tg tg-dn"><div class="k">What would make us cut</div><ul>
+      <li>Another quarter of rising debt without margin recovery at Amber or Kaynes.</li>
+      <li>Indian smartphone volumes still falling 20%+ YoY into Q3, which would hit Dixon's mobile base.</li>
+      <li>A memory price correction that forces write-downs on strategic stock at Dixon or Syrma.</li>
+    </ul></div>
+  </div>
+</section>
+
+<section>
+  <h2>Analyst coverage after results</h2>
+  <div class="rule"></div>
+  <p class="note">Broker calls published after Q2 FY27 results, with report dates. Post-result calls were found only for Dixon and Kaynes.</p>
+  <div class="tw">
+  <table>
+    <thead><tr><th>Company</th><th>Broker</th><th>Report date</th><th>Rating</th><th class="r">Target (₹)</th><th class="r">Prior (₹)</th><th class="r">Price at report (₹)</th></tr></thead>
+    <tbody id="brk"></tbody>
+  </table>
+  </div>
+  <p class="asof">Sources: Business Standard (17 Nov 2026) for Jefferies on Kaynes, which reported the 19% cut and a lower target P/E of 32x but not the target level. DSIJ report listing (31 Oct 2026) for Motilal Oswal on Dixon.</p>
+</section>
+
+<section>
+  <h2>Price and returns</h2>
+  <div class="rule"></div>
+  <p class="note">Results date against market performance. Avalon (−12%), Amber (−8%) and Kaynes (−16%) fell between 13 and 18 Nov, after their results.</p>
+  <div class="tw">
+  <table>
+    <thead><tr>
+      <th>Company</th><th>Ticker</th><th>Results date</th><th class="r">CMP (₹)</th>
+      <th class="r">1 year</th><th class="r">6 months</th><th class="r">3 months</th><th class="r">MTD</th>
+    </tr></thead>
+    <tbody id="ret"></tbody>
+  </table>
+  </div>
+  <p class="asof">Current price: NSE official close, 18 Nov 2026 (bhavcopy). Return anchors: Kite daily closes, corporate-action adjusted: 1Y = 14 Nov 2025, 6M = 15 May 2026, 3M = 14 Aug 2026, MTD = 30 Oct 2026. No split or bonus in the window. Sorted by 1-year return.</p>
+</section>
+
+<section>
+  <h2>Caveats</h2>
+  <div class="rule"></div>
+  <ul class="cav">
+    <li><b>Basis.</b> Revenue, EBITDA, margins and PAT are Tijori's filed consolidated quarterlies, cross-checked against BSE XBRL filings (DalalOS). EBITDA excludes other income. Debt and cash are from the filed 30 Sep and 31 Mar balance sheets.</li>
+    <li><b>Kaynes.</b>
+      <ul>
+        <li>The qualified review conclusion and the FY26 restatement (~₹254 cr to ~₹182 cr standalone PAT) come from two results reports (5paisa and Univest, 16 Nov). We could not open the filing itself.</li>
+        <li>Working capital of 169 days is the company's rolling-12-month figure.</li>
+        <li>Group PAT ₹39.8 cr is after a ₹6.0 cr associate loss. PAT to owners is ₹38.0 cr. The YoY base is the originally filed Q2 FY26.</li>
+        <li>Call details come from a published transcript (Investing.com), not the company's own transcript.</li>
+      </ul></li>
+    <li><b>Still from digests, not re-verified:</b> management commentary for the nine non-Kaynes names; free cash flow and inventory figures (PG Electroplast ₹1,353 cr, Syrma +₹517 cr); Dixon's phone volumes; Avalon's gross margin and US mix.</li>
+    <li><b>Prices.</b> The Kite API returned errors on 19 Nov. The current price is the official NSE close of 18 Nov 2026. Return anchors are the Kite corporate-action-adjusted closes pulled on 15 Nov. No split or bonus occurred at any of the ten companies in the window, so the two series compare cleanly.</li>
+    <li><b>Results dates.</b> Cyient DLM ~14 Oct. Elin and Centum are board dates (5 Nov and 4 Nov). Kaynes reported after hours on Saturday 14 Nov; its call was held on 15–16 Nov.</li>
+  </ul>
+</section>
+
+<footer>
+  <p><b>Universe:</b> 10 listed Indian EMS companies, quarter ended 30 September 2026. Sources: Tijori Finance filed quarterlies, BSE XBRL filings and announcements via DalalOS, the Kaynes press release and call transcript, Business Standard, 5paisa, Univest and DSIJ. Prices: NSE bhavcopy (18 Nov) and Zerodha Kite anchors.</p>
+</footer>
+
+</div>
+<script>
+const C=(n,t,b,bl,k,p,f)=>({n,t,b,bl,k,p,f});
+const SC=[
+ ["PG Electroplast",42.6,98.6],["Avalon",37.4,71.0],["Syrma SGS",73.6,67.8],["Centum",58.4,49.7],["Amber",59.5,7.9],["Dixon",46.7,6.3],
+ ["Cyient DLM",26.4,9.6],["Kaynes",4.5,-15.2],["Elin",10.1,-30.9]
+];
+const MIN=-40,MAX=110,SCU1="%",SCU2="%";
+const LEAGUES=[["league",[["Kaynes",13.18,"−3.2 pts"],["Centum",12.72,"−0.8 pts"],["Avalon",12.57,"+2.5 pts"],["Syrma SGS",9.71,"−0.4 pts"],["Cyient DLM",8.69,"−1.4 pts"],
+ ["PG Electroplast",6.40,"+1.8 pts"],["Amber",3.74,"−1.8 pts"],["Elin",3.40,"−2.0 pts"],["Dixon",2.74,"−1.0 pts"],["EPACK",1.61,"+1.4 pts"]],14,10,5,v=>`${v.toFixed(1)}%`]];
+const FU=[["Amber",1586],["Kaynes",935],["Syrma",393],["Dixon",201],["Avalon",128],["PG Electroplast",117]];
+const FUMAX=1600,FUFMT=v=>`+₹${Math.abs(v).toLocaleString('en-IN')}`;
+const CO=[
+ C("Dixon Technologies","DIXON · Large","del","On track",[["₹21,794 cr","Revenue (+46.7%)",1],["2.7%","EBITDA ex OI (3.8% YoY)",-1],["₹344 cr","PAT to owners (−49%)",-1],["₹669 cr","Gross debt (₹468 cr in March)",0]],
+  ["EBITDA before other income grew 6% on revenue +47%. Growth is price-led on memory, and the margin fell 1.0 pt.","PAT to owners fell 49% because Q2 FY26 carried a ~₹490 cr other-income gain. This quarter's other income was ₹69 cr, so the fall is mostly the base.","Call (digest, not re-read): 9.7 mn phones in Q2, Q3 guided at 7–7.5 mn. Vivo JV and HKC notebooks from Q4 FY27; display fab FY28.","Motilal Oswal (31 Oct): Buy ₹15,900, from ₹15,400.","Verdict: the scale leader on a thinning margin. The optionality is FY28."],
+  [["Margin −1.0 pt",""],["Q3 volume dip",""],["New platforms","ok"]]),
+ C("Kaynes Technology","KAYNES · Mid","miss","Missed",[["₹953 cr","Revenue (+4.5%)",-1],["13.2%","EBITDA ex OI (16.4% YoY)",-1],["₹39.8 cr","Group PAT (−67%)",-1],["₹1,810 cr","Gross debt (₹875 cr in March)",-1]],
+  ["The auditor qualified its limited review of the consolidated results because it could not review associate Mixx Technologies' figures. Prior periods were restated under Ind AS 8, and FY26 standalone PAT fell to ~₹182 cr from ~₹254 cr (results coverage, 16 Nov).","Smart-meter revenue was ~₹54 cr against ₹228 cr a year ago (−80%). It is being held back until receivables of ₹1,091 cr fall below ₹750 cr. Core EMS grew 34% to ~₹799 cr.","Working capital is 169 days (company, rolling 12 months), against 123 at Q1 and a 70–85 day promise. Cash is ₹68 cr. D/E is 0.4x against 0.2x, partly because bill discounting was reclassified as debt.","Vishay is to take 49% of Kaynes Semicon (binding term sheet 12 Nov; definitive agreement in 2–3 months). OSAT and PCB unit 2 are in customer validation, and PCB unit 1 revenue is guided from Q3.","The stock is −16% since 13 Nov (₹3,430 to ₹2,882). Jefferies (17 Nov) kept Buy and cut its target 19%; the new level was not reported.","Verdict: the call explained the miss, but the results added a qualified review and a restatement. Avoid until a clean review and falling working-capital days."],
+  [["Qualified review",""],["Restatement",""],["WC 169 days",""],["Debt doubled",""]]),
+ C("Amber Enterprises","AMBER · Mid","miss","Missed",[["₹2,627 cr","Revenue (+59.5%)",1],["3.7%","EBITDA ex OI (5.5% YoY)",-1],["−₹80 cr","Loss to owners (−₹33 cr YoY)",-1],["₹4,288 cr","Gross debt (₹2,702 cr in March)",-1]],
+  ["The company-quoted 5.0% EBITDA includes ₹33 cr of other income. Before it, the margin is 3.7%, down 1.8 pts.","One of its two large segments (consumer durables, per results coverage) lost ₹14 cr before interest. The other earned ₹105 cr.","Its smallest segment (₹152 cr, railway and defence) earned a 4.8% margin against a 15–16% guide. Interest rose to ₹95 cr from ₹77 cr.","Verdict: growth by acquisition and debt, now loss-making. The balance sheet is doing the heavy lifting."],
+  [["Loss",""],["Debt +₹1,586 cr",""],["Mobility miss",""]]),
+ C("Syrma SGS","SYRMA · Small","part","Growth beat",[["₹1,990 cr","Revenue (+73.6%)",1],["9.7%","EBITDA ex OI (10.1% YoY)",-1],["₹124 cr","PAT (+87%)",1],["₹746 cr","Gross debt (₹353 cr in March)",-1]],
+  ["The FY27 growth guide was raised to above 35%; H1 grew 71%.","The company-quoted 10.2% margin includes other income. Before it, the margin is 9.7%, down 0.4 pt YoY and below Q1.","Material and traded-goods cost rose to 78.9% of revenue from 75.5% in Q1, on memory, laminate and copper.","Gross debt doubled since March and filed cash is ₹145 cr. The company's net-cash figure includes investments not checked here.","Verdict: top-line delivery is excellent. Cash conversion has to follow by Q4."],
+  [["Margin at floor",""],["Debt doubled",""],["Guide raised","ok"]]),
+ C("PG Electroplast","PGEL · Small","miss","Behind",[["₹934 cr","Revenue (+42.6%)",1],["6.4%","EBITDA ex OI (+181 bps)",1],["₹13.7 cr","Group PAT (₹2.8 cr YoY)",1],["₹714 cr","Gross debt (₹597 cr in March)",-1]],
+  ["Q2 is the room-AC off-season. The H1 margin is 7.0%, flat on last year.","₹4.6 cr of the ₹13.7 cr PAT came from associates.","The ~8% FY27 EBITDA goal and the promise to beat FY25 PAT need a strong H2. Inventory of ₹1,353 cr is against a target below ₹900 cr (call digest).","Verdict: growth intact, but the margin and inventory promises are slipping."],
+  [["Inventory",""],["PAT promise",""]]),
+ C("Avalon Technologies","AVALON · Small","del","Delivered",[["₹525 cr","Revenue (+37.4%)",1],["12.6%","EBITDA ex OI (+247 bps)",1],["₹39.8 cr","PAT (+59%)",1],["₹311 cr","Gross debt (₹183 cr in March)",-1]],
+  ["The FY27 growth guide was raised to 26–30%; H1 grew 43%. Gross margin was 34.1% (company), inside its 33–35% band.","Borrowings are up 70% since March. Net debt/equity is 0.22x.","The stock is −12% since 13 Nov, after results on 12 Nov. No new negative disclosure was found to explain the fall.","Verdict: guidance credibility is high. Cash conversion is the gap."],
+  [["Cash conversion",""],["Post-result fall",""],["Guide raised","ok"]]),
+ C("Cyient DLM","CYIENTDLM · Small","del","Order book",[["₹393 cr","Revenue (+26.4%)",1],["8.7%","EBITDA ex OI (10.0% YoY)",-1],["₹34.0 cr","Reported PAT (+6%)",0],["₹2,814 cr","Order book (B2B 1.6x)",1]],
+  ["Other income was ₹22.6 cr, including an ~₹18 cr earnout reversal. Normalised PAT is ~₹16 cr.","Aerospace revenue grew 62%. The 1.5x book-to-bill guide was beaten (company).","Verdict: the order book is the best in the set, but margin conversion lags. Up 91% in a year."],
+  [["Margin −1.4 pts",""],["Record OB","ok"]]),
+ C("EPACK Durable","EPACK · Micro","nsc","Not scored",[["₹439 cr","Revenue (+106%)",1],["1.6%","EBITDA ex OI (0.3% YoY)",0],["−₹25 cr","Loss to owners (−₹22 cr YoY)",-1],["₹20 cr","Interest (₹20 cr YoY)",0]],
+  ["Room-AC ODM. Q2 is the off-season quarter.","Revenue doubled, but depreciation from new capacity (₹18 cr against ₹14 cr) widened the loss.","Verdict: wait for the Q4 season to judge."],[["Loss widened",""]]),
+ C("Elin Electronics","ELIN · Micro","nsc","Not scored",[["₹413 cr","Revenue (+10%)",0],["3.4%","EBITDA ex OI (5.4% YoY)",-1],["−31%","EBITDA YoY",-1],["₹4.1 cr","PBT (₹13.9 cr YoY)",-1]],
+  ["Material cost rose as a share of revenue. It could not pass through polymer and metal inflation, and the rupee added pressure.","It is cutting low-priced batten orders to protect margin.","Verdict: no pricing power. Down 61% in a year."],[["No pass-through",""]]),
+ C("Centum Electronics","CENTUM · Micro","nsc","Not scored",[["₹312 cr","Revenue (+58%)",1],["12.7%","EBITDA ex OI (13.5% YoY)",-1],["₹22.9 cr","PAT (+52%)",1],["n/d","Order book (no update)",0]],
+  ["Defence and space electronics. The filed quarterly gives EBITDA ₹39.7 cr, +50% YoY.","The last disclosed order books (₹650 cr build-to-spec, ₹763 cr EMS) are stale.","Verdict: strong growth with a slight margin dip and thin disclosure. Up 84% in a year."],[["Thin disclosure",""]])
+];
+const KPI=[
+ ["Dixon","+46.7%","2.7%","−1.0 pts","+6.3%","−49% (owners)","₹669 cr","+₹201 cr","Base had ~₹490 cr OI gain"],
+ ["Kaynes","+4.5%","13.2%","−3.2 pts","−15.2%","−67% (group)","₹1,810 cr","+₹935 cr","Qualified review; WC 169 d"],
+ ["Amber","+59.5%","3.7%","−1.8 pts","+7.9%","Loss ₹80 cr","₹4,288 cr","+₹1,586 cr","Co. quotes 5.0% incl. OI"],
+ ["Syrma SGS","+73.6%","9.7%","−0.4 pts","+67.8%","+87%","₹746 cr","+₹393 cr","Co. quotes 10.2% incl. OI"],
+ ["PG Electroplast","+42.6%","6.4%","+1.8 pts","+98.6%","₹13.7 cr vs ₹2.8 cr","₹714 cr","+₹117 cr","Off-season"],
+ ["Avalon","+37.4%","12.6%","+2.5 pts","+71.0%","+59%","₹311 cr","+₹128 cr","US ~62%"],
+ ["Cyient DLM","+26.4%","8.7%","−1.4 pts","+9.6%","+6% (reported)","n/c","n/c","OB ₹2,814 cr"],
+ ["EPACK","+106%","1.6%","+1.4 pts","n/m","Loss ₹25 cr","n/c","n/c","Off-season"],
+ ["Elin","+10.1%","3.4%","−2.0 pts","−30.9%","PBT −71%","n/c","n/c","—"],
+ ["Centum","+58.4%","12.7%","−0.8 pts","+49.7%","+52%","n/c","n/c","No OB update"]
+];
+const BRK=[
+ ["Kaynes","Jefferies","17 Nov 2026","Buy","Cut 19% (level not reported)","—","~2,899 (intraday)"],
+ ["Dixon","Motilal Oswal","31 Oct 2026","Buy","15,900","15,400 ↑","12,820"],
+ ["Other 8 names","None found post-result","—","—","—","—","—"]
+];
+const SCORE=[
+ ["Avalon","FY27 growth 24–27%; gross margin 33–35%","Raised to 26–30%; H1 +43%; GM 34.1%.","del","Delivered"],
+ ["Syrma SGS","FY27 growth 30–35%; margin 10.5–11%","Raised to >35% (H1 +71%); margin 9.7% ex OI (10.2% as quoted).","part","Margin below band"],
+ ["Cyient DLM","Book-to-bill ~1.5x","1.6x; record order book ₹2,814 cr.","del","Delivered"],
+ ["Dixon","FY27 mobile volume 33–34 mn","H1 17.2 mn; Q3 guided 7–7.5 mn.","del","On track"],
+ ["PG Electroplast","~8% EBITDA; inventory <₹900 cr; beat FY25 PAT","H1 7.0%; inventory ₹1,353 cr; needs a strong H2.","miss","Behind"],
+ ["Amber","Mobility margin 15–16%; electronics growth ~40%","Segment 3 margin 4.8% (filed); electronics +94% (acquisition).","miss","Missed"],
+ ["Kaynes","Margin recovery; NWC 70–85 days; OSAT billing Q3","13.2% (−324 bps); 169 days (company); OSAT in validation, PCB revenue from Q3.","miss","Missed"]
+];
+const SPAN=MAX-MIN,Z=(0-MIN)/SPAN*100;
+document.getElementById("scissor").innerHTML=SC.map(([n,v,e],i)=>{
+ const bar=(val,cls,u)=>{const w=Math.max(Math.abs(val),0.3)/SPAN*100;
+  const l=val>=0?Z:Z-w;
+  return `<i class="b ${cls} ${val>=0?'pos':'neg'}" style="left:${l}%;width:${w}%;animation-delay:${i*45}ms"><span>${val>0?'+':''}${val}${u}</span></i>`;};
+ return `<div class="row"><div class="co">${n}</div><div class="track"><i class="axis" style="left:${Z}%"></i>${bar(v,'v',SCU1)}${bar(e,'e',SCU2)}</div></div>`;
+}).join("");
+const league=(id,rows,max,hi,mid,fmt)=>{document.getElementById(id).innerHTML=rows.map(([n,v,d],i)=>{
+ const cls=v>=hi?"":v>=mid?"mid":"low";
+ return `<div class="lrow"><div class="co">${n}</div>
+ <div><i class="lbar ${cls}" style="display:block;width:${Math.max(v,0)/max*100}%;animation-delay:${i*40}ms"></i></div>
+ <div><div class="v">${fmt(v)}</div><div class="d">${d}</div></div></div>`;}).join("");};
+LEAGUES.forEach(([id,rows,max,hi,mid,fmt])=>league(id,rows,max,hi,mid,fmt));
+document.getElementById("fuel").innerHTML=FU.map(([l,v],i)=>
+ `<div class="fp"><b>${FUFMT(v)}</b><i style="height:${Math.abs(v)/FUMAX*88}px;animation-delay:${i*120}ms"></i><em>${l}</em></div>`).join("");
+document.getElementById("cards").innerHTML=CO.map(c=>`
+ <article class="c">
+  <div class="chead"><div><h3>${c.n}</h3><div class="tick">${c.t}</div></div><div class="badge ${c.b}">${c.bl}</div></div>
+  <div class="tiles">${c.k.map(([n,l,s])=>`<div class="tile"><div class="n ${s===1?'up':s===-1?'dn':''}">${n}</div><div class="l">${l}</div></div>`).join("")}</div>
+  <ul>${c.p.map(x=>`<li>${x}</li>`).join("")}</ul>
+  <div class="flags">${c.f.map(([t,k])=>`<span class="flag ${k}">${t}</span>`).join("")}</div>
+ </article>`).join("");
+document.getElementById("kpi").innerHTML=KPI.map(r=>
+ `<tr><td class="co">${r[0]}</td>`+r.slice(1).map(c=>`<td class="kpi">${c}</td>`).join("")+`</tr>`).join("");
+document.getElementById("brk").innerHTML=BRK.map(r=>
+ `<tr><td class="co">${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td class="num">${r[4]}</td><td class="num ${r[5].includes('↓')?'dn':r[5].includes('↑')?'up':''}">${r[5]}</td><td class="num">${r[6]}</td></tr>`).join("");
+const RET=[["Cyient DLM", "CYIENTDLM", "~14 Oct", "819.55", "+91.1%", "+96.9%", "+17.6%", "+9.2%"], ["Centum Electronics", "CENTUM", "4 Nov", "4,492.80", "+83.7%", "+49.2%", "+27.0%", "+12.5%"], ["Avalon Technologies", "AVALON", "12 Nov", "1,786.40", "+70.7%", "+35.0%", "-8.0%", "-12.9%"], ["Syrma SGS", "SYRMA", "30 Oct", "1,475.00", "+64.9%", "+45.6%", "+0.7%", "-9.2%"], ["PG Electroplast", "PGEL", "27 Oct", "539.20", "-6.7%", "+10.7%", "-10.3%", "+1.7%"], ["Amber Enterprises", "AMBER", "12 Nov", "6,236.50", "-15.4%", "-26.4%", "-13.6%", "+6.3%"], ["Dixon Technologies", "DIXON", "30 Oct", "12,615.00", "-18.2%", "+14.9%", "-10.7%", "+14.7%"], ["EPACK Durable", "EPACK", "29 Oct", "145.09", "-48.1%", "-39.6%", "-32.7%", "-6.2%"], ["Kaynes Technology", "KAYNES", "14 Nov (Sat)", "2,882.00", "-54.5%", "-11.9%", "-21.3%", "-8.0%"], ["Elin Electronics", "ELIN", "5 Nov", "77.08", "-60.6%", "-34.9%", "-24.1%", "+7.0%"]];
+document.getElementById("ret").innerHTML=RET.map(r=>{
+ const cell=v=>{ if(v==="n/s") return `<td class="num ns">n/s</td>`;
+   const cls=v.startsWith("+")?"up":v.startsWith("-")?"dn":""; return `<td class="num ${cls}">${v}</td>`;};
+ return `<tr><td class="co">${r[0]}</td><td class="tick">${r[1]}</td><td>${r[2]}</td>`
+  +`<td class="num">${r[3]==="n/s"?'<span class="ns">n/s</span>':r[3]}</td>`+r.slice(4).map(cell).join("")+`</tr>`;
+}).join("");
+document.getElementById("score").innerHTML=SCORE.map(([c,p,d,k,v])=>
+ `<tr><td class="co">${c}</td><td>${p}</td><td class="hide">${d}</td><td class="vd ${k}">${v}</td></tr>`).join("");
+</script></body></html>
