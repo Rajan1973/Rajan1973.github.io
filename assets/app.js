@@ -9,6 +9,7 @@
 const state = {
   reports: [],
   sectors: [],
+  catalysts: [],                                    // data/catalysts.json (stock catalyst briefings)
   snapshot: null,                                   // data/sector-snapshot.json (stock returns per review)
   desk: { quarter: null, sector: 'all', stock: '' }, // Sector research filters; quarter null = newest
   siteBase: 'https://rajan1973.github.io/',   // canonical public home of the reports (external links)
@@ -57,7 +58,7 @@ function resolveEmbedBase(configured) {
 function parseHash() {
   const h = (location.hash || '#/').replace(/^#\/?/, '');
   const [name, param] = h.split('/');
-  const known = ['home', 'report', 'rotation', 'sectors', 'archive'];
+  const known = ['home', 'report', 'rotation', 'sectors', 'catalysts', 'archive'];
   return { name: known.includes(name) ? name : 'home', param: param || null };
 }
 function go(hash) { location.hash = hash; }
@@ -73,6 +74,7 @@ async function boot() {
     ]);
     state.reports = r.reports || [];
     state.sectors = s.sectors || [];
+    state.catalysts = await fetch('data/catalysts.json').then((x) => (x.ok ? x.json() : { catalysts: [] })).then((x) => x.catalysts || []).catch(() => []);
     // optional: the desk still works without the snapshot, just without returns and notes
     state.snapshot = await fetch('data/sector-snapshot.json').then((x) => (x.ok ? x.json() : null)).catch(() => null);
     state.siteBase = r.site_base || state.siteBase;
@@ -93,7 +95,8 @@ const NAV = [
   { id: 'report', href: '#/report', num: '02', label: 'Daily report', count: () => String(state.reports.length) },
   { id: 'rotation', href: '#/rotation', num: '03', label: 'Rotation · RRG', count: () => 'live' },
   { id: 'sectors', href: '#/sectors', num: '04', label: 'Sector research', count: () => String(state.sectors.length) },
-  { id: 'archive', href: '#/archive', num: '05', label: 'Archive', count: () => String(state.reports.length) },
+  { id: 'catalysts', href: '#/catalysts', num: '05', label: 'Stock catalysts', count: () => String(state.catalysts.length) },
+  { id: 'archive', href: '#/archive', num: '06', label: 'Archive', count: () => String(state.reports.length) },
 ];
 
 function sidebar() {
@@ -157,7 +160,7 @@ function render() {
     return;
   }
 
-  const view = { home: viewHome, report: viewReport, rotation: viewRotation, sectors: viewSectors, archive: viewArchive }[state.route.name];
+  const view = { home: viewHome, report: viewReport, rotation: viewRotation, sectors: viewSectors, catalysts: viewCatalysts, archive: viewArchive }[state.route.name];
   root.append(sidebar(), view());
   if (state.search.open) root.append(searchOverlay());
 }
@@ -479,6 +482,56 @@ function viewSectorsCardsOnly() {
   ]);
 }
 
+/* ---------- stock catalyst briefings: list, then each briefing in place ---------- */
+function viewCatalysts() {
+  if (state.route.param) return viewCatalystDoc(state.route.param);
+  const items = state.catalysts.filter((c) => c.status === 'published' && c.path);
+  const grid = el('div', { class: 'sector-grid' }, items.map((c, i) => {
+    const card = el('div', { class: 'sector-card published stagger', style: '--i:' + (i % 16) }, [
+      el('div', { class: 'sc-top' }, [el('div', { class: 'sc-name', text: c.title }), el('div', { class: 'sc-q', text: c.asOf })]),
+      el('div', { class: 'sc-note', text: c.note || '' }),
+      el('div', { class: 'sc-foot' }, [el('span', { text: 'Data to ' + (c.dataCutoff || c.asOf) }), el('span', { class: 'go', text: 'Open briefing →' })]),
+    ]);
+    card.addEventListener('click', () => go('#/catalysts/' + c.id));
+    return card;
+  }));
+  return el('main', { class: 'main' }, [
+    pageHead('Stock catalysts', 'Stock catalyst desk', [
+      { lab: 'Briefings', val: String(items.length), gold: true },
+    ]),
+    el('div', { class: 'view' }, [
+      el('p', { class: 'lede', text: items.length ? 'Material corporate catalysts for Indian stocks, one living briefing per data cut. Each opens in place.' : 'No catalyst briefing has been published yet.' }),
+      grid,
+    ]),
+  ]);
+}
+
+function viewCatalystDoc(id) {
+  const c = state.catalysts.find((x) => x.id === id);
+  const main = el('main', { class: 'main' });
+  if (!c || c.status !== 'published' || !c.path) {
+    main.append(pageHead('Stock catalysts', 'Not found'),
+      el('div', { class: 'state-msg', html: 'No published briefing for <code>' + esc(id) + '</code>. <a href="#/catalysts">Back to the desk →</a>' }));
+    return main;
+  }
+  // catalysts/ ships inside this app, so the frame is same-origin and auto-sizes
+  const { frame, hint } = docFrame(c.path, c.title, c.title + ' · data to ' + (c.dataCutoff || c.asOf));
+  main.append(
+    pageHead('Stock catalysts', c.title, [
+      { lab: 'As of', val: c.asOf },
+      { lab: 'Data to', val: c.dataCutoff || c.asOf, gold: true },
+    ]),
+    el('div', { class: 'report-bar' }, [
+      el('a', { class: 'linkout', href: '#/catalysts', text: '← All briefings' }),
+      el('span', { class: 'spacer' }),
+      el('a', { class: 'linkout', href: pageUrl(c.path), target: '_blank', rel: 'noopener', text: 'Open full page ↗' }),
+    ]),
+    hint,
+    el('div', { class: 'frame-wrap' }, [frame]),
+  );
+  return main;
+}
+
 function viewSectorDoc(id) {
   const s = state.sectors.find((x) => x.id === id);
   const main = el('main', { class: 'main' });
@@ -615,6 +668,7 @@ function buildIndex() {
     { kind: 'Go', label: 'Daily report', meta: 'Latest edition', hay: 'daily report brief eod post market close nifty', act: () => go('#/report') },
     { kind: 'Go', label: 'Rotation · RRG', meta: 'Weekly graph', hay: 'rrg rotation relative strength momentum sector rotation graph', act: () => go('#/rotation') },
     { kind: 'Go', label: 'Sector research', meta: 'Earnings reviews', hay: 'sector research earnings review desk', act: () => go('#/sectors') },
+    { kind: 'Go', label: 'Stock catalysts', meta: 'Catalyst briefings', hay: 'stock catalyst briefing orders capex funding', act: () => go('#/catalysts') },
     { kind: 'Go', label: 'Archive', meta: 'All reports', hay: 'archive history all reports past editions', act: () => go('#/archive') },
   );
   for (const r of state.reports) {
