@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nifty &amp; Beyond — Markets with Rajan — 17 Nov 2026</title>
+<style>
+  :root{
+    --bg:#f8f9fa; --card:#f1f5f9; --text:#0f172a; --accent:#1d4ed8; --accent-dark:#1e3a8a;
+    --green:#15803d; --red:#dc2626; --amber:#b45309; --border:#cbd5e1; --rowalt:#eff6ff; --rowhover:#dbeafe;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;line-height:1.5;}
+  .topbar{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--border);z-index:50;padding:10px 16px;}
+  .topbar .meta{font-size:12px;color:#475569;}
+  .expirywarn{background:#7f1d1d;color:#fff;font-size:13px;font-weight:800;padding:8px 12px;border-radius:6px;margin-top:8px;display:inline-block;letter-spacing:.02em;}
+  nav{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px;}
+  nav a{font-size:11.5px;padding:5px 9px;border-radius:6px;background:var(--card);color:var(--accent-dark);text-decoration:none;font-weight:600;border:1px solid var(--border);}
+  nav a.active{background:var(--accent);color:#fff;}
+  main{max-width:1080px;margin:0 auto;padding:16px;}
+  section{background:#fff;border:1px solid var(--border);border-radius:10px;margin-bottom:16px;overflow:hidden;}
+  section > .hdr{background:var(--card);padding:12px 16px;font-weight:700;font-size:15px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;}
+  section > .hdr .grp{font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:#64748b;font-weight:700;margin-right:8px;}
+  section > .body{padding:14px 16px;}
+  section > .body.collapsed{display:none;}
+  h3{font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:#334155;margin:18px 0 8px;}
+  h3:first-child{margin-top:0;}
+  p{margin:6px 0;font-size:14px;}
+  ul{margin:6px 0;padding-left:20px;font-size:14px;}
+  li{margin:4px 0;}
+  .note{font-size:12px;color:#64748b;font-style:italic;}
+  table{border-collapse:collapse;width:100%;font-size:12px;}
+  .tblwrap{border:1px solid var(--border);border-radius:8px;overflow:hidden;margin:8px 0;overflow-x:auto;}
+  th{background:var(--accent-dark);color:#fff;font-weight:700;text-transform:uppercase;font-size:10px;letter-spacing:.03em;padding:7px 6px;text-align:left;cursor:pointer;white-space:nowrap;}
+  th:hover{background:var(--accent);}
+  td{padding:5px 6px;border-bottom:1px solid #e2e8f0;white-space:nowrap;}
+  tr:nth-child(odd) td{background:#fff;}
+  tr:nth-child(even) td{background:var(--rowalt);}
+  tr:hover td{background:var(--rowhover) !important;}
+  .pos{color:var(--green);font-weight:700;}
+  .neg{color:var(--red);font-weight:700;}
+  .amb{color:var(--amber);font-weight:700;}
+  .scorecard{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin-bottom:10px;}
+  .kpi{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px 10px;}
+  .kpi .lbl{font-size:10px;color:#64748b;text-transform:uppercase;letter-spacing:.03em;}
+  .kpi .val{font-size:15px;font-weight:700;margin-top:2px;}
+  .badge{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px;}
+  .badge.bull{background:#dcfce7;color:var(--green);}
+  .badge.bear{background:#fee2e2;color:var(--red);}
+  .badge.neutral{background:#fef3c7;color:var(--amber);}
+  .datanote{background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:8px 10px;font-size:12px;color:#92400e;margin:8px 0;}
+  .thesis{background:#eff6ff;border-left:4px solid var(--accent);border-radius:6px;padding:12px 14px;font-size:14.5px;margin:8px 0;}
+  table td.rank-top1{background:rgba(21,128,61,.32);}
+  table td.rank-top2{background:rgba(21,128,61,.14);}
+  table td.rank-top3{background:rgba(21,128,61,.07);}
+  table td.rank-bot1{background:rgba(220,38,38,.32);}
+  table td.rank-bot2{background:rgba(220,38,38,.14);}
+  table.wrap th{white-space:normal;word-break:break-word;font-size:9.5px;line-height:1.25;padding:6px 4px;}
+  table.wrap td{white-space:normal;word-break:break-word;}
+  table.wrap th:last-child,table.wrap td:last-child{min-width:110px;}
+
+  .rgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:10px;margin:8px 0;}
+  .rcard{background:#fff;border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+  .rcard .rc-h{background:var(--card);padding:8px 12px;font-weight:700;font-size:13.5px;display:flex;justify-content:space-between;gap:8px;align-items:baseline;border-bottom:1px solid var(--border);}
+  .rcard .rc-h .mv{font-size:12.5px;white-space:nowrap;}
+  .g3{display:grid;grid-template-columns:minmax(76px,.8fr) 1.3fr 1.5fr;font-size:12px;}
+  .g3 > div{padding:5px 8px;border-bottom:1px solid #e2e8f0;word-break:break-word;}
+  .g3 > div:nth-child(3n+1){font-weight:700;color:#334155;background:var(--rowalt);}
+  .g3 > div.gh{font-size:10px;text-transform:uppercase;letter-spacing:.03em;color:#fff;background:var(--accent-dark);font-weight:700;}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:10px;margin:8px 0;}
+  .card{background:#fff;border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:10px;padding:10px 14px;}
+  .card h4{margin:0 0 6px;font-size:14px;color:var(--accent-dark);}
+  .card ul{margin:4px 0;padding-left:18px;font-size:13px;}
+  .card p{font-size:13px;margin:4px 0;}
+  #notes > .hdr .hint{font-size:11px;color:#64748b;font-weight:600;}
+
+  .dash{background:#fff;border:1px solid var(--border);border-radius:10px;margin-bottom:16px;padding:14px 16px;}
+  .dash-h{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:6px;margin-bottom:10px;}
+  .dash-h h2{margin:0;font-size:18px;color:var(--text);}
+  .dash-h .sub{font-size:12px;color:#64748b;}
+  .dgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;}
+  .dcard{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:10px 12px;min-width:0;}
+  .dcard .dl{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#64748b;margin-bottom:6px;}
+  .dcard .big{font-size:22px;font-weight:800;line-height:1.2;}
+  .dcard .mid{font-size:17px;font-weight:600;line-height:1.3;}
+  .dcard .sm{font-size:12px;color:#475569;margin-top:4px;}
+  .drows{display:flex;flex-direction:column;}
+  .drow{display:flex;justify-content:space-between;gap:8px;font-size:13px;padding:5px 0;border-bottom:1px solid #e2e8f0;}
+  .drow:last-child{border-bottom:none;}
+  .drow span:last-child{text-align:right;white-space:nowrap;}
+  .heat{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+  .heat div{border-radius:6px;padding:6px 4px;text-align:center;font-size:12px;font-weight:600;}
+  .heat .up{background:rgba(21,128,61,.14);color:var(--green);}
+  .heat .dn{background:rgba(220,38,38,.12);color:var(--red);}
+  .dcard.tall{grid-row:span 2;}
+  .tblwrap.fit{display:inline-block;max-width:100%;}
+  table.compact{width:auto;}
+  table.compact.wrap th{white-space:nowrap;min-width:0;}
+  table.compact.wrap th:last-child,table.compact.wrap td:last-child{min-width:0;}
+  table.compact td{white-space:nowrap;text-align:right;}
+  table.compact td:first-child,table.compact th:first-child{text-align:left;}
+  .split{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:12px;align-items:start;margin:8px 0;}
+  .split > .split-t .tblwrap{margin:0;}
+  .split-x{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:8px 14px;}
+  .split-x > ul{margin:0;}
+  @media (max-width:860px){.split{grid-template-columns:1fr;}}
+  @media (max-width:980px){.dgrid{grid-template-columns:repeat(2,minmax(0,1fr));}}
+  @media (max-width:520px){.dgrid{grid-template-columns:1fr;}.dcard.tall{grid-row:auto;}}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="meta">17 November 2026 · compiled 21:25–23:30 IST, before the 23:30 IST MCX close · <b>Pipeline pack not built tonight</b>: the datapack was rebuilt from the Supabase raw tables (daily_prices, daily_indicators, index_breadth, weekly_indicators) with the pack’s own rules where known · NSE bhavcopy (final authority for closes) · FII/DII: provisional exchange data via PTI/ThePrint and CNBC-TV18 (web; net only) · Kite MCP (MCX, CDS, session shape) · MCX values are live at 21:27 IST · 1D = 16-Nov → 17-Nov</div>
+  <div class="expirywarn">⚖ Banks carried the index: Nifty 25,387.40 (+0.38%), highest close since 26-Feb · Bank Nifty 62,273.25 (+1.13%), above any close or high in the past year · PSU Bank +1.95%, Realty +1.94%; IT −0.90%, Capital Goods −0.99% · Nifty 500 breadth 256 : 242 (A/D 1.06) · regime <b>about 61.9, Constructive</b> (rebuilt, from 49.1) · FII +₹4,195 Cr, DII +₹197 Cr (first DII buy in 13 sessions) · India VIX 15.52 (−0.16) · <b>FirstCry +12.85% on Q2; Tata Chemicals +6.10% on the RBI’s Tata Sons letter; Urban Company −5.86% to its QIP floor</b></div>
+  <nav id="navbar">
+    <a href="#dash">Dashboard</a><a href="#s1">Scorecard</a><a href="#s2">Regime</a><a href="#s3">Tomorrow</a><a href="#s4">Unusual</a><a href="#s5">Macro</a><a href="#s6">Global</a><a href="#s7">Structure</a><a href="#s8">Breadth</a><a href="#s9">Rotation</a><a href="#s10">Scanners</a><a href="#s11">Momentum</a><a href="#s12">Flows</a><a href="#s13">Changed</a><a href="#notes" onclick="document.querySelector('#notes > .body').classList.remove('collapsed')">Notes</a>
+  </nav>
+</div>
+<main>
+<div class="dash" id="dash">
+  <div class="dash-h"><h2>Nifty Dashboard · 17 Nov 2026</h2><span class="sub">Closing view · Constructive about 61.9 (rebuilt pack) · Full report follows · MCX live at 21:27 IST</span></div>
+  <div class="dgrid">
+<div class="dcard "><div class="dl">Nifty 50</div><div class="big pos">25,387.40</div><div class="mid pos">+0.38% · +96.30</div><div class="sm">H 25,501.35 · L 25,267.30 · highest close since 26-Feb (25,496.55) · Sensex 82,532.19 (+0.52%) · Bank Nifty +1.13% to 62,273.25</div></div>
+<div class="dcard "><div class="dl">Smallcap 100</div><div class="big neg">−0.22%</div><div class="sm">Midcap 100 +0.25% · Next 50 +0.28% · Nifty 500 +0.29%. Smallcap breadth was 55 : 45, but its losers were bigger</div></div>
+<div class="dcard "><div class="dl">Breadth · adv : dec (A/D)</div><div class="big pos">N500 256 : 242</div><div class="mid">Nifty 500 A/D 1.06 · Nifty 50 27 : 23 (A/D 1.17)</div><div class="sm">All NSE 1,749 : 1,895 (A/D 0.92, bhavcopy). 16-Nov: Nifty 500 A/D 0.53. N500 %&gt;20DMA 74% → 74%</div></div>
+<div class="dcard "><div class="dl">Regime (rebuilt)</div><div class="big pos">≈61.9</div><div class="mid">Constructive (+12.8 vs 49.1)</div><div class="sm">Trend 79.1 · Breadth 61.7 · Momentum 60.4 · Volatility 36.6. Pipeline pack not built; replicated within ±0.4 on 12–16 Nov</div></div>
+<div class="dcard "><div class="dl">Flows (₹ Cr, provisional)</div><div class="drows"><div class="drow"><span>FII</span><span class="pos">+4,195</span></div><div class="drow"><span>DII</span><span class="pos">+197</span></div><div class="drow"><span>Net today</span><span class="pos">+4,392</span></div><div class="drow"><span>Nov MTD FII</span><span class="pos">+88,363</span></div><div class="drow"><span>Nov MTD DII</span><span class="neg">−52,411</span></div></div><div class="sm">Net only, from web reports; gross buy/sell not available</div></div>
+<div class="dcard "><div class="dl">SMA participation</div><div class="drows"><div class="drow"><span>N500 %&gt;20D</span><span class="pos">74%</span></div><div class="drow"><span>N500 %&gt;50D</span><span class="pos">56%</span></div><div class="drow"><span>N500 %&gt;200D</span><span class="neg">49%</span></div><div class="drow"><span>N50 %&gt;20D</span><span class="pos">84%</span></div><div class="drow"><span>N50 %&gt;50D</span><span class="pos">82%</span></div><div class="drow"><span>N50 %&gt;200D</span><span class="pos">70%</span></div></div></div>
+<div class="dcard tall"><div class="dl">Commodities &amp; currency · live 21:27</div><div class="drows"><div class="drow"><span>Crude · Nov</span><span class="neg">8,094 · +0.19%</span></div><div class="drow"><span>Gold · Dec</span><span class="neg">1,34,637 · +0.07%</span></div><div class="drow"><span>Silver · Dec</span><span class="neg">1,70,080 · +1.32%</span></div><div class="drow"><span>Aluminium · Nov</span><span class="pos">323.95 · −0.69%</span></div><div class="drow"><span>Copper · Nov</span><span class="pos">1,279.35 · −0.30%</span></div><div class="drow"><span>USD/INR · CDS Nov</span><span class="pos">93.56 · −0.42%</span></div></div><div class="sm">MCX futures, ₹ per bbl / 10g / kg; Kite last price at 21:27 IST vs previous close. Live, not closes. USD/INR futures change is against 16-Nov’s last trade (93.95); spot rupee 93.51, a seven-month high (PTI). Green = helps Indian equities</div></div>
+<div class="dcard tall"><div class="dl">Sector heat</div><div class="heat"><div class="up">PSU Bank +1.95%</div><div class="up">Realty +1.94%</div><div class="up">Bank +1.13%</div><div class="up">Pvt Bank +0.89%</div><div class="up">Auto +0.72%</div><div class="dn">FMCG −0.20%</div><div class="dn">Consumer Durables −0.24%</div><div class="dn">IT −0.90%</div><div class="dn">Capital Goods −0.99%</div></div><div class="sm">Top five of the 12 that rose and every one that fell (database sectors plus Hospitals and Capital Goods from NSE bhavcopy; one session)</div></div>
+<div class="dcard "><div class="dl">Top movers (N500)</div><div class="drows"><div class="drow"><span>FIRSTCRY</span><span class="pos">+12.85%</span></div><div class="drow"><span>SIGNATURE</span><span class="pos">+9.14%</span></div><div class="drow"><span>WELSPUNLIV</span><span class="pos">+7.92%</span></div><div class="drow"><span>URBANCO</span><span class="neg">−5.86%</span></div><div class="drow"><span>INDIACEM</span><span class="neg">−4.56%</span></div><div class="drow"><span>CONCORDBIO</span><span class="neg">−4.51%</span></div></div></div>
+<div class="dcard "><div class="dl">Results &amp; events · 1D move</div><div class="drows"><div class="drow"><span>FirstCry</span><span class="pos">loss −75% · +12.85%</span></div><div class="drow"><span>Tata Chemicals</span><span class="pos">RBI letter · +6.10%</span></div><div class="drow"><span>Urban Company</span><span class="neg">QIP floor · −5.86%</span></div><div class="drow"><span>Sammaan Capital</span><span class="neg">PAT +28% QoQ · −4.42%</span></div><div class="drow"><span>Cummins</span><span class="neg">PAT −27% · −3.97%</span></div><div class="drow"><span>Caplin Point</span><span class="neg">FDA 483 · −4.25%</span></div><div class="drow"><span>After hours</span><span class="amb">Nvidia Q3 (~02:50 IST Wed)</span></div></div></div>
+  </div>
+</div>
+
+<!-- ================= A. THE READ ================= -->
+<section id="s1">
+  <div class="hdr"><span><span class="grp">A · The Read</span>§1 · Executive Scorecard</span></div>
+  <div class="body">
+<h3>Key Themes</h3>
+<ul>
+<li>🏦 <b>Banks lifted the index on a day the AI trade fell apart abroad.</b>
+  <ul>
+  <li>Nifty 25,387.40 (+96.30, +0.38%), its highest close since 26-Feb. Sensex 82,532.19 (+0.52%). Bank Nifty 62,273.25 (+1.13%), above every close and every intraday high in the past 12 months (bhavcopy history). [Certain]</li>
+  <li>Overnight the Nasdaq fell 2.49% and the chip index 5.3%; Kospi −2.59% and Nikkei −1.34% today. Indian IT fell 0.90%, the rest of the market rose. [Certain]</li>
+  </ul></li>
+<li>📈 <b>Breadth repaired, but only just.</b> Nifty 500 256 : 242 (A/D 1.06) after 0.47 and 0.53; Nifty 50 27 : 23. All NSE stayed negative at 1,749 : 1,895 (A/D 0.92). Smallcap 100 −0.22% on 55 : 45: more risers, bigger fallers. [Certain]</li>
+<li>🏛 <b>PSU banks +1.95% on merger talk; Realty +1.94%.</b> Reports said SBI backs another round of state-bank consolidation; nothing is announced. Bank of Maharashtra +4.34%, Bank of India +4.12%, PNB +3.74%. Brigade +3.37%, Signatureglobal +9.14% (§5a). [Certain] on the moves.</li>
+<li>🧾 <b>Event stocks did the rest:</b>
+  <ul>
+  <li>FirstCry +12.85% on 33× volume: Q2 loss down 75%, revenue +14%.</li>
+  <li>Tata Chemicals +6.10%, Tata Investment +5.74%: an RBI letter (16-Nov) repeats that Tata Sons must follow upper-layer NBFC rules, which include listing.</li>
+  <li>Urban Company −5.86%, closing at ₹161.63 against its ₹161.03 QIP floor. Cummins −3.97% (margin 15.3% from 21.9%); Caplin Point −4.25% (US FDA, 10 observations); cables KEI −4.20%, Apar −4.45%, Polycab −3.19% with no stated cause.</li>
+  </ul></li>
+<li>📊 <b>Regime about 61.9, Constructive, from 49.1.</b> The pipeline did not build tonight’s pack; the score is rebuilt from the raw tables with the pack’s rules (§2). Momentum and Breadth did the work as the A/D ratio doubled.</li>
+<li>💰 <b>FII +₹4,195 Cr, DII +₹197 Cr.</b> DII buying ends a 12-session selling run; FII has bought six sessions in a row. November FII about +₹88,363 Cr (§12). Figures are provisional exchange data from the press, net only.</li>
+<li>⚠ <b>Two things change the read tomorrow:</b> Nvidia’s Q3 results land at about 02:50 IST, and SEBI is reported to be weighing limits on margin-funded buying in 220-plus stocks (§5b).</li>
+</ul>
+<p class="note">Corrections to earlier editions, source conflicts and data-integrity notes are collected in the collapsed <b>Data notes &amp; corrections</b> section at the end of the report. <a href="#notes" onclick="document.querySelector('#notes &gt; .body').classList.remove('collapsed')">Open</a></p>
+  </div>
+</section>
+<section id="s2">
+  <div class="hdr"><span><span class="grp">A · The Read</span>§2 · Market Regime</span></div>
+  <div class="body">
+<p><span class="badge bull">Constructive</span> &nbsp;Composite <b class="pos">≈61.9</b> / 100 · <span class="pos">+12.8</span> vs 49.1 on 16-Nov · ex-volatility 64.7 · <b>rebuilt, not the pipeline’s figure</b></p>
+<div class="tblwrap"><table><tr><th>Component</th><th>Weight</th><th>Reading</th><th>Score</th><th>Percentile / method</th></tr>
+<tr><td>Breadth</td><td>30%</td><td>55.82% &gt;50D · A/D 1.06</td><td class="pos">61.7</td><td>mean of the %&gt;50D percentile (63.0) and the A/D percentile (60.4); was 45.2</td></tr>
+<tr><td>Trend</td><td>25%</td><td>5.81% vs 200D</td><td class="pos">79.1</td><td>n/a — direct formula 50 + 5 × % vs 200D (was 77.0)</td></tr>
+<tr><td>Momentum</td><td>20%</td><td>A/D ratio 1.06</td><td class="pos">60.4</td><td>A/D rank 151 of 250 (was 27.8)</td></tr>
+<tr><td>Institutional Flow</td><td>15%</td><td>FII 49/60 · DII 15/60</td><td class="amb">52.5</td><td>mean of FII 80.8 and DII 24.2 (was 49.2)</td></tr>
+<tr><td>Volatility</td><td>10%</td><td>ATR 1.22% of price</td><td class="neg">36.6</td><td>63.4 (calmer scores higher; rank 159 of 250; was 33.4)</td></tr>
+</table></div>
+<div class="thesis"><b>One good breadth day flipped the band back. That says more about how the score is built than about the market.</b>
+<ul>
+<li><b>Band:</b> Constructive (60+), from Neutral. Two sessions ago it was Neutral at 47.7; on 12-Nov Constructive at 65.6. [Likely] — the band is from my rebuild; it sits 1.9 points above the line, more than the ±0.4 rebuild error.</li>
+<li><b>Where the points came from (weight × change):</b>
+  <ul>
+  <li>Momentum 27.8 → 60.4: +6.52. Breadth 45.2 → 61.7: +4.95. Trend 77.0 → 79.1: +0.52. Flow 49.2 → 52.5: +0.49. Volatility 33.4 → 36.6: +0.32.</li>
+  <li>The parts sum to +12.81; the composite moved +12.8.</li>
+  </ul></li>
+<li><b>Momentum is a percentile of one day’s A/D ratio.</b> 0.53 ranked 69th of 250 sessions; 1.06 ranks 151th. A merely average day is worth 30+ points of Momentum. [Certain] on the method.</li>
+<li><b>Trend is the steady part:</b> the Nifty is 5.81% above its 200-DMA. [Certain]</li>
+<li><b>Flow barely moved</b> because the score uses ranks of net flows over 60 sessions: FII +₹4,195 Cr ranks 49/60, DII +₹197 Cr 15/60. The DII turn matters more than its rank. [Certain]</li>
+<li><b>Context:</b> scores since 4-Nov: 60.2, 61.9, 49.3, 61.7, 68.3, 65.6, 47.7, 49.1, ≈61.9. Two band changes in three sessions. [Certain] on the series.</li>
+<li><b>Staying Constructive needs:</b> Nifty 500 A/D above 1.0 again tomorrow. A day like 16-Nov (0.53) would take it straight back to about 50. [Likely] by the same arithmetic.</li>
+</ul></div>
+<div class="datanote"><b>Check:</b> 0.30×61.7 + 0.25×79.1 + 0.20×60.4 + 0.15×52.5 + 0.10×36.6 = 61.90.
+<br><b>Rebuild:</b> the same code gives 47.7 for 13-Nov and 65.6 for 12-Nov (both exact) and 49.5 for 16-Nov (pack 49.1; the Momentum rank differs by 4 places). Inputs: <code>index_breadth</code> (Nifty 500), <code>daily_indicators</code> (Nifty ATR, 200-DMA), <code>fii_dii_cash_market_daily</code> plus today’s web figures.</div>
+  </div>
+</section>
+<section id="s3">
+  <div class="hdr"><span><span class="grp">A · The Read</span>§3 · Tomorrow's Action Plan</span></div>
+  <div class="body">
+<div class="cards">
+<div class="card"><h4>Nvidia lands overnight</h4><ul><li>Q3 results at about 02:50 IST Wednesday; consensus revenue about $109 bn; first quarter without Jensen Huang. The chip index fell 5.3% into it.</li><li>India held up on the AI sell-off because it has little AI hardware. A relief rally abroad may pull money back to Taiwan and Korea. [Guessing]</li></ul></div>
+<div class="card"><h4>Levels to respect</h4><ul><li>Nifty: 25,501.35 (today’s high), 25,496.55 (26-Feb close) above. 25,267.30 (today’s low), 25,172.10 (16-Nov low), 25,054.40 (13-Nov low) below.</li><li>Bank Nifty: 62,442.20 (today’s high) above; 61,488.00 (today’s low) below.</li></ul></div>
+<div class="card"><h4>The afternoon fade</h4><ul><li>The Nifty gave back 114 of the day’s 234 points after 11:45 and closed at the low of the last bar (§7c).</li><li>Watch the first hour: a gap that holds above 25,400 confirms; a slide under 25,267 says the fade was distribution. [Guessing]</li></ul></div>
+<div class="card"><h4>Breadth has to follow through</h4><ul><li>Nifty 500 A/D 1.06 after 0.47 and 0.53; all NSE still 0.92.</li><li>The regime is back in Constructive by 1.9 points; one weak day reverses it (§2).</li></ul></div>
+<div class="card"><h4>SEBI and margin money</h4><ul><li>A report (Reuters via Kotak Neo) says SEBI may stop fresh margin funding in a stock once margin positions pass 5–10% of free float. 220-plus stocks are above 5%; two-thirds of the ₹1.53 lakh Cr book is small and mid caps.</li><li>Only a proposal. If it firms up, the most-levered small caps are exposed. [Likely]</li></ul></div>
+<div class="card"><h4>PSU banks on merger talk</h4><ul><li>PSU Bank +1.95%, 12 : 0, five-session +6.53%. The trigger is a report, not an announcement.</li><li>Swap ratios decide who gains; a denial would hurt the smaller banks most. [Guessing]</li></ul></div>
+<div class="card"><h4>FII still buying; DII turned</h4><ul><li>FII +₹4,195 Cr, six buying sessions; DII +₹197 Cr after twelve selling sessions.</li><li>FOMC minutes Wed 18-Nov (late IST); Anthropic IPO pricing expected Wed; India October IIP Fri 20-Nov (date not verified).</li></ul></div>
+<div class="card"><h4>Event names, day two</h4><ul><li>Urban Company: whether ₹161 (QIP floor) holds once the issue prices.</li><li>Cables (KEI, Apar, Polycab) fell 3–4.5% with no stated cause; Kaynes 3D −17.97%; Laurus bounced +5.32% after the promoters ruled out more sales.</li></ul></div>
+</div>
+  </div>
+</section>
+<section id="s4">
+  <div class="hdr"><span><span class="grp">A · The Read</span>§4 · What's Unusual Today</span></div>
+  <div class="body">
+<div class="tblwrap"><table><tr><th>Kind</th><th>Subject</th><th>Reading</th><th>Why it stands out</th></tr>
+<tr><td>Stock</td><td>FIRSTCRY</td><td>+12.85% on 33.30× volume</td><td>Q2: loss ₹12.6 Cr vs ₹50.5 Cr, revenue +14.1%. Largest volume multiple in the Nifty 500</td></tr>
+<tr><td>Stock</td><td>APTUS</td><td>+7.19% on 11.92× volume</td><td>No trigger found (§5a)</td></tr>
+<tr><td>Stock</td><td>DEEPAKFERT</td><td>+6.72% on 7.49× volume</td><td>Third day after Q2; 5D +22.63% ⚑</td></tr>
+<tr><td>Stock</td><td>TATACHEM</td><td>+6.10% on 6.51× volume</td><td>RBI letter on Tata Sons listing; holds 2.53% of Tata Sons</td></tr>
+<tr><td>Stock</td><td>SIGNATURE</td><td>+9.14% on 5.39× volume</td><td>Realty rally; no company trigger found</td></tr>
+<tr><td>Stock</td><td>URBANCO</td><td>−5.86% on 3.39× volume</td><td>₹2,500 Cr QIP; closed 0.4% above the ₹161.03 floor</td></tr>
+<tr><td>Stock</td><td>CONCORDBIO</td><td>−4.51% on 3.48× volume</td><td>No trigger found; 3D −7.81%</td></tr>
+<tr><td>Stock</td><td>ASHOKLEY</td><td>−4.17% on 3.38× volume</td><td>No trigger found; 3D −7.73%</td></tr>
+<tr><td>Flow</td><td>DII net</td><td>+₹196.93 Cr</td><td>First DII net buy after 12 selling sessions (30-Oct to 16-Nov)</td></tr>
+<tr><td>Breadth</td><td>Nifty 500 A/D</td><td>1.06 (from 0.53)</td><td>Doubled in a day; A/D rank 151 of 250</td></tr>
+<tr><td>Sector</td><td>NIFTY IT %&gt;20DMA</td><td>10% (from 30%; 80% on 9-Nov)</td><td>Lowest of all 24 indices for a fourth edition; 1 of 10 above its 20-DMA</td></tr>
+<tr><td>Index</td><td>Bank Nifty</td><td>62,273.25 (+1.13%)</td><td>Above every close and high in 12 months of bhavcopy history</td></tr>
+</table></div>
+<ul>
+<li><b>FIRSTCRY +12.85% — results, a day late.</b> Q2 FY27 (reported 14-Nov per IANS): revenue ₹2,395.8 Cr (+14.1%), net loss ₹12.6 Cr (−75%), adjusted EBITDA ₹117.5 Cr (−2.7%), margin 4.9% from 5.8%. Most of the smaller loss is lower ESOP cost (₹24.9 Cr vs ₹58.6 Cr). It fell 1.13% on 16-Nov, so today’s move is late; no source explains the timing. [Certain] on figures; [Guessing] on timing.</li>
+<li><b>TATACHEM +6.10%, TATAINVEST +5.74% — Tata Sons listing.</b> The RBI’s 16-Nov letter, in reply to Tata Sons’ 6-Oct query, repeats the upper-layer NBFC rules, including listing, and turns down its request to give up the core investment company registration. No IPO timetable (Kotak Neo, 17-Nov). [Certain]</li>
+<li><b>URBANCO −5.86% — share sale.</b> The ₹2,500 Cr QIP opened 16-Nov at a ₹161.03 floor; the stock touched ₹160.40 and closed at ₹161.63 (BusinessToday). Q2 loss ₹182.5 Cr vs ₹59.3 Cr. [Certain]</li>
+<li><b>DII turned buyer.</b> +₹196.93 Cr is small, but it is the first net buy since 29-Oct. Single source (CNBC-TV18); the FII figure is confirmed by PTI. [Likely]</li>
+<li><b>IT participation is at 10%.</b> Only one of ten IT stocks is above its 20-DMA, while 8 of 10 are above the 50-, 100- and 200-DMA. A sharp pullback inside a longer uptrend. [Certain]</li>
+</ul>
+<div class="datanote">The pipeline’s unusualness scores are not available tonight, so the table is ranked by judgement from the rebuilt pack: stocks by one-day move × 63-day volume multiple, plus flow, breadth, sector and index readings. All moves are one session, 16-Nov → 17-Nov, from <code>daily_prices</code> and checked against NSE bhavcopy.</div>
+  </div>
+</section>
+
+<!-- ================= B. THE CONTEXT ================= -->
+<section id="s5">
+  <div class="hdr"><span><span class="grp">B · The Context</span>§5 · Macro &amp; Policy Dashboard</span></div>
+  <div class="body">
+<p class="note">The 48-hour scan covers 16–17 Nov. No deep-dive release from the standing list (auto sales, PMI, bank credit, IIP/core) landed. <b>5a</b> covers results and events behind today’s moves; <b>5b</b> the SEBI margin-trading report, the rupee and oil.</p><h2 style="font-size:14px;margin:14px 0 4px">5a. Results and events that moved stocks (press coverage; exchange PDFs not read)</h2><div class="rgrid">
+<div class="rcard"><div class="rc-h"><span>Brainbees Solutions / FirstCry (Q2 FY27, reported 14-Nov)</span><span class="mv pos"><b>⚑ 1D +12.85% · 3D +9.56% · 5D +10.33%</b> · 33.3× vol</span></div><div class="g3"><div class="gh">Item</div><div class="gh">Reported</div><div class="gh">Change / note</div><div>Revenue</div><div>₹2,395.8 Cr (+14.1%)</div><div>GMV ₹3,077.5 Cr (+9.2%)</div><div>Net loss</div><div>₹12.6 Cr vs ₹50.5 Cr (−75%)</div><div>ESOP cost ₹24.9 Cr vs ₹58.6 Cr explains most of it</div><div>Adj. EBITDA / margin</div><div>₹117.5 Cr (−2.7%) / 4.9% vs 5.8%</div><div>Gross margin 35.1% vs 36.7%: the operating business did not improve</div><div>Outlook</div><div>Management expects Q3 stronger than Q2</div><div>No figure given. Univest, Kotak Neo (17-Nov); IANS (14–15 Nov). No broker target found</div><div>Timing</div><div>16-Nov −1.13%, then today’s jump</div><div>No source explains the one-day lag [Guessing: analyst call or broker notes on 16-Nov]</div></div></div>
+<div class="rcard"><div class="rc-h"><span>Tata Chemicals / Tata Investment (RBI letter to Tata Sons, 16-Nov)</span><span class="mv pos">1D +6.10% · 3D +7.55% · 5D +7.39% / 1D +5.74% · 3D +3.54% · 5D +5.60%</span></div><div class="g3"><div class="gh">Item</div><div class="gh">Reported</div><div class="gh">Change / note</div><div>What the RBI said</div><div>Tata Sons must follow upper-layer NBFC rules, which include listing</div><div>Reply to Tata Sons’ 6-Oct query; listing deadline was Sept 2025 (classified Sept 2022)</div><div>Also</div><div>Request to surrender the CIC registration rejected</div><div>No IPO timetable set</div><div>Stakes in Tata Sons</div><div>Tata Chemicals 2.53%; Tata Investment 0.25%</div><div>Kotak Neo, 17-Nov 10:57</div><div>Read</div><div>A listing would put a market price on these stakes</div><div>Not new: the same trade has run several times since 2024. [Likely]</div></div></div>
+<div class="rcard"><div class="rc-h"><span>Urban Company (QIP opened 16-Nov)</span><span class="mv neg">1D −5.86% · 3D −3.73% · 5D +1.58% · 3.4× vol</span></div><div class="g3"><div class="gh">Item</div><div class="gh">Reported</div><div class="gh">Change / note</div><div>Issue</div><div>₹2,500 Cr QIP, floor ₹161.03</div><div>Use: ₹600 Cr InstaHelp, ₹540 Cr marketing, ₹200 Cr tech</div><div>Price</div><div>Low ₹160.40 (BSE), close ₹161.63</div><div>Briefly below the floor (BusinessToday, 17-Nov)</div><div>Q2 FY27</div><div>Loss ₹182.48 Cr vs ₹59.33 Cr; revenue ₹537.29 Cr (+41.4%)</div><div>InstaHelp investment drives the loss</div><div>Demand</div><div>Bids reported near ₹15,300 Cr (about 6×)</div><div>Kotak Neo; publication date not checked</div></div></div>
+<div class="rcard"><div class="rc-h"><span>Cummins India (Q2 FY27; call 16-Nov)</span><span class="mv neg">1D −3.97% · 3D −4.54% · 5D −1.70% · 2.5× vol</span></div><div class="g3"><div class="gh">Item</div><div class="gh">Reported</div><div class="gh">Change / note</div><div>Revenue</div><div>₹3,247 Cr (+4%)</div><div>Domestic +5%, exports +2%</div><div>EBITDA / margin</div><div>About ₹507 Cr (−27%) / 15.3% vs 21.9%</div><div>Commodity and input costs, not mix (MD Adegbile Adewunmi)</div><div>Net profit</div><div>₹467 Cr vs ₹638 Cr (−27%)</div><div>No guidance on when margins recover</div><div>Brokers</div><div>MOFSL Buy ₹6,200 → ₹5,600; PL Buy ₹5,414 → ₹5,334</div><div>Business Upturn, 17-Nov; note dates not given. Close ₹4,065</div></div></div>
+<div class="rcard"><div class="rc-h"><span>Sammaan Capital (Q2 FY27, 16-Nov)</span><span class="mv neg">1D −4.42% · 3D −4.52% · 5D −2.51%</span></div><div class="g3"><div class="gh">Item</div><div class="gh">Reported</div><div class="gh">Change / note</div><div>Profit</div><div>₹312 Cr (+28% QoQ)</div><div>From ₹243 Cr</div><div>Book</div><div>Disbursements ₹6,278 Cr (+62%); AUM ₹59,188 Cr (+5.2%)</div><div>Gross NPA 0.15% from 0.21%</div><div>Guidance</div><div>FY27 PAT ₹1,400 Cr kept; lending margin target 3.5% from about 2.9%</div><div>CNBC-TV18, 16-Nov</div><div>Why it fell</div><div>No source gives a reason</div><div>Status: result confirmed; reaction unexplained [Guessing: sell on the news]</div></div></div>
+<div class="rcard"><div class="rc-h"><span>Eicher Motors (brokers after Q2)</span><span class="mv pos">1D +3.01% · 3D +3.70% · 5D +2.61%</span></div><div class="g3"><div class="gh">Item</div><div class="gh">Reported</div><div class="gh">Change / note</div><div>Q2 recap</div><div>EBITDA margin 23.7% (−79 bp); Royal Enfield volumes +15.2%</div><div>Nomura: missed its 25% estimate</div><div>Brokers</div><div>Nirmal Bang Buy ₹8,888 → ₹9,503; Equirus Long ₹9,533; Nomura Neutral ₹8,437 → ₹8,022</div><div>BusinessToday, 17-Nov; note dates not given</div><div>Demand</div><div>Bookings +20–21% YTD; channel stock 7–8 days</div><div>Equirus via BusinessToday</div></div></div>
+<div class="rcard"><div class="rc-h"><span>Other catalysts on 16–17 Nov</span><span class="mv amb">non-results items</span></div><div class="g3"><div class="gh">Item</div><div class="gh">Reported</div><div class="gh">Change / note</div><div>Laurus Labs</div><div>1D +5.32% · 3D −2.58% · 5D −4.73%</div><div>Rebound after the ₹500 Cr CEO/CFO sale: the promoters say no further sales; the sale was for personal debt and philanthropy (multibagg, 17-Nov; secondary source)</div><div>Caplin Point</div><div><b>⚑ 1D −4.25% · 3D −5.83% · 5D −10.21%</b></div><div>US FDA Form 483 with 10 observations at the Caplin Steriles injectables and ophthalmic plant, Gummidipoondi; inspection 13–21 Aug (EquityPandit, 17-Nov; single source)</div><div>PSU banks</div><div><b>⚑ 1D +3.74% · 3D +5.79% · 5D +13.49%</b> (PNB)</div><div>Reports that SBI backs another round of PSU-bank consolidation (17-Nov) and a finance-ministry roadmap (15-Nov). Nothing announced (Univest, 17-Nov). Bank of Maharashtra +4.34%, Bank of India +4.12%</div><div>Tata Steel</div><div>1D −0.42% · 3D −3.46% · 5D −1.81%</div><div>CEO: plan for 50 MTPA India capacity over a decade; a 15 MTPA Maharashtra plant under study (Kotak Neo)</div><div>Exchanges and brokers</div><div>BSE −0.58% · Groww +1.16% · Angel One +0.47%</div><div>Gave up early gains on the SEBI margin-trading report (Kotak Neo)</div><div>Out of the Nifty 500</div><div>not in the database</div><div>Senco Gold about +3.5% on festive sales +26% (HDFC Sky); Krishca about +17% on a capex update (Kotak Neo). Press figures; not checked against closes</div></div></div>
+<div class="rcard"><div class="rc-h"><span>Movers — catalysts checked (top 15 gainers and losers)</span><span class="mv amb">1D / 3D / 5D</span></div><div class="g3"><div class="gh">Stock</div><div class="gh">Move (⚑ = 3D or 5D beyond ±10%)</div><div class="gh">Results, orders, brokers and news</div><div>SIGNATURE</div><div class="pos"><b>⚑ 1D +9.14% · 3D +7.46% · 5D +15.11%</b></div><div>Realty rally (Realty +1.94%, 10 : 0); no company trigger (MarketsMojo, 17-Nov: “stock-specific”). Status: no catalyst found after calendar check and two query types</div><div>WELSPUNLIV</div><div class="pos">1D +7.92% · 3D +7.27% · 5D +5.32%</div><div>No 17-Nov catalyst. Q2 was 2-Nov (profit ₹170 Cr vs ₹15 Cr); MOFSL Buy ₹260 (2-Nov) is now below the price. Two query types</div><div>APTUS</div><div class="pos">1D +7.19% · 3D +7.06% · 5D +7.13%</div><div>No trigger (Univest, 17-Nov). 11.9× volume is far out of proportion to “no news” — flag</div><div>DEEPAKFERT</div><div class="pos"><b>⚑ 1D +6.72% · 3D +14.76% · 5D +22.63%</b></div><div>Still re-rating after Q2 (profit +85%); 5D +22.63% ⚑</div><div>MAHABANK</div><div class="pos">1D +4.34% · 3D +4.58% · 5D +9.48%</div><div>PSU-bank merger reports</div><div>PFOCUS</div><div class="pos">1D +4.26% · 3D +1.49% · 5D −0.21%</div><div>Not researched beyond one query</div><div>CEMPRO</div><div class="pos">1D +4.14% · 3D +2.01% · 5D +3.43%</div><div>Not researched beyond one query</div><div>TMCV</div><div class="pos">1D +4.06% · 3D −1.71% · 5D +2.06%</div><div>Tata group rally on the RBI letter [Guessing]; no company news found in one query</div><div>EXIDEIND</div><div class="pos">1D +4.01% · 3D +0.04% · 5D −1.27%</div><div>No catalyst found in one query (Univest describes price action only)</div><div>DELHIVERY</div><div class="pos">1D +3.97% · 3D +3.96% · 5D +5.73%</div><div>Open-interest build-up noted by MarketsMojo; no company news found</div><div>INDIACEM</div><div class="neg">1D −4.56% · 3D −8.17% · 5D −5.83%</div><div>No catalyst found in one query; 3D −8.17%</div><div>CONCORDBIO</div><div class="neg">1D −4.51% · 3D −7.81% · 5D −7.04%</div><div>No catalyst found after two query types; 3.5× volume — flag</div><div>APARINDS</div><div class="neg">1D −4.45% · 3D −1.30% · 5D −0.24%</div><div>Cables sell-off with KEI and Polycab; no source gives a cause (MarketsMojo, multibagg). Two query types</div><div>KEI</div><div class="neg">1D −4.20% · 3D −6.88% · 5D −3.79%</div><div>Cables sell-off; no cause found. 3D −6.88%</div><div>POLYCAB</div><div class="neg">1D −3.19% · 3D −4.68% · 5D −1.67%</div><div>Cables sell-off; MarketsMojo: “despite a broadly positive market”, no trigger</div><div>CARBORUNIV</div><div class="neg">1D −4.29% · 3D −4.07% · 5D −3.53%</div><div>No catalyst found in one query</div><div>ASHOKLEY</div><div class="neg">1D −4.17% · 3D −7.73% · 5D −8.21%</div><div>No catalyst found after two query types; 3.4× volume — flag. Heavy call writing noted ahead of the 23-Nov expiry (MarketsMojo)</div><div>KAYNES</div><div class="neg"><b>⚑ 1D −4.09% · 3D −17.97% · 5D −13.39%</b></div><div>Still falling after the 16-Nov results and restatement; 3D −17.97% ⚑</div><div>GLAND</div><div class="neg">1D −4.06% · 3D −1.82% · 5D −1.64%</div><div>No catalyst found in one query</div><div>KALYANKJIL</div><div class="neg"><b>⚑ 1D −3.59% · 3D −3.96% · 5D +11.74%</b></div><div>Profit-taking after a 5D +11.74% ⚑ run; no news</div><div>STARHEALTH</div><div class="neg">1D −3.33% · 3D −3.82% · 5D +0.16%</div><div>No catalyst found in one query</div><div>BSOFT</div><div class="neg">1D −3.27% · 3D −7.17% · 5D −8.43%</div><div>IT sell-off; 3D −7.17%</div></div></div>
+</div>
+<h2 style="font-size:14px;margin:14px 0 4px">5b. Margin trading, rupee and policy</h2><div class="rgrid">
+<div class="rcard"><div class="rc-h"><span>SEBI and margin trading (report, 17-Nov)</span><span class="mv amb">proposal only</span></div><div class="g3"><div class="gh">Item</div><div class="gh">Reported</div><div class="gh">Change / note</div><div>What</div><div>Brokers would stop funding fresh margin purchases in a stock once margin-funded holdings pass 5–10% of free float</div><div>Own-money buying unaffected; level not chosen</div><div>Size</div><div>MTF book ₹1.53 lakh Cr (+29% in a year)</div><div>About two-thirds in small and mid caps</div><div>Reach</div><div>220+ stocks above 5%; 36 above 10%</div><div>Stocks not named</div><div>Status</div><div>Under discussion; public consultation expected first</div><div>Reuters via Kotak Neo, 17-Nov. Current rules unchanged</div></div></div>
+<div class="rcard"><div class="rc-h"><span>Rupee, oil and fuel exports</span><span class="mv pos">rupee 93.51 · 7-month high</span></div><div class="g3"><div class="gh">Item</div><div class="gh">Reported</div><div class="gh">Change / note</div><div>Rupee (spot)</div><div>93.51, +43 paise</div><div>Seven-month high; FPI inflows and softer crude (PTI via ThePrint, 17-Nov)</div><div>Brent</div><div>About $92.8 (Jan futures, evening)</div><div>$92.44 on Monday after −3.5%; IEA sees a Q4 surplus</div><div>Fuel export levy</div><div>Raised on diesel and ATF; petrol unchanged</div><div>Kotak Neo, 17-Nov; rates not given — hits refiners’ export margins at the edge [Guessing]</div><div>FPI flows</div><div>BlackRock India ETF drew $316 mn</div><div>Foreign money moving to India amid the AI sell-off (Kotak Neo)</div></div></div>
+<div class="rcard"><div class="rc-h"><span>Policy backdrop (unchanged since 16-Nov)</span><span class="mv neg">December hike expected</span></div><div class="g3"><div class="gh">Item</div><div class="gh">Reported</div><div class="gh">Change / note</div><div>October CPI (12-Nov)</div><div>6.09%</div><div>First breach of 6% since October 2024</div><div>October WPI (16-Nov)</div><div>About 12.3%</div><div>Single source; 12.29% vs 12.07% conflict (16-Nov notes)</div><div>Repo / MPC</div><div>5.50% / 2–4 Dec</div><div>ICRA 25 bp; SBI Research 50 bp (2-Nov)</div><div>US</div><div>CME FedWatch 95.7% for a December hike</div><div>STL.News, 16-Nov</div></div></div>
+</div>
+<ul>
+<li><b>Thesis: India is being bought as the place to hide from the AI trade.</b> Nasdaq −2.49%, the chip index −5.3%, Kospi −2.59%; the Nifty +0.38%, the rupee at a seven-month high, FII +₹4,195 Cr and a $316 mn inflow to a BlackRock India ETF. [Certain] on the figures; [Likely] on the reason.</li>
+<li><b>The rate backdrop has not changed:</b> CPI 6.09%, WPI about 12.3% and a near-certain US hike in December. The rally is in banks, which gain from higher rates, not in rate-sensitive mid caps. [Likely]</li>
+<li><b>The SEBI report is the domestic risk.</b> If margin funding is capped in 220-plus stocks, mostly small and mid caps, levered retail buying slows where breadth is already weakest. Only a proposal. [Likely]</li>
+<li><b>Source quality:</b> FirstCry, Urban Company, Cummins and Sammaan figures are press reports, not filings. The FII figure has two sources; DII one.</li>
+</ul>
+<h2 style="font-size:14px;margin:14px 0 4px">Macro</h2><h3>Calendar — the next ten days</h3>
+<ul>
+<li>Wed 18-Nov: Nvidia Q3 (about 02:50 IST); FOMC minutes (late IST); Anthropic IPO expected to price ($70–78, per CNBC). Thu 19-Nov: Trump–Xi meeting; Mahanadi Coalfields IPO opens. Fri 20-Nov: October IIP (date not verified). Mon 23-Nov: monthly F&amp;O expiry (per MarketsMojo). Tue 24-Nov: holiday. 30-Nov: MSCI changes take effect. 2–4 Dec: RBI MPC.</li>
+</ul>
+  </div>
+</section>
+<section id="s6">
+  <div class="hdr"><span><span class="grp">B · The Context</span>§6 · Global Cues, Currency &amp; Commodities</span></div>
+  <div class="body">
+<div class="tblwrap"><table><tr><th>Market</th><th>Level</th><th>1D</th><th>Context</th></tr>
+<tr><td>GIFT Nifty</td><td>—</td><td></td><td>Not captured</td></tr>
+<tr><td>India VIX</td><td>15.52</td><td class="pos">−1.00%</td><td>NSE bhavcopy close, from 15.68; intraday low 14.04. Kite agrees</td></tr>
+<tr><td>US (Mon 16-Nov close)</td><td>Dow 51,608.17 · S&amp;P 7,416.59 · Nasdaq 24,509.76</td><td class="neg">−1.41% · −1.92% · −2.49%</td><td>Nasdaq more than 10% below its 6-Oct record (correction). Chip index −5.28%; Nvidia −4.1% to $156.14, a 52-week low; Intel and Micron −7%+. New US curbs on China’s indirect access to AI compute. STL.News and TokenPost agree</td></tr>
+<tr><td>Asia (Tue)</td><td>Nikkei 58,860 · Kospi 4,968 · Taiex 40,092 · Hang Seng 23,508</td><td class="neg">−1.34% · −2.59% · −2.31% · −1.03%</td><td>Kospi below 5,000; Samsung −3.05%, Kioxia −5.08%, SoftBank −3.95%. Nikkei down a fourth day (TradingKey, Quackonomist)</td></tr>
+<tr><td>Nvidia Q3 FY27</td><td>Tue after US close</td><td></td><td>About 02:50 IST Wed; consensus revenue about $109.1 bn; CFO Colette Kress is interim CEO after Jensen Huang’s exit</td></tr>
+<tr><td>Brent (Jan)</td><td>about $92.8</td><td>about flat</td><td>$92.44 Monday (−3.5%). Evening quotes conflict: $92.79 (−0.38%, PTI) vs $93.68 (+1.3%, Quackonomist)</td></tr>
+<tr><td>US 10-year</td><td>5.12% (Mon)</td><td class="pos">−3 bp</td><td>From 5.15%; FedWatch 95.7% for a December hike</td></tr>
+<tr><td>Dollar index</td><td>103.54</td><td>−0.01%</td><td>PTI via ThePrint</td></tr>
+<tr><td>USD/INR (spot)</td><td>93.51</td><td class="pos">−0.46%</td><td>+43 paise for the rupee, seven-month high (PTI)</td></tr>
+<tr><td>USD/INR (CDS Nov fut)</td><td>93.56</td><td class="pos">−0.42%</td><td>Kite last price vs 16-Nov’s last trade (93.95)</td></tr>
+<tr><td>MCX Crude (Nov)</td><td>₹8,094</td><td class="neg">+0.19%</td><td>Kite · live 21:27 IST vs previous close 8,079</td></tr>
+<tr><td>MCX Gold (Dec)</td><td>₹1,34,637</td><td class="neg">+0.07%</td><td>Live; previous close 1,34,539</td></tr>
+<tr><td>MCX Silver (Dec)</td><td>₹1,70,080</td><td class="neg">+1.32%</td><td>Live; previous close 1,67,863</td></tr>
+<tr><td>MCX Aluminium (Nov)</td><td>₹323.95</td><td class="pos">−0.69%</td><td>Live</td></tr>
+<tr><td>MCX Copper (Nov)</td><td>₹1,279.35</td><td class="pos">−0.30%</td><td>Live</td></tr>
+<tr><td>MCX Natural Gas (Nov)</td><td>₹294.20</td><td class="pos">−0.07%</td><td>Live</td></tr>
+</table></div>
+<ul>
+<li><b>The AI sell-off spread through Asia; India went the other way.</b> Kospi −2.59%, Taiex −2.31%; Nifty +0.38% and IT −0.90% only. [Certain] on the moves.</li>
+<li><b>The rupee is the cleanest signal of foreign money:</b> 93.51, +43 paise, a seven-month high, with FII +₹4,195 Cr. [Certain]</li>
+<li><b>Commodities were quiet tonight:</b> MCX crude +0.19%, gold +0.07%, silver +1.32% (live). Monday’s 3.5% fall in Brent is what helped the oil-sensitive names (IndiGo, paints, tyres per HDFC Sky). [Certain] on the levels.</li>
+<li><b>Colour in the table:</b> green marks what helps Indian equities (lower oil, VIX, dollar and USD/INR), red what hurts. For MCX metals a fall is shown green by the same rule, which is a judgement.</li>
+</ul>
+<div class="datanote">US and Asian closes are from news reports (two sources each agree). Brent, the dollar index and the 10-year are approximate. MCX and CDS values are Kite last prices; MCX was still trading at the read time.</div>
+  </div>
+</section>
+
+<!-- ================= C. THE STRUCTURE ================= -->
+<section id="s7">
+  <div class="hdr"><span><span class="grp">C · The Structure</span>§7 · Index Market Structure</span></div>
+  <div class="body">
+<h3>7a. Index Board — Broad Benchmarks</h3><p class="note">1D = vs 16-Nov. 1W = 5 sessions (9-Nov), 1M = 16-Oct, 3M = 17-Aug; session-based from <code>daily_prices</code>, which has no 8-Nov Muhurat bar. Closes checked against the NSE bhavcopy index snapshot.</p><div class="tblwrap"><table><tr><th>Index</th><th>Close</th><th>1D%</th><th>1W%</th><th>1M%</th><th>3M%</th></tr>
+<tr><td>Nifty 50</td><td>25,387.40</td><td><span class="pos">+0.38%</span></td><td><span class="pos">+1.37%</span></td><td><span class="pos">+9.68%</span></td><td><span class="pos">+4.53%</span></td></tr>
+<tr><td>Nifty 100</td><td>26,278.25</td><td><span class="pos">+0.36%</span></td><td><span class="pos">+1.10%</span></td><td><span class="pos">+8.89%</span></td><td><span class="pos">+3.22%</span></td></tr>
+<tr><td>Nifty 200</td><td>14,403.95</td><td><span class="pos">+0.34%</span></td><td><span class="pos">+1.11%</span></td><td><span class="pos">+8.00%</span></td><td><span class="pos">+1.91%</span></td></tr>
+<tr><td>Nifty 500</td><td>23,822.30</td><td><span class="pos">+0.29%</span></td><td><span class="pos">+1.08%</span></td><td><span class="pos">+6.97%</span></td><td><span class="pos">+1.09%</span></td></tr>
+<tr><td>Next 50</td><td>72,693.00</td><td><span class="pos">+0.28%</span></td><td><span class="neg">−0.13%</span></td><td><span class="pos">+5.37%</span></td><td><span class="neg">−2.39%</span></td></tr>
+<tr><td>Midcap 150</td><td>22,648.70</td><td><span class="pos">+0.27%</span></td><td><span class="pos">+1.07%</span></td><td><span class="pos">+4.20%</span></td><td><span class="neg">−3.44%</span></td></tr>
+<tr><td>Midcap 100</td><td>61,730.00</td><td><span class="pos">+0.25%</span></td><td><span class="pos">+1.16%</span></td><td><span class="pos">+4.40%</span></td><td><span class="neg">−3.27%</span></td></tr>
+<tr><td>Smallcap 100</td><td>19,398.70</td><td><span class="neg">−0.22%</span></td><td><span class="pos">+1.11%</span></td><td><span class="pos">+1.41%</span></td><td><span class="neg">−2.07%</span></td></tr>
+</table></div>
+<ul>
+<li><b>Large caps led, small caps did not follow.</b> Nifty 50 +0.38%, Nifty 100 +0.36%, Nifty 500 +0.29%; Next 50 +0.28%, Midcap 100 +0.25%, Smallcap 100 −0.22%. The spread was 0.60 points, against 1.68 on 16-Nov. [Certain]</li>
+<li><b>Over a week the broad market has kept up:</b> Nifty +1.37% since 9-Nov; Midcap 100 +1.16%, Smallcap 100 +1.11%. Over a month the Nifty leads by far (+9.68% vs +1.41%).</li>
+<li><b>The Nifty is 0.4% from its February closes</b> (25,496.55 on 26-Feb) and touched 25,501.35 intraday, the highest level since 26-Feb. [Certain]</li>
+</ul>
+<h3>7b. Sector Performance (ranked by 1M)</h3>
+<p class="note">Ranked by 1-month return, with 1D, 1W, 1M and 3M shown together so a single day's move can be checked against the longer trend. Capital Goods (−0.99%) and Hospitals (+0.44%) have no price series in the database; their 1D figures are from the NSE bhavcopy snapshot and appear in the dashboard only.</p><div class="tblwrap"><table><tr><th>Rank</th><th>Sector</th><th>Close</th><th>1D%</th><th>1W%</th><th>1M%</th><th>3M%</th></tr>
+<tr><td>1</td><td>PSU Bank</td><td>9,486.60</td><td><span class="pos">+1.95%</span></td><td><span class="pos">+6.53%</span></td><td><span class="pos">+17.19%</span></td><td><span class="pos">+8.96%</span></td></tr>
+<tr><td>2</td><td>Realty</td><td>926.50</td><td><span class="pos">+1.94%</span></td><td><span class="pos">+3.21%</span></td><td><span class="pos">+12.17%</span></td><td><span class="pos">+1.96%</span></td></tr>
+<tr><td>3</td><td>Bank</td><td>62,273.25</td><td><span class="pos">+1.13%</span></td><td><span class="pos">+4.24%</span></td><td><span class="pos">+11.51%</span></td><td><span class="pos">+8.31%</span></td></tr>
+<tr><td>4</td><td>Fin Service</td><td>28,195.00</td><td><span class="pos">+0.64%</span></td><td><span class="pos">+2.96%</span></td><td><span class="pos">+11.06%</span></td><td><span class="pos">+7.54%</span></td></tr>
+<tr><td>5</td><td>Pvt Bank</td><td>30,512.15</td><td><span class="pos">+0.89%</span></td><td><span class="pos">+3.05%</span></td><td><span class="pos">+10.15%</span></td><td><span class="pos">+11.72%</span></td></tr>
+<tr><td>6</td><td>Healthcare</td><td>17,233.20</td><td><span class="pos">+0.38%</span></td><td><span class="neg">−1.02%</span></td><td><span class="pos">+9.88%</span></td><td><span class="pos">+4.89%</span></td></tr>
+<tr><td>7</td><td>Pharma</td><td>28,157.10</td><td><span class="pos">+0.21%</span></td><td><span class="neg">−2.56%</span></td><td><span class="pos">+9.21%</span></td><td><span class="pos">+6.89%</span></td></tr>
+<tr><td>8</td><td>Oil &amp; Gas</td><td>11,410.60</td><td><span class="pos">+0.44%</span></td><td><span class="pos">+0.67%</span></td><td><span class="pos">+8.09%</span></td><td><span class="pos">+1.80%</span></td></tr>
+<tr><td>9</td><td>Auto</td><td>27,769.15</td><td><span class="pos">+0.72%</span></td><td><span class="neg">−0.56%</span></td><td><span class="pos">+7.76%</span></td><td><span class="neg">−4.83%</span></td></tr>
+<tr><td>10</td><td>Media</td><td>1,774.65</td><td><span class="pos">+0.64%</span></td><td><span class="pos">+3.95%</span></td><td><span class="pos">+7.67%</span></td><td><span class="pos">+11.21%</span></td></tr>
+<tr><td>11</td><td>FMCG</td><td>47,611.60</td><td><span class="neg">−0.20%</span></td><td><span class="pos">+2.04%</span></td><td><span class="pos">+6.71%</span></td><td><span class="neg">−1.03%</span></td></tr>
+<tr><td>12</td><td>Consumer Durables</td><td>38,493.90</td><td><span class="neg">−0.24%</span></td><td><span class="pos">+0.62%</span></td><td><span class="pos">+6.20%</span></td><td><span class="neg">−4.78%</span></td></tr>
+<tr><td>13</td><td>Metal</td><td>12,530.30</td><td><span class="pos">+0.58%</span></td><td><span class="neg">−1.06%</span></td><td><span class="pos">+3.27%</span></td><td><span class="neg">−4.38%</span></td></tr>
+<tr><td>14</td><td>IT</td><td>31,654.10</td><td><span class="neg">−0.90%</span></td><td><span class="neg">−2.51%</span></td><td><span class="neg">−0.85%</span></td><td><span class="pos">+2.75%</span></td></tr>
+</table></div>
+<ul>
+<li><b>PSU Bank leads on every horizon:</b> +1.95% today, +6.53% in five sessions, +17.19% in a month, 12 : 0 today. Bank +1.13% (12 : 2) and Pvt Bank +0.89% followed. [Certain]</li>
+<li><b>Realty +1.94% on 10 : 0,</b> second on one month (+12.17%), after falling on 13 and 16 Nov. A one-day reversal, not yet a trend. [Likely]</li>
+<li><b>Four fell:</b> IT −0.90% (3 : 7; last on one month, −0.85%), Capital Goods −0.99% (15 : 35, cables and Cummins), Consumer Durables −0.24%, FMCG −0.20% after +1.87% yesterday.</li>
+</ul>
+<h3>7c. Today's Session Shape</h3><div class="tblwrap"><table><tr><th>Index</th><th>Open</th><th>High</th><th>Low</th><th>Close</th><th>Range</th><th>Close position</th></tr>
+<tr><td>Nifty 50</td><td>25,277.30</td><td>25,501.35</td><td>25,267.30</td><td>25,387.40</td><td>234.05 pts (0.93%)</td><td class="amb">Middle third (51% of range)</td></tr>
+<tr><td>Bank Nifty</td><td>61,559.95</td><td>62,442.20</td><td>61,488.00</td><td>62,273.25</td><td>954.20 pts (1.55%)</td><td class="pos">Upper third (82% of range)</td></tr>
+</table></div>
+<ul>
+<li><b>Nifty: a gap up, a rally to 11:45, then a fade.</b> 30-minute bars (Kite): open 25,277.30 (−0.05%), a steady climb to 25,501.35 in the 11:45 bar, a 154-point drop to 25,347.15 by 13:00, a recovery to 25,476.95, and a slide in the last 90 minutes to close at the low of the final bar. [Certain]</li>
+<li><b>Close in the middle of the range (51%)</b> after a 234-point day, the widest of the last five sessions. Selling into the close on a positive-breadth day reads as profit-taking at the February highs. [Guessing]</li>
+<li><b>Bank Nifty held its gains:</b> it closed at 82% of its range, 169 points below the high. Banks, not the Nifty’s other heavyweights, carried the day. [Certain]</li>
+</ul>
+  </div>
+</section>
+<section id="s8">
+  <div class="hdr"><span><span class="grp">C · The Structure</span>§8 · Breadth &amp; Participation</span></div>
+  <div class="body">
+<h3>8A. Broader Index Board</h3><p class="note">The %&gt;20DMA columns track the change in the <i>share of stocks above their 20-day average</i> over three and five sessions — a technical-health signal that can lead or lag price — and are distinct from the same-day advance/decline count. 3D back = 12-Nov; 5D back = 9-Nov.</p><div class="split"><div class="split-t"><div class="tblwrap fit"><table class="wrap compact"><tr><th>Index</th><th>Adv:Dec</th><th>Adv:Dec<br>(3D back)</th><th>%&gt;20DMA</th><th>%&gt;20DMA<br>(3D back)</th><th>%&gt;20DMA<br>(5D back)</th></tr>
+<tr><td>Nifty 50</td><td class="pos">27:23</td><td class="neg">19:31</td><td class="rank-top1">84%</td><td class="rank-top3">92%</td><td class="rank-top1">100%</td></tr>
+<tr><td>Nifty 100</td><td class="pos">57:42</td><td class="neg">45:55</td><td class="rank-top1">84%</td><td class="rank-top2">93%</td><td class="rank-top2">95%</td></tr>
+<tr><td>Nifty 200</td><td class="pos">109:90</td><td class="pos">103:96</td><td class="rank-top2">81%</td><td class="rank-top3">92%</td><td class="">89%</td></tr>
+<tr><td>Nifty 500</td><td class="pos">256:242</td><td class="pos">298:197</td><td class="rank-bot2">74%</td><td class="rank-bot1">83%</td><td class="rank-bot2">76%</td></tr>
+<tr><td>Next 50</td><td class="pos">30:19</td><td class="pos">26:24</td><td class="rank-top1">84%</td><td class="rank-top1">94%</td><td class="rank-top3">90%</td></tr>
+<tr><td>Midcap 150</td><td class="pos">79:70</td><td class="pos">88:61</td><td class="">75%</td><td class="rank-bot1">83%</td><td class="">77%</td></tr>
+<tr><td>Midcap 100</td><td class="pos">52:48</td><td class="pos">58:41</td><td class="rank-top3">78%</td><td class="">90%</td><td class="">83%</td></tr>
+<tr><td>Smallcap 100</td><td class="pos">55:45</td><td class="pos">65:34</td><td class="rank-bot1">72%</td><td class="rank-bot2">84%</td><td class="rank-bot1">69%</td></tr>
+</table></div></div><div class="split-x"><ul>
+<li><b>Breadth turned positive in every broad index except one:</b> Nifty 50 27 : 23; Nifty 100 57 : 42; Nifty 500 256 : 242 (A/D 1.06); Midcap 150 79 : 70; Smallcap 100 55 : 45. Only the all-NSE count stayed negative (1,749 : 1,895). [Certain]</li>
+<li><b>%&gt;20DMA did not improve:</b> Nifty 500 74% → 74%; Nifty 50 88% → 84%; Nifty 100 88% → 84%; Smallcap 100 70% → 72%; Midcap 100 76% → 78%.</li>
+<li><b>Against 9-Nov: lower almost everywhere.</b> Nifty 50 100% → 84%, Nifty 100 95% → 84%, Nifty 500 76% → 74%; Smallcap 100 69% → 72% is the exception.</li>
+<li><b>The long end:</b> Nifty 500 above the 200-DMA 48% → 49%. [Certain]</li>
+<li><b>Read:</b> a better advance count on a day of small moves. The share of stocks in short-term uptrends is stuck at about three-quarters. [Likely]</li>
+</ul></div></div>
+<h3>8B. Sector Index Board</h3><div class="split"><div class="split-t"><div class="tblwrap fit"><table class="wrap compact"><tr><th>Index</th><th>Adv:Dec</th><th>Adv:Dec<br>(3D back)</th><th>%&gt;20DMA</th><th>%&gt;20DMA<br>(3D back)</th><th>%&gt;20DMA<br>(5D back)</th></tr>
+<tr><td>Auto</td><td class="pos">10:5</td><td class="neg">6:9</td><td class="">87%</td><td class="rank-top3">93%</td><td class="rank-top3">93%</td></tr>
+<tr><td>Bank</td><td class="pos">12:2</td><td class="pos">14:0</td><td class="rank-top1">100%</td><td class="rank-top1">100%</td><td class="rank-top3">93%</td></tr>
+<tr><td>Capital Goods</td><td class="neg">15:35</td><td class="pos">30:20</td><td class="rank-bot2">44%</td><td class="rank-bot2">66%</td><td class="rank-bot1">58%</td></tr>
+<tr><td>Consumer Durables</td><td class="neg">4:9</td><td class="pos">8:5</td><td class="">85%</td><td class="">92%</td><td class="">92%</td></tr>
+<tr><td>Fin Service</td><td class="pos">13:7</td><td class="pos">18:2</td><td class="rank-top1">100%</td><td class="rank-top1">100%</td><td class="rank-top1">100%</td></tr>
+<tr><td>FMCG</td><td class="neg">7:8</td><td class="neg">6:9</td><td class="rank-top2">93%</td><td class="rank-top1">100%</td><td class="rank-top1">100%</td></tr>
+<tr><td>Healthcare</td><td class="neg">9:11</td><td class="neg">7:13</td><td class="">85%</td><td class="rank-top2">95%</td><td class="rank-top1">100%</td></tr>
+<tr><td>Hospitals</td><td class="pos">7:6</td><td class="pos">8:5</td><td class="rank-top3">92%</td><td class="">92%</td><td class="rank-top1">100%</td></tr>
+<tr><td>IT</td><td class="neg">3:7</td><td class="neg">4:6</td><td class="rank-bot1">10%</td><td class="rank-bot1">50%</td><td class="">80%</td></tr>
+<tr><td>Media</td><td class="pos">6:4</td><td class="pos">8:1</td><td class="">80%</td><td class="">80%</td><td class="rank-bot2">60%</td></tr>
+<tr><td>Metal</td><td class="pos">9:6</td><td class="pos">8:7</td><td class="">87%</td><td class="rank-top3">93%</td><td class="">87%</td></tr>
+<tr><td>Oil &amp; Gas</td><td class="pos">8:6</td><td class="neg">4:11</td><td class="">67%</td><td class="">67%</td><td class="">73%</td></tr>
+<tr><td>Pharma</td><td class="neg">8:12</td><td class="neg">8:12</td><td class="">80%</td><td class="">90%</td><td class="rank-top2">95%</td></tr>
+<tr><td>PSU Bank</td><td class="pos">12:0</td><td class="pos">12:0</td><td class="rank-top1">100%</td><td class="rank-top1">100%</td><td class="rank-top1">100%</td></tr>
+<tr><td>Pvt Bank</td><td class="pos">8:2</td><td class="pos">10:0</td><td class="rank-top1">100%</td><td class="rank-top1">100%</td><td class="rank-top1">100%</td></tr>
+<tr><td>Realty</td><td class="pos">10:0</td><td class="pos">10:0</td><td class="">90%</td><td class="rank-top1">100%</td><td class="">80%</td></tr>
+</table></div></div><div class="split-x"><ul>
+<li><b>Near-total advance:</b> PSU Bank 12 : 0, Realty 10 : 0, Bank 12 : 2, Pvt Bank 8 : 2, Auto 10 : 5.</li>
+<li><b>Near-total decline:</b> IT 3 : 7, with %&gt;20DMA down to 10% (from 50% three sessions ago and 80% on 9-Nov) — the lowest of all 24 indices. Capital Goods 15 : 35, %&gt;20DMA 44%.</li>
+<li><b>Falling participation despite a rising index:</b> Healthcare 100% → 85% and Pharma 95% → 80% against 9-Nov; Metal 87% → 87% after a dip to 67% yesterday.</li>
+<li><b>Fully participating (100%):</b> Bank, PSU Bank, Pvt Bank, Fin Service. FMCG slipped to 93%.</li>
+<li><b>Media’s 60% → 80%</b> (5 sessions) is a 10-stock index; today 6 : 4.</li>
+</ul></div></div>
+<h3>8c. SMA Participation Ladder — all 24 indices</h3><div class="split"><div class="split-t"><div class="tblwrap fit"><table class="wrap compact"><tr><th>Index</th><th>%&gt;20D</th><th>%&gt;50D</th><th>%&gt;100D</th><th>%&gt;200D</th></tr>
+<tr><td>Nifty 50</td><td class="">84%</td><td class="">82%</td><td class="">68%</td><td class="">70%</td></tr>
+<tr><td>Nifty 100</td><td class="">84%</td><td class="">76%</td><td class="">59%</td><td class="">65%</td></tr>
+<tr><td>Nifty 200</td><td class="">81%</td><td class="">68%</td><td class="">52%</td><td class="">54%</td></tr>
+<tr><td>Nifty 500</td><td class="">74%</td><td class="">56%</td><td class="">44%</td><td class="">49%</td></tr>
+<tr><td>Next 50</td><td class="">84%</td><td class="">70%</td><td class="">50%</td><td class="">60%</td></tr>
+<tr><td>Midcap 150</td><td class="">75%</td><td class="">57%</td><td class="">42%</td><td class="">42%</td></tr>
+<tr><td>Midcap 100</td><td class="">78%</td><td class="">59%</td><td class="">45%</td><td class="">42%</td></tr>
+<tr><td>Smallcap 100</td><td class="">72%</td><td class="">55%</td><td class="">46%</td><td class="">54%</td></tr>
+<tr><td>Auto</td><td class="">87%</td><td class="">67%</td><td class="">53%</td><td class="">67%</td></tr>
+<tr><td>Bank</td><td class="rank-top1">100%</td><td class="rank-top2">93%</td><td class="rank-top3">79%</td><td class="rank-top1">86%</td></tr>
+<tr><td>Capital Goods</td><td class="rank-bot2">44%</td><td class="rank-bot1">30%</td><td class="rank-bot1">24%</td><td class="rank-bot2">34%</td></tr>
+<tr><td>Consumer Durables</td><td class="">85%</td><td class="">69%</td><td class="">46%</td><td class="">38%</td></tr>
+<tr><td>Fin Service</td><td class="rank-top1">100%</td><td class="rank-top3">85%</td><td class="">65%</td><td class="">55%</td></tr>
+<tr><td>FMCG</td><td class="rank-top2">93%</td><td class="">73%</td><td class="">53%</td><td class="rank-bot1">33%</td></tr>
+<tr><td>Healthcare</td><td class="">85%</td><td class="">65%</td><td class="">55%</td><td class="rank-top3">75%</td></tr>
+<tr><td>Hospitals</td><td class="rank-top3">92%</td><td class="">69%</td><td class="">62%</td><td class="">69%</td></tr>
+<tr><td>IT</td><td class="rank-bot1">10%</td><td class="">80%</td><td class="rank-top2">80%</td><td class="rank-top2">80%</td></tr>
+<tr><td>Media</td><td class="">80%</td><td class="">60%</td><td class="">50%</td><td class="">50%</td></tr>
+<tr><td>Metal</td><td class="">87%</td><td class="rank-bot2">40%</td><td class="rank-bot2">33%</td><td class="rank-bot1">33%</td></tr>
+<tr><td>Oil &amp; Gas</td><td class="">67%</td><td class="">60%</td><td class="">60%</td><td class="">67%</td></tr>
+<tr><td>Pharma</td><td class="">80%</td><td class="">60%</td><td class="">55%</td><td class="rank-top2">80%</td></tr>
+<tr><td>PSU Bank</td><td class="rank-top1">100%</td><td class="rank-top1">100%</td><td class="rank-top1">83%</td><td class="">67%</td></tr>
+<tr><td>Pvt Bank</td><td class="rank-top1">100%</td><td class="">80%</td><td class="">70%</td><td class="rank-top2">80%</td></tr>
+<tr><td>Realty</td><td class="">90%</td><td class="">80%</td><td class="">60%</td><td class="">70%</td></tr>
+</table></div></div><div class="split-x"><ul>
+<li><b>Banks are the strongest boards at every average:</b> Bank 100 / 93 / 79 / 86; PSU Bank 100 / 100 / 83 / 67.</li>
+<li><b>Capital Goods is the weakest ladder:</b> 44 / 30 / 24 / 34. Metal is weak beyond the 20-DMA (87 / 40 / 33 / 33).</li>
+<li><b>IT is now 10 / 80 / 80 / 80:</b> nine of ten below the 20-DMA, eight of ten above the 200-DMA. The short-term break is deep, the long-term trend intact. [Certain]</li>
+<li><b>FMCG and Consumer Durables are bounces in downtrends:</b> 93% and 85% above the 20-DMA, 33% and 38% above the 200-DMA.</li>
+<li><b>Nifty 50 above the 200-DMA: 70%,</b> unchanged from 16-Nov.</li>
+</ul></div></div>
+  </div>
+</section>
+<section id="s9">
+  <div class="hdr"><span><span class="grp">C · The Structure</span>§9 · Sector Rotation</span></div>
+  <div class="body">
+<p class="note">Splits sectors by the direction of change in rank, cross-checked against the same 5-session breadth metric as §8 (rotating in = gaining participation, rotating out = losing it). A positioning-shift read, not a price-return ranking.</p><div class="split"><div class="split-t"><div class="tblwrap fit"><table class="wrap compact"><tr><th>Sector</th><th>1D Rank</th><th>3D Rank</th><th>5D Rank</th><th>1M Rank</th></tr>
+<tr><td>PSU Bank</td><td class="rank-top1">1</td><td class="rank-top1">1</td><td class="rank-top1">1</td><td class="rank-top1">1</td></tr>
+<tr><td>Realty</td><td class="rank-top2">2</td><td class="">16</td><td class="">4</td><td class="rank-top2">2</td></tr>
+<tr><td>Bank</td><td class="rank-top3">3</td><td class="rank-top3">3</td><td class="rank-top2">2</td><td class="rank-top3">3</td></tr>
+<tr><td>Pvt Bank</td><td class="">4</td><td class="">4</td><td class="">5</td><td class="">5</td></tr>
+<tr><td>Auto</td><td class="">5</td><td class="">20</td><td class="">18</td><td class="">12</td></tr>
+<tr><td>Media</td><td class="">6</td><td class="">5</td><td class="rank-top3">3</td><td class="">13</td></tr>
+<tr><td>Fin Service</td><td class="">7</td><td class="">6</td><td class="">6</td><td class="">4</td></tr>
+<tr><td>Metal</td><td class="">8</td><td class="rank-bot1">22</td><td class="">20</td><td class="">20</td></tr>
+<tr><td>Oil &amp; Gas</td><td class="">9</td><td class="">8</td><td class="">15</td><td class="">10</td></tr>
+<tr><td>Healthcare</td><td class="">10</td><td class="">12</td><td class="">19</td><td class="">6</td></tr>
+<tr><td>Nifty 50</td><td class="">11</td><td class="">7</td><td class="">8</td><td class="">7</td></tr>
+<tr><td>Nifty 100</td><td class="">12</td><td class="">9</td><td class="">12</td><td class="">9</td></tr>
+<tr><td>Nifty 200</td><td class="">13</td><td class="">10</td><td class="">11</td><td class="">11</td></tr>
+<tr><td>Nifty 500</td><td class="">14</td><td class="">11</td><td class="">13</td><td class="">14</td></tr>
+<tr><td>Next 50</td><td class="">15</td><td class="">17</td><td class="">17</td><td class="">17</td></tr>
+<tr><td>Midcap 150</td><td class="">16</td><td class="">14</td><td class="">14</td><td class="">19</td></tr>
+<tr><td>Midcap 100</td><td class="">17</td><td class="">15</td><td class="">9</td><td class="">18</td></tr>
+<tr><td>Pharma</td><td class="">18</td><td class="rank-bot2">21</td><td class="rank-bot1">22</td><td class="">8</td></tr>
+<tr><td>FMCG</td><td class="">19</td><td class="rank-top2">2</td><td class="">7</td><td class="">15</td></tr>
+<tr><td>Smallcap 100</td><td class="">20</td><td class="">18</td><td class="">10</td><td class="rank-bot2">21</td></tr>
+<tr><td>Consumer Durables</td><td class="rank-bot2">21</td><td class="">13</td><td class="">16</td><td class="">16</td></tr>
+<tr><td>IT</td><td class="rank-bot1">22</td><td class="">19</td><td class="rank-bot2">21</td><td class="rank-bot1">22</td></tr>
+</table></div></div><div class="split-x"><ul>
+<li><b>Rotating in:</b> Metal 8 / 22 / 20 / 20 (87% → 93% → 87%), Oil &amp; Gas 9 / 8 / 15 / 10 (73% → 67% → 67%) — unconfirmed.</li>
+<li><b>Rotating out:</b> Realty 2 / 16 / 4 / 2 (80% → 100% → 90%) — unconfirmed, Pharma 18 / 21 / 22 / 8 (95% → 90% → 80%).</li>
+<li><b>Persistent leaders:</b> PSU Bank 1 / 1 / 1 / 1 (100% → 100% → 100%), Bank 3 / 3 / 2 / 3 (93% → 100% → 100%), Pvt Bank 4 / 4 / 5 / 5 (100% → 100% → 100%), Media 6 / 5 / 3 / 13 (60% → 80% → 80%), Fin Service 7 / 6 / 6 / 4 (100% → 100% → 100%).</li>
+<li><b>Persistent laggards:</b> Next 50 15 / 17 / 17 / 17 (90% → 94% → 84%), Midcap 150 16 / 14 / 14 / 19 (77% → 83% → 75%), Smallcap 100 20 / 18 / 10 / 21 (69% → 84% → 72%) — unconfirmed, Consumer Durables 21 / 13 / 16 / 16 (92% → 92% → 85%), IT 22 / 19 / 21 / 22 (80% → 50% → 10%).</li>
+<li><b>Neutral/Stable:</b> Auto 5 / 20 / 18 / 12 (93% → 93% → 87%) — unconfirmed, Healthcare 10 / 12 / 19 / 6 (100% → 95% → 85%) — unconfirmed, Nifty 50 11 / 7 / 8 / 7 (100% → 92% → 84%) — unconfirmed, Nifty 100 12 / 9 / 12 / 9 (95% → 93% → 84%) — unconfirmed, Nifty 200 13 / 10 / 11 / 11 (89% → 92% → 81%) — unconfirmed, Nifty 500 14 / 11 / 13 / 14 (76% → 83% → 74%) — unconfirmed, Midcap 100 17 / 15 / 9 / 18 (83% → 90% → 78%) — unconfirmed, FMCG 19 / 2 / 7 / 15 (100% → 100% → 93%) — unconfirmed.</li>
+<li><b>Read-across.</b> Banks and financials are the persistent leaders on every horizon. Metal and Oil &amp; Gas rank better over 1–3 days (Oil &amp; Gas is unconfirmed: participation fell 73% → 67%). Realty ranks as rotating out despite +1.94% today, because its 3-day rank is 16th; its breadth rose (80% → 90%), so the call is unconfirmed. Pharma is the clean rotation out (95% → 80%). IT is last on 1D and 1M with 10% above the 20-DMA. [Certain] on the readings.</li>
+</ul></div></div><p class="note">Ranks across the 22 indices with a price series (Capital Goods and Hospitals have none). Structure rule: "Rotating In" when the average of 1D+3D ranks is at least 4 places better than the average of 5D+1M; "Rotating Out" when 4+ places worse; otherwise Neutral/Stable ("persistent leader" averages rank ≤ 8, "persistent laggard" ≥ 15.5). The §8 %&gt;20DMA read (9-Nov → 12-Nov → today) is the cross-check; "unconfirmed" = the breadth path points the other way. An unchanged reading (for example 100% → 100%) is not marked unconfirmed.</p>
+  </div>
+</section>
+<section id="s10">
+  <div class="hdr"><span><span class="grp">C · The Structure</span>§10 · Stock Scanners</span></div>
+  <div class="body">
+<h3>Bottom 15 — Top Losers</h3><div class="tblwrap"><table><tr><th>Symbol</th><th>LTP</th><th>1D%</th><th>Vol×63D</th><th>RSI-14</th><th>ADX-14</th><th>Industry</th></tr>
+<tr><td>URBANCO</td><td>161.63</td><td><span class="neg">−5.86%</span></td><td>3.39×</td><td class="">53.1</td><td>19.4</td><td>Consumer Services</td></tr>
+<tr><td>INDIACEM</td><td>321.50</td><td><span class="neg">−4.56%</span></td><td>0.52×</td><td class="">46.9</td><td>35.5</td><td>Construction Materials</td></tr>
+<tr><td>CONCORDBIO</td><td>554.80</td><td><span class="neg">−4.51%</span></td><td>3.48×</td><td class="amb">22.2</td><td>47.3</td><td>Healthcare</td></tr>
+<tr><td>APARINDS</td><td>14,171.00</td><td><span class="neg">−4.45%</span></td><td>1.02×</td><td class="">36.3</td><td>32.7</td><td>Capital Goods</td></tr>
+<tr><td>SAMMAANCAP</td><td>131.29</td><td><span class="neg">−4.42%</span></td><td>1.08×</td><td class="">50.8</td><td>27.5</td><td>Financial Services</td></tr>
+<tr><td>CARBORUNIV</td><td>1,014.10</td><td><span class="neg">−4.29%</span></td><td>0.50×</td><td class="">38.1</td><td>12.3</td><td>Capital Goods</td></tr>
+<tr><td>CAPLIPOINT</td><td>2,247.10</td><td><span class="neg">−4.25%</span></td><td>1.22×</td><td class="">37.3</td><td>18.6</td><td>Healthcare</td></tr>
+<tr><td>KEI</td><td>3,851.00</td><td><span class="neg">−4.20%</span></td><td>1.55×</td><td class="">36.7</td><td>29.9</td><td>Capital Goods</td></tr>
+<tr><td>ASHOKLEY</td><td>160.50</td><td><span class="neg">−4.17%</span></td><td>3.38×</td><td class="">52.0</td><td>37.9</td><td>Capital Goods</td></tr>
+<tr><td>KAYNES</td><td>2,858.00</td><td><span class="neg">−4.09%</span></td><td>4.00×</td><td class="">34.0</td><td>20.6</td><td>Capital Goods</td></tr>
+<tr><td>GLAND</td><td>3,248.40</td><td><span class="neg">−4.06%</span></td><td>0.54×</td><td class="">58.8</td><td>34.0</td><td>Healthcare</td></tr>
+<tr><td>CUMMINSIND</td><td>4,065.00</td><td><span class="neg">−3.97%</span></td><td>2.47×</td><td class="">36.2</td><td>27.0</td><td>Capital Goods</td></tr>
+<tr><td>HFCL</td><td>188.19</td><td><span class="neg">−3.59%</span></td><td>1.03×</td><td class="">31.0</td><td>18.5</td><td>Telecommunication</td></tr>
+<tr><td>KALYANKJIL</td><td>682.75</td><td><span class="neg">−3.59%</span></td><td>1.78×</td><td class="">68.9</td><td>37.0</td><td>Consumer Durables</td></tr>
+<tr><td>STARHEALTH</td><td>549.15</td><td><span class="neg">−3.33%</span></td><td>0.79×</td><td class="">50.0</td><td>17.4</td><td>Financial Services</td></tr>
+</table></div><p class="note">Ex-dividend check (NSE bhavcopy corporate actions): none of the 15 losers had an ex-date on 17-Nov.</p><h3>Top 15 Gainers</h3><div class="tblwrap"><table><tr><th>Symbol</th><th>LTP</th><th>1D%</th><th>Vol×63D</th><th>RSI-14</th><th>ADX-14</th><th>Industry</th></tr>
+<tr><td>FIRSTCRY</td><td>178.97</td><td><span class="pos">+12.85%</span></td><td>33.30×</td><td class="">61.0</td><td>14.0</td><td>Consumer Services</td></tr>
+<tr><td>SIGNATURE</td><td>835.60</td><td><span class="pos">+9.14%</span></td><td>5.39×</td><td class="amb">72.9</td><td>21.8</td><td>Realty</td></tr>
+<tr><td>WELSPUNLIV</td><td>265.62</td><td><span class="pos">+7.92%</span></td><td>1.39×</td><td class="">65.1</td><td>33.3</td><td>Textiles</td></tr>
+<tr><td>APTUS</td><td>188.58</td><td><span class="pos">+7.19%</span></td><td>11.92×</td><td class="">42.9</td><td>43.5</td><td>Financial Services</td></tr>
+<tr><td>DEEPAKFERT</td><td>1,443.70</td><td><span class="pos">+6.72%</span></td><td>7.49×</td><td class="">69.3</td><td>28.9</td><td>Chemicals</td></tr>
+<tr><td>TATACHEM</td><td>649.45</td><td><span class="pos">+6.10%</span></td><td>6.51×</td><td class="">62.5</td><td>9.9</td><td>Chemicals</td></tr>
+<tr><td>TATAINVEST</td><td>609.55</td><td><span class="pos">+5.74%</span></td><td>2.98×</td><td class="">57.2</td><td>16.8</td><td>Financial Services</td></tr>
+<tr><td>LAURUSLABS</td><td>2,338.00</td><td><span class="pos">+5.32%</span></td><td>1.86×</td><td class="">57.5</td><td>27.0</td><td>Healthcare</td></tr>
+<tr><td>MAHABANK</td><td>95.99</td><td><span class="pos">+4.34%</span></td><td>2.12×</td><td class="amb">75.3</td><td>26.3</td><td>Financial Services</td></tr>
+<tr><td>PFOCUS</td><td>279.00</td><td><span class="pos">+4.26%</span></td><td>1.53×</td><td class="">47.6</td><td>10.4</td><td>Media Entertainment &amp; Publication</td></tr>
+<tr><td>CEMPRO</td><td>1,352.30</td><td><span class="pos">+4.14%</span></td><td>2.04×</td><td class="">63.2</td><td>24.8</td><td>Construction</td></tr>
+<tr><td>BANKINDIA</td><td>159.28</td><td><span class="pos">+4.12%</span></td><td>2.95×</td><td class="amb">74.8</td><td>24.0</td><td>Financial Services</td></tr>
+<tr><td>TMCV</td><td>445.65</td><td><span class="pos">+4.06%</span></td><td>1.63×</td><td class="">59.4</td><td>25.5</td><td>Capital Goods</td></tr>
+<tr><td>RHIM</td><td>343.50</td><td><span class="pos">+4.04%</span></td><td>1.76×</td><td class="">40.4</td><td>17.6</td><td>Capital Goods</td></tr>
+<tr><td>EXIDEIND</td><td>380.15</td><td><span class="pos">+4.01%</span></td><td>2.49×</td><td class="">53.4</td><td>28.2</td><td>Automobile and Auto Components</td></tr>
+</table></div>
+<ul>
+<li><b>Gainers are events and banks.</b> Results or news: FIRSTCRY, TATACHEM, TATAINVEST, LAURUSLABS, DEEPAKFERT. PSU banks: MAHABANK, BANKINDIA, PNB. Realty: SIGNATURE, ABREL, BRIGADE. No cause found: WELSPUNLIV, APTUS, PFOCUS, CEMPRO, EXIDEIND. [Certain] on the grouping.</li>
+<li><b>Losers are capital goods and mid-cap pharma.</b> Cables: KEI, APARINDS, POLYCAB, HFCL. Capital goods: CUMMINSIND, CARBORUNIV, KAYNES, JYOTICNC. Pharma: CONCORDBIO, CAPLIPOINT, GLAND. Plus URBANCO (QIP) and SAMMAANCAP (after Q2).</li>
+<li><b>Volume:</b> FIRSTCRY 33.3×, APTUS 11.9×, DEEPAKFERT 7.5×, TATACHEM 6.5×, SIGNATURE 5.4×. Most losers traded below 1.6× normal: selling without panic, as on 16-Nov.</li>
+<li><b>No loss was bigger than 5.86%:</b> the narrowest downside tail in a week. Gainers ran further (FIRSTCRY +12.85%, SIGNATURE +9.14%).</li>
+</ul>
+  </div>
+</section>
+<section id="s11">
+  <div class="hdr"><span><span class="grp">C · The Structure</span>§11 · Momentum Composite</span></div>
+  <div class="body">
+<p class="note">Table 1 (Fresh Entry) catches single-day price and volume shocks that may not be a real trend; Table 2 (Continued Momentum) filters for sustained multi-week strength and is the more reliable list for spotting an established trend.</p>
+<h3>Table 1 — Fresh Entry (Stage 1+2 composite) — all 20</h3><div class="tblwrap"><table><tr><th>Rank</th><th>Symbol</th><th>LTP</th><th>1D%</th><th>5D%</th><th>Vol×63D</th><th>3W Trend</th><th>Score</th></tr>
+<tr><td>1</td><td>DEEPAKFERT</td><td>1,443.70</td><td><span class="pos">+6.72%</span></td><td><span class="pos">+22.63%</span></td><td>7.49×</td><td class="pos">✓</td><td>99.4</td></tr>
+<tr><td>2</td><td>SIGNATURE</td><td>835.60</td><td><span class="pos">+9.14%</span></td><td><span class="pos">+15.11%</span></td><td>5.39×</td><td class="pos">✓</td><td>99.4</td></tr>
+<tr><td>3</td><td>FIRSTCRY</td><td>178.97</td><td><span class="pos">+12.85%</span></td><td><span class="pos">+10.33%</span></td><td>33.30×</td><td class="pos">✓</td><td>98.9</td></tr>
+<tr><td>4</td><td>KAYNES</td><td>2,858.00</td><td><span class="neg">−4.09%</span></td><td><span class="neg">−13.39%</span></td><td>4.00×</td><td class="neg">✗</td><td>97.6</td></tr>
+<tr><td>5</td><td>APTUS</td><td>188.58</td><td><span class="pos">+7.19%</span></td><td><span class="pos">+7.13%</span></td><td>11.92×</td><td class="neg">✗</td><td>97.0</td></tr>
+<tr><td>6</td><td>TATACHEM</td><td>649.45</td><td><span class="pos">+6.10%</span></td><td><span class="pos">+7.39%</span></td><td>6.51×</td><td class="pos">✓</td><td>96.8</td></tr>
+<tr><td>7</td><td>PNB</td><td>150.00</td><td><span class="pos">+3.74%</span></td><td><span class="pos">+13.49%</span></td><td>2.96×</td><td class="pos">✓</td><td>96.3</td></tr>
+<tr><td>8</td><td>BANKINDIA</td><td>159.28</td><td><span class="pos">+4.12%</span></td><td><span class="pos">+9.85%</span></td><td>2.95×</td><td class="pos">✓</td><td>95.9</td></tr>
+<tr><td>9</td><td>ASHOKLEY</td><td>160.50</td><td><span class="neg">−4.17%</span></td><td><span class="neg">−8.21%</span></td><td>3.38×</td><td class="pos">✓</td><td>95.8</td></tr>
+<tr><td>10</td><td>CONCORDBIO</td><td>554.80</td><td><span class="neg">−4.51%</span></td><td><span class="neg">−7.04%</span></td><td>3.48×</td><td class="neg">✗</td><td>95.7</td></tr>
+<tr><td>11</td><td>MAHABANK</td><td>95.99</td><td><span class="pos">+4.34%</span></td><td><span class="pos">+9.48%</span></td><td>2.12×</td><td class="pos">✓</td><td>95.4</td></tr>
+<tr><td>12</td><td>KALYANKJIL</td><td>682.75</td><td><span class="neg">−3.59%</span></td><td><span class="pos">+11.74%</span></td><td>1.78×</td><td class="pos">✓</td><td>93.6</td></tr>
+<tr><td>13</td><td>LICHSGFIN</td><td>622.50</td><td><span class="pos">+2.81%</span></td><td><span class="pos">+12.79%</span></td><td>2.07×</td><td class="pos">✓</td><td>93.6</td></tr>
+<tr><td>14</td><td>TATAINVEST</td><td>609.55</td><td><span class="pos">+5.74%</span></td><td><span class="pos">+5.60%</span></td><td>2.98×</td><td class="pos">✓</td><td>93.0</td></tr>
+<tr><td>15</td><td>DELHIVERY</td><td>457.95</td><td><span class="pos">+3.97%</span></td><td><span class="pos">+5.73%</span></td><td>2.81×</td><td class="pos">✓</td><td>91.6</td></tr>
+<tr><td>16</td><td>ABREL</td><td>1,260.80</td><td><span class="pos">+3.68%</span></td><td><span class="pos">+16.98%</span></td><td>1.27×</td><td class="pos">✓</td><td>91.4</td></tr>
+<tr><td>17</td><td>MAXHEALTH</td><td>1,030.90</td><td><span class="pos">+2.08%</span></td><td><span class="pos">+12.67%</span></td><td>1.98×</td><td class="pos">✓</td><td>91.1</td></tr>
+<tr><td>18</td><td>CAPLIPOINT</td><td>2,247.10</td><td><span class="neg">−4.25%</span></td><td><span class="neg">−10.21%</span></td><td>1.22×</td><td class="neg">✗</td><td>90.6</td></tr>
+<tr><td>19</td><td>KFINTECH</td><td>965.00</td><td><span class="pos">+2.85%</span></td><td><span class="pos">+5.52%</span></td><td>2.94×</td><td class="pos">✓</td><td>89.1</td></tr>
+<tr><td>20</td><td>MOTILALOFS</td><td>1,240.25</td><td><span class="pos">+1.91%</span></td><td><span class="pos">+8.10%</span></td><td>2.22×</td><td class="pos">✓</td><td>88.7</td></tr>
+</table></div>
+<h3>Table 2 — Continued Momentum (weekly persistence)</h3><div class="tblwrap"><table><tr><th>Symbol</th><th>LTP</th><th>1D%</th><th>1W%</th><th>Weekly RSI</th><th>ADX-14</th><th>% from SMA20</th><th>% from SMA50</th></tr>
+<tr><td>IGIL</td><td>450.60</td><td><span class="pos">+3.90%</span></td><td><span class="pos">+5.58%</span></td><td>73.4</td><td>59.7</td><td><span class="pos">+12.8%</span></td><td><span class="pos">+28.3%</span></td></tr>
+<tr><td>PVRINOX</td><td>1,677.40</td><td><span class="pos">+2.32%</span></td><td><span class="pos">+5.51%</span></td><td>82.8</td><td>59.1</td><td><span class="pos">+10.1%</span></td><td><span class="pos">+21.8%</span></td></tr>
+<tr><td>LTTS</td><td>4,208.00</td><td><span class="neg">−0.43%</span></td><td><span class="pos">+0.14%</span></td><td>66.8</td><td>51.1</td><td><span class="pos">+1.9%</span></td><td><span class="pos">+15.1%</span></td></tr>
+<tr><td>INDHOTEL</td><td>901.55</td><td><span class="pos">+1.76%</span></td><td><span class="pos">+1.11%</span></td><td>79.2</td><td>50.5</td><td><span class="pos">+7.9%</span></td><td><span class="pos">+17.1%</span></td></tr>
+<tr><td>KOTAKBANK</td><td>497.25</td><td><span class="pos">+0.62%</span></td><td><span class="pos">+3.70%</span></td><td>73.1</td><td>49.4</td><td><span class="pos">+7.4%</span></td><td><span class="pos">+13.4%</span></td></tr>
+<tr><td>BHARTIARTL</td><td>2,138.30</td><td><span class="neg">−0.71%</span></td><td><span class="pos">+3.19%</span></td><td>66.1</td><td>46.3</td><td><span class="pos">+6.1%</span></td><td><span class="pos">+12.7%</span></td></tr>
+<tr><td>ICICIBANK</td><td>1,598.70</td><td><span class="pos">+0.86%</span></td><td><span class="pos">+0.61%</span></td><td>74.9</td><td>46.1</td><td><span class="pos">+9.0%</span></td><td><span class="pos">+14.1%</span></td></tr>
+<tr><td>M&amp;M</td><td>3,399.00</td><td><span class="pos">+1.80%</span></td><td><span class="pos">+3.29%</span></td><td>59.7</td><td>45.5</td><td><span class="pos">+11.1%</span></td><td><span class="pos">+12.8%</span></td></tr>
+<tr><td>LT</td><td>4,155.50</td><td><span class="pos">+0.37%</span></td><td><span class="neg">−0.70%</span></td><td>59.9</td><td>45.3</td><td><span class="pos">+6.0%</span></td><td><span class="pos">+7.8%</span></td></tr>
+<tr><td>SBIN</td><td>1,108.60</td><td><span class="pos">+1.66%</span></td><td><span class="pos">+6.39%</span></td><td>65.4</td><td>44.8</td><td><span class="pos">+10.4%</span></td><td><span class="pos">+12.2%</span></td></tr>
+<tr><td>BAJAJFINSV</td><td>1,870.80</td><td><span class="pos">+1.22%</span></td><td><span class="pos">+1.85%</span></td><td>52.7</td><td>44.7</td><td><span class="pos">+6.7%</span></td><td><span class="pos">+4.6%</span></td></tr>
+<tr><td>EMCURE</td><td>2,339.40</td><td><span class="pos">+0.03%</span></td><td><span class="pos">+5.56%</span></td><td>72.4</td><td>43.8</td><td><span class="pos">+15.2%</span></td><td><span class="pos">+19.0%</span></td></tr>
+<tr><td>DRREDDY</td><td>1,388.00</td><td><span class="pos">+0.73%</span></td><td><span class="pos">+0.22%</span></td><td>68.6</td><td>43.3</td><td><span class="pos">+3.9%</span></td><td><span class="pos">+11.1%</span></td></tr>
+<tr><td>ULTRACEMCO</td><td>12,290.00</td><td><span class="pos">+0.16%</span></td><td><span class="pos">+0.12%</span></td><td>61.3</td><td>42.4</td><td><span class="pos">+5.8%</span></td><td><span class="pos">+9.8%</span></td></tr>
+<tr><td>MRF</td><td>128,840.00</td><td><span class="pos">+0.59%</span></td><td><span class="pos">+2.99%</span></td><td>51.3</td><td>42.2</td><td><span class="pos">+5.7%</span></td><td><span class="pos">+4.1%</span></td></tr>
+<tr><td>PNB</td><td>150.00</td><td><span class="pos">+3.74%</span></td><td><span class="pos">+13.49%</span></td><td>79.5</td><td>41.3</td><td><span class="pos">+16.9%</span></td><td><span class="pos">+24.3%</span></td></tr>
+<tr><td>DIVISLAB</td><td>11,150.00</td><td><span class="pos">+0.63%</span></td><td><span class="neg">−3.59%</span></td><td>78.0</td><td>41.2</td><td><span class="pos">+10.1%</span></td><td><span class="pos">+15.4%</span></td></tr>
+<tr><td>SAREGAMA</td><td>674.90</td><td><span class="pos">+0.73%</span></td><td><span class="pos">+4.18%</span></td><td>80.6</td><td>41.0</td><td><span class="pos">+17.0%</span></td><td><span class="pos">+27.6%</span></td></tr>
+<tr><td>SHYAMMETL</td><td>1,321.10</td><td><span class="pos">+0.39%</span></td><td><span class="pos">+0.05%</span></td><td>73.2</td><td>40.2</td><td><span class="pos">+7.3%</span></td><td><span class="pos">+15.6%</span></td></tr>
+<tr><td>ATHERENERG</td><td>1,908.60</td><td><span class="neg">−1.60%</span></td><td><span class="pos">+2.62%</span></td><td>71.8</td><td>39.7</td><td><span class="pos">+10.7%</span></td><td><span class="pos">+19.3%</span></td></tr>
+</table></div>
+<ul>
+<li><b>The Fresh Entry list is rebuilt tonight with my own scoring</b> (mean percentile of |1D move|, 63-day volume multiple and |5-session return| across the Nifty 500). It ranks the size of a shock, not its direction, like the pipeline’s. [Certain] on the method.</li>
+<li>⚠ <b>Five of the 20 fell today:</b> KAYNES (rank 4), ASHOKLEY (9), CONCORDBIO (10), KALYANKJIL (12), CAPLIPOINT (18). Read the 1D column before treating a name as momentum. Four have no 3-week uptrend (KAYNES, APTUS, CONCORDBIO, CAPLIPOINT).</li>
+<li><b>The genuine up-shocks:</b> DEEPAKFERT, SIGNATURE, FIRSTCRY, TATACHEM, the PSU banks (PNB, BANKINDIA, MAHABANK) and TATAINVEST.</li>
+<li><b>Continued Momentum</b> (RSI ≥ 55, above the 20-DMA, ranked by ADX) is led by IGIL, PVRINOX, LTTS and INDHOTEL; PNB joins on a 5-session +13.49%. Large financials dominate, as on 16-Nov.</li>
+</ul>
+  </div>
+</section>
+<section id="s12">
+  <div class="hdr"><span><span class="grp">C · The Structure</span>§12 · FII / DII Flows</span></div>
+  <div class="body">
+<h3>12a. Daily Flows (₹ Cr)</h3><div class="tblwrap"><table><tr><th>Date</th><th>FII Buy</th><th>FII Sell</th><th>FII Net</th><th>DII Buy</th><th>DII Sell</th><th>DII Net</th></tr>
+<tr><td>17-Nov</td><td>—</td><td>—</td><td><span class="pos">+4,195.38</span></td><td>—</td><td>—</td><td><span class="pos">+196.93</span></td></tr>
+<tr><td>16-Nov</td><td>15,636.88</td><td>10,772.20</td><td><span class="pos">+4,864.68</span></td><td>11,752.03</td><td>15,271.08</td><td><span class="neg">−3,519.05</span></td></tr>
+<tr><td>13-Nov</td><td>18,339.57</td><td>12,603.02</td><td><span class="pos">+5,736.55</span></td><td>11,745.95</td><td>13,999.53</td><td><span class="neg">−2,253.58</span></td></tr>
+<tr><td>12-Nov</td><td>20,273.32</td><td>12,442.72</td><td><span class="pos">+7,830.60</span></td><td>15,855.13</td><td>22,186.30</td><td><span class="neg">−6,331.17</span></td></tr>
+<tr><td>11-Nov</td><td>30,087.21</td><td>17,523.88</td><td><span class="pos">+12,563.33</span></td><td>19,704.39</td><td>28,138.92</td><td><span class="neg">−8,434.53</span></td></tr>
+<tr><td>09-Nov</td><td>20,310.99</td><td>13,098.77</td><td><span class="pos">+7,212.22</span></td><td>12,764.97</td><td>19,937.50</td><td><span class="neg">−7,172.53</span></td></tr>
+<tr><td>08-Nov (Muhurat)</td><td>52.39</td><td>52.64</td><td><span class="neg">−0.25</span></td><td>331.11</td><td>1,031.42</td><td><span class="neg">−700.31</span></td></tr>
+</table></div><h3>12b. Trend Comparison (₹ Cr)</h3><div class="tblwrap"><table><tr><th>Window</th><th>FII Net</th><th>DII Net</th><th>Combined</th></tr>
+<tr><td>November MTD, 2–17 Nov (11 sessions + Muhurat)</td><td><span class="pos">+88,362.53</span></td><td><span class="neg">−52,410.76</span></td><td><span class="pos">+35,951.77</span></td></tr>
+<tr><td>This week, 16–17 Nov (2 sessions)</td><td><span class="pos">+9,060.06</span></td><td><span class="neg">−3,322.12</span></td><td><span class="pos">+5,737.94</span></td></tr>
+<tr><td>Week 9–13 Nov (4 sessions)</td><td><span class="pos">+33,342.70</span></td><td><span class="neg">−24,191.81</span></td><td><span class="pos">+9,150.89</span></td></tr>
+<tr><td>October (full month)</td><td><span class="neg">−45,161.71</span></td><td><span class="pos">+62,220.11</span></td><td><span class="pos">+17,058.40</span></td></tr>
+</table></div>
+<div class="tblwrap"><table><tr><th>Scorecard</th><th>Value</th></tr>
+<tr><td>FII reading (60 sessions)</td><td class="pos">rank 49/60 (percentile 80.8)</td></tr>
+<tr><td>DII reading (60 sessions)</td><td class="neg">rank 15/60 (percentile 24.2)</td></tr>
+<tr><td>Combined net, today</td><td class="pos">+4,392.31</td></tr>
+<tr><td>Combined net, November</td><td class="pos">+35,951.77</td></tr></table></div>
+<ul>
+<li><b>FII +₹4,195 Cr; DII +₹197 Cr; net +₹4,392 Cr.</b> [Certain] on FII (PTI and CNBC-TV18); [Likely] on DII (CNBC-TV18 only).</li>
+<li><b>FII buying has slowed for five sessions:</b> ₹12,563 (11-Nov) → ₹7,831 → ₹5,737 → ₹4,865 → ₹4,195 Cr. Six buying sessions in a row. [Certain]</li>
+<li><b>DII turned buyer after twelve selling sessions</b> (30-Oct to 16-Nov, −₹53,425 Cr). One small buy does not make a trend.</li>
+<li><b>November so far: FII about +₹88,363 Cr, DII about −₹52,411 Cr</b> (my sums of the daily table, including Muhurat).</li>
+<li><b>Read:</b> foreign money is still coming, but less each day. The rupee at a seven-month high says it is not leaving. [Likely]</li>
+</ul>
+<div class="datanote">Today’s row is net only: FII +₹4,195.38 Cr (PTI via ThePrint; CNBC-TV18) and DII +₹196.93 Cr (CNBC-TV18), described as provisional exchange data. Gross buy and sell figures were not available because the pipeline’s flows step (Tapetide) did not run; earlier rows are the pipeline’s NSE provisional figures. The 60-session ranks and November totals are my arithmetic on that series.</div>
+  </div>
+</section>
+
+<!-- ================= D. THE FORWARD VIEW ================= -->
+<section id="s13">
+  <div class="hdr"><span><span class="grp">D · The Forward View</span>§13 · What Changed Today</span></div>
+  <div class="body">
+<ul>
+<li><b>Regime:</b> Neutral → Constructive. Composite <span class="pos">49.1 → ≈61.9 (+12.8)</span>, rebuilt (§2).
+  <ul>
+  <li>Momentum <span class="pos">27.8 → 60.4</span>. Breadth <span class="pos">45.2 → 61.7</span>. Trend <span class="pos">77.0 → 79.1</span>. Flow <span class="pos">49.2 → 52.5</span>. Volatility <span class="pos">33.4 → 36.6</span>.</li>
+  </ul></li>
+<li><b>Breadth:</b>
+  <ul>
+  <li>Nifty 500 A/D <span class="pos">0.53 (174:326) → 1.06 (256:242)</span>. Nifty 50 31 : 19 → 27 : 23.</li>
+  <li>Nifty 500 %&gt;20DMA 74% → 74%. %&gt;50DMA 55% → 56%.</li>
+  </ul></li>
+<li><b>Flows:</b> FII <span class="neg">+₹4,865 → +₹4,195 Cr</span>. DII <span class="pos">−₹3,519 → +₹197 Cr</span>, the first DII buy since 29-Oct.</li>
+<li><b>Volatility:</b> India VIX 15.68 → <span class="pos">15.52</span> (bhavcopy).</li>
+<li><b>Index levels:</b> Nifty’s highest close since 26-Feb; Bank Nifty above any close or high in 12 months. Rupee 93.94 → 93.51.</li>
+<li><b>Sectors:</b>
+  <ul>
+  <li>Best 1M: PSU Bank (+17.19%). Weakest 1M: IT (−0.85%), now negative.</li>
+  <li>Leadership swapped: FMCG +1.87% → −0.20%, Hospitals +3.73% → +0.44%; Realty −1.34% → +1.94%, PSU Bank +0.50% → +1.95%.</li>
+  </ul></li>
+<li><b>Macro:</b> no new Indian data. SEBI margin-trading report; RBI letter to Tata Sons; US Nasdaq in correction; Nvidia results overnight.</li>
+<li><b>Scorecard on the 16-Nov notes:</b>
+  <ul>
+  <li><b>Right:</b> “Breadth has to turn … Confirm: A/D above 1.0.” It did: 1.06.</li>
+  <li><b>Right:</b> “FII buying is slowing day by day.” ₹4,865 → ₹4,195 Cr.</li>
+  <li><b>Right:</b> “Kaynes: whether peers keep falling.” Kaynes fell again (−4.09%); Amber (−0.10%) and PG Electroplast (+0.11%) steadied. TMPV −1.22% to ₹259.20, inside the ₹235–380 broker range.</li>
+  <li><b>Wrong:</b> “Defensives are leading … reducing risk.” One day later FMCG fell and banks, realty and autos led.</li>
+  <li><b>Wrong:</b> “Back to Constructive needs Nifty 500 A/D above 1.5 for a session or two.” One day at 1.06 was enough, because Momentum is a percentile of a single day’s A/D (§2).</li>
+  <li><b>Wrong:</b> “Expiry-day pinning near round strikes is common [near 25,300].” The Nifty traded 25,267–25,501 and closed at 25,387.40.</li>
+  <li><b>Levels:</b> all three overhead levels (25,337.60, 25,384.80, 25,424.35) were taken out intraday; the close held only the first two. Bank Nifty cleared 61,712.80. Downside levels untouched (low 25,267.30).</li>
+  <li><b>Follow-ups still open:</b> causes for KPRMILL, TATACOMM, IGL and HFCL (16-Nov). RHIM rebounded +4.04% with no news; HFCL fell another 3.59%.</li>
+  </ul></li>
+</ul>
+  </div>
+</section>
+<!-- ================= REFERENCE ================= -->
+<section id="notes">
+  <div class="hdr"><span><span class="grp">Reference</span>Data notes &amp; corrections</span><span class="hint">tap to expand</span></div>
+  <div class="body collapsed">
+<p class="note">Everything here is a correction to an earlier edition, a provisional-data flag, a source conflict or a method note. It is collapsed so the main flow stays on the market.</p>
+<h3>Corrections to earlier editions</h3><ul>
+<li><b>16-Nov §2:</b> “Back to Constructive needs Nifty 500 A/D above 1.5 for a session or two” overstated what is needed; one session at about 1.0 moves Momentum by 30+ points.</li>
+<li><b>16-Nov §8A and §13:</b> Nifty 500 breadth for 16-Nov is 174 : 326 in <code>index_breadth</code> and 173 : 326 in the 16-Nov pack. The difference is one stock and does not change any ratio.</li>
+</ul>
+<div class="datanote"><b>Data-integrity notes in this edition:</b>
+<br>(1) <b>No pipeline pack for 17-Nov.</b> <code>daily-update.yml</code> was dispatched at 20:15 and 20:27 IST (HTTP 204) but no <code>report_packs</code> row and no 17-Nov <code>fii_dii_cash_market_daily</code> row appeared by 21:22. A Tapetide call from this session returned “free access is over”, and the flows step depends on Tapetide; that is the likely cause [Likely]. Tijori was checked as a substitute: it has index returns but no FII/DII or breadth data, so it was used only to cross-check index returns (Nifty 1D +0.4%, 1W +1.4%, 1M +9.7%: matches).
+<br>(2) <b>Rebuilt pack.</b> Breadth snapshots and the SMA ladder are read straight from <code>index_breadth</code>. Scanners use current Nifty 500 members, <code>daily_prices</code> volumes (vol × 14/63 = today ÷ average of the prior 14/63 sessions) and <code>daily_indicators</code>. Regime uses the pack’s rules as inferred: Breadth = mean of the %&gt;50D and A/D percentiles; Trend = 50 + 5 × % above the 200-DMA; Momentum = A/D percentile; Flow = mean of FII and DII 60-session percentiles; Volatility = 100 − ATR% percentile (250 sessions). It reproduces 12-Nov (65.6) and 13-Nov (47.7) exactly and 16-Nov at 49.5 vs 49.1. Fresh Entry and Continued Momentum use my own rules (§11) and will not match the pipeline’s lists exactly. Unusualness scores were not rebuilt (§4).
+<br>(3) <b>Flows:</b> net only. FII +₹4,195.38 Cr: PTI (ThePrint) and CNBC-TV18 agree. DII +₹196.93 Cr: CNBC-TV18 only. Not written to the database.
+<br>(4) <b>Price validation:</b> every stock 1D move quoted in this report was machine-checked against <code>daily_prices</code> closes (17-Nov vs 16-Nov): 146 instances matched, 0 unexplained mismatches; the validator’s 9 flags are 7 MCX commodity prices (MCX is also a stock ticker), one Consumer Durables index move read as Cummins, and one five-session return. 50 dashboard, §4, §5a and §10 names were also checked against NSE bhavcopy: all dated 17-Nov, all identical. [Certain] No ex-dividend dates on 17-Nov among the 15 losers (bhavcopy corporate actions).
+<br>(5) <b>Trading calendar:</b> 1D = 16-Nov; 3D = 12-Nov; 1W/5D = 9-Nov; 1M = 16-Oct; 3M = 17-Aug. No 8-Nov Muhurat bar and no 10-Nov bar in <code>daily_prices</code>. ICICIPRULI has no bar for 16 or 17 Nov.
+<br>(6) <b>Source conflicts, shown not resolved:</b>
+<br>&nbsp;&nbsp;Brent in the evening: $92.79 (−0.38%, PTI) vs $93.68 (+1.3%, Quackonomist).
+<br>&nbsp;&nbsp;Eicher previous close: ₹7,574.10 (BusinessToday, likely BSE) vs ₹7,599 implied by NSE; NSE is used.
+<br>&nbsp;&nbsp;Welspun Living Q2 profit growth: “13-fold” in headlines vs about 11.4× from the article’s own figures (2-Nov).
+<br>&nbsp;&nbsp;Bank Nifty “record high” (Equentis headline, not read): bhavcopy history confirms only that 62,273.25 is above every close and high since 17-Nov-2025.
+<br>(7) <b>Results coverage:</b> no results calendar was available (Tapetide unavailable). Every top-15 gainer and loser was searched at least once; statuses in §5a say which had one query and which two.
+<br>(8) <b>Single-source figures:</b> DII flow (CNBC-TV18); Caplin Point FDA 483 (EquityPandit); Laurus no-further-sale statement (multibagg, secondary); Urban Company QIP bids (Kotak Neo); Sensex close (Kotak Neo and PTI agree on 82,532.19).
+<br>(9) <b>Arithmetic that is mine:</b> the rebuilt regime and its contributions, scanners and momentum lists, close position in range, flows totals and ranks, MCX and CDS percentage changes, session-based returns and ranks.
+<br>(10) <b>Not captured:</b> GIFT Nifty; gross FII/DII buy and sell; option-chain data; bulk and block deals; a cause for WELSPUNLIV, APTUS, SIGNATURE, the cables and several mid-cap losers.
+<br>(11) <b>MCX:</b> values read at 21:27 IST while MCX was open until 23:30 IST; they will differ from session-end values.</div>
+<h3>Open data gaps</h3><ul>
+<li>(1) The pipeline pack and FII/DII rows for 17-Nov are missing; restore the Tapetide plan or switch the flows source, then backfill 17-Nov.</li>
+<li>(2) DII figure is single-source and net only.</li>
+<li>(3) Capital Goods and Hospitals have no price series in the database.</li>
+<li>(4) Unexplained moves: WELSPUNLIV, APTUS (11.9× volume), SIGNATURE, KEI, APARINDS, POLYCAB, CONCORDBIO, ASHOKLEY.</li>
+<li>(5) Nvidia results land after this report.</li>
+</ul>
+  </div>
+</section>
+
+</main>
+<script>
+  document.querySelectorAll('section > .hdr').forEach(h => {
+    h.addEventListener('click', () => { h.nextElementSibling.classList.toggle('collapsed'); });
+  });
+  document.querySelectorAll('table').forEach(table => {
+    const headers = table.querySelectorAll('th');
+    headers.forEach((th, idx) => {
+      th.addEventListener('click', () => {
+        const rows = Array.from(table.querySelectorAll('tr')).slice(1);
+        const asc = th.dataset.asc !== 'true';
+        headers.forEach(h => h.dataset.asc = '');
+        th.dataset.asc = asc;
+        rows.sort((a, b) => {
+          let x = a.children[idx]?.innerText.replace(/[^0-9.\-]/g,'') || a.children[idx]?.innerText || '';
+          let y = b.children[idx]?.innerText.replace(/[^0-9.\-]/g,'') || b.children[idx]?.innerText || '';
+          const nx = parseFloat(x), ny = parseFloat(y);
+          if (!isNaN(nx) && !isNaN(ny)) return asc ? nx - ny : ny - nx;
+          return asc ? x.localeCompare(y) : y.localeCompare(x);
+        });
+        rows.forEach(r => table.appendChild(r));
+      });
+    });
+  });
+  const sections = ['dash','s1','s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','notes'];
+  const navLinks = document.querySelectorAll('#navbar a');
+  window.addEventListener('scroll', () => {
+    let current = sections[0];
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && window.scrollY >= el.offsetTop - 120) current = id;
+    });
+    navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+  });
+</script>
+</body>
+</html>

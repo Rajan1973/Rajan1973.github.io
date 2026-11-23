@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Defence Q2 FY27 — Sector Earnings Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Roboto+Mono:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --stone:#E3E0D9; --card:#F3F1EC; --card2:#EAE7E0;
+  --ink:#1F1D1A; --mute:#6E6A62; --faint:#9A958B; --rule:#C9C4B9;
+  --gain:#1D5C7A; --loss:#A8382C; 
+  --vol:#8E8879; --gold:#B4842A;
+  --disp:'Archivo',system-ui,sans-serif;
+  --serif:'Source Serif 4',Georgia,serif;
+  --mono:'Roboto Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--stone);color:var(--ink);font-family:var(--serif);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:28px 20px 90px}
+section{margin-bottom:40px}
+
+/* type */
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
+h1{font-family:var(--disp);font-weight:800;font-size:clamp(34px,7vw,62px);line-height:.94;letter-spacing:-.03em;margin:.18em 0 .22em;text-transform:uppercase}
+h2{font-family:var(--disp);font-weight:700;font-size:clamp(19px,3.2vw,25px);letter-spacing:-.015em;margin:0 0 4px;text-transform:uppercase}
+h3{font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:-.005em;margin:0}
+.dek{font-size:17px;color:var(--mute);max-width:56ch;margin:0}
+.note{font-size:13px;color:var(--mute);margin:4px 0 20px;max-width:70ch}
+.rule{height:3px;background:var(--ink);margin:0 0 16px}
+
+/* thesis stats */
+.thesis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:2px;background:var(--rule);border:2px solid var(--ink);margin-top:26px}
+.t{background:var(--card);padding:13px 15px}
+.t .n{font-family:var(--disp);font-weight:800;font-size:26px;line-height:1.05;letter-spacing:-.02em}
+.t .l{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:5px;line-height:1.35}
+.t.up .n{color:var(--gain)} .t.dn .n{color:var(--loss)}
+
+/* SIGNATURE: the scissor */
+.scissor{background:var(--card);border:2px solid var(--ink);padding:18px 16px 12px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin-bottom:14px}
+.legend span{display:flex;align-items:center;gap:6px}
+.sw{width:13px;height:11px;display:inline-block}
+.row{display:grid;grid-template-columns:104px 1fr;gap:10px;align-items:center;margin-bottom:3px}
+.row .co{font-family:var(--disp);font-weight:600;font-size:12px;text-align:right;line-height:1.15}
+.track{position:relative;height:26px;border-left:2px solid var(--ink);border-right:0}
+.axis{position:absolute;top:0;bottom:0;width:2px;background:var(--ink);opacity:.85}
+.b{position:absolute;height:10px}
+.b.v{top:1px;background:var(--vol)}
+.b.e{top:14px}
+.b.e.pos{background:var(--gain)} .b.e.neg{background:var(--loss)}
+.b span{position:absolute;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:9.5px;font-weight:500;white-space:nowrap;color:var(--ink)}
+.b.pos span,.b.v span{left:calc(100% + 5px)}
+.b.neg span{right:calc(100% + 5px)}
+.scale{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9.5px;color:var(--faint);margin-top:6px;padding-left:114px}
+
+/* league bars */
+.league{background:var(--card);border:2px solid var(--ink);padding:16px}
+.lrow{display:grid;grid-template-columns:112px 1fr 96px;gap:10px;align-items:center;padding:4px 0;border-bottom:1px solid var(--rule)}
+.lrow:last-child{border-bottom:0}
+.lrow .co{font-family:var(--disp);font-weight:600;font-size:12.5px;text-align:right}
+.lbar{height:16px;background:var(--gain);position:relative}
+.lbar.mid{background:#4A7F91} .lbar.low{background:var(--loss)}
+.lrow .v{font-family:var(--mono);font-size:12px;font-weight:700;text-align:right}
+.lrow .d{font-family:var(--mono);font-size:10px;color:var(--mute);text-align:right}
+
+/* fuel strip */
+.fuel{background:var(--ink);color:var(--card);border:2px solid var(--ink);padding:18px}
+.fuel h2{color:var(--card)}
+.fline{display:flex;align-items:flex-end;gap:0;height:110px;margin:20px 0 6px}
+.fp{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:6px}
+.fp i{display:block;width:100%;max-width:52px;background:var(--gold)}
+.fp b{font-family:var(--mono);font-size:12px;font-weight:700}
+.fp em{font-family:var(--mono);font-size:9.5px;font-style:normal;letter-spacing:.09em;text-transform:uppercase;color:#A9A296}
+.warn{border-top:1px solid #4A453C;margin-top:14px;padding-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
+.warn div{font-size:13.5px;color:#D6D1C6}
+.warn strong{display:block;font-family:var(--mono);font-size:17px;font-weight:700;color:var(--gold);margin-bottom:2px}
+
+/* company cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
+.c{background:var(--card);border:2px solid var(--ink);padding:14px;display:flex;flex-direction:column}
+.chead{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:2px}
+.tick{font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacing:.06em}
+.badge{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 6px;border:1.5px solid;white-space:nowrap;flex-shrink:0}
+.badge.del{color:var(--gain);border-color:var(--gain)}
+.badge.part{color:var(--gold);border-color:var(--gold)}
+.badge.miss{color:var(--loss);border-color:var(--loss)}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);margin:11px 0}
+.tile{background:var(--card2);padding:7px 9px}
+.tile .n{font-family:var(--mono);font-size:15px;font-weight:700;line-height:1.15}
+.tile .l{font-family:var(--mono);font-size:8.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:3px}
+.tile .n.up{color:var(--gain)} .tile .n.dn{color:var(--loss)}
+.c ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.c li{margin-bottom:5px}
+.c li::marker{color:var(--faint)}
+.flags{margin-top:auto;padding-top:10px;display:flex;flex-wrap:wrap;gap:5px}
+.flag{font-family:var(--mono);font-size:9px;letter-spacing:.05em;text-transform:uppercase;background:var(--loss);color:var(--card);padding:3px 6px}
+.flag.ok{background:var(--gain)}
+
+
+table{width:100%;border-collapse:collapse;background:var(--card);border:2px solid var(--ink)}
+th{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;text-align:left;padding:9px 10px;background:var(--ink);color:var(--card)}
+td{padding:9px 10px;border-bottom:1px solid var(--rule);font-size:13.5px;vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.co{font-family:var(--disp);font-weight:700;font-size:13px;white-space:nowrap}
+td.vd{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;white-space:nowrap}
+.vd.del{color:var(--gain)} .vd.part{color:var(--gold)} .vd.miss{color:var(--loss)}
+
+/* call */
+.calls{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.call{border:2px solid var(--ink);padding:15px;background:var(--card)}
+.call.buy{border-left:9px solid var(--gain)}
+.call.wait{border-left:9px solid var(--gold)}
+.call.avoid{border-left:9px solid var(--loss)}
+.call .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.call h3{margin:4px 0 7px;font-size:17px}
+.call p{margin:0;font-size:13.5px}
+
+
+/* commentary */
+.themes{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.th{background:var(--card);border:2px solid var(--ink);padding:14px}
+.th .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--mute);border-bottom:2px solid var(--ink);padding-bottom:6px;margin-bottom:9px}
+.th ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.th li{margin-bottom:6px}
+.th li::marker{color:var(--faint)}
+.th b{font-family:var(--mono);font-size:12.5px;font-weight:700}
+
+/* red flags */
+.rf{background:var(--card);border:2px solid var(--ink)}
+.rfg{border-bottom:2px solid var(--ink)}
+.rfg:last-child{border-bottom:0}
+.rfh{display:flex;align-items:center;gap:9px;padding:8px 13px;background:var(--card2)}
+.sev{width:11px;height:11px;flex-shrink:0}
+.sev.hi{background:var(--loss)} .sev.md{background:var(--gold)} .sev.lo{background:var(--faint)}
+.rfh span{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase}
+.rfr{display:grid;grid-template-columns:118px 1fr;gap:12px;padding:9px 13px;border-top:1px solid var(--rule);font-size:13.5px}
+.rfr b{font-family:var(--disp);font-weight:700;font-size:12.5px}
+
+/* ind-ra verdict */
+.indra{background:var(--card);border:2px solid var(--ink);padding:16px}
+.split{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:2px;background:var(--rule);border:1px solid var(--rule);margin-bottom:16px}
+.sp{background:var(--card2);padding:13px 14px}
+.sp .n{font-family:var(--disp);font-weight:800;font-size:34px;line-height:1;letter-spacing:-.03em;color:var(--loss)}
+.sp.ok .n{color:var(--gain)}
+.sp .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-top:6px}
+.sp .w{font-size:12.5px;color:var(--mute);margin-top:7px}
+.vs{display:grid;grid-template-columns:82px 1fr;gap:11px;padding:7px 0;border-bottom:1px solid var(--rule);font-size:13.5px;align-items:start}
+.vs:last-child{border-bottom:0}
+.vs em{font-family:var(--mono);font-size:9.5px;font-style:normal;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding-top:2px}
+.vs em.y{color:var(--gain)} .vs em.n{color:var(--loss)} .vs em.p{color:var(--gold)}
+
+/* regional strip */
+.reg{display:grid;grid-template-columns:repeat(auto-fit,minmax(112px,1fr));gap:2px;background:var(--rule);border:2px solid var(--ink);margin-top:16px}
+.rg{background:var(--card2);padding:11px 12px;text-align:center}
+.rg .n{font-family:var(--mono);font-size:15px;font-weight:700}
+.rg .n.up{color:var(--gain)} .rg .n.dn{color:var(--loss)}
+.rg .l{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-top:4px}
+
+/* triggers */
+.trigs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:14px}
+.tg{border:2px solid var(--ink);padding:14px;background:var(--card)}
+.tg .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
+.tg.tg-up .k{color:var(--gain)} .tg.tg-dn .k{color:var(--loss)}
+.tg ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.tg li{margin-bottom:6px}
+
+/* caveats */
+.cav{background:var(--card2);border:2px solid var(--ink);padding:15px 15px 15px 30px;margin:0;font-size:13.5px;line-height:1.55}
+.cav li{margin-bottom:8px}
+.cav li:last-child{margin-bottom:0}
+.cav b{font-family:var(--mono);font-size:12px;font-weight:700}
+
+
+/* wide data tables */
+.tw{overflow-x:auto;border:2px solid var(--ink);background:var(--card)}
+.tw table{border:0;min-width:660px}
+.tw th{position:sticky;top:0}
+td.num{font-family:var(--mono);font-size:12px;font-weight:700;text-align:right;white-space:nowrap}
+td.num.up{color:var(--gain)} td.num.dn{color:var(--loss)} td.num.ns{color:var(--faint);font-weight:400}
+th.r{text-align:right}
+td.kpi{font-family:var(--mono);font-size:11.5px;text-align:right;white-space:nowrap}
+.asof{font-family:var(--mono);font-size:11px;color:var(--mute);margin-top:10px;line-height:1.6}
+.asof b{color:var(--ink)}
+
+footer{border-top:3px solid var(--ink);padding-top:15px;font-size:12.5px;color:var(--mute)}
+footer p{margin:0 0 8px;max-width:80ch}
+
+@media(max-width:620px){
+  .row{grid-template-columns:74px 1fr;gap:7px}
+  .row .co{font-size:10.5px}
+  .scale{padding-left:81px}
+  .lrow{grid-template-columns:80px 1fr 74px}
+  .lrow .co{font-size:11px}
+  .wrap{padding:20px 13px 60px}
+  td.hide,th.hide{display:none}
+}
+@media(prefers-reduced-motion:no-preference){
+  .b,.lbar,.fp i{animation:g .7s cubic-bezier(.2,.7,.3,1) both}
+  @keyframes g{from{transform:scaleX(.001);opacity:0}to{transform:scaleX(1);opacity:1}}
+  .b.neg{transform-origin:right} .b.v,.b.pos,.lbar{transform-origin:left}
+  .fp i{animation-name:gy;transform-origin:bottom}
+  @keyframes gy{from{transform:scaleY(.001)}to{transform:scaleY(1)}}
+}
+
+.badge.nsc{color:var(--mute);border-color:var(--mute)}
+.lsub{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin:14px 0 6px}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Sector earnings review · Quarter ended 30 September 2026</div>
+  <h1>Defence<br>Q2 FY27</h1>
+  <p class="dek">Order books are at records, but the quarter split on ownership: PSU shipyards and missiles lost margin, while private electronics makers widened theirs.</p>
+  <div class="thesis">
+    <div class="t dn"><div class="n">−15.6 pts</div><div class="l">Mazagon Dock operating margin YoY</div></div>
+    <div class="t dn"><div class="n">68%</div><div class="l">Share of BDL's PBT from other income</div></div>
+    <div class="t up"><div class="n">+11.1 pts</div><div class="l">Astra Microwave operating margin YoY</div></div>
+    <div class="t up"><div class="n">+82%</div><div class="l">Solar Industries operating profit YoY</div></div>
+  </div>
+</header>
+
+<section>
+  <h2>The scissor</h2>
+  <div class="rule"></div>
+  <p class="note">Revenue growth YoY against operating-profit growth YoY (before other income), on one axis, from filed consolidated quarterlies. Three PSUs grew revenue and shrank operating profit: BDL, Cochin Shipyard and, on falling revenue, Mazagon Dock. Every private name grew operating profit faster than revenue except Data Patterns, whose revenue halved. ideaForge (loss to profit) and MTAR (not reported) are excluded.</p>
+  <div class="scissor">
+    <div class="legend">
+      <span><i class="sw" style="background:var(--vol)"></i>Revenue growth YoY</span>
+      <span><i class="sw" style="background:var(--gain)"></i>Operating profit growth YoY</span>
+    </div>
+    <div id="scissor"></div>
+    <div class="scale"><span>−100</span><span>−20</span><span>+60</span><span>+140</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>Operating margin — the league table</h2>
+  <div class="rule"></div>
+  <p class="note">Consolidated operating margin before other income. The top four are all private companies. The bottom four are all PSUs.</p>
+  <div class="league">
+    <div class="lsub">Operating margin, Q2 FY27 (change)</div>
+    <div id="league"></div>
+  </div>
+</section>
+
+<section>
+  <h2>The pressure point: PSU execution margins</h2>
+  <div class="rule"></div>
+  <div class="fuel">
+    <h2>Op. margin change YoY, pts</h2>
+    <div class="fline" id="fuel"></div>
+    <div class="warn">
+      <div><strong>What broke</strong>Mazagon Dock took "higher provisions" and its margin fell to 8.1% from 23.7%. BDL billed old work-in-progress (inventory −₹945 cr) at a 6.1% margin. Cochin's margin fell to 4.1% from 17.7% in Q1.</div>
+      <div><strong>What hid it</strong>Other income: 68% of BDL's PBT, 63% of Mazagon's, 40% of HAL's, and more than all of Cochin's. Headline PAT falls far less than operating profit.</div>
+      <div><strong>Who did not break</strong>Solar (+2.0 pts), Astra (+11.1) and Paras (+1.4) widened margins on mix. GRSE (+1.4) was the only shipyard to improve.</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Company by company</h2>
+  <div class="rule"></div>
+  <p class="note">The badge scores Q2 delivery against verified commitments. Few Q2 transcripts were on Tijori by 15 November, so most companies are not scored. Mazagon, BDL and Cochin are marked as misses on the size of the margin fall alone.</p>
+  <div class="grid" id="cards"></div>
+</section>
+
+<section>
+  <h2>KPI comparison</h2>
+  <div class="rule"></div>
+  <p class="note">n/v means disclosed but not verified for this build. n/r means not reported. n/m means not meaningful.</p>
+  <div class="tw">
+  <table>
+    <thead><tr>
+      <th>Company</th><th class="r">Revenue YoY</th><th class="r">Op. margin</th><th class="r">Margin chg YoY</th><th class="r">Other income / PBT</th>
+      <th class="r">Order book</th><th class="r">PAT YoY</th><th class="r">Basis</th>
+    </tr></thead>
+    <tbody id="kpi"></tbody>
+  </table>
+  </div>
+  <p class="asof">Other income / PBT is derived from Tijori filed figures. HAL's order book is from its FY26 annual report, not the Q2 release.</p>
+</section>
+
+<section>
+  <h2>What management said</h2>
+  <div class="rule"></div>
+  <p class="note">From results statements reported by Upstox (Data Patterns, Solar), Kotak Neo (Mazagon Dock) and Indian Masterminds (BEL). Tijori had no Q2 transcripts for this set by 15 November.</p>
+  <div class="themes">
+    <div class="th"><div class="k">Orders</div><ul>
+      <li>BEL: order book ₹68,717 cr on 1 October.</li>
+      <li>Solar: order book ₹20,178 cr on 30 September.</li>
+      <li>Data Patterns: Q2 inflow ₹929 cr; ₹956 cr more under negotiation.</li>
+    </ul></div>
+    <div class="th"><div class="k">Guidance</div><ul>
+      <li>Solar expects to surpass its FY27 guidance.</li>
+      <li>Data Patterns: "FY27 guidance remains unchanged", with H2 stronger.</li>
+    </ul></div>
+    <div class="th"><div class="k">Costs and provisions</div><ul>
+      <li>Mazagon Dock: margin hit by "higher provisions"; the amount was not given.</li>
+    </ul></div>
+    <div class="th"><div class="k">Capital</div><ul>
+      <li>Mazagon Dock: ₹1,250 cr SBI facility for Colombo Dockyard; authorised capital to rise to ₹900 cr.</li>
+    </ul></div>
+  </div>
+</section>
+
+<section>
+  <h2>Red flags</h2>
+  <div class="rule"></div>
+  <p class="note">Ranked by how much they should change position sizing.</p>
+  <div class="rf">
+    <div class="rfg">
+      <div class="rfh"><i class="sev hi"></i><span>Act on these</span></div>
+      <div class="rfr"><b>Mazagon Dock</b><div>Operating profit −71% on undisclosed provisions, falling revenue, and a capital raise proposal alongside the Colombo funding.</div></div>
+      <div class="rfr"><b>Cochin Shipyard</b><div>Other income exceeds PBT, so the core business lost money. The margin fell 13.6 pts QoQ.</div></div>
+      <div class="rfr"><b>BDL</b><div>Operating profit −46% on revenue +45%; 68% of PBT is other income.</div></div>
+    </div>
+    <div class="rfg">
+      <div class="rfh"><i class="sev md"></i><span>Monitor next quarter</span></div>
+      <div class="rfr"><b>HAL</b><div>Margin −4.8 pts QoQ; 40% of PBT is other income.</div></div>
+      <div class="rfr"><b>Data Patterns</b><div>Revenue −57%. H2 must carry the year.</div></div>
+      <div class="rfr"><b>BEML</b><div>PAT −31% on revenue +42%.</div></div>
+    </div>
+    <div class="rfg">
+      <div class="rfh"><i class="sev lo"></i><span>Note and move on</span></div>
+      <div class="rfr"><b>Zen · ideaForge</b><div>Quarterly revenue is lumpy; one order moves the numbers.</div></div>
+      <div class="rfr"><b>MTAR</b><div>The September quarter had not reported by 15 Nov.</div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Walk the talk</h2>
+  <div class="rule"></div>
+  <p class="note">Only two commitments could be verified from public sources. Nothing else is scored, rather than scoring against digest summaries.</p>
+  <table>
+    <thead><tr><th>Company</th><th>Promised</th><th class="hide">Delivered</th><th>Verdict</th></tr></thead>
+    <tbody id="score"></tbody>
+  </table>
+</section>
+
+<section>
+  <h2>Was the consensus right?</h2>
+  <div class="rule"></div>
+  <p class="note">No published Q2 poll was found. We score the narrative: record order books turn into revenue and margin across the sector.</p>
+  <div class="indra">
+    <div class="split">
+      <div class="sp ok"><div class="n">11 of 13</div><div class="l">Grew revenue YoY</div><div class="w">Execution came through.</div></div>
+      <div class="sp"><div class="n">6 of 13</div><div class="l">Lower margin YoY</div><div class="w">All six are PSUs.</div></div>
+      <div class="sp ok"><div class="n">+11.1 pts</div><div class="l">Best margin gain</div><div class="w">Private, mix-led.</div></div>
+    </div>
+    <div class="vs"><em class="y">Right</em><div><b>Order books turn into revenue.</b> Eleven of thirteen grew revenue; BDL +45%, BEML +42%, Solar +69%.</div></div>
+    <div class="vs"><em class="n">Wrong</em><div><b>Revenue brings margin.</b> At PSU shipyards and BDL, revenue came at lower margins, and other income propped up PAT.</div></div>
+  </div>
+</section>
+
+<section>
+  <h2>The call</h2>
+  <div class="rule"></div>
+  <div class="calls">
+    <div class="call buy">
+      <div class="k">Own now</div>
+      <h3>Solar Industries · Astra Microwave</h3>
+      <p>Solar grew operating profit 82% with almost no other income and expects to beat its guide. Astra added 11 pts of margin. Both have run (+39% and +71% in a year), but both are flat to down over three months.</p>
+    </div>
+    <div class="call wait">
+      <div class="k">Accumulate on evidence</div>
+      <h3>BEL · GRSE · Data Patterns · HAL</h3>
+      <p>BEL runs a 28% margin, earns from operations, and is −6% in a year. GRSE is the only shipyard improving. Data Patterns needs H2 revenue to match its inflow. HAL needs the Tejas ramp to show in margins.</p>
+    </div>
+    <div class="call avoid">
+      <div class="k">Stay out</div>
+      <h3>Mazagon Dock · BDL · Cochin Shipyard · BEML</h3>
+      <p>Their margins fell 2–16 pts and other income now carries their profit. Down 32–36% in a year, but not yet cheap on core earnings.</p>
+    </div>
+  </div>
+  <div class="trigs">
+    <div class="tg tg-up"><div class="k">What would make us more positive</div><ul>
+      <li>Mazagon discloses the provision as one-off and Q3 margin returns above 15%.</li>
+      <li>BDL's margin back in double digits as new orders replace old WIP.</li>
+      <li>HAL's Q3 margin back above 25%.</li>
+    </ul></div>
+    <div class="tg tg-dn"><div class="k">What would make us cut</div><ul>
+      <li>Solar or Astra margins falling back as mix normalises.</li>
+      <li>Data Patterns' H2 revenue failing to recover.</li>
+    </ul></div>
+  </div>
+</section>
+
+<section>
+  <h2>Analyst coverage after results</h2>
+  <div class="rule"></div>
+  <p class="note">Dated post-result broker reports were not verified for this build. No targets are shown, rather than undated ones.</p>
+  <div class="tw">
+  <table>
+    <thead><tr><th>Company</th><th>Broker</th><th>Report date</th><th>Rating</th><th class="r">Target (₹)</th><th class="r">Prior (₹)</th><th class="r">Price at report (₹)</th></tr></thead>
+    <tbody id="brk"></tbody>
+  </table>
+  </div>
+</section>
+
+<section>
+  <h2>Price and returns</h2>
+  <div class="rule"></div>
+  <p class="note">The market has already split the sector. MTAR, Astra and Paras are +69–131% in a year. BDL, Mazagon, Cochin and GRSE are −25% to −36%.</p>
+  <div class="tw">
+  <table>
+    <thead><tr>
+      <th>Company</th><th>Ticker</th><th>Results date</th><th class="r">CMP (₹)</th>
+      <th class="r">1 year</th><th class="r">6 months</th><th class="r">3 months</th><th class="r">MTD</th>
+    </tr></thead>
+    <tbody id="ret"></tbody>
+  </table>
+  </div>
+  <p class="asof">Prices as on 13 Nov 2026 close (Zerodha Kite last price). Anchors: 1Y = 14 Nov 2025, 6M = 15 May 2026, 3M = 14 Aug 2026, MTD = 30 Oct 2026 closes, Kite daily candles (corporate-action adjusted).  Sorted by 1-year return.</p>
+</section>
+
+<section>
+  <h2>Caveats</h2>
+  <div class="rule"></div>
+  <ul class="cav">
+    <li><b>Sources.</b> All financials are consolidated filed quarterlies from Tijori, with operating profit before other income. Commentary comes from news reports of results statements (Upstox, Kotak Neo, Indian Masterminds), because Tijori had no Q2 transcripts for this set by 15 November.</li>
+    <li><b>Tijori against management.</b>
+      <ul>
+        <li>BEL's reported revenue of ₹7,291 cr is standalone; Tijori's ₹7,328 cr is consolidated. PAT matches (₹1,540–1,541 cr).</li>
+        <li>Solar's EBITDA ₹1,006 cr and net profit ₹617 cr match exactly.</li>
+        <li>Data Patterns: management's 23.3% against Tijori's 23.5% is rounding on ₹31 cr. Tijori holds only two periods for it, so its revenue was checked against Upstox.</li>
+        <li>Mazagon Dock's EBITDA ₹199 cr and net profit ₹344 cr match.</li>
+      </ul></li>
+    <li><b>Not verified.</b> HAL, BDL, Cochin, GRSE, BEML, Astra, Zen, Paras and ideaForge rest on filed numbers alone; no Q2 commentary was verified. The Solar ₹14,000 cr guide is from a news report of the Q1 call.</li>
+    <li><b>Results dates</b> marked n/s were not verified. MTAR had not reported by 15 November.</li>
+    <li><b>Walk the talk and analyst coverage</b> are thin. These are the weakest sections.</li>
+  </ul>
+</section>
+
+<footer>
+  <p><b>Universe:</b> 14 listed Indian defence companies, quarter ended 30 September 2026. Sources: filed quarterlies via Tijori; Upstox; Kotak Neo; Indian Masterminds. Prices from Zerodha Kite. Built 15 November 2026.</p>
+</footer>
+
+</div>
+<script>
+const C=(n,t,b,bl,k,p,f)=>({n,t,b,bl,k,p,f});
+const SC=[["Zen Technologies",98.3,103.7],["Solar Industries",69.0,81.9],["BDL",45.1,-46.3],["Paras Defence",42.5,49.8],["BEML",42.1,8.5],["BEL",26.5,19.9],["Astra Microwave",22.3,83.9],["HAL",14.8,11.6],["Cochin Shipyard",11.6,-30.9],["GRSE",8.9,25.0],["Mazagon Dock",-16.5,-71.4],["Data Patterns",-56.7,-54.2]];
+const MIN=-100,MAX=140,SCU1="%",SCU2="%";
+const LEAGUES=[["league",[["Zen Technologies",38.2,"+0.9 pts YoY; +10.9 QoQ"],["Astra Microwave",33.4,"+11.1 pts YoY; +14.7 QoQ"],["Paras Defence",29.5,"+1.4 pts YoY; +4.5 QoQ"],["Solar Industries",28.6,"+2.0 pts YoY; +0.9 QoQ"],["BEL",27.9,"−1.5 pts YoY; +2.8 QoQ"],["Data Patterns",23.5,"+1.2 pts YoY"],["HAL",22.8,"−0.7 pts YoY; −4.8 QoQ"],["ideaForge",18.6,"Loss YoY; +15.2 QoQ"],["GRSE",10.7,"+1.4 pts YoY; +2.5 QoQ"],["Mazagon Dock",8.1,"−15.6 pts YoY; −7.0 QoQ"],["BEML",6.7,"−2.1 pts YoY; +6.4 QoQ"],["BDL",6.1,"−10.3 pts YoY; −8.5 QoQ"],["Cochin Shipyard",4.1,"−2.5 pts YoY; −13.6 QoQ"]],40,20,10,v=>`${v.toFixed(1)}%`]];
+const FU=[["MDL",-15.6],["BDL",-10.3],["CSL",-2.5],["BEML",-2.1],["BEL",-1.5],["HAL",-0.7],["GRSE",1.4],["Solar",2.0],["Astra",11.1]];
+const FUMAX=16,FUFMT=v=>`${v>0?'+':v<0?'−':''}${Math.abs(v).toFixed(1)}`;
+const CO=[
+ C("Solar Industries","SOLARINDS · Large","del","Ahead of guide",[["₹3,519 cr","Revenue (+69%)",1],["28.6%","Op. margin (26.6% YoY)",1],["₹617 cr","Net profit (+79%)",1],["₹20,178 cr","Order book, 30 Sep",1]],
+  ["Operating profit +82% on revenue +69%. The defence mix is pulling the margin up.","H1 revenue ₹7,187 cr is 51% of the ~₹14,000 cr FY27 guide. Management now expects to surpass it.","Other income is only 2% of PBT. This is operating profit, not treasury.","Shares rose 7% intraday on 4 Nov.","Verdict: the cleanest large-cap print in defence. Up 39% in a year, so the price already expects the beat."],
+  [["Valuation",""],["Guide beat","ok"]]),
+ C("BEL","BEL · Large","nsc","Not scored",[["₹7,328 cr","Revenue (+26.5%)",1],["27.9%","Op. margin (29.4% YoY)",-1],["₹1,540 cr","Net profit (+19.6%)",1],["₹68,717 cr","Order book, 1 Oct",0]],
+  ["Revenue +26.5%, but operating profit grew only 20%. Margin −1.5 pts YoY, +2.8 QoQ.","Other income is 9% of PBT; the profit is operational.","Standalone revenue ₹7,291 cr against Tijori's consolidated ₹7,328 cr. The gap is subsidiaries and reconciles.","The order book (₹68,717 cr) is about 2.5x FY26 revenue. Q2 inflow and FY27 guidance were not verified.","Verdict: steady, high-margin execution. Down 6% in a year: the cheapest quality in the set."],
+  [["Margin dip",""],["Execution","ok"]]),
+ C("HAL","HAL · Large","nsc","Not scored",[["₹7,613 cr","Revenue (+14.8%)",1],["22.8%","Op. margin (23.5% YoY)",-1],["₹1,936 cr","Net profit (+16%)",1],["40%","Other income / PBT",-1]],
+  ["Operating profit +11.6% on revenue +14.8%. Margin −0.7 pts YoY and −4.8 QoQ.","Other income ₹988 cr is 40% of PBT. HAL's profit leans on its cash pile.","Order book ₹2.55 lakh cr (FY26 annual report), 7–8 years of revenue. Mk1A output is planned above 24 a year.","Results came on 12 Nov. No Q2 call commentary was verified.","Verdict: visibility is unmatched; the quarter was ordinary. Flat over a year."],
+  [["OI 40% of PBT",""],["Tejas ramp",""]]),
+ C("Mazagon Dock","MAZDOCK · Large","miss","Margin collapse",[["₹2,446 cr","Revenue (−16.5%)",-1],["8.1%","Op. margin (23.7% YoY)",-1],["₹344 cr","Net profit (−54%)",-1],["−71%","Operating profit YoY",-1]],
+  ["Operating profit fell to ₹199 cr from ₹695 cr. Management cited \"higher provisions\"; the amount was not disclosed.","Other expenses of ₹446 cr carry the provisions. Other income is 63% of PBT.","It took a ₹1,250 cr SBI facility for Colombo Dockyard, and proposes raising authorised capital to ₹900 cr.","The stock fell 10% intraday on 27 Oct. It is −32% in a year.","Verdict: the worst print in the sector. Wait for the provision detail before re-entering."],
+  [["Provisions",""],["Revenue down",""],["Colombo",""]]),
+ C("Bharat Dynamics","BDL · Large","miss","Margin collapse",[["₹1,664 cr","Revenue (+45%)",1],["6.1%","Op. margin (16.4% YoY)",-1],["₹183 cr","PAT (−15%)",-1],["68%","Other income / PBT",-1]],
+  ["Revenue +45%, but operating profit fell 46% to ₹101 cr. Margin −10.3 pts YoY.","Other income ₹167 cr is 68% of PBT. Without it the quarter barely made money.","Inventory fell by ₹945 cr: old low-margin work-in-progress is being billed.","No Q2 commentary was verified. Down 36% in a year.","Verdict: revenue recovery without profit. The margin must return before the stock does."],
+  [["OI 68% of PBT",""],["Margin −10 pts",""]]),
+ C("Cochin Shipyard","COCHINSHIP · Mid","miss","Margin collapse",[["₹1,249 cr","Revenue (+11.6%)",1],["4.1%","Op. margin (6.6% YoY)",-1],["₹54 cr","PAT (−50%)",-1],["110%","Other income / PBT",-1]],
+  ["Operating profit fell 31% to ₹51 cr. The margin fell from 17.7% in Q1 to 4.1%.","Other income ₹83 cr is larger than PBT (₹75 cr). The core business lost money after interest and depreciation.","No Q2 commentary was verified.","Verdict: the weakest earnings quality in the set. Down 32% in a year, and still not cheap on core profit."],
+  [["Core loss",""],["QoQ −13.6 pts",""]]),
+ C("GRSE","GRSE · Mid","nsc","Not scored",[["₹1,827 cr","Revenue (+8.9%)",0],["10.7%","Op. margin (9.3% YoY)",1],["₹172 cr","PAT (+12%)",1],["+25%","Operating profit YoY",1]],
+  ["The only shipyard to widen its margin: +1.4 pts YoY and +2.5 QoQ.","Revenue growth slowed to 9%, flat QoQ.","Other income is 25% of PBT, falling.","Verdict: the best-run shipyard this quarter. The stock fell 25% in a year with the group."],
+  [["Growth slowing",""],["Margin up","ok"]]),
+ C("BEML","BEML · Mid","nsc","Not scored",[["₹1,192 cr","Revenue (+42%)",1],["6.7%","Op. margin (8.7% YoY)",-1],["₹33 cr","PAT (−31%)",-1],["₹15 cr","Interest",-1]],
+  ["Revenue +42%, but operating profit grew only 8.5%.","PAT fell 31% on higher interest and depreciation.","Defence is a minority of BEML's revenue; mining and rail dominate.","Verdict: volume without margin. Up 4% in a year."],
+  [["Thin margin",""],["PAT down",""]]),
+ C("Data Patterns","DATAPATTNS · Mid","part","Back-ended",[["₹133 cr","Revenue (−57%)",-1],["23.5%","Op. margin (22.3% YoY)",1],["₹22 cr","PAT (−56%)",-1],["₹929 cr","Q2 order inflow",1]],
+  ["Revenue fell 57% against a large Q2 FY26 base. The margin held at 23.5%; management reported 23.3%.","Q2 inflow ₹929 cr; H1 inflow ₹1,046 cr, about 3x last year.","Order book ₹1,724 cr plus ₹956 cr under negotiation.","\"FY27 guidance remains unchanged\"; H2 to be stronger. Shares rose 8% on 9 Nov.","Verdict: orders are strong but revenue is lumpy. H2 has to deliver most of the year."],
+  [["Lumpy revenue",""],["Inflow","ok"]]),
+ C("Astra Microwave","ASTRAMICRO · Small","nsc","Not scored",[["₹263 cr","Revenue (+22%)",1],["33.4%","Op. margin (22.3% YoY)",1],["₹48 cr","PAT (+120%)",1],["+84%","Operating profit YoY",1]],
+  ["Operating profit +84% on revenue +22%. Margin +11.1 pts YoY, the biggest gain in the set.","Mix is the likely cause; not confirmed by management.","Interest ₹13 cr is material for its size.","Verdict: the best operating leverage in defence. Up 71% in a year, but −2% over three months."],
+  [["Mix-driven?",""],["Op. leverage","ok"]]),
+ C("Zen Technologies","ZENTEC · Small","nsc","Not scored",[["₹345 cr","Revenue (+98%)",1],["38.2%","Op. margin (37.3% YoY)",1],["₹90 cr","Net profit (+51%)",1],["+104%","Operating profit YoY",1]],
+  ["Revenue doubled at the highest margin in the set.","Revenue more than doubled QoQ (₹142 cr in Q1). Zen's revenue is lumpy by quarter.","Other income fell to ₹17 cr from ₹25 cr.","Verdict: strong on every line, but lumpy. Up 22% in a year."],
+  [["Lumpy",""],["Margin","ok"]]),
+ C("Paras Defence","PARAS · Small","nsc","Not scored",[["₹151 cr","Revenue (+42.5%)",1],["29.5%","Op. margin (28.1% YoY)",1],["₹30 cr","Net profit (+47%)",1],["+50%","Operating profit YoY",1]],
+  ["Operating profit grew faster than revenue; margin +1.4 pts YoY and +4.5 QoQ.","No Q2 commentary was verified.","Verdict: clean growth. Up 69% in a year, so the price is ahead of the numbers."],
+  [["Price run",""],["Growth","ok"]]),
+ C("ideaForge","IDEAFORGE · Small","nsc","Not scored",[["₹91 cr","Revenue (+124%)",1],["18.6%","Op. margin (loss YoY)",1],["₹6.5 cr","PAT (−₹19.6 cr YoY)",1],["+33%","Revenue QoQ",1]],
+  ["A turnaround: operating profit ₹17 cr against a ₹11 cr loss a year ago.","At ₹91 cr a quarter, one drone order moves the numbers.","Verdict: proof of life, not proof of scale. Up 53% in a year."],
+  [["Small base",""],["Turnaround","ok"]]),
+ C("MTAR Technologies","MTARTECH · Small","nsc","Not reported",[["n/r","Sep quarter not filed",0],["23.6%","Op. margin, Jun quarter",1],["+130%","Revenue YoY, Jun quarter",1],["+131%","1-year return",1]],
+  ["The September quarter was not on Tijori by 15 Nov.","Shown for completeness; excluded from charts and rankings."],[["Not reported",""]])
+];
+const KPI=[
+ ["HAL","+14.8%","22.8%","−0.7 pts","40%","₹2.55 lakh cr (FY26)","+16%","Cons.; Tijori"],
+ ["BEL","+26.5%","27.9%","−1.5 pts","9%","₹68,717 cr","+20%","Cons.; Tijori"],
+ ["Solar Industries","+69.0%","28.6%","+2.0 pts","2%","₹20,178 cr","+79%","Cons.; Tijori"],
+ ["Mazagon Dock","−16.5%","8.1%","−15.6 pts","63%","n/v","−54%","Cons.; Tijori"],
+ ["BDL","+45.1%","6.1%","−10.3 pts","68%","n/v","−15%","Cons.; Tijori"],
+ ["Cochin Shipyard","+11.6%","4.1%","−2.5 pts","110%","n/v","−50%","Cons.; Tijori"],
+ ["GRSE","+8.9%","10.7%","+1.4 pts","25%","n/v","+12%","Cons.; Tijori"],
+ ["BEML","+42.1%","6.7%","−2.1 pts","n/v","n/v","−31%","Cons.; Tijori"],
+ ["Data Patterns","−56.7%","23.5%","+1.2 pts","n/v","₹1,724 cr + ₹956 cr L1","−56%","Tijori; Upstox"],
+ ["Astra Microwave","+22.3%","33.4%","+11.1 pts","n/v","n/v","+120%","Cons.; Tijori"],
+ ["Zen Technologies","+98.3%","38.2%","+0.9 pts","12%","n/v","+51%","Cons.; Tijori"],
+ ["Paras Defence","+42.5%","29.5%","+1.4 pts","n/v","n/v","+47%","Cons.; Tijori"],
+ ["ideaForge","+124%","18.6%","n/m","n/v","n/v","Profit vs loss","Cons.; Tijori"],
+ ["MTAR Technologies","n/r","n/r","n/r","n/r","n/r","n/r","Sep qtr not filed"]
+];
+const BRK=[["All","Not verified this build","—","—","—","—","—"]];
+const SCORE=[
+ ["Solar Industries","FY27 revenue ~₹14,000 cr (guide)","H1 ₹7,187 cr (51%); management now expects to surpass it.","del","Ahead"],
+ ["Data Patterns","FY27 guidance; growth H2-weighted","H1 inflow ~3x; Q2 revenue −57%; guidance reiterated as unchanged.","part","Pending H2"]
+];
+const SPAN=MAX-MIN,Z=(0-MIN)/SPAN*100;
+document.getElementById("scissor").innerHTML=SC.map(([n,v,e],i)=>{
+ const bar=(val,cls,u)=>{const w=Math.max(Math.abs(val),0.3)/SPAN*100;
+  const l=val>=0?Z:Z-w;
+  return `<i class="b ${cls} ${val>=0?'pos':'neg'}" style="left:${l}%;width:${w}%;animation-delay:${i*45}ms"><span>${val>0?'+':''}${val}${u}</span></i>`;};
+ return `<div class="row"><div class="co">${n}</div><div class="track"><i class="axis" style="left:${Z}%"></i>${bar(v,'v',SCU1)}${bar(e,'e',SCU2)}</div></div>`;
+}).join("");
+const league=(id,rows,max,hi,mid,fmt)=>{document.getElementById(id).innerHTML=rows.map(([n,v,d],i)=>{
+ const cls=v>=hi?"":v>=mid?"mid":"low";
+ return `<div class="lrow"><div class="co">${n}</div>
+ <div><i class="lbar ${cls}" style="display:block;width:${Math.max(v,0)/max*100}%;animation-delay:${i*40}ms"></i></div>
+ <div><div class="v">${fmt(v)}</div><div class="d">${d}</div></div></div>`;}).join("");};
+LEAGUES.forEach(([id,rows,max,hi,mid,fmt])=>league(id,rows,max,hi,mid,fmt));
+document.getElementById("fuel").innerHTML=FU.map(([l,v],i)=>
+ `<div class="fp"><b>${FUFMT(v)}</b><i style="height:${Math.abs(v)/FUMAX*88}px;animation-delay:${i*120}ms"></i><em>${l}</em></div>`).join("");
+document.getElementById("cards").innerHTML=CO.map(c=>`
+ <article class="c">
+  <div class="chead"><div><h3>${c.n}</h3><div class="tick">${c.t}</div></div><div class="badge ${c.b}">${c.bl}</div></div>
+  <div class="tiles">${c.k.map(([n,l,s])=>`<div class="tile"><div class="n ${s===1?'up':s===-1?'dn':''}">${n}</div><div class="l">${l}</div></div>`).join("")}</div>
+  <ul>${c.p.map(x=>`<li>${x}</li>`).join("")}</ul>
+  <div class="flags">${c.f.map(([t,k])=>`<span class="flag ${k}">${t}</span>`).join("")}</div>
+ </article>`).join("");
+document.getElementById("kpi").innerHTML=KPI.map(r=>
+ `<tr><td class="co">${r[0]}</td>`+r.slice(1).map(c=>`<td class="kpi">${c}</td>`).join("")+`</tr>`).join("");
+document.getElementById("brk").innerHTML=BRK.map(r=>
+ `<tr><td class="co">${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td class="num">${r[4]}</td><td class="num ${r[5].includes('↓')?'dn':r[5].includes('↑')?'up':''}">${r[5]}</td><td class="num">${r[6]}</td></tr>`).join("");
+const RET=[["MTAR Technologies", "MTARTECH", "Not reported", "6,056.50", "+130.6%", "-16.3%", "-14.2%", "-11.4%"], ["Astra Microwave", "ASTRAMICRO", "n/s", "1,703.50", "+70.5%", "+53.9%", "-2.1%", "+12.5%"], ["Paras Defence", "PARAS", "n/s", "1,293.30", "+68.9%", "+71.7%", "-6.1%", "+3.5%"], ["ideaForge", "IDEAFORGE", "n/s", "708.40", "+52.5%", "-13.5%", "-13.7%", "+12.7%"], ["Solar Industries", "SOLARINDS", "3 Nov", "19,338.00", "+39.3%", "+11.7%", "-3.2%", "+2.9%"], ["Data Patterns", "DATAPATTNS", "n/s", "4,268.00", "+37.6%", "+10.1%", "-4.2%", "+12.3%"], ["Zen Technologies", "ZENTEC", "n/s", "1,743.70", "+21.6%", "+12.1%", "-6.1%", "+9.8%"], ["BEML", "BEML", "n/s", "2,098.20", "+4.4%", "+17.3%", "+11.9%", "+5.5%"], ["HAL", "HAL", "12 Nov", "4,809.80", "+1.7%", "+9.7%", "-4.4%", "-0.9%"], ["BEL", "BEL", "30 Oct", "400.85", "-6.1%", "-5.4%", "-2.4%", "+8.4%"], ["GRSE", "GRSE", "n/s", "2,184.80", "-24.6%", "-18.7%", "-16.6%", "+12.4%"], ["Cochin Shipyard", "COCHINSHIP", "n/s", "1,178.00", "-31.7%", "-26.1%", "-21.3%", "+5.7%"], ["Mazagon Dock", "MAZDOCK", "27 Oct", "1,890.00", "-32.1%", "-23.8%", "-26.7%", "+10.8%"], ["Bharat Dynamics", "BDL", "n/s", "1,030.00", "-36.2%", "-22.3%", "-26.3%", "+5.7%"]];
+document.getElementById("ret").innerHTML=RET.map(r=>{
+ const cell=v=>{ if(v==="n/s") return `<td class="num ns">n/s</td>`;
+   const cls=v.startsWith("+")?"up":v.startsWith("-")?"dn":""; return `<td class="num ${cls}">${v}</td>`;};
+ return `<tr><td class="co">${r[0]}</td><td class="tick">${r[1]}</td><td>${r[2]}</td>`
+  +`<td class="num">${r[3]==="n/s"?'<span class="ns">n/s</span>':r[3]}</td>`+r.slice(4).map(cell).join("")+`</tr>`;
+}).join("");
+document.getElementById("score").innerHTML=SCORE.map(([c,p,d,k,v])=>
+ `<tr><td class="co">${c}</td><td>${p}</td><td class="hide">${d}</td><td class="vd ${k}">${v}</td></tr>`).join("");
+</script></body></html>

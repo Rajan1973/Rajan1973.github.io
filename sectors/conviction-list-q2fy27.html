@@ -1,0 +1,644 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Q2 FY27 Conviction List</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Fraunces:opsz,wght@9..144,600&display=swap">
+<style>
+/* Layout: a single reading column of ranked dossier rows; score shown as a six-segment factor strip */
+:root{
+  --bg:#f6f7f5; --panel:#ffffff; --fg:#1b2420; --muted:#5d6a64; --line:#dde3df;
+  --accent:#1f6b52; --accent-soft:#e2efe9; --warn:#a35b12; --warn-soft:#f7ecdf; --bad:#a33a2c; --bad-soft:#f6e6e3;
+  --t1:#1f6b52; --t2:#3d6f8f; --t3:#7a6a3b;
+  --display:"Fraunces",Georgia,serif; --body:"IBM Plex Sans",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#111614; --panel:#18201d; --fg:#e4ebe7; --muted:#95a39c; --line:#2a3530;
+  --accent:#5cc29b; --accent-soft:#1d3229; --warn:#e3a35c; --warn-soft:#33281b; --bad:#e3826f; --bad-soft:#33201c;
+  --t1:#5cc29b; --t2:#7fb3d6; --t3:#cdb877; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#111614; --panel:#18201d; --fg:#e4ebe7; --muted:#95a39c; --line:#2a3530;
+  --accent:#5cc29b; --accent-soft:#1d3229; --warn:#e3a35c; --warn-soft:#33281b; --bad:#e3826f; --bad-soft:#33201c;
+  --t1:#5cc29b; --t2:#7fb3d6; --t3:#cdb877; color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.55}
+.wrap{max-width:980px;margin:0 auto;padding-block:28px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:28px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-weight:600;font-size:clamp(30px,5vw,44px);line-height:1.08;margin:6px 0 10px;text-wrap:balance}
+h2{font-family:var(--display);font-weight:600;font-size:22px;margin:0 0 10px;text-wrap:balance}
+.dek{max-width:68ch;font-size:16.5px;margin:0}
+.warnbox{border:1px solid var(--warn);background:var(--warn-soft);border-radius:8px;padding:14px 16px;display:grid;gap:6px}
+.warnbox b{color:var(--warn)}
+.warnbox ul{margin:0;padding-left:18px}
+.method{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.m{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+.m .w{font-family:var(--mono);font-size:20px;color:var(--accent)}
+.m .n{font-weight:600;font-size:13.5px}
+.m .d{font-size:12.5px;color:var(--muted)}
+.tiers{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px}
+.tier{border-left:4px solid var(--c);background:var(--panel);border-radius:0 8px 8px 0;padding:10px 14px}
+.tier b{color:var(--c)}
+.filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.filters label{font-family:var(--mono);font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.chip{font:500 13px var(--body);border:1px solid var(--line);background:var(--panel);color:var(--fg);border-radius:999px;padding:5px 12px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.chip:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+select{font:14px var(--body);padding:5px 8px;border-radius:6px;border:1px solid var(--line);background:var(--panel);color:var(--fg)}
+.count{font-family:var(--mono);font-size:12.5px;color:var(--muted)}
+.list{display:grid;gap:12px}
+.row{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 18px;display:grid;gap:12px}
+.top{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:start}
+.rk{font-family:var(--display);font-size:30px;line-height:1;color:var(--tc);min-width:44px;font-variant-numeric:tabular-nums}
+.nm{font-weight:600;font-size:17px}
+.meta{font-family:var(--mono);font-size:12px;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px 12px}
+.sc{text-align:right;display:grid;gap:4px;justify-items:end}
+.sc .v{font-family:var(--mono);font-size:22px;font-variant-numeric:tabular-nums}
+.sc .v small{font-size:12px;color:var(--muted)}
+.pill{font-family:var(--mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;border-radius:4px;padding:2px 7px;background:var(--tc);color:var(--panel)}
+.strip{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px}
+.f{display:grid;gap:3px}
+.f span{font-family:var(--mono);font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dots{display:grid;grid-template-columns:repeat(5,1fr);gap:2px}
+.dots i{height:6px;border-radius:2px;background:var(--line)}
+.dots i.on{background:var(--tc)}
+.why{font-size:15.5px;margin:0;max-width:75ch}
+.grid4{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.grid4 div{min-width:0}
+.grid4 h4{margin:0 0 3px;font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.grid4 p{margin:0;font-size:14px}
+.trk p{color:var(--fg)}
+.trk{border-left:2px solid var(--warn);padding-left:10px}
+.notes ul{margin:0;padding-left:18px;display:grid;gap:4px;max-width:80ch}
+.ret{font-variant-numeric:tabular-nums}
+.ret.neg{color:var(--bad)} .ret.pos{color:var(--accent)}
+@media (max-width:720px){.grid4{grid-template-columns:1fr}.strip{grid-template-columns:repeat(3,minmax(0,1fr))}.top{grid-template-columns:auto 1fr}.sc{grid-column:1/-1;justify-items:start;text-align:left;display:flex;gap:10px;align-items:center}}
+@media (prefers-reduced-motion:no-preference){.row{transition:border-color .15s}.row:hover{border-color:var(--accent)}}
+.jump{display:flex;flex-wrap:wrap;gap:8px}
+.jump a,.jumplink{font:500 13px var(--body);color:var(--accent);text-decoration:none;border-bottom:1px solid currentColor}
+.jump a{border:1px solid var(--line);border-radius:999px;padding:5px 12px;background:var(--panel)}
+.jump a:hover,.jumplink:hover{background:var(--accent-soft)}
+.highlight{border:2px solid var(--accent);background:var(--accent-soft);border-radius:12px;padding:18px 20px;scroll-margin-top:16px}
+.highlight.bad{border-color:var(--bad);background:var(--bad-soft)}
+.highlight li{font-size:15px}
+#ranked,#avoid{scroll-margin-top:16px}
+.row.av{--tc:var(--bad)}
+.conf{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.strip.s7{grid-template-columns:repeat(7,minmax(0,1fr))}
+.flow{display:flex;flex-wrap:wrap;gap:4px 16px;font-family:var(--mono);font-size:12px;color:var(--muted);border-top:1px dashed var(--line);padding-top:8px}
+.flow b{color:var(--fg);font-weight:500}
+.flow .mir{color:var(--warn)} .flow .mv{color:var(--accent)}
+@media (max-width:720px){.strip.s7{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.highlight.flowbox{border-color:var(--t2);background:var(--panel)}
+.highlight .lead{margin:0 0 8px;max-width:75ch;font-size:15.5px}
+#flows{scroll-margin-top:16px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="eyebrow">Markets with Rajan · Cross-sector ranking · Q2 FY27 (quarter ended 30 Sep 2026)</div>
+  <h1>Q2 FY27 Conviction List</h1>
+  <p class="dek">The 47 stocks marked "Own now" across the 25 sector reviews, ranked against each other on one scorecard. Earnings quality and delivery against guidance carry the most weight. The ranking does not use valuation multiples. A second list ranks 25 stocks to avoid on the same evidence. Updated 17 Nov 2026: both lists now include FII and DII shareholding changes as a seventh factor.</p>
+</header>
+<nav class="jump" aria-label="Sections"><a href="#ranked">Conviction list (47)</a><a href="#flows">What FII/DII flows changed</a><a href="#takeaways">What the list says</a><a href="#avoid">Stocks to avoid (25)</a><a href="#avoid-takeaways">What the avoid list says</a></nav>
+
+<section class="warnbox" aria-label="Read this first">
+  <div><b>Read this first.</b> This list ranks how good each quarter was and how clean the evidence is. It does not say which stocks are cheapest.</div>
+  <ul>
+    <li>No P/E or EV/EBITDA was used. Kite carries no fundamentals, and no multiples were collected for the sector reviews. A strong quarter on an expensive stock is still ranked high; the price-setup factor (a 1-year price run penalises) only partly offsets this.</li>
+    <li>Five sector reviews were built from third-party AI digests and still await re-verification: Auto Ancillaries, Cables, Jewellery, EMS and Metals. Their stocks carry a lower data-confidence score.</li>
+    <li>Prices and returns are as at the 13 Nov 2026 close (Kite). Q3 outlooks come from management guidance and dated broker notes in each review. Where none was found, the card says so.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>How the score works</h2>
+  <div class="method" id="method"></div>
+</section>
+
+<section>
+  <h2>Tiers</h2>
+  <div class="tiers">
+    <div class="tier" style="--c:var(--t1)"><b>Tier 1 · Ranks 1–12 · Core buys.</b> Strong quarter, delivered on guidance, clean balance sheet, and Q3 visibility. Size these as full positions.</div>
+    <div class="tier" style="--c:var(--t2)"><b>Tier 2 · Ranks 13–25 · Accumulate.</b> Good quarter with one open question, or thinner evidence. Build positions in steps.</div>
+    <div class="tier" style="--c:var(--t3)"><b>Tier 3 · Ranks 26–47 · Selective.</b> Best in their own sector, but weaker on price setup, leverage or data. Buy only on the trigger named in "What to track".</div>
+  </div>
+</section>
+
+<section aria-label="Ranked list" id="ranked">
+  <h2>The ranked list</h2>
+  <div class="filters" role="group" aria-label="Filters">
+    <label>Tier</label>
+    <button class="chip" data-tier="0" aria-pressed="true" id="t0">All</button>
+    <button class="chip" data-tier="1" aria-pressed="false" id="t1">Tier 1</button>
+    <button class="chip" data-tier="2" aria-pressed="false" id="t2">Tier 2</button>
+    <button class="chip" data-tier="3" aria-pressed="false" id="t3">Tier 3</button>
+    <label for="sec">Sector</label>
+    <select id="sec"><option value="">All sectors</option></select>
+    <span class="count" id="count"></span><a class="jumplink" href="#takeaways">What the list says as a whole ↓</a>
+  </div>
+  <div class="list" id="list" style="margin-top:14px"></div>
+</section>
+
+<section class="notes highlight flowbox" id="flows">
+  <div class="eyebrow">Update · 17 Nov 2026 · FII and DII shareholding</div>
+  <h2>What FII/DII flows changed</h2>
+  <p class="lead">The 47 names stay the same. Flows changed the order, not the selection: no stock on the list shows institutions leaving on a scale that outweighs its quarter, and only ITC Hotels comes close. Six names change tier.</p>
+  <ul>
+    <li><b>Up into Tier 1:</b> UltraTech (15 → 9; combined FII + DII +1.1 pts YoY and +1.5 QoQ), Exide (17 → 10; +1.4 YoY, FII +2.6 QoQ) and PN Gadgil (18 → 11; +5.0 YoY and +5.6 QoQ, the strongest fresh buying on the list).</li>
+    <li><b>Down to Tier 2:</b> Transrail (8 → 15; −1.8 YoY, −1.2 QoQ), Techno Electric (11 → 16; −2.4 YoY) and ITC Hotels (10 → 18; FII −13.9 pts YoY). The ITC Hotels move is too large to be routine selling; a single large holder exiting is the likely cause, but that was not verified.</li>
+    <li><b>Biggest risers:</b> Navin Fluorine (9 → 2; +5.2 YoY, DII +4.0) and Ujjivan (21 → 19; +16.9 YoY, mostly DII from the preferential issue). ACME Solar (+11.9 pts combined YoY), Mphasis (+9.5), NHPC (+6.8), Astra Microwave (+6.0), Engineers India (+4.0) and JSW Energy (+3.9) also moved up, mostly on domestic buying.</li>
+    <li><b>Biggest fallers outside the tier moves:</b> CG Power (29 → 33; −2.0 YoY, −1.2 QoQ), IIFL (32 → 39; FII −2.7, DII −1.3), Fine Organic (33 → 40) and Ganesha Ecosphere (45 → 47; DII −6.4 YoY).</li>
+    <li><b>Hand-overs, not exits:</b> at Max Healthcare (FII −11.3, DII +11.0), Vijaya (FII −7.6, DII +7.2), IHCL and Elgi, foreign funds sold to domestic funds. The combined holding barely moved, so these score neutral. Read them as a change of owner, not a verdict on the business.</li>
+    <li><b>The pattern:</b> domestic funds were the net buyers across the list. FII holding fell YoY in 21 of the 45 names with comparable data; DII holding rose in 29.</li>
+  </ul>
+</section>
+
+<section class="notes highlight" id="takeaways">
+  <div class="eyebrow">Key takeaways · Conviction list</div>
+  <h2>What the list says as a whole</h2>
+  <ul>
+    <li>Healthcare holds three of the top seven places: Medanta (1), Vijaya (6) and Dr Lal (7). Service businesses with net cash and pricing power came through a cost-shock quarter best.</li>
+    <li>The cheapest-looking strong prints are Timken, ITC Hotels, Transrail, Techno Electric, Max and Supreme. Each is flat to down over a year despite a clean quarter.</li>
+    <li>Already priced: Navin (+66%), Indo Count (+77%), Avalon (+95%), Sona (+89%) and Astra (+71%). Their quarters were excellent; their setups are not.</li>
+    <li>No small finance bank or vehicle financier makes Tier 1. The rate cycle has turned against funding costs; Ujjivan (19) and IIFL (39) are the only lenders on the list.</li>
+    <li>Healthcare (Medanta, Vijaya, Dr Lal) is the largest theme in the top 12. After the flow update, power transmission keeps only GE Vernova T&amp;D there; Transrail and Techno move to Tier 2. Cap any one theme at about a quarter of the portfolio.</li>
+  </ul>
+</section>
+
+
+<section id="avoid">
+  <div class="eyebrow">Second list · Same 25 sector reviews</div>
+  <h2>25 stocks to avoid</h2>
+  <p class="dek">Drawn from the "Stay out" calls across the sector reviews, then ranked against each other on a risk score. A higher score means more reasons to stay away. Avoid means do not own now; it is not a short call.</p>
+  <div class="method" id="amethod" style="margin-top:14px"></div>
+  <div class="filters" role="group" aria-label="Avoid filters" style="margin-top:16px">
+    <label for="asec">Sector</label>
+    <select id="asec"><option value="">All sectors</option></select>
+    <span class="count" id="acount"></span><a class="jumplink" href="#avoid-takeaways">What the avoid list says ↓</a>
+  </div>
+  <div class="list" id="alist" style="margin-top:14px"></div>
+</section>
+
+<section class="notes highlight bad" id="avoid-takeaways">
+  <div class="eyebrow">Key takeaways · Avoid list</div>
+  <h2>What the avoid list says</h2>
+  <ul>
+    <li>Other income is the most common tell. Seven of the 25 lean on it: Afcons (3.3x PBT), Cochin Shipyard (more than PBT), BDL (68%), Mazagon Dock (63%), Raymond Lifestyle (54%), PI (34%) and SKF Industrial, whose PBT growth came from it. NLC's profit is a tax credit.</li>
+    <li>Defence PSUs supply three names. Mazagon Dock and BDL lost 10–16 pts of margin YoY, and Cochin Shipyard lost 13.6 pts QoQ. Down 32–36% in a year, they are still not cheap on core earnings.</li>
+    <li>Growth funded by the balance sheet is the second pattern: Kaynes, Amber, RR Kabel, Thangamayil and Sky Gold. All five come from the digest-based reviews (EMS, Cables, Jewellery), so re-verify before acting on them.</li>
+    <li>Contractors with stuck execution: KEC and Afcons have record order books that are not converting, and PNC is barred from its main client for three years.</li>
+    <li>Broken guidance is the sharpest single signal. KEC, PI, Amara Raja, Kaynes, Sky Gold and SAIL each missed or cut a commitment they had made earlier.</li>
+    <li>Institutions confirm the worst names. Kaynes (combined FII + DII −15.8 pts YoY), KEC (−9.0), PNC (−5.1), Raymond Lifestyle (−4.9), Apollo Pipes (−6.8) and Afcons (−3.6) are being sold; each held or moved up its place on the avoid list. Utkarsh, Sky Gold, Cochin Shipyard and HCG saw buying, which eased their risk scores; they stay on the list on fundamentals.</li>
+    <li>Not ranked for lack of data: Ultracab, Utssav CZ, Vedanta Oil &amp; Gas and Jyoti Structures. No Q2 figures were found, which is itself a reason not to own them.</li>
+  </ul>
+</section>
+
+<section class="notes">
+  <h2>Sources and limits</h2>
+  <ul>
+    <li>Quarterly figures: Tijori's filed consolidated quarterlies, as used in each sector review (operating profit before other income). Company-reported figures are labelled where used.</li>
+    <li>Management commentary: call transcripts where the review read them (for example Navin, Vinati, PI and Mahindra Finance), and results coverage and dated broker notes otherwise. Broker targets show the report date as given in each review.</li>
+    <li>Avoid-list risk weights (after the flow update): earnings damage 22.5%, broken promises 18%, balance-sheet stress 18%, Q3 headwinds 18%, earnings-quality flags 13.5%, FII + DII selling 10%. Data confidence is shown but not scored.</li>
+    <li>FII and DII holdings: Tijori screener, September 2026 quarter against June 2026 (QoQ) and September 2025 (YoY), pulled 17 Nov 2026. Flow score: combined change of +3 pts or more YoY scores 5, +1 to +3 scores 4, −1 to +1 scores 3, −3 to −1 scores 2, below −3 scores 1. It drops a point if the latest quarter fell more than 1 pt, and rises one if it gained more than 1 pt on a rising year. Moves above 5 pts in one bucket can be block deals or reclassification. Groww (listed Nov 2025) uses QoQ only; Vedanta Aluminium and Antony Waste had no data and score neutral.</li>
+    <li>Factor scores (1–5) are analyst judgements made from each review's company card, KPI table and walk-the-talk table. They are not model outputs, and reasonable people could score some names a point differently.</li>
+    <li>This is research for information, not investment advice. Check the latest price, valuation and any news since 13 Nov before acting.</li>
+  </ul>
+</section>
+</div>
+<script>
+// [rank, name, ticker, sector, cap, score, EQ,Del,BS,Out,Set,Conf, ret1y, why, stood, outlook, track]
+const D=[
+[1,"Global Health (Medanta)","MEDANTA","Hospitals","Mid",90,5,5,5,4,3,4,"+21.0%",
+ "The cleanest print across all 25 sectors: growth, margin and balance sheet improved together.",
+ "Revenue +33.6%, EBITDA margin +420 bps to 25.2%, PAT +38%. Noida reached EBITDA breakeven. EBITDA 23% above PL's estimate.",
+ "IP volumes +30%; net cash funds the next 3,450 beds, including a 500-bed Ghaziabad hospital. PL (5 Nov): Buy ₹1,700. No Q3 guide was found.",
+ "Noida ramp beyond breakeven; doctor-cost volatility; South Delhi and Pitampura timelines; NPPA oncology cap."],
+[2,"Solar Industries","SOLARINDS","Defence","Large",89,5,5,4,5,2,4,"+39.3%",
+ "The cleanest large-cap defence print: profit is almost all operating, and management expects to beat its own guide.",
+ "Operating profit +82% on revenue +69%; margin 28.6% (26.6%). Other income only 2% of PBT. Order book ₹20,178 cr.",
+ "H1 revenue is 51% of the ~₹14,000 cr FY27 guide, which management now expects to surpass. Defence mix keeps lifting the margin.",
+ "Defence share of revenue; export order conversion; valuation after +39% in a year."],
+[3,"Timken India","TIMKEN","Bearings","Mid",89,5,5,4,4,5,3,"+1.8%",
+ "Best earnings quality in bearings, kept its Q1-call promises, and the stock has de-rated: flat over a year, −12% over six months.",
+ "Operating profit +28.7% on revenue +25%; margin held at 18.7% through the cost shock. Exports +60%, now 27% of revenue.",
+ "Bharuch SRB lines at 70% as promised; CRB lines at 58–60% still ramping. ICICI Direct (2 Nov): Buy ₹3,570.",
+ "CRB utilisation; rail revenue (fell to ₹157 cr from ₹200 cr QoQ); carbide and steel costs."],
+[4,"Vijaya Diagnostic","VIJAYA","Diagnostics","Small",87,5,5,4,4,3,4,"+35.4%",
+ "The highest-quality grower in diagnostics: 92% B2C, highest margin, and growth earned from footfalls rather than price.",
+ "Revenue +26.7%, EBITDA margin 44.1% (+355 bps), footfalls +14.5%, tests +16.5%.",
+ "Guide of 42%+ margin and 20%+ growth for FY27; three hubs and seven spokes in H2 plus North-East entry. No price hike taken yet.",
+ "Hyderabad concentration (67%); CGHS contribution (~2 pts of margin) fading; new-centre ramp costs."],
+[5,"Dr Lal PathLabs","LALPATHLAB","Diagnostics","Mid",86,5,5,5,3,3,4,"+26.8%",
+ "Delivered its high-teens guide with margin to spare, on a ₹1,746 cr cash pile.",
+ "Revenue +19.6%, EBITDA margin 32.1% (+140 bps), patients +9%, revenue per patient +9.7%.",
+ "CGHS added 2–3 points of growth that management says fades within a quarter, so Q3 growth likely slows. Antique (5 Nov): Buy ₹2,400, raised.",
+ "Patient growth ex-CGHS; SwasthFit bundle share; use of cash (Centrapath buyout done)."],
+[6,"Hindustan Zinc","HINDZINC","Metals","Large",86,5,5,5,3,4,3,"+13.9%",
+ "Record quarter, cost guidance cut, ₹11,268 cr net cash. Size it as a silver position as much as zinc.",
+ "Revenue +77%, EBITDA +108%, PAT +142%. Zinc cost of production $703/t (−29% YoY). FY27 COP guide cut by ~$150/t.",
+ "Q3 zinc and silver hedges cap the upside. Silver was ~45% of H1 profit. Jefferies (21 Oct): Buy ₹650; Nuvama Buy ₹676.",
+ "Silver and LME zinc prices; hedge roll-off; dividend policy. Report built partly from digests: re-verify."],
+[7,"IHCL","INDHOTEL","Hotels","Large",86,4,5,4,5,2,5,"+23.5%",
+ "Raised its revenue guide mid-year and has the longest pipeline in the sector.",
+ "Revenue +21.7%; full-service RevPAR +28%; same-store RevPAR, fees and select-service each +25%. FY27 guide raised to 15–17%.",
+ "Q3 is the peak season. 280 hotels in the pipeline; 20 opened and 47 signed in H1.",
+ "RevPAR growth in Q3; fee income share; valuation (+24% over three months)."],
+[8,"Transrail Lighting","TRANSRAILL","Power Transmission","Small",86,4,5,4,4,5,4,"−28.0%",
+ "On-track EPC execution with falling debt, at a price down 28% in a year.",
+ "Revenue +32%, EBITDA +28%; net debt cut to ₹143 cr from ₹267 cr on ₹435 cr of H1 operating cash flow.",
+ "FY27 guide of 20–22% growth at ~11% margin is on track. Order book ₹14,218 cr; ₹1,747 cr of new orders declared in October.",
+ "PAT margin (−90 bps); October order conversion; working capital."],
+[9,"Navin Fluorine","NAVINFLUOR","Spec. Chemicals","Mid",85,5,5,4,4,1,5,"+66.1%",
+ "The best-run chemical company this quarter and the only large one whose margin held QoQ. The price already knows it.",
+ "Revenue +57%, operating margin 34.2% against a 30% long-term guide. Pricing and forex offset sulphur, gas and fluorspar costs.",
+ "CDMO order book near its $100 mn target; HFO contract with Solstice extended to 2032; Chemours project slipped to Q3.",
+ "Chemours commissioning in Q3; CDMO revenue; valuation after +66%."],
+[10,"ITC Hotels","ITCHOTELS","Hotels","Large",84,5,3,5,4,5,3,"−17.0%",
+ "The strongest hotel print, with no debt, at a price down 17% in a year.",
+ "Operating profit +37% on revenue +26%; margin 32.0% (29.3%). Interest only ₹2 cr.",
+ "Q3 peak season should carry the operating leverage further. No RevPAR commentary was verified.",
+ "Q3 RevPAR (not yet verified); other income from demerger cash; new-property openings."],
+[11,"Techno Electric","TECHNOE","Power Transmission","Small",83,4,5,3,4,5,4,"−22.6%",
+ "The EPC core is executing and guidance held, at a de-rated price after a 6% results-day fall.",
+ "Revenue +31.4%, consolidated EBITDA +63%, margin 16.4% (+318 bps), PAT +52%. Order book ₹10,100 cr.",
+ "₹4,000 cr FY27 revenue and inflow targets reiterated; ₹2,511 cr secured plus ₹1,191 cr at L1.",
+ "Data-centre cash burn (~₹658 cr invested, no revenue guide); smart-meter asset monetisation."],
+[12,"GE Vernova T&D","GVT&D","Power Ancillaries","Large",82,5,3,5,5,2,3,"+45.6%",
+ "The best combination of margin, growth and order quality in power equipment.",
+ "Revenue +31.8%; operating margin 27.1% (+1.4 pts); order inflow +52%.",
+ "Backlog ₹21,443 cr, about 3x trailing revenue, 78% from private utilities. Revenue visibility for Q3 is high.",
+ "Margin sustainability; export versus domestic order mix; valuation."],
+[13,"Uno Minda","UNOMINDA","Auto Ancillaries","Mid",82,4,5,4,4,4,3,"+6.2%",
+ "The cleanest guidance delivery in auto ancillaries, and the stock has barely moved in a year.",
+ "Revenue +38%, EBITDA 11.0% on its 11% guide, PAT +38%. Green mobility +102%, now 10% of revenue.",
+ "₹5,200–5,300 cr of projects under execution; depreciation rises as 16 commission. Axis (6 Nov): Buy ₹1,525, raised.",
+ "Aluminium price in casting revenue; depreciation drag; H2 FCF. Report built from digests: re-verify."],
+[14,"Max Healthcare","MAXHEALTH","Hospitals","Large",82,4,5,4,3,5,4,"−13.7%",
+ "The best capacity execution in hospitals, at a price down 14% in a year.",
+ "Network revenue +20%, beds +14% without losing occupancy (77%) or margin (26.8%). ₹500 cr Q2 free cash flow.",
+ "New Max Smart beds broke even in three months. PL cut its target to ₹1,080; ICICI Sec ₹1,300 (all 4 Nov).",
+ "NPPA oncology drug cap (largest large-cap exposure); institutional bed share; PAT lagging EBITDA."],
+[15,"UltraTech Cement","ULTRACEMCO","Cement","Large",81,4,5,3,4,4,4,"+5.6%",
+ "The only scale cement maker to grow EBITDA per tonne in the worst fuel quarter in two years.",
+ "Domestic volume +13.8%; EBITDA/t ~₹1,066 (+3%, derived); PAT +21.3%. 48% green power.",
+ "October spot prices ~5% above the Q2 average help Q3; petcoke at $170+ hurts. 240 MTPA by March 2028 on track.",
+ "Q3 petcoke cost; whether ₹15–20/bag hikes hold; net debt (not disclosed)."],
+[16,"Supreme Industries","SUPREMEIND","Pipes","Large",81,4,3,5,4,5,4,"−10.8%",
+ "Volume came back sharply and the margin held through the polymer spike, at a price down 11% in a year.",
+ "Sales volume +19%, plastic piping +24%; operating profit +45%; margin 12.8%.",
+ "Management sees stabilisation; the PVC minimum import price helps. The cut ~10% FY27 volume guide is now in reach.",
+ "PVC resin prices; H2 volume pace; EBITDA reconciliation (~₹20 cr gap to Tijori)."],
+[17,"Exide Industries","EXIDEIND","BESS","Mid",81,4,4,5,3,5,4,"−2.1%",
+ "A commissioned lithium-cell plant and a rising margin, at a price down 22% in three months.",
+ "Revenue +21.2%; operating profit +44%; margin 10.6% before other income (9.0%). Standalone debt-free.",
+ "The 6 GWh Bengaluru cell plant is commissioned; first NMC revenue expected around February.",
+ "Cell utilisation and customer approvals; lead price; subsidiary losses."],
+[18,"PN Gadgil Jewellers","PNGJL","Jewellery","Small",79,4,5,3,4,5,2,"−3.0%",
+ "The cleanest margin expansion among jewellers, and the market has not paid for it.",
+ "Revenue +22%, adjusted EBITDA +60% at 8.2%, SSSG 25.5%. PAT +53%.",
+ "About ₹200 cr of festive revenue moved from Q2 into Q3 with Navratri, so Q3 has a tailwind. ~23 stores in FY27, mostly H2.",
+ "Q3 SSSG; customs-duty inventory gains in reported margin; H2 store openings. Digest-based: re-verify."],
+[19,"KPR Mill","KPRMILL","Textiles","Mid",78,5,3,5,3,4,3,"+7.4%",
+ "The best margin in textiles, widening both YoY and QoQ, with a net-cash balance sheet.",
+ "Revenue +19%; operating margin 25.7% (19.3%), +6.3 pts QoQ; PAT +58%.",
+ "Revenue was flat QoQ, so the gain is spread, not volume. The driver was not verified, so Q3 visibility is lower.",
+ "Cotton versus yarn spread; garment export volumes; the unverified margin driver."],
+[20,"CDSL","CDSL","Platform Fintech","Mid",77,4,3,5,4,4,3,"−11.0%",
+ "The cleanest way to own market activity without derivative risk, at a price down 11% in a year.",
+ "Revenue +23.5% YoY and +34.5% QoQ; operating margin 57.9%; PAT +24%.",
+ "Depository revenue tracks accounts, IPOs and settlement volumes; the IPO pipeline should support Q3.",
+ "IPO calendar; new demat accounts; no Q2 commentary was verified."],
+[21,"Ujjivan SFB","UJJIVANSFB","SFBs","Mid",76,4,4,4,3,4,4,"+17.0%",
+ "The only small finance bank where pre-provision profit grew as fast as the provision benefit.",
+ "NII +35.5%, PPOP +50%, provisions −56%, PAT 3.0x. NIM 8.4%, the highest in the set. GNPA 2.10%.",
+ "Rising funding costs after the rate hike will press NIM in Q3. Fresh ₹409 cr raised from IFC and insurers above book value.",
+ "NIM QoQ; interim CEO succession; secured-loan share (52%); MFI collections."],
+[22,"Elgi Equipments","ELGIEQUIP","Capital Goods","Mid",75,5,3,4,3,4,3,"+16.7%",
+ "The best operating leverage in capital goods.",
+ "Operating profit +32% on revenue +17%; margin 16.3% (14.5%). PAT +7% only because last year had more other income.",
+ "No transcript was verified, so Q3 visibility rests on the trend.",
+ "Margin sustainability; export markets; order commentary."],
+[23,"Polycab India","POLYCAB","Cables","Large",75,4,4,5,3,4,2,"+3.6%",
+ "The best operator in cables, with the entrant risk partly priced after a 15% three-month fall.",
+ "Revenue +53%, EBITDA 14.4%, PAT +43%. FMEG +124% at its first double-digit EBIT margin.",
+ "Management guides W&C margin to 11–13% long term, below today's ~15%, so expect margin to mean-revert. MOSL Buy ₹10,600 (16 Oct).",
+ "Copper price; UltraTech/new-entrant pricing; working capital. Digest-based: re-verify."],
+[24,"ACME Solar","ACMESOLAR","BESS","Small",74,4,5,2,4,2,4,"+65.3%",
+ "The only listed company earning storage revenue at scale, and it hit its BESS target.",
+ "Revenue +89.5%, PAT +134%; 5.2 GWh BESS commissioned against a 5 GWh H1 target.",
+ "More than ₹1,600 cr of FY27 and ₹1,500 cr of FY28 peak-power revenue locked in; 92% of capacity under signed PPAs.",
+ "Interest (₹345 cr from ₹265 cr) and depreciation; leverage; rate hikes."],
+[25,"Mphasis","MPHASIS","IT Midcap","Mid",74,4,3,4,4,4,3,"−7.9%",
+ "The cleanest organic growth in IT midcaps, at a price down 8% in a year.",
+ "Constant-currency growth 9.7% YoY and 3.3% QoQ, with no acquisition. Direct business +11.3%.",
+ "TCV $466 mn, 66% AI-led. Margin flat QoQ, −50 bps YoY.",
+ "Organic cc growth QoQ; rupee; top-client concentration."],
+[26,"NTPC","NTPC","Power Generation","Large",73,4,3,3,4,5,3,"−2.8%",
+ "The steadiest compounder in power generation, down 19% over six months.",
+ "Generation +13%, operating profit +22%; coal PLF 75.1% against 68.4% for the rest of India.",
+ "Capacity additions continue; interest +19% with capex.",
+ "Consolidated PAT gap (₹7,351 cr vs Tijori ₹7,030 cr); interest growth; NTPC Green dilution."],
+[27,"Indo Count","ICIL","Textiles","Small",73,4,5,3,4,1,3,"+77.1%",
+ "Ahead of its own margin guide, with new revenue lines; but the stock has already run 77% in a year.",
+ "Revenue +58%; company EBITDA margin 15.3%; PAT 3.4x. H1 margin 14.4% against a ~13% guide.",
+ "Utility bedding and Wamsutta contributed over ₹500 cr; US tariff relief continues.",
+ "Acquired-business margins; US tariff stability; interest (16% of operating profit)."],
+[28,"Kajaria Ceramics","KAJARIACER","Building Materials","Mid",73,4,3,5,3,4,3,"+6.9%",
+ "The highest margin in building materials, still expanding.",
+ "Revenue +24%, operating profit +35%; margin 19.5% (18.0%).",
+ "Power and fuel +39% (20.3% of sales): gas cost is the Q3 swing factor.",
+ "Gas prices; volume growth; no Q2 commentary was verified."],
+[29,"CG Power","CGPOWER","Power Ancillaries","Large",72,4,3,4,4,3,3,"+11.4%",
+ "Clean scale-up with operating leverage and strong order inflow.",
+ "Revenue +30.1%, operating profit +43%, margin 14.2% (12.9%). Order inflow +78%.",
+ "New Sehore transformer facility launched; backlog supports Q3.",
+ "Capex ramp; margin by segment (not verified); order conversion."],
+[30,"Minda Corporation","MINDACORP","Auto Ancillaries","Small",71,4,4,3,4,3,2,"+22.5%",
+ "One of only two margin expanders in auto ancillaries; the results-day dip was an entry.",
+ "Revenue +43%, EBITDA 11.8% (11.6%), PAT +69%. EV is 35% of the order book.",
+ "TFT orders over ₹1,000 cr lifetime start FY28; a ₹400 cr+ charger order starts Q1 FY28. Choice Buy ₹860 (4 Nov).",
+ "Minda Vast integration; EV order ramp. Digest-based: re-verify."],
+[31,"Avalon Technologies","AVALON","EMS","Small",71,4,5,3,4,1,2,"+94.7%",
+ "Raised its growth guide and delivered above it, but the stock is up 95% and cash conversion is weak.",
+ "Revenue +37%, EBITDA margin 12.6% (+246 bps); gross margin inside its 33–35% band.",
+ "FY27 growth guide raised to 26–30%; H1 +43%.",
+ "CFO/PAT (0.13x); inventory (+29%); standalone PAT (−15%). Fell 7.6% intraday today. Digest-based."],
+[32,"IIFL Finance","IIFL","Vehicle & Gold Loans","Mid",71,4,3,3,4,3,4,"+17.1%",
+ "The full recovery from the 2024 gold-loan ban, with clean asset quality.",
+ "Gold-loan AUM +90% YoY and +13% QoQ; total AUM +38%; GNPA 1.5%; PAT 2x.",
+ "Gold near ₹1.5 lakh/10 g supports AUM; funding cost grew fastest in the set (+11% QoQ).",
+ "Gold price; finance cost QoQ; spread (−1.1 pts QoQ)."],
+[33,"Fine Organic","FINEORG","Spec. Chemicals","Small",71,4,3,5,3,3,3,"+17.4%",
+ "One of only two chemical companies whose margin did not fall QoQ; net cash.",
+ "Revenue +22%; operating margin 25.4% (22.6%); PAT +41%.",
+ "No commentary verified; input costs remain the risk.",
+ "Gross margin QoQ; other income (15% of PBT)."],
+[34,"Engineers India","ENGINERSIN","EPC","Small",69,4,3,5,3,2,3,"+56.0%",
+ "Best margin gain among contractors, asset-light and net cash, but already rewarded (+56%).",
+ "Revenue −10.5% but operating profit +44% on a consultancy mix; margin 21.0% (13.0%).",
+ "Net profit includes JV share and ₹66 cr other income.",
+ "Revenue decline; order inflow; JV earnings."],
+[35,"JSW Steel","JSWSTEEL","Metals","Large",69,3,4,4,3,4,3,"+15.4%",
+ "The best balance-sheet repair in steel, but the margin is lagging the volume.",
+ "Record sales 7.46 mt (+13%); EBITDA/t ~₹13,300 (from ~₹15,000 in Q1); net debt down 44% YoY, now investment grade.",
+ "Q3 coking coal and freight costs are the swing factor. Jefferies Buy ₹1,650 (by 26 Oct).",
+ "EBITDA/t; value-added share (56%); coking coal. Digest-based: re-verify."],
+[36,"Goldiam International","GOLDIAM","Jewellery","Micro",68,4,3,4,3,4,2,"+10.0%",
+ "A lab-grown diamond exporter with a 25% margin and no gold-duty exposure.",
+ "Revenue +44%, EBITDA margin 25.2% (+176 bps), PAT +58%.",
+ "US holiday demand drives Q3; Origem retail still small (₹11 cr a quarter).",
+ "US demand and tariffs; LGD pricing. Digest-based."],
+[37,"Syrma SGS","SYRMA","EMS","Small",68,3,5,3,4,2,2,"+68.2%",
+ "Top-line delivery is excellent and guidance was raised, but margin is at the floor and cash burned.",
+ "Revenue +74%, EBITDA 10.2% (−61 bps), PAT +87%. H1 FCF −₹205 cr.",
+ "FY27 growth guide raised above 35%; H1 EBITDA is 54% of the ₹700 cr target.",
+ "Material ratio (78.9%); inventory; borrowings. Digest-based."],
+[38,"Grindwell Norton","GRINDWELL","Capital Goods","Mid",68,3,3,5,3,4,3,"+21.3%",
+ "A clean, unexciting compounder with a stable margin.",
+ "Revenue +14.1%, margin 18.8% (18.2%), PAT +24% helped by ₹39 cr other income.",
+ "No transcript; trend suggests steady Q3.",
+ "Other income share; mix detail unavailable."],
+[39,"Tinna Rubber","TINNARUBR","Recycling","Micro",67,4,3,3,3,4,3,"−3.8%",
+ "Steady tyre-rubber recycler that avoided the import-scrap squeeze.",
+ "Revenue +31%, operating profit +37%, margin 18.8%.",
+ "Revenue flat QoQ, so Q3 growth needs new volume.",
+ "QoQ revenue; feedstock access; −20% over three months."],
+[40,"Vedanta Aluminium Metal","VAML","Metals","Large",66,4,3,4,3,3,2,"n/s",
+ "The highest-margin aluminium print, but it is an LME and alumina-price position with no guidance.",
+ "EBITDA +83% at a 46% margin; record aluminium output 649 kt; adjusted PAT +118%.",
+ "No call and no numeric guidance; newly listed after the demerger.",
+ "LME aluminium; alumina price; clean post-demerger base. Digest-based."],
+[41,"Groww","GROWW","Platform Fintech","Large",66,4,3,4,3,2,3,"+51.5%",
+ "The best-quality broker print; diversification cushioned the F&O shock.",
+ "Revenue +47% YoY but flat QoQ; operating margin 64.5%. Derivatives revenue −14.3% QoQ.",
+ "MTF book +15% QoQ, AMC AUM +31% QoQ; 2.4 cr transacting users.",
+ "F&O regulation; derivatives revenue QoQ; valuation."],
+[42,"Astra Microwave","ASTRAMICRO","Defence","Small",63,4,3,3,3,2,3,"+70.5%",
+ "The best operating leverage in defence, but the mix driver is unconfirmed and the stock is up 71%.",
+ "Revenue +22%, operating profit +84%, margin 33.4% (+11.1 pts).",
+ "No commentary verified.",
+ "Margin sustainability; interest (₹13 cr)."],
+[43,"JSW Energy","JSWENERGY","Power Generation","Mid",63,3,4,2,3,4,3,"−2.7%",
+ "Capacity delivery on time and interest growing slower than operating profit.",
+ "Revenue +23%, operating profit +21%, PBT +41%.",
+ "Storage and new capacity scale over FY27–28.",
+ "Leverage (~4.9x); rate hikes; storage ramp."],
+[44,"Sona BLW Precision","SONACOMS","Auto Ancillaries","Mid",62,3,3,5,3,1,3,"+89.3%",
+ "The best growth and cash quality in auto ancillaries, but priced for it after +89% in a year.",
+ "Revenue +35%, BEV revenue +129%; margin 23.0% at the floor of its band; record H1 FCF ₹446 cr.",
+ "Order book ₹251 bn; Denso JV close may slip to January.",
+ "Rare-earth export controls; freight; margin band."],
+[45,"Ganesha Ecosphere","GANECOS","Recycling","Small",62,3,3,3,3,4,3,"−10.7%",
+ "The PET-recycling recovery is real and has held for three quarters.",
+ "Revenue +41%; operating profit 2.7x off a weak base; margin 11.8% (6.1%).",
+ "Margin has held at 12–14% for three quarters.",
+ "Feedstock prices; −18% over three months."],
+[46,"NCC","NCC","EPC","Small",61,3,3,2,3,5,3,"−26.9%",
+ "The cleanest growth print among contractors, at a price down 27% in a year.",
+ "Revenue +32% and operating profit +34% with margin intact (8.8%).",
+ "Interest (₹211 cr from ₹172 cr) and depreciation cap PAT growth.",
+ "Interest bill; receivables; order inflow."],
+[47,"NHPC","NHPC","Power Generation","Mid",59,3,3,2,3,4,3,"−5.6%",
+ "New hydro capacity is finally earning, but financing costs now hit the P&L.",
+ "Revenue +33%, operating profit +42%; interest doubled.",
+ "PBT +21%; net profit +52% on a lower tax charge.",
+ "Interest and depreciation; tax rate; commissioning schedule."]
+];
+// [rank,name,ticker,sector,cap,risk,ED,BP,BSS,Q3,QF,conf,ret1y,why,wrong,outlook,change]
+const A=[
+[1,"Kaynes Technology","KAYNES","EMS","Mid",88,4,5,5,4,4,2,"−45.8%",
+ "Every promise from the last year is behind, and the balance sheet is now carrying the business.",
+ "Revenue +4.4%; consolidated PAT −66% to ₹39.8 cr while standalone PAT rose. Nine unreviewed subsidiaries lost ₹54 cr. Net debt doubled to ₹1,703 cr in six months.",
+ "OSAT/PCB billings were guided for Q3 and none have started. Working capital is ~257 days against a 70–85 day promise. The call had not been held by 13 Nov.",
+ "A call that explains the subsidiary losses, plus first OSAT revenue and working-capital days falling toward 100."],
+[2,"KEC International","KEC","EPC","Small",86,5,5,4,4,3,4,"−57.8%",
+ "Two guidance misses in a row, and a record order book that is not converting.",
+ "Revenue −10%; EBITDA margin 5.0% (7.1%); PAT −81% to ₹30 cr. Interest rose to ₹191 cr.",
+ "Management blamed Middle East disruption, right-of-way and land issues. H1 revenue is −6% against a 12–15% growth guide and an 8% margin target.",
+ "Two quarters of revenue growth and margin back above 7%, with interest falling."],
+[3,"Alok Industries","ALOKINDS","Textiles","Micro",85,5,3,5,4,4,3,"−53.0%",
+ "Not investable on earnings: interest is 3.7x operating profit.",
+ "Net loss ₹208 cr including a ₹36 cr exceptional charge. Operating margin 3.8%.",
+ "No sign of a fix to the interest burden in the filed numbers.",
+ "A balance-sheet restructuring that brings interest below operating profit."],
+[4,"Utkarsh SFB","UTKARSHBNK","SFBs","Small",82,5,4,4,4,3,4,"−26.4%",
+ "Sixth straight quarterly loss, and the loss widened QoQ.",
+ "Net loss ₹70 cr (₹34 cr in Q1). Provisions rose 52% QoQ to ₹166 cr. The FY26 clean-up was supposed to end the losses.",
+ "Rising funding costs after the rate hike add pressure; the JLG book is still shrinking as a share.",
+ "Provisions falling QoQ for two quarters and a return to profit."],
+[5,"PI Industries","PIIND","Spec. Chemicals","Mid",81,5,5,2,4,4,5,"−51.8%",
+ "The worst print in speciality chemicals, with the guide still drifting lower.",
+ "Revenue −9%; operating margin 13.7% (28.9%); PAT −71%. Agchem exports −18% as genericisation came faster than expected. Other income is 34% of PBT.",
+ "FY27 growth guide cut to \"flattish\" from low single digit. Gross margin 49% against a 52–53% guide.",
+ "Export revenue stabilising QoQ and new pharma/biologicals revenue showing up."],
+[6,"Afcons Infrastructure","AFCONS","EPC","Mid",80,5,3,3,4,5,4,"−45.5%",
+ "The weakest operating print among contractors: other income is 3.3x PBT.",
+ "Operating profit −72% to ₹92 cr; margin 3.5% (11.0%). Revenue has fallen four quarters in a row.",
+ "The order book (₹43,837 cr) is about 4x revenue, so execution, not demand, is the problem. Management's H1 EBITDA was not reconciled.",
+ "Revenue growth QoQ and an operating margin back above 8%."],
+[7,"Amara Raja Energy","ARE&M","Auto / BESS","Small",77,4,5,3,4,3,4,"−22.2%",
+ "Missed both near-term promises while the lithium bill rises.",
+ "EBITDA margin 8.8% (10.8%), the second quarterly fall, against a 13–14% target. Clean PBT −14%. Exports −18%. New-energy loss widened to ₹42 cr.",
+ "FY27 capex raised to ₹2,200 cr from ₹1,700 cr. BESS margins guided at only 5–8%.",
+ "Lead-acid margin back above 11% and new-energy losses narrowing."],
+[8,"Amber Enterprises","AMBER","EMS","Mid",77,4,4,5,3,3,2,"−8.2%",
+ "Growth by acquisition and capex, with losses; the balance sheet is doing the work.",
+ "Loss to owners ₹80 cr. Consumer durables margin −1.1%; railway and defence 4.8% against a 15–16% guide. H1 FCF −₹1,576 cr.",
+ "FY27 capex of ₹1,800–2,000 cr continues; gross D/E 0.73x.",
+ "Positive operating cash flow and mobility margins back toward guide."],
+[9,"HealthCare Global (HCG)","HCG","Hospitals","Small",77,4,3,4,5,3,4,"−23.8%",
+ "The purest exposure to the oncology drug-price cap, with a weakening balance sheet.",
+ "Reported PAT −71% after an EPCG provision; adjusted PAT missed PL by 40%. Net debt rose to ₹490 cr; cash conversion 54%.",
+ "Management guides a mid-to-high single-digit hit from the drug cap for a quarter or two. PL (9 Nov) cut FY28 EPS 26%.",
+ "Two quarters after the cap with margin holding near 19%, and net debt falling."],
+[10,"Mazagon Dock","MAZDOCK","Defence","Large",76,5,3,3,3,5,4,"−32.1%",
+ "The worst print in defence, driven by provisions it did not quantify.",
+ "Revenue −16.5%; operating profit −71%; margin 8.1% (23.7%). Other income is 63% of PBT.",
+ "A ₹1,250 cr facility for Colombo Dockyard and a proposed rise in authorised capital point to more cash needs.",
+ "Disclosure of the provisions and a margin back in the high teens."],
+[11,"Cochin Shipyard","COCHINSHIP","Defence","Mid",76,5,3,3,3,5,3,"−31.7%",
+ "The core business lost money after interest and depreciation.",
+ "Operating margin 4.1%, from 17.7% in Q1. Other income (₹83 cr) exceeds PBT (₹75 cr).",
+ "No commentary verified; still not cheap on core profit after a 32% fall.",
+ "Operating margin back above 12% without other-income support."],
+[12,"Thangamayil Jewellery","THANGAMAYL","Jewellery","Micro",76,4,3,4,4,4,2,"+27.3%",
+ "Price-led revenue with shrinking profit and growing debt.",
+ "Normalised PAT −35%; reported PAT was saved by a ₹28.5 cr duty-hike inventory gain. Gold volume −1%. Net debt up ₹590 cr; H1 OCF −₹542 cr.",
+ "Duty-related inventory gains run off in Q3.",
+ "Volume growth and operating cash flow turning positive."],
+[13,"NLC India","NLCINDIA","Power Generation","Small",75,4,3,4,3,5,3,"−6.7%",
+ "Reported profit is a tax line; the underlying trend is down.",
+ "PBT −50%; net profit doubled only on an ₹863 cr tax credit. Interest +52%, depreciation +33%.",
+ "Regulatory deferrals and interim tariffs keep earnings volatile.",
+ "Final tariffs for Ghatampur and PBT growth without tax credits."],
+[14,"Adani Energy Solutions","ADANIENSOL","Power Transmission","Mid",74,2,4,5,4,4,4,"+40.8%",
+ "The profit beat came from trading; the execution misses were in the core business.",
+ "PAT +145%, but energy-trading EBIT jumped to ₹8.0 bn from ₹0.1 bn. EBITDA margin −390 bps.",
+ "Smart-meter installs cut to 8–9 mn; Halvad stuck on right-of-way; PL models ~4.5x net debt/EBITDA. Brokers upgraded on valuation (PL Buy ₹1,526, 24 Oct).",
+ "Core transmission EBITDA growth without trading, and leverage falling."],
+[15,"RR Kabel","RRKABEL","Cables","Small",72,3,4,4,4,3,2,"+44.4%",
+ "Growth funded with debt and working capital.",
+ "H1 FCF −₹159 cr; net debt tripled to ₹447 cr; finance cost +101%. FMEG back to a loss.",
+ "The FY27 9.5% margin guide needs ~10.2% in H2, above any recent quarter. JM (2 Sep): Reduce ₹2,750.",
+ "Positive free cash flow and FMEG breakeven."],
+[16,"Sky Gold & Diamonds","SKYGOLD","Jewellery","Micro",70,2,5,4,3,4,2,"+194.7%",
+ "The P&L beat its guide, but the balance-sheet promises were broken.",
+ "Promised to halve net debt in FY27; it rose to ₹874 cr. Approved a QIP of up to ₹1,800 cr after saying no dilution was planned. CFO/EBITDA 0.39x.",
+ "Dilution is the near-term overhang after a +195% year.",
+ "Net debt falling and QIP pricing that protects existing holders."],
+[17,"Raymond Lifestyle","RAYMONDLSL","Textiles","Small",70,3,3,4,3,5,3,"−50.8%",
+ "The weakest quality of earnings in textiles.",
+ "Operating profit −3% YoY, the only fall in the set. Other income is 54% of PBT; interest 34% of operating profit. PAT −10%.",
+ "Q3 carries the wedding season, but Q1 was a loss.",
+ "Operating profit growth with other income below a quarter of PBT."],
+[18,"SKF India (Industrial)","SKFINDUS","Bearings","Mid",70,3,4,3,3,5,3,"n/s",
+ "Headline profit growth flatters it: the operating margin has not recovered.",
+ "Operating profit −6.5% on revenue +28%; margin 9.6% (13.3%). PBT +33% came from other income (₹45 cr). Operating cash flow −₹6 cr.",
+ "Pune capex of ₹900–950 cr runs to 2028; no Q2 call.",
+ "Operating margin back toward 12% on operations, not other income."],
+[19,"Jain Resource Recycling","JAINREC","Recycling","Small",69,4,3,3,4,3,3,"−35.8%",
+ "Volume at the cost of spread, with scrap scarce.",
+ "Revenue +58% but operating profit −13%; margin 4.2% (7.6%).",
+ "Import-scrap scarcity persists into Q3.",
+ "Spread recovering above 6%."],
+[20,"Antony Waste Handling","AWHCL","Recycling","Micro",69,4,3,4,3,3,3,"−36.4%",
+ "Municipal contract growth is not reaching profit.",
+ "Revenue +24% with flat operating profit; a ₹20 cr exceptional charge pushed it to a net loss.",
+ "Interest and depreciation keep rising with new contracts.",
+ "Operating profit growth and no further exceptional charges."],
+[21,"PNC Infratech","PNCINFRA","EPC","Small",68,3,3,3,5,3,3,"−53.3%",
+ "The numbers are fine; the pipeline is not.",
+ "Barred from NHAI and MoRTH bidding for three years in September. Toll collection on the Kanpur–Lucknow expressway was suspended.",
+ "Order inflow from its main client stops; the book will shrink.",
+ "A legal reversal of the ban or new non-NHAI orders at scale."],
+[22,"SAIL","SAIL","Metals","Mid",68,2,5,4,4,2,3,"+24.1%",
+ "Profit rose on a low base, but the company is missing its own guidance.",
+ "EBITDA/t ~₹8,170 against a ₹10,000 aim. Imported coal rose when a decline was guided. FY27 sales guide cut to 21 mt from 22 mt.",
+ "Q3 coal ~₹23,500–23,900/t; an FPO and unquantified wage revision overhang the stock.",
+ "Clarity on the FPO and EBITDA/t above ₹9,500."],
+[23,"Bharat Dynamics","BDL","Defence","Large",67,4,3,2,3,5,3,"−36.2%",
+ "Revenue recovery without profit.",
+ "Revenue +45% but operating profit −46%; margin 6.1% (16.4%). Other income is 68% of PBT.",
+ "Old low-margin work-in-progress is being billed (inventory −₹945 cr).",
+ "Operating margin back in double digits."],
+[24,"Apollo Pipes","APOLLOPIPE","Pipes","Small",65,4,3,3,3,3,3,"+65.6%",
+ "The price has run far ahead of numbers that barely break even.",
+ "Revenue +31% but operating profit −27%; margin 3.7%. Depreciation exceeds operating profit. PBT ₹0.7 cr.",
+ "No commentary verified; the reason for the +66% price run was not found.",
+ "Operating margin above 8% for two quarters."],
+[25,"Krsnaa Diagnostics","KRSNAA","Diagnostics","Micro",64,3,3,4,3,3,4,"−35.0%",
+ "Buying volume with interest and channel fees; growth is not converting.",
+ "Tests +85% but PAT +3%. Finance costs +89%; channel-partner fees 19% of revenue from 8%.",
+ "Rajasthan labs carry fixed costs ahead of utilisation.",
+ "Finance costs flattening and channel fees back toward 10% of revenue."]
+];
+const SH={"C":{"MEDANTA":{"r1":1,"r0":1,"s1":89,"s0":90,"isc":4,"mirror":false,"sh":{"f":26.88,"fq":26.8,"fy":29.13,"di":17.01,"dq":16.89,"dy":12.97,"fQ":0.08,"fY":-2.25,"dQ":0.12,"dY":4.04},"tq":0.2,"ty":1.79},"NAVINFLUOR":{"r1":2,"r0":9,"s1":87,"s0":85,"isc":5,"mirror":false,"sh":{"f":23.38,"fq":23.73,"fy":22.15,"di":23.64,"dq":22.02,"dy":19.66,"fQ":-0.35,"fY":1.23,"dQ":1.62,"dY":3.98},"tq":1.27,"ty":5.21},"SOLARINDS":{"r1":3,"r0":2,"s1":86,"s0":89,"isc":3,"mirror":false,"sh":{"f":6.13,"fq":6.39,"fy":7.11,"di":13.55,"dq":13.36,"dy":12.9,"fQ":-0.26,"fY":-0.98,"dQ":0.19,"dY":0.65},"tq":-0.07,"ty":-0.33},"TIMKEN":{"r1":4,"r0":3,"s1":86,"s0":89,"isc":3,"mirror":false,"sh":{"f":6.91,"fq":7.32,"fy":7.39,"di":30.73,"dq":30.26,"dy":29.72,"fQ":-0.41,"fY":-0.48,"dQ":0.47,"dY":1.01},"tq":0.06,"ty":0.53},"INDHOTEL":{"r1":5,"r0":7,"s1":85,"s0":86,"isc":4,"mirror":true,"sh":{"f":22.12,"fq":21.71,"fy":26.14,"di":24.46,"dq":24.47,"dy":19.4,"fQ":0.41,"fY":-4.02,"dQ":-0.01,"dY":5.06},"tq":0.4,"ty":1.04},"VIJAYA":{"r1":6,"r0":4,"s1":84,"s0":87,"isc":3,"mirror":true,"sh":{"f":10.67,"fq":11.65,"fy":18.27,"di":32.49,"dq":31.61,"dy":25.34,"fQ":-0.98,"fY":-7.6,"dQ":0.88,"dY":7.15},"tq":-0.1,"ty":-0.45},"LALPATHLAB":{"r1":7,"r0":5,"s1":83,"s0":86,"isc":3,"mirror":true,"sh":{"f":18.73,"fq":17.35,"fy":21.86,"di":21.57,"dq":21.59,"dy":18.22,"fQ":1.38,"fY":-3.13,"dQ":-0.02,"dY":3.35},"tq":1.36,"ty":0.22},"HINDZINC":{"r1":8,"r0":6,"s1":83,"s0":86,"isc":3,"mirror":false,"sh":{"f":2.36,"fq":2.19,"fy":1.32,"di":4.84,"dq":4.96,"dy":4.92,"fQ":0.17,"fY":1.04,"dQ":-0.12,"dY":-0.08},"tq":0.05,"ty":0.96},"ULTRACEMCO":{"r1":9,"r0":15,"s1":83,"s0":81,"isc":5,"mirror":true,"sh":{"f":13.21,"fq":12.87,"fy":16.33,"di":20.86,"dq":19.69,"dy":16.65,"fQ":0.34,"fY":-3.12,"dQ":1.17,"dY":4.21},"tq":1.51,"ty":1.09},"EXIDEIND":{"r1":10,"r0":17,"s1":81,"s0":81,"isc":4,"mirror":false,"sh":{"f":13.21,"fq":10.62,"fy":10.88,"di":17.57,"dq":19.3,"dy":18.46,"fQ":2.59,"fY":2.33,"dQ":-1.73,"dY":-0.89},"tq":0.86,"ty":1.44},"PNGJL":{"r1":11,"r0":18,"s1":81,"s0":79,"isc":5,"mirror":false,"sh":{"f":3.83,"fq":0.48,"fy":0.91,"di":7.05,"dq":4.76,"dy":4.99,"fQ":3.35,"fY":2.92,"dQ":2.29,"dY":2.06},"tq":5.64,"ty":4.98},"GVT&D":{"r1":12,"r0":12,"s1":80,"s0":82,"isc":3,"mirror":true,"sh":{"f":19.16,"fq":22.89,"fy":16.14,"di":22.18,"dq":18.46,"dy":25.2,"fQ":-3.73,"fY":3.02,"dQ":3.72,"dY":-3.02},"tq":-0.01,"ty":0},"UNOMINDA":{"r1":13,"r0":13,"s1":80,"s0":82,"isc":3,"mirror":false,"sh":{"f":8.8,"fq":8.17,"fy":10.03,"di":17.11,"dq":17.52,"dy":15.8,"fQ":0.63,"fY":-1.23,"dQ":-0.41,"dY":1.31},"tq":0.22,"ty":0.08},"MAXHEALTH":{"r1":14,"r0":14,"s1":80,"s0":82,"isc":3,"mirror":true,"sh":{"f":40.52,"fq":41.78,"fy":51.8,"di":31.01,"dq":29.95,"dy":20.03,"fQ":-1.26,"fY":-11.28,"dQ":1.06,"dY":10.98},"tq":-0.2,"ty":-0.3},"TRANSRAILL":{"r1":15,"r0":8,"s1":79,"s0":86,"isc":1,"mirror":false,"sh":{"f":1.85,"fq":2.49,"fy":1.16,"di":5.95,"dq":6.51,"dy":8.41,"fQ":-0.64,"fY":0.69,"dQ":-0.56,"dY":-2.46},"tq":-1.2,"ty":-1.77},"TECHNOE":{"r1":16,"r0":11,"s1":79,"s0":83,"isc":2,"mirror":false,"sh":{"f":8.09,"fq":8.08,"fy":9.22,"di":21.33,"dq":21.61,"dy":22.62,"fQ":0.01,"fY":-1.13,"dQ":-0.28,"dY":-1.29},"tq":-0.27,"ty":-2.42},"SUPREMEIND":{"r1":17,"r0":16,"s1":79,"s0":81,"isc":3,"mirror":true,"sh":{"f":16.57,"fq":17.08,"fy":20.66,"di":19.61,"dq":18.98,"dy":15.96,"fQ":-0.51,"fY":-4.09,"dQ":0.63,"dY":3.65},"tq":0.12,"ty":-0.44},"ITCHOTELS":{"r1":18,"r0":10,"s1":78,"s0":84,"isc":1,"mirror":false,"sh":{"f":11.63,"fq":11.61,"fy":25.49,"di":22.52,"dq":23.95,"dy":20.14,"fQ":0.02,"fY":-13.86,"dQ":-1.43,"dY":2.38},"tq":-1.41,"ty":-11.48},"UJJIVANSFB":{"r1":19,"r0":21,"s1":78,"s0":76,"isc":5,"mirror":false,"sh":{"f":18.03,"fq":16.81,"fy":17.05,"di":36,"dq":33.45,"dy":20.13,"fQ":1.22,"fY":0.98,"dQ":2.55,"dY":15.87},"tq":3.77,"ty":16.85},"ACMESOLAR":{"r1":20,"r0":24,"s1":77,"s0":74,"isc":5,"mirror":false,"sh":{"f":6.44,"fq":4.39,"fy":5.57,"di":17.46,"dq":19.1,"dy":6.39,"fQ":2.05,"fY":0.87,"dQ":-1.64,"dY":11.07},"tq":0.41,"ty":11.94},"MPHASIS":{"r1":21,"r0":25,"s1":77,"s0":74,"isc":5,"mirror":false,"sh":{"f":19.39,"fq":19.5,"fy":18.52,"di":45.69,"dq":45.14,"dy":37.08,"fQ":-0.11,"fY":0.87,"dQ":0.55,"dY":8.61},"tq":0.44,"ty":9.48},"KPRMILL":{"r1":22,"r0":19,"s1":76,"s0":78,"isc":3,"mirror":false,"sh":{"f":7.01,"fq":7.02,"fy":6.45,"di":19.15,"dq":19.25,"dy":19.38,"fQ":-0.01,"fY":0.56,"dQ":-0.1,"dY":-0.23},"tq":-0.11,"ty":0.33},"CDSL":{"r1":23,"r0":20,"s1":75,"s0":77,"isc":3,"mirror":false,"sh":{"f":8.67,"fq":8.24,"fy":11.54,"di":17.78,"dq":15.19,"dy":14.17,"fQ":0.43,"fY":-2.87,"dQ":2.59,"dY":3.61},"tq":3.02,"ty":0.74},"ELGIEQUIP":{"r1":24,"r0":22,"s1":74,"s0":75,"isc":3,"mirror":true,"sh":{"f":20.2,"fq":21.9,"fy":26.11,"di":11.47,"dq":10.12,"dy":6.24,"fQ":-1.7,"fY":-5.91,"dQ":1.35,"dY":5.23},"tq":-0.35,"ty":-0.68},"POLYCAB":{"r1":25,"r0":23,"s1":74,"s0":75,"isc":3,"mirror":true,"sh":{"f":18.06,"fq":19,"fy":13.96,"di":7.91,"dq":7.62,"dy":11.7,"fQ":-0.94,"fY":4.1,"dQ":0.29,"dY":-3.79},"tq":-0.65,"ty":0.31},"ICIL":{"r1":26,"r0":27,"s1":74,"s0":73,"isc":4,"mirror":false,"sh":{"f":10.68,"fq":10.14,"fy":9.98,"di":6.08,"dq":5.82,"dy":5.31,"fQ":0.54,"fY":0.7,"dQ":0.26,"dY":0.77},"tq":0.8,"ty":1.47},"NTPC":{"r1":27,"r0":26,"s1":72,"s0":73,"isc":3,"mirror":false,"sh":{"f":15.79,"fq":16.3,"fy":16.4,"di":29.74,"dq":29.32,"dy":28.93,"fQ":-0.51,"fY":-0.61,"dQ":0.42,"dY":0.81},"tq":-0.09,"ty":0.2},"KAJARIACER":{"r1":28,"r0":28,"s1":72,"s0":73,"isc":3,"mirror":false,"sh":{"f":12.05,"fq":11.58,"fy":11.57,"di":26.08,"dq":26.24,"dy":26,"fQ":0.47,"fY":0.48,"dQ":-0.16,"dY":0.08},"tq":0.31,"ty":0.56},"ENGINERSIN":{"r1":29,"r0":34,"s1":72,"s0":69,"isc":5,"mirror":false,"sh":{"f":8.09,"fq":9.17,"fy":7,"di":16.61,"dq":14.22,"dy":13.74,"fQ":-1.08,"fY":1.09,"dQ":2.39,"dY":2.87},"tq":1.31,"ty":3.96},"MINDACORP":{"r1":30,"r0":30,"s1":70,"s0":71,"isc":3,"mirror":false,"sh":{"f":9.35,"fq":9.29,"fy":8.71,"di":17.92,"dq":17.87,"dy":18.52,"fQ":0.06,"fY":0.64,"dQ":0.05,"dY":-0.6},"tq":0.11,"ty":0.04},"AVALON":{"r1":31,"r0":31,"s1":70,"s0":71,"isc":3,"mirror":false,"sh":{"f":11.13,"fq":7.85,"fy":10.13,"di":21.82,"dq":24.72,"dy":22.84,"fQ":3.28,"fY":1,"dQ":-2.9,"dY":-1.02},"tq":0.38,"ty":-0.02},"JSWSTEEL":{"r1":32,"r0":35,"s1":70,"s0":69,"isc":4,"mirror":false,"sh":{"f":26.48,"fq":26.17,"fy":25.81,"di":11.34,"dq":11.49,"dy":10.87,"fQ":0.31,"fY":0.67,"dQ":-0.15,"dY":0.47},"tq":0.16,"ty":1.14},"CGPOWER":{"r1":33,"r0":29,"s1":67,"s0":72,"isc":1,"mirror":false,"sh":{"f":11.08,"fq":11.97,"fy":13.02,"di":13.88,"dq":14.23,"dy":13.96,"fQ":-0.89,"fY":-1.94,"dQ":-0.35,"dY":-0.08},"tq":-1.24,"ty":-2.02},"GOLDIAM":{"r1":34,"r0":36,"s1":67,"s0":68,"isc":3,"mirror":false,"sh":{"f":1.76,"fq":1.99,"fy":1.47,"di":0.23,"dq":0.78,"dy":1.15,"fQ":-0.23,"fY":0.29,"dQ":-0.55,"dY":-0.92},"tq":-0.78,"ty":-0.63},"SYRMA":{"r1":35,"r0":37,"s1":67,"s0":68,"isc":3,"mirror":false,"sh":{"f":9.66,"fq":7.74,"fy":7.41,"di":14.44,"dq":15.9,"dy":16.38,"fQ":1.92,"fY":2.25,"dQ":-1.46,"dY":-1.94},"tq":0.46,"ty":0.31},"GRINDWELL":{"r1":36,"r0":38,"s1":67,"s0":68,"isc":3,"mirror":false,"sh":{"f":5.34,"fq":5.21,"fy":6.39,"di":19.66,"dq":19.59,"dy":18.37,"fQ":0.13,"fY":-1.05,"dQ":0.07,"dY":1.29},"tq":0.2,"ty":0.24},"ASTRAMICRO":{"r1":37,"r0":42,"s1":67,"s0":63,"isc":5,"mirror":false,"sh":{"f":12.24,"fq":12.5,"fy":8.23,"di":16.52,"dq":16.09,"dy":14.55,"fQ":-0.26,"fY":4.01,"dQ":0.43,"dY":1.97},"tq":0.17,"ty":5.98},"JSWENERGY":{"r1":38,"r0":43,"s1":67,"s0":63,"isc":5,"mirror":false,"sh":{"f":10.91,"fq":11.41,"fy":12.12,"di":16.68,"dq":16.16,"dy":11.56,"fQ":-0.5,"fY":-1.21,"dQ":0.52,"dY":5.12},"tq":0.02,"ty":3.91},"IIFL":{"r1":39,"r0":32,"s1":66,"s0":71,"isc":1,"mirror":false,"sh":{"f":39.27,"fq":39.04,"fy":41.96,"di":7.85,"dq":7.5,"dy":9.13,"fQ":0.23,"fY":-2.69,"dQ":0.35,"dY":-1.28},"tq":0.58,"ty":-3.97},"FINEORG":{"r1":40,"r0":33,"s1":66,"s0":71,"isc":1,"mirror":false,"sh":{"f":4.56,"fq":4.27,"fy":4.57,"di":10.26,"dq":11.72,"dy":12.02,"fQ":0.29,"fY":-0.01,"dQ":-1.46,"dY":-1.76},"tq":-1.17,"ty":-1.77},"VAML":{"r1":41,"r0":40,"s1":65,"s0":66,"isc":3,"mirror":null,"sh":null,"tq":null,"ty":null},"GROWW":{"r1":42,"r0":41,"s1":65,"s0":66,"isc":3,"mirror":false,"sh":{"f":52.36,"fq":55.89,"fy":0,"di":12.73,"dq":10.08,"dy":0,"fQ":-3.53,"fY":52.36,"dQ":2.65,"dY":12.73},"tq":-0.88,"ty":null},"TINNARUBR":{"r1":43,"r0":39,"s1":64,"s0":67,"isc":2,"mirror":false,"sh":{"f":1,"fq":0.49,"fy":0.59,"di":3.09,"dq":4.18,"dy":5.84,"fQ":0.51,"fY":0.41,"dQ":-1.09,"dY":-2.75},"tq":-0.58,"ty":-2.34},"SONACOMS":{"r1":44,"r0":44,"s1":64,"s0":62,"isc":4,"mirror":false,"sh":{"f":23.86,"fq":23.61,"fy":23.47,"di":41.21,"dq":41.6,"dy":40.13,"fQ":0.25,"fY":0.39,"dQ":-0.39,"dY":1.08},"tq":-0.14,"ty":1.47},"NHPC":{"r1":45,"r0":47,"s1":63,"s0":59,"isc":5,"mirror":false,"sh":{"f":13.17,"fq":12.29,"fy":10.05,"di":14.26,"dq":14.54,"dy":10.54,"fQ":0.88,"fY":3.12,"dQ":-0.28,"dY":3.72},"tq":0.6,"ty":6.84},"NCC":{"r1":46,"r0":46,"s1":61,"s0":61,"isc":3,"mirror":false,"sh":{"f":10.44,"fq":11.29,"fy":12.87,"di":18.17,"dq":17.88,"dy":16.65,"fQ":-0.85,"fY":-2.43,"dQ":0.29,"dY":1.52},"tq":-0.56,"ty":-0.91},"GANECOS":{"r1":47,"r0":45,"s1":58,"s0":62,"isc":1,"mirror":false,"sh":{"f":10.71,"fq":10.38,"fy":8.79,"di":16.53,"dq":15.07,"dy":22.89,"fQ":0.33,"fY":1.92,"dQ":1.46,"dY":-6.36},"tq":1.79,"ty":-4.44}},"A":{"KAYNES":{"r1":1,"r0":1,"s1":89,"s0":88,"isc":5,"mirror":false,"sh":{"f":6.17,"fq":5.91,"fy":10.8,"di":12.47,"dq":11.78,"dy":23.66,"fQ":0.26,"fY":-4.63,"dQ":0.69,"dY":-11.19},"tq":0.95,"ty":-15.82},"KEC":{"r1":2,"r0":2,"s1":87,"s0":86,"isc":5,"mirror":false,"sh":{"f":8.71,"fq":9.94,"fy":15.94,"di":20.77,"dq":23.34,"dy":22.54,"fQ":-1.23,"fY":-7.23,"dQ":-2.57,"dY":-1.77},"tq":-3.8,"ty":-9},"ALOKINDS":{"r1":3,"r0":3,"s1":83,"s0":85,"isc":3,"mirror":false,"sh":{"f":1.79,"fq":1.9,"fy":2.32,"di":0.32,"dq":0.39,"dy":0.44,"fQ":-0.11,"fY":-0.53,"dQ":-0.07,"dY":-0.12},"tq":-0.18,"ty":-0.65},"AFCONS":{"r1":4,"r0":6,"s1":82,"s0":80,"isc":5,"mirror":false,"sh":{"f":18.3,"fq":19.53,"fy":21.97,"di":18,"dq":20.07,"dy":17.94,"fQ":-1.23,"fY":-3.67,"dQ":-2.07,"dY":0.06},"tq":-3.3,"ty":-3.61},"PIIND":{"r1":5,"r0":5,"s1":79,"s0":81,"isc":3,"mirror":false,"sh":{"f":14.79,"fq":14.83,"fy":16.42,"di":31.39,"dq":31.5,"dy":30.26,"fQ":-0.04,"fY":-1.63,"dQ":-0.11,"dY":1.13},"tq":-0.15,"ty":-0.5},"UTKARSHBNK":{"r1":6,"r0":4,"s1":78,"s0":82,"isc":2,"mirror":false,"sh":{"f":12.81,"fq":14.89,"fy":6.37,"di":9.15,"dq":9.54,"dy":2.39,"fQ":-2.08,"fY":6.44,"dQ":-0.39,"dY":6.76},"tq":-2.47,"ty":13.2},"ARE&M":{"r1":7,"r0":7,"s1":77,"s0":77,"isc":4,"mirror":false,"sh":{"f":17.24,"fq":17.34,"fy":17.97,"di":14.93,"dq":15.31,"dy":16.24,"fQ":-0.1,"fY":-0.73,"dQ":-0.38,"dY":-1.31},"tq":-0.48,"ty":-2.04},"AMBER":{"r1":8,"r0":8,"s1":75,"s0":77,"isc":3,"mirror":true,"sh":{"f":20.61,"fq":20.47,"fy":30.61,"di":29.76,"dq":30.54,"dy":20.2,"fQ":0.14,"fY":-10,"dQ":-0.78,"dY":9.56},"tq":-0.64,"ty":-0.44},"ADANIENSOL":{"r1":9,"r0":14,"s1":75,"s0":74,"isc":4,"mirror":true,"sh":{"f":9.63,"fq":10.2,"fy":14.37,"di":13.61,"dq":11.77,"dy":9.97,"fQ":-0.57,"fY":-4.74,"dQ":1.84,"dY":3.64},"tq":1.27,"ty":-1.1},"MAZDOCK":{"r1":10,"r0":10,"s1":74,"s0":76,"isc":3,"mirror":false,"sh":{"f":1.73,"fq":1.72,"fy":1.97,"di":5.09,"dq":5.02,"dy":5.65,"fQ":0.01,"fY":-0.24,"dQ":0.07,"dY":-0.56},"tq":0.08,"ty":-0.8},"RAYMONDLSL":{"r1":11,"r0":17,"s1":73,"s0":70,"isc":5,"mirror":false,"sh":{"f":7,"fq":7.33,"fy":8.97,"di":4.56,"dq":5.72,"dy":7.47,"fQ":-0.33,"fY":-1.97,"dQ":-1.16,"dY":-2.91},"tq":-1.49,"ty":-4.88},"THANGAMAYL":{"r1":12,"r0":12,"s1":72,"s0":76,"isc":2,"mirror":false,"sh":{"f":5.79,"fq":5.54,"fy":4.61,"di":17.03,"dq":16.43,"dy":15.25,"fQ":0.25,"fY":1.18,"dQ":0.6,"dY":1.78},"tq":0.85,"ty":2.96},"NLCINDIA":{"r1":13,"r0":13,"s1":72,"s0":75,"isc":2,"mirror":false,"sh":{"f":4.61,"fq":4.62,"fy":3.25,"di":13.64,"dq":12.94,"dy":13.86,"fQ":-0.01,"fY":1.36,"dQ":0.7,"dY":-0.22},"tq":0.69,"ty":1.14},"HCG":{"r1":14,"r0":9,"s1":71,"s0":77,"isc":1,"mirror":false,"sh":{"f":2.7,"fq":2.73,"fy":3.59,"di":20.78,"dq":19.2,"dy":18.36,"fQ":-0.03,"fY":-0.89,"dQ":1.58,"dY":2.42},"tq":1.55,"ty":1.53},"RRKABEL":{"r1":15,"r0":15,"s1":71,"s0":72,"isc":3,"mirror":true,"sh":{"f":12.51,"fq":10.67,"fy":8.42,"di":10.25,"dq":11.87,"dy":13.87,"fQ":1.84,"fY":4.09,"dQ":-1.62,"dY":-3.62},"tq":0.22,"ty":0.47},"PNCINFRA":{"r1":16,"r0":21,"s1":71,"s0":68,"isc":5,"mirror":false,"sh":{"f":8.35,"fq":7.28,"fy":6.99,"di":20.07,"dq":23.83,"dy":26.51,"fQ":1.07,"fY":1.36,"dQ":-3.76,"dY":-6.44},"tq":-2.69,"ty":-5.08},"COCHINSHIP":{"r1":17,"r0":11,"s1":70,"s0":76,"isc":1,"mirror":false,"sh":{"f":3.07,"fq":2.83,"fy":3.22,"di":11.26,"dq":6.96,"dy":6.48,"fQ":0.24,"fY":-0.15,"dQ":4.3,"dY":4.78},"tq":4.54,"ty":4.63},"JAINREC":{"r1":18,"r0":19,"s1":70,"s0":69,"isc":4,"mirror":false,"sh":{"f":0.79,"fq":1.23,"fy":6.42,"di":9.54,"dq":9.68,"dy":6.43,"fQ":-0.44,"fY":-5.63,"dQ":-0.14,"dY":3.11},"tq":-0.58,"ty":-2.52},"SKFINDUS":{"r1":19,"r0":18,"s1":69,"s0":70,"isc":3,"mirror":false,"sh":{"f":7.42,"fq":5.08,"fy":7,"di":26.74,"dq":29.18,"dy":27.07,"fQ":2.34,"fY":0.42,"dQ":-2.44,"dY":-0.33},"tq":-0.1,"ty":0.09},"APOLLOPIPE":{"r1":20,"r0":24,"s1":69,"s0":65,"isc":5,"mirror":false,"sh":{"f":3.47,"fq":2.51,"fy":3.71,"di":8.01,"dq":7.2,"dy":14.59,"fQ":0.96,"fY":-0.24,"dQ":0.81,"dY":-6.58},"tq":1.77,"ty":-6.82},"AWHCL":{"r1":21,"r0":20,"s1":68,"s0":69,"isc":3,"mirror":null,"sh":null,"tq":null,"ty":null},"BDL":{"r1":22,"r0":23,"s1":68,"s0":67,"isc":4,"mirror":false,"sh":{"f":1.76,"fq":1.69,"fy":2.43,"di":10.79,"dq":11.52,"dy":11.29,"fQ":0.07,"fY":-0.67,"dQ":-0.73,"dY":-0.5},"tq":-0.66,"ty":-1.17},"SKYGOLD":{"r1":23,"r0":16,"s1":65,"s0":70,"isc":1,"mirror":false,"sh":{"f":4.7,"fq":2.79,"fy":0.55,"di":12.44,"dq":14.2,"dy":9.02,"fQ":1.91,"fY":4.15,"dQ":-1.76,"dY":3.42},"tq":0.15,"ty":7.57},"SAIL":{"r1":24,"r0":22,"s1":65,"s0":68,"isc":2,"mirror":false,"sh":{"f":7.3,"fq":7.09,"fy":3.76,"di":16.49,"dq":16.87,"dy":18.1,"fQ":0.21,"fY":3.54,"dQ":-0.38,"dY":-1.61},"tq":-0.17,"ty":1.93},"KRSNAA":{"r1":25,"r0":25,"s1":64,"s0":64,"isc":3,"mirror":false,"sh":{"f":3.84,"fq":4.28,"fy":3.66,"di":14.5,"dq":14.51,"dy":14.96,"fQ":-0.44,"fY":0.18,"dQ":-0.01,"dY":-0.46},"tq":-0.45,"ty":-0.28}}};
+const F=[["EQ","Earnings quality",22.5,"Operating profit vs revenue growth; reliance on other income or one-offs."],["Del","Delivery vs guidance",18,"Did it do what it promised last quarter? Not-scored names get 3."],["BS","Balance sheet & cash",13.5,"Net cash or deleveraging scores high; rising leverage or cash burn low."],["Out","Q3 visibility",18,"Guide raised, order book, contracted revenue, or seasonal tailwind."],["Set","Price setup",9,"De-rated after a good print scores high; a big 1-year run scores low."],["Conf","Data confidence",9,"Filed numbers plus transcript = 5; digest-only = 2."],["Inst","FII + DII flow",10,"Change in combined FII and DII holding, Sep 2025 to Sep 2026 (QoQ as a check). Rising scores high."]];
+for(const d of D){const x=SH.C[d[2]];if(x){d[0]=x.r1;d[5]=x.s1;}} D.sort((a,b)=>a[0]-b[0]);
+for(const d of A){const x=SH.A[d[2]];if(x){d[0]=x.r1;d[5]=x.s1;}} A.sort((a,b)=>a[0]-b[0]);
+const fv=(L,d,i,n)=>i<n?d[6+i]:(SH[L][d[2]]?SH[L][d[2]].isc:3);
+const sg=v=>v==null?"n/c":(v>0?"+":v<0?"−":"")+Math.abs(v).toFixed(2);
+function flows(L,d){const x=SH[L][d[2]];if(!x||!x.sh)return `<div class="flow">FII/DII: not available in Tijori for this listing.</div>`;const h=x.sh;const nc=d[2]==="GROWW";
+ return `<div class="flow"><span><b>FII</b> ${h.f.toFixed(2)}% · QoQ ${sg(h.fQ)} · YoY ${nc?"n/c":sg(h.fY)}</span><span><b>DII</b> ${h.di.toFixed(2)}% · QoQ ${sg(h.dQ)} · YoY ${nc?"n/c":sg(h.dY)}</span><span><b>Combined</b> QoQ ${sg(x.tq)} · YoY ${nc?"n/c (listed Nov 2025)":sg(x.ty)} pts</span>${x.mirror?`<span class="mir">FII and DII moved in opposite directions by similar amounts: a hand-over, not net buying or selling</span>`:""}<span class="mv">${x.r0===x.r1?"Rank unchanged":"Was #"+x.r0+" before flows"}</span></div>`;}
+
+document.getElementById('method').innerHTML=F.map(f=>`<div class="m"><div class="w">${f[2]}%</div><div class="n">${f[1]}</div><div class="d">${f[3]}</div></div>`).join('');
+const tierOf=r=>r<=12?1:r<=25?2:3;
+const tc=t=>`var(--t${t})`;
+const sel=document.getElementById('sec');
+[...new Set(D.map(d=>d[3]))].sort().forEach(s=>{const o=document.createElement('option');o.value=s;o.textContent=s;sel.appendChild(o)});
+let tier=0;
+function retCls(v){return v.startsWith('−')?'neg':v.startsWith('+')?'pos':''}
+function render(){
+  const sec=sel.value;
+  const rows=D.filter(d=>(!tier||tierOf(d[0])===tier)&&(!sec||d[3]===sec));
+  document.getElementById('count').textContent=rows.length+' of '+D.length+' stocks';
+  document.getElementById('list').innerHTML=rows.map(d=>{
+    const t=tierOf(d[0]);
+    const strip=F.map((f,i)=>`<div class="f"><span>${f[1]}</span><div class="dots" aria-label="${f[1]} ${fv("C",d,i,6)} of 5">${[1,2,3,4,5].map(k=>`<i class="${k<=fv("C",d,i,6)?'on':''}"></i>`).join('')}</div></div>`).join('');
+    return `<article class="row" style="--tc:${tc(t)}">
+      <div class="top"><div class="rk">${d[0]}</div>
+        <div><div class="nm">${d[1]}</div><div class="meta"><span>${d[2]}</span><span>${d[3]}</span><span>${d[4]} cap</span><span>1Y <b class="ret ${retCls(d[12])}">${d[12]}</b></span></div></div>
+        <div class="sc"><span class="pill">Tier ${t}</span><div class="v">${d[5]}<small>/100</small></div></div></div>
+      <div class="strip s7">${strip}</div>
+      ${flows("C",d)}
+      <p class="why"><b>Why it was picked.</b> ${d[13]}</p>
+      <div class="grid4">
+        <div><h4>What stood out</h4><p>${d[14]}</p></div>
+        <div><h4>Next-quarter outlook</h4><p>${d[15]}</p></div>
+        <div class="trk"><h4>What to track</h4><p>${d[16]}</p></div>
+      </div></article>`}).join('');
+}
+document.querySelectorAll('.chip').forEach(b=>b.addEventListener('click',()=>{tier=+b.dataset.tier;document.querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-pressed',x===b));render();try{localStorage.setItem('tier',tier)}catch(e){}}));
+sel.addEventListener('change',render);
+render();
+const AF=[["ED","Earnings damage",22.5,"How far operating profit, margin or PAT fell."],["BP","Broken promises",18,"Missed or cut a commitment from the previous call."],["BSS","Balance-sheet stress",18,"Debt rising, cash burn, dilution or funding needs."],["Q3","Q3 headwinds",18,"Regulation, cost shock, bans or guidance pointing lower."],["QF","Earnings-quality flags",13.5,"Other income, tax credits, exceptionals or undisclosed items."],["Inst","FII + DII selling",10,"Falling combined FII and DII holding over the year raises the risk score."]];
+document.getElementById('amethod').innerHTML=AF.map(f=>`<div class="m"><div class="w" style="color:var(--bad)">${f[2]}%</div><div class="n">${f[1]}</div><div class="d">${f[3]}</div></div>`).join('');
+const asel=document.getElementById('asec');
+[...new Set(A.map(d=>d[3]))].sort().forEach(s=>{const o=document.createElement('option');o.value=s;o.textContent=s;asel.appendChild(o)});
+const confTxt=c=>c>=4?'Data: filed + commentary':c==3?'Data: filed, thin commentary':'Data: digest-based, re-verify';
+function arender(){
+  const sec=asel.value;const rows=A.filter(d=>!sec||d[3]===sec);
+  document.getElementById('acount').textContent=rows.length+' of '+A.length+' stocks';
+  document.getElementById('alist').innerHTML=rows.map(d=>{
+    const strip=AF.map((f,i)=>`<div class="f"><span>${f[1]}</span><div class="dots" aria-label="${f[1]} ${fv("A",d,i,5)} of 5">${[1,2,3,4,5].map(k=>`<i class="${k<=fv("A",d,i,5)?'on':''}"></i>`).join('')}</div></div>`).join('')+`<div class="f"><span>Confidence</span><div class="conf">${d[11]}/5</div></div>`;
+    return `<article class="row av">
+      <div class="top"><div class="rk">${d[0]}</div>
+        <div><div class="nm">${d[1]}</div><div class="meta"><span>${d[2]}</span><span>${d[3]}</span><span>${d[4]} cap</span><span>1Y <b class="ret ${retCls(d[12])}">${d[12]}</b></span><span>${confTxt(d[11])}</span></div></div>
+        <div class="sc"><span class="pill">Avoid</span><div class="v">${d[5]}<small>/100 risk</small></div></div></div>
+      <div class="strip s7">${strip}</div>
+      ${flows("A",d)}
+      <p class="why"><b>Why avoid.</b> ${d[13]}</p>
+      <div class="grid4">
+        <div><h4>What went wrong</h4><p>${d[14]}</p></div>
+        <div><h4>Next-quarter outlook</h4><p>${d[15]}</p></div>
+        <div class="trk"><h4>What would change our mind</h4><p>${d[16]}</p></div>
+      </div></article>`}).join('');
+}
+asel.addEventListener('change',arender);arender();
+</script>
+
+</body>
+</html>

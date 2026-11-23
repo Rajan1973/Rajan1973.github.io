@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Capital Goods Q2 FY27 — Sector Earnings Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Roboto+Mono:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --stone:#E3E0D9; --card:#F3F1EC; --card2:#EAE7E0;
+  --ink:#1F1D1A; --mute:#6E6A62; --faint:#9A958B; --rule:#C9C4B9;
+  --gain:#1D5C7A; --loss:#A8382C; 
+  --vol:#8E8879; --gold:#B4842A;
+  --disp:'Archivo',system-ui,sans-serif;
+  --serif:'Source Serif 4',Georgia,serif;
+  --mono:'Roboto Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--stone);color:var(--ink);font-family:var(--serif);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:28px 20px 90px}
+section{margin-bottom:40px}
+
+/* type */
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
+h1{font-family:var(--disp);font-weight:800;font-size:clamp(34px,7vw,62px);line-height:.94;letter-spacing:-.03em;margin:.18em 0 .22em;text-transform:uppercase}
+h2{font-family:var(--disp);font-weight:700;font-size:clamp(19px,3.2vw,25px);letter-spacing:-.015em;margin:0 0 4px;text-transform:uppercase}
+h3{font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:-.005em;margin:0}
+.dek{font-size:17px;color:var(--mute);max-width:56ch;margin:0}
+.note{font-size:13px;color:var(--mute);margin:4px 0 20px;max-width:70ch}
+.rule{height:3px;background:var(--ink);margin:0 0 16px}
+
+/* thesis stats */
+.thesis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:2px;background:var(--rule);border:2px solid var(--ink);margin-top:26px}
+.t{background:var(--card);padding:13px 15px}
+.t .n{font-family:var(--disp);font-weight:800;font-size:26px;line-height:1.05;letter-spacing:-.02em}
+.t .l{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:5px;line-height:1.35}
+.t.up .n{color:var(--gain)} .t.dn .n{color:var(--loss)}
+
+/* SIGNATURE: the scissor */
+.scissor{background:var(--card);border:2px solid var(--ink);padding:18px 16px 12px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin-bottom:14px}
+.legend span{display:flex;align-items:center;gap:6px}
+.sw{width:13px;height:11px;display:inline-block}
+.row{display:grid;grid-template-columns:104px 1fr;gap:10px;align-items:center;margin-bottom:3px}
+.row .co{font-family:var(--disp);font-weight:600;font-size:12px;text-align:right;line-height:1.15}
+.track{position:relative;height:26px;border-left:2px solid var(--ink);border-right:0}
+.axis{position:absolute;top:0;bottom:0;width:2px;background:var(--ink);opacity:.85}
+.b{position:absolute;height:10px}
+.b.v{top:1px;background:var(--vol)}
+.b.e{top:14px}
+.b.e.pos{background:var(--gain)} .b.e.neg{background:var(--loss)}
+.b span{position:absolute;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:9.5px;font-weight:500;white-space:nowrap;color:var(--ink)}
+.b.pos span,.b.v span{left:calc(100% + 5px)}
+.b.neg span{right:calc(100% + 5px)}
+.scale{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9.5px;color:var(--faint);margin-top:6px;padding-left:114px}
+
+/* league bars */
+.league{background:var(--card);border:2px solid var(--ink);padding:16px}
+.lrow{display:grid;grid-template-columns:112px 1fr 96px;gap:10px;align-items:center;padding:4px 0;border-bottom:1px solid var(--rule)}
+.lrow:last-child{border-bottom:0}
+.lrow .co{font-family:var(--disp);font-weight:600;font-size:12.5px;text-align:right}
+.lbar{height:16px;background:var(--gain);position:relative}
+.lbar.mid{background:#4A7F91} .lbar.low{background:var(--loss)}
+.lrow .v{font-family:var(--mono);font-size:12px;font-weight:700;text-align:right}
+.lrow .d{font-family:var(--mono);font-size:10px;color:var(--mute);text-align:right}
+
+/* fuel strip */
+.fuel{background:var(--ink);color:var(--card);border:2px solid var(--ink);padding:18px}
+.fuel h2{color:var(--card)}
+.fline{display:flex;align-items:flex-end;gap:0;height:110px;margin:20px 0 6px}
+.fp{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:6px}
+.fp i{display:block;width:100%;max-width:52px;background:var(--gold)}
+.fp b{font-family:var(--mono);font-size:12px;font-weight:700}
+.fp em{font-family:var(--mono);font-size:9.5px;font-style:normal;letter-spacing:.09em;text-transform:uppercase;color:#A9A296}
+.warn{border-top:1px solid #4A453C;margin-top:14px;padding-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
+.warn div{font-size:13.5px;color:#D6D1C6}
+.warn strong{display:block;font-family:var(--mono);font-size:17px;font-weight:700;color:var(--gold);margin-bottom:2px}
+
+/* company cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
+.c{background:var(--card);border:2px solid var(--ink);padding:14px;display:flex;flex-direction:column}
+.chead{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:2px}
+.tick{font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacing:.06em}
+.badge{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 6px;border:1.5px solid;white-space:nowrap;flex-shrink:0}
+.badge.del{color:var(--gain);border-color:var(--gain)}
+.badge.part{color:var(--gold);border-color:var(--gold)}
+.badge.miss{color:var(--loss);border-color:var(--loss)}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);margin:11px 0}
+.tile{background:var(--card2);padding:7px 9px}
+.tile .n{font-family:var(--mono);font-size:15px;font-weight:700;line-height:1.15}
+.tile .l{font-family:var(--mono);font-size:8.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:3px}
+.tile .n.up{color:var(--gain)} .tile .n.dn{color:var(--loss)}
+.c ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.c li{margin-bottom:5px}
+.c li::marker{color:var(--faint)}
+.flags{margin-top:auto;padding-top:10px;display:flex;flex-wrap:wrap;gap:5px}
+.flag{font-family:var(--mono);font-size:9px;letter-spacing:.05em;text-transform:uppercase;background:var(--loss);color:var(--card);padding:3px 6px}
+.flag.ok{background:var(--gain)}
+
+
+table{width:100%;border-collapse:collapse;background:var(--card);border:2px solid var(--ink)}
+th{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;text-align:left;padding:9px 10px;background:var(--ink);color:var(--card)}
+td{padding:9px 10px;border-bottom:1px solid var(--rule);font-size:13.5px;vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.co{font-family:var(--disp);font-weight:700;font-size:13px;white-space:nowrap}
+td.vd{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;white-space:nowrap}
+.vd.del{color:var(--gain)} .vd.part{color:var(--gold)} .vd.miss{color:var(--loss)}
+
+/* call */
+.calls{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.call{border:2px solid var(--ink);padding:15px;background:var(--card)}
+.call.buy{border-left:9px solid var(--gain)}
+.call.wait{border-left:9px solid var(--gold)}
+.call.avoid{border-left:9px solid var(--loss)}
+.call .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.call h3{margin:4px 0 7px;font-size:17px}
+.call p{margin:0;font-size:13.5px}
+
+
+/* commentary */
+.themes{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.th{background:var(--card);border:2px solid var(--ink);padding:14px}
+.th .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--mute);border-bottom:2px solid var(--ink);padding-bottom:6px;margin-bottom:9px}
+.th ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.th li{margin-bottom:6px}
+.th li::marker{color:var(--faint)}
+.th b{font-family:var(--mono);font-size:12.5px;font-weight:700}
+
+/* red flags */
+.rf{background:var(--card);border:2px solid var(--ink)}
+.rfg{border-bottom:2px solid var(--ink)}
+.rfg:last-child{border-bottom:0}
+.rfh{display:flex;align-items:center;gap:9px;padding:8px 13px;background:var(--card2)}
+.sev{width:11px;height:11px;flex-shrink:0}
+.sev.hi{background:var(--loss)} .sev.md{background:var(--gold)} .sev.lo{background:var(--faint)}
+.rfh span{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase}
+.rfr{display:grid;grid-template-columns:118px 1fr;gap:12px;padding:9px 13px;border-top:1px solid var(--rule);font-size:13.5px}
+.rfr b{font-family:var(--disp);font-weight:700;font-size:12.5px}
+
+/* ind-ra verdict */
+.indra{background:var(--card);border:2px solid var(--ink);padding:16px}
+.split{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:2px;background:var(--rule);border:1px solid var(--rule);margin-bottom:16px}
+.sp{background:var(--card2);padding:13px 14px}
+.sp .n{font-family:var(--disp);font-weight:800;font-size:34px;line-height:1;letter-spacing:-.03em;color:var(--loss)}
+.sp.ok .n{color:var(--gain)}
+.sp .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-top:6px}
+.sp .w{font-size:12.5px;color:var(--mute);margin-top:7px}
+.vs{display:grid;grid-template-columns:82px 1fr;gap:11px;padding:7px 0;border-bottom:1px solid var(--rule);font-size:13.5px;align-items:start}
+.vs:last-child{border-bottom:0}
+.vs em{font-family:var(--mono);font-size:9.5px;font-style:normal;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding-top:2px}
+.vs em.y{color:var(--gain)} .vs em.n{color:var(--loss)} .vs em.p{color:var(--gold)}
+
+/* regional strip */
+.reg{display:grid;grid-template-columns:repeat(auto-fit,minmax(112px,1fr));gap:2px;background:var(--rule);border:2px solid var(--ink);margin-top:16px}
+.rg{background:var(--card2);padding:11px 12px;text-align:center}
+.rg .n{font-family:var(--mono);font-size:15px;font-weight:700}
+.rg .n.up{color:var(--gain)} .rg .n.dn{color:var(--loss)}
+.rg .l{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-top:4px}
+
+/* triggers */
+.trigs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:14px}
+.tg{border:2px solid var(--ink);padding:14px;background:var(--card)}
+.tg .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
+.tg.tg-up .k{color:var(--gain)} .tg.tg-dn .k{color:var(--loss)}
+.tg ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.tg li{margin-bottom:6px}
+
+/* caveats */
+.cav{background:var(--card2);border:2px solid var(--ink);padding:15px 15px 15px 30px;margin:0;font-size:13.5px;line-height:1.55}
+.cav li{margin-bottom:8px}
+.cav li:last-child{margin-bottom:0}
+.cav b{font-family:var(--mono);font-size:12px;font-weight:700}
+
+
+/* wide data tables */
+.tw{overflow-x:auto;border:2px solid var(--ink);background:var(--card)}
+.tw table{border:0;min-width:660px}
+.tw th{position:sticky;top:0}
+td.num{font-family:var(--mono);font-size:12px;font-weight:700;text-align:right;white-space:nowrap}
+td.num.up{color:var(--gain)} td.num.dn{color:var(--loss)} td.num.ns{color:var(--faint);font-weight:400}
+th.r{text-align:right}
+td.kpi{font-family:var(--mono);font-size:11.5px;text-align:right;white-space:nowrap}
+.asof{font-family:var(--mono);font-size:11px;color:var(--mute);margin-top:10px;line-height:1.6}
+.asof b{color:var(--ink)}
+
+footer{border-top:3px solid var(--ink);padding-top:15px;font-size:12.5px;color:var(--mute)}
+footer p{margin:0 0 8px;max-width:80ch}
+
+@media(max-width:620px){
+  .row{grid-template-columns:74px 1fr;gap:7px}
+  .row .co{font-size:10.5px}
+  .scale{padding-left:81px}
+  .lrow{grid-template-columns:80px 1fr 74px}
+  .lrow .co{font-size:11px}
+  .wrap{padding:20px 13px 60px}
+  td.hide,th.hide{display:none}
+}
+@media(prefers-reduced-motion:no-preference){
+  .b,.lbar,.fp i{animation:g .7s cubic-bezier(.2,.7,.3,1) both}
+  @keyframes g{from{transform:scaleX(.001);opacity:0}to{transform:scaleX(1);opacity:1}}
+  .b.neg{transform-origin:right} .b.v,.b.pos,.lbar{transform-origin:left}
+  .fp i{animation-name:gy;transform-origin:bottom}
+  @keyframes gy{from{transform:scaleY(.001)}to{transform:scaleY(1)}}
+}
+
+.badge.nsc{color:var(--mute);border-color:var(--mute)}
+.lsub{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin:14px 0 6px}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Sector earnings review · Quarter ended 30 September 2026</div>
+  <h1>Capital Goods<br>Q2 FY27</h1>
+  <p class="dek">Orders and revenue are growing in double digits, but commodity and freight costs are eating the margin everywhere except where volume leverage is strong.</p>
+  <div class="thesis">
+    <div class="t up"><div class="n">+37.8%</div><div class="l">Siemens new orders YoY; book-to-bill ~1.09</div></div>
+    <div class="t dn"><div class="n">−6.6 pts</div><div class="l">Cummins operating margin YoY; operating profit −27%</div></div>
+    <div class="t dn"><div class="n">5 of 9</div><div class="l">Companies with an operating margin lower YoY</div></div>
+    <div class="t dn"><div class="n">~0.4x</div><div class="l">BHEL Q2 book-to-bill (inflow ~₹4,000 cr on ₹9,300 cr revenue)</div></div>
+  </div>
+</header>
+
+<section>
+  <h2>The scissor</h2>
+  <div class="rule"></div>
+  <p class="note">Revenue growth YoY against operating-profit growth YoY (before other income), on one axis, from filed consolidated quarterlies. The sector map calls for order inflow against margin. Only Siemens and BHEL disclosed quarterly inflow in sources we could verify, so revenue stands in. Four companies grew revenue but shrank operating profit, or grew it far more slowly: Siemens, Kirloskar, AIA and Cummins.</p>
+  <div class="scissor">
+    <div class="legend">
+      <span><i class="sw" style="background:var(--vol)"></i>Revenue growth YoY</span>
+      <span><i class="sw" style="background:var(--gain)"></i>Operating profit growth YoY</span>
+    </div>
+    <div id="scissor"></div>
+    <div class="scale"><span>−30</span><span>+10</span><span>+50</span><span>+90</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>Operating margin — the league table</h2>
+  <div class="rule"></div>
+  <p class="note">Consolidated operating margin before other income. Siemens reports a 9.5% margin after depreciation; it is shown here before depreciation, so it matches its peers. Kirloskar's consolidated figure includes an NBFC (Arka Fincap), which flatters its operating margin.</p>
+  <div class="league">
+    <div class="lsub">Operating margin, Q2 FY27 (change)</div>
+    <div id="league"></div>
+  </div>
+</section>
+
+<section>
+  <h2>The pressure point: commodity and freight costs</h2>
+  <div class="rule"></div>
+  <div class="fuel">
+    <h2>Op. margin change YoY, pts</h2>
+    <div class="fline" id="fuel"></div>
+    <div class="warn">
+      <div><strong>The cost shock</strong>Cummins: "Commodity and freight inflation, coupled with product mix, impacted margins." Siemens: "volatility in commodity prices and foreign exchange". AIA's selling and distribution costs rose 53%.</div>
+      <div><strong>Who absorbed it</strong>Engine makers (Cummins −6.6 pts, Kirloskar −4.8) and AIA (−2.9). Siemens grew operating profit only 3% on revenue +17%; Mobility profit fell.</div>
+      <div><strong>Who did not</strong>Elgi (+1.9 pts) and Grindwell (+0.7) held or widened margins on volume. BHEL (+3.3) is recovering from a low base and benefits from lower interest costs.</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Company by company</h2>
+  <div class="rule"></div>
+  <p class="note">The badge scores Q2 delivery against verified Q1 or standing commitments. Most companies here had no Q2 transcript on Tijori by 15 November, so most are grey. Numbers are consolidated filed quarterlies (Tijori).</p>
+  <div class="grid" id="cards"></div>
+</section>
+
+<section>
+  <h2>KPI comparison</h2>
+  <div class="rule"></div>
+  <p class="note">n/d means not disclosed. n/v means disclosed but not verified for this build. n/r means not reported.</p>
+  <div class="tw">
+  <table>
+    <thead><tr>
+      <th>Company</th><th class="r">Revenue YoY</th><th class="r">Op. margin</th><th class="r">Margin chg YoY</th><th class="r">Order inflow</th>
+      <th class="r">Book-to-bill</th><th class="r">Backlog</th><th class="r">Leverage</th><th class="r">Basis</th>
+    </tr></thead>
+    <tbody id="kpi"></tbody>
+  </table>
+  </div>
+  <p class="asof">Siemens' book-to-bill is derived: inflow ₹6,228 cr over revenue ₹5,734 cr. BHEL's is derived: ~₹4,000 cr over ₹9,300 cr.</p>
+</section>
+
+<section>
+  <h2>What management said</h2>
+  <div class="rule"></div>
+  <p class="note">From results statements reported by IANS/The Hans India (Cummins), Kotak Neo (Siemens), Free Press Journal and T&amp;D India (BHEL). Tijori had no Q2 transcripts for this set by 15 November.</p>
+  <div class="themes">
+    <div class="th"><div class="k">Demand</div><ul>
+      <li>Siemens: orders driven by "infrastructure capex and higher private-sector investment".</li>
+      <li>Cummins: healthy demand in data centres, manufacturing, realty and distribution.</li>
+      <li>BHEL: backlog ₹2.58 lakh cr; it is diversifying into nuclear, defence, transport and coal gasification.</li>
+    </ul></div>
+    <div class="th"><div class="k">Costs</div><ul>
+      <li>Cummins: commodity and freight inflation plus mix.</li>
+      <li>Siemens: commodity prices and foreign exchange.</li>
+    </ul></div>
+    <div class="th"><div class="k">Pricing</div><ul>
+      <li>Cummins: pricing actions to benefit "progressively".</li>
+    </ul></div>
+    <div class="th"><div class="k">Execution</div><ul>
+      <li>BHEL: 2,260 MW of thermal capacity added in H1 against a 4,790 MW FY27 target.</li>
+    </ul></div>
+  </div>
+</section>
+
+<section>
+  <h2>Red flags</h2>
+  <div class="rule"></div>
+  <p class="note">Ranked by how much they should change position sizing.</p>
+  <div class="rf">
+    <div class="rfg">
+      <div class="rfh"><i class="sev hi"></i><span>Act on these</span></div>
+      <div class="rfr"><b>Cummins India</b><div>Operating profit −27% on revenue +4%, and domestic sales fell 6% QoQ. The stock fell up to 15% on the day.</div></div>
+      <div class="rfr"><b>BHEL</b><div>Q2 order inflow ~₹4,000 cr is less than half of quarterly revenue. ₹196 cr of overdue Sudan receivables are unprovided. The stock is +55% in a year.</div></div>
+    </div>
+    <div class="rfg">
+      <div class="rfh"><i class="sev md"></i><span>Monitor next quarter</span></div>
+      <div class="rfr"><b>Siemens</b><div>Mobility segment profit fell to ₹96 cr from ₹126 cr on revenue +14%.</div></div>
+      <div class="rfr"><b>Kirloskar Oil</b><div>Operating profit −12% on revenue +17%; the NBFC complicates the consolidated figures.</div></div>
+      <div class="rfr"><b>AIA Engineering</b><div>Selling and distribution costs +53% YoY; volume growth only +6%.</div></div>
+    </div>
+    <div class="rfg">
+      <div class="rfh"><i class="sev lo"></i><span>Note and move on</span></div>
+      <div class="rfr"><b>Thermax</b><div>A thin 7% margin; capex depreciation keeps PAT down.</div></div>
+      <div class="rfr"><b>Siemens Energy India</b><div>The September quarter had not reported by 15 Nov.</div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Walk the talk</h2>
+  <div class="rule"></div>
+  <p class="note">Only one commitment could be verified from public sources for this set: BHEL's FY27 thermal capacity target. Nothing else is scored, rather than scoring against digest summaries.</p>
+  <table>
+    <thead><tr><th>Company</th><th>Promised</th><th class="hide">Delivered</th><th>Verdict</th></tr></thead>
+    <tbody id="score"></tbody>
+  </table>
+</section>
+
+<section>
+  <h2>Was the consensus right?</h2>
+  <div class="rule"></div>
+  <p class="note">No published Q2 poll was found. We score the narrative: the capex upcycle lifts orders and operating leverage lifts margins.</p>
+  <div class="indra">
+    <div class="split">
+      <div class="sp ok"><div class="n">+37.8%</div><div class="l">Siemens orders</div><div class="w">Order momentum held.</div></div>
+      <div class="sp ok"><div class="n">+4% to +24%</div><div class="l">Revenue growth range</div><div class="w">Demand came through.</div></div>
+      <div class="sp"><div class="n">5 of 9</div><div class="l">Lower margin YoY</div><div class="w">Operating leverage did not.</div></div>
+    </div>
+    <div class="vs"><em class="y">Right</em><div><b>The capex upcycle lifts orders.</b> Siemens orders +38%, BHEL backlog +17%, ABB H1 orders +36%.</div></div>
+    <div class="vs"><em class="n">Wrong</em><div><b>Operating leverage lifts margins.</b> Commodity and freight costs outran pricing at Cummins, Siemens, AIA and Kirloskar.</div></div>
+  </div>
+</section>
+
+<section>
+  <h2>The call</h2>
+  <div class="rule"></div>
+  <div class="calls">
+    <div class="call buy">
+      <div class="k">Own now</div>
+      <h3>Elgi Equipments · Grindwell Norton</h3>
+      <p>Elgi grew operating profit 32% on revenue +17%, the best operating leverage in the set. Grindwell held its margin and grew PAT 24%. Neither has run as hard as BHEL or ABB: +17% and +21% in a year.</p>
+    </div>
+    <div class="call wait">
+      <div class="k">Accumulate on evidence</div>
+      <h3>Siemens · ABB India</h3>
+      <p>Siemens' orders (+38%) and backlog (₹47,034 cr) are the best demand signal here, but the margin must stop falling. ABB's margin recovered QoQ but is still below last year. Up 42% in a year, it needs Q4 order confirmation.</p>
+    </div>
+    <div class="call avoid">
+      <div class="k">Stay out</div>
+      <h3>Cummins · BHEL · AIA · Kirloskar · Thermax</h3>
+      <p>Cummins lost 6.6 pts of margin with no verified fix. BHEL's profit surge is real, but Q2 inflow stalled and the stock is +55%. AIA and Kirloskar are growing without profit. Thermax runs a 7% margin.</p>
+    </div>
+  </div>
+  <div class="trigs">
+    <div class="tg tg-up"><div class="k">What would make us more positive</div><ul>
+      <li>Cummins' Q3 margin back above 18% as price increases land.</li>
+      <li>BHEL's H2 inflow back above ₹20,000 cr.</li>
+      <li>Commodity and freight costs rolling over.</li>
+    </ul></div>
+    <div class="tg tg-dn"><div class="k">What would make us cut</div><ul>
+      <li>Siemens' order growth fading below revenue growth.</li>
+      <li>Another quarter of margin decline at Siemens or ABB.</li>
+    </ul></div>
+  </div>
+</section>
+
+<section>
+  <h2>Analyst coverage after results</h2>
+  <div class="rule"></div>
+  <p class="note">Dated post-result broker reports were not verified for this build. No targets are shown, rather than undated ones.</p>
+  <div class="tw">
+  <table>
+    <thead><tr><th>Company</th><th>Broker</th><th>Report date</th><th>Rating</th><th class="r">Target (₹)</th><th class="r">Prior (₹)</th><th class="r">Price at report (₹)</th></tr></thead>
+    <tbody id="brk"></tbody>
+  </table>
+  </div>
+</section>
+
+<section>
+  <h2>Price and returns</h2>
+  <div class="rule"></div>
+  <p class="note">The market has split the sector: BHEL, Kirloskar and ABB are +42–55% in a year, while Thermax and AIA are −8% to −14% and down 29–38% over three to six months.</p>
+  <div class="tw">
+  <table>
+    <thead><tr>
+      <th>Company</th><th>Ticker</th><th>Results date</th><th class="r">CMP (₹)</th>
+      <th class="r">1 year</th><th class="r">6 months</th><th class="r">3 months</th><th class="r">MTD</th>
+    </tr></thead>
+    <tbody id="ret"></tbody>
+  </table>
+  </div>
+  <p class="asof">Prices as on 13 Nov 2026 close (Zerodha Kite last price). Anchors: 1Y = 14 Nov 2025, 6M = 15 May 2026, 3M = 14 Aug 2026, MTD = 30 Oct 2026 closes, Kite daily candles (corporate-action adjusted).  Sorted by 1-year return.</p>
+</section>
+
+<section>
+  <h2>Caveats</h2>
+  <div class="rule"></div>
+  <ul class="cav">
+    <li><b>Sources.</b> All financials are consolidated filed quarterlies from Tijori, with operating profit before other income. Commentary comes from news reports of results statements (IANS/The Hans India, Kotak Neo, Free Press Journal, T&amp;D India), because Tijori had no Q2 transcripts for this set by 15 November.</li>
+    <li><b>Tijori against management.</b>
+      <ul>
+        <li>Cummins' consolidated PAT of ₹507 cr matches the reports; the ₹467 cr figure in some headlines is standalone.</li>
+        <li>Siemens' 9.5% margin is after depreciation: ₹626 cr operating profit less ₹89 cr of depreciation ≈ ₹545 cr reported.</li>
+        <li>BHEL's PBT is ₹1,089 cr in the filing against ₹1,071 cr in Tijori, an ~₹18 cr gap we could not trace.</li>
+      </ul></li>
+    <li><b>Fiscal years.</b> Siemens now reports April–March (this is Q2 FY27). ABB reports a calendar year (Q3 CY26). Siemens Energy India (September year-end) had not reported.</li>
+    <li><b>Universe.</b> Timken and SKF India are in the sector list but are covered in the Bearings report, so they are excluded here. Siemens Energy India is added after the 2025 demerger.</li>
+    <li><b>Walk the talk and analyst coverage</b> are thin. These are the weakest sections. Results dates marked n/s were not verified.</li>
+  </ul>
+</section>
+
+<footer>
+  <p><b>Universe:</b> 10 listed Indian capital-goods companies, quarter ended 30 September 2026. Sources: filed quarterlies via Tijori; IANS/The Hans India; Kotak Neo; Free Press Journal; T&amp;D India. Prices from Zerodha Kite. Built 15 November 2026.</p>
+</footer>
+
+</div>
+<script>
+const C=(n,t,b,bl,k,p,f)=>({n,t,b,bl,k,p,f});
+const SC=[["BHEL",23.8,76.6],["ABB India",19.4,13.6],["Elgi Equipments",17.1,32.0],["Kirloskar Oil",17.1,-11.5],["Siemens",17.0,2.8],["Grindwell Norton",14.1,17.7],["Thermax",11.4,12.8],["AIA Engineering",6.2,-4.7],["Cummins India",4.1,-27.2]];
+const MIN=-30,MAX=90,SCU1="%",SCU2="%";
+const LEAGUES=[["league",[["AIA Engineering",25.4,"−2.9 pts YoY; −0.9 QoQ"],["Grindwell Norton",18.8,"+0.7 pts YoY; −0.7 QoQ"],["Elgi Equipments",16.3,"+1.9 pts YoY; +1.7 QoQ"],["Cummins India",15.3,"−6.6 pts YoY; −2.6 QoQ"],["Kirloskar Oil",14.8,"−4.8 pts YoY; −0.2 QoQ"],["ABB India",14.8,"−0.8 pts YoY; +2.2 QoQ"],["BHEL",11.0,"+3.3 pts YoY; +4.5 QoQ"],["Siemens",10.9,"−1.5 pts YoY; +1.8 QoQ"],["Thermax",7.0,"+0.1 pts YoY; +4.1 QoQ"]],27,16,10,v=>`${v.toFixed(1)}%`]];
+const FU=[["CMI",-6.6],["KOEL",-4.8],["AIA",-2.9],["SIEM",-1.5],["ABB",-0.8],["TMX",0.1],["GNO",0.7],["Elgi",1.9],["BHEL",3.3]];
+const FUMAX=7,FUFMT=v=>`${v>0?'+':v<0?'−':''}${Math.abs(v).toFixed(1)}`;
+const CO=[
+ C("Siemens","SIEMENS · Large","nsc","Orders up, margin down",[["₹6,228 cr","New orders (+37.8%)",1],["₹5,734 cr","Revenue (+17.0%)",1],["10.9%","Op. margin (12.4% YoY)",-1],["₹504 cr","PAT (+4.8%)",0]],
+  ["Book-to-bill ~1.09. The backlog is ₹47,034 cr, up 12%.","Smart Infrastructure grew revenue 20% and segment profit 8%. Mobility profit fell to ₹96 cr from ₹126 cr on revenue +14%.","The MD blamed \"volatility in commodity prices and foreign exchange\". Management's 9.5% margin is after depreciation; Tijori's 10.9% is before it. They reconcile.","Siemens now reports on an April–March year, so this is Q2 FY27. The energy business demerged into Siemens Energy India (ENRIN), which has not reported September yet.","Verdict: demand is strong, but operating profit grew only 3% on revenue +17%. No Q1 margin guide was verified to score."],
+  [["Mobility margin",""],["Orders","ok"]]),
+ C("ABB India","ABB · Large","nsc","Not scored",[["₹3,738 cr","Revenue (+19.4%)",1],["14.8%","Op. margin (15.5% YoY)",-1],["₹440 cr","PAT (+10.6%)",1],["+2.2 pts","Margin QoQ",1]],
+  ["Calendar-year company; this is Q3 CY26. The margin recovered from 12.6% in Q2 but stays below last year.","H1 CY26 orders grew 36% (T&D India). Q3 order and commentary detail was not verified.","Other income is falling as a share of profit: ₹78 cr from ₹84 cr.","Verdict: steady compounding, but the margin is off its 18–19% peak. Up 42% in a year."],
+  [["Margin below peak",""]]),
+ C("BHEL","BHEL · Large","part","Inflow slump",[["₹9,300 cr","Revenue (+23.8%)",1],["11.0%","Op. margin (7.7% YoY)",1],["₹821 cr","PAT (+119%)",1],["~₹4,000 cr","Q2 order inflow",-1]],
+  ["Execution is finally converting the ₹2.58 lakh cr backlog. Operating profit +77% and interest down to ₹125 cr from ₹195 cr.","But Q2 order inflow was only ~₹4,000 cr against ₹9,300 cr of revenue, a book-to-bill of ~0.4. H1 inflow was ~₹30,000 cr.","Thermal capacity added in H1 was 2,260 MW against a FY27 target of 4,790 MW: on track.","Overdue Sudan receivables of ₹196 cr are deemed recoverable. Providing for them would cut PBT by ₹176 cr.","Verdict: the turnaround is real. The stock is +55% in a year and Q2 inflow stalled."],
+  [["Q2 inflow",""],["Sudan receivable",""],["Execution","ok"]]),
+ C("Cummins India","CUMMINSIND · Large","nsc","Margin hit",[["₹3,301 cr","Revenue (+4.1%)",0],["15.3%","Op. margin (21.9% YoY)",-1],["−27.2%","Operating profit YoY",-1],["₹507 cr","PAT (−18.5%)",-1]],
+  ["The MD: \"Commodity and freight inflation, coupled with product mix, impacted margins.\" Price increases are to flow through progressively.","Domestic sales rose 5% YoY but fell 6% QoQ. Exports were flat at +2%.","The stock fell as much as 15% intraday on 5 Nov.","Verdict: the sharpest margin fall in the set, and on slowing growth. Wait for proof that the price hikes stick."],
+  [["Margin −6.6 pts",""],["Growth slowing",""]]),
+ C("Thermax","THERMAX · Mid","nsc","Not scored",[["₹2,756 cr","Revenue (+11.4%)",1],["7.0%","Op. margin (7.0% YoY)",0],["₹113 cr","PAT (−6%)",-1],["₹70 cr","Depreciation (₹51 cr YoY)",-1]],
+  ["Recovered from a 3.0% margin in Q1, but no better than a year ago.","Depreciation and interest from its green-energy and chemical capex keep PAT below last year.","No Q2 transcript or verified commentary.","Verdict: low single-digit margins in a capital-goods upcycle. Down 38% in six months."],
+  [["Thin margin",""],["PAT down",""]]),
+ C("AIA Engineering","AIAENG · Mid","nsc","Not scored",[["₹1,113 cr","Revenue (+6.2%)",0],["25.4%","Op. margin (28.3% YoY)",-1],["₹243 cr","PAT (−12%)",-1],["+53%","Selling and distribution cost YoY",-1]],
+  ["The best margin in the set, but falling: −2.9 pts YoY.","Selling and distribution costs jumped to ₹120 cr from ₹78 cr. Freight costs are the likely cause; not confirmed by management.","Other income fell to ₹72 cr from ₹98 cr, compounding the PAT decline.","Verdict: a quality franchise in a volume rut. Down 29% in three months."],
+  [["Freight costs",""],["Volume flat",""]]),
+ C("Grindwell Norton","GRINDWELL · Mid","nsc","Not scored",[["₹884 cr","Revenue (+14.1%)",1],["18.8%","Op. margin (18.2% YoY)",1],["₹133 cr","PAT (+24%)",1],["+17.7%","Operating profit YoY",1]],
+  ["Revenue growth held at 14%, on a steady 18–19% margin.","PAT +24%, helped by ₹39 cr of other income.","No transcript; abrasives and ceramics mix detail is not available.","Verdict: a clean, unexciting compounder. Margin stable through the cost shock."],
+  [["Stable","ok"]]),
+ C("Elgi Equipments","ELGIEQUIP · Mid","nsc","Not scored",[["₹1,134 cr","Revenue (+17.1%)",1],["16.3%","Op. margin (14.5% YoY)",1],["+32%","Operating profit YoY",1],["₹126 cr","PAT (+7%)",0]],
+  ["Operating profit +32% on revenue +17%: the best operating leverage in the set.","PAT growth (+7%) lags because last year had ₹51 cr of other income against ₹21 cr now.","No transcript was verified for the quarter.","Verdict: the cleanest operating print. Up 17% in a year."],
+  [["Op. leverage","ok"]]),
+ C("Kirloskar Oil Engines","KIRLOSENG · Mid","nsc","Not scored",[["₹2,284 cr","Revenue (+17.1%)",1],["14.8%","Op. margin (19.6% YoY)",-1],["−11.5%","Operating profit YoY",-1],["₹130 cr","PAT (−18%)",-1]],
+  ["Consolidated figures include the Arka Fincap NBFC, so interest (₹121 cr) is mostly lending cost and the margin is not comparable to pure engine makers.","Operating profit fell 12% on revenue +17%, the same pattern as Cummins.","Verdict: growth without profit. Down 19% in three months after a +55% year."],
+  [["NBFC in cons.",""],["Margin −4.8 pts",""]]),
+ C("Siemens Energy India","ENRIN · Large","nsc","Not reported",[["n/r","Sep quarter not filed",0],["23.6%","Op. margin, Jun quarter",1],["+68%","PAT YoY, Jun quarter",1],["−4.0%","1-year return",-1]],
+  ["Demerged from Siemens in 2025. On a September year-end; the September quarter had not reported by 15 Nov.","Shown for completeness; excluded from charts and rankings."],[["Not reported",""]])
+];
+const KPI=[
+ ["Siemens","+17.0%","10.9%","−1.5 pts","₹6,228 cr (+37.8%)","~1.09","₹47,034 cr (+12%)","Net cash","Apr–Mar FY; Q2 FY27"],
+ ["ABB India","+19.4%","14.8%","−0.8 pts","n/v","n/v","n/v","Net cash","Calendar Q3"],
+ ["BHEL","+23.8%","11.0%","+3.3 pts","~₹4,000 cr","~0.4","₹2,57,571 cr (+17%)","Interest ₹125 cr","PSU"],
+ ["Cummins India","+4.1%","15.3%","−6.6 pts","n/d","n/d","n/d","Net cash","—"],
+ ["Thermax","+11.4%","7.0%","+0.1 pts","n/v","n/v","n/v","Interest ₹37 cr","—"],
+ ["AIA Engineering","+6.2%","25.4%","−2.9 pts","n/d","n/d","n/d","Net cash","—"],
+ ["Grindwell Norton","+14.1%","18.8%","+0.7 pts","n/d","n/d","n/d","Net cash","—"],
+ ["Elgi Equipments","+17.1%","16.3%","+1.9 pts","n/d","n/d","n/d","Interest ₹5 cr","—"],
+ ["Kirloskar Oil","+17.1%","14.8%","−4.8 pts","n/d","n/d","n/d","NBFC debt in cons.","Incl. Arka Fincap"],
+ ["Siemens Energy India","n/r","n/r","n/r","n/r","n/r","n/r","n/r","Sep qtr not filed"]
+];
+const BRK=[["All","Not verified this build","—","—","—","—","—"]];
+const SCORE=[
+ ["BHEL","FY27 thermal capacity addition 4,790 MW","2,260 MW in H1 (47%).","del","On track"]
+];
+const SPAN=MAX-MIN,Z=(0-MIN)/SPAN*100;
+document.getElementById("scissor").innerHTML=SC.map(([n,v,e],i)=>{
+ const bar=(val,cls,u)=>{const w=Math.max(Math.abs(val),0.3)/SPAN*100;
+  const l=val>=0?Z:Z-w;
+  return `<i class="b ${cls} ${val>=0?'pos':'neg'}" style="left:${l}%;width:${w}%;animation-delay:${i*45}ms"><span>${val>0?'+':''}${val}${u}</span></i>`;};
+ return `<div class="row"><div class="co">${n}</div><div class="track"><i class="axis" style="left:${Z}%"></i>${bar(v,'v',SCU1)}${bar(e,'e',SCU2)}</div></div>`;
+}).join("");
+const league=(id,rows,max,hi,mid,fmt)=>{document.getElementById(id).innerHTML=rows.map(([n,v,d],i)=>{
+ const cls=v>=hi?"":v>=mid?"mid":"low";
+ return `<div class="lrow"><div class="co">${n}</div>
+ <div><i class="lbar ${cls}" style="display:block;width:${Math.max(v,0)/max*100}%;animation-delay:${i*40}ms"></i></div>
+ <div><div class="v">${fmt(v)}</div><div class="d">${d}</div></div></div>`;}).join("");};
+LEAGUES.forEach(([id,rows,max,hi,mid,fmt])=>league(id,rows,max,hi,mid,fmt));
+document.getElementById("fuel").innerHTML=FU.map(([l,v],i)=>
+ `<div class="fp"><b>${FUFMT(v)}</b><i style="height:${Math.abs(v)/FUMAX*88}px;animation-delay:${i*120}ms"></i><em>${l}</em></div>`).join("");
+document.getElementById("cards").innerHTML=CO.map(c=>`
+ <article class="c">
+  <div class="chead"><div><h3>${c.n}</h3><div class="tick">${c.t}</div></div><div class="badge ${c.b}">${c.bl}</div></div>
+  <div class="tiles">${c.k.map(([n,l,s])=>`<div class="tile"><div class="n ${s===1?'up':s===-1?'dn':''}">${n}</div><div class="l">${l}</div></div>`).join("")}</div>
+  <ul>${c.p.map(x=>`<li>${x}</li>`).join("")}</ul>
+  <div class="flags">${c.f.map(([t,k])=>`<span class="flag ${k}">${t}</span>`).join("")}</div>
+ </article>`).join("");
+document.getElementById("kpi").innerHTML=KPI.map(r=>
+ `<tr><td class="co">${r[0]}</td>`+r.slice(1).map(c=>`<td class="kpi">${c}</td>`).join("")+`</tr>`).join("");
+document.getElementById("brk").innerHTML=BRK.map(r=>
+ `<tr><td class="co">${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td class="num">${r[4]}</td><td class="num ${r[5].includes('↓')?'dn':r[5].includes('↑')?'up':''}">${r[5]}</td><td class="num">${r[6]}</td></tr>`).join("");
+const RET=[["Kirloskar Oil Engines", "KIRLOSENG", "n/s", "1,692.30", "+55.0%", "-2.8%", "-19.4%", "-5.8%"], ["BHEL", "BHEL", "14 Oct", "436.30", "+54.9%", "+9.5%", "+3.5%", "+12.6%"], ["ABB India", "ABB", "n/s", "7,054.50", "+42.4%", "+10.6%", "-7.8%", "+10.0%"], ["Grindwell Norton", "GRINDWELL", "n/s", "1,923.40", "+21.3%", "+3.4%", "-11.3%", "+2.4%"], ["Siemens", "SIEMENS", "6 Nov", "3,660.00", "+18.7%", "+2.0%", "-7.1%", "+10.8%"], ["Elgi Equipments", "ELGIEQUIP", "n/s", "585.10", "+16.7%", "+11.8%", "-4.0%", "+14.9%"], ["Cummins India", "CUMMINSIND", "4 Nov", "4,369.00", "+2.0%", "-19.0%", "-19.1%", "-1.9%"], ["Siemens Energy India", "ENRIN", "Not reported", "3,125.90", "-4.0%", "+1.3%", "-11.6%", "+11.5%"], ["Thermax", "THERMAX", "n/s", "2,776.20", "-7.6%", "-38.3%", "-31.4%", "-10.8%"], ["AIA Engineering", "AIAENG", "n/s", "3,186.00", "-13.7%", "-17.4%", "-28.9%", "-11.4%"]];
+document.getElementById("ret").innerHTML=RET.map(r=>{
+ const cell=v=>{ if(v==="n/s") return `<td class="num ns">n/s</td>`;
+   const cls=v.startsWith("+")?"up":v.startsWith("-")?"dn":""; return `<td class="num ${cls}">${v}</td>`;};
+ return `<tr><td class="co">${r[0]}</td><td class="tick">${r[1]}</td><td>${r[2]}</td>`
+  +`<td class="num">${r[3]==="n/s"?'<span class="ns">n/s</span>':r[3]}</td>`+r.slice(4).map(cell).join("")+`</tr>`;
+}).join("");
+document.getElementById("score").innerHTML=SCORE.map(([c,p,d,k,v])=>
+ `<tr><td class="co">${c}</td><td>${p}</td><td class="hide">${d}</td><td class="vd ${k}">${v}</td></tr>`).join("");
+</script></body></html>

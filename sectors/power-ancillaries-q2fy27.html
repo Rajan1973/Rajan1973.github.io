@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Power Ancillaries Q2 FY27 — Sector Earnings Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Roboto+Mono:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --stone:#E3E0D9; --card:#F3F1EC; --card2:#EAE7E0;
+  --ink:#1F1D1A; --mute:#6E6A62; --faint:#9A958B; --rule:#C9C4B9;
+  --gain:#1D5C7A; --loss:#A8382C; 
+  --vol:#8E8879; --gold:#B4842A;
+  --disp:'Archivo',system-ui,sans-serif;
+  --serif:'Source Serif 4',Georgia,serif;
+  --mono:'Roboto Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--stone);color:var(--ink);font-family:var(--serif);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:28px 20px 90px}
+section{margin-bottom:40px}
+
+/* type */
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
+h1{font-family:var(--disp);font-weight:800;font-size:clamp(34px,7vw,62px);line-height:.94;letter-spacing:-.03em;margin:.18em 0 .22em;text-transform:uppercase}
+h2{font-family:var(--disp);font-weight:700;font-size:clamp(19px,3.2vw,25px);letter-spacing:-.015em;margin:0 0 4px;text-transform:uppercase}
+h3{font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:-.005em;margin:0}
+.dek{font-size:17px;color:var(--mute);max-width:56ch;margin:0}
+.note{font-size:13px;color:var(--mute);margin:4px 0 20px;max-width:70ch}
+.rule{height:3px;background:var(--ink);margin:0 0 16px}
+
+/* thesis stats */
+.thesis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:2px;background:var(--rule);border:2px solid var(--ink);margin-top:26px}
+.t{background:var(--card);padding:13px 15px}
+.t .n{font-family:var(--disp);font-weight:800;font-size:26px;line-height:1.05;letter-spacing:-.02em}
+.t .l{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:5px;line-height:1.35}
+.t.up .n{color:var(--gain)} .t.dn .n{color:var(--loss)}
+
+/* SIGNATURE: the scissor */
+.scissor{background:var(--card);border:2px solid var(--ink);padding:18px 16px 12px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin-bottom:14px}
+.legend span{display:flex;align-items:center;gap:6px}
+.sw{width:13px;height:11px;display:inline-block}
+.row{display:grid;grid-template-columns:104px 1fr;gap:10px;align-items:center;margin-bottom:3px}
+.row .co{font-family:var(--disp);font-weight:600;font-size:12px;text-align:right;line-height:1.15}
+.track{position:relative;height:26px;border-left:2px solid var(--ink);border-right:0}
+.axis{position:absolute;top:0;bottom:0;width:2px;background:var(--ink);opacity:.85}
+.b{position:absolute;height:10px}
+.b.v{top:1px;background:var(--vol)}
+.b.e{top:14px}
+.b.e.pos{background:var(--gain)} .b.e.neg{background:var(--loss)}
+.b span{position:absolute;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:9.5px;font-weight:500;white-space:nowrap;color:var(--ink)}
+.b.pos span,.b.v span{left:calc(100% + 5px)}
+.b.neg span{right:calc(100% + 5px)}
+.scale{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9.5px;color:var(--faint);margin-top:6px;padding-left:114px}
+
+/* league bars */
+.league{background:var(--card);border:2px solid var(--ink);padding:16px}
+.lrow{display:grid;grid-template-columns:112px 1fr 96px;gap:10px;align-items:center;padding:4px 0;border-bottom:1px solid var(--rule)}
+.lrow:last-child{border-bottom:0}
+.lrow .co{font-family:var(--disp);font-weight:600;font-size:12.5px;text-align:right}
+.lbar{height:16px;background:var(--gain);position:relative}
+.lbar.mid{background:#4A7F91} .lbar.low{background:var(--loss)}
+.lrow .v{font-family:var(--mono);font-size:12px;font-weight:700;text-align:right}
+.lrow .d{font-family:var(--mono);font-size:10px;color:var(--mute);text-align:right}
+
+/* fuel strip */
+.fuel{background:var(--ink);color:var(--card);border:2px solid var(--ink);padding:18px}
+.fuel h2{color:var(--card)}
+.fline{display:flex;align-items:flex-end;gap:0;height:110px;margin:20px 0 6px}
+.fp{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:6px}
+.fp i{display:block;width:100%;max-width:52px;background:var(--gold)}
+.fp b{font-family:var(--mono);font-size:12px;font-weight:700}
+.fp em{font-family:var(--mono);font-size:9.5px;font-style:normal;letter-spacing:.09em;text-transform:uppercase;color:#A9A296}
+.warn{border-top:1px solid #4A453C;margin-top:14px;padding-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
+.warn div{font-size:13.5px;color:#D6D1C6}
+.warn strong{display:block;font-family:var(--mono);font-size:17px;font-weight:700;color:var(--gold);margin-bottom:2px}
+
+/* company cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
+.c{background:var(--card);border:2px solid var(--ink);padding:14px;display:flex;flex-direction:column}
+.chead{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:2px}
+.tick{font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacing:.06em}
+.badge{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 6px;border:1.5px solid;white-space:nowrap;flex-shrink:0}
+.badge.del{color:var(--gain);border-color:var(--gain)}
+.badge.part{color:var(--gold);border-color:var(--gold)}
+.badge.miss{color:var(--loss);border-color:var(--loss)}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);margin:11px 0}
+.tile{background:var(--card2);padding:7px 9px}
+.tile .n{font-family:var(--mono);font-size:15px;font-weight:700;line-height:1.15}
+.tile .l{font-family:var(--mono);font-size:8.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:3px}
+.tile .n.up{color:var(--gain)} .tile .n.dn{color:var(--loss)}
+.c ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.c li{margin-bottom:5px}
+.c li::marker{color:var(--faint)}
+.flags{margin-top:auto;padding-top:10px;display:flex;flex-wrap:wrap;gap:5px}
+.flag{font-family:var(--mono);font-size:9px;letter-spacing:.05em;text-transform:uppercase;background:var(--loss);color:var(--card);padding:3px 6px}
+.flag.ok{background:var(--gain)}
+
+
+table{width:100%;border-collapse:collapse;background:var(--card);border:2px solid var(--ink)}
+th{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;text-align:left;padding:9px 10px;background:var(--ink);color:var(--card)}
+td{padding:9px 10px;border-bottom:1px solid var(--rule);font-size:13.5px;vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.co{font-family:var(--disp);font-weight:700;font-size:13px;white-space:nowrap}
+td.vd{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;white-space:nowrap}
+.vd.del{color:var(--gain)} .vd.part{color:var(--gold)} .vd.miss{color:var(--loss)}
+
+/* call */
+.calls{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.call{border:2px solid var(--ink);padding:15px;background:var(--card)}
+.call.buy{border-left:9px solid var(--gain)}
+.call.wait{border-left:9px solid var(--gold)}
+.call.avoid{border-left:9px solid var(--loss)}
+.call .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.call h3{margin:4px 0 7px;font-size:17px}
+.call p{margin:0;font-size:13.5px}
+
+
+/* commentary */
+.themes{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.th{background:var(--card);border:2px solid var(--ink);padding:14px}
+.th .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--mute);border-bottom:2px solid var(--ink);padding-bottom:6px;margin-bottom:9px}
+.th ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.th li{margin-bottom:6px}
+.th li::marker{color:var(--faint)}
+.th b{font-family:var(--mono);font-size:12.5px;font-weight:700}
+
+/* red flags */
+.rf{background:var(--card);border:2px solid var(--ink)}
+.rfg{border-bottom:2px solid var(--ink)}
+.rfg:last-child{border-bottom:0}
+.rfh{display:flex;align-items:center;gap:9px;padding:8px 13px;background:var(--card2)}
+.sev{width:11px;height:11px;flex-shrink:0}
+.sev.hi{background:var(--loss)} .sev.md{background:var(--gold)} .sev.lo{background:var(--faint)}
+.rfh span{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase}
+.rfr{display:grid;grid-template-columns:118px 1fr;gap:12px;padding:9px 13px;border-top:1px solid var(--rule);font-size:13.5px}
+.rfr b{font-family:var(--disp);font-weight:700;font-size:12.5px}
+
+/* ind-ra verdict */
+.indra{background:var(--card);border:2px solid var(--ink);padding:16px}
+.split{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:2px;background:var(--rule);border:1px solid var(--rule);margin-bottom:16px}
+.sp{background:var(--card2);padding:13px 14px}
+.sp .n{font-family:var(--disp);font-weight:800;font-size:34px;line-height:1;letter-spacing:-.03em;color:var(--loss)}
+.sp.ok .n{color:var(--gain)}
+.sp .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-top:6px}
+.sp .w{font-size:12.5px;color:var(--mute);margin-top:7px}
+.vs{display:grid;grid-template-columns:82px 1fr;gap:11px;padding:7px 0;border-bottom:1px solid var(--rule);font-size:13.5px;align-items:start}
+.vs:last-child{border-bottom:0}
+.vs em{font-family:var(--mono);font-size:9.5px;font-style:normal;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding-top:2px}
+.vs em.y{color:var(--gain)} .vs em.n{color:var(--loss)} .vs em.p{color:var(--gold)}
+
+/* regional strip */
+.reg{display:grid;grid-template-columns:repeat(auto-fit,minmax(112px,1fr));gap:2px;background:var(--rule);border:2px solid var(--ink);margin-top:16px}
+.rg{background:var(--card2);padding:11px 12px;text-align:center}
+.rg .n{font-family:var(--mono);font-size:15px;font-weight:700}
+.rg .n.up{color:var(--gain)} .rg .n.dn{color:var(--loss)}
+.rg .l{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-top:4px}
+
+/* triggers */
+.trigs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:14px}
+.tg{border:2px solid var(--ink);padding:14px;background:var(--card)}
+.tg .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
+.tg.tg-up .k{color:var(--gain)} .tg.tg-dn .k{color:var(--loss)}
+.tg ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.tg li{margin-bottom:6px}
+
+/* caveats */
+.cav{background:var(--card2);border:2px solid var(--ink);padding:15px 15px 15px 30px;margin:0;font-size:13.5px;line-height:1.55}
+.cav li{margin-bottom:8px}
+.cav li:last-child{margin-bottom:0}
+.cav b{font-family:var(--mono);font-size:12px;font-weight:700}
+
+
+/* wide data tables */
+.tw{overflow-x:auto;border:2px solid var(--ink);background:var(--card)}
+.tw table{border:0;min-width:660px}
+.tw th{position:sticky;top:0}
+td.num{font-family:var(--mono);font-size:12px;font-weight:700;text-align:right;white-space:nowrap}
+td.num.up{color:var(--gain)} td.num.dn{color:var(--loss)} td.num.ns{color:var(--faint);font-weight:400}
+th.r{text-align:right}
+td.kpi{font-family:var(--mono);font-size:11.5px;text-align:right;white-space:nowrap}
+.asof{font-family:var(--mono);font-size:11px;color:var(--mute);margin-top:10px;line-height:1.6}
+.asof b{color:var(--ink)}
+
+footer{border-top:3px solid var(--ink);padding-top:15px;font-size:12.5px;color:var(--mute)}
+footer p{margin:0 0 8px;max-width:80ch}
+
+@media(max-width:620px){
+  .row{grid-template-columns:74px 1fr;gap:7px}
+  .row .co{font-size:10.5px}
+  .scale{padding-left:81px}
+  .lrow{grid-template-columns:80px 1fr 74px}
+  .lrow .co{font-size:11px}
+  .wrap{padding:20px 13px 60px}
+  td.hide,th.hide{display:none}
+}
+@media(prefers-reduced-motion:no-preference){
+  .b,.lbar,.fp i{animation:g .7s cubic-bezier(.2,.7,.3,1) both}
+  @keyframes g{from{transform:scaleX(.001);opacity:0}to{transform:scaleX(1);opacity:1}}
+  .b.neg{transform-origin:right} .b.v,.b.pos,.lbar{transform-origin:left}
+  .fp i{animation-name:gy;transform-origin:bottom}
+  @keyframes gy{from{transform:scaleY(.001)}to{transform:scaleY(1)}}
+}
+
+.badge.nsc{color:var(--mute);border-color:var(--mute)}
+.lsub{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin:14px 0 6px}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Sector earnings review · Quarter ended 30 September 2026</div>
+  <h1>Power Ancillaries<br>Q2 FY27</h1>
+  <p class="dek">Orders are booming, but materials split the margins: the large OEMs widened theirs while mid-size transformer makers lost 4–10 points to input costs.</p>
+  <div class="thesis">
+    <div class="t up"><div class="n">+78%</div><div class="l">CG Power order inflow YoY</div></div>
+    <div class="t up"><div class="n">27.1%</div><div class="l">GE Vernova T&amp;D operating margin</div></div>
+    <div class="t dn"><div class="n">−10.5 pts</div><div class="l">Shilchar operating margin YoY</div></div>
+    <div class="t dn"><div class="n">76%</div><div class="l">Voltamp material cost / revenue (71%)</div></div>
+  </div>
+</header>
+
+<section>
+  <h2>The scissor</h2>
+  <div class="rule"></div>
+  <p class="note">The sector map calls for order-inflow growth against margin change. Inflow was verified only for three large companies, so revenue growth stands in. Bars show revenue growth YoY against operating-profit growth YoY (before other income), on one axis, from filed consolidated quarterlies. TARIL's +150% is off a weak base.</p>
+  <div class="scissor">
+    <div class="legend">
+      <span><i class="sw" style="background:var(--vol)"></i>Revenue growth YoY</span>
+      <span><i class="sw" style="background:var(--gain)"></i>Operating profit growth YoY</span>
+    </div>
+    <div id="scissor"></div>
+    <div class="scale"><span>−30</span><span>+40</span><span>+110</span><span>+180</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>Operating margin — the league table</h2>
+  <div class="rule"></div>
+  <p class="note">Consolidated operating margin before other income. Hitachi's 13.6% includes a ₹56 cr FX and commodity timing loss; management's 16.5% excludes it.</p>
+  <div class="league">
+    <div class="lsub">Operating margin, Q2 FY27 (change)</div>
+    <div id="league"></div>
+  </div>
+</section>
+
+<section>
+  <h2>The pressure point: material cost pass-through</h2>
+  <div class="rule"></div>
+  <div class="fuel">
+    <h2>Op. margin change YoY, pts</h2>
+    <div class="fline" id="fuel"></div>
+    <div class="warn">
+      <div><strong>The squeeze</strong>Material cost rose to 76% of revenue at Voltamp (71% a year ago) and 71% at Shilchar (60%). Hitachi's rose to 61.7% from 57.5%.</div>
+      <div><strong>Who passed it on</strong>GE Vernova T&amp;D (+1.4 pts), CG Power (+1.3) and TARIL (+6.2) widened margins. Their material share is 56–68%.</div>
+      <div><strong>Read-across</strong>Orders are not the constraint. Pricing power on copper and CRGO steel is. The derived material shares are inventory-adjusted Tijori figures.</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Company by company</h2>
+  <div class="rule"></div>
+  <p class="note">The badge scores Q2 delivery against verified commitments. Voltamp, Shilchar and Indo Tech are marked on the size of the margin fall. Danish Power is not covered in this build.</p>
+  <div class="grid" id="cards"></div>
+</section>
+
+<section>
+  <h2>KPI comparison</h2>
+  <div class="rule"></div>
+  <p class="note">n/v means disclosed but not verified for this build. n/r means not reported. Book-to-revenue and material share are derived from Tijori.</p>
+  <div class="tw">
+  <table>
+    <thead><tr>
+      <th>Company</th><th class="r">Revenue YoY</th><th class="r">Op. margin</th><th class="r">Margin chg</th><th class="r">Order inflow</th>
+      <th class="r">Order book</th><th class="r">Book / TTM rev</th><th class="r">Material / rev</th><th class="r">Basis</th>
+    </tr></thead>
+    <tbody id="kpi"></tbody>
+  </table>
+  </div>
+</section>
+
+<section>
+  <h2>What management said</h2>
+  <div class="rule"></div>
+  <p class="note">From GE Vernova T&amp;D's release (T&amp;D India), CG Power's BSE filing (via Arthneeti) and Hitachi Energy's November presentation. Tijori had no Q2 transcripts for this set by 15 November.</p>
+  <div class="themes">
+    <div class="th"><div class="k">Orders</div><ul>
+      <li>CG Power: inflow ₹8,485 cr, +78%.</li>
+      <li>GE Vernova T&amp;D: inflow ₹2,440 cr, +52%; 79% domestic.</li>
+      <li>Hitachi: inflow ₹4,121 cr, +86%; backlog ₹33,335 cr.</li>
+    </ul></div>
+    <div class="th"><div class="k">Customers</div><ul>
+      <li>GE Vernova T&amp;D: backlog 78% private utilities, 20% central.</li>
+    </ul></div>
+    <div class="th"><div class="k">Capacity</div><ul>
+      <li>CG Power: Sehore transformer facility launched.</li>
+      <li>Hitachi: Karjan transformer plant due December 2028.</li>
+    </ul></div>
+    <div class="th"><div class="k">Costs</div><ul>
+      <li>Hitachi: a ₹56 cr FX and commodity timing loss in the quarter.</li>
+    </ul></div>
+  </div>
+</section>
+
+<section>
+  <h2>Red flags</h2>
+  <div class="rule"></div>
+  <p class="note">Ranked by how much they should change position sizing.</p>
+  <div class="rf">
+    <div class="rfg">
+      <div class="rfh"><i class="sev hi"></i><span>Act on these</span></div>
+      <div class="rfr"><b>Shilchar</b><div>Margin down 10.5 pts YoY and falling for three quarters: the peak-margin cycle is reversing.</div></div>
+      <div class="rfr"><b>Indo Tech</b><div>Operating profit flat on revenue +30%.</div></div>
+    </div>
+    <div class="rfg">
+      <div class="rfh"><i class="sev md"></i><span>Monitor next quarter</span></div>
+      <div class="rfr"><b>Voltamp</b><div>Material cost up 5 pts of revenue.</div></div>
+      <div class="rfr"><b>Hitachi Energy</b><div>Material share and FX losses hurt the reported margin.</div></div>
+    </div>
+    <div class="rfg">
+      <div class="rfh"><i class="sev lo"></i><span>Note and move on</span></div>
+      <div class="rfr"><b>Salzer · Bharat Bijlee</b><div>Single-digit margins on strong revenue.</div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Walk the talk</h2>
+  <div class="rule"></div>
+  <p class="note">Only Hitachi's Q1 commitments were verified, from the BESS review.</p>
+  <table>
+    <thead><tr><th>Company</th><th>Promised</th><th class="hide">Delivered</th><th>Verdict</th></tr></thead>
+    <tbody id="score"></tbody>
+  </table>
+</section>
+
+<section>
+  <h2>Was the consensus right?</h2>
+  <div class="rule"></div>
+  <p class="note">No published Q2 poll was found. We score the narrative: a transmission super-cycle lifts every equipment maker.</p>
+  <div class="indra">
+    <div class="split">
+      <div class="sp ok"><div class="n">9 of 9</div><div class="l">Revenue up YoY</div><div class="w">Demand is broad.</div></div>
+      <div class="sp"><div class="n">5 of 9</div><div class="l">Lower margin YoY</div><div class="w">Pricing is not.</div></div>
+      <div class="sp ok"><div class="n">+52–86%</div><div class="l">Inflow at the leaders</div><div class="w">Orders keep coming.</div></div>
+    </div>
+    <div class="vs"><em class="y">Right</em><div><b>Demand keeps growing.</b> Every company grew revenue 13–64%; the three large OEMs grew inflow 52–86%.</div></div>
+    <div class="vs"><em class="n">Partly</em><div><b>It lifts every maker.</b> Five of nine lost margin. The winners were the scale players and TARIL.</div></div>
+  </div>
+</section>
+
+<section>
+  <h2>The call</h2>
+  <div class="rule"></div>
+  <div class="calls">
+    <div class="call buy">
+      <div class="k">Own now</div>
+      <h3>GE Vernova T&amp;D · CG Power</h3>
+      <p>Both grew operating profit faster than revenue, with inflow up 52–78% and material share under 66%. GE Vernova T&amp;D has the best margin in the set.</p>
+    </div>
+    <div class="call wait">
+      <div class="k">Accumulate on evidence</div>
+      <h3>Hitachi Energy · TARIL · Voltamp · Bharat Bijlee</h3>
+      <p>Hitachi's orders are a record but its margin needs to recover. TARIL's margin recovery needs one more quarter. Voltamp must pass costs on. Bharat Bijlee's growth comes at an 8% margin.</p>
+    </div>
+    <div class="call avoid">
+      <div class="k">Stay out</div>
+      <h3>Shilchar · Indo Tech · Salzer</h3>
+      <p>Shilchar and Indo Tech lost 4–10 pts of margin. Salzer earns under 7% with a heavy interest bill.</p>
+    </div>
+  </div>
+  <div class="trigs">
+    <div class="tg tg-up"><div class="k">What would make us more positive</div><ul>
+      <li>Copper and CRGO prices easing in Q3.</li>
+      <li>Hitachi's reported margin back above 15%.</li>
+    </ul></div>
+    <div class="tg tg-dn"><div class="k">What would make us cut</div><ul>
+      <li>GE Vernova T&amp;D's or CG's margin falling as capacity adds dilute pricing.</li>
+      <li>A slowdown in utility tendering.</li>
+    </ul></div>
+  </div>
+</section>
+
+<section>
+  <h2>Analyst coverage after results</h2>
+  <div class="rule"></div>
+  <p class="note">Dated post-result broker reports were not verified for this build. No targets are shown, rather than undated ones.</p>
+  <div class="tw">
+  <table>
+    <thead><tr><th>Company</th><th>Broker</th><th>Report date</th><th>Rating</th><th class="r">Target (₹)</th><th class="r">Prior (₹)</th><th class="r">Price at report (₹)</th></tr></thead>
+    <tbody id="brk"></tbody>
+  </table>
+  </div>
+</section>
+
+<section>
+  <h2>Price and returns</h2>
+  <div class="rule"></div>
+  <p class="note">Hitachi, GE Vernova T&amp;D and Indo Tech are +44% to +47% in a year. Most of the set is down over three months as the cycle's margin peak is questioned.</p>
+  <div class="tw">
+  <table>
+    <thead><tr>
+      <th>Company</th><th>Ticker</th><th>Results date</th><th class="r">CMP (₹)</th>
+      <th class="r">1 year</th><th class="r">6 months</th><th class="r">3 months</th><th class="r">MTD</th>
+    </tr></thead>
+    <tbody id="ret"></tbody>
+  </table>
+  </div>
+  <p class="asof">Prices as on 13 Nov 2026 close (Zerodha Kite last price). Anchors: 1Y = 14 Nov 2025, 6M = 15 May 2026, 3M = 14 Aug 2026, MTD = 30 Oct 2026 closes, Kite daily candles (corporate-action adjusted).  Sorted by 1-year return.</p>
+</section>
+
+<section>
+  <h2>Caveats</h2>
+  <div class="rule"></div>
+  <ul class="cav">
+    <li><b>Sources.</b> All financials are consolidated filed quarterlies from Tijori, with operating profit before other income. Commentary comes from T&amp;D India, CG Power's BSE filing via Arthneeti, and Hitachi Energy's investor presentation.</li>
+    <li><b>Tijori against management.</b> Hitachi's 16.5% operating EBITDA excludes a ₹56.1 cr FX and commodity timing loss; Tijori's 13.6% includes it, and the two reconcile. CG Power's ₹409 cr PAT matches Tijori's ₹409 cr.</li>
+    <li><b>Derived figures.</b> Material cost / revenue is raw material adjusted for inventory change, from Tijori. Book-to-revenue uses four quarters of Tijori revenue.</li>
+    <li><b>Prices.</b> Shilchar's NSE price history on Kite starts after November 2025, so its one-year return is n/s. Siemens Energy India had not reported.</li>
+    <li><b>Walk the talk and analyst coverage</b> are thin. Results dates marked n/s were not verified.</li>
+  </ul>
+</section>
+
+<footer>
+  <p><b>Universe:</b> 10 listed Indian power-equipment companies, quarter ended 30 September 2026. Sources: filed quarterlies via Tijori; T&amp;D India; BSE filings; company presentations. Prices from Zerodha Kite. Built 16 November 2026.</p>
+</footer>
+
+</div>
+<script>
+const C=(n,t,b,bl,k,p,f)=>({n,t,b,bl,k,p,f});
+const SC=[["Hitachi Energy",63.5,35.8],["TARIL",60.7,150.0],["Bharat Bijlee",55.6,68.7],["Voltamp",41.6,13.2],["Salzer",38.4,9.3],["GE Vernova T&D",31.8,38.9],["CG Power",30.1,43.2],["Indo Tech",30.1,-0.9],["Shilchar",12.9,-25.3]];
+const MIN=-30,MAX=180,SCU1="%",SCU2="%";
+const LEAGUES=[["league",[["GE Vernova T&D",27.1,"+1.4 pts YoY; +2.0 QoQ"],["Shilchar",20.8,"−10.5 pts YoY; +4.4 QoQ"],["TARIL",17.4,"+6.2 pts YoY; +1.1 QoQ"],["Voltamp",15.5,"−3.9 pts YoY; +0.7 QoQ"],["CG Power",14.2,"+1.3 pts YoY; +2.1 QoQ"],["Hitachi Energy",13.6,"−2.8 pts YoY; −1.0 QoQ"],["Indo Tech",12.9,"−4.1 pts YoY; −1.1 QoQ"],["Bharat Bijlee",8.0,"+0.6 pts YoY; +2.7 QoQ"],["Salzer",6.9,"−1.8 pts YoY; +0.6 QoQ"]],30,15,9,v=>`${v.toFixed(1)}%`]];
+const FU=[["SHILCHAR",-10.5],["INDOTECH",-4.1],["VOLTAMP",-3.9],["HITACHI",-2.8],["SALZER",-1.8],["BBL",0.6],["CG",1.3],["GVTD",1.4],["TARIL",6.2]];
+const FUMAX=11,FUFMT=v=>`${v>0?'+':v<0?'−':''}${Math.abs(v).toFixed(1)}`;
+const CO=[
+ C("GE Vernova T&D","GVT&D · Large","nsc","Not scored",[["₹2,440 cr","Order inflow (+52%)",1],["₹2,027 cr","Revenue (+31.8%)",1],["27.1%","Op. margin (25.8% YoY)",1],["₹431 cr","Net profit (+44%)",1]],
+  ["The highest margin in the set, and still rising: +1.4 pts YoY.","Backlog ₹21,443 cr, about 3x trailing revenue. 78% is from private utilities.","79% of new orders were domestic.","Verdict: the best combination of margin, growth and order quality. +46% in a year."],
+  [["Valuation",""],["Margin","ok"],["Orders","ok"]]),
+ C("CG Power","CGPOWER · Large","nsc","Not scored",[["₹8,485 cr","Order inflow (+78%)",1],["₹3,802 cr","Revenue (+30.1%)",1],["14.2%","Op. margin (12.9% YoY)",1],["₹412 cr","Net profit (+44%)",1]],
+  ["Operating profit +43% on revenue +30%.","Order inflow +78%. A new transformer facility at Sehore was launched in the quarter.","No margin guidance or segment detail was verified.","Verdict: clean scale-up with operating leverage. +11% in a year."],
+  [["Capex ramp",""],["Orders","ok"]]),
+ C("Hitachi Energy","POWERINDIA · Large","part","Orders up, margin down",[["₹4,121 cr","Order inflow (+86%)",1],["₹2,997 cr","Revenue (+63.5%)",1],["13.6%","Op. margin (16.3% YoY)",-1],["₹33,335 cr","Backlog (+13%)",1]],
+  ["Management's 16.5% operating EBITDA excludes a ₹56 cr FX and commodity timing loss. Tijori's 13.6% includes it. They reconcile.","Material cost rose to 61.7% of revenue from 57.5%.","Q1 call: BESS margins to reach \"desired levels\" gradually. Karjan transformer plant due December 2028.","Verdict: orders delivered; the reported margin did not. −12% over three months."],
+  [["Material cost",""],["FX loss",""],["Orders","ok"]]),
+ C("Transformers & Rectifiers","TARIL · Small","nsc","Not scored",[["₹739 cr","Revenue (+60.7%)",1],["17.4%","Op. margin (11.2% YoY)",1],["₹80 cr","Net profit (2.4x)",1],["+150%","Operating profit YoY",1]],
+  ["Operating profit 2.5x on a weak base; margin +6.2 pts, the biggest gain in the set.","Interest ₹14 cr is material for its size.","No Q2 commentary was verified.","Verdict: the margin recovery is real. Flat over a year."],
+  [["Weak base",""],["Margin","ok"]]),
+ C("Voltamp","VOLTAMP · Small","miss","Margin hit",[["₹684 cr","Revenue (+41.6%)",1],["15.5%","Op. margin (19.4% YoY)",-1],["₹85 cr","Net profit (+8%)",0],["76%","Material cost / revenue",-1]],
+  ["Material cost rose to 76% of revenue from 71%. Operating profit grew only 13%.","Other income fell to ₹8 cr from ₹15 cr.","Verdict: volumes are strong but pricing has not caught up with input costs. +22% in a year."],
+  [["Material cost",""],["Margin −3.9 pts",""]]),
+ C("Shilchar","SHILCTECH · Micro","miss","Margin collapse",[["₹193 cr","Revenue (+12.9%)",0],["20.8%","Op. margin (31.3% YoY)",-1],["₹33 cr","Net profit (−28%)",-1],["−25%","Operating profit YoY",-1]],
+  ["Margin fell 10.5 pts YoY: the sharpest fall in the set. Material cost rose to 71% of revenue from 60%.","Revenue rebounded QoQ, but margins have fallen for three quarters from 33%.","Verdict: the peak-margin phase is over. −11% over six months."],
+  [["Margin −10.5 pts",""],["Peak reversal",""]]),
+ C("Bharat Bijlee","BBL · Micro","nsc","Not scored",[["₹736 cr","Revenue (+55.6%)",1],["8.0%","Op. margin (7.4% YoY)",0],["₹46 cr","Net profit (+63%)",1],["+69%","Operating profit YoY",1]],
+  ["Strong revenue growth; operating profit +69%.","The margin stays under 8%, low for the sector.","Verdict: growth with thin pricing. +19% over three months."],
+  [["Thin margin",""],["Growth","ok"]]),
+ C("Indo Tech","INDOTECH · Micro","miss","Margin hit",[["₹238 cr","Revenue (+30%)",1],["12.9%","Op. margin (16.9% YoY)",-1],["₹26 cr","Net profit (+5%)",0],["−1%","Operating profit YoY",-1]],
+  ["Revenue +30% but operating profit flat. Margin −4.1 pts.","Verdict: no operating leverage on strong demand. −25% over three months."],
+  [["Margin −4.1 pts",""]]),
+ C("Salzer","SALZERELEC · Micro","nsc","Not scored",[["₹580 cr","Revenue (+38.4%)",1],["6.9%","Op. margin (8.7% YoY)",-1],["₹14 cr","Net profit (+11%)",0],["₹13 cr","Interest",-1]],
+  ["Revenue +38% but operating profit only +9%.","Interest takes a third of operating profit.","Verdict: low-margin volume. −29% in a year."],
+  [["Thin margin",""],["Interest",""]]),
+ C("Siemens Energy India","ENRIN · Large","nsc","Not reported",[["n/r","Sep quarter not filed",0],["23.6%","Op. margin, Jun quarter",1],["+68%","PAT YoY, Jun quarter",1],["−4.0%","1-year return",-1]],
+  ["On a September year-end; the September quarter had not reported by 15 Nov.","Shown for completeness; excluded from charts and rankings."],[["Not reported",""]])
+];
+const KPI=[
+ ["GE Vernova T&D","+31.8%","27.1%","+1.4 pts","₹2,440 cr (+52%)","₹21,443 cr","~3.0x","56%","Cons.; Tijori + T&D India"],
+ ["CG Power","+30.1%","14.2%","+1.3 pts","₹8,485 cr (+78%)","n/v","n/v","65%","Cons.; Tijori + filing"],
+ ["Hitachi Energy","+63.5%","13.6% (mgmt 16.5%)","−2.8 pts","₹4,121 cr (+86%)","₹33,335 cr","~3.4x","62%","Cons.; Tijori + presentation"],
+ ["TARIL","+60.7%","17.4%","+6.2 pts","n/v","n/v","n/v","68%","Cons.; Tijori"],
+ ["Voltamp","+41.6%","15.5%","−3.9 pts","n/v","n/v","n/v","76%","Cons.; Tijori"],
+ ["Shilchar","+12.9%","20.8%","−10.5 pts","n/v","n/v","n/v","71%","Cons.; Tijori"],
+ ["Bharat Bijlee","+55.6%","8.0%","+0.6 pts","n/v","n/v","n/v","75%","Cons.; Tijori"],
+ ["Indo Tech","+30.1%","12.9%","−4.1 pts","n/v","n/v","n/v","73%","Cons.; Tijori"],
+ ["Salzer","+38.4%","6.9%","−1.8 pts","n/v","n/v","n/v","81%","Cons.; Tijori"],
+ ["Siemens Energy India","n/r","n/r","n/r","n/r","n/r","n/r","n/r","Sep qtr not filed"]
+];
+const BRK=[["All","Not verified this build","—","—","—","—","—"]];
+const SCORE=[
+ ["Hitachi Energy","Q1 call: HVDC and transmission orders; BESS margins to improve gradually","Orders +86%, backlog record; operating margin 16.5% (mgmt) but 13.6% reported after FX loss.","part","Partial"]
+];
+const SPAN=MAX-MIN,Z=(0-MIN)/SPAN*100;
+document.getElementById("scissor").innerHTML=SC.map(([n,v,e],i)=>{
+ const bar=(val,cls,u)=>{const w=Math.max(Math.abs(val),0.3)/SPAN*100;
+  const l=val>=0?Z:Z-w;
+  return `<i class="b ${cls} ${val>=0?'pos':'neg'}" style="left:${l}%;width:${w}%;animation-delay:${i*45}ms"><span>${val>0?'+':''}${val}${u}</span></i>`;};
+ return `<div class="row"><div class="co">${n}</div><div class="track"><i class="axis" style="left:${Z}%"></i>${bar(v,'v',SCU1)}${bar(e,'e',SCU2)}</div></div>`;
+}).join("");
+const league=(id,rows,max,hi,mid,fmt)=>{document.getElementById(id).innerHTML=rows.map(([n,v,d],i)=>{
+ const cls=v>=hi?"":v>=mid?"mid":"low";
+ return `<div class="lrow"><div class="co">${n}</div>
+ <div><i class="lbar ${cls}" style="display:block;width:${Math.max(v,0)/max*100}%;animation-delay:${i*40}ms"></i></div>
+ <div><div class="v">${fmt(v)}</div><div class="d">${d}</div></div></div>`;}).join("");};
+LEAGUES.forEach(([id,rows,max,hi,mid,fmt])=>league(id,rows,max,hi,mid,fmt));
+document.getElementById("fuel").innerHTML=FU.map(([l,v],i)=>
+ `<div class="fp"><b>${FUFMT(v)}</b><i style="height:${Math.abs(v)/FUMAX*88}px;animation-delay:${i*120}ms"></i><em>${l}</em></div>`).join("");
+document.getElementById("cards").innerHTML=CO.map(c=>`
+ <article class="c">
+  <div class="chead"><div><h3>${c.n}</h3><div class="tick">${c.t}</div></div><div class="badge ${c.b}">${c.bl}</div></div>
+  <div class="tiles">${c.k.map(([n,l,s])=>`<div class="tile"><div class="n ${s===1?'up':s===-1?'dn':''}">${n}</div><div class="l">${l}</div></div>`).join("")}</div>
+  <ul>${c.p.map(x=>`<li>${x}</li>`).join("")}</ul>
+  <div class="flags">${c.f.map(([t,k])=>`<span class="flag ${k}">${t}</span>`).join("")}</div>
+ </article>`).join("");
+document.getElementById("kpi").innerHTML=KPI.map(r=>
+ `<tr><td class="co">${r[0]}</td>`+r.slice(1).map(c=>`<td class="kpi">${c}</td>`).join("")+`</tr>`).join("");
+document.getElementById("brk").innerHTML=BRK.map(r=>
+ `<tr><td class="co">${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td class="num">${r[4]}</td><td class="num ${r[5].includes('↓')?'dn':r[5].includes('↑')?'up':''}">${r[5]}</td><td class="num">${r[6]}</td></tr>`).join("");
+const RET=[["Hitachi Energy", "POWERINDIA", "12 Nov", "31,595.00", "+47.2%", "-2.9%", "-11.5%", "+16.1%"], ["GE Vernova T&D", "GVT&D", "n/s", "4,420.00", "+45.6%", "+1.8%", "+1.6%", "+10.0%"], ["Indo Tech", "INDOTECH", "n/s", "2,662.60", "+44.0%", "+2.4%", "-25.2%", "-2.0%"], ["Voltamp", "VOLTAMP", "n/s", "9,849.00", "+22.0%", "+3.7%", "-2.9%", "-4.8%"], ["CG Power", "CGPOWER", "23 Oct", "828.00", "+11.4%", "-1.2%", "-7.0%", "+3.0%"], ["Transformers & Rectifiers", "TARIL", "n/s", "314.80", "-1.1%", "+4.7%", "+5.6%", "+5.5%"], ["Bharat Bijlee", "BBL", "n/s", "2,722.90", "-7.2%", "+6.2%", "+19.2%", "+16.8%"], ["Salzer", "SALZERELEC", "n/s", "543.80", "-29.0%", "-23.5%", "-4.6%", "+16.6%"], ["Shilchar", "SHILCTECH", "n/s", "3,557.60", "n/s", "-11.3%", "-8.9%", "-0.5%"]];
+document.getElementById("ret").innerHTML=RET.map(r=>{
+ const cell=v=>{ if(v==="n/s") return `<td class="num ns">n/s</td>`;
+   const cls=v.startsWith("+")?"up":v.startsWith("-")?"dn":""; return `<td class="num ${cls}">${v}</td>`;};
+ return `<tr><td class="co">${r[0]}</td><td class="tick">${r[1]}</td><td>${r[2]}</td>`
+  +`<td class="num">${r[3]==="n/s"?'<span class="ns">n/s</span>':r[3]}</td>`+r.slice(4).map(cell).join("")+`</tr>`;
+}).join("");
+document.getElementById("score").innerHTML=SCORE.map(([c,p,d,k,v])=>
+ `<tr><td class="co">${c}</td><td>${p}</td><td class="hide">${d}</td><td class="vd ${k}">${v}</td></tr>`).join("");
+</script></body></html>

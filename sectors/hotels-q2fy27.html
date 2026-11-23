@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hotels Q2 FY27 — Sector Earnings Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Roboto+Mono:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --stone:#E3E0D9; --card:#F3F1EC; --card2:#EAE7E0;
+  --ink:#1F1D1A; --mute:#6E6A62; --faint:#9A958B; --rule:#C9C4B9;
+  --gain:#1D5C7A; --loss:#A8382C; 
+  --vol:#8E8879; --gold:#B4842A;
+  --disp:'Archivo',system-ui,sans-serif;
+  --serif:'Source Serif 4',Georgia,serif;
+  --mono:'Roboto Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--stone);color:var(--ink);font-family:var(--serif);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:28px 20px 90px}
+section{margin-bottom:40px}
+
+/* type */
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
+h1{font-family:var(--disp);font-weight:800;font-size:clamp(34px,7vw,62px);line-height:.94;letter-spacing:-.03em;margin:.18em 0 .22em;text-transform:uppercase}
+h2{font-family:var(--disp);font-weight:700;font-size:clamp(19px,3.2vw,25px);letter-spacing:-.015em;margin:0 0 4px;text-transform:uppercase}
+h3{font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:-.005em;margin:0}
+.dek{font-size:17px;color:var(--mute);max-width:56ch;margin:0}
+.note{font-size:13px;color:var(--mute);margin:4px 0 20px;max-width:70ch}
+.rule{height:3px;background:var(--ink);margin:0 0 16px}
+
+/* thesis stats */
+.thesis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:2px;background:var(--rule);border:2px solid var(--ink);margin-top:26px}
+.t{background:var(--card);padding:13px 15px}
+.t .n{font-family:var(--disp);font-weight:800;font-size:26px;line-height:1.05;letter-spacing:-.02em}
+.t .l{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:5px;line-height:1.35}
+.t.up .n{color:var(--gain)} .t.dn .n{color:var(--loss)}
+
+/* SIGNATURE: the scissor */
+.scissor{background:var(--card);border:2px solid var(--ink);padding:18px 16px 12px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin-bottom:14px}
+.legend span{display:flex;align-items:center;gap:6px}
+.sw{width:13px;height:11px;display:inline-block}
+.row{display:grid;grid-template-columns:104px 1fr;gap:10px;align-items:center;margin-bottom:3px}
+.row .co{font-family:var(--disp);font-weight:600;font-size:12px;text-align:right;line-height:1.15}
+.track{position:relative;height:26px;border-left:2px solid var(--ink);border-right:0}
+.axis{position:absolute;top:0;bottom:0;width:2px;background:var(--ink);opacity:.85}
+.b{position:absolute;height:10px}
+.b.v{top:1px;background:var(--vol)}
+.b.e{top:14px}
+.b.e.pos{background:var(--gain)} .b.e.neg{background:var(--loss)}
+.b span{position:absolute;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:9.5px;font-weight:500;white-space:nowrap;color:var(--ink)}
+.b.pos span,.b.v span{left:calc(100% + 5px)}
+.b.neg span{right:calc(100% + 5px)}
+.scale{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9.5px;color:var(--faint);margin-top:6px;padding-left:114px}
+
+/* league bars */
+.league{background:var(--card);border:2px solid var(--ink);padding:16px}
+.lrow{display:grid;grid-template-columns:112px 1fr 96px;gap:10px;align-items:center;padding:4px 0;border-bottom:1px solid var(--rule)}
+.lrow:last-child{border-bottom:0}
+.lrow .co{font-family:var(--disp);font-weight:600;font-size:12.5px;text-align:right}
+.lbar{height:16px;background:var(--gain);position:relative}
+.lbar.mid{background:#4A7F91} .lbar.low{background:var(--loss)}
+.lrow .v{font-family:var(--mono);font-size:12px;font-weight:700;text-align:right}
+.lrow .d{font-family:var(--mono);font-size:10px;color:var(--mute);text-align:right}
+
+/* fuel strip */
+.fuel{background:var(--ink);color:var(--card);border:2px solid var(--ink);padding:18px}
+.fuel h2{color:var(--card)}
+.fline{display:flex;align-items:flex-end;gap:0;height:110px;margin:20px 0 6px}
+.fp{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:6px}
+.fp i{display:block;width:100%;max-width:52px;background:var(--gold)}
+.fp b{font-family:var(--mono);font-size:12px;font-weight:700}
+.fp em{font-family:var(--mono);font-size:9.5px;font-style:normal;letter-spacing:.09em;text-transform:uppercase;color:#A9A296}
+.warn{border-top:1px solid #4A453C;margin-top:14px;padding-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
+.warn div{font-size:13.5px;color:#D6D1C6}
+.warn strong{display:block;font-family:var(--mono);font-size:17px;font-weight:700;color:var(--gold);margin-bottom:2px}
+
+/* company cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
+.c{background:var(--card);border:2px solid var(--ink);padding:14px;display:flex;flex-direction:column}
+.chead{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:2px}
+.tick{font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacing:.06em}
+.badge{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 6px;border:1.5px solid;white-space:nowrap;flex-shrink:0}
+.badge.del{color:var(--gain);border-color:var(--gain)}
+.badge.part{color:var(--gold);border-color:var(--gold)}
+.badge.miss{color:var(--loss);border-color:var(--loss)}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);margin:11px 0}
+.tile{background:var(--card2);padding:7px 9px}
+.tile .n{font-family:var(--mono);font-size:15px;font-weight:700;line-height:1.15}
+.tile .l{font-family:var(--mono);font-size:8.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-top:3px}
+.tile .n.up{color:var(--gain)} .tile .n.dn{color:var(--loss)}
+.c ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.c li{margin-bottom:5px}
+.c li::marker{color:var(--faint)}
+.flags{margin-top:auto;padding-top:10px;display:flex;flex-wrap:wrap;gap:5px}
+.flag{font-family:var(--mono);font-size:9px;letter-spacing:.05em;text-transform:uppercase;background:var(--loss);color:var(--card);padding:3px 6px}
+.flag.ok{background:var(--gain)}
+
+
+table{width:100%;border-collapse:collapse;background:var(--card);border:2px solid var(--ink)}
+th{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;text-align:left;padding:9px 10px;background:var(--ink);color:var(--card)}
+td{padding:9px 10px;border-bottom:1px solid var(--rule);font-size:13.5px;vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.co{font-family:var(--disp);font-weight:700;font-size:13px;white-space:nowrap}
+td.vd{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;white-space:nowrap}
+.vd.del{color:var(--gain)} .vd.part{color:var(--gold)} .vd.miss{color:var(--loss)}
+
+/* call */
+.calls{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.call{border:2px solid var(--ink);padding:15px;background:var(--card)}
+.call.buy{border-left:9px solid var(--gain)}
+.call.wait{border-left:9px solid var(--gold)}
+.call.avoid{border-left:9px solid var(--loss)}
+.call .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.call h3{margin:4px 0 7px;font-size:17px}
+.call p{margin:0;font-size:13.5px}
+
+
+/* commentary */
+.themes{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.th{background:var(--card);border:2px solid var(--ink);padding:14px}
+.th .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--mute);border-bottom:2px solid var(--ink);padding-bottom:6px;margin-bottom:9px}
+.th ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.th li{margin-bottom:6px}
+.th li::marker{color:var(--faint)}
+.th b{font-family:var(--mono);font-size:12.5px;font-weight:700}
+
+/* red flags */
+.rf{background:var(--card);border:2px solid var(--ink)}
+.rfg{border-bottom:2px solid var(--ink)}
+.rfg:last-child{border-bottom:0}
+.rfh{display:flex;align-items:center;gap:9px;padding:8px 13px;background:var(--card2)}
+.sev{width:11px;height:11px;flex-shrink:0}
+.sev.hi{background:var(--loss)} .sev.md{background:var(--gold)} .sev.lo{background:var(--faint)}
+.rfh span{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase}
+.rfr{display:grid;grid-template-columns:118px 1fr;gap:12px;padding:9px 13px;border-top:1px solid var(--rule);font-size:13.5px}
+.rfr b{font-family:var(--disp);font-weight:700;font-size:12.5px}
+
+/* ind-ra verdict */
+.indra{background:var(--card);border:2px solid var(--ink);padding:16px}
+.split{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:2px;background:var(--rule);border:1px solid var(--rule);margin-bottom:16px}
+.sp{background:var(--card2);padding:13px 14px}
+.sp .n{font-family:var(--disp);font-weight:800;font-size:34px;line-height:1;letter-spacing:-.03em;color:var(--loss)}
+.sp.ok .n{color:var(--gain)}
+.sp .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-top:6px}
+.sp .w{font-size:12.5px;color:var(--mute);margin-top:7px}
+.vs{display:grid;grid-template-columns:82px 1fr;gap:11px;padding:7px 0;border-bottom:1px solid var(--rule);font-size:13.5px;align-items:start}
+.vs:last-child{border-bottom:0}
+.vs em{font-family:var(--mono);font-size:9.5px;font-style:normal;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding-top:2px}
+.vs em.y{color:var(--gain)} .vs em.n{color:var(--loss)} .vs em.p{color:var(--gold)}
+
+/* regional strip */
+.reg{display:grid;grid-template-columns:repeat(auto-fit,minmax(112px,1fr));gap:2px;background:var(--rule);border:2px solid var(--ink);margin-top:16px}
+.rg{background:var(--card2);padding:11px 12px;text-align:center}
+.rg .n{font-family:var(--mono);font-size:15px;font-weight:700}
+.rg .n.up{color:var(--gain)} .rg .n.dn{color:var(--loss)}
+.rg .l{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-top:4px}
+
+/* triggers */
+.trigs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:14px}
+.tg{border:2px solid var(--ink);padding:14px;background:var(--card)}
+.tg .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
+.tg.tg-up .k{color:var(--gain)} .tg.tg-dn .k{color:var(--loss)}
+.tg ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5}
+.tg li{margin-bottom:6px}
+
+/* caveats */
+.cav{background:var(--card2);border:2px solid var(--ink);padding:15px 15px 15px 30px;margin:0;font-size:13.5px;line-height:1.55}
+.cav li{margin-bottom:8px}
+.cav li:last-child{margin-bottom:0}
+.cav b{font-family:var(--mono);font-size:12px;font-weight:700}
+
+
+/* wide data tables */
+.tw{overflow-x:auto;border:2px solid var(--ink);background:var(--card)}
+.tw table{border:0;min-width:660px}
+.tw th{position:sticky;top:0}
+td.num{font-family:var(--mono);font-size:12px;font-weight:700;text-align:right;white-space:nowrap}
+td.num.up{color:var(--gain)} td.num.dn{color:var(--loss)} td.num.ns{color:var(--faint);font-weight:400}
+th.r{text-align:right}
+td.kpi{font-family:var(--mono);font-size:11.5px;text-align:right;white-space:nowrap}
+.asof{font-family:var(--mono);font-size:11px;color:var(--mute);margin-top:10px;line-height:1.6}
+.asof b{color:var(--ink)}
+
+footer{border-top:3px solid var(--ink);padding-top:15px;font-size:12.5px;color:var(--mute)}
+footer p{margin:0 0 8px;max-width:80ch}
+
+@media(max-width:620px){
+  .row{grid-template-columns:74px 1fr;gap:7px}
+  .row .co{font-size:10.5px}
+  .scale{padding-left:81px}
+  .lrow{grid-template-columns:80px 1fr 74px}
+  .lrow .co{font-size:11px}
+  .wrap{padding:20px 13px 60px}
+  td.hide,th.hide{display:none}
+}
+@media(prefers-reduced-motion:no-preference){
+  .b,.lbar,.fp i{animation:g .7s cubic-bezier(.2,.7,.3,1) both}
+  @keyframes g{from{transform:scaleX(.001);opacity:0}to{transform:scaleX(1);opacity:1}}
+  .b.neg{transform-origin:right} .b.v,.b.pos,.lbar{transform-origin:left}
+  .fp i{animation-name:gy;transform-origin:bottom}
+  @keyframes gy{from{transform:scaleY(.001)}to{transform:scaleY(1)}}
+}
+
+.badge.nsc{color:var(--mute);border-color:var(--mute)}
+.lsub{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin:14px 0 6px}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Sector earnings review · Quarter ended 30 September 2026</div>
+  <h1>Hotels<br>Q2 FY27</h1>
+  <p class="dek">Room demand is strong, but only the net-cash leaders turned it into profit growth. Leveraged owners grew operating profit 0–11%.</p>
+  <div class="thesis">
+    <div class="t up"><div class="n">+28%</div><div class="l">IHCL full-service RevPAR YoY</div></div>
+    <div class="t up"><div class="n">15–17%</div><div class="l">IHCL FY27 revenue guide, raised from 12–14%</div></div>
+    <div class="t up"><div class="n">+37%</div><div class="l">ITC Hotels operating profit YoY</div></div>
+    <div class="t dn"><div class="n">−56%</div><div class="l">Ventive net profit YoY</div></div>
+  </div>
+</header>
+
+<section>
+  <h2>The scissor</h2>
+  <div class="rule"></div>
+  <p class="note">The sector map calls for RevPAR growth against margin change. Only IHCL and Lemon Tree disclosed RevPAR in sources we verified, so revenue growth stands in. Bars show revenue growth YoY against operating-profit growth YoY (before other income), on one axis, from filed consolidated quarterlies. Chalet's base included residential sales and is not comparable.</p>
+  <div class="scissor">
+    <div class="legend">
+      <span><i class="sw" style="background:var(--vol)"></i>Revenue growth YoY</span>
+      <span><i class="sw" style="background:var(--gain)"></i>Operating profit growth YoY</span>
+    </div>
+    <div id="scissor"></div>
+    <div class="scale"><span>−40</span><span>−10</span><span>+20</span><span>+50</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>Operating margin — the league table</h2>
+  <div class="rule"></div>
+  <p class="note">Consolidated operating margin before other income. IHCL's margin is diluted by managed hotels, F&amp;B and its wider business mix, so it is not comparable with pure owners such as Lemon Tree.</p>
+  <div class="league">
+    <div class="lsub">Operating margin, Q2 FY27 (change)</div>
+    <div id="league"></div>
+  </div>
+</section>
+
+<section>
+  <h2>The pressure point: who keeps the RevPAR gain</h2>
+  <div class="rule"></div>
+  <div class="fuel">
+    <h2>Op. margin change YoY, pts</h2>
+    <div class="fline" id="fuel"></div>
+    <div class="warn">
+      <div><strong>Demand</strong>IHCL full-service RevPAR +28%. Lemon Tree occupancy 76.1%, +6.3 pts, with room rates +8%.</div>
+      <div><strong>Who converted</strong>ITC Hotels (+2.7 pts) and IHCL have net cash and fee income. Their operating profit grew 24–37%.</div>
+      <div><strong>Who did not</strong>Juniper (−2.7 pts), SAMHI (−1.3) and Ventive (−0.5) own their assets and carry debt and depreciation. Their operating profit grew 0–11%.</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Company by company</h2>
+  <div class="rule"></div>
+  <p class="note">The badge scores Q2 delivery against verified commitments. Only IHCL's guide could be checked. Juniper and Ventive are marked on the size of the miss. Four smaller names (Mahindra Holidays, Park Hotels, Brigade Hotel Ventures, Royal Orchid) are not covered in this build.</p>
+  <div class="grid" id="cards"></div>
+</section>
+
+<section>
+  <h2>KPI comparison</h2>
+  <div class="rule"></div>
+  <p class="note">n/v means disclosed but not verified for this build. n/d means not disclosed. n/c means not comparable.</p>
+  <div class="tw">
+  <table>
+    <thead><tr>
+      <th>Company</th><th class="r">Revenue YoY</th><th class="r">RevPAR YoY</th><th class="r">Occupancy</th><th class="r">ARR YoY</th>
+      <th class="r">Op. margin</th><th class="r">Margin chg</th><th class="r">Leverage</th><th class="r">Basis</th>
+    </tr></thead>
+    <tbody id="kpi"></tbody>
+  </table>
+  </div>
+</section>
+
+<section>
+  <h2>What management said</h2>
+  <div class="rule"></div>
+  <p class="note">From IHCL's and Lemon Tree's results releases as reported by Asian Hospitality. Tijori had no Q2 transcripts for this set by 15 November.</p>
+  <div class="themes">
+    <div class="th"><div class="k">Demand</div><ul>
+      <li>IHCL: domestic same-store RevPAR +25%.</li>
+      <li>Lemon Tree: "simultaneous growth in room rates and occupancy".</li>
+    </ul></div>
+    <div class="th"><div class="k">Guidance</div><ul>
+      <li>IHCL: FY27 revenue growth raised to 15–17% from 12–14%.</li>
+    </ul></div>
+    <div class="th"><div class="k">Pipeline</div><ul>
+      <li>IHCL: 47 signings and 20 openings in H1; 280 hotels in the pipeline.</li>
+      <li>Lemon Tree: 825 keys signed; a Bandra, Mumbai hotel planned for FY2030.</li>
+    </ul></div>
+    <div class="th"><div class="k">Costs</div><ul>
+      <li>Lemon Tree: GST changes and a stock-appreciation-rights provision weighed on the quarter.</li>
+    </ul></div>
+  </div>
+</section>
+
+<section>
+  <h2>Red flags</h2>
+  <div class="rule"></div>
+  <p class="note">Ranked by how much they should change position sizing.</p>
+  <div class="rf">
+    <div class="rfg">
+      <div class="rfh"><i class="sev hi"></i><span>Act on these</span></div>
+      <div class="rfr"><b>Ventive</b><div>Net profit −56% on rising depreciation, halved other income and a 57% tax rate.</div></div>
+      <div class="rfr"><b>Chalet</b><div>Headline profit rests on a ₹92 cr tax credit; PBT fell 40%.</div></div>
+    </div>
+    <div class="rfg">
+      <div class="rfh"><i class="sev md"></i><span>Monitor next quarter</span></div>
+      <div class="rfr"><b>Juniper</b><div>Operating profit flat; margin −2.7 pts. Profit growth is from lower interest only.</div></div>
+      <div class="rfr"><b>EIH</b><div>Interest nearly tripled, cause not verified.</div></div>
+    </div>
+    <div class="rfg">
+      <div class="rfh"><i class="sev lo"></i><span>Note and move on</span></div>
+      <div class="rfr"><b>Lemon Tree · SAMHI</b><div>Exceptional items in PBT this year or last.</div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Walk the talk</h2>
+  <div class="rule"></div>
+  <p class="note">Only IHCL's guidance could be checked from public reports. Nothing else is scored.</p>
+  <table>
+    <thead><tr><th>Company</th><th>Promised</th><th class="hide">Delivered</th><th>Verdict</th></tr></thead>
+    <tbody id="score"></tbody>
+  </table>
+</section>
+
+<section>
+  <h2>Was the consensus right?</h2>
+  <div class="rule"></div>
+  <p class="note">No published Q2 poll was found. We score the narrative: a strong demand cycle lifts every hotel owner.</p>
+  <div class="indra">
+    <div class="split">
+      <div class="sp ok"><div class="n">7 of 7</div><div class="l">Revenue up (ex Chalet)</div><div class="w">Demand is broad.</div></div>
+      <div class="sp"><div class="n">3 of 7</div><div class="l">Lower margin YoY</div><div class="w">All are leveraged owners.</div></div>
+      <div class="sp ok"><div class="n">+300 bps</div><div class="l">IHCL guide raised</div><div class="w">The leader beat.</div></div>
+    </div>
+    <div class="vs"><em class="y">Right</em><div><b>Demand is strong.</b> RevPAR rose 18–28% where disclosed; every company grew revenue.</div></div>
+    <div class="vs"><em class="n">Partly</em><div><b>It lifts every owner.</b> Leveraged owners kept less of it: Juniper, SAMHI and Ventive lost margin.</div></div>
+  </div>
+</section>
+
+<section>
+  <h2>The call</h2>
+  <div class="rule"></div>
+  <div class="calls">
+    <div class="call buy">
+      <div class="k">Own now</div>
+      <h3>ITC Hotels · IHCL</h3>
+      <p>ITC Hotels grew operating profit 37% with no debt and is −17% in a year. IHCL raised its guide and has the pipeline; it is the one stock already rewarded.</p>
+    </div>
+    <div class="call wait">
+      <div class="k">Accumulate on evidence</div>
+      <h3>Lemon Tree · EIH · SAMHI</h3>
+      <p>Lemon Tree's occupancy and rates both rose. EIH widened its margin but its interest jumped. SAMHI is deleveraging but has not expanded its margin.</p>
+    </div>
+    <div class="call avoid">
+      <div class="k">Stay out</div>
+      <h3>Ventive · Juniper · Chalet</h3>
+      <p>Ventive's profit more than halved. Juniper's operating profit was flat. Chalet's quarter cannot be read without the hospitality segment.</p>
+    </div>
+  </div>
+  <div class="trigs">
+    <div class="tg tg-up"><div class="k">What would make us more positive</div><ul>
+      <li>Ventive's depreciation stabilising and its tax rate normalising.</li>
+      <li>Chalet's hospitality-only margin above 42%.</li>
+    </ul></div>
+    <div class="tg tg-dn"><div class="k">What would make us cut</div><ul>
+      <li>IHCL's Q3 RevPAR growth below 15%.</li>
+      <li>New supply in key metros pushing rates down.</li>
+    </ul></div>
+  </div>
+</section>
+
+<section>
+  <h2>Analyst coverage after results</h2>
+  <div class="rule"></div>
+  <p class="note">Dated post-result broker reports were not verified for this build. No targets are shown, rather than undated ones.</p>
+  <div class="tw">
+  <table>
+    <thead><tr><th>Company</th><th>Broker</th><th>Report date</th><th>Rating</th><th class="r">Target (₹)</th><th class="r">Prior (₹)</th><th class="r">Price at report (₹)</th></tr></thead>
+    <tbody id="brk"></tbody>
+  </table>
+  </div>
+</section>
+
+<section>
+  <h2>Price and returns</h2>
+  <div class="rule"></div>
+  <p class="note">Only IHCL is up over a year (+24%). Every other name is −7% to −27%, despite double-digit revenue growth across the set.</p>
+  <div class="tw">
+  <table>
+    <thead><tr>
+      <th>Company</th><th>Ticker</th><th>Results date</th><th class="r">CMP (₹)</th>
+      <th class="r">1 year</th><th class="r">6 months</th><th class="r">3 months</th><th class="r">MTD</th>
+    </tr></thead>
+    <tbody id="ret"></tbody>
+  </table>
+  </div>
+  <p class="asof">Prices as on 13 Nov 2026 close (Zerodha Kite last price). Anchors: 1Y = 14 Nov 2025, 6M = 15 May 2026, 3M = 14 Aug 2026, MTD = 30 Oct 2026 closes, Kite daily candles (corporate-action adjusted).  Sorted by 1-year return.</p>
+</section>
+
+<section>
+  <h2>Caveats</h2>
+  <div class="rule"></div>
+  <ul class="cav">
+    <li><b>Sources.</b> All financials are consolidated filed quarterlies from Tijori, with operating profit before other income. Commentary comes from IHCL's and Lemon Tree's releases as reported by Asian Hospitality. Tijori had no Q2 transcripts for this set by 15 November.</li>
+    <li><b>Tijori against management.</b>
+      <ul>
+        <li>IHCL: 30.7% EBITDA margin is on total income including other income: (₹706 cr + ₹82 cr) / ₹2,566 cr. Tijori's 28.4% excludes other income. They reconcile.</li>
+        <li>Lemon Tree: 44.6% net EBITDA against Tijori's 44.2%. The gap is other income and rounding.</li>
+      </ul></li>
+    <li><b>Core metric.</b> RevPAR, occupancy and ARR were verified only for IHCL and Lemon Tree. The scissor uses revenue as a stand-in. This is the weakest part of the report.</li>
+    <li><b>Coverage.</b> 8 of the 12 names in the reference universe are covered. Results dates marked n/s were not verified.</li>
+  </ul>
+</section>
+
+<footer>
+  <p><b>Universe:</b> 8 listed Indian hotel companies, quarter ended 30 September 2026. Sources: filed quarterlies via Tijori; Asian Hospitality. Prices from Zerodha Kite. Built 15 November 2026.</p>
+</footer>
+
+</div>
+<script>
+const C=(n,t,b,bl,k,p,f)=>({n,t,b,bl,k,p,f});
+const SC=[["ITC Hotels",25.6,37.0],["IHCL",21.7,23.9],["Lemon Tree",18.0,22.1],["EIH",16.1,22.7],["SAMHI",15.4,11.2],["Ventive",12.7,11.1],["Juniper",8.7,0.2],["Chalet",-31.7,-27.1]];
+const MIN=-40,MAX=50,SCU1="%",SCU2="%";
+const LEAGUES=[["league",[["Lemon Tree",44.2,"+1.5 pts YoY; +0.8 QoQ"],["Chalet (n/c)",43.3,"Base had flat sales; −2.3 QoQ"],["Ventive",38.2,"−0.5 pts YoY; +2.7 QoQ"],["SAMHI",35.3,"−1.3 pts YoY; +3.1 QoQ"],["Juniper",33.2,"−2.7 pts YoY; −1.4 QoQ"],["ITC Hotels",32.0,"+2.7 pts YoY; +0.8 QoQ"],["IHCL",28.4,"+0.5 pts YoY; −0.4 QoQ"],["EIH",27.2,"+1.5 pts YoY; +1.8 QoQ"]],46,35,28,v=>`${v.toFixed(1)}%`]];
+const FU=[["JUNIPER",-2.7],["SAMHI",-1.3],["VENTIVE",-0.5],["IHCL",0.5],["LEMON",1.5],["EIH",1.5],["ITC",2.7]];
+const FUMAX=3,FUFMT=v=>`${v>0?'+':v<0?'−':''}${Math.abs(v).toFixed(1)}`;
+const CO=[
+ C("IHCL","INDHOTEL · Large","del","Guide raised",[["+28%","Full-service RevPAR",1],["₹2,484 cr","Revenue (+21.7%)",1],["30.7%","EBITDA margin, mgmt (incl. OI)",1],["₹349 cr","Net profit (+22.5%)",1]],
+  ["FY27 revenue guidance raised to 15–17% from 12–14%. H1 revenue is +18%.","Domestic same-store RevPAR, management fees and select-service revenue each grew 25%.","H1: 47 hotels signed and 20 opened. 670 hotels in the portfolio, 280 in the pipeline.","Management's 30.7% margin is on total income including other income. Tijori's 28.4% excludes it. The two reconcile.","Verdict: the sector benchmark, delivering above its own guide. The only hotel stock up over a year (+24%)."],
+  [["Valuation",""],["Guide raised","ok"],["Pipeline","ok"]]),
+ C("ITC Hotels","ITCHOTELS · Large","nsc","Not scored",[["₹1,054 cr","Revenue (+25.6%)",1],["32.0%","Op. margin (29.3% YoY)",1],["₹201 cr","Net profit (+51%)",1],["+37%","Operating profit YoY",1]],
+  ["Operating profit +37% on revenue +26%: the best operating leverage in the set.","Net cash: interest is ₹2 cr. Other income ₹52 cr comes from the demerger cash.","No Q2 RevPAR or commentary was verified.","Verdict: the strongest print in hotels. Down 17% in a year, so the market has not paid for it."],
+  [["RevPAR n/v",""],["Op. leverage","ok"]]),
+ C("Lemon Tree","LEMONTREE · Small","nsc","Not scored",[["76.1%","Occupancy (+6.3 pts)",1],["+18%","RevPAR",1],["44.2%","Op. margin (42.7% YoY)",1],["₹57 cr","Net profit (+64%)",1]],
+  ["Both drivers moved: occupancy +633 bps and room rate +8%. RevPAR +18%.","Aurika earned a 59% EBITDAR margin on RevPAR +17%.","GST changes and a stock-appreciation-rights provision weighed on the quarter, per the company.","Interest fell to ₹39 cr from ₹45 cr. PBT includes a ₹22 cr exceptional gain.","Verdict: clean, volume-and-rate growth. −22% in a year."],
+  [["Exceptional gain",""],["Occupancy","ok"]]),
+ C("EIH","EIHOTEL · Mid","nsc","Not scored",[["₹694 cr","Revenue (+16.1%)",1],["27.2%","Op. margin (25.7% YoY)",1],["₹136 cr","Net profit (+19%)",1],["₹16 cr","Interest (₹6 cr YoY)",-1]],
+  ["Operating profit +23% on revenue +16%.","Interest nearly tripled to ₹16 cr. The cause was not verified.","No Q2 RevPAR or commentary was verified.","Verdict: steady luxury exposure. −16% in a year."],
+  [["Interest up",""],["Margin","ok"]]),
+ C("Chalet Hotels","CHALET · Small","nsc","Not comparable",[["₹502 cr","Revenue (−31.7%)",0],["43.3%","Op. margin (40.7% YoY)",0],["₹216 cr","Net profit (incl. tax credit)",0],["−₹92 cr","Tax (credit)",-1]],
+  ["Last year's quarter included sales of residential flats. Revenue and operating profit are not comparable YoY.","Net profit +39% came from a ₹92 cr tax credit; PBT fell to ₹124 cr from ₹205 cr.","Interest ₹42 cr, down from ₹45 cr.","Verdict: the hotel business cannot be judged from these numbers. We need the hospitality-only segment."],
+  [["Tax credit",""],["Not comparable",""]]),
+ C("SAMHI Hotels","SAMHI · Small","nsc","Not scored",[["₹338 cr","Revenue (+15.4%)",1],["35.3%","Op. margin (36.6% YoY)",-1],["₹34 cr","Net profit (₹92 cr YoY)",0],["₹38 cr","Interest (₹43 cr YoY)",1]],
+  ["Operating profit grew 11%, slower than revenue.","Last year's profit included an ₹84 cr exceptional gain. Excluding it, PBT rose 42%.","Interest keeps falling as debt is refinanced.","Verdict: deleveraging works; margin did not expand. −9% in a year."],
+  [["Margin −1.3 pts",""],["Deleveraging","ok"]]),
+ C("Juniper Hotels","JUNIPER · Small","miss","Flat profit",[["₹250 cr","Revenue (+8.7%)",0],["33.2%","Op. margin (35.9% YoY)",-1],["+0.2%","Operating profit YoY",-1],["₹37 cr","Net profit (2.2x)",1]],
+  ["Revenue flat QoQ; operating profit flat YoY. Margin −2.7 pts, the largest fall in the set.","Net profit doubled only because interest halved to ₹15 cr after IPO debt repayment.","Verdict: the profit gain is financial, not operating. −19% in a year."],
+  [["Margin −2.7 pts",""],["Slow growth",""]]),
+ C("Ventive Hospitality","VENTIVE · Small","miss","Profit fall",[["₹551 cr","Revenue (+12.7%)",1],["38.2%","Op. margin (38.8% YoY)",0],["₹23 cr","Net profit (−56%)",-1],["₹102 cr","Depreciation (₹79 cr YoY)",-1]],
+  ["Operating profit +11%, but depreciation rose 29% and other income halved to ₹31 cr.","PBT fell 31%; tax took 57% of PBT.","Interest is ₹57 cr. Net profit is a fraction of operating profit.","Verdict: the weakest bottom line in the set. −27% in a year."],
+  [["Depreciation",""],["OI halved",""],["High tax",""]])
+];
+const KPI=[
+ ["IHCL","+21.7%","+28% (full-service)","n/d","n/d","28.4% (mgmt 30.7%)","+0.5 pts","Net cash","Cons.; Tijori + release"],
+ ["ITC Hotels","+25.6%","n/v","n/v","n/v","32.0%","+2.7 pts","Net cash","Cons.; Tijori"],
+ ["Lemon Tree","+18.0%","+18%","76.1% (+6.3 pts)","+8%","44.2% (mgmt 44.6%)","+1.5 pts","Interest ₹39 cr","Cons.; Tijori + release"],
+ ["EIH","+16.1%","n/v","n/v","n/v","27.2%","+1.5 pts","Interest ₹16 cr","Cons.; Tijori"],
+ ["Chalet Hotels","n/c","n/v","n/v","n/v","43.3%","n/c","Interest ₹42 cr","Base incl. residential"],
+ ["SAMHI Hotels","+15.4%","n/v","n/v","n/v","35.3%","−1.3 pts","Interest ₹38 cr","Cons.; Tijori"],
+ ["Juniper Hotels","+8.7%","n/v","n/v","n/v","33.2%","−2.7 pts","Interest ₹15 cr","Cons.; Tijori"],
+ ["Ventive Hospitality","+12.7%","n/v","n/v","n/v","38.2%","−0.5 pts","Interest ₹57 cr","Cons.; Tijori"]
+];
+const BRK=[["All","Not verified this build","—","—","—","—","—"]];
+const SCORE=[
+ ["IHCL","FY27 revenue growth 12–14% (earlier guide)","H1 revenue +18%; guide raised to 15–17%.","del","Beat"]
+];
+const SPAN=MAX-MIN,Z=(0-MIN)/SPAN*100;
+document.getElementById("scissor").innerHTML=SC.map(([n,v,e],i)=>{
+ const bar=(val,cls,u)=>{const w=Math.max(Math.abs(val),0.3)/SPAN*100;
+  const l=val>=0?Z:Z-w;
+  return `<i class="b ${cls} ${val>=0?'pos':'neg'}" style="left:${l}%;width:${w}%;animation-delay:${i*45}ms"><span>${val>0?'+':''}${val}${u}</span></i>`;};
+ return `<div class="row"><div class="co">${n}</div><div class="track"><i class="axis" style="left:${Z}%"></i>${bar(v,'v',SCU1)}${bar(e,'e',SCU2)}</div></div>`;
+}).join("");
+const league=(id,rows,max,hi,mid,fmt)=>{document.getElementById(id).innerHTML=rows.map(([n,v,d],i)=>{
+ const cls=v>=hi?"":v>=mid?"mid":"low";
+ return `<div class="lrow"><div class="co">${n}</div>
+ <div><i class="lbar ${cls}" style="display:block;width:${Math.max(v,0)/max*100}%;animation-delay:${i*40}ms"></i></div>
+ <div><div class="v">${fmt(v)}</div><div class="d">${d}</div></div></div>`;}).join("");};
+LEAGUES.forEach(([id,rows,max,hi,mid,fmt])=>league(id,rows,max,hi,mid,fmt));
+document.getElementById("fuel").innerHTML=FU.map(([l,v],i)=>
+ `<div class="fp"><b>${FUFMT(v)}</b><i style="height:${Math.abs(v)/FUMAX*88}px;animation-delay:${i*120}ms"></i><em>${l}</em></div>`).join("");
+document.getElementById("cards").innerHTML=CO.map(c=>`
+ <article class="c">
+  <div class="chead"><div><h3>${c.n}</h3><div class="tick">${c.t}</div></div><div class="badge ${c.b}">${c.bl}</div></div>
+  <div class="tiles">${c.k.map(([n,l,s])=>`<div class="tile"><div class="n ${s===1?'up':s===-1?'dn':''}">${n}</div><div class="l">${l}</div></div>`).join("")}</div>
+  <ul>${c.p.map(x=>`<li>${x}</li>`).join("")}</ul>
+  <div class="flags">${c.f.map(([t,k])=>`<span class="flag ${k}">${t}</span>`).join("")}</div>
+ </article>`).join("");
+document.getElementById("kpi").innerHTML=KPI.map(r=>
+ `<tr><td class="co">${r[0]}</td>`+r.slice(1).map(c=>`<td class="kpi">${c}</td>`).join("")+`</tr>`).join("");
+document.getElementById("brk").innerHTML=BRK.map(r=>
+ `<tr><td class="co">${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td class="num">${r[4]}</td><td class="num ${r[5].includes('↓')?'dn':r[5].includes('↑')?'up':''}">${r[5]}</td><td class="num">${r[6]}</td></tr>`).join("");
+const RET=[["IHCL", "INDHOTEL", "~21 Oct", "890.30", "+23.5%", "+35.7%", "+23.7%", "+9.7%"], ["Chalet Hotels", "CHALET", "n/s", "824.65", "-6.7%", "+5.1%", "-0.1%", "+2.4%"], ["SAMHI Hotels", "SAMHI", "n/s", "165.80", "-8.8%", "+13.1%", "+1.5%", "+9.6%"], ["EIH", "EIHOTEL", "n/s", "316.55", "-16.1%", "+0.1%", "+5.4%", "+10.5%"], ["ITC Hotels", "ITCHOTELS", "n/s", "173.60", "-17.0%", "+11.7%", "+5.3%", "+3.8%"], ["Juniper Hotels", "JUNIPER", "n/s", "202.22", "-18.6%", "+0.1%", "+4.8%", "+3.1%"], ["Lemon Tree", "LEMONTREE", "n/s", "121.96", "-22.1%", "+9.6%", "+12.0%", "+11.6%"], ["Ventive Hospitality", "VENTIVE", "n/s", "546.30", "-27.0%", "-16.4%", "-6.3%", "+2.8%"]];
+document.getElementById("ret").innerHTML=RET.map(r=>{
+ const cell=v=>{ if(v==="n/s") return `<td class="num ns">n/s</td>`;
+   const cls=v.startsWith("+")?"up":v.startsWith("-")?"dn":""; return `<td class="num ${cls}">${v}</td>`;};
+ return `<tr><td class="co">${r[0]}</td><td class="tick">${r[1]}</td><td>${r[2]}</td>`
+  +`<td class="num">${r[3]==="n/s"?'<span class="ns">n/s</span>':r[3]}</td>`+r.slice(4).map(cell).join("")+`</tr>`;
+}).join("");
+document.getElementById("score").innerHTML=SCORE.map(([c,p,d,k,v])=>
+ `<tr><td class="co">${c}</td><td>${p}</td><td class="hide">${d}</td><td class="vd ${k}">${v}</td></tr>`).join("");
+</script></body></html>
