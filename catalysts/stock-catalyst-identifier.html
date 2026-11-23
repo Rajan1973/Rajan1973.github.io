@@ -1,0 +1,1931 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stock Catalyst Briefing | through 18 Nov 2026</title>
+<style>
+  :root {
+    --bg: #0b1220;
+    --panel: #121b2d;
+    --panel2: #182338;
+    --line: #2a3a55;
+    --text: #e8eef8;
+    --muted: #93a4bf;
+    --accent: #3dd6c6;
+    --accent2: #7aa2ff;
+    --pos: #3ecf8e;
+    --neg: #ff6b7a;
+    --warn: #f5c14a;
+    --chip: #24324a;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Segoe UI", Inter, system-ui, sans-serif;
+    background: radial-gradient(1200px 600px at 10% -10%, #16324a 0%, var(--bg) 45%);
+    color: var(--text);
+    line-height: 1.45;
+  }
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 28px 18px 60px; }
+  header h1 { margin: 0 0 6px; font-size: 28px; letter-spacing: -0.03em; }
+  header p { margin: 0; color: var(--muted); }
+  .meta {
+    display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 22px;
+  }
+  .pill {
+    background: var(--chip); border: 1px solid var(--line); border-radius: 999px;
+    padding: 6px 12px; font-size: 12px; color: var(--muted);
+  }
+  .stats {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px; margin-bottom: 22px;
+  }
+  .stat {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 14px;
+  }
+  .stat b { display: block; font-size: 22px; color: var(--accent); }
+  .stat span { color: var(--muted); font-size: 12px; }
+  .filters {
+    position: sticky; top: 0; z-index: 5;
+    background: rgba(11,18,32,0.92); backdrop-filter: blur(10px);
+    border: 1px solid var(--line); border-radius: 16px; padding: 14px;
+    margin-bottom: 18px;
+  }
+  .filters h2 { margin: 0 0 10px; font-size: 14px; color: var(--accent2); text-transform: uppercase; letter-spacing: .08em; }
+  .grid5 {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px;
+  }
+  .picks {
+    background: linear-gradient(180deg, #163528 0%, var(--panel) 70%);
+    border: 1px solid #2e6b4f; border-radius: 16px; padding: 16px 18px; margin-bottom: 18px;
+  }
+  .picks h2 { margin: 0 0 6px; font-size: 13.5px; color: var(--pos); letter-spacing: .04em; text-transform: uppercase; }
+  .picks p { margin: 0 0 10px; color: var(--muted); font-size: 11.5px; }
+  .pick-row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .slate-tabs { display: flex; gap: 6px; margin-bottom: 10px; flex-wrap: wrap; }
+  .slate-tab { background: #1a2a3d; border: 1px solid var(--line); color: var(--muted); border-radius: 999px; padding: 5px 12px; font-size: 11.5px; cursor: pointer; }
+  .slate-tab.active { background: #1c3d2e; border-color: #3d7a5a; color: var(--pos); font-weight: 650; }
+  .slate-panel { display: none; }
+  .slate-panel.active { display: block; }
+  .sort-wrap { display: flex; align-items: center; gap: 8px; }
+
+  .pick {
+    background: #1c3d2e; border: 1px solid #3d7a5a; border-radius: 12px;
+    padding: 6px 10px; font-size: 11.5px; cursor: pointer; color: var(--text);
+  }
+  .pick b { color: var(--pos); }
+  .chip.high {
+    color: #06221e; background: var(--accent); border-color: var(--accent); font-weight: 700;
+  }
+  .chip.med { color: var(--warn); border-color: #7a6230; }
+  .chip.none { color: var(--muted); }
+  .card.highc { border-color: #3d7a5a; box-shadow: inset 3px 0 0 var(--pos); }
+  label { display: block; font-size: 11px; color: var(--muted); margin-bottom: 4px; }
+  select, input[type="search"] {
+    width: 100%; background: var(--panel2); color: var(--text);
+    border: 1px solid var(--line); border-radius: 10px; padding: 9px 10px; font-size: 13px;
+  }
+  .filter-row { display: flex; gap: 10px; align-items: end; margin-top: 10px; flex-wrap: wrap; }
+  .toggle-wrap {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--panel2); border: 1px solid var(--line);
+    border-radius: 10px; padding: 8px 12px; min-height: 40px;
+  }
+  .toggle-wrap span { font-size: 12px; color: var(--muted); white-space: nowrap; }
+  .toggle-wrap strong { color: var(--text); font-weight: 650; }
+  .switch {
+    position: relative; width: 44px; height: 24px; flex-shrink: 0;
+  }
+  .switch input { opacity: 0; width: 0; height: 0; }
+  .slider {
+    position: absolute; inset: 0; cursor: pointer;
+    background: #31415c; border-radius: 999px; transition: .2s;
+  }
+  .slider:before {
+    content: ""; position: absolute; height: 18px; width: 18px; left: 3px; top: 3px;
+    background: #e8eef8; border-radius: 50%; transition: .2s;
+  }
+  .switch input:checked + .slider { background: var(--accent); }
+  .switch input:checked + .slider:before { transform: translateX(20px); background: #06221e; }
+  button {
+    background: var(--accent); color: #06221e; border: 0; border-radius: 10px;
+    padding: 9px 14px; font-weight: 700; cursor: pointer;
+  }
+  button.ghost { background: transparent; color: var(--muted); border: 1px solid var(--line); }
+  .count { margin: 8px 2px 16px; color: var(--muted); font-size: 13px; }
+  .card {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 16px;
+    padding: 18px; margin-bottom: 14px;
+  }
+  .card.neg { border-color: #5a2a33; }
+  .top { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .date { color: var(--accent); font-weight: 700; font-size: 13px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 10px; }
+  .chip {
+    font-size: 11px; padding: 3px 8px; border-radius: 999px; background: var(--chip);
+    border: 1px solid var(--line); color: var(--muted);
+  }
+  .chip.pos { color: var(--pos); border-color: #245a43; }
+  .chip.negc { color: var(--neg); border-color: #5a2a33; }
+  .chip.stock {
+    color: var(--text); border-color: #5a7aa0; background: #1c2c44;
+    font-size: 12px;
+  }
+  .chip.stock strong { font-weight: 800; letter-spacing: 0.01em; }
+  h3 { margin: 0 0 6px; font-size: 18px; }
+  h3 .stock-name { font-weight: 800; color: var(--text); }
+  .ann { color: var(--muted); font-size: 14px; margin-bottom: 10px; }
+  details { margin-top: 8px; }
+  summary { cursor: pointer; color: var(--accent2); font-size: 13px; }
+  .analysis { margin-top: 8px; font-size: 13.5px; color: #d5deee; }
+  .analysis ul { margin: 6px 0 0 18px; padding: 0; }
+  .action {
+    margin-top: 10px; background: var(--panel2); border-radius: 10px; padding: 10px 12px; font-size: 13px;
+  }
+  footer { margin-top: 28px; color: var(--muted); font-size: 12px; }
+  @media print { .filters { position: static; } button { display: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Stock-Catalyst-identifier</h1>
+    <p>Living EOD book. Data through 18 Nov 2026. Filter ≥1.5% of revenue or ≥2% of PAT (capex/funding ≥₹500 Cr). Conviction rescored on the full list each EOD.</p>
+  </header>
+
+  <div class="meta">
+    <span class="pill">Rebuilt 30 Oct 2026 · 1.5% / 2% hurdle</span>
+    <span class="pill">Data cutoff: 17 Nov 2026</span>
+    <span class="pill">Chronological</span>
+    <span class="pill">Not investment advice</span>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><b>86</b><span>Events passing 1.5% / 2%</span></div>
+    <div class="stat"><b>27 / 1</b><span>Positive / Negative</span></div>
+    <div class="stat"><b>9</b><span>High-conviction names</span></div>
+    <div class="stat"><b>1.5% / 2%</b><span>Revenue / PAT hurdle</span></div>
+  </div>
+
+  <section class="picks" id="picks">
+    <div class="slate-tabs">
+      <button type="button" class="slate-tab active" data-tab="high">High conviction</button>
+      <button type="button" class="slate-tab" data-tab="multi">Multi-entry stocks</button>
+      <button type="button" class="slate-tab" data-tab="indtheme">Top industry / theme</button>
+    </div>
+    <div id="panel-high" class="slate-panel active">
+      <h2>High conviction slate</h2>
+      <p>Sized only where the award is binding (or LoA with a disclosed band), the ticket is a large share of sales, and the counterparty is creditworthy. Primary pick first.</p>
+      <div class="pick-row" id="high-picks"></div>
+    </div>
+    <div id="panel-multi" class="slate-panel">
+      <h2>Top multi-entry stocks</h2>
+      <p>Stocks with the most material events in the book. Click a name to filter the list below to that stock.</p>
+      <div class="pick-row" id="multi-picks"></div>
+    </div>
+    <div id="panel-indtheme" class="slate-panel">
+      <h2>Top industry / theme</h2>
+      <p>Most frequent industry or theme. Toggle the mode, then click a chip to filter the list below.</p>
+      <div style="margin-bottom:8px">
+        <label class="toggle-wrap" style="display:inline-flex">
+          <span>Mode</span>
+          <strong id="indThemeLabel">Industry</strong>
+          <span class="switch">
+            <input type="checkbox" id="indThemeToggle" aria-label="Toggle industry or theme">
+            <span class="slider"></span>
+          </span>
+        </label>
+      </div>
+      <div class="pick-row" id="indtheme-picks"></div>
+    </div>
+  </section>
+
+  <section class="filters">
+    <h2>Filters</h2>
+    <div class="grid5">
+      <div>
+        <label for="industry">Industry</label>
+        <select id="industry">
+          <option value="all">All industries</option>
+        </select>
+      </div>
+      <div>
+        <label for="category">Category</label>
+        <select id="category">
+          <option value="all">All categories</option>
+        </select>
+      </div>
+      <div>
+        <label for="theme">Theme</label>
+        <select id="theme">
+          <option value="all">All themes</option>
+        </select>
+      </div>
+      <div>
+        <label for="stock">Stock</label>
+        <select id="stock">
+          <option value="all">All stocks</option>
+        </select>
+      </div>
+      <div>
+        <label for="conviction">Conviction</label>
+        <select id="conviction">
+          <option value="all">All convictions</option>
+          <option value="High">High</option>
+          <option value="Medium">Medium</option>
+          <option value="None">No comments</option>
+        </select>
+      </div>
+    </div>
+    <div class="filter-row">
+      <div style="flex:1;min-width:220px">
+        <label for="q">Search</label>
+        <input id="q" type="search" placeholder="Search stock, order, client, keyword…">
+      </div>
+      <div>
+        <label>Detail view</label>
+        <label class="toggle-wrap" for="expandDetails">
+          <span>Revenue / PAT / risk / action</span>
+          <strong id="expandLabel">Collapsed</strong>
+          <span class="switch">
+            <input type="checkbox" id="expandDetails" aria-label="Expand analysis details">
+            <span class="slider"></span>
+          </span>
+        </label>
+      </div>
+      <div class="sort-wrap">
+        <label>Sort</label>
+        <label class="toggle-wrap" for="sortToggle">
+          <span>Order</span>
+          <strong id="sortLabel">Latest first</strong>
+          <span class="switch">
+            <input type="checkbox" id="sortToggle" aria-label="Toggle sort order">
+            <span class="slider"></span>
+          </span>
+        </label>
+      </div>
+      <button type="button" onclick="resetFilters()">Reset</button>
+    </div>
+  </section>
+
+  <div class="count" id="count"></div>
+  <div id="list"></div>
+
+  <footer>
+    Sources: NSE/BSE Regulation 30 filings and contemporaneous reports from Economic Times, Business Standard, CNBC-TV18, Moneycontrol, Hindu Business Line, company press releases (01 Sep–28 Oct 2026).
+    Estimates use disclosed contract values versus last reported annual revenue where available. KPIL UAE and GE Vernova HVDC values are company “major/L1” classifications or broker estimates, not always exact LoA amounts.
+    Live hurdle is ≥1.5% of last FY revenue or ≥2% of last FY PAT, or capex/funding of at least ₹500 Cr. The original seed used 2.5% / 3%; events below the current bar are not shown. Conviction is rescored on the full list each run. This briefing is for information only and is not a recommendation to buy or sell securities.
+  </footer>
+</div>
+
+<script>
+const events = [
+
+  {
+    date: "2026-11-18",
+    stock: "Om Power Transmission",
+    industry: "Power Transmission / EPC",
+    category: "Order win (LOI)",
+    theme: "Substation EPC",
+    sentiment: "Positive",
+    title: "₹46.57 Cr LOI from GETCO for 220kV & 66kV Dharampur AIS Substation (incl. GST)",
+    announcement: "18 Nov 2026. Reg 30: received Letter of Intent from Gujarat Energy Transmission Corporation Limited for supply, erection, testing and commissioning of 220kV & 66kV equipment & materials on turnkey basis including civil works for 220kV Dharampur AIS Substation. Contract price ₹46.57 Cr (incl. GST). Execution within 18 months from LOA.",
+    impact: "~10.4% of FY26 revenue (₹449 Cr). Material for power EPC player. Clears 1.5% easily. Confidence HIGH.",
+    pat: "EPC margin contribution over 18-month window; peak-year PAT above 2% on typical margins. Confidence MEDIUM.",
+    risk: "MEDIUM. LOI stage (not yet full LoA); execution and working-capital risk on turnkey substation.",
+    action: "Added Medium. Binding LOI from creditworthy state utility; strong price reaction.",
+    conv: 6
+  },
+  {
+    date: "2026-11-18",
+    stock: "Hirect",
+    industry: "Railway / Power Electronics",
+    category: "Order win",
+    theme: "Traction motors",
+    sentiment: "Positive",
+    title: "₹136.26 Cr LOA from Chittaranjan Locomotive Works for 900 traction motors (WAG-9)",
+    announcement: "18 Nov 2026. Reg 30 / press release: received Letter of Acceptance from Chittaranjan Locomotive Works (Indian Railways) for supply of 900 three-phase asynchronous traction motors for WAG-9 locomotives. Value ~₹136.26 Cr. Phased deliveries Jan–Dec 2027; 78-month warranty. Second major CLW order in the week (after ₹133 Cr propulsion sets on 16 Nov).",
+    impact: "~13.6% of FY26 consolidated revenue (~₹999 Cr). Material for railway traction specialist. Clears 1.5% by wide margin. Confidence HIGH.",
+    pat: "Order supports FY27–28 execution; peak-year PAT contribution above 2%. Confidence MEDIUM-HIGH.",
+    risk: "MEDIUM. Execution phasing, warranty exposure, and competitive railway tender environment.",
+    action: "Added Medium. Binding LOA from Indian Railways; follow-on to recent CLW wins.",
+    conv: 6
+  },
+  {
+    date: "2026-11-18",
+    stock: "Seamec",
+    industry: "Offshore / Oil & Gas Services",
+    category: "Order win",
+    theme: "Subsea installation",
+    sentiment: "Positive",
+    title: "₹100.16 Cr (USD 10.77 Mn) LoA from POSH India for ONGC PRP-X subsea installation",
+    announcement: "18 Nov 2026. Reg 30: received Letter of Award from POSH India Offshore Private Limited for subsea installation works (riser clamps and bow strings) on ONGC’s Pipeline Replacement Project PRP-X. Value approx USD 10.77 million (₹100.16 Cr) exclusive of GST. Completion targeted by May 2027. Project originally awarded by L&T Energy Hydrocarbon to POSH.",
+    impact: "~10–10.5% of FY26 consolidated revenue (~₹952–1,000 Cr). Material for offshore services company. Clears 1.5%. Confidence HIGH.",
+    pat: "Project-life contribution supports visibility; peak-year PAT above 2% on typical margins. Confidence MEDIUM.",
+    risk: "MEDIUM. Subcontractor role under POSH/L&T; offshore execution and weather/operational risk.",
+    action: "Added Medium. Binding LoA for ONGC-linked offshore work.",
+    conv: 6
+  },
+  {
+    date: "2026-11-18",
+    stock: "Titagarh Rail Systems",
+    industry: "Railway / Rolling Stock",
+    category: "Order win",
+    theme: "Traction motors",
+    sentiment: "Positive",
+    title: "₹65.38 Cr LOA from Chittaranjan Locomotive Works for traction motors (WAG-9)",
+    announcement: "18 Nov 2026. Reg 30: received Letter of Acceptance from Chittaranjan Locomotive Works for supply of 3-Phase Asynchronous Traction Motors (Type 6FRA-6068, Scheme-I) for WAG-9 locomotives. Value ₹65.38 Cr (incl. GST). First contract under upgraded vendor status; phased execution by 31 Dec 2027. Approved capacity 1,200 units p.a.",
+    impact: "~2.1% of FY26 consolidated revenue (₹3,144 Cr). Clears the 1.5% revenue threshold. Confidence HIGH.",
+    pat: "Incremental contribution over execution window; peak-year PAT modestly above 2% bar. Confidence MEDIUM.",
+    risk: "MEDIUM. Competitive railway component market; execution phasing to Dec 2027.",
+    action: "Added Medium. Binding LOA; supports traction motor franchise.",
+    conv: 5
+  },
+  {
+    date: "2026-11-17",
+    stock: "Ashoka Buildcon",
+    industry: "Infrastructure / Roads",
+    category: "Order win (L1)",
+    theme: "Highway EPC",
+    sentiment: "Positive",
+    title: "Declared L1 for ₹1,465 Cr NHAI EPC on Vadodara-Mumbai Expressway Pkg-VIII (Jujuwa-Gandeva, 35.4 km)",
+    announcement: "17 Nov 2026. Reg 30: emerged as lowest bidder (L-1) for balance work of 8-lane access-controlled expressway on Vadodara-Mumbai Expressway (Km 154.6 to 190, Gujarat). Quoted EPC price ₹1,465 Cr excl. GST. Execution 18 months, defect liability 10 years. Domestic, NHAI.",
+    impact: "~21.6% of TTM revenue (~₹6,786 Cr). Material pipeline addition if converted to LoA. Clears 1.5% easily. Confidence MEDIUM (L1 only).",
+    pat: "Supports multi-quarter EPC execution if awarded. Peak-year contribution above 2% on conversion. Confidence LOW-MEDIUM.",
+    risk: "HIGH. L1 status only; not yet LoA/contract. Conversion, mobilisation and execution risk on balance works. Prior ₹866 Cr LoA on related package already tracked.",
+    action: "Added Medium (L1). Track for LoA conversion. Follow-on to existing Ashoka pipeline.",
+    conv: 5
+  },
+  {
+    date: "2026-11-16",
+    stock: "Pace Digitek",
+    industry: "Energy Storage / BESS",
+    category: "Order win",
+    theme: "Battery energy storage",
+    sentiment: "Positive",
+    title: "₹2,691.3 Cr LoA from NTPC Green Energy for 600 MW / 1,800 MWh BESS at Khavda Solar Plant (incl. 15-yr O&M)",
+    announcement: "16 Nov 2026. Reg 30: received Letter of Award from NTPC Green Energy Limited for BESS supply, integration, installation, testing, commissioning, civil works and 15 years O&M. Two blocks of 300 MW/900 MWh each under Cluster-01 of 3,300 MWh project at NTPC REL Khavda, Gujarat. Completion by Sep 2027. Value ₹2,691.30 Cr incl. GST.",
+    impact: "~102% of FY26 revenue (~₹2,641 Cr). Transformative single order for listed BESS/EPC player. Clears 1.5% by wide margin. Confidence HIGH.",
+    pat: "Large EPC + long-term O&M revenue. Peak-year PAT contribution well above 2% on execution. Confidence MEDIUM (margins, working capital).",
+    risk: "MEDIUM. Execution timeline to Sep 2027, GST-inclusive value, localisation criteria, O&M delivery. Company relatively new on main board (IPO 2025).",
+    action: "Added Medium-High. Binding LoA from creditworthy NTPC Green. Strongest ticket in window.",
+    conv: 7
+  },
+  {
+    date: "2026-11-16",
+    stock: "Kalpataru Projects International",
+    industry: "Infrastructure / Power T&D",
+    category: "Order win",
+    theme: "International T&D EPC",
+    sentiment: "Positive",
+    title: "₹2,610 Cr notification of award for international power transmission lines & substations EPC (South America)",
+    announcement: "16 Nov 2026. Reg 30 / press: secured notification of award for EPC project involving power transmission lines and substations in international market (strengthens South America presence). Approx value ₹2,610 Cr. YTD FY27 order inflows now exceed ₹26,000 Cr (+50% YoY).",
+    impact: "~9.6% of FY26 revenue (₹27,143 Cr). Material addition to already strong T&D order book. Clears 1.5%. Confidence HIGH.",
+    pat: "Multi-year EPC contribution. Peak-year PAT above 2% after phasing. Confidence MEDIUM.",
+    risk: "MEDIUM. International execution, currency, client undisclosed. Notification of award (binding intent). Company has proven overseas track record.",
+    action: "Added Medium. Follow-on material order for tracked name. Strengthens global T&D franchise.",
+    conv: 6
+  },
+  {
+    date: "2026-11-16",
+    stock: "Capacit'e Infraprojects",
+    industry: "Construction / Housing",
+    category: "Order win",
+    theme: "Public-sector housing EPC",
+    sentiment: "Positive",
+    title: "₹670.43 Cr LOA from CIDCO for MAHA Awas DRS Housing Scheme at CBD Belapur, Navi Mumbai (42 months)",
+    announcement: "16 Nov 2026. Reg 30: received Letter of Acceptance from CIDCO for construction of MAHA Awas DRS Housing Scheme at Plot 20, Sector 15A, CBD Belapur. Value ~₹670.43 Cr excl. GST. Repeat order. Completion 42 months. Domestic, ordinary course, no related-party.",
+    impact: "~27-29% of annualised revenue (H1 ~₹1,171 Cr). Highly material for mid-cap construction player. Clears 1.5% easily. Confidence HIGH.",
+    pat: "Supports revenue visibility over 3.5 years. Peak-year PAT contribution above 2%. Confidence MEDIUM.",
+    risk: "MEDIUM. Public-sector working capital, 42-month execution, housing project risks. Repeat client reduces counterparty risk.",
+    action: "Added Medium. Binding LOA, repeat CIDCO mandate. Strengthens public-sector book.",
+    conv: 6
+  },
+  {
+    date: "2026-11-14",
+    stock: "VA Tech Wabag",
+    industry: "Water / Desalination",
+    category: "Order cancellation",
+    theme: "International water project",
+    sentiment: "Negative",
+    title: "Saudi Water Authority cancels ₹2,332 Cr / USD 272 Mn 300 MLD Yanbu desalination tender (second cancellation)",
+    announcement: "14 Nov 2026. Reg 30 update: Saudi Water Authority notified via Etimad portal that the 300 MLD Mega Sea Water Desalination Plant tender at Yanbu (awarded Jul 2025, value ~USD 272 Mn / ₹2,332 Cr) has been cancelled for internal reasons attributable to the customer. Company seeking clarity. Prior similar cancellation in Dec 2024.",
+    impact: "Removes previously disclosed large international order (~18% of order book / significant % of annual revenue). Material negative for revenue visibility. Clears threshold on downside.",
+    pat: "Loss of multi-year execution and margin contribution. Confidence HIGH on the cancellation fact.",
+    risk: "HIGH. Repeated Saudi cancellations highlight geopolitical / client internal risk on large international water projects. Order book still robust otherwise.",
+    action: "Annotated negative follow-on on tracked name. Downgrade visibility; monitor for retender or replacement wins.",
+    conv: 4
+  },
+  {
+    date: "2026-11-13",
+    stock: "Pasupati Acrylon",
+    industry: "Chemicals / Ethanol",
+    category: "Order win",
+    theme: "Ethanol supply",
+    sentiment: "Positive",
+    title: "₹334 Cr OMC ethanol allocation for ESY 2026-27 (50,745 KL to BPCL, IOCL, HPCL)",
+    announcement: "17 Nov 2026. Business update / Reg 30: allocated 50,745 KL of denatured anhydrous ethanol for ESY 2026-27 under EBPP from BPCL, IOCL and HPCL. Estimated combined order value ₹334 Cr. Domestic, ordinary course.",
+    impact: "~33% of FY26 revenue (₹1,010 Cr). Highly material for ethanol and fibre player. Clears 1.5% by a wide margin. Confidence HIGH.",
+    pat: "Ethanol segment margin contribution over ESY window; peak-year PAT above 2% on volume. Confidence MEDIUM.",
+    risk: "MEDIUM. Allocation subject to offtake and feedstock. Ordinary-course supply; execution and price realisation risk.",
+    action: "Added Medium. Binding OMC allocation expanding ethanol visibility.",
+    conv: 6
+  },
+  {
+    date: "2026-11-12",
+    stock: "TruAlt Bioenergy",
+    industry: "Bioenergy / Ethanol",
+    category: "Order win",
+    theme: "Ethanol supply",
+    sentiment: "Positive",
+    title: "₹1,715.27 Cr public-sector OMC ethanol allocation for ESY 2026-27 (27.48 crore litres)",
+    announcement: "12 Nov 2026. Reg 30: allocated 2,74,832 KL (27.48 crore litres) of ethanol for ESY 2026-27 (1 Nov 2026–31 Oct 2027) under CRFQ/E-Tender to BPCL, HPCL, IOCL and MRPL. Valued at ₹1,715.27 Cr at tender rates (ex-freight/taxes). Additional Nayara and other components noted in filing.",
+    impact: "~62% of TTM revenue (~₹2,747 Cr). Transformative supply visibility for bioenergy company. Clears 1.5% easily. Confidence HIGH.",
+    pat: "Large volume contribution over 12-month ESY; peak-year PAT well above 2%. Confidence MEDIUM-HIGH.",
+    risk: "MEDIUM. Allocation/offtake risk, feedstock and logistics. Security deposit required. Not a single fixed-price construction contract.",
+    action: "Added Medium. Material government OMC ethanol allocation for the full ESY.",
+    conv: 6
+  },
+  {
+    date: "2026-11-06",
+    stock: "Bharat Electronics",
+    industry: "Defence / Electronics",
+    category: "Order win",
+    theme: "Defence electronics",
+    sentiment: "Positive",
+    title: "Additional orders worth ₹909 Cr since 21 Oct (optronic pedestals, communication, navigation, night vision, software, upgrades, spares)",
+    announcement: "06 Nov 2026. Reg 30 / press release: secured additional orders worth ₹909 Cr since last disclosure on 21 October 2026. Major items include Stabilized Optronic Pedestal, communication equipment, navigation systems, night vision devices, software solutions, components, upgrades, spares and services. Aggregate of multiple contracts.",
+    impact: "~3.3% of FY26 revenue (~₹27,500 Cr). Material incremental backlog for defence electronics major. Clears 1.5% revenue hurdle. Confidence HIGH.",
+    pat: "Order-book addition supports multi-year execution visibility; peak-year PAT contribution above 2% on conversion. Confidence MEDIUM.",
+    risk: "MEDIUM. Basket of smaller/medium orders rather than a single large system programme. Execution spread across product and services mix.",
+    action: "Added Medium. Incremental defence electronics orders expanding the already large backlog.",
+    conv: 6
+  },
+  {
+    date: "2026-11-11",
+    stock: "Cochin Shipyard",
+    industry: "Defence / Shipbuilding",
+    category: "Order win",
+    theme: "Naval refit",
+    sentiment: "Positive",
+    title: "₹498.58 Cr MoD contract for normal refit and re-powering of INS Betwa",
+    announcement: "11 Nov 2026. Binding contract signed with Ministry of Defence for normal refit and re-powering of INS Betwa (Brahmaputra-class frigate). Scope: replace steam propulsion with diesel-engine system plus modernised weapon suite. Project duration ~2 years. Involves 50+ MSMEs. No related-party.",
+    impact: "Material naval refit order for shipyard. Clears 1.5% on relative basis. Confidence HIGH.",
+    pat: "Repair and modernisation margin contribution over 2 years; peak-year PAT above 2% on utilisation. Confidence MEDIUM.",
+    risk: "MEDIUM. Government counterparty. Execution risk on complex propulsion conversion within existing platform.",
+    action: "Added Medium. Binding defence refit expanding naval maintenance visibility.",
+    conv: 6
+  },
+  {
+    date: "2026-11-09",
+    stock: "Ashoka Buildcon",
+    industry: "Infrastructure / Roads",
+    category: "Order win",
+    theme: "Expressway EPC",
+    sentiment: "Positive",
+    title: "₹865.90 Cr NHAI LoA for balance work on Vadodara-Mumbai Expressway (Karvad-Jujuwa section)",
+    announcement: "09 Nov 2026. Letter of Acceptance from NHAI for balance construction of 8-lane access-controlled expressway from Km 128.0 to Km 154.6 (Karvad to Jujuwa section, Gujarat, Package IX). EPC mode, accepted price ₹865.90 Cr excluding GST. Execution 18 months, 10-year defect liability. Follows L1 declaration on 05 Nov.",
+    impact: "Material for infrastructure player; strengthens order book. Clears 1.5%. Confidence HIGH.",
+    pat: "EPC margin contribution over 18 months; peak-year PAT above 2% on higher utilisation. Confidence MEDIUM.",
+    risk: "MEDIUM. Government counterparty. Balance-work execution and working-capital risk.",
+    action: "Added Medium. Binding LoA converting prior L1 into formal award.",
+    conv: 6
+  },
+  {
+    date: "2026-11-10",
+    stock: "HLE Glascoat",
+    industry: "Process Equipment",
+    category: "Order win",
+    theme: "Energy storage export",
+    sentiment: "Positive",
+    title: "Subsidiary Kinam bags ~USD 42-48 Mn (~₹392-448 Cr) order for heat exchangers for North American energy storage project",
+    announcement: "10 Nov 2026. Subsidiary Kinam Engineering Industries secured international order (USD 42-48 million) from a leading North American energy storage entity for design, engineering, manufacturing, testing and supply of specialised shell-and-tube heat exchangers and process equipment. Phased execution through November 2028. Customer name withheld. No related-party.",
+    impact: "Large relative export order for process-equipment maker. Clears 1.5% by a wide margin. Confidence HIGH.",
+    pat: "Export margin contribution over multi-year delivery; peak-year PAT above 2%. Confidence MEDIUM.",
+    risk: "MEDIUM. International customer. Execution and FX risk over long delivery window to Nov 2028.",
+    action: "Added Medium. Binding large export order expanding energy-storage visibility.",
+    conv: 6
+  },
+  {
+    date: "2026-11-07",
+    stock: "Seamec",
+    industry: "Offshore / Subsea",
+    category: "Order win",
+    theme: "ONGC subsea",
+    sentiment: "Positive",
+    title: "USD 26.14 Mn (~₹246 Cr) LoA from L&T for subsea installation on ONGC PRP-X project",
+    announcement: "07 Nov 2026. Letter of Award from Larsen & Toubro (Energy Hydrocarbon Division) to consortium of Seamec and Posh India Offshore for subsea installation works on ONGC PRP-X pipeline replacement project. Seamec’s lumpsum scope USD 26.14 million exclusive of GST. Completion by May 2027. Domestic, no related-party. Vessel SEAMEC PRINCESS subsequently mobilised.",
+    impact: "~25% of recent annual revenue. Highly material for offshore services company. Clears 1.5% comfortably. Confidence HIGH.",
+    pat: "Vessel utilisation and margin contribution through May 2027; peak-year PAT above 2%. Confidence MEDIUM-HIGH.",
+    risk: "MEDIUM. Subcontractor to L&T for ONGC work. Offshore execution and weather/vessel-utilisation risk.",
+    action: "Added Medium. Binding subsea LoA with near-term mobilisation.",
+    conv: 6
+  },
+
+  {
+    date: "2026-11-05",
+    stock: "Texmaco Rail & Engineering",
+    industry: "Railways / Wagons",
+    category: "Order win",
+    theme: "Private wagon demand",
+    sentiment: "Positive",
+    title: "₹428.55 Cr wagon orders from Ultratech Cement, Jujhar Logistics and APL Logistics",
+    announcement: "05 Nov 2026. Three binding orders aggregating ₹428.55 Cr (including taxes). (1) Ultratech Cement ₹30.98 Cr — 1 rake BCFCM1 + 1 BVCM, delivery by 28 Feb 2027. (2) Jujhar Logistics & Travels ₹329.53 Cr — 15 rakes ACT1/ACT3 + 15 BVCM, first rake in 5 months, balance by 31 Dec 2027. (3) APL Logistics Vascor ₹68.04 Cr — 3 rakes ACT3 + 3 BVCM, phased. All domestic, arm’s-length, no related-party.",
+    impact: "Material for wagon manufacturer; clears 1.5% on company scale. Confidence HIGH.",
+    pat: "Manufacturing margin contribution over 2026–27; peak-year PAT impact above 2% on higher utilisation. Confidence MEDIUM.",
+    risk: "MEDIUM. Private counterparties. Working-capital and delivery-schedule risk typical for multi-rake wagon orders.",
+    action: "Added Medium. Binding private-sector wagon orders expanding visibility.",
+    conv: 6
+  },
+
+  {
+    date: "2026-11-04",
+    stock: "Highway Infrastructure",
+    industry: "Infrastructure / EPC",
+    category: "Order win",
+    theme: "Government civil",
+    sentiment: "Positive",
+    title: "₹198.31 Cr CPWD LoA for CISF 12th Reserve Battalion infrastructure (Sehore, MP)",
+    announcement: "04 Nov 2026 (LoA dated 03 Nov). Binding Letter of Acceptance from Central Public Works Department for planning, designing and construction of residential and non-residential infrastructure (Phase I) for CISF 12th Reserve Battalion at Jamunia Talab, Sehore, Madhya Pradesh. EPC Mode-I, 2-year execution. Company calls it largest-ever civil construction order since incorporation. Order book rises to ₹1,776.19 Cr.",
+    impact: "Material for company scale; largest civil order. Clears 1.5% on relative basis. Confidence HIGH.",
+    pat: "EPC margin contribution over 2 years; peak-year PAT impact above 2% on higher utilisation. Confidence MEDIUM.",
+    risk: "MEDIUM. Government counterparty. Execution and working-capital risk typical for mid-size EPC expanding from tolling base.",
+    action: "Added Medium. Binding large relative civil order.",
+    conv: 6
+  },
+  {
+    date: "2026-11-04",
+    stock: "Markolines Pavement Technologies",
+    industry: "Infrastructure / Roads",
+    category: "Order win",
+    theme: "Highway maintenance",
+    sentiment: "Positive",
+    title: "₹135.20 Cr BMC LoAs for microsurfacing on Eastern & Western Express Highways, Mumbai",
+    announcement: "04 Nov 2026. Two Letters of Acceptance-cum-Work Orders from Brihanmumbai Municipal Corporation. (1) Eastern Express Highway microsurfacing/resurfacing ₹63.23 Cr. (2) Western Express Highway main carriageway improvement ₹71.97 Cr. Aggregate ₹135.20 Cr inclusive of GST and contingencies. Each 6 months including monsoon. No related-party.",
+    impact: "~38% of FY26 revenue. Highly material for specialised pavement company. Clears 1.5% by a wide margin. Confidence HIGH.",
+    pat: "Near-term margin contribution over two quarters; peak-year PAT above 2%. Confidence MEDIUM-HIGH.",
+    risk: "MEDIUM. Municipal counterparty. Monsoon execution risk on 6-month timelines.",
+    action: "Added Medium. Binding large relative orders with near-term revenue visibility.",
+    conv: 6
+  },
+
+  {
+    date: "2026-11-03",
+    stock: "LCC Projects",
+    industry: "Infrastructure / Water",
+    category: "Order win",
+    theme: "Water supply",
+    sentiment: "Positive",
+    title: "₹703 Cr LOI from Gujarat Water Supply & Sewerage Board (Bhadbhut Barrage scheme)",
+    announcement: "03 Nov 2026. Letter of Intent for EPC water supply scheme based on Bhadbhut Barrage (RHS) covering Bharuch and Vadodara districts. Scope: intake well, rising mains, pump house, electro-mechanical, SCADA + 10 years comprehensive O&M. Value ₹703 Cr exclusive of GST. 18 months execution including 3-month trial run from LOI dated 02 Nov 2026. No related-party.",
+    impact: "Highly material relative to company size (recently listed mid/small-cap). Clears 1.5% by a wide margin. Confidence HIGH.",
+    pat: "EPC + long O&M contribution; peak-year PAT impact above 2% on higher utilisation. Confidence MEDIUM.",
+    risk: "MEDIUM. LOI stage (not yet full contract). Government counterparty. Execution and working-capital risk typical for mid-size EPC.",
+    action: "Added Medium. Binding-intent large relative order.",
+    conv: 6
+  },
+  {
+    date: "2026-11-03",
+    stock: "Man Infraconstruction",
+    industry: "Infrastructure / EPC",
+    category: "Order win",
+    theme: "High-rise & ports",
+    sentiment: "Positive",
+    title: "₹583 Cr EPC orders — ₹508 Cr Marine Lines skyscraper + ₹75 Cr JNPA reclamation",
+    announcement: "03 Nov 2026. Two binding EPC work orders aggregating ₹583 Cr. (1) ₹508 Cr construction of skyscraper residential tower at Marine Lines, South Mumbai. (2) ₹75 Cr LoA from BMCTPL for triangular yard-surcharging and reclamation at JNPA (repeat order). EPC portfolio rises from ₹275 Cr (Sep 2026) to ~₹858 Cr.",
+    impact: "Material for standalone EPC business. Portfolio more than triples. Clears 1.5% on company scale. Confidence HIGH.",
+    pat: "EPC margin contribution over multi-year execution; peak-year PAT above 2% on higher utilisation. Confidence MEDIUM.",
+    risk: "MEDIUM. Private counterparties. High-rise execution complexity and working-capital risk.",
+    action: "Added Medium. Binding orders expanding EPC visibility.",
+    conv: 6
+  },
+
+  {
+    date: "2026-11-02",
+    stock: "Garden Reach Shipbuilders & Engineers",
+    industry: "Defence / Shipbuilding",
+    category: "Order win",
+    theme: "Naval shipbuilding",
+    sentiment: "Positive",
+    title: "₹32,000 Cr contract for 5 Next Generation Corvettes for Indian Navy",
+    announcement: "02 Nov 2026. Binding contract signed with Ministry of Defence. GRSE to build 5 of 8 NGCs (total programme ₹53,866.50 Cr with GSL for 3). First competitive DPSU design-and-build project. Vessels 127 m, multi-role ASW/ASuW. Employment generation cited by MoD.",
+    impact: "~4.5x last FY revenue (₹7,002 Cr FY26). Multi-year visibility of exceptional scale. Clears 1.5% by a wide margin. Confidence HIGH.",
+    pat: "Defence shipbuilding margin profile; peak-year PAT contribution well above 2% across the programme life. Confidence HIGH.",
+    risk: "LOW-MEDIUM. Sovereign counterparty. Long execution cycle typical for naval platforms; schedule and cost overrun risk standard for warship programmes.",
+    action: "Added High. Largest single binding order in the book by absolute value and relative impact. Primary candidate on size.",
+    conv: 9
+  },
+  {
+    date: "2026-10-31",
+    stock: "RBM Infracon",
+    industry: "Infrastructure / EPC",
+    category: "Order win",
+    theme: "Industrial construction",
+    sentiment: "Positive",
+    title: "₹354.76 Cr EPC service order from Epitome Industries (18-month execution)",
+    announcement: "30-31 Oct 2026. Binding service agreement. Scope: design, engineering, construction, erection, testing and commissioning of buildings and structures. Inclusive of taxes. 18-month timeline. No related-party.",
+    impact: "~47-72% of last FY / TTM revenue. Highly material for a small-cap EPC. Clears 1.5%. Confidence HIGH.",
+    pat: "EPC margin contribution over 18 months; peak-year PAT impact above 2% on higher utilisation. Confidence MEDIUM.",
+    risk: "MEDIUM. Private counterparty; small-cap execution and working-capital risk. Counterparty also active in edible-oil expansion.",
+    action: "Added Medium. Binding large-ticket relative to company size.",
+    conv: 6
+  },
+
+  {
+    date: "2026-08-29",
+    stock: "Ashoka Buildcon",
+    industry: "Infrastructure / EPC",
+    category: "Order win",
+    theme: "Railway infrastructure",
+    sentiment: "Positive",
+    title: "₹602.16 Cr LoA from RVNL for E&M systems on 4 tunnels (Rishikesh-Karnprayag)",
+    announcement: "28-29 Aug 2026. Binding Letter of Acceptance from RVNL. Package E-4, Tunnels T-13 to T-16. Scope: 33/11 kV & 11/0.433 kV GIS substations, HT/LT cables, DG sets, lighting, UPS, ventilation, fire-fighting. 30-month execution. Performance BG ₹25.51 Cr. Defect liability 2 years.",
+    impact: "Material addition to order book. ~25% of recent quarterly revenue run-rate on a single ticket. Clears 1.5% on annualised basis for mid-size EPC. Confidence HIGH.",
+    pat: "EPC margin contribution over 30 months; peak-year PAT impact above 2% on higher utilisation. Confidence MEDIUM.",
+    risk: "MEDIUM. Execution in Himalayan terrain; working-capital heavy PSU counterparty. Performance BG requirement.",
+    action: "Added Medium. Binding multi-year visibility on railway E&M.",
+    conv: 6
+  },
+  {
+    date: "2026-08-21",
+    stock: "Data Patterns (India)",
+    industry: "Defence Electronics",
+    category: "Order win",
+    theme: "Defence / Radar",
+    sentiment: "Positive",
+    title: "₹585.76 Cr order from BEL for supply of Radar Electronics",
+    announcement: "21 Aug 2026. Binding order from Bharat Electronics. Domestic. Part of broader ₹771 Cr receipts since July 30 order-book update (₹2,654 Cr). Execution as per contract. No related-party.",
+    impact: "Order is ~80-100% of last FY revenue (annualised from ~₹116 Cr Q1). Highly material. Confidence HIGH.",
+    pat: "Defence electronics margin profile; peak-year PAT contribution well above 2%. Confidence HIGH.",
+    risk: "LOW-MEDIUM. Strong PSU counterparty (BEL). Execution risk typical for complex electronics.",
+    action: "Added High. Binding large-ticket defence order with creditworthy counterparty.",
+    conv: 8
+  },
+  {
+    date: "2026-08-20",
+    stock: "Welspun Corp",
+    industry: "Pipes / Energy infrastructure",
+    category: "Order win",
+    theme: "US energy infrastructure",
+    sentiment: "Positive",
+    title: "Largest-ever single order: ~$1.8 bn (₹17,200 Cr) US pipe supply (FY28-29)",
+    announcement: "20-21 Aug 2026. Binding order from US manufacturing facility. Customer unnamed. Execution FY28-FY29. Lifts global order book to record $4.4 bn (₹42,100 Cr). No major new capex required per management.",
+    impact: "Multi-year revenue visibility substantially above 1.5% of sales. Strengthens North American position. Confidence HIGH.",
+    pat: "Higher-margin US geography. Management indicated potential EBITDA doubling path by FY30. Peak-year PAT contribution well above 2%. Confidence HIGH.",
+    risk: "MEDIUM. Customer unnamed; steel spreads and execution phasing. Back-ended recognition.",
+    action: "Stays High. This is the original August announcement of the US $1.8 bn order already on the High slate.",
+    conv: 8
+  },
+  {
+    date: "2026-08-11",
+    stock: "Saatvik Green Energy",
+    industry: "Solar / Renewables",
+    category: "Order win",
+    theme: "Solar modules",
+    sentiment: "Positive",
+    title: "₹400.16 Cr solar PV module order from leading IPP/EPC (plus other Aug wins)",
+    announcement: "11 Aug 2026. Material subsidiary Saatvik Solar Industries received ₹400.16 Cr commercial order for solar PV modules. Execution by March 2027. Additional August wins include ₹190 Cr (20 Aug) and ₹132 Cr (14 Aug) from domestic IPPs. Confirmed order book ~6.35 GW.",
+    impact: "Cluster of commercial orders provides multi-quarter visibility. Clears 1.5% on combined basis for growing module manufacturer. Confidence MEDIUM.",
+    pat: "Module margin contribution; peak-year impact around 2% depending on realisation. Confidence MEDIUM.",
+    risk: "MEDIUM. Module price volatility; execution ramp at new Odisha facilities.",
+    action: "Added Medium. Binding commercial module orders with domestic IPPs.",
+    conv: 6
+  },
+
+  {
+    date: "2026-10-30",
+    stock: "Knowledge Marine & Engineering Works",
+    industry: "Marine / Dredging",
+    category: "Order win",
+    theme: "Port infrastructure",
+    sentiment: "Positive",
+    title: "₹303.17 Cr 3-year maintenance dredging from New Mangalore Port Authority",
+    announcement: "30 Oct 2026. Binding LoA. Largest-ever dredging order. 15.9 mn m3 over 3 years (FY27-29). Annual ~₹101 Cr. Starts Nov 15 2026.",
+    impact: "Annual ~50%+ of prior dredging revenue (~₹193 Cr FY26). Clears 1.5%. Confidence HIGH.",
+    pat: "Peak-year PAT contribution above 2% on higher utilisation. Confidence MEDIUM.",
+    risk: "MEDIUM. Execution volume risk; port counterparty strong.",
+    action: "Added Medium. Material binding multi-year visibility.",
+    conv: 7
+  },
+  {
+    date: "2026-10-30",
+    stock: "Oswal Pumps",
+    industry: "Pumps / Solar irrigation",
+    category: "Order win",
+    theme: "PM-KUSUM solar pumps",
+    sentiment: "Positive",
+    title: "₹235.92 Cr additional MSEDCL order for 10,000 solar pumps",
+    announcement: "30 Oct 2026. Repeat order. 60-day execution. Includes 5-yr warranty/RMS. Stock at 52w low.",
+    impact: "Material vs company scale (repeat ~₹236 Cr). Clears for small base. Confidence HIGH.",
+    pat: "Peak contribution above 2% if margins hold.",
+    risk: "MEDIUM. Tight timeline; scheme pricing pressure; stock at 52w low.",
+    action: "Medium. Quantified but working-capital and scheme risk.",
+    conv: 6
+  },
+  {
+    date: "2026-10-30",
+    stock: "Waaree Renewable Technologies",
+    industry: "Renewables / BESS",
+    category: "Order win",
+    theme: "Energy storage",
+    sentiment: "Positive",
+    title: "LoA for 200 MW / 500 MWh BESS EPC from leading IPP",
+    announcement: "30 Oct 2026. Binding LoA. Completion FY28. No rupee value disclosed. Order book >₹5,500 Cr.",
+    impact: "Value undisclosed; capacity large but % of revenue not quantifiable.",
+    pat: "Cannot score PAT without value.",
+    risk: "HIGH. Missing quantification.",
+    action: "No comments. Binding but fails quantification rule.",
+    conv: 4
+  },
+  {
+    date: "2026-10-29",
+    stock: "Jupiter Wagons",
+    industry: "Railways / Wagons",
+    category: "Order win",
+    theme: "Freight capacity",
+    sentiment: "Positive",
+    title: "₹1,140 Cr Ministry of Railways order for 2,583 BOXNHL/BOXNS wagons",
+    announcement: "29 Oct 2026. Binding order from Railway Board. ~39% of FY26 consolidated revenue (~₹2,916 Cr). Execution over coming quarters. Private book also strong.",
+    impact: "~39% of last FY sales. Clears 1.5% by a wide margin. Confidence HIGH.",
+    pat: "Wagon margins mid-teens. Peak-year PAT contribution well above 2%.",
+    risk: "MEDIUM. Wheelset supply chain residual risk; IR counterparty strong.",
+    action: "Stays High. Largest clean % impact.",
+    conv: 8
+  },
+  {
+    date: "2026-10-29",
+    stock: "Dilip Buildcon",
+    industry: "Roads / Infra",
+    category: "Order win",
+    theme: "HAM highway",
+    sentiment: "Positive",
+    title: "₹688.23 Cr NHAI LoA — Solapur elevated corridor (HAM)",
+    announcement: "29 Oct 2026. Upgrade from Sep L1 to binding LoA. 9.66 km NH-65, 24 months construction + 15 yr O&M. Ex-GST. ~9.8% of FY26 standalone revenue (₹7,005 Cr).",
+    impact: "~9.8% of FY26 standalone sales. Clears hurdle. Confidence HIGH on award.",
+    pat: "HAM annuity + EPC margin. Peak PAT contribution above 2% over project life.",
+    risk: "MEDIUM. Working-capital intensity of HAM; execution over 24 months.",
+    action: "Stays Medium. Material binding win.",
+    conv: 6
+  },
+
+  {
+    date: "2026-09-01",
+    stock: "HFCL",
+    industry: "Telecom / Cables",
+    category: "Order win",
+    theme: "Digital infrastructure",
+    sentiment: "Positive",
+    title: "₹2,329 Cr (USD 244 mn) 3-year OFC export supply agreement",
+    announcement: "01 Sep 2026 filing. Three-year supply of high-fibre-count optical fibre cable via overseas WOS to an unnamed global MNC. Supplies in CY27–CY29, through Dec 2029.",
+    impact: "FY26 revenue ₹4,949 Cr. ₹2,329 Cr over CY27–29 ≈ 47% of FY26 sales, ~15.7% per year if even — clears 2.5% comfortably. Export mix already 41% of FY26.",
+    pat: "Export OFC typically carries healthier mix than domestic EPC. PAT accretion is back-ended to FY28–FY30. Confidence: HIGH on contract; MEDIUM on annual recognition.",
+    risk: "Customer name undisclosed. Execution from 2027. Capacity capex (~₹400 Cr planned) needed to service high-count fibre.",
+    action: "Watch export mix in Q2. Conviction 7/10. Horizon FY28+.",
+    conv: 7
+  },
+  {
+    date: "2026-09-07",
+    stock: "GE Vernova T&D India",
+    industry: "Power equipment",
+    category: "Order win",
+    theme: "RE evacuation / HVDC",
+    sentiment: "Positive",
+    title: "L1 for 6,000 MW ±800 kV HVDC terminals (Barmer II–South Kalamb)",
+    announcement: "07 Sep 2026. Power Grid letter naming GE Vernova T&D as L1 for design and establishment of 2×3,000 MW LCC HVDC terminals to evacuate Rajasthan RE. Multi-year execution. Exact value not in filing; broker estimates ~₹12,500–13,000 Cr.",
+    impact: "If converted, this is several times FY26 revenue and would take FY27 inflows toward ~₹23,000 Cr. Recognition likely FY28–FY31 (48–54 month HVDC cycle).",
+    pat: "Mid-20% EBITDA guided for FY27; HVDC can dilute gross margin but operating leverage may hold EBITDA. Peak-year PAT impact HIGH if awarded.",
+    risk: "L1 is not LoA. Award timing and consortium split matter. HIGH execution complexity.",
+    action: "Event-driven hold until LoA. Conviction 7/10 on L1, 8/10 if awarded. Nomura TP ₹6,000.",
+    conv: 7
+  },
+  {
+    date: "2026-09-07",
+    stock: "VA Tech Wabag",
+    industry: "Water / Environment",
+    category: "Order win",
+    theme: "Industrial water / Giga Complex",
+    sentiment: "Positive",
+    title: "Repeat RIL order — advanced ETP at Jamnagar Giga Complex",
+    announcement: "07 Sep 2026. Medium-sized repeat order from Reliance Industries to design and commission a state-of-the-art effluent treatment plant at Dhirubhai Ambani Green Energy Giga Complex, Jamnagar.",
+    impact: "Exact rupee value not disclosed (company classed as medium). Repeat RIL work supports Wabag’s ₹19,400 Cr order book and industrial-water franchise.",
+    pat: "Water EPC margins historically mid-teens at project level. Incremental PAT modest in isolation; franchise signal is the story.",
+    risk: "Size not quantified in public snippets. Treat as medium-impact unless full filing value is larger.",
+    action: "Hold franchise. Conviction 6/10 on disclosed facts.",
+    conv: 6
+  },
+  {
+    date: "2026-09-08",
+    stock: "Dilip Buildcon",
+    industry: "Infrastructure",
+    category: "M&A / Monetisation",
+    theme: "Deleveraging",
+    sentiment: "Positive",
+    title: "Definitive agreements to sell Mekhali Power Transmission (EV ~₹2,914 Cr)",
+    announcement: "08 Sep 2026. Sale of under-construction transmission SPV Mekhali Power Transmission to Alpha Alternatives at EV ~₹2,914 Cr. Part of a broader September monetisation path that later included a larger solar portfolio EV ~₹6,829 Cr (21 Sep).",
+    impact: "Not incremental EPC revenue; recycle of locked capital. Material for net-debt and equity funding of HAM/BOOT bids.",
+    pat: "P&L depends on sale vs book. Balance-sheet PAT quality improves if leverage falls.",
+    risk: "Closing conditions, valuation haircut, replacement-capex needs.",
+    action: "Credit-positive. Pair with order wins later in month. Conviction 7/10.",
+    conv: 7
+  },
+  {
+    date: "2026-09-09",
+    stock: "Shakti Pumps",
+    industry: "Capital goods / Agri-solar",
+    category: "Order win",
+    theme: "Solar pumps",
+    sentiment: "Positive",
+    title: "MSEDCL empanelment — 10,000 off-grid solar pumps (~₹216–236 Cr)",
+    announcement: "09 Sep 2026 LoE from MSEDCL under Magel Tyala Saur Krushi Pump Yojana. 10,000 SPWPS; value cited ~₹216.64 Cr to ₹235.92 Cr incl. GST.",
+    impact: "Material for a pumps specialist. Execution over the scheme window; repeat state-tender optionality.",
+    pat: "Product + installation mix. Working-capital intensive (state subsidies).",
+    risk: "Scheme disbursement delays.",
+    action: "Tactical. Conviction 6/10.",
+    conv: 6
+  },
+  {
+    date: "2026-09-09",
+    stock: "Dilip Buildcon",
+    industry: "Infrastructure",
+    category: "Order win",
+    theme: "Energy pipelines",
+    sentiment: "Positive",
+    title: "PNGRB LoI — Paradip–Raipur LPG pipeline; ~₹1,800 Cr EPC opportunity",
+    announcement: "09 Sep 2026. LoI from PNGRB to develop Paradip–Raipur LPG pipeline via SPV. 3-year construction, 25-year operate. EPC opportunity ~₹1,800 Cr ex-GST to DBL.",
+    impact: "Large versus DBL’s mid-cap P&L. Adds a 25-year infra annuity if licence converts.",
+    pat: "Construction PAT first, tariff later. HIGH WC during build.",
+    risk: "LoI ≠ licence. Funding of SPV equity.",
+    action: "Track licence grant. Conviction 7/10.",
+    conv: 7
+  },
+  {
+    date: "2026-09-15",
+    stock: "Saatvik Green Energy",
+    industry: "Renewables",
+    category: "Order win",
+    theme: "Solar manufacturing",
+    sentiment: "Positive",
+    title: "SECI module supply order ₹1,041.63 Cr",
+    announcement: "15 Sep 2026 (stock reacted 16 Sep, hit 10% UC). Award from SECI for solar PV modules, execution by Dec 2027.",
+    impact: "Tier-1 versus small-cap module revenue base. Multi-quarter recognition through CY27.",
+    pat: "Module OEM margins cyclical with cell/wafer prices.",
+    risk: "Price-escalation clauses, SECI delivery LD.",
+    action: "Small-cap high beta. Conviction 6/10.",
+    conv: 6
+  },
+  {
+    date: "2026-09-21",
+    stock: "Welspun Corp",
+    industry: "Steel pipes",
+    category: "Order win",
+    theme: "Energy infrastructure / Exports",
+    sentiment: "Positive",
+    title: "Associate EPIC wins ~₹2,000 Cr Saudi Aramco pipe order",
+    announcement: "20–21 Sep 2026. East Pipes Integrated Company (KSA associate) bags Aramco steel-pipe order ~₹2,000 Cr. Stock hit 52-week highs with Welspun Enterprises the same session.",
+    impact: "Adds to a record global book (later printed $4.7 bn after the 25 Sep US order). Associate income, not 100% consolidated.",
+    pat: "Pick-up via share of associate. Still strategic for US/KSA pipe platform.",
+    risk: "Associate accounting opacity.",
+    action: "Part of a September order cluster. Conviction 7/10.",
+    conv: 7
+  },
+  {
+    date: "2026-09-21",
+    stock: "Dilip Buildcon",
+    industry: "Infrastructure",
+    category: "Order win",
+    theme: "Power transmission",
+    sentiment: "Positive",
+    title: "₹1,265 Cr intra-state transmission win (RECPDCL) + solar portfolio EV ~₹6,829 Cr",
+    announcement: "21 Sep 2026. Mega transmission project from RECPDCL (~₹1,265 Cr ex-GST) and definitive agreements to divest under-construction solar portfolio to Alpha Alternatives at EV ~₹6,829 Cr (project cost ~₹6,263 Cr, 51:49 equity).",
+    impact: "Order book lifted past ₹27,691 Cr (Q1 FY27). Monetisation is the larger balance-sheet event.",
+    pat: "Transmission BOOT annuity from FY28+; sale proceeds cut leverage.",
+    risk: "Closing of sale; HAM/BOOT equity overload if new bids pile up.",
+    action: "Core DBL September thesis. Conviction 7/10.",
+    conv: 7
+  },
+  {
+    date: "2026-09-21",
+    stock: "Waaree Energies",
+    industry: "Renewables",
+    category: "Order win",
+    theme: "Solar manufacturing",
+    sentiment: "Positive",
+    title: "2 GW domestic module supply (FY27–FY28)",
+    announcement: "21 Sep 2026 order from a leading unnamed solar developer. One-time supply across FY27 and FY28. Monetary value not disclosed; 2 GW is large in volume terms.",
+    impact: "Volume-material for module shipments. Rupee value depends on ASP (~industry ₹1.2–1.8 Cr/MW would imply a very large ticket — treat as HIGH volume, MEDIUM value confidence).",
+    pat: "Module OEM; margin tied to cell costs and US/India mix.",
+    risk: "Undisclosed customer and price.",
+    action: "Monitor order-book disclosures. Conviction 6/10.",
+    conv: 6
+  },
+  {
+    date: "2026-09-22",
+    stock: "Engineers India",
+    industry: "Oil & gas consultancy",
+    category: "Order win",
+    theme: "Energy security / Africa",
+    sentiment: "Positive",
+    title: ">$450 mn (~₹3,800–4,300 Cr) Dangote PMC+EPCM — 700 kb/d Kenya refinery",
+    announcement: "22 Sep 2026. Contract agreement with Dangote Group for PMC and EPCM on a 700,000 bpd greenfield refinery and petrochem complex in Lamu, Kenya. Builds on EIL’s Lekki (Nigeria) role.",
+    impact: "FY26 revenue ₹3,849 Cr, PAT ₹638 Cr, order book ~₹15,000–17,000 Cr. This single ticket is ~100%+ of FY26 sales if fully booked over the consultancy life — Tier-1 for EIL.",
+    pat: "Consultancy margins are high (FY26 EBITDA ~21.6%). Multi-year recognition. PAT accretion HIGH over FY27–FY30.",
+    risk: "Africa project-finance / political execution. Fees vs cost-plus structure not fully public.",
+    action: "Accumulate on dips. Conviction 8/10. 12-month payoff as book converts.",
+    conv: 8
+  },
+  {
+    date: "2026-09-24",
+    stock: "Kalpataru Projects",
+    industry: "Infrastructure",
+    category: "Order win",
+    theme: "T&D / Buildings / O&G",
+    sentiment: "Positive",
+    title: "₹2,025 Cr new orders across T&D, B&F and Oil & Gas",
+    announcement: "24 Sep 2026. Domestic + international awards; individual clients not named. FY27 YTD inflows ₹13,219 Cr vs ₹30,000 Cr target; &gt;₹12,000 Cr L1 pipeline.",
+    impact: "~7.5% of FY26 revenue (₹27,143 Cr) in one print. Adds coverage to a ₹66,607 Cr book (30 Jun).",
+    pat: "EPC EBITDA ~8–9%. Project-life PAT ₹120–160 Cr band.",
+    risk: "Lumpy international execution.",
+    action: "Pre-cursor to 28 Sep UAE mega order. Conviction 7/10.",
+    conv: 7
+  },
+  {
+    date: "2026-09-25",
+    stock: "Welspun Corp",
+    industry: "Steel pipes",
+    category: "Order win",
+    theme: "Energy infrastructure / US manufacturing",
+    sentiment: "Positive",
+    title: "Largest-ever HFIW pipe order — USD 412.5 mn (~₹4,000 Cr) from US mill",
+    announcement: "25 Sep 2026. Welspun Tubular LLC (US WOS) wins record HFIW pipe order. Execution FY28–FY29 from upgraded Little Rock mill. Global book to record $4.7 bn (~₹45,000 Cr).",
+    impact: "Largest single order in company history. ~high-teens % of a strong year if recognised over FY28–29. US localisation thesis.",
+    pat: "US mill margins after upgrade. WC + steel spreads are the swing.",
+    risk: "US energy capex cycle; tariff/policy.",
+    action: "Core pipe-export compounder. Conviction 8/10.",
+    conv: 8
+  },
+  {
+    date: "2026-09-25",
+    stock: "Vascon Engineers",
+    industry: "Construction",
+    category: "Order win",
+    theme: "Data / tech real estate",
+    sentiment: "Positive",
+    title: "₹660.79 Cr design-and-build GMP from Qualcomm India (Bengaluru office)",
+    announcement: "25 Sep 2026. Block K office: 3 basements + G+12, 30 months from handover. Stock jumped ~10–14% then faded.",
+    impact: "Very large versus Vascon’s mid/small construction book. Clears 3% easily.",
+    pat: "GMP contracts cap upside and protect owner; contractor margin mid-single digit typical.",
+    risk: "Handover date, design changes, working capital.",
+    action: "Tactical small-cap. Conviction 6/10.",
+    conv: 6
+  },
+  {
+    date: "2026-09-25",
+    stock: "NMDC",
+    industry: "Metals / Mining",
+    category: "Commissioning",
+    theme: "Steel value chain",
+    sentiment: "Positive",
+    title: "₹5,427 Cr Bastar integrated processing + slurry pipeline + pellet plant commissioned",
+    announcement: "Late Sep (focus 25–28 Sep). Iron-ore processing, slurry pipeline and pellet plant in Bastar, Chhattisgarh now commissioned.",
+    impact: "Not a new order — converts capex into volume/mix. Pellets + slurry cut logistics cost and can lift realisation versus lump/fines.",
+    pat: "Margin accretion as utilisation ramps in FY27. Quantum depends on pellet spreads.",
+    risk: "Ramp-up, pellet demand, freight.",
+    action: "Watch monthly production. Conviction 7/10.",
+    conv: 7
+  },
+  {
+    date: "2026-09-28",
+    stock: "Kalpataru Projects",
+    industry: "Infrastructure",
+    category: "Order win",
+    theme: "Oil & gas / Middle East",
+    sentiment: "Positive",
+    title: "Major UAE gas-pipeline EPC LoA, estimated &gt;₹4,000 Cr",
+    announcement: "28 Sep 2026. LoA for full EPC of a UAE gas pipeline. ‘Major’ = company definition &gt;₹4,000 Cr. Client undisclosed.",
+    impact: "Annualised ~5–8% of FY26 sales over 24–36 months. FY27 inflows now &gt;₹17,000 Cr.",
+    pat: "₹150–250 Cr project-life PAT band at 8–9% EBITDA.",
+    risk: "Exact value not printed. Cross-border execution/FX.",
+    action: "Accumulate. Target zone ₹1,700–1,800. Conviction 8/10.",
+    conv: 8
+  },
+  {
+    date: "2026-09-28",
+    stock: "Godrej Properties",
+    industry: "Real estate",
+    category: "JV / Development agreement",
+    theme: "Luxury housing",
+    sentiment: "Positive",
+    title: "Marine Lines 2.5-acre luxury DA — ~₹6,000 Cr GDV",
+    announcement: "28 Sep 2026. DA with Man Infraconstruction/Shreepati. ~6 lakh sq ft, launch &lt;6 months. GPL brands and sells.",
+    impact: "~15–17% of FY26 bookings (₹34,171 Cr). P&L over 4–6 years.",
+    pat: "South Mumbai luxury margins richer than mid-market. FY27 booking impact; FY28+ P&L.",
+    risk: "Redevelopment residual, price list, absorption.",
+    action: "Hold / add weakness. Conviction 7/10.",
+    conv: 7
+  },
+  {
+    date: "2026-09-28",
+    stock: "Man Infraconstruction",
+    industry: "Real estate",
+    category: "JV / Development agreement",
+    theme: "Luxury housing",
+    sentiment: "Positive",
+    title: "Same Marine Lines deal — revenue share + ~₹300 Cr capital recycle",
+    announcement: "28 Sep 2026. Rights transferred to GPL; MICL keeps revenue share and expects to recoup ~₹300 Cr invested.",
+    impact: "Even 15–25% of ₹6,000 Cr GDV is ₹900–1,500 Cr over project life vs mid-cap P&L. ₹300 Cr cash is ~6% of mcap.",
+    pat: "Asset-light share. High incremental ROE if pricing holds.",
+    risk: "Share ratio not fully disclosed.",
+    action: "Buy small. Conviction 7/10.",
+    conv: 7
+  },
+  {
+    date: "2026-09-28",
+    stock: "NCC",
+    industry: "Infrastructure",
+    category: "Order win",
+    theme: "Water / Jal Jeevan",
+    sentiment: "Positive",
+    title: "₹1,076.71 Cr Anakapalli multi-village drinking-water LoA",
+    announcement: "LoA dated 26 Sep, disclosed 28 Sep. AP Rural Water Supply, 24 months. Stock +~5% on 29 Sep.",
+    impact: "~5.1% of FY26 consol. revenue (₹20,944 Cr).",
+    pat: "At 8–9% EBITDA, project-life PAT ~₹60–75 Cr (~5–10% of one year).",
+    risk: "State water receivables.",
+    action: "Accumulate ₹128–135 zone. Conviction 7/10.",
+    conv: 7
+  },
+  {
+    date: "2026-09-28",
+    stock: "Dilip Buildcon",
+    industry: "Infrastructure",
+    category: "Order win",
+    theme: "Roads / Transmission",
+    sentiment: "Positive",
+    title: "L1 cluster: ₹688 Cr NHAI Solapur HAM + ₹1,151 Cr Yavatmal 400 kV BOOT",
+    announcement: "28 Sep. NH-65 9.66 km elevated corridor (15-year O&M after COD) and RECPDCL 400 kV AIS, 24-month construction.",
+    impact: "Combined ~₹1,840 Cr new visibility. Material vs DBL scale. Still L1 on both.",
+    pat: "Annuity after construction. Near-term PAT small.",
+    risk: "L1 conversion; equity load.",
+    action: "Wait for LoA if possible. Conviction 7/10.",
+    conv: 7
+  },
+  {
+    date: "2026-09-28",
+    stock: "CleanMax Enviro",
+    industry: "Renewables",
+    category: "Debt / Equity raise",
+    theme: "Green financing",
+    sentiment: "Positive",
+    title: "₹2,500 Cr green NCDs (private placement)",
+    announcement: "28 Sep 2026. Growth funding. Same week also saw a large block (~₹1,063 Cr / 7.25% Augment India) — supply overhang.",
+    impact: "Enables RE project SPVs. Qualifies as expansion fundraising &gt;₹500 Cr.",
+    pat: "Interest cost vs project IRRs. Near-term EPS dilution none (debt); leverage up.",
+    risk: "Block-deal float vs capex deployment.",
+    action: "Separate funding (+) from stake sale (neutral/negative flow). Conviction 6/10.",
+    conv: 6
+  },
+  {
+    date: "2026-09-28",
+    stock: "Marine Electricals",
+    industry: "Electrical / Data centres",
+    category: "Order win",
+    theme: "Data centres",
+    sentiment: "Positive",
+    title: "₹250.78 Cr PDS orders from Digital Edge, Socomec, STT GDC",
+    announcement: "28 Sep 2026. Three power-distribution-system contracts; Digital Edge tranche 10–12 months. Stock +5% intraday.",
+    impact: "FY26 consol. revenue ~₹767–877 Cr. ₹250.78 Cr is 29–33% of FY26 sales — well above 2.5%. FY26 PAT ~₹38–59 Cr; this cluster can move PAT &gt;3%.",
+    pat: "Equipment + integration margins. WC on DC schedules.",
+    risk: "Client concentration in DC build cycle.",
+    action: "Small-cap tactical. Conviction 6/10.",
+    conv: 6
+  },
+  {
+    date: "2026-09-28",
+    stock: "Ellenbarrie Industrial Gases",
+    industry: "Industrial gases",
+    category: "Order win",
+    theme: "Coal-to-chemicals",
+    sentiment: "Positive",
+    title: "₹481 Cr BHEL ASU — 1,200 TPD for Odisha coal-to-AN project",
+    announcement: "Late Sep (focus 28–29). Design to commissioning, Build-and-Transfer, 8 quarters, COD FY29. Mcap ~₹5,061 Cr.",
+    impact: "FY26 revenue ₹341.6 Cr. ₹481 Cr is 141% of FY26 sales. Build-and-transfer, COD FY29 — recognition FY27–FY29, not a 15-year operate contract.",
+    pat: "Turnkey industrial-gas plant margins. PAT in FY28–FY29.",
+    risk: "BHEL pass-through, project delay to FY29.",
+    action: "Tactical. Conviction 6/10.",
+    conv: 6
+  },
+  {
+    date: "2026-09-28",
+    stock: "Aequs",
+    industry: "Aerospace / Precision engg",
+    category: "Capex / Funding",
+    theme: "Defence & aerospace",
+    sentiment: "Positive",
+    title: "₹660 Cr FY27 capex budget + ~₹800 Cr debt + ₹650 Cr promoter warrants",
+    announcement: "28 Sep 2026 interviews/filings. $450 mn capex path to 2031; drones/defence assemblies with HAL; 4–6× 2026 scale target.",
+    impact: "Capex &gt;₹500 Cr filter. Revenue impact is future capacity, not booked sales.",
+    pat: "Near-term depreciation/interest; FY28+ operating leverage.",
+    risk: "Aero cycle, execution of new plants.",
+    action: "Growth-funding watch. Conviction 6/10.",
+    conv: 6
+  },
+  {
+    date: "2026-09-28",
+    stock: "Eureka Forbes",
+    industry: "Consumer durables",
+    category: "Regulatory / Tax",
+    theme: "Tax risk",
+    sentiment: "Negative",
+    title: "₹273 Cr tax demand from Uttar Pradesh tax department",
+    announcement: "28–29 Sep stocks-to-watch. Demand notified; contest/appeal path not fully detailed in secondary reports.",
+    impact: "Could be material versus mid-cap consumer PAT if sustained and unstayed.",
+    pat: "Worst case is a large one-time hit. Base case is provision + appeal.",
+    risk: "HIGH until company publishes quantified exposure and legal strategy.",
+    action: "Avoid adding. Conviction on negative case 6/10 pending filing.",
+    conv: 6
+  },
+  {
+    date: "2026-09-29",
+    stock: "KPI Green Energy",
+    industry: "Renewables",
+    category: "Order win",
+    theme: "Solar EPC",
+    sentiment: "Positive",
+    title: "~₹2,025 Cr turnkey 500 MW / 550 MWp solar EPC from NACOF Oorja (Bikaner)",
+    announcement: "29 Sep 2026 work order, tax-inclusive. 12 months from site handover. Part of 5,000 MW park. Follows NTPC REL BOS package in Bikaner.",
+    impact: "FY26 revenue ₹2,742 Cr — this ticket is ~60–74% of last year if booked over 12 months. Largest % impact in the month.",
+    pat: "EPC margins mid-teens vs IPP-heavy FY26 EBITDA. PAT band ₹120–220 Cr if 12–15% EBITDA on net contract.",
+    risk: "12-month solar schedule is tight. Module/evacuation.",
+    action: "Buy dips ₹360–375. Conviction 8/10.",
+    conv: 8
+  },
+  {
+    date: "2026-09-29",
+    stock: "Power Mech Projects",
+    industry: "Power services",
+    category: "Order win",
+    theme: "O&M / Thermal",
+    sentiment: "Positive",
+    title: "₹549.37 Cr / 60-month O&M for 1,200 MW plant (Moxie Power) plus earlier ₹279 Cr TSGENCO",
+    announcement: "29 Sep 2026 filing: ₹549.37 Cr O&M, 60 months, 1,200 MW. Earlier window also had ₹279.20 Cr three-year O&M from Telangana Power Generation for YTPS.",
+    impact: "FY26 revenue ~₹6,107 Cr. Combined late-Sep O&M: ₹549.37 Cr (5 yrs) + ₹279.20 Cr TSGENCO (3 yrs) = ₹828.6 Cr, 13.6% of FY26 sales. Annualised ~₹200 Cr ≈ 3.3% — passes the 2.5% cut on a run-rate basis.",
+    pat: "O&M margins typically steadier than EPC.",
+    risk: "Plant PLF / contract scope.",
+    action: "Accumulate services compounder. Conviction 7/10.",
+    conv: 7
+  },
+  {
+    date: "2026-09-29",
+    stock: "Vikram Solar",
+    industry: "Renewables",
+    category: "Order win",
+    theme: "Solar manufacturing",
+    sentiment: "Positive",
+    title: "400 MW module supply for Maharashtra agri-solar portfolio",
+    announcement: "28–29 Sep. Leading domestic EPC customer; multi-location agri-solar. Value not always disclosed with MW.",
+    impact: "Conditional pass. At ₹1.2–1.6 Cr/MW ASP the ticket is ₹480–640 Cr. Only include if that band is &gt;2.5% of Vikram’s FY26 module sales — value not filed.",
+    pat: "Module OEM. Limited if price is thin.",
+    risk: "Undisclosed rupee value — may miss the hurdle.",
+    action: "Monitor until rupee value is filed. Conviction 5/10.",
+    conv: 5
+  },
+  {
+    date: "2026-09-10",
+    stock: "Systematic Industries",
+    industry: "Cables / Electricals",
+    category: "Order win",
+    theme: "T&D / OPGW",
+    sentiment: "Positive",
+    title: "₹82.42 Cr POWERGRID OPGW-06 supply + installation",
+    announcement: "Disclosed 10 Sep 2026 (NoA dated 9 Sep). OPGW goods and installation on pan-India transmission lines.",
+    impact: "Small-cap. ~13% of ~₹625 Cr mcap. One source pegs it at about a third of a recent quarterly sales line. Clears 2.5% of annual sales for this scale.",
+    pat: "Cable + installation mix. PAT &gt;3% of a small-cap year if executed cleanly.",
+    risk: "Just listed / thin float. Capacity and working capital.",
+    action: "Small-cap only. Conviction 6/10.",
+    conv: 6
+  },
+  {
+    date: "2026-09-17",
+    stock: "GPT Infraprojects",
+    industry: "Infrastructure",
+    category: "Order win",
+    theme: "Railways / Bridges",
+    sentiment: "Positive",
+    title: "₹483.72 Cr RVNL Mahanadi important-bridge (1,095 days)",
+    announcement: "Post-market 17 Sep 2026. Important Bridge 544 — 32×65.84 m open-web steel girder over the Mahanadi, Nergundi–Barang third/fourth line, ECoR. Domestic, 1,095 days from start.",
+    impact: "FY26 consol. revenue ₹1,289.9 Cr — this ticket is 37.5% of FY26 sales. Book was ₹4,476 Cr (3.5×) at FY26 end.",
+    pat: "FY26 PAT ₹97.3 Cr, PAT margin 7.5%. Project-life PAT ~₹30–40 Cr if margin holds = 30%+ of one year. Clears 3% PAT easily.",
+    risk: "River-bridge monsoon windows. RVNL certification cycle.",
+    action: "Core small/mid infra. Conviction 7/10.",
+    conv: 7
+  },
+  {
+    date: "2026-09-23",
+    stock: "Bharat Dynamics",
+    industry: "Defence",
+    category: "Order win",
+    theme: "Defence indigenisation",
+    sentiment: "Positive",
+    title: "₹810.79 Cr MoD contract — 160 SAT-SAAW for IAF",
+    announcement: "Signed 23 Sep 2026, Buy (Indian-IDDM). Air-to-ground precision glide bomb (Jaguar/Hawk/Su-30). Deliveries FY28–FY29. 60% indigenous content.",
+    impact: "FY26 net sales cited ~₹2,442 Cr in the annual report (another print cites a higher peak year). ₹811 Cr is 18–33% of that base, phased over FY28–29. Clears 2.5%. Book ₹26,176 Cr.",
+    pat: "Defence manufacturing margins. Peak-year PAT likely &gt;3% of a normal BDL year.",
+    risk: "DRDO-to-production ramp, platform integration.",
+    action: "Hold / add dips. Conviction 7/10.",
+    conv: 7
+  },
+  {
+    date: "2026-09-24",
+    stock: "Genesys International",
+    industry: "Geospatial / IT services",
+    category: "Order win",
+    theme: "Digital twin / Urban GIS",
+    sentiment: "Positive",
+    title: "₹283 Cr World Bank-funded Ahmedabad 3D digital twin",
+    announcement: "24 Sep 2026. 625 sq km, 25 lakh properties, GIS 3D map + utilities. 2.5 years build + 5 years O&M. Inclusive of taxes.",
+    impact: "One of Genesys’s largest single tickets. For a mid-cap geospatial franchise this is well above 2.5% of TTM sales (multi-quarter recognition).",
+    pat: "Software + survey + O&M mix. High incremental PAT if execution stays in-house.",
+    risk: "City-survey execution, World Bank milestone billing.",
+    action: "Small/mid thematic. Conviction 7/10.",
+    conv: 7
+  },
+  {
+    date: "2026-09-24",
+    stock: "Vikran Engineering",
+    industry: "Power T&D / EPC",
+    category: "Order win",
+    theme: "RE evacuation",
+    sentiment: "Positive",
+    title: "₹153.76 Cr POWERGRID 400 kV AIS + STATCOM civil, Tumkur-II",
+    announcement: "24 Sep 2026. Package SS136T for 400/220 kV Tumkur-II AIS extension and 300 MVAR STATCOM civil works; 2.7 GW RE integration. 21 months.",
+    impact: "Material versus Vikran’s listed-scale P&L (stock +8% on the print). Clears 2.5% for a small/mid T&D EPC.",
+    pat: "Substation EPC mid-single to low-double digit. 21-month recognition.",
+    risk: "POWERGRID LD, design interface with STATCOM OEM.",
+    action: "Tactical small-cap. Conviction 6/10.",
+    conv: 6
+  },
+  {
+    date: "2026-09-30",
+    stock: "Transrail Lighting",
+    industry: "Power T&D",
+    category: "Order win",
+    theme: "Transmission EPC",
+    sentiment: "Positive",
+    title: "₹574 Cr domestic T&D orders; YTD intake ₹1,609 Cr; extra L1 ₹694 Cr",
+    announcement: "30 Sep 2026 Reg 30. New orders above ₹574 Cr, mainly HTLS reconductoring and a private-developer transmission-line EPC. L1 of ₹694 Cr is not booked.",
+    impact: "₹574 Cr is about 10–12% of a ~₹5,000 Cr sales base if FY sales are in that band. Recognition over FY27 as sites mobilise. Confidence MEDIUM.",
+    pat: "T&D EPC mid-single to low-double digit margin. L1 of ₹694 Cr is upside only if LoA follows.",
+    risk: "MEDIUM. L1 may not convert. HTLS supply is in-house, which helps margin, but private-developer credit is the swing factor.",
+    action: "Track LoA on the ₹694 Cr L1. Do not add the L1 to the book yet.",
+    conv: 7
+  },
+  {
+    date: "2026-09-30",
+    stock: "KSB",
+    industry: "Capital goods",
+    category: "Order win",
+    theme: "Export pumps",
+    sentiment: "Positive",
+    title: "₹118 Cr ($12.4 mn) Dangote boiler-feed pump packages",
+    announcement: "30 Sep 2026. About 18 boiler feed pump packages for Dangote Projects Free Zone Enterprise.",
+    impact: "₹118 Cr is about 4.4% of the ₹2,679 Cr sales base the company cites. Export revenue in FY27. Confidence MEDIUM.",
+    pat: "Engineered pumps typically above company average margin. One package slip moves a few crore of PAT.",
+    risk: "MEDIUM. Nigeria execution and payment timing. Precedent is KSB’s existing energy-pump export book.",
+    action: "Watch shipment schedule. Not a franchise-changer alone.",
+    conv: 6
+  },
+  {
+    date: "2026-09-30",
+    stock: "Ganesh Benzoplast",
+    industry: "Chemicals / Logistics",
+    category: "M&A",
+    theme: "Asset sale",
+    sentiment: "Positive",
+    title: "₹1,154 Cr slump sale of tank terminals to KKR-backed Cisternina; ~₹280 Cr EPC add-on",
+    announcement: "30 Sep 2026 definitive agreements. Sale of JNPT, Goa and Cochin tank terminals plus Daund rail logistics. Closing in tranches over 18–24 months, subject to approvals. EPC for JNP expansion guided near ₹280 Cr ex-tax.",
+    impact: "Consideration is a multiple of the company’s market scale. Cash use is chemicals capacity and EPC. Confidence MEDIUM until approvals.",
+    pat: "One-time gain on sale, then loss of terminal earnings, partly offset by ₹280 Cr EPC over 18–24 months.",
+    risk: "HIGH until shareholder and regulatory approvals. Closing can slip a year.",
+    action: "Event-driven. Do not treat as closed.",
+    conv: 6
+  },
+  {
+    date: "2026-10-01",
+    stock: "Sterlite Technologies",
+    industry: "Telecom / Cables",
+    category: "Technology partnership",
+    theme: "AI data-centre connectivity",
+    sentiment: "Positive",
+    title: "Subsidiary LTSA with a hyperscaler — potential ~$1.2 bn through Dec 2030",
+    announcement: "1 Oct 2026 Reg 30. Wholly owned subsidiary signed an LTSA for optical connectivity products, CY26–CY30. Value is an estimate at prevailing prices. Purchase orders released periodically. Capped mutual liabilities.",
+    impact: "About ₹10,000 Cr potential over five years, roughly ₹2,000 Cr a year if allocations hold. That is a large share of STL sales. Confidence MEDIUM because it is not a single firm PO for the full amount.",
+    pat: "Optical connectivity margin if utilisation stays high. A demand shortfall is contractually capped, not eliminated.",
+    risk: "MEDIUM. Value is potential, not a take-or-pay for $1.2 bn. Follow-on to the May 2026 $1.11 bn award, so execution history exists.",
+    action: "Track first CY26 purchase orders. Upgrade only if POs firm up the annual run-rate.",
+    conv: 7
+  },
+  {
+    date: "2026-10-03",
+    stock: "GPT Infraprojects",
+    industry: "Construction",
+    category: "Order win",
+    theme: "Railway signalling",
+    sentiment: "Positive",
+    title: "Alcon L1 for ₹149.49 Cr Western Railway electronic interlocking",
+    announcement: "3 Oct 2026. Wholly owned Alcon is L1 for Bhavnagar Division signalling at 18 stations. Formal LoA not yet disclosed.",
+    impact: "About 11.6% of FY26 consolidated revenue of ₹1,290 Cr if awarded. Larger than Alcon’s own book. Confidence LOW until LoA.",
+    pat: "Signalling margin unknown. Delay of award pushes FY27 PAT.",
+    risk: "HIGH until LoA. L1 is not an order. Does not by itself keep the High tag — that still rests on the 17 Sep RVNL bridge LoA.",
+    action: "Wait for LoA before adding to the order book.",
+    conv: 6
+  },
+  {
+    date: "2026-10-06",
+    stock: "Transrail Lighting",
+    industry: "Power T&D",
+    category: "Order win",
+    theme: "Transmission EPC",
+    sentiment: "Positive",
+    title: "Further ₹412 Cr T&D orders; YTD intake ₹2,021 Cr including L1",
+    announcement: "6 Oct 2026 filing. Second large T&D print in a week. L1 of ₹409 Cr still not awarded.",
+    impact: "₹412 Cr is another ~8% of sales on the same base as the 30 Sep print. FY27 execution. Confidence MEDIUM.",
+    pat: "Same T&D margin band. Cluster supports the book but each print is scored on its own.",
+    risk: "MEDIUM. Same L1 conversion risk as 30 Sep.",
+    action: "Two binding prints in seven days. Still Medium until a single disclosed mega-LoA.",
+    conv: 7
+  },
+  {
+    date: "2026-10-06",
+    stock: "Shakti Pumps",
+    industry: "Capital goods",
+    category: "Order win",
+    theme: "Solar irrigation",
+    sentiment: "Positive",
+    title: "₹112.18 Cr MSEDCL LoE for 4,755 solar pumps",
+    announcement: "6 Oct 2026 Letter of Empanelment. 3–7.5 HP off-grid pumps under Magel Tyala. Execute in 60 days from NTP. Ex-GST ₹103 Cr.",
+    impact: "About 4–7% of annual sales depending on a ₹1,600–2,500 Cr base. Near-term FY27 revenue. Confidence MEDIUM.",
+    pat: "Solar-pump margin. 60-day clock helps recognition, state-utility payment is the drag.",
+    risk: "MEDIUM. Follows a Sep ₹236 Cr MSEDCL LoE. Empanelment is not the same as full cash collection.",
+    action: "Watch NTP date. Cluster is a tie-break only.",
+    conv: 6
+  },
+  {
+    date: "2026-10-06",
+    stock: "Capacit'e Infraprojects",
+    industry: "Construction",
+    category: "Order win",
+    theme: "Metro buildings",
+    sentiment: "Positive",
+    title: "₹368.98 Cr LoA from Chennai Metro for Thirumangalam buildings",
+    announcement: "6 Oct 2026 LoA ex-GST from CMRL. Civil, finishes, plumbing and lifts near Thirumangalam station.",
+    impact: "Roughly 15–20% of a ~₹2,000 Cr sales base. Multi-quarter recognition. Confidence MEDIUM.",
+    pat: "Building EPC mid-single digit. GST extra.",
+    risk: "MEDIUM. Metro interface and finishes scope. Counterparty is a state metro.",
+    action: "Add to the order book. Not High — scope is buildings, not a franchise LoA.",
+    conv: 6
+  },
+  {
+    date: "2026-10-06",
+    stock: "Solex Energy",
+    industry: "Renewables",
+    category: "Order win",
+    theme: "Solar modules",
+    sentiment: "Positive",
+    title: "₹180.98 Cr TOPCon module order via subsidiary; group prints ₹194 Cr",
+    announcement: "6 Oct 2026. Solex Green Energy work order for bifacial G2G modules, execute by Jan 2027. Parent added ₹13.16 Cr. FY26 consolidated revenue ₹1,621 Cr.",
+    impact: "₹181 Cr is 11.2% of FY26 sales. H2 FY27 revenue. Confidence MEDIUM.",
+    pat: "Module margin has been compressing (Q1 EBITDA margin 12.7%). Price risk on TOPCon.",
+    risk: "MEDIUM. Domestic power offtaker not named. Capacity is 4 GW, so volume is feasible.",
+    action: "Track dispatch through Jan 2027. Medium, not High.",
+    conv: 6
+  },
+  {
+    date: "2026-10-07",
+    stock: "Bondada Engineering",
+    industry: "Renewables",
+    category: "Order win",
+    theme: "Solar EPC",
+    sentiment: "Positive",
+    title: "₹1,153.93 Cr EPC for 270 MWp Maharashtra solar",
+    announcement: "7 Oct 2026. Ground-mounted solar EPC across Maharashtra, six-month execution. Separate Onix IPP unit got ₹911 Cr SBI sanction for a 225 MW PPA project — funding, not sales.",
+    impact: "₹1,154 Cr is a large share of Bondada’s annual sales (well above 2.5%, likely several tens of percent). Revenue mostly H2 FY27 if the six-month clock holds. Confidence MEDIUM.",
+    pat: "Solar EPC mid-single digit. WC heavy. SBI sanction does not add PAT until the IPP is built.",
+    risk: "MEDIUM-HIGH. Six-month clock is tight. 29 Sep ₹147 Cr print was below this bar and is not the High trigger.",
+    action: "High on this single LoA. Watch mobilisation in 30 days.",
+    conv: 8
+  },
+  {
+    date: "2026-10-07",
+    stock: "Dilip Buildcon",
+    industry: "Construction",
+    category: "Regulatory approval",
+    theme: "LPG pipeline",
+    sentiment: "Positive",
+    title: "PNGRB authorisation for Paradip–Raipur LPG pipeline; EPC opportunity ~₹1,800 Cr",
+    announcement: "7 Oct 2026. Exclusive authorisation. 3-year build, then 25-year tariff. EPC proposed to be awarded to DBL via a 100% SPV. Not yet a signed EPC LoA.",
+    impact: "₹1,800 Cr ex-GST over 36 months is material versus DBL sales if the EPC is awarded. Confidence LOW until the SPV awards the EPC.",
+    pat: "Construction margin plus later tariff. Financing of the SPV is the gate.",
+    risk: "HIGH. Authorisation is not an order. Proposed EPC can be delayed or shared.",
+    action: "Keep Medium. Upgrade only on a signed EPC work order.",
+    conv: 6
+  },
+  {
+    date: "2026-10-07",
+    stock: "Swastika Infra",
+    industry: "Power T&D",
+    category: "Order win",
+    theme: "Distribution EPC",
+    sentiment: "Positive",
+    title: "₹615.76 Cr MSEDCL LoA for Bhandup zone — largest single order",
+    announcement: "7 Oct 2026. Listed 30 Sep 2026. Unexecuted book guided near ₹1,400 Cr after this LoA.",
+    impact: "Largest single ticket versus a thin listed history. Clears 2.5% easily. Revenue over the execution period. Confidence LOW.",
+    pat: "Distribution EPC margin unproven at this scale.",
+    risk: "HIGH. One week after listing. Execution and WC are the risk, not the award.",
+    action: "Watch, do not size. Medium on the award, No-comments on underwriting the equity.",
+    conv: 5
+  },
+  {
+    date: "2026-10-09",
+    stock: "SEPC",
+    industry: "Construction",
+    category: "Order win",
+    theme: "Steel plant EPC",
+    sentiment: "Positive",
+    title: "₹854.57 Cr SAIL-IISCO pellet plant BOP; order book crosses ₹10,000 Cr",
+    announcement: "Contract dated 8 Oct 2026, disclosed around 9 Oct. Pellet Plant BOP for SAIL-ISP Burnpur expansion. 32 months from 3 Sep 2026. Net of ITC.",
+    impact: "₹855 Cr is about 79% of FY26 total income of ₹1,086 Cr. Recognition over ~32 months. Confidence MEDIUM.",
+    pat: "Steel-plant BOP margin mid-single digit. Large versus SEPC scale.",
+    risk: "MEDIUM-HIGH. Small-cap execution on a SAIL expansion. Book is already ~9x income.",
+    action: "Size small. SAIL counterparty is clean; delivery is the risk.",
+    conv: 6
+  },
+  {
+    date: "2026-10-10",
+    stock: "Viviana Power Tech",
+    industry: "Power T&D",
+    category: "Order win",
+    theme: "Distribution network",
+    sentiment: "Positive",
+    title: "₹466.74 Cr MGVCL turnkey — 11 kV conversion and undergrounding",
+    announcement: "10 Oct 2026 LoA. Three packages (₹113 Cr, ₹77.79 Cr, ₹275.05 Cr) under ROBUST-III. 16–18 months. Existing client. L1 was already in the investor deck.",
+    impact: "About 82% of annual revenue. Well above 1.5%. Confidence MEDIUM.",
+    pat: "Distribution EPC mid-single digit. WC on a state discom.",
+    risk: "MEDIUM. Discom receivables. Award converts a known L1, so surprise is limited.",
+    action: "Watch mobilisation. Not High — scale is large versus sales but execution is the gate.",
+    conv: 6
+  },
+  {
+    date: "2026-10-12",
+    stock: "IRCON International",
+    industry: "Railways",
+    category: "Order win",
+    theme: "Track EPC",
+    sentiment: "Positive",
+    title: "₹862.46 Cr East Central Railway LoA — Son Nagar–Andal 3rd/4th line",
+    announcement: "12 Oct 2026 LoA. Ballast, P.Way supply, track laying on Gomoh–Koderma and Gaya–Son Nagar. 365 days. Separate 9 Oct Konkan Railway AMC of ₹96 Cr is below the bar.",
+    impact: "₹862 Cr is material versus IRCON sales and about 3.7% of the ₹23,366 Cr June order book. FY27 recognition. Confidence HIGH on the award.",
+    pat: "Rail EPC mid-single digit. One-year clock helps visibility.",
+    risk: "LOW-MEDIUM. PSU-to-PSU. Site access is the swing.",
+    action: "High on this single binding LoA. Track billing in Q3.",
+    conv: 7
+  },
+  {
+    date: "2026-10-13",
+    stock: "Kalpataru Projects",
+    industry: "Infrastructure",
+    category: "Order win",
+    theme: "T&D / International",
+    sentiment: "Positive",
+    title: "₹2,225 Cr orders — ₹2,031 Cr T&D plus ₹194 Cr Sweden",
+    announcement: "13 Oct 2026. Follow-on to the September UAE and T&D prints. Individual clients not named.",
+    impact: "About 8% of FY26 revenue of ₹27,143 Cr. FY27 YTD inflows now well above ₹17,000 Cr. Confidence MEDIUM.",
+    pat: "EPC EBITDA 8–9%. Cluster supports the High tag; does not replace the UAE LoA as the best single trigger.",
+    risk: "MEDIUM. Same international execution risk as September.",
+    action: "Stays High. Watch named-client disclosures.",
+    conv: 7
+  },
+  {
+    date: "2026-10-15",
+    stock: "Bharat Dynamics",
+    industry: "Defence",
+    category: "Order win",
+    theme: "Navy munitions",
+    sentiment: "Positive",
+    title: "₹1,307 Cr Indian Navy heavyweight torpedo contract",
+    announcement: "Signed 15 Oct 2026. Supply of heavyweight torpedoes. Execute within 42 months.",
+    impact: "About 30–50% of a normal BDL sales year, phased over 42 months. Clears 1.5% easily. Confidence HIGH on the contract.",
+    pat: "Defence manufacturing margin. Peak-year PAT likely above 2% of a normal year.",
+    risk: "LOW-MEDIUM. MoD/Navy counterparty. Production ramp is the gate.",
+    action: "Stays High. Follows the Sep SAT-SAAW contract.",
+    conv: 8
+  },
+  {
+    date: "2026-10-21",
+    stock: "Kalpataru Projects",
+    industry: "Infrastructure",
+    category: "Order win",
+    theme: "T&D / Buildings",
+    sentiment: "Positive",
+    title: "Further ₹2,349 Cr T&D and buildings orders; FY27 inflows cross ₹22,000 Cr",
+    announcement: "21 Oct 2026. Domestic T&D and B&F. Clients not named. Follow-on to the 13 Oct print.",
+    impact: "Another ~8.7% of FY26 sales. Confidence MEDIUM.",
+    pat: "Same EPC margin band.",
+    risk: "MEDIUM. Two large unnamed clusters in eight days.",
+    action: "Cluster is a tie-break only. High still rests on the UAE LoA.",
+    conv: 7
+  },
+  {
+    date: "2026-10-22",
+    stock: "Bharat Electronics",
+    industry: "Defence",
+    category: "Order win",
+    theme: "Radar / electronics",
+    sentiment: "Positive",
+    title: "₹1,011 Cr additional orders since 13 Oct; includes Army radar",
+    announcement: "22 Oct 2026. Radar, communication, sonar, jammers, spares. MoD also signed a ₹770 Cr improved low-level light-weight radar contract.",
+    impact: "About 4–5% of BEL annual sales. Clears 1.5%. Confidence MEDIUM.",
+    pat: "Defence electronics margin. Not a franchise-changer alone.",
+    risk: "LOW. PSU defence. Q2 results due 30 Oct.",
+    action: "Medium. Watch the 30 Oct print.",
+    conv: 6
+  },
+  {
+    date: "2026-10-23",
+    stock: "Welspun Corp",
+    industry: "Steel pipes",
+    category: "Order win",
+    theme: "US energy / data centres",
+    sentiment: "Positive",
+    title: "₹5,500 Cr (~$730 mn) US coated line-pipe order; book to $5.25 bn",
+    announcement: "23 Oct 2026. Welspun Tubular LLC. Permian natural-gas pipeline for a midstream company serving a hyperscaler data-centre complex. Execute FY29 from the US mill.",
+    impact: "Largest single print of the window. About 40%+ of a strong year if recognised in FY29. Global book to a record ~₹50,000 Cr. Confidence HIGH on the award.",
+    pat: "US mill margin after the Little Rock upgrade. Steel spreads are the swing.",
+    risk: "MEDIUM. Customer unnamed. FY29 recognition is back-ended.",
+    action: "Stays High. This is larger than the Sep $412.5 mn HFIW order.",
+    conv: 8
+  },
+  {
+    date: "2026-10-24",
+    stock: "KEC International",
+    industry: "Power T&D",
+    category: "Order win",
+    theme: "RE evacuation",
+    sentiment: "Positive",
+    title: "₹2,872 Cr PGCIL 765 kV lines — largest India T&D order",
+    announcement: "24 Oct 2026. Design, supply and installation of 765 kV lines to evacuate 8.5 GW from Gujarat. YTD intake crosses ₹13,500 Cr.",
+    impact: "About 12–15% of KEC annual sales. FY27–FY28 recognition. Confidence HIGH on the award.",
+    pat: "T&D EPC mid-single to high-single digit.",
+    risk: "LOW-MEDIUM. PGCIL counterparty. ROW is the usual drag.",
+    action: "Medium. Clean counterparty, not a single franchise-changer versus KEC scale.",
+    conv: 7
+  },
+  {
+    date: "2026-10-24",
+    stock: "Ramky Infrastructure",
+    industry: "Construction",
+    category: "Order win",
+    theme: "Township EPC",
+    sentiment: "Positive",
+    title: "₹588.57 Cr RVNL residential EPC for NMDC Bacheli township",
+    announcement: "24 Oct 2026. 17 towers, 670 units, shopping complex. 30 months from appointed date. Incl. GST.",
+    impact: "About 30% of annual revenue. Clears 1.5% easily. Confidence MEDIUM.",
+    pat: "Building EPC mid-single digit. 30-month recognition.",
+    risk: "MEDIUM. RVNL/NMDC counterparty is clean. Township finishes are the drag.",
+    action: "Medium. Watch appointed date.",
+    conv: 6
+  },
+  {
+    date: "2026-10-24",
+    stock: "B.L. Kashyap",
+    industry: "Construction",
+    category: "Order win",
+    theme: "Residential civil",
+    sentiment: "Positive",
+    title: "₹495.86 Cr civil and part-MEP from Signature Global",
+    announcement: "23–24 Oct 2026 LoA. Four towers and basements. About 40 months.",
+    impact: "Material versus BL Kashyap’s mid/small construction base. Clears 1.5%. Confidence MEDIUM.",
+    pat: "Residential civil mid-single digit.",
+    risk: "MEDIUM. Developer counterparty and a long clock.",
+    action: "Medium. Not High.",
+    conv: 6
+  }
+,
+  {
+    date: "2026-10-26",
+    stock: "Jyoti Structures",
+    industry: "Power T&D",
+    category: "Order win",
+    theme: "HVDC evacuation",
+    sentiment: "Positive",
+    title: "₹949.35 Cr POWERGRID NOA — TL01 and TL02, Barmer-II–South Kalamb",
+    announcement: "26 Oct 2026. Two packages of the ±800 kV HVDC bipole line in Rajasthan. Turnkey supply, erection, testing and commissioning.",
+    impact: "First half of a three-package cluster that reaches ₹1,598 Cr by 28 Oct. Large versus Jyoti’s listed scale. Confidence HIGH on the awards.",
+    pat: "Transmission EPC mid-single digit. 38-month clock on the related Gujarat package.",
+    risk: "MEDIUM. POWERGRID counterparty is clean. Working capital and tower supply are the gates.",
+    action: "High on the cluster. Pair with the 28 Oct Gujarat package.",
+    conv: 8
+  },
+  {
+    date: "2026-10-27",
+    stock: "VA Tech Wabag",
+    industry: "Water / Environment",
+    category: "Order win",
+    theme: "Desalination / RIL",
+    sentiment: "Positive",
+    title: "Mega RIL order >₹1,000 Cr — Jamnagar desalination and remineralisation",
+    announcement: "27 Oct 2026. Design to PGTR of an 8,400 m3/hr desalination plant (expandable to 12,600 m3/hr / 302 MLD) and a 3,000 m3/hr remineralisation plant. 25 months, phased. Follows the Sep medium ETP.",
+    impact: "Above ₹1,000 Cr is material versus Wabag sales and well above 1.5%. Confidence HIGH on the award; value is a floor.",
+    pat: "Water EPC mid-teens at project level. RIL counterparty helps cash.",
+    risk: "MEDIUM. Exact rupee is a floor, not a precise figure. 25-month execution.",
+    action: "Upgrade from No comments to High on this single mega LoA.",
+    conv: 7
+  },
+  {
+    date: "2026-10-27",
+    stock: "Karamtara Engineering",
+    industry: "Power equipment",
+    category: "Order win",
+    theme: "Transmission / RE",
+    sentiment: "Positive",
+    title: "₹1,199 Cr orders across transmission and renewable energy",
+    announcement: "27 Oct 2026. Cluster of new orders in energy and transmission. About 28% of annual operating revenue of ~₹4,312 Cr.",
+    impact: "27.8% of annual sales. Clears 1.5% by a wide margin. Confidence MEDIUM on the aggregate.",
+    pat: "Equipment + project mix. Peak-year PAT likely above 2%.",
+    risk: "MEDIUM. Individual clients not fully broken out.",
+    action: "High on size versus sales and the energy-transition franchise.",
+    conv: 7
+  },
+  {
+    date: "2026-10-27",
+    stock: "Marine Electricals",
+    industry: "Electrical / Data centres",
+    category: "Order win",
+    theme: "Data centres",
+    sentiment: "Positive",
+    title: "₹362.34 Cr PDS orders from Princeton Digital and DXDC Chennai",
+    announcement: "27 Oct 2026. Two power-distribution-system orders. Follow-on to the 28 Sep ₹251 Cr cluster.",
+    impact: "About 40%+ of FY26 sales on top of the September print. Confidence MEDIUM.",
+    pat: "Equipment + integration. WC on DC schedules.",
+    risk: "MEDIUM. Client concentration in the DC build cycle.",
+    action: "Stays Medium. Cluster is a tie-break, not a High upgrade under the single-trigger rule.",
+    conv: 6
+  },
+  {
+    date: "2026-10-27",
+    stock: "Subros",
+    industry: "Auto components",
+    category: "Order win",
+    theme: "HVAC / Maruti",
+    sentiment: "Positive",
+    title: "₹1,225 Cr HVAC assembly award from Maruti Suzuki — 7-year model life",
+    announcement: "27 Oct 2026. New business award for HVAC assemblies. Revenue over about seven years.",
+    impact: "₹1,225 Cr over seven years is about ₹175 Cr a year. Clears 1.5% of Subros sales if annualised. Confidence MEDIUM.",
+    pat: "Auto-component margin. Spread over the model life.",
+    risk: "LOW-MEDIUM. Maruti counterparty. Volume follows the model.",
+    action: "Medium. Not High — the annual run-rate is modest.",
+    conv: 6
+  },
+  {
+    date: "2026-10-28",
+    stock: "Jyoti Structures",
+    industry: "Power T&D",
+    category: "Order win",
+    theme: "HVDC evacuation",
+    sentiment: "Positive",
+    title: "₹648.91 Cr POWERGRID NOA — TL05 Gujarat; cluster now ₹1,598 Cr",
+    announcement: "28 Oct 2026. Package TL05 of the same ±800 kV HVDC bipole, Gujarat stretch. 38 months. Ex-GST. Combined with 26 Oct packages, three awards total ₹1,598.26 Cr.",
+    impact: "About 60% of market cap on this package alone; the cluster is several times annual sales. Confidence HIGH.",
+    pat: "Same EPC margin band. Peak-year PAT well above 2%.",
+    risk: "MEDIUM. Execution over 38 months. POWERGRID is the counterparty.",
+    action: "Primary new High. Tops the slate on binding size versus the company base.",
+    conv: 8
+  },
+  {
+    date: "2026-10-28",
+    stock: "Welspun Corp",
+    industry: "Steel pipes",
+    category: "Order win",
+    theme: "US energy",
+    sentiment: "Positive",
+    title: "Largest-ever single order — ~USD 1.8 bn (~₹17,200 Cr) from US mill",
+    announcement: "Filing visible 28 Oct 2026. Supply of pipes from the USA facility. Distinct from the 23 Oct ₹5,500 Cr coated line-pipe print. Execute FY28–FY29.",
+    impact: "Largest single contract in company history. Global book to a record. Confidence HIGH on the award.",
+    pat: "US mill margin. Steel spreads are the swing.",
+    risk: "MEDIUM. Customer unnamed. Back-ended recognition.",
+    action: "Stays High. This is larger than every prior Welspun print in the book.",
+    conv: 8
+  }
+];
+
+const HIGH_NAMES = new Set(["Garden Reach Shipbuilders & Engineers", "Jyoti Structures", "Data Patterns (India)", "Jupiter Wagons", "Engineers India", "Welspun Corp", "Karamtara Engineering", "KPI Green Energy"]);
+const NO_COMMENT_NAMES = new Set([
+  "VA Tech Wabag",
+  "Waaree Energies",
+  "Vikram Solar",
+  "Aequs",
+  "CleanMax Enviro",
+  "Systematic Industries"
+]);
+events.forEach(e => {
+  if (HIGH_NAMES.has(e.stock)) e.conviction = "High";
+  else if (NO_COMMENT_NAMES.has(e.stock)) e.conviction = "None";
+  else e.conviction = "Medium";
+});
+
+function unique(key) {
+  return [...new Set(events.map(e => e[key]))].sort();
+}
+function fillSelect(id, values) {
+  const sel = document.getElementById(id);
+  values.forEach(v => {
+    const o = document.createElement("option");
+    o.value = v; o.textContent = v; sel.appendChild(o);
+  });
+}
+fillSelect("industry", unique("industry"));
+fillSelect("category", unique("category"));
+fillSelect("theme", unique("theme"));
+fillSelect("stock", unique("stock"));
+
+function fmtDate(d) {
+  return new Date(d + "T00:00:00").toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" });
+}
+
+
+let activeSlateTab = "high";
+let sortNewestFirst = true;
+
+function countBy(key) {
+  const m = {};
+  events.forEach(e => {
+    const k = e[key];
+    if (!k) return;
+    m[k] = (m[k] || 0) + 1;
+  });
+  return Object.entries(m).sort((a, b) => b[1] - a[1]);
+}
+
+function populateHighPicks() {
+  const high = [
+    ["Garden Reach Shipbuilders & Engineers", "GRSE", "₹32,000 Cr 5 NGCs for Navy"],
+    ["Jyoti Structures", "JYOTISTRUC", "₹1,598 Cr POWERGRID HVDC"],
+    ["Data Patterns (India)", "DATAPATTNS", "₹586 Cr BEL radar"],
+    ["Jupiter Wagons", "JUPWAGON", "₹1,140 Cr IR wagons"],
+    ["Engineers India", "ENGINERSIN", "Dangote Kenya PMC"],
+    ["Welspun Corp", "WELCORP", "US $1.8 bn pipe"],
+    ["Karamtara Engineering", "KARAMTARA", "₹1,199 Cr T&D / RE"],
+    ["KPI Green Energy", "KPIGREEN", "NACOF 500 MW EPC"]
+  ];
+  document.getElementById("high-picks").innerHTML = high.map((h, i) =>
+    `<button type="button" class="pick" onclick="jumpStock('${h[0]}')"><b>${i+1}. ${h[1]}</b> — ${h[2]}</button>`
+  ).join("");
+}
+
+function populateMultiPicks() {
+  const top = countBy("stock").slice(0, 8);
+  document.getElementById("multi-picks").innerHTML = top.map(([name, n], i) =>
+    `<button type="button" class="pick" onclick="jumpStock('${name}')"><b>${i+1}. ${name}</b> — ${n} events</button>`
+  ).join("");
+}
+
+function populateIndTheme() {
+  const mode = document.getElementById("indThemeToggle").checked ? "theme" : "industry";
+  document.getElementById("indThemeLabel").textContent = mode === "theme" ? "Theme" : "Industry";
+  const top = countBy(mode).slice(0, 8);
+  document.getElementById("indtheme-picks").innerHTML = top.map(([name, n], i) =>
+    `<button type="button" class="pick" onclick="jumpFilter('${mode}', '${name.replace(/'/g, "\'")}')"><b>${i+1}. ${name}</b> — ${n}</button>`
+  ).join("");
+}
+
+function setSlateTab(tab) {
+  activeSlateTab = tab;
+  document.querySelectorAll(".slate-tab").forEach(t => t.classList.toggle("active", t.dataset.tab === tab));
+  document.querySelectorAll(".slate-panel").forEach(p => p.classList.toggle("active", p.id === "panel-" + tab));
+  if (tab === "multi") populateMultiPicks();
+  if (tab === "indtheme") populateIndTheme();
+}
+
+function jumpFilter(key, value) {
+  document.getElementById("industry").value = "all";
+  document.getElementById("theme").value = "all";
+  document.getElementById("stock").value = "all";
+  document.getElementById("conviction").value = "all";
+  if (key === "industry") document.getElementById("industry").value = value;
+  if (key === "theme") document.getElementById("theme").value = value;
+  render();
+  document.getElementById("list").scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+document.querySelectorAll(".slate-tab").forEach(t => {
+  t.addEventListener("click", () => setSlateTab(t.dataset.tab));
+});
+document.getElementById("indThemeToggle").addEventListener("change", populateIndTheme);
+document.getElementById("sortToggle").addEventListener("change", () => {
+  sortNewestFirst = !document.getElementById("sortToggle").checked;
+  document.getElementById("sortLabel").textContent = sortNewestFirst ? "Latest first" : "Oldest first";
+  render();
+});
+
+populateHighPicks();
+populateMultiPicks();
+populateIndTheme();
+
+function render() {
+  const ind = document.getElementById("industry").value;
+  const cat = document.getElementById("category").value;
+  const th = document.getElementById("theme").value;
+  const st = document.getElementById("stock").value;
+  const cv = document.getElementById("conviction").value;
+  const q = document.getElementById("q").value.trim().toLowerCase();
+
+  const filtered = events.filter(e => {
+    if (ind !== "all" && e.industry !== ind) return false;
+    if (cat !== "all" && e.category !== cat) return false;
+    if (th !== "all" && e.theme !== th) return false;
+    if (st !== "all" && e.stock !== st) return false;
+    if (cv !== "all" && e.conviction !== cv) return false;
+    if (q) {
+      const blob = [e.stock, e.title, e.announcement, e.industry, e.theme, e.category].join(" ").toLowerCase();
+      if (!blob.includes(q)) return false;
+    }
+    return true;
+  });
+
+  const sorted = [...filtered].sort((a, b) => {
+    const da = a.date, db = b.date;
+    return sortNewestFirst ? (db.localeCompare(da)) : (da.localeCompare(db));
+  });
+  document.getElementById("count").textContent =
+    `Showing ${sorted.length} of ${events.length} events (${sortNewestFirst ? "latest → oldest" : "oldest → newest"})`;
+
+  const expanded = isExpanded();
+  const convLabel = { High: "High conviction", Medium: "Medium", None: "No comments" };
+  const convChip = { High: "high", Medium: "med", None: "none" };
+  document.getElementById("list").innerHTML = sorted.map(e => `
+    <article class="card ${e.sentiment === "Negative" ? "neg" : ""} ${e.conviction === "High" ? "highc" : ""}"
+      data-industry="${e.industry}" data-category="${e.category}" data-theme="${e.theme}" data-stock="${e.stock}">
+      <div class="top">
+        <div class="date">${fmtDate(e.date)}</div>
+        <div class="date">Score ${e.conv}/10</div>
+      </div>
+      <div class="chips">
+        <span class="chip ${convChip[e.conviction]}">${convLabel[e.conviction]}</span>
+        <span class="chip ${e.sentiment === "Negative" ? "negc" : "pos"}">${e.sentiment}</span>
+        <span class="chip stock"><strong>${e.stock}</strong></span>
+        <span class="chip">${e.industry}</span>
+        <span class="chip">${e.category}</span>
+        <span class="chip">${e.theme}</span>
+        <span class="chip pos">≥2.5% rev or ≥3% PAT</span>
+      </div>
+      <h3><strong class="stock-name">${e.stock}</strong> — ${e.title}</h3>
+      <div class="ann">${e.announcement}</div>
+      <details class="analysis-block"${expanded ? " open" : ""}>
+        <summary>Revenue / PAT / risk / action</summary>
+        <div class="analysis">
+          <ul>
+            <li><strong>Revenue impact:</strong> ${e.impact}</li>
+            <li><strong>PAT impact:</strong> ${e.pat}</li>
+            <li><strong>Risk:</strong> ${e.risk}</li>
+          </ul>
+          <div class="action"><strong>Action:</strong> ${e.action}</div>
+        </div>
+      </details>
+    </article>
+  `).join("") || `<p class="ann">No events match the current filters.</p>`;
+}
+
+function isExpanded() {
+  return document.getElementById("expandDetails").checked;
+}
+function syncExpandLabel() {
+  document.getElementById("expandLabel").textContent = isExpanded() ? "Expanded" : "Collapsed";
+}
+function applyExpandState() {
+  const open = isExpanded();
+  document.querySelectorAll("details.analysis-block").forEach(d => { d.open = open; });
+  syncExpandLabel();
+}
+
+["industry","category","theme","stock","conviction","q"].forEach(id => {
+  document.getElementById(id).addEventListener("input", render);
+  document.getElementById(id).addEventListener("change", render);
+});
+document.getElementById("expandDetails").addEventListener("change", applyExpandState);
+function resetFilters() {
+  ["industry","category","theme","stock","conviction"].forEach(id => document.getElementById(id).value = "all");
+  document.getElementById("q").value = "";
+  render();
+}
+function jumpStock(name) {
+  document.getElementById("stock").value = name;
+  document.getElementById("conviction").value = "all";
+  document.getElementById("expandDetails").checked = true;
+  render();
+  applyExpandState();
+  document.getElementById("list").scrollIntoView({ behavior: "smooth", block: "start" });
+}
+syncExpandLabel();
+render();
+</script>
+</body>
+</html>
