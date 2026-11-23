@@ -2,177 +2,306 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Work+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Stock Catalyst Briefing | through 18 Nov 2026</title>
+<title>Stock Catalyst Briefing | through 22 Nov 2026</title>
 <style>
   :root {
-    --bg: #0b1220;
-    --panel: #121b2d;
-    --panel2: #182338;
-    --line: #2a3a55;
-    --text: #e8eef8;
-    --muted: #93a4bf;
-    --accent: #3dd6c6;
-    --accent2: #7aa2ff;
-    --pos: #3ecf8e;
-    --neg: #ff6b7a;
-    --warn: #f5c14a;
-    --chip: #24324a;
+    --bg: #efe9df;
+    --panel: #fffdf9;
+    --panel2: #f7f4ee;
+    --text: #082342;
+    --muted: rgba(8,35,66,.7);
+    --border: rgba(8,35,66,.14);
+    --accent: #a8781a;
+    --pos: #256045;
+    --neg: #a8352a;
+    --chip: #f7f4ee;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #061a33;
+      --panel: #0b2a4d;
+      --panel2: #0b2a4d;
+      --text: #efe9df;
+      --muted: rgba(239,233,223,.66);
+      --border: rgba(239,233,223,.16);
+      --accent: #d89b2b;
+      --pos: #7fc4a0;
+      --neg: #f0aca2;
+      --chip: #0b2a4d;
+    }
+  }
+  [data-theme="light"] {
+    --bg: #efe9df;
+    --panel: #fffdf9;
+    --panel2: #f7f4ee;
+    --text: #082342;
+    --muted: rgba(8,35,66,.7);
+    --border: rgba(8,35,66,.14);
+    --accent: #a8781a;
+    --pos: #256045;
+    --neg: #a8352a;
+    --chip: #f7f4ee;
+  }
+  [data-theme="dark"] {
+    --bg: #061a33;
+    --panel: #0b2a4d;
+    --panel2: #0b2a4d;
+    --text: #efe9df;
+    --muted: rgba(239,233,223,.66);
+    --border: rgba(239,233,223,.16);
+    --accent: #d89b2b;
+    --pos: #7fc4a0;
+    --neg: #f0aca2;
+    --chip: #0b2a4d;
   }
   * { box-sizing: border-box; }
   body {
     margin: 0;
-    font-family: "Segoe UI", Inter, system-ui, sans-serif;
-    background: radial-gradient(1200px 600px at 10% -10%, #16324a 0%, var(--bg) 45%);
+    font-family: "Work Sans", system-ui, sans-serif;
+    font-weight: 400;
+    background: var(--bg);
     color: var(--text);
-    line-height: 1.45;
+    line-height: 1.5;
   }
-  .wrap { max-width: 1280px; margin: 0 auto; padding: 28px 18px 60px; }
-  header h1 { margin: 0 0 6px; font-size: 28px; letter-spacing: -0.03em; }
-  header p { margin: 0; color: var(--muted); }
-  .meta {
-    display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 22px;
+  h1, h2, h3, .stock-name, header h1 {
+    font-family: "Playfair Display", serif;
+    font-weight: 600;
+    letter-spacing: -0.01em;
   }
+  .eyebrow, .pill, label, .chip, .stat span, .filters h2, .picks h2, button, select, input {
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 400;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    font-size: 11px;
+    color: var(--accent);
+  }
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 32px 20px 80px; }
+  header h1 { margin: 0 0 6px; font-size: 28px; color: var(--text); }
+  header p { margin: 0; color: var(--muted); font-weight: 300; font-size: 14px; line-height: 1.4; }
+  .meta { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0 24px; }
   .pill {
-    background: var(--chip); border: 1px solid var(--line); border-radius: 999px;
-    padding: 6px 12px; font-size: 12px; color: var(--muted);
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 7px 14px;
+    color: var(--muted);
+    letter-spacing: .15em;
   }
   .stats {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 12px; margin-bottom: 22px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 14px;
+    margin-bottom: 26px;
   }
   .stat {
-    background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 14px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 10px 12px;
   }
-  .stat b { display: block; font-size: 22px; color: var(--accent); }
-  .stat span { color: var(--muted); font-size: 12px; }
+  .stat b { display: block; font-size: 20px; font-family: "IBM Plex Mono", monospace; color: var(--accent); font-weight: 500; }
+  .stat span { color: var(--muted); font-size: 11px; letter-spacing: .12em; }
   .filters {
     position: sticky; top: 0; z-index: 5;
-    background: rgba(11,18,32,0.92); backdrop-filter: blur(10px);
-    border: 1px solid var(--line); border-radius: 16px; padding: 14px;
-    margin-bottom: 18px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 16px;
+    margin-bottom: 20px;
   }
-  .filters h2 { margin: 0 0 10px; font-size: 14px; color: var(--accent2); text-transform: uppercase; letter-spacing: .08em; }
-  .grid5 {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px;
-  }
+  .filters h2 { margin: 0 0 12px; font-size: 12px; color: var(--accent); }
+  .grid5 { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
   .picks {
-    background: linear-gradient(180deg, #163528 0%, var(--panel) 70%);
-    border: 1px solid #2e6b4f; border-radius: 16px; padding: 16px 18px; margin-bottom: 18px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 18px 20px;
+    margin-bottom: 20px;
   }
-  .picks h2 { margin: 0 0 6px; font-size: 13.5px; color: var(--pos); letter-spacing: .04em; text-transform: uppercase; }
-  .picks p { margin: 0 0 10px; color: var(--muted); font-size: 11.5px; }
-  .pick-row { display: flex; flex-wrap: wrap; gap: 8px; }
-  .slate-tabs { display: flex; gap: 6px; margin-bottom: 10px; flex-wrap: wrap; }
-  .slate-tab { background: #1a2a3d; border: 1px solid var(--line); color: var(--muted); border-radius: 999px; padding: 5px 12px; font-size: 11.5px; cursor: pointer; }
-  .slate-tab.active { background: #1c3d2e; border-color: #3d7a5a; color: var(--pos); font-weight: 650; }
+  .picks h2 { margin: 0 0 8px; font-size: 13px; color: var(--pos); font-family: "Work Sans", sans-serif; letter-spacing: 0.05em; text-transform: uppercase; }
+  .picks p { margin: 0 0 12px; color: var(--muted); font-size: 12px; font-family: "Work Sans", sans-serif; }
+  .pick-row { display: flex; flex-wrap: wrap; gap: 10px; }
+  .pick {
+    background: var(--panel2);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 8px 12px;
+    font-size: 12px;
+    cursor: pointer;
+    color: var(--text);
+    font-family: "Work Sans", sans-serif;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+  .pick b { color: var(--pos); font-weight: 600; }
+  .slate-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .slate-tab {
+    background: var(--accent);
+    color: #fffdf9;
+    border: 0;
+    border-radius: 3px;
+    padding: 8px 16px;
+    font-family: "Work Sans", sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  .slate-tab.active {
+    background: var(--accent);
+    color: #fffdf9;
+  }
   .slate-panel { display: none; }
   .slate-panel.active { display: block; }
-  .sort-wrap { display: flex; align-items: center; gap: 8px; }
-
-  .pick {
-    background: #1c3d2e; border: 1px solid #3d7a5a; border-radius: 12px;
-    padding: 6px 10px; font-size: 11.5px; cursor: pointer; color: var(--text);
-  }
-  .pick b { color: var(--pos); }
-  .chip.high {
-    color: #06221e; background: var(--accent); border-color: var(--accent); font-weight: 700;
-  }
-  .chip.med { color: var(--warn); border-color: #7a6230; }
+  .chip.high { color: var(--pos); background: transparent; border-color: var(--pos); font-weight: 500; }
+  .chip.med { color: var(--accent); border-color: var(--accent); }
   .chip.none { color: var(--muted); }
-  .card.highc { border-color: #3d7a5a; box-shadow: inset 3px 0 0 var(--pos); }
-  label { display: block; font-size: 11px; color: var(--muted); margin-bottom: 4px; }
+  .card.highc { border-color: var(--pos); box-shadow: inset 3px 0 0 var(--pos); }
+  label { display: block; margin-bottom: 6px; }
   select, input[type="search"] {
-    width: 100%; background: var(--panel2); color: var(--text);
-    border: 1px solid var(--line); border-radius: 10px; padding: 9px 10px; font-size: 13px;
+    width: 100%;
+    background: var(--panel2);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 10px 12px;
+    font-size: 13px;
+    font-family: "Work Sans", sans-serif;
+    letter-spacing: 0;
+    text-transform: none;
   }
-  .filter-row { display: flex; gap: 10px; align-items: end; margin-top: 10px; flex-wrap: wrap; }
+  .filter-row { display: flex; gap: 12px; align-items: end; margin-top: 12px; flex-wrap: wrap; }
   .toggle-wrap {
-    display: flex; align-items: center; gap: 10px;
-    background: var(--panel2); border: 1px solid var(--line);
-    border-radius: 10px; padding: 8px 12px; min-height: 40px;
+    display: flex; align-items: center; gap: 12px;
+    background: var(--panel2);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 10px 14px;
+    min-height: 42px;
   }
-  .toggle-wrap span { font-size: 12px; color: var(--muted); white-space: nowrap; }
-  .toggle-wrap strong { color: var(--text); font-weight: 650; }
-  .switch {
-    position: relative; width: 44px; height: 24px; flex-shrink: 0;
-  }
+  .toggle-wrap span { font-size: 11px; color: var(--muted); letter-spacing: .1em; }
+  .toggle-wrap strong { color: var(--text); font-weight: 500; }
+  .switch { position: relative; width: 44px; height: 24px; flex-shrink: 0; }
   .switch input { opacity: 0; width: 0; height: 0; }
   .slider {
     position: absolute; inset: 0; cursor: pointer;
-    background: #31415c; border-radius: 999px; transition: .2s;
+    background: var(--border); border-radius: 3px; transition: .2s;
   }
   .slider:before {
     content: ""; position: absolute; height: 18px; width: 18px; left: 3px; top: 3px;
-    background: #e8eef8; border-radius: 50%; transition: .2s;
+    background: var(--text); border-radius: 2px; transition: .2s;
   }
   .switch input:checked + .slider { background: var(--accent); }
-  .switch input:checked + .slider:before { transform: translateX(20px); background: #06221e; }
+  .switch input:checked + .slider:before { transform: translateX(20px); background: var(--bg); }
   button {
-    background: var(--accent); color: #06221e; border: 0; border-radius: 10px;
-    padding: 9px 14px; font-weight: 700; cursor: pointer;
+    background: var(--accent);
+    color: #fffdf9;
+    border: 0;
+    border-radius: 3px;
+    padding: 10px 16px;
+    font-weight: 500;
+    cursor: pointer;
+    letter-spacing: .15em;
   }
-  button.ghost { background: transparent; color: var(--muted); border: 1px solid var(--line); }
-  .count { margin: 8px 2px 16px; color: var(--muted); font-size: 13px; }
+  button.ghost { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+  .count { margin: 10px 2px 18px; color: var(--muted); font-size: 13px; }
   .card {
-    background: var(--panel); border: 1px solid var(--line); border-radius: 16px;
-    padding: 18px; margin-bottom: 14px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 18px 20px;
+    margin-bottom: 14px;
   }
-  .card.neg { border-color: #5a2a33; }
-  .top { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
-  .date { color: var(--accent); font-weight: 700; font-size: 13px; }
-  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 10px; }
+  .card h3 { margin: 0 0 6px; font-size: 21px; color: var(--text); line-height: 1.3; }
+  .card .stock-name {
+    font-size: 21px;
+    font-weight: 600;
+  }
+  .card .stock-name,
+  .card .chip.stock strong {
+    color: var(--pos);
+    font-weight: 600;
+  }
+  .card.neg .stock-name,
+  .card.neg .chip.stock strong {
+    color: var(--neg);
+  }
+  .chip.stock { color: inherit; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
   .chip {
-    font-size: 11px; padding: 3px 8px; border-radius: 999px; background: var(--chip);
-    border: 1px solid var(--line); color: var(--muted);
+    background: var(--chip);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 4px 10px;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: .08em;
   }
-  .chip.pos { color: var(--pos); border-color: #245a43; }
-  .chip.negc { color: var(--neg); border-color: #5a2a33; }
-  .chip.stock {
-    color: var(--text); border-color: #5a7aa0; background: #1c2c44;
-    font-size: 12px;
+  .chip.stock { color: var(--pos); font-weight: 500; }
+  .card.neg .chip.stock { color: var(--neg); }
+  .details { color: var(--muted); font-size: 14px; }
+  .details strong { color: var(--text); font-weight: 500; }
+  .theme-toggle {
+    position: fixed; top: 16px; right: 16px; z-index: 10;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 8px 12px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    letter-spacing: .15em;
+    color: var(--accent);
+    cursor: pointer;
   }
-  .chip.stock strong { font-weight: 800; letter-spacing: 0.01em; }
-  h3 { margin: 0 0 6px; font-size: 18px; }
-  h3 .stock-name { font-weight: 800; color: var(--text); }
-  .ann { color: var(--muted); font-size: 14px; margin-bottom: 10px; }
-  details { margin-top: 8px; }
-  summary { cursor: pointer; color: var(--accent2); font-size: 13px; }
-  .analysis { margin-top: 8px; font-size: 13.5px; color: #d5deee; }
-  .analysis ul { margin: 6px 0 0 18px; padding: 0; }
-  .action {
-    margin-top: 10px; background: var(--panel2); border-radius: 10px; padding: 10px 12px; font-size: 13px;
-  }
-  footer { margin-top: 28px; color: var(--muted); font-size: 12px; }
-  @media print { .filters { position: static; } button { display: none; } }
+  @media print { .filters, .theme-toggle, button { display: none; } }
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
     <h1>Stock-Catalyst-identifier</h1>
-    <p>Living EOD book. Data through 18 Nov 2026. Filter ≥1.5% of revenue or ≥2% of PAT (capex/funding ≥₹500 Cr). Conviction rescored on the full list each EOD.</p>
+    <p>Living EOD book. Data through 22 Nov 2026. Filter ≥1.5% of revenue or ≥2% of PAT (capex/funding ≥₹500 Cr). Conviction rescored on the full list each EOD.</p>
   </header>
 
   <div class="meta">
-    <span class="pill">Rebuilt 30 Oct 2026 · 1.5% / 2% hurdle</span>
-    <span class="pill">Data cutoff: 17 Nov 2026</span>
+    <span class="pill">Rebuilt 23 Nov 2026 · 1.5% / 2% hurdle</span>
+    <span class="pill">Data cutoff: 22 Nov 2026</span>
     <span class="pill">Chronological</span>
     <span class="pill">Not investment advice</span>
   </div>
 
   <div class="stats">
-    <div class="stat"><b>86</b><span>Events passing 1.5% / 2%</span></div>
-    <div class="stat"><b>27 / 1</b><span>Positive / Negative</span></div>
-    <div class="stat"><b>9</b><span>High-conviction names</span></div>
+    <div class="stat"><b>99</b><span>Events passing 1.5% / 2%</span></div>
+    <div class="stat"><b>97 / 2</b><span>Positive / Negative</span></div>
+    <div class="stat"><b>8</b><span>High-conviction names</span></div>
     <div class="stat"><b>1.5% / 2%</b><span>Revenue / PAT hurdle</span></div>
   </div>
 
   <section class="picks" id="picks">
-    <div class="slate-tabs">
+    <div class="slate-tabs" style="display:flex; align-items:center; flex-wrap:wrap; gap:8px;">
       <button type="button" class="slate-tab active" data-tab="high">High conviction</button>
       <button type="button" class="slate-tab" data-tab="multi">Multi-entry stocks</button>
       <button type="button" class="slate-tab" data-tab="indtheme">Top industry / theme</button>
+      <label class="toggle-wrap" style="display:inline-flex; margin-left:auto; min-height:36px; padding:6px 12px;">
+        <span>Mode</span>
+        <strong id="indThemeLabel">Industry</strong>
+        <span class="switch">
+          <input type="checkbox" id="indThemeToggle" aria-label="Toggle industry or theme">
+          <span class="slider"></span>
+        </span>
+      </label>
     </div>
     <div id="panel-high" class="slate-panel active">
       <h2>High conviction slate</h2>
@@ -187,16 +316,6 @@
     <div id="panel-indtheme" class="slate-panel">
       <h2>Top industry / theme</h2>
       <p>Most frequent industry or theme. Toggle the mode, then click a chip to filter the list below.</p>
-      <div style="margin-bottom:8px">
-        <label class="toggle-wrap" style="display:inline-flex">
-          <span>Mode</span>
-          <strong id="indThemeLabel">Industry</strong>
-          <span class="switch">
-            <input type="checkbox" id="indThemeToggle" aria-label="Toggle industry or theme">
-            <span class="slider"></span>
-          </span>
-        </label>
-      </div>
       <div class="pick-row" id="indtheme-picks"></div>
     </div>
   </section>
@@ -281,6 +400,67 @@
 
 <script>
 const events = [
+
+  {
+    date: "2026-11-21",
+    stock: "Premier Explosives",
+    industry: "Defence / Explosives",
+    category: "Order win",
+    theme: "Defence exports",
+    sentiment: "Positive",
+    title: "₹311 Cr (USD 33.603 Mn) export order for defence explosives (12-month delivery)",
+    announcement: "21 Nov 2026. Reg 30: received export order for total consideration of USD 33,603,000 (approx. ₹311 Cr) from an international entity for manufacture and supply of defence explosives. Delivery within 12 months. No promoter interest; not related-party.",
+    impact: "~80% of FY26 revenue (~₹388 Cr). Transformative for defence explosives player. Clears 1.5% by a wide margin. Confidence HIGH.",
+    pat: "Order-book addition (now ~₹1,642 Cr, 96% defence) supports multi-year execution; peak-year PAT well above 2%. Confidence MEDIUM-HIGH.",
+    risk: "MEDIUM. Undisclosed buyer; export execution, regulatory and raw-material risks.",
+    action: "Added Medium-High. Binding export order expanding defence franchise.",
+    conv: 7
+  },
+  {
+    date: "2026-11-19",
+    stock: "Diamond Power Infrastructure",
+    industry: "Cables & Conductors",
+    category: "Order win",
+    theme: "HVDC transmission",
+    sentiment: "Positive",
+    title: "₹707.80 Cr purchase order from Adani Energy Solutions for 9,059 km AL-59 conductors (HVDC Bhadla–Fatehpur)",
+    announcement: "19 Nov 2026. Reg 30: received Purchase Order from Adani Energy Solutions Limited for supply of 9,059.33 km of AL-59 conductors (8,948.33 km Lapwing + 111 km Moose) for the ±800 kV HVDC Bhadla–Fatehpur transmission project. Value ₹707.80 Cr incl. GST (basic ₹599.83 Cr). Commodity back-to-back pricing; deliveries by 31 Dec 2027. Marks entry into HVDC segment.",
+    impact: "~37% of FY26 revenue (₹1,910 Cr). Highly material for conductors/cables company. Clears 1.5% easily. Confidence HIGH.",
+    pat: "Multi-year supply visibility; peak-year PAT contribution well above 2% on typical margins. Confidence MEDIUM-HIGH.",
+    risk: "MEDIUM. Commodity-linked pricing (LME aluminium / USD-INR pass-through); execution phasing to Dec 2027.",
+    action: "Added Medium-High. Binding PO from creditworthy Adani Energy Solutions; HVDC entry.",
+    conv: 7
+  },
+  {
+    date: "2026-11-20",
+    stock: "Jupiter Wagons",
+    industry: "Railway / Wagons",
+    category: "Order win (follow-on)",
+    theme: "Freight wagons",
+    sentiment: "Positive",
+    title: "₹128.61 Cr LOI from JSW (South) Rail Logistics for 5 BFNSM1 rakes (302 wagons) — repeat order",
+    announcement: "20 Nov 2026. Reg 30 / LOI: received Letter of Intent from JSW (South) Rail Logistics Private Limited valued at ₹128.61 Cr (incl. GST) for manufacture and supply of 5 BFNSM1 rakes comprising 302 wagons. Repeat order (prior ₹122.88 Cr in June 2026); cumulative from JSW group in 2026 ~₹399 Cr.",
+    impact: "Material incremental backlog for tracked high-conviction name. Clears 1.5% relative to scale. Confidence HIGH.",
+    pat: "Supports private freight operator franchise; peak-year PAT contribution positive. Confidence MEDIUM.",
+    risk: "LOW-MEDIUM. Repeat client; ordinary-course wagon supply.",
+    action: "Follow-on annotation on existing Jupiter Wagons card. Binding LOI reinforcing high-slate name.",
+    conv: 7
+  },
+  {
+    date: "2026-11-20",
+    stock: "Ashoka Buildcon",
+    industry: "Infrastructure / Metro",
+    category: "Order win (L1)",
+    theme: "Metro EPC",
+    sentiment: "Positive",
+    title: "Declared L1 (JV with SAM India) for two Jaipur Metro Phase-II packages aggregating ₹2,758.31 Cr",
+    announcement: "20 Nov 2026. Reg 30: ABL–SAM India JV (Ashoka as lead member) declared Lowest Bidder for two Rajasthan Metro Rail Corporation packages under Jaipur Metro Phase-II. Quoted EPC price ₹2,758.31 Cr incl. GST (Package 3 ₹1,130.31 Cr; Package 4 ₹1,628 Cr). Elevated viaducts + 23 stations; 36-month execution. Follows prior L1/LoA on NHAI expressway.",
+    impact: "Large pipeline addition for tracked name. L1 status only (pending LoA). Confidence MEDIUM.",
+    pat: "Potential multi-year EPC contribution if converted. Confidence MEDIUM.",
+    risk: "MEDIUM-HIGH. L1 not yet binding LoA; JV structure and execution risk on metro packages.",
+    action: "Follow-on L1 annotation on existing Ashoka Buildcon card. Pending conversion to LoA.",
+    conv: 5
+  },
 
   {
     date: "2026-11-18",
@@ -1926,6 +2106,21 @@ function jumpStock(name) {
 }
 syncExpandLabel();
 render();
+</script>
+
+<button class="theme-toggle" onclick="toggleTheme()">Theme</button>
+<script>
+function toggleTheme() {
+  const root = document.documentElement;
+  const current = root.getAttribute('data-theme');
+  if (current === 'dark') {
+    root.setAttribute('data-theme', 'light');
+  } else if (current === 'light') {
+    root.removeAttribute('data-theme');
+  } else {
+    root.setAttribute('data-theme', 'dark');
+  }
+}
 </script>
 </body>
 </html>
