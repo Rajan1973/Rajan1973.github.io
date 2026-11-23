@@ -1,0 +1,42 @@
+# Keeps data/sector-snapshot.json in step with the sector reviews. Runs whenever a
+# review, the manifest or the notes change on main, so new uploads appear on the
+# Sector research desk without anyone running the build script by hand.
+name: Rebuild sector snapshot
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'sectors/**'
+      - 'data/sectors.json'
+      - 'data/sector-notes.json'
+      - 'scripts/lib/snapshot.mjs'
+      - 'scripts/build-sector-snapshot.mjs'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Self-check
+        run: node scripts/test-snapshot.mjs
+      - name: Rebuild snapshot
+        run: node scripts/build-sector-snapshot.mjs
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/sector-snapshot.json
+          if git diff --cached --quiet; then
+            echo "snapshot already up to date"
+          else
+            git commit -m "Rebuild sector snapshot [skip ci]"
+            git push
+          fi

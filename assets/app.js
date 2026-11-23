@@ -292,6 +292,8 @@ const pct = (v) => (v == null ? '—' : (v > 0 ? '+' : v < 0 ? '−' : '') + Mat
 const tone = (v) => (v == null || v === 0 ? '' : v > 0 ? ' up' : ' down');
 
 // newest quarter with data is the default; the selector only offers quarters that have reviews
+const qKey = (q) => { const m = String(q || '').match(/Q(\d)\s*FY(\d{2})/i); return m ? Number(m[2]) + Number(m[1]) / 10 : 0; };
+
 function deskQuarter(quarters) {
   const q = state.desk.quarter;
   return q && quarters.includes(q) ? q : (quarters[0] || state.quarter);
@@ -353,9 +355,15 @@ function viewSectors() {
   if (!state.snapshot) return viewSectorsCardsOnly();
 
   const snap = state.snapshot;
-  const q = deskQuarter(snap.quarters);
   const desk = state.desk;
-  const inQ = snap.sectors.filter((s) => s.quarter === q);
+  const pubs = state.sectors.filter((s) => s.status === 'published' && s.path);
+  const quarters = [...new Set(pubs.map((s) => s.quarter))].sort((a, b) => qKey(b) - qKey(a));
+  const q = deskQuarter(quarters);
+  const byId = new Map(snap.sectors.map((d) => [d.id, d]));
+  // every published review in the quarter appears, even if the snapshot file is behind
+  const inQ = pubs.filter((m) => m.quarter === q).map((m) => byId.get(m.id) || {
+    id: m.id, name: m.name, quarter: m.quarter, path: m.path, hasReturns: false, summary: null, stocks: [], notes: [],
+  });
   const tickers = new Map();
   for (const s of inQ) for (const r of s.stocks) if (r.ticker && !tickers.has(r.ticker)) tickers.set(r.ticker, r.name);
 
@@ -370,7 +378,7 @@ function viewSectors() {
     : [];
 
   const reset = () => { desk.sector = 'all'; desk.stock = ''; };
-  const qSeg = el('div', { class: 'seg' }, snap.quarters.map((x, i) => el('button', {
+  const qSeg = el('div', { class: 'seg' }, quarters.map((x, i) => el('button', {
     class: x === q ? 'on' : '',
     onclick: () => { desk.quarter = x; reset(); render(); },
   }, [x + (i === 0 ? ' · latest' : '')])));
