@@ -269,7 +269,6 @@ function viewReport() {
       el('a', { class: 'linkout', href: pageUrl(rep.path), target: '_blank', rel: 'noopener', text: 'Open on GitHub Pages ↗' }),
       el('a', { class: 'linkout', href: state.bloggerUrl, target: '_blank', rel: 'noopener', text: 'Blogger ↗' }),
     ]),
-    hint,
     el('div', { class: 'frame-wrap' }, [frame]),
   );
   return main;
